@@ -1,0 +1,89 @@
+/* General styling */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #6200ee;
+    color: white;
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  .login-container h2 {
+    color: white;
+    font-size: 2em;
+  }
+  
+  .input-box {
+    margin: 10px 0;
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  .input-box label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    text-align: right;
+
+  }
+  
+  .input-box input {
+    width: 300px;
+    padding: 12px;
+    border: 1px solid white;
+    border-radius: 4px;
+    outline: none;
+    color: #6200ee;
+    text-align: right;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    transition: all 0.3s ease; /* Add transition for smooth animation */
+  }
+  
+  button {
+    background-color: #4a00b5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease; /* Add transition for smooth animation */
+    width: 15%;
+  }
+  
+  button:hover {
+    background-color: #2f0080;
+  }
+  
+  .signup-link {
+    margin-top: 15px;
+    color: white;
+  }
+  
+  .signup-link a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Media query for mobile */
+  @media screen and (max-width: 600px) {
+    .input-box input {
+      width: 100%;
+    }
+  
+    button {
+      width: 40%;
+    }
+  }
+  
