@@ -7,14 +7,14 @@ function App() {
 
   useEffect(() => {
     axios.get("http://localhost:3001").then((res) => {
-      setCheckList(res.data)
+      setCheckList(res.data.listOfGender)
       //console.log(res.data)
     })
   },[])
   return (
     <div className="App">
       {checkList.map((value, key) => {
-        return <div>{value.yomama}</div>
+        return <div>{value.gender}</div>
       })}
     </div>
   );
