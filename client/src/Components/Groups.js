@@ -1,9 +1,15 @@
 import './css/Groups.css'
-const Groups = () => {
+import Nav from './Nav';
+import Header from './Header';
+const Groups = ({userName, role}) => {
   return (
+    <>
+    <Header userName={userName}  role={role}/>
+    <Nav role={role}/>
     <div className='content-Box'>
-      <h1>Groups page</h1>
+      <h1>עמוד הקבוצות</h1>
     </div>
+    </>
   )
 }
 

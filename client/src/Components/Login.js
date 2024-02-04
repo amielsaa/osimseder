@@ -1,15 +1,18 @@
-
+import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
 import React, { useState } from 'react';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
   const [displayCode, setDisplayCode] = useState(false);
+  const [error, setError] = useState('');
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const lowercaseEmail = e.target.value.toLowerCase();
+    setEmail(lowercaseEmail);
   };
 
   const handlePasswordChange = (e) => {
@@ -25,8 +28,15 @@ const Login = () => {
   };
 
   const handleSignIn = () => {
-    // Implement your sign-in logic here
-    console.log('Signing in with:', email, password, code);
+    if (email == "arioshry@gmail.com" && password == "123") {
+      navigate('/Home');
+    } else {
+      setError("Only pussy distroyers are welcome here!")
+    }
+    
+  };
+  const handleSignInAsStaff = () => {
+    
   };
 
   return (
@@ -43,8 +53,9 @@ const Login = () => {
       <div className="input-box" style={{ display: displayCode ? 'block' : 'none' }}>
         <label>:קוד סודי</label>
         <input type="password" value={code} placeholder='קוד סודי' onChange={handleCodeChange} />
+        <div style={{"color": "red"}}>{error?error:""}</div>
       </div>
-      <button onClick={handleSignIn} style={{ display: displayCode ? 'block' : 'none' }}>הרשם כסגל</button>
+      <button onClick={handleSignInAsStaff} style={{ display: displayCode ? 'block' : 'none' }}>הרשם כסגל</button>
       <button onClick={handleSignIn}>התחבר</button>
       <div className="signup-link">
         <p>
