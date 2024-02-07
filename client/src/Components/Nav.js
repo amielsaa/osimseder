@@ -13,6 +13,7 @@ const Nav = ({ role }) => {
     <div className="App">
       <nav className={`${isSidebarHidden ? 'hide' : ''}`}>
         <button id="toggle-btn" onClick={toggleSidebar}>
+          <div class="menu-icon"></div>
           <i className="fa fa-bars"></i>
         </button>
         <span className='menu-title'>תפריט</span>
