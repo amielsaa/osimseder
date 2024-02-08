@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     top: 7vh; /* Height of the header */
     width: 100%; /* Adjust for the remaining width */
     height: calc(100vh - 7vh); /* Take the remaining viewport height */
@@ -10,4 +11,5 @@
     background-color: #f2f2f2; /* Set a background color or style as desired */
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
   }
