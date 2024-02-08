@@ -31,7 +31,7 @@ const Nav = ({ role }) => {
             </>
           )}
           {role === 'Student' && (
-            <li onClick={closeSidebar}><a href="#"><i className="fa fa-home"></i>קבוצות</a></li>
+            <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
           )}
         </ul>
       </nav>
