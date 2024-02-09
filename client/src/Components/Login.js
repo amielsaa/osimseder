@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
-import React, { useState } from 'react';
+import React, { useState , useContext} from 'react';
+import {AuthContext} from "../Helpers/AuthContext";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ const Login = () => {
   const [code, setCode] = useState('');
   const [displayCode, setDisplayCode] = useState(false);
   const [error, setError] = useState('');
+  const {setAuthState} = useContext(AuthContext);
 
   const handleEmailChange = (e) => {
     const lowercaseEmail = e.target.value.toLowerCase();
@@ -28,11 +31,16 @@ const Login = () => {
   };
 
   const handleSignIn = () => {
-    if (email == "arioshry@gmail.com" && password == "123") {
-      navigate('/Home');
-    } else {
-      setError("Only pussy distroyers are welcome here!")
-    }
+    const data = {username: email, password: password};
+        axios.post("http://localhost:3001/login", data).then((res) => {
+            if(res.data.error) alert(res.data.error);
+            else {
+                localStorage.setItem("accessToken",res.data.token);
+                // setAuthState({username:res.data.username, id: res.data.id, status: true});
+                setAuthState({username:"username", id: "id", status: true});
+                navigate("/Home");
+            }
+        })
     
   };
   const handleSignInAsStaff = () => {
@@ -59,7 +67,7 @@ const Login = () => {
       <button onClick={handleSignIn}>התחבר</button>
       <div className="signup-link">
         <p>
-          <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | <a href="#">הרשמה לסטודנט</a>
+          <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | <a href="/register" >הרשמה לסטודנט</a>
         </p>
       </div>
     </div>
