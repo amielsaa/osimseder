@@ -10,7 +10,19 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: password
     volumes:
-      - ./postgres:/app
+      # - ./postgres:/app
+      # - database:/app/postgres
+      - ./postgres:/var/lib/postgresql/data 
+      - database:/var/lib/postgresql/data
+  # pgadmin:
+  #   container_name: pgadmin4_container
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #         - "5050:80"
   server:
     build: ./server
     container_name: server_c
@@ -41,3 +53,5 @@ services:
       - /client/node_modules
     
 #volumes for db
+volumes:
+  database: 

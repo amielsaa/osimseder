@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "osimseder",
-    "host": "postgres",
+
+    "username": "eqsnedcw",
+    "password": "ESwma7rxZ1I-XK0YteObZ0WjQupR8boK",
+    "database": "eqsnedcw",
+    "host": "surus.db.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {
