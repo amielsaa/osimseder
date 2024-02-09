@@ -9,10 +9,11 @@ const db = require('./models');
 const cors = require("cors")
 app.use(express.json())
 app.use(cors())
-//const db = require()
 
-const helloRouter = require("./routes/Hello")
-app.use("/", helloRouter)
+// const helloRouter = require("./routes/Hello")
+// app.use("/", helloRouter)
+const usersRouter = require("./routes/Users")
+app.use("/", usersRouter)
 
 
 // app.listen(port, () => {

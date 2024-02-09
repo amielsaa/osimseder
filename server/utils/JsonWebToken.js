@@ -4,17 +4,18 @@ const jwt = require('jsonwebtoken');
  const generateToken =  (user, password) => {jwt.sign(user, password, { expiresIn: '1h' })}; // Expires in 1 hour
 
 
-//authenticate a token
-const authenticateToken = (token,password) => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, password, (err, decoded) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(decoded);
+ const validateToken = (req, res, next) => {
+  const accessToken = req.header("accessToken");
+  if(!accessToken) return res.json({error:"User not logged in"});
+  try{
+      const validToken = verify(accessToken, "importantsecret");
+      req.user = validToken;
+      if(validToken) {
+          return next();
       }
-    });
-  });
+  } catch(err) {
+      return res.json({error:err});
+  }
 }
 
-module.exports = {generateToken, authenticateToken}
+module.exports = {generateToken, validateToken}
