@@ -1,13 +1,16 @@
 import './css/Groups.css'
 import Nav from './Nav';
 import Header from './Header';
+import GroupList from './GroupList';
 const Groups = ({userName, role}) => {
   return (
     <>
     <Header userName={userName}  role={role}/>
-    <Nav role={role}/>
+    {role === 'Admin' && (
+      <Nav role={role}/>
+    )}
     <div className='content-Box'>
-      <h1>עמוד הקבוצות</h1>
+      <GroupList/>
     </div>
     </>
   )

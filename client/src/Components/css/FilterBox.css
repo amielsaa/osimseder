@@ -1,0 +1,5 @@
+.fliterBox {
+    display: flex;
+    flex-direction: row-reverse;
+    text-decoration: solid;
+}

@@ -17,7 +17,7 @@ function App() {
   },[]) */
 
   // Sample state for role and userName
-  const [role, setRole] = useState('Admin');
+  const [role, setRole] = useState('Student');
   const [userName, setUserName] = useState('user ' + role);
 
   return (
