@@ -1,14 +1,11 @@
-// routes/students.js
 const express = require('express');
 const router = express.Router();
-const { Student } = require('../models');
-const authMiddleware = require('../middleware/auth'); // Authentication middleware
-const authorize = require('../middleware/authorize'); // Authorization middleware
+const { studentModel } = require('../models/studentModel'); // Import Student model
 
 // Create a new student (POST)
-router.post('/', authMiddleware, authorize('admin'), async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
     try {
-        const student = await Student.create(req.body);
+        const student = await studentModel.create(req.body);
         res.status(201).json(student);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -16,9 +13,9 @@ router.post('/', authMiddleware, authorize('admin'), async (req, res) => {
 });
 
 // Get all students (GET)
-router.get('/', authMiddleware, authorize(['admin', 'teacher']), async (req, res) => {
+router.get('/', validateToken, async (req, res) => {
     try {
-        const students = await Student.findAll();
+        const students = await studentModel.findAll();
         res.json(students);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -26,9 +23,9 @@ router.get('/', authMiddleware, authorize(['admin', 'teacher']), async (req, res
 });
 
 // Get a single student by ID (GET)
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/:id', validateToken, async (req, res) => {
     try {
-        const student = await Student.findByPk(req.params.id);
+        const student = await studentModel.findByPk(req.params.id);
         if (student) {
             res.json(student);
         } else {
@@ -40,9 +37,9 @@ router.get('/:id', authMiddleware, async (req, res) => {
 });
 
 // Update a student by ID (PUT)
-router.put('/:id', authMiddleware, authorize('admin'), async (req, res) => {
+router.put('/:id', validateToken, async (req, res) => {
     try {
-        const student = await Student.findByPk(req.params.id);
+        const student = await studentModel.findByPk(req.params.id);
         if (student) {
             await student.update(req.body);
             res.json(student);
@@ -55,9 +52,9 @@ router.put('/:id', authMiddleware, authorize('admin'), async (req, res) => {
 });
 
 // Delete a student by ID (DELETE)
-router.delete('/:id', authMiddleware, authorize('admin'), async (req, res) => {
+router.delete('/:id', validateToken, async (req, res) => {
     try {
-        const student = await Student.findByPk(req.params.id);
+        const student = await studentModel.findByPk(req.params.id);
         if (student) {
             await student.destroy();
             res.json({ message: 'Student deleted' });

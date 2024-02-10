@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\server",
+    "\\server\\config",
+    "\\server\\models",
+    "\\server\\routes",
+    "\\server\\services",
+    "\\server\\utils"
+  ],
+  "PreviewInSolutionExplorer": false
+}
