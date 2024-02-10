@@ -3,7 +3,7 @@ const router = express.Router();
 const { studentModel } = require('../models/studentModel'); // Import Student model
 
 // Create a new student (POST)
-router.post('/', validateToken, async (req, res) => {
+router.post('/stundets/addStudent', validateToken, async (req, res) => {
     try {
         const student = await studentModel.create(req.body);
         res.status(201).json(student);
@@ -13,7 +13,7 @@ router.post('/', validateToken, async (req, res) => {
 });
 
 // Get all students (GET)
-router.get('/', validateToken, async (req, res) => {
+router.get('/students/getStudents', validateToken, async (req, res) => {
     try {
         const students = await studentModel.findAll();
         res.json(students);
@@ -23,7 +23,7 @@ router.get('/', validateToken, async (req, res) => {
 });
 
 // Get a single student by ID (GET)
-router.get('/:id', validateToken, async (req, res) => {
+router.get('/student/getStudent/:id', validateToken, async (req, res) => {
     try {
         const student = await studentModel.findByPk(req.params.id);
         if (student) {

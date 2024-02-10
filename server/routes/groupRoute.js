@@ -23,7 +23,7 @@ router.get('/', validateToken, async (req, res) => {
 });
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, async (req, res) => {
+router.get('/groups/:id', validateToken, async (req, res) => {
     try {
         const group = await groupModel.findByPk(req.params.id);
         if (group) {
