@@ -4,10 +4,11 @@ import Login from "./Components/Login.js";
 import { useEffect, useState } from "react";
 import { Route, Routes } from 'react-router-dom';
 import Home from './Components/Home.js';
-import Groups from './Components/Groups.js';
+import Groups from './Components/StudentView/Groups.js';
 import Register from './Components/Register.js';
 import {AuthContext} from './Helpers/AuthContext';
-
+import Footer from './Components/Footer.js';
+import GroupPage from './Components/StudentView/GroupPage.js';
 function App() {
   /* const [checkList, setCheckList] = useState([])
 
@@ -27,6 +28,8 @@ function App() {
   return (
     <div className="App">
       <AuthContext.Provider value ={{authState, setAuthState}}>
+
+
       <Routes>
 
         <Route path="/" element={<Login />} />
@@ -36,9 +39,13 @@ function App() {
         <Route path="/Home" element={<Home role={role} userName={userName} />} />
 
         <Route path="/Groups" element={<Groups role={role} userName={userName} />} />
+
+        <Route path="/My-Group" element={<GroupPage role={role} userName={userName}/>}/>
         
       </Routes>
+      
       </AuthContext.Provider>
+      <Footer/>
     </div>
   );
 }

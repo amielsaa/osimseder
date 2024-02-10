@@ -17,3 +17,13 @@
     width: 30%;
     margin:0%;
 }
+.title{
+    color: #6200ee;
+    font-size: 3rem;
+
+}
+.sub-title {
+    color: red;
+    text-wrap: nowrap;
+    font-size: 1rem;
+}

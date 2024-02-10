@@ -20,7 +20,7 @@ const Nav = ({ role }) => {
           <div className="menu-icon"></div>
           <i className="fa fa-bars"></i>
         </button>
-        <span className='menu-title'>תפריט</span>
+        <span className='menu-title'>{role} תפריט</span>
         <ul className="sidebar-menu">
           {role === 'Admin' && (
             <>
@@ -31,7 +31,10 @@ const Nav = ({ role }) => {
             </>
           )}
           {role === 'Student' && (
+            <>
             <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Group"><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>
+            </>
           )}
         </ul>
       </nav>
