@@ -40,7 +40,7 @@ function App() {
 
         <Route path="/Groups" element={<Groups role={role} userName={userName} />} />
 
-        <Route path="/My-Group" element={<GroupPage role={role} userName={userName}/>}/>
+        <Route path="/My-Group" element={<GroupPage role={role} userName={userName} />} />
         
       </Routes>
       
