@@ -1,10 +1,10 @@
 // services/studentService.js
-const { Student } = require('../models');
+const Students = require('./studentModel');
 
 class StudentService {
   async createStudent(studentData) {
     try {
-      const student = await Student.create(studentData);
+      const student = await Students.create(studentData);
       return student;
     } catch (error) {
       throw new Error('Failed to create student');
@@ -13,7 +13,7 @@ class StudentService {
 
   async getStudents() {
     try {
-      const students = await Student.findAll();
+      const students = await Students.findAll();
       return students;
     } catch (error) {
       throw new Error('Failed to fetch students');
@@ -22,7 +22,7 @@ class StudentService {
 
   async getStudentById(studentId) {
     try {
-      const student = await Student.findByPk(studentId);
+      const student = await Students.findByPk(studentId);
       if (!student) {
         throw new Error('Student not found');
       }
@@ -34,7 +34,7 @@ class StudentService {
 
   async updateStudent(studentId, studentData) {
     try {
-      const student = await Student.findByPk(studentId);
+      const student = await Students.findByPk(studentId);
       if (!student) {
         throw new Error('Student not found');
       }
@@ -47,7 +47,7 @@ class StudentService {
 
   async deleteStudent(studentId) {
     try {
-      const student = await Student.findByPk(studentId);
+      const student = await Students.findByPk(studentId);
       if (!student) {
         throw new Error('Student not found');
       }
@@ -62,22 +62,3 @@ module.exports = new StudentService();
 
 
 // studentService.js
-
-const Student = require('./studentModel');
-
-async function getStudent(studentId) {
-    try {
-        // Find the student record by ID
-        const student = await Student.findByPk(studentId);
-
-        if (!student) {
-            throw new Error('Student not found');
-        }
-
-        return student;
-    } catch (error) {
-        throw new Error('Error fetching student:', error);
-    }
-}
-
-module.exports = { getStudent };
