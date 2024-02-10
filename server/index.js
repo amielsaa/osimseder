@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 3001;
-const encryption = require('./utils/Encryption')
-const logger = require('./utils/Logger')
-const tokens = require('./utils/JsonWebToken')
+//const encryption = require('./utils/Encryption')
+//const logger = require('./utils/Logger')
+//const tokens = require('./utils/JsonWebToken')
 const db = require('./models');
 
 const cors = require("cors")
