@@ -12,8 +12,10 @@ app.use(cors())
 
 // const helloRouter = require("./routes/Hello")
 // app.use("/", helloRouter)
-const usersRouter = require("./routes/Users")
-app.use("/", usersRouter)
+const studentRouter = require("./routes/studentRoutes/usersRoute")
+app.use("/studentAuth", studentRouter)
+const staffRouter = require("./routes/staffRoutes/usersRoute")
+app.use("/staffAuth", staffRouter)
 
 
 // app.listen(port, () => {

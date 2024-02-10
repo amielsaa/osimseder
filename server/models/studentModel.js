@@ -5,9 +5,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             primaryKey: true
         },
-        PhoneNumber: {
+        Email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         Password: {
             type: DataTypes.STRING,
@@ -20,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         FirstName: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        PhoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
         },
         Gender: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
         ParentName: {
@@ -48,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
         }, 
         IssuesText: { // free text explaining
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }, 
         Languages: {
             type: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
@@ -64,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    return Student;
+    return Students;
 };
 
 
