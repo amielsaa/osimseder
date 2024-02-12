@@ -27,8 +27,8 @@ class StudentLogic {
             "IssuesChoose": studentData.IssuesChoose,
             "IssuesText": studentData.IssuesText,
             "Languages": studentData.Languages,
-            "IsInGroup": studentData.IsInGroup,
-            "DidParentApprove": studentData.DidParentApprove
+            "IsInGroup": '',
+            "DidParentApprove": false
         });
          return true;
         });

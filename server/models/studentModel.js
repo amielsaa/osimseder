@@ -27,7 +27,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true
         },
-        Gender: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
+        Gender: {
+            type: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
+            allowNull: false,
+        },
         ParentName: {
             type: DataTypes.STRING,
             allowNull: false
@@ -42,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         },  
         City: {
             type: DataTypes.ENUM('BSV', 'JRS', 'TLV'),
-            allowNull: false
+            allowNull: false,
         },
         School: { // Add more schools as necessary
             type: DataTypes.ENUM('SchoolTest1', 'SchoolTest2', 'SchoolTest3'), 
@@ -50,15 +53,16 @@ module.exports = (sequelize, DataTypes) => {
         },
         IssuesChoose: {
             type: DataTypes.ENUM('accessability', 'timing', 'allergy', 'other'),
-            allowNull: false
+            allowNull: true
         }, 
         IssuesText: { // free text explaining
             type: DataTypes.STRING,
             allowNull: true
+
         }, 
         Languages: {
             type: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
-            allowNull: false
+            allowNull: true
         }, 
         IsInGroup: { // '' for no value, group ID if in
             type: DataTypes.STRING,
