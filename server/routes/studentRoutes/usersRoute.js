@@ -18,19 +18,12 @@ router.post('/login', async (req,res) => {
 
 router.post('/register', async (req,res) => {
     const studentData = req.body;
-    const user = await StudentLogic.registerStudent(studentData);
-
-    if(!user) res.json({error:"User doesn't exists"});
-    else {
-        bcrypt.compare(password, user.password).then((match) => {
-            if(!match) res.json({error: "Wrong username and password combination"});
-            else {
-                const accessToken = sign({username: user.username, id: user.id}, "importantsecret");
-                res.json({token:accessToken, username: username, id: user.id});
-            }
-        })
-    }
-})
-
+    try{
+        const user = StudentLogic.registerStudent(studentData);
+        res.json(user)
+    }catch(error){
+        res.json({error: error});
+        }
+    })
 
 module.exports = router;

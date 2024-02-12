@@ -1,9 +1,9 @@
-const Students = require('../models/studentModel');
+const Students = require('../../models/studentModel');
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { generateToken, validateToken } = require("../utils/JsonWebToken");
-const {UsersToDelete} = require('../models')
+const { generateToken, validateToken } = require("../../utils/JsonWebToken");
+const {UsersToDelete} = require('../../models')
 const {sign} = require('jsonwebtoken');
 
 
@@ -40,24 +40,17 @@ class StudentLogic {
   async verifyLogin(email, givenPassword) {
     try {
         const student = await Students.findOne({
-        where: { 
-            Email: email 
-            }});
+            where: { Email: email }});
         if (!student) {
-            throw new Error('Student not found');
-            }
+            throw new Error('Student not found');}
         bcrypt.compare(givenPassword, student.password).then((match) => {
             if(!match) 
-                throw new Error('Wrong username and password combination'});
+                throw new Error('Wrong username and password combination');
             else {
                 const accessToken = sign({username: email, id: student.id}, "importantsecret");
                 return {token:accessToken, username: email, id: student.id};
             }
         })
-
-
-        
-    }
     } catch (error) {
         throw new Error('Failed to login: ' + error);
     }

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { generateToken, validateToken } = require("../utils/JsonWebToken");
-const {UsersToDelete} = require('../models')
+const { generateToken, validateToken } = require("../../utils/JsonWebToken");
+const {UsersToDelete} = require('../../models')
 const {sign} = require('jsonwebtoken');
 
 router.post('/login', async (req,res) => {
