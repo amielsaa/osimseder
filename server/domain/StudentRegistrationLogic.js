@@ -1,9 +1,9 @@
-// RegistrationLogic.js
+// StudentRegistrationLogic.js
 const Students = require('../models/studentModel');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
-class RegistrationLogic {
+class StudentRegistrationLogic {
     async registerStudent(studentData) {
         try {
             const existingStudent = await Students.findOne({
@@ -51,4 +51,4 @@ class RegistrationLogic {
     }
 }
 
-module.exports = new RegistrationLogic();
+module.exports = new StudentRegistrationLogic();

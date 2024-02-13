@@ -97,6 +97,7 @@ class StudentManagementLogic {
             throw new Error('Failed to change student password: ' + error);
         }
     }
+
 }
 
 module.exports = new StudentManagementLogic();

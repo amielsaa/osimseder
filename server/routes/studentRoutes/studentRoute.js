@@ -11,7 +11,7 @@ const {
 } = require('../domains/studentLogic');
 
 // Create a new student (POST)
-router.post('/addStudent', validateToken, async (req, res) => {
+router.post('/add_student', validateToken, async (req, res) => {
     try {
         const student = await createStudent(req.body);
         res.status(201).json(student);
@@ -59,5 +59,4 @@ router.delete('/deleteStudent/:id', validateToken, async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
-
 module.exports = router;

@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const StudentLogic = require('../../domain/studentDomain/StudentLogic')
+const StudentLogic = require('../domain/studentDomain/StudentLogic')
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 
 // Endpoint to register a new student
-router.post('/register', validateToken, async (req, res) => {
+router.post('/auth/v0/register', validateToken, async (req, res) => {
     const studentData = req.body;
     try {
-        const createdStudent = await StudentLogic.registerStudent(studentData);
+        const createdStudent = await StudentRegistrationLogic.registerStudent(studentData);
         res.json(createdStudent);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -15,10 +15,10 @@ router.post('/register', validateToken, async (req, res) => {
 });
 
 // Endpoint to log in a student
-router.post('/login', validateToken, async (req, res) => {
+router.post('/auth/v1//login', validateToken, async (req, res) => {
     const { email, password } = req.body;
     try {
-        const loggedInStudent = await StudentLogic.verifyLogin(email, password);
+        const loggedInStudent = await AuthenticationLogic.verifyLogin(email, password);
         res.json(loggedInStudent);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -28,7 +28,7 @@ router.post('/login', validateToken, async (req, res) => {
 // Endpoint to fetch all students
 router.get('/students', validateToken, async (req, res) => {
     try {
-        const students = await StudentLogic.getStudents();
+        const students = await StudentManagementLogic.getStudents();
         res.json(students);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -39,7 +39,7 @@ router.get('/students', validateToken, async (req, res) => {
 router.get('/student/:email', validateToken, async (req, res) => {
     const email = req.params.email;
     try {
-        const student = await StudentLogic.getStudentByEmail(email);
+        const student = await StudentManagementLogic.getStudentByEmail(email);
         res.json(student);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -50,7 +50,7 @@ router.get('/student/:email', validateToken, async (req, res) => {
 router.delete('/student/:studentId', validateToken, async (req, res) => {
     const studentId = req.params.studentId;
     try {
-        await StudentLogic.deleteStudent(studentId);
+        await StudentManagementLogic.deleteStudent(studentId);
         res.json({ message: 'Student deleted successfully.' });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -62,7 +62,7 @@ router.put('/student/:email', validateToken, async (req, res) => {
     const email = req.params.email;
     const updatedData = req.body;
     try {
-        const updatedStudent = await StudentLogic.updateStudent(email, updatedData);
+        const updatedStudent = await StudentManagementLogic.updateStudent(email, updatedData);
         res.json(updatedStudent);
     } catch (error) {
         res.status(500).json({ error: error.message });
