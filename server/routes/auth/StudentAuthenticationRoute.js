@@ -5,7 +5,7 @@ const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 
 // Endpoint to register a new student
-router.post('/v0/register_student', validateToken, async (req, res) => {
+router.post('/v0/register_student', async (req, res) => {
     const studentData = req.body;
     try {
         const createdStudent = await studentRegistrationLogic.registerStudent(studentData);

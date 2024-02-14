@@ -8,8 +8,8 @@ const staffAuthenticationRouter = require('./StaffAuthenticationRoute');
 const studentAuthenticationRouter = require('./StudentAuthenticationRoute');
 const emailRouter = require('./EmailRoute');
 
-router.use("/staffauth", staffAuthenticationRouter);
-router.use("/staffauth2", studentAuthenticationRouter);
-router.use("/staffauth3", emailRouter);
+router.use(staffAuthenticationRouter);
+router.use(studentAuthenticationRouter);
+router.use(emailRouter);
 
 module.exports = router;

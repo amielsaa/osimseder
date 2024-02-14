@@ -4,7 +4,7 @@ const StaffRegistrationLogic = require('../../domain/StaffRegistrationLogic')
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 
 // Endpoint to register a new staff
-router.post('/v0/register_staff', validateToken, async (req, res) => {
+router.post('/v0/register_staff', async (req, res) => {
     const staffData = req.body;
     try {
         const createdStaff = await StaffRegistrationLogic.registerStaff(staffData);
