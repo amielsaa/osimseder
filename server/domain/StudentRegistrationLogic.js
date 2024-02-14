@@ -10,8 +10,10 @@ class StudentRegistrationLogic {
             this.validateInput(studentData);
 
             const verificationToken = this.generateVerificationToken();
+            console.log("Called Register - 2")
 
             const hashedPassword = await bcrypt.hash(studentData.password, 10);
+            console.log("Called Register - 3")
 
             const createdStudent = await Students.create({
                 "Email": studentData.email,
@@ -32,6 +34,7 @@ class StudentRegistrationLogic {
                 "DidParentApprove": false,
                 "VerificationToken": verificationToken
             });
+            console.log("Called Register - 4")
 
             await EmailLogic.sendVerificationEmail(studentData.email, verificationToken);
 
@@ -42,19 +45,15 @@ class StudentRegistrationLogic {
     }
 
     validateInput(studentData) {
-        if (!studentData.email || !studentData.password || !studentData.firstName || !studentData.lastName) {
-            throw new Error('Required fields are missing');
-        }
-
         if (!this.isValidEmail(studentData.email)) {
             throw new Error('Invalid email format');
         }
 
-        const student = await Students.findOne({
-            where: { "Email": email }
+        const student = Students.findOne({
+            where: { "Email": studentData.email }
         });
         if (!student) {
-            throw new Error('Student not found');
+            throw new Error('A student with this email already exists');
         }
 
         if (!this.isValidPassword(studentData.password)) {
@@ -62,14 +61,12 @@ class StudentRegistrationLogic {
         }
 
         if (!this.isValidPhoneNumber(studentData.phoneNumber)) {
-            throw new Error('Invalid phone number format');
+            throw new Error('Phone number must be 10 digits starting with 05');
         }
-
-        // You can add more specific validation checks for other fields here
-        // For example, checking if enums are valid, etc.
+        // TODO YOAV : necessary? checking if enums are valid, etc.
     }
 
-    validateEmail(email) {
+    isValidEmail(email) {
         const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return regex.test(email);
     }
@@ -78,11 +75,6 @@ class StudentRegistrationLogic {
         // Password must be at least 8 characters long and contain both letters and numbers
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return passwordRegex.test(password);
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!#$%&?"]).{8,}$/;
-
-        // Example usage:
-        const isValidPassword = passwordRegex.test("MySecureP@ssw0rd");
-        console.log("Is password valid?", isValidPassword); // Should print true
 
     }
 
