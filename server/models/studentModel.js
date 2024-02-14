@@ -1,74 +1,74 @@
 // models/studentModel.js
 module.exports = (sequelize, DataTypes) => {
     const Students = sequelize.define('Students', {
-        ID: {
+        id: {
             type: DataTypes.STRING,
             primaryKey: true
         },
-        Email: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
         },
-        Password: {
+        password: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        LastName: {
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        FirstName: {
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        PhoneNumber: {
+        phoneNumber: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
         },
-        Gender: {
+        gender: {
             type: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
             allowNull: false,
         },
-        ParentName: {
+        parentName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ParentPhoneNumber: {
+        parentPhoneNumber: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ParentEmail: { // TODO YOAV check with Ofir if needed
+        parentEmail: { // TODO YOAV check with Ofir if needed
             type: DataTypes.STRING,
             allowNull: false
         },  
-        City: {
+        city: {
             type: DataTypes.ENUM('BSV', 'JRS', 'TLV'),
             allowNull: false,
         },
-        School: { // Add more schools as necessary
+        school: { // Add more schools as necessary
             type: DataTypes.ENUM('SchoolTest1', 'SchoolTest2', 'SchoolTest3'), 
             allowNull: false
         },
-        IssuesChoose: {
+        issuesChoose: {
             type: DataTypes.ENUM('accessability', 'timing', 'allergy', 'other'),
             allowNull: true
         }, 
-        IssuesText: { // free text explaining
+        issuesText: { // free text explaining
             type: DataTypes.STRING,
             allowNull: true
 
         }, 
-        Languages: {
+        languages: {
             type: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
             allowNull: true
         }, 
-        IsInGroup: { // '' for no value, group ID if in
+        isInGroup: { // '' for no value, group ID if in
             type: DataTypes.STRING,
             allowNull: false
         }, 
-        DidParentApprove: { // TODO YOAV let the student know in screen but don't stop him from doing actions
+        didParentApprove: { // TODO YOAV let the student know in screen but don't stop him from doing actions
             type: DataTypes.BOOLEAN,
             allowNull: false
         }

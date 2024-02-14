@@ -16,23 +16,23 @@ class StudentRegistrationLogic {
             console.log("Called Register - 3")
 
             const createdStudent = await Students.create({
-                "Email": studentData.email,
-                "Password": hashedPassword,
-                "LastName": studentData.lastName,
-                "FirstName": studentData.firstName,
-                "PhoneNumber": studentData.phoneNumber,
-                "Gender": studentData.gender,
-                "ParentName": studentData.parentName,
-                "ParentPhoneNumber": studentData.parentPhoneNumber,
-                "ParentEmail": studentData.parentEmail,
-                "City": studentData.city,
-                "School": studentData.school,
-                "IssuesChoose": studentData.issuesChoose,
-                "IssuesText": studentData.issuesText,
-                "Languages": studentData.languages,
-                "IsInGroup": '',
-                "DidParentApprove": false,
-                "VerificationToken": verificationToken
+                "email": studentData.email,
+                "password": hashedPassword,
+                "lastName": studentData.lastName,
+                "firstName": studentData.firstName,
+                "phoneNumber": studentData.phoneNumber,
+                "gender": studentData.gender,
+                "parentName": studentData.parentName,
+                "parentPhoneNumber": studentData.parentPhoneNumber,
+                "parentEmail": studentData.parentEmail,
+                "city": studentData.city,
+                "school": studentData.school,
+                "issuesChoose": studentData.issuesChoose,
+                "issuesText": studentData.issuesText,
+                "languages": studentData.languages,
+                "isInGroup": '',
+                "didParentApprove": false,
+                "verificationToken": verificationToken
             });
             console.log("Called Register - 4")
 
@@ -50,7 +50,7 @@ class StudentRegistrationLogic {
         }
 
         const student = Students.findOne({
-            where: { "Email": studentData.email }
+            where: { "email": studentData.email }
         });
         if (!student) {
             throw new Error('A student with this email already exists');
