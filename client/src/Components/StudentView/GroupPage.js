@@ -37,7 +37,9 @@ const GroupPage = ({ role, userName }) => {
       <Header userName={userName} role={role} />
       <Nav role={role} />
       <div className='content-Box-Group'>
-        <h1>קבוצה: 001</h1>
+      <div className='group-title'>
+          <h1>קבוצה:001</h1>
+        </div>
         <div className='Group-Info'>
           <div className='Info'>חניך גרעין : </div>
           <div className='Info'>בית ספר : </div>

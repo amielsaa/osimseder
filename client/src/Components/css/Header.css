@@ -40,6 +40,14 @@ header .icons .settings-icon {
 .settings-icon {
   margin-right: 10px;
 }
+.header .icons a.Link .user-icon,
+.header .icons a.Link .user-icon:hover,
+.header .icons a.Link .user-icon:active {
+  color: white !important;
+  text-decoration: none;
+}
+
+
 
 .role-box {
   margin-right: 10px;
