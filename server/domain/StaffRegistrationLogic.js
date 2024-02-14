@@ -2,10 +2,12 @@
 const Staffs = require('../models/staffModel');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const sequelize = require('sequelize');
 
 class StaffRegistrationLogic {
     async registerStaff(staffData) {
         try {
+            sequelize.sync()
             const existingStaff = await Staffs.findOne({
                 where: { Email: staffData.email }
             });

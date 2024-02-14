@@ -2,12 +2,13 @@
 const { Students } = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const emailService = require('./services/emailService')
 
 
 class StudentRegistrationLogic {
     async registerStudent(studentData) {
         try {
-            this.validateInput(studentData);
+            await this.validateInput(studentData);
 
             const verificationToken = this.generateVerificationToken();
             console.log("Called Register - 2")
@@ -36,7 +37,7 @@ class StudentRegistrationLogic {
             });
             console.log("Called Register - 4")
 
-            await EmailLogic.sendVerificationEmail(studentData.email, verificationToken);
+            await emailService.sendVerificationEmail(studentData.email, verificationToken);
 
             return createdStudent;
         } catch (error) {
@@ -44,25 +45,35 @@ class StudentRegistrationLogic {
         }
     }
 
-    validateInput(studentData) {
+    async validateInput(studentData) {
+        console.log("Called Register - 4")
+
         if (!this.isValidEmail(studentData.email)) {
             throw new Error('Invalid email format');
         }
+        console.log("Called Register - 5")
 
-        const student = Students.findOne({
-            where: { "email": studentData.email }
+        const student = await Students.findOne({
+            where: { "email": studentData.email },
+            logging: console.log // Add this line to log the generated SQL query
         });
-        if (!student) {
+        console.log("Called Register - 6")
+
+        if (student) {
             throw new Error('A student with this email already exists');
         }
+        console.log("Called Register - 7")
 
         if (!this.isValidPassword(studentData.password)) {
             throw new Error('Password must be at least 8 characters long and contain both letters and numbers');
         }
+        console.log("Called Register - 8")
 
         if (!this.isValidPhoneNumber(studentData.phoneNumber)) {
             throw new Error('Phone number must be 10 digits starting with 05');
         }
+        console.log("Called Register - 9")
+
         // TODO YOAV : necessary? checking if enums are valid, etc.
     }
 

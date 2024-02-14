@@ -1,9 +1,10 @@
 // models/studentModel.js
 module.exports = (sequelize, DataTypes) => {
     const Students = sequelize.define('Students', {
-        id: {
-            type: DataTypes.STRING,
-            primaryKey: true
+        ID: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
         email: {
             type: DataTypes.STRING,
@@ -52,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         issuesChoose: {
-            type: DataTypes.ENUM('accessability', 'timing', 'allergy', 'other'),
+            type: DataTypes.ENUM('Accessability', 'Timing', 'Allergy', 'Other'),
             allowNull: true
         }, 
         issuesText: { // free text explaining
