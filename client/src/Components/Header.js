@@ -14,9 +14,11 @@ const Header = ({ userName, role }) => {
       <div className='logo'>לוגו חברה</div>
       <h1 className='hello'>שלום {userName}</h1>
       <div className='icons'>
-        <IoMdSettings className='settings-icon' />
+      <IoMdSettings className='settings-icon' />
+      <Link to="/Personal" className="user-link">
         <FaUser className='user-icon' />
-        <div className='role-box' style={roleBoxStyle}>{role}</div>
+      </Link>
+      <div className='role-box' style={roleBoxStyle}>{role}</div>
       </div>
     </header>
   );

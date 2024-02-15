@@ -12,4 +12,5 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
+    
   }
