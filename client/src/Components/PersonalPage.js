@@ -68,11 +68,7 @@ const PersonalPage = ({role, userName, user}) => {
           <button className='ActionButton'>
           <IoMdLock className='ActionIcon' /> שנה סיסמה
           </button>
-        </div>
-        
-
-        
-      
+        </div>     
     </div>
     
     </>
