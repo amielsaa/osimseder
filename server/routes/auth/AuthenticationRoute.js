@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const studentRegistrationLogic = require('../../domain/StudentRegistrationLogic');
+const studentRegistrationLogic = require('../../domain/RegistrationLogic');
 const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 
 // Endpoint to register a new student
-router.post('/v0/register_student', async (req, res) => {
+router.post('/register_student', async (req, res) => {
     const studentData = req.body;
     try {
         const createdStudent = await studentRegistrationLogic.registerStudent(studentData);
@@ -16,7 +16,7 @@ router.post('/v0/register_student', async (req, res) => {
 });
 
 // Endpoint to log in a student
-router.post('/v0/login_student', async (req, res) => {
+router.post('/login_student', async (req, res) => {
     const { email, password } = req.body;
     try {
         const loggedInStudent = await loginLogic.verifyLoginStudent(email, password);
@@ -26,9 +26,31 @@ router.post('/v0/login_student', async (req, res) => {
     }
 });
 
+// Endpoint to register a new staff
+router.post('/register_staff', async (req, res) => {
+    const staffData = req.body;
+    try {
+        const createdStaff = await StaffRegistrationLogic.registerStaff(staffData);
+        res.json(createdStaff);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
+// Endpoint to log in a staff
+router.post('/login_staff', validateToken, async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const loggedInStaff = await AuthenticationLogic.verifyLogin(email, password);
+        res.json(loggedInStaff);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// FROM NOW
 // Endpoint to initiate password reset
-router.post('/v0/password/reset', async (req, res) => {
+router.post('/password/reset', async (req, res) => {
     const { email } = req.body;
     try {
         const resetToken = await StudentLogic.resetPassword(email);
@@ -39,7 +61,7 @@ router.post('/v0/password/reset', async (req, res) => {
 });
 
 // Endpoint to handle password reset
-router.post('/v0/password/reset/confirm', async (req, res) => {
+router.post('/password/reset/confirm', async (req, res) => {
     const { token, newPassword } = req.body;
     try {
         await StudentLogic.handleResetPassword(token, newPassword);
