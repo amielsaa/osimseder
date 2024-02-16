@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './css/Nav.css';
 import { Link } from 'react-router-dom';
+import DataContext from '../Helpers/DataContext';
+import { useContext } from 'react';
 
-const Nav = ({ role }) => {
+const Nav = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(true);
+  const {user} = useContext(DataContext)
 
   const toggleSidebar = () => {
     setIsSidebarHidden(!isSidebarHidden);
@@ -20,9 +23,9 @@ const Nav = ({ role }) => {
           <div className="menu-icon"></div>
           <i className="fa fa-bars"></i>
         </button>
-        <span className='menu-title'>{role} תפריט</span>
+        <span className='menu-title'>{user.role} תפריט</span>
         <ul className="sidebar-menu">
-          {role === 'Admin' && (
+          {user.role === 'Admin' && (
             <>
               <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
               <li onClick={closeSidebar}><a href="#"><i className="fa fa-suitcase"></i>בתים</a></li>
@@ -30,7 +33,7 @@ const Nav = ({ role }) => {
               <li onClick={closeSidebar}><a href="#"><i className="fa fa-gear"></i>מפה</a></li>
             </>
           )}
-          {role === 'Student' && (
+          {user.role === 'Student' && (
             <>
             <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
             <li onClick={closeSidebar}><Link to="/My-Group"><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>

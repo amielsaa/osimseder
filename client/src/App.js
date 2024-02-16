@@ -9,6 +9,7 @@ import Register from './Components/Register.js';
 /* import {AuthContext} from './Helpers/AuthContext'; */
 import GroupPage from './Components/StudentView/GroupPage.js';
 import PersonalPage from './Components/PersonalPage.js';
+import { DataProvider } from './Helpers/DataContext';
 function App() {
  
 
@@ -25,22 +26,23 @@ function App() {
     <div className="App">
      {/*  <AuthContext.Provider value ={{authState, setAuthState}}> */}
 
+      <DataProvider>
+        <Routes>
 
-      <Routes>
+          <Route path="/" element={<Login />} />
 
-        <Route path="/" element={<Login />} />
-
-        <Route path="/Register" element={<Register />} />
+          <Route path="/Register" element={<Register />} />
         
-        <Route path="/Home" element={<Home role={user.role} userName={user.userName} />} />
+          <Route path="/Home" element={<Home />} />
 
-        <Route path="/Groups" element={<Groups role={user.role} userName={user.userName} />} />
+          <Route path="/Groups" element={<Groups/>} />
 
-        <Route path="/My-Group" element={<GroupPage role={user.role} userName={user.userName} />} />
+          <Route path="/My-Group" element={<GroupPage/>} />
 
-        <Route path="/Personal" element={<PersonalPage role={user.role} userName={user.userName} user={user}/>}/>
+          <Route path="/Personal" element={<PersonalPage/>}/>
         
-      </Routes>
+        </Routes>
+      </DataProvider>
       
       {/* </AuthContext.Provider> */}
       
