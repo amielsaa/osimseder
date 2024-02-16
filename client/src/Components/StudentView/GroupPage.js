@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 const GroupPage = () => {
   const {user} = useContext(DataContext)
-
+  
   //Amiel - take group Id and get all the necesecry data
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
