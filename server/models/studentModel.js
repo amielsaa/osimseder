@@ -1,28 +1,80 @@
-// models/students.js
+// models/studentModel.js
 module.exports = (sequelize, DataTypes) => {
-    const Student = sequelize.define('Student', {
+    const Students = sequelize.define('Students', {
         ID: {
-            type: DataTypes.STRING,
-            primaryKey: true
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
-        PhoneNumber: DataTypes.STRING,
-        Password: DataTypes.STRING,
-        LastName: DataTypes.STRING,
-        FirstName: DataTypes.STRING,
-        Gender: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
-        ParentName: DataTypes.STRING,
-        ParentPhoneNumber: DataTypes.STRING,
-        ParentEmail: DataTypes.STRING,  // TODO YOAV check with Ofir if needed
-        City: DataTypes.ENUM('BSV','JRS', 'TLV'),
-        School: DataTypes.ENUM('SchoolTest1', 'SchoolTest2', 'SchoolTest3'), // Add more schools as necessary
-        IssuesChoose: DataTypes.TEXT, // accessability, timing, allergy
-        IssuesText: DataTypes.TEXT, // free text explaining
-        Languages: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
-        IsInGroup: DataTypes.STRING, // '' for no value, group ID if in
-        DidParentApprove: DataTypes.BOOLEAN // TODO YOAV let the student know in screen but don't stop him from doing actions
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        phoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        gender: {
+            type: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
+            allowNull: false,
+        },
+        parentName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        parentPhoneNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        parentEmail: { // TODO YOAV check with Ofir if needed
+            type: DataTypes.STRING,
+            allowNull: false
+        },  
+        city: {
+            type: DataTypes.ENUM('BSV', 'JRS', 'TLV'),
+            allowNull: false,
+        },
+        school: { // Add more schools as necessary
+            type: DataTypes.ENUM('SchoolTest1', 'SchoolTest2', 'SchoolTest3'), 
+            allowNull: false
+        },
+        issuesChoose: {
+            type: DataTypes.ENUM('Accessability', 'Timing', 'Allergy', 'Other'),
+            allowNull: true
+        }, 
+        issuesText: { // free text explaining
+            type: DataTypes.STRING,
+            allowNull: true
+
+        }, 
+        languages: {
+            type: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
+            allowNull: true
+        }, 
+        isInGroup: { // '' for no value, group ID if in
+            type: DataTypes.STRING,
+            allowNull: false
+        }, 
+        didParentApprove: { // TODO YOAV let the student know in screen but don't stop him from doing actions
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        }
     });
 
-    return Student;
+    return Students;
 };
 
 
