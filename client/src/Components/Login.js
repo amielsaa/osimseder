@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
 import React, { useState , useContext} from 'react';
-import {AuthContext} from "../Helpers/AuthContext";
 import axios from "axios";
-
+import DataContext from '../Helpers/DataContext';
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -11,7 +10,7 @@ const Login = () => {
   const [code, setCode] = useState('');
   const [displayCode, setDisplayCode] = useState(false);
   const [error, setError] = useState('');
-  const {setAuthState} = useContext(AuthContext);
+  const {URL} = useContext(DataContext)
 
   const handleEmailChange = (e) => {
     const lowercaseEmail = e.target.value.toLowerCase();
@@ -32,12 +31,11 @@ const Login = () => {
 
   const handleSignIn = () => {
     const data = {username: email, password: password};
-        axios.post("http://localhost:3001/login", data).then((res) => {
+        axios.post(`${URL}/login`, data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 localStorage.setItem("accessToken",res.data.token);
-                // setAuthState({username:res.data.username, id: res.data.id, status: true});
-                setAuthState({username:"username", id: "id", status: true});
+                //Set inside the Datacontext
                 navigate("/Home");
             }
         })

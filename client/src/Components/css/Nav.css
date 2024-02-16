@@ -14,7 +14,7 @@
     position: fixed;
     flex-direction: column;
     flex-wrap: wrap;
-    align-items: start;
+    align-items: flex-start;
     position: fixed;
     width: 270px;
     height: 100%;
