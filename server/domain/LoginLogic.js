@@ -1,5 +1,5 @@
 // AuthenticationLogic.js
-const Students = require('../models/studentModel');
+const {Students} = require('../models/');
 const bcrypt = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
@@ -7,7 +7,7 @@ class AuthenticationLogic {
     async verifyLoginStudent(email, givenPassword) {
         try {
             const student = await Students.findOne({
-                where: { Email: email }
+                where: { email: email }
             });
             if (!student) {
                 throw new Error('Student not found');
