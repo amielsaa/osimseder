@@ -9,13 +9,16 @@ const Group = ({ groupId }) => {
     //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
   };
-
+  
+  const handleJoinGroup = (groupId) => {
+  //Amiel
+  }
   return (
     <>
       <div className="group">
         <div className='group-id'>{`${groupId}: קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
-        <button className='join-group-btn'>הצטרף</button>
+        <button className='join-group-btn' onclick={handleJoinGroup(groupId)}>הצטרף</button>
         <div className='students-Count'>4/5</div>
       </div>
       {studentsPopUp ?

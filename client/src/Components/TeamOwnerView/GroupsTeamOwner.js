@@ -1,10 +1,20 @@
+import '../css/Groups.css'
+import Nav from '../Nav';
+import Header from '../Header';
+import GroupList from '../StudentView/GroupList';
 
-const GroupsTeamOwner = () => {
+const Groups = () => {
+
   return (
+    <>
+    <Header/>
+      <Nav/>
     <div className='content-Box'>
-      <h1>Houses page</h1>
+      <h1 className='title'> בחר קבוצות</h1>
+      <GroupList/>
     </div>
+    </>
   )
 }
 
-export default GroupsTeamOwner;
+export default Groups;
