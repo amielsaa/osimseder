@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        PhoneNumber: DataTypes.STRING,
         Email: DataTypes.STRING,
         Password: DataTypes.STRING,
         LastName: DataTypes.STRING,
         FirstName: DataTypes.STRING,
+        PhoneNumber: DataTypes.STRING,
         Gender: DataTypes.ENUM('Male', 'Female'),
         City: DataTypes.STRING,
         School: DataTypes.ENUM('School1', 'School2', 'School3'), // Add more schools as necessary

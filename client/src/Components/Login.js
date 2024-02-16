@@ -32,7 +32,7 @@ const Login = () => {
 
   const handleSignIn = () => {
     const data = {username: email, password: password};
-        axios.post("http://localhost:3001/login", data).then((res) => {
+        axios.post("http://localhost:3001/student/login", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 localStorage.setItem("accessToken",res.data.token);
