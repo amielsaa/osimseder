@@ -1,12 +1,15 @@
 import './css/Home.css'
 import Header from './Header'
 import Nav from './Nav'
-const Home = ({role, userName}) => {
+import DataContext from '../Helpers/DataContext';
+import { useContext } from 'react';
+const Home = () => {
+  const {user} = useContext(DataContext)
   return (
     <>
-    <Header userName={userName}  role={role}/>
+    <Header/>
 
-    <Nav role={role}/>
+    <Nav/>
     
     <div className='content-Box-Home'>
         <h1>עושים סדר</h1>

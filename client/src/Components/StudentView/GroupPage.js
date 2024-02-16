@@ -3,10 +3,14 @@ import Header from '../Header';
 import Nav from '../Nav';
 import TaskCard from './TaskCard';
 import '../css/GroupPage.css'
-
+import DataContext from '../../Helpers/DataContext';
+import { useContext } from 'react';
 import React, { useState } from 'react';
 
-const GroupPage = ({ role, userName }) => {
+const GroupPage = () => {
+  const {user} = useContext(DataContext)
+
+  //Amiel - take group Id and get all the necesecry data
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
   const [tasks, setTasks] = useState([
@@ -34,8 +38,8 @@ const GroupPage = ({ role, userName }) => {
 
   return (
     <div>
-      <Header userName={userName} role={role} />
-      <Nav role={role} />
+      <Header/>
+      <Nav/>
       <div className='content-Box-Group'>
       <div className='group-title'>
           <h1>קבוצה:001</h1>

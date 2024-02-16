@@ -5,7 +5,10 @@ import { useState } from 'react';
 import Footer from './Footer';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { IoMdCreate, IoMdLock } from 'react-icons/io';
-const PersonalPage = ({role, userName, user}) => {
+import DataContext from '../Helpers/DataContext';
+import { useContext } from 'react';
+const PersonalPage = () => {
+  const {user} = useContext(DataContext)
   const [imageSrc, setImageSrc] = useState(null);
 
   const handleFileUpload = async (event) => {
@@ -33,8 +36,8 @@ const PersonalPage = ({role, userName, user}) => {
   };
   return (
     <>
-    <Header userName={userName} role={role} />
-    <Nav role={role} />
+    <Header/>
+    <Nav/>
     <div className='content-Box'>
     <div className='Personal-Title'>
       <h1>פרטים אישיים</h1>
