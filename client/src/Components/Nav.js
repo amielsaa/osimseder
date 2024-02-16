@@ -36,6 +36,14 @@ const Nav = ({ role }) => {
             <li onClick={closeSidebar}><Link to="/My-Group"><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>
             </>
           )}
+          {role === 'Team Leader' && (
+            <>
+            <li onClick={closeSidebar}><Link to="/Groups-tl"><i className="fa fa-home"></i>קבוצות</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>הקבוצות שלי</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>הבתים שלי</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>ציוד נדרש</Link></li>
+            </>
+          )}
         </ul>
       </nav>
     </div>
