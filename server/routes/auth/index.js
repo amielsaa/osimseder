@@ -4,12 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 // Import and use individual route handlers
-const staffAuthenticationRouter = require('./StaffAuthenticationRoute');
-const studentAuthenticationRouter = require('./StudentAuthenticationRoute');
+const authenticationRouter = require('./AuthenticationRoute');
 const emailRouter = require('./EmailRoute');
 
-router.use(staffAuthenticationRouter);
-router.use(studentAuthenticationRouter);
+router.use(authenticationRouter);
 router.use(emailRouter);
 
 module.exports = router;
