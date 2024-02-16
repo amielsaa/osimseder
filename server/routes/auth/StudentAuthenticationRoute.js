@@ -16,7 +16,7 @@ router.post('/v0/register_student', async (req, res) => {
 });
 
 // Endpoint to log in a student
-router.post('/v0/login_student', validateToken, async (req, res) => {
+router.post('/v0/login_student', async (req, res) => {
     const { email, password } = req.body;
     try {
         const loggedInStudent = await loginLogic.verifyLoginStudent(email, password);

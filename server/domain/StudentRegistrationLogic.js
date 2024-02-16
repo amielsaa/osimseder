@@ -46,13 +46,7 @@ class StudentRegistrationLogic {
     }
 
     async validateInput(studentData) {
-        console.log("Called Register - 4")
-
-        if (!this.isValidEmail(studentData.email)) {
-            throw new Error('Invalid email format');
-        }
-        console.log("Called Register - 5")
-
+        
         const student = await Students.findOne({
             where: { "email": studentData.email },
             logging: console.log // Add this line to log the generated SQL query
@@ -64,35 +58,7 @@ class StudentRegistrationLogic {
         }
         console.log("Called Register - 7")
 
-        if (!this.isValidPassword(studentData.password)) {
-            throw new Error('Password must be at least 8 characters long and contain both letters and numbers');
-        }
-        console.log("Called Register - 8")
-
-        if (!this.isValidPhoneNumber(studentData.phoneNumber)) {
-            throw new Error('Phone number must be 10 digits starting with 05');
-        }
-        console.log("Called Register - 9")
-
         // TODO YOAV : necessary? checking if enums are valid, etc.
-    }
-
-    isValidEmail(email) {
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return regex.test(email);
-    }
-
-    isValidPassword(password) {
-        // Password must be at least 8 characters long and contain both letters and numbers
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return passwordRegex.test(password);
-
-    }
-
-    isValidPhoneNumber(phoneNumber) {
-        // Phone number must have 10 digits
-        const phoneRegex = /^\d{10}$/;
-        return phoneRegex.test(phoneNumber);
     }
 
 
