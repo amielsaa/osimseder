@@ -12,14 +12,14 @@ import PersonalPage from './Components/PersonalPage.js';
 import { DataProvider } from './Helpers/DataContext';
 function App() {
  
-
+  //{headers: {accessToken: localStorage.getItem('accessToken')}}
   // Sample state for role and userName
   
   
   /* const [authState, setAuthState] = useState({username:"", id: 0, status: false}); */
   const [user,setUser] = useState({userName: "ארי מאיר",role:'Student' , phoneNumber:"0508639353", parentName: "אורלי אושרי",
    parentNumber: "0503428526", School: "מקיף ו", sex:"זכר", languages:["אנגלית", "עברית"], personalRequests:"כבד לי בלילות"
-  , group:"001" })
+  , groupId:"001" })
 
 
   return (
@@ -38,7 +38,7 @@ function App() {
           <Route path="/Groups" element={<Groups/>} />
 
           <Route path="/My-Group" element={<GroupPage/>} />
-
+            
           <Route path="/Personal" element={<PersonalPage/>}/>
         
         </Routes>

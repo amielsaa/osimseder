@@ -10,6 +10,7 @@ function Registration() {
         firstName: "",
         lastName: "",
         password: "",
+        email:"",
         confirmPassword: "",
         gender: "",
         parentName: "",
@@ -38,6 +39,7 @@ function Registration() {
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
+        email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
         parentEmail: Yup.string().email("אימייל לא תקין").required("אימייל הורה נדרש"),
         city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
@@ -67,6 +69,12 @@ function Registration() {
                         <label htmlFor="lastName">שם משפחה: </label>
                         <Field id="lastName" name="lastName" placeholder="שם משפחה" />
                         <ErrorMessage name="lastName" component="span" />
+                    </div>
+
+                    <div>
+                        <label htmlFor="email">אימייל: </label>
+                        <Field type="email" id="email" name="email" placeholder="אימייל" />
+                        <ErrorMessage name="email" component="span" />
                     </div>
 
                     <div>
