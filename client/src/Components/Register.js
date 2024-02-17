@@ -17,11 +17,11 @@ function Registration() {
         parentEmail: "",
         city: "",
         school: "",
-        language: "",
+        languages: "",
     };
     const schools = []
     const languages = []
-    const navigate = useNavigate();
+    
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required("שם פרטי נדרש"),
@@ -41,13 +41,15 @@ function Registration() {
         parentEmail: Yup.string().email("אימייל לא תקין").required("אימייל הורה נדרש"),
         city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
-        language: Yup.string().required("לפחות שפה אחת נדרשת"),
+        languages: Yup.string().required("לפחות שפה אחת נדרשת"),
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001", data).then(() => {
+      /*   axios.post("http://localhost:3001", data).then(() => {
             navigate('/');
-        });
+        }); */
+        console.log("form submitted!" , data)
+        
     };
 
     return (
@@ -124,19 +126,18 @@ function Registration() {
                       <label htmlFor="school">בית ספר: </label>
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
-                          <option value="english">נתיבי עם</option>
-                          <option value="spanish">רמבם</option>
+                          <option value="נתיבי עם">נתיבי עם</option>
+                          <option value="רמבם">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="language">שפת אם: </label>
+                        <label htmlFor="languages">שפת אם: </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
                             <option value="אנגלית">אנגלית</option>
                             <option value="עברית">עברית</option>
-                            
                         </Field>
                         <ErrorMessage name="languages" component="span" />
                     </div>
