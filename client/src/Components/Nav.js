@@ -35,13 +35,13 @@ const Nav = () => {
           )}
           {user.role === 'Student' && (
             <>
-            <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
-            <li onClick={closeSidebar}><Link to="/My-Group"><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>
+              <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
+              <li onClick={closeSidebar}><Link to={`/GroupPage/${user.groupId}`}><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>
             </>
           )}
           {user.role === 'TeamOwner' && (
             <>
-            <li onClick={closeSidebar}><Link to="/Groups-to"><i className="fa fa-home"></i>קבוצות</Link></li>
+            <li onClick={closeSidebar}><Link to="/Groups"><i className="fa fa-home"></i>קבוצות</Link></li>
             <li onClick={closeSidebar}><Link to="/My-Groups-to"><i className="fa fa-my_group"></i>הקבוצות שלי</Link></li>
             <li onClick={closeSidebar}><Link to="/My-Houses-to"><i className="fa fa-my_group"></i>הבתים שלי</Link></li>
             <li onClick={closeSidebar}><Link to="/Equipment-to"><i className="fa fa-my_group"></i>ציוד נדרש</Link></li>

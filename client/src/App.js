@@ -7,13 +7,11 @@ import Register from './Components/Register.js';
 import GroupPage from './Components/StudentView/GroupPage.js';
 import PersonalPage from './Components/PersonalPage.js';
 import { DataProvider } from './Helpers/DataContext';
-import GroupsTeamOwner from './Components/TeamOwnerView/GroupsTeamOwner.js';
 import MyGroupsTeamOwner from './Components/TeamOwnerView/MyGroupsTeamOwner.js';
 import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
 import EquipmentTeamOwner from './Components/TeamOwnerView/EquipmentTeamOwner.js';
 import Error from './Components/Error.js'
 function App() {
-
   return (
     <div className="App">
 
@@ -28,11 +26,9 @@ function App() {
 
           <Route path="/Groups" element={<Groups/>} />
 
-          <Route path="/My-Group" element={<GroupPage/>} />
+          <Route path="/GroupPage/:id" element={<GroupPage/>} />
 
           <Route path="/Personal" element={<PersonalPage/>}/>
-
-          <Route path="/Groups-to" element={<GroupsTeamOwner/>}/>
 
           <Route path="/My-Groups-to" element={<MyGroupsTeamOwner/>}/>
 

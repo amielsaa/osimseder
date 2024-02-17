@@ -1,4 +1,4 @@
-
+import { useParams } from 'react-router-dom';
 import Header from '../Header';
 import Nav from '../Nav';
 import TaskCard from './TaskCard';
@@ -8,9 +8,10 @@ import { useContext } from 'react';
 import React, { useState } from 'react';
 
 const GroupPage = () => {
+  const { id } = useParams();
   const {user} = useContext(DataContext)
   
-  //Amiel - take group Id and get all the necesecry data
+  //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
   const [tasks, setTasks] = useState([
@@ -42,13 +43,12 @@ const GroupPage = () => {
       <Nav/>
       <div className='content-Box-Group'>
       <div className='group-title'>
-          <h1>קבוצה:001</h1>
+        <h1>קבוצה: {id}</h1>
         </div>
         <div className='Group-Info'>
           <div className='Info'>חניך גרעין : </div>
           <div className='Info'>בית ספר : </div>
-          <div className='Info'>שם קשיש : </div>
-          <div className='Info'>כתובת הבית : </div>
+          <div className='Info'>בית : </div>
         </div>
         <div className='group-title'>
           <h1>חברי הקבוצה</h1>
