@@ -18,4 +18,4 @@ router.post("/gender/:gender_name", async (req,res) => {
     
 })
 
-module.exports = router
+module.exports = router;
