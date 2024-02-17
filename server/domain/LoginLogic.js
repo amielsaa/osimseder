@@ -17,7 +17,7 @@ class AuthenticationLogic {
                 throw new Error('Wrong username and password combination');
             }
             const accessToken = sign({ username: email, id: student.id }, "importantsecret");
-            return { token: accessToken, username: email, id: student.id };
+            return { token: accessToken,role:'Student', username: email, id: student.id };
         } catch (error) {
             throw new Error('Failed to login: ' + error);
         }

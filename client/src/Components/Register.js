@@ -1,11 +1,13 @@
-import React from 'react';
+import React ,{ useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
+import DataContext from '../Helpers/DataContext';
 
 function Registration() {
+    const {URL} = useContext(DataContext);
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -13,12 +15,15 @@ function Registration() {
         email:"",
         confirmPassword: "",
         gender: "",
+        //phoneNumber:"", //doesnt preview in the form
         parentName: "",
         parentPhoneNumber: "",
         parentEmail: "",
         city: "",
         school: "",
         language: "",
+        //issuesChoose: "",//doesnt preview in the form
+        //issuesText: "",//doesnt preview in the form
     };
     const schools = []
     const languages = []
@@ -47,8 +52,14 @@ function Registration() {
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001", data).then(() => {
-            navigate('/');
+        console.log("wt??");
+        axios.post(`http://localhost:3001/auth/register_student`, data).then((res) => {
+            if(res.data.error) {
+                alert(res.data.error);
+            } else {
+                navigate('/');
+            }
+            
         });
     };
 

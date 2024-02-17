@@ -11,7 +11,7 @@ router.post('/register_student', async (req, res) => {
         const createdStudent = await studentRegistrationLogic.registerStudent(studentData);
         res.json(createdStudent);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -22,7 +22,8 @@ router.post('/login_student', async (req, res) => {
         const loggedInStudent = await loginLogic.verifyLoginStudent(email, password);
         res.json(loggedInStudent);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        
+        res.json({ error: error.message });
     }
 });
 

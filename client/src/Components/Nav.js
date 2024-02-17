@@ -7,7 +7,6 @@ import { useContext } from 'react';
 const Nav = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(true);
   const {user} = useContext(DataContext)
-
   const toggleSidebar = () => {
     setIsSidebarHidden(!isSidebarHidden);
   };
@@ -39,7 +38,7 @@ const Nav = () => {
             <li onClick={closeSidebar}><Link to="/My-Group"><i className="fa fa-my_group"></i>הקבוצה שלי</Link></li>
             </>
           )}
-          {role === 'Team Leader' && (
+          {user.role === 'Team Leader' && (
             <>
             <li onClick={closeSidebar}><Link to="/Groups-tl"><i className="fa fa-home"></i>קבוצות</Link></li>
             <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>הקבוצות שלי</Link></li>

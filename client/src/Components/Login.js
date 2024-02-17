@@ -3,6 +3,7 @@ import './css/Login.css';
 import React, { useState , useContext} from 'react';
 import {AuthContext} from "../Helpers/AuthContext";
 import axios from "axios";
+import DataContext from '../Helpers/DataContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ const Login = () => {
   const [code, setCode] = useState('');
   const [displayCode, setDisplayCode] = useState(false);
   const [error, setError] = useState('');
-  const {setAuthState} = useContext(AuthContext);
+  const {setUser} = useContext(DataContext);
+  // const {setAuthState} = useContext(AuthContext);
 
   const handleEmailChange = (e) => {
     const lowercaseEmail = e.target.value.toLowerCase();
@@ -31,13 +33,14 @@ const Login = () => {
   };
 
   const handleSignIn = () => {
-    const data = {username: email, password: password};
-        axios.post("http://localhost:3001/student/login", data).then((res) => {
+    const data = {email: email, password: password};
+        axios.post("http://localhost:3001/auth/login_student", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 localStorage.setItem("accessToken",res.data.token);
+                setUser(res.data);
                 // setAuthState({username:res.data.username, id: res.data.id, status: true});
-                setAuthState({username:"username", id: "id", status: true});
+                // setAuthState({username:"username", id: "id", status: true});
                 navigate("/Home");
             }
         })
