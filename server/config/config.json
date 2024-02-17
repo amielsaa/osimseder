@@ -1,6 +1,5 @@
 {
   "development": {
-
     "username": "root",
     "password": "password",
     "database": "osimseder",
@@ -10,8 +9,8 @@
   "test": {
     "username": "root",
     "password": "password",
-    "database": "osimseder",
-    "host": "postgres",
+    "database": "osimseder-test",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
