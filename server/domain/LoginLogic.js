@@ -1,9 +1,9 @@
-// AuthenticationLogic.js
+// LoginLogic.js
 const {Students} = require('../models/');
 const bcrypt = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
-class AuthenticationLogic {
+class LoginLogic {
     async verifyLoginStudent(email, givenPassword) {
         try {
             const student = await Students.findOne({
@@ -42,4 +42,4 @@ class AuthenticationLogic {
     }
 }
 
-module.exports = new AuthenticationLogic();
+module.exports = new LoginLogic();
