@@ -13,18 +13,6 @@ class RegistrationLogic {
             const verificationToken = this.generateVerificationToken();
 
             const hashedPassword = await bcrypt.hash(studentData.password, 10);
-            if(studentData.gender === "זכר") {
-                studentData.gender = "Male";
-            }
-            if(studentData.languages === "אנגלית") {
-                studentData.languages = "English";
-            }
-            if(studentData.city === "באר שבע") {
-                studentData.city = "BSV";
-            }
-            if(studentData.school === "רמבם") {
-                studentData.school = "SchoolTest1";
-            }
             
             const createdStudent = await Students.create({
                 "email": studentData.email,
