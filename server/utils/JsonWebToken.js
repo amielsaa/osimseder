@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const {verify} = require('jsonwebtoken');
 
 // Generate Token
  const generateToken =  (user, password) => {jwt.sign(user, password, { expiresIn: '1h' })}; // Expires in 1 hour

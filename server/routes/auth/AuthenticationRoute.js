@@ -3,7 +3,7 @@ const router = express.Router();
 const studentRegistrationLogic = require('../../domain/RegistrationLogic');
 const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
-
+const {accessGroup, validateAccess} = require('../../utils/Accesses');
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
     const studentData = req.body;
@@ -25,6 +25,11 @@ router.post('/login_student', async (req, res) => {
         
         res.json({ error: error.message });
     }
+});
+
+// just testing validateAccess
+router.post('/some_operation', validateToken , validateAccess(accessGroup.A),async (req, res) => {
+    res.json("sup bich")
 });
 
 // Endpoint to register a new staff
