@@ -21,7 +21,6 @@
     min-height: 350px;
     color: white;
     background: #6200ee; /* Background color change */
-    border-top-right-radius: 20px;
     border-bottom-right-radius: 10px;
     transition: ease-in 0.3s;
     z-index: 1000;
@@ -157,7 +156,9 @@
   @media only screen and (max-width: 480px) {
     nav{
       width: 90%;
-      margin-top: 15%;
+      margin-top: 18%;
+      max-height: 90%;
+      border-bottom-right-radius: 12px;
     }
     .sidebar-menu li a {
       justify-content: center;

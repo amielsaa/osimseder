@@ -11,14 +11,14 @@ const Group = ({ groupId }) => {
   };
   
   const handleJoinGroup = (groupId) => {
-  //Amiel
+  //Amiel - backend
   }
   return (
     <>
       <div className="group">
         <div className='group-id'>{`${groupId}: קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
-        <button className='join-group-btn' onclick={handleJoinGroup(groupId)}>הצטרף</button>
+        <button className='join-group-btn' onClick={handleJoinGroup(groupId)}>הצטרף</button>
         <div className='students-Count'>4/5</div>
       </div>
       {studentsPopUp ?

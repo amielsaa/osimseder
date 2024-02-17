@@ -142,7 +142,7 @@ function Registration() {
                         <ErrorMessage name="languages" component="span" />
                     </div>
                     <div className='Button-Div'>
-                    <button type="submit">הירשם</button>
+                    <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>
                 </Form>
             </Formik>
