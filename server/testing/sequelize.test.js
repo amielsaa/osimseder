@@ -2,6 +2,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelizeConfig = require('../config/config.json').test; // Assuming you're using a separate configuration for testing
 const studentModel = require('../models/studentModel'); // Import your Sequelize model for testing
+const bcrypt = require('bcrypt');
 
 describe('Sequelize', () => {
   let sequelize;
@@ -26,9 +27,8 @@ describe('Sequelize', () => {
   it('should create a new user record', async () => {
     // Create a new user record
     const newStudent = await student.create({
-      ID: "207238759",
       email: 'test@example.com',
-      password: 'password123',      
+      password: await bcrypt.hash("password123", 10),      
       lastName: "lastname",
       firstName: "firstname",
       phoneNumber: "0524587746",
@@ -47,7 +47,7 @@ describe('Sequelize', () => {
 
     // Retrieve the user from the database
     const retrievedStudent = await student.findOne({
-      where: { ID: newStudent.ID },
+      where: { email: newStudent.email },
     });
 
     // Assert that the user record is retrieved correctly
@@ -58,20 +58,20 @@ describe('Sequelize', () => {
 
   it('should update an existing user record', async () => {
     // Find the user record to update
-    const existingUser = await student.findOne({
-      where: { firstName: 'firstname' },
+    const existingStudent = await student.findOne({
+      where: { email: "test@example.com" },
     });
 
     // Update the user record
-    await existingUser.update({ email: 'updated@example.com' });
+    await existingStudent.update({ email: 'updated@example.com' });
 
     // Retrieve the updated user from the database
-    const updatedUser = await User.findOne({
-      where: { ID: existingUser.id },
+    const updatedStudent = await student.findOne({
+      where: { email: "updated@example.com" },
     });
 
     // Assert that the user record is updated correctly
-    expect(updatedUser).toBeDefined();
-    expect(updatedUser.email).toBe('updated@example.com');
+    expect(updatedStudent).toBeDefined();
+    expect(updatedStudent.email).toBe('updated@example.com');
   });
 });
