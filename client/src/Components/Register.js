@@ -1,33 +1,27 @@
-import React ,{ useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
-import DataContext from '../Helpers/DataContext';
 
 function Registration() {
-    const {URL} = useContext(DataContext);
     const initialValues = {
         firstName: "",
         lastName: "",
         password: "",
-        email:"",
         confirmPassword: "",
         gender: "",
-        //phoneNumber:"", //doesnt preview in the form
         parentName: "",
         parentPhoneNumber: "",
         parentEmail: "",
         city: "",
         school: "",
-        language: "",
-        //issuesChoose: "",//doesnt preview in the form
-        //issuesText: "",//doesnt preview in the form
+        languages: "",
     };
     const schools = []
     const languages = []
-    const navigate = useNavigate();
+    
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required("שם פרטי נדרש"),
@@ -44,23 +38,18 @@ function Registration() {
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
         parentEmail: Yup.string().email("אימייל לא תקין").required("אימייל הורה נדרש"),
         city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
-        language: Yup.string().required("לפחות שפה אחת נדרשת"),
+        languages: Yup.string().required("לפחות שפה אחת נדרשת"),
     });
 
     const onSubmit = (data) => {
-        console.log("wt??");
-        axios.post(`http://localhost:3001/auth/register_student`, data).then((res) => {
-            if(res.data.error) {
-                alert(res.data.error);
-            } else {
-                navigate('/');
-            }
-            
-        });
+      /*   axios.post("http://localhost:3001", data).then(() => {
+            navigate('/');
+        }); */
+        console.log("form submitted!" , data)
+        
     };
 
     return (
@@ -80,12 +69,6 @@ function Registration() {
                         <label htmlFor="lastName">שם משפחה: </label>
                         <Field id="lastName" name="lastName" placeholder="שם משפחה" />
                         <ErrorMessage name="lastName" component="span" />
-                    </div>
-
-                    <div>
-                        <label htmlFor="email">אימייל: </label>
-                        <Field type="email" id="email" name="email" placeholder="אימייל" />
-                        <ErrorMessage name="email" component="span" />
                     </div>
 
                     <div>
@@ -143,19 +126,18 @@ function Registration() {
                       <label htmlFor="school">בית ספר: </label>
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
-                          <option value="english">נתיבי עם</option>
-                          <option value="spanish">רמבם</option>
+                          <option value="נתיבי עם">נתיבי עם</option>
+                          <option value="רמבם">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="language">שפת אם: </label>
+                        <label htmlFor="languages">שפת אם: </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
                             <option value="אנגלית">אנגלית</option>
                             <option value="עברית">עברית</option>
-                            
                         </Field>
                         <ErrorMessage name="languages" component="span" />
                     </div>
