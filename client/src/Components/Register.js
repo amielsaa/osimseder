@@ -24,6 +24,7 @@ function Registration() {
         issuesChoose: "Accessability", //not presented in the form
         issuesText: "", //not presented in the form
         phoneNumber: "0", //not presented in the form
+
     };
     const schools = []
     const languages = []
@@ -55,8 +56,7 @@ function Registration() {
         console.log(data);
         axios.post("http://localhost:3001/auth/register_student", data).then(() => {
             navigate('/');
-        }); 
-        
+        });         
     };
 
     return (
@@ -153,7 +153,7 @@ function Registration() {
                         <ErrorMessage name="languages" component="span" />
                     </div>
                     <div className='Button-Div'>
-                    <button type="submit">הירשם</button>
+                    <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>
                 </Form>
             </Formik>
