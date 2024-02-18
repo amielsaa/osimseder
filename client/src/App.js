@@ -11,6 +11,7 @@ import MyGroupsTeamOwner from './Components/TeamOwnerView/MyGroupsTeamOwner.js';
 import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
 import EquipmentTeamOwner from './Components/TeamOwnerView/EquipmentTeamOwner.js';
 import Error from './Components/Error.js'
+import HousePage from './Components/HousePage.js';
 function App() {
   return (
     <div className="App">
@@ -34,7 +35,11 @@ function App() {
 
           <Route path="/My-Houses-to" element={<HousesTeamOwner/>}/>
 
+          <Route path="/HousePage/:id" element={<HousePage/>}/>
+
           <Route path="/Equipment-to" element={<EquipmentTeamOwner/>}/>
+
+          
 
           <Route path="/404" element={<Error/>}/>
         

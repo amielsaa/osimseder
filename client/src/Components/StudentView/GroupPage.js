@@ -37,6 +37,12 @@ const GroupPage = () => {
     ]},
   ]);
 
+  const handleRemoveMember = (index) => {
+    const updatedStudents = [...studentList];
+    updatedStudents.splice(index, 1);
+    setStudentsList(updatedStudents);
+  };
+
   return (
     <div>
       <Header/>
@@ -54,12 +60,15 @@ const GroupPage = () => {
           <h1>חברי הקבוצה</h1>
         </div>
         <div className='Group-Info'>
-          {studentList.map((student, index) => (
-            <div key={index} className='Info'>
-              {student}
-            </div>
-          ))}
-        </div>
+        {studentList.map((student, index) => (
+          <div key={index} className='Group_Member'>
+            {student}
+            {user.role !== 'Student' && (
+              <button className='kick_student' onClick={() => handleRemoveMember(index)}>X</button>
+            )}
+          </div>
+        ))}
+      </div>
 
         <div className='group-title'>
           <h1>מטלות</h1>
