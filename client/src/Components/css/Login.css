@@ -1,89 +1,76 @@
-/* General styling */
 .login-container {
-    display: flex;
-    flex-direction: column;
+  max-width: 80%;
+  height:70%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top:50%
+}
+.input-box {
+  margin-bottom: 15px;
+}
+.header-container{
+  display: flex;
+    place-content: center;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #6200ee;
-    color: white;
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-  }
-  
-  .login-container h2 {
-    color: white;
-    font-size: 2em;
-  }
-  
-  .input-box {
-    margin: 10px 0;
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-  }
-  
-  .input-box label {
-    display: block;
-    margin-bottom: 5px;
-    color: white;
-    text-align: right;
-
-  }
-  
-  .input-box input {
-    width: 300px;
-    padding: 12px;
-    border: 1px solid white;
-    border-radius: 4px;
-    outline: none;
+    font-size: 1.5rem;
     color: #6200ee;
-    text-align: right;
-  }
-  
-  .button-container {
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+.login_Buttons{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.login_Buttons .button-login {
+  background-color: #6200ee;
+  width: 100%;
+  font-size: 1.2em;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 5%;
+}
+
+
+
+.signup-link {
+    margin-top: 5%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
-    transition: all 0.3s ease; /* Add transition for smooth animation */
-  }
-  
-  button {
-    background-color: #4a00b5;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease; /* Add transition for smooth animation */
-    width: 15%;
-  }
-  
-  button:hover {
-    background-color: #2f0080;
-  }
-  
-  .signup-link {
-    margin-top: 15px;
-    color: white;
-  }
-  
-  .signup-link a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .signup-link a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Media query for mobile */
-  @media screen and (max-width: 600px) {
-    .input-box input {
-      width: 100%;
-    }
-  
-    button {
-      width: 40%;
-    }
-  }
-  
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: none;
+  color:#6200ee
+}
