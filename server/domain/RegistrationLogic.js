@@ -29,7 +29,6 @@ class RegistrationLogic {
                 "issuesChoose": studentData.issuesChoose,
                 "issuesText": studentData.issuesText,
                 "languages": studentData.languages,
-                "isInGroup": '',
                 "didParentApprove": false,
                 "verificationToken": verificationToken
             });

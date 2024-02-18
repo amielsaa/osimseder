@@ -1,7 +1,7 @@
 // models/staffModel.js
 module.exports = (sequelize, DataTypes) => {
     const Staffs = sequelize.define('Staffs', {
-        ID: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -28,12 +28,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         gender: {
-            type: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
-            allowNull: false,
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        city: {
-            type: DataTypes.ENUM('BSV', 'JRS', 'TLV'),
-            allowNull: false,
+        accesses: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
 

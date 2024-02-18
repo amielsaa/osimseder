@@ -1,13 +1,30 @@
 // models/groups.js
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-        GroupID: {
-            type: DataTypes.STRING,
-            primaryKey: true
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
         },
-        GroupMembersIds: DataTypes.STRING,
-        HouseID: DataTypes.STRING
+        groupName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        teamOwnerId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     });
+
+    Groups.associate = (models) => {
+        Groups.hasMany(models.Students, {
+            foreignKey: 'groupId'
+        });
+
+        Groups.hasOne(models.Houses, {
+            foreignKey: 'groupId'
+        });
+    };
 
     return Groups;
 };

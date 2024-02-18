@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { groupModel } = require('../models/groupModel'); // Import group model
+const { GroupModel } = require('../models/GroupModel'); // Import group model
 
 // Create a new group (POST)
 router.post('/', validateToken, async (req, res) => {
     try {
-        const group = await groupModel.create(req.body);
+        const group = await GroupModel.create(req.body);
         res.status(201).json(group);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -15,7 +15,7 @@ router.post('/', validateToken, async (req, res) => {
 // Get all groups (GET)
 router.get('/', validateToken, async (req, res) => {
     try {
-        const groups = await groupModel.findAll();
+        const groups = await GroupModel.findAll();
         res.json(groups);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -25,7 +25,7 @@ router.get('/', validateToken, async (req, res) => {
 // Get a single group by ID (GET)
 router.get('/groups/:id', validateToken, async (req, res) => {
     try {
-        const group = await groupModel.findByPk(req.params.id);
+        const group = await GroupModel.findByPk(req.params.id);
         if (group) {
             res.json(group);
         } else {
@@ -39,7 +39,7 @@ router.get('/groups/:id', validateToken, async (req, res) => {
 // Update a group by ID (PUT)
 router.put('/:id', validateToken, async (req, res) => {
     try {
-        const group = await groupModel.findByPk(req.params.id);
+        const group = await GroupModel.findByPk(req.params.id);
         if (group) {
             await group.update(req.body);
             res.json(group);
@@ -54,7 +54,7 @@ router.put('/:id', validateToken, async (req, res) => {
 // Delete a group by ID (DELETE)
 router.delete('/:id', validateToken, async (req, res) => {
     try {
-        const group = await groupModel.findByPk(req.params.id);
+        const group = await GroupModel.findByPk(req.params.id);
         if (group) {
             await group.destroy();
             res.json({ message: 'group deleted' });

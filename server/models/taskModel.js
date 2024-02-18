@@ -1,19 +1,45 @@
-// models/tasks.js
+// models/TasksModel.js
 module.exports = (sequelize, DataTypes) => {
     const Tasks = sequelize.define('Tasks', {
-        TaskID: {
-            type: DataTypes.STRING,
-            primaryKey: true
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
         },
-        TaskType: DataTypes.INTEGER,
-        TaskName: DataTypes.ENUM('Type1', 'Type2', 'Type3'), // Add more types as necessary
-        Option: DataTypes.ENUM('Option1', 'Option2', 'Option3'), // Add more options as necessary
-        Room: DataTypes.STRING,
-        FreeText: DataTypes.STRING,
-        Progress: DataTypes.ENUM('1', '2', '3'),
-        PictureBefore: DataTypes.STRING,
-        PictureAfter: DataTypes.STRING
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        taskName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        option: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        room: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        freeText: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        picBefore: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        picAfter: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     });
+
 
     return Tasks;
 };
