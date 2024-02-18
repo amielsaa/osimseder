@@ -76,5 +76,19 @@
     direction: rtl;
     flex-wrap: wrap;
 }
+.purple_circle{
+  right:0;
+  position: absolute;
+  margin-right: 5%;
+  background-color: #6200ee;
+  border-radius: 100%;
+  width: 6%;
+  height: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
   

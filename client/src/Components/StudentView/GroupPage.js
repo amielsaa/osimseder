@@ -6,10 +6,13 @@ import '../css/GroupPage.css'
 import DataContext from '../../Helpers/DataContext';
 import { useContext } from 'react';
 import React, { useState } from 'react';
+import { IoChevronForwardCircle } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 const GroupPage = () => {
   const { id } = useParams();
   const {user} = useContext(DataContext)
+  const navigate = useNavigate();
   
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
@@ -47,7 +50,11 @@ const GroupPage = () => {
     <div>
       <Header/>
       <Nav/>
+      
       <div className='content-Box-Group'>
+        <span className='purple_circle'>
+      <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+      </span>
       <div className='group-title'>
         <h1>קבוצה: {id}</h1>
         </div>
