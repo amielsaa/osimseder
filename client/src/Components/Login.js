@@ -5,9 +5,6 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import DataContext from '../Helpers/DataContext';
 import './css/Login.css';
-import React, { useState , useContext} from 'react';
-import axios from "axios";
-import DataContext from '../Helpers/DataContext';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,11 +26,11 @@ const Login = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('אימייל לא תקין').required('אימייל נדרש'),
     password: Yup.string().required('סיסמה נדרשת'),
-    code: Yup.string().when('email', {
+    /* code: Yup.string().when('email', {
       is: (val) => val && val.length > 0,
       then: Yup.string().required('קוד סודי נדרש'),
       otherwise: Yup.string(),
-    }),
+    }), */
   });
 
   const handleSubmit = (values) => {

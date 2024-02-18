@@ -1,34 +1,121 @@
-import { useEffect } from "react";
+import {  useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
-import './css/HousePage.css'
+import './css/HousePage.css';
+import HousePicture from '../images/housepicture.jpg';
+import TaskCard from "./StudentView/TaskCard";
+import { IoChevronForwardCircle } from "react-icons/io5";
+import DataContext from "../Helpers/DataContext";
+
 const HousePage = () => {
-    const {id} = useParams()
+  const { id } = useParams();
+  const [house, setHouse] = useState(null);
+  const {navigate} = useContext(DataContext)
 
-    /* const house = {id } */
+  useEffect(() => {
+    // Generate a random House object for testing
+    const generateRandomHouse = () => {
+      const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
 
+      const genders = ["זכר", "נקבה"];
+      const cities = ["תל אביב", "ירושלים", "חיפה", "באר שבע"];
+      const languages = ["עברית", "אנגלית", "ערבית"];
 
-    useEffect(() => {
-        // Amiel - you have the Id of the house, I need you to get all the information about this house in here
-        // and store it into a consts. use this useEffect to do it.
-        // including the tasks of this house and including the id of the team that is in this house !!
-    })
+      const randomHouse = {
+        contactName: "דוד כהן",
+        gender: getRandomValue(genders),
+        city: getRandomValue(cities),
+        address: "רחוב הראשון 123",
+        languages: [getRandomValue(languages)],
+        phoneNumber: "123-456-7890",
+        alternativeNumber: "987-654-3210",
+        notes: "אוהב משכבי זכר למיניהם",
+      };
+
+      return randomHouse;
+    };
+    
+
+    // Set the generated random house to the state
+    setHouse(generateRandomHouse());
+  }, [id]); // Dependency array ensures it runs when the id changes
+  const [tasks, setTasks] = useState([
+    { room: 'סלון', tasks: [
+      { description: 'ניקיון', status: true },
+      { description: 'סידור', status: false },
+    ]},
+    { room: 'חדר ילדים', tasks: [
+      { description: 'תיקון', status: false },
+      { description: 'ניקיון', status: true },
+    ]},
+    { room: 'מטבח', tasks: [
+      { description: 'תיקון', status: false },
+      { description: 'ניקיון', status: true },
+    ]},
+    { room: 'חדר שינה', tasks: [
+      { description: 'תיקון', status: false },
+      { description: 'ניקיון', status: true },
+    ]},
+    { room: 'מחסן', tasks: [
+      { description: 'ניקיון', status: true },
+      { description: 'סידור', status: false },
+    ]},
+  ]);
   return (
     <>
-    <Header/>
-
-    <Nav/>
-    <div className='content-Box'>
-      <div className="info_picture">
-        <div className="House_full_Info"></div>
-        <div className="House_picture"></div>
+      <Header />
+      <Nav />
+      <div className='content-Box'>
+      <span className='purple_circle'>
+      <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+      </span>
+        <div className="title_picture">
+          <div className="House-title">
+            <h1>בית מספר : {id}</h1>
+          </div>
+          <div className="House_picture">
+            <img src={HousePicture} alt="אין תמונה" />
+          </div>
+        </div>
+        <div className="House_Info">
+          <div className="Info">
+            שם איש קשר: {house?.contactName}
+          </div>
+          <div className="Info">
+            מגדר: {house?.gender}
+          </div>
+          <div className="Info">
+            עיר: {house?.city}
+          </div>
+          <div className="Info">
+            כתובת: {house?.address}
+          </div>
+          <div className="Info">
+            שפות: {house?.languages.join(", ")}
+          </div>
+          <div className="Info">
+            מספר פלאפון: {house?.phoneNumber}
+          </div>
+          <div className="Info">
+            מספר חלופי: {house?.alternativeNumber}
+          </div>
+          <div className="Info">
+            הערות: {house?.notes}
+          </div>
+          <div className="Info">
+            קבוצה :
+          </div>
+        </div>
+        <div className='House-Info-Tasks'>
+          {tasks.map((task, index) => (
+            <TaskCard key={index} room={task.room} tasks={task.tasks} />
+          ))}
+        </div>
         
       </div>
-      
-    </div>
     </>
-  )
+  );
 }
 
 export default HousePage;
