@@ -1,69 +1,48 @@
 const express = require('express');
 const router = express.Router();
 const { groupModel } = require('../models/groupModel'); // Import group model
+const {validateToken} = require('../../utils/JsonWebToken');
+const {validateAccess, accessGroup} = require('../../utils/Accesses');
 
-// Create a new group (POST)
-router.post('/', validateToken, async (req, res) => {
-    try {
-        const group = await groupModel.create(req.body);
-        res.status(201).json(group);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
 
-// Get all groups (GET)
-router.get('/', validateToken, async (req, res) => {
+// data provided by the request:
+// json with all the studentModel properties except for 'password'
+// req.body = {email:'', firstName:'', ...}
+
+// Get all groups by school name (GET)
+router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
-        const groups = await groupModel.findAll();
+        // implement to return all the groups that related to the school specified
+        const groups = {};
         res.json(groups);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.json({ error: err.message });
     }
 });
 
 // Get a single group by ID (GET)
-router.get('/groups/:id', validateToken, async (req, res) => {
+router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
-        const group = await groupModel.findByPk(req.params.id);
-        if (group) {
-            res.json(group);
-        } else {
-            res.status(404).json({ message: 'group not found' });
-        }
+        // implement to return the correct group by groupid
+        // access the :id argument by: req.params.id
+        
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.json({ error: err.message });
     }
 });
 
-// Update a group by ID (PUT)
-router.put('/:id', validateToken, async (req, res) => {
+//Join Group by groupId
+router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
-        const group = await groupModel.findByPk(req.params.id);
-        if (group) {
-            await group.update(req.body);
-            res.json(group);
-        } else {
-            res.status(404).json({ message: 'group not found' });
-        }
+        // implement to add a student to an existing group
+        const group = {};
+        //should return the group he just joined
+        res.json(group)
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.json({ error: err.message });
     }
 });
 
-// Delete a group by ID (DELETE)
-router.delete('/:id', validateToken, async (req, res) => {
-    try {
-        const group = await groupModel.findByPk(req.params.id);
-        if (group) {
-            await group.destroy();
-            res.json({ message: 'group deleted' });
-        } else {
-            res.status(404).json({ message: 'group not found' });
-        }
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+
 
 module.exports = router;

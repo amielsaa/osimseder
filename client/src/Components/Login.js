@@ -38,9 +38,8 @@ const Login = () => {
             if(res.data.error) alert(res.data.error);
             else {
                 localStorage.setItem("accessToken",res.data.token);
+                //res.data = { token: accessToken,role:'Student', user:student, id: student.id }
                 setUser(res.data);
-                // setAuthState({username:res.data.username, id: res.data.id, status: true});
-                // setAuthState({username:"username", id: "id", status: true});
                 navigate("/Home");
             }
         })
