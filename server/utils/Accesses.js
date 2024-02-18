@@ -9,6 +9,7 @@ const accessGroup = {
 
 const validateAccess = (permissions) => {
     return (req,res,next) => {
+        console.log(req.something);
         if(permissions.includes(req.user.role)) {
             next();
         } else {
