@@ -5,12 +5,16 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import DataContext from '../Helpers/DataContext';
 import './css/Login.css';
+import React, { useState , useContext} from 'react';
+import axios from "axios";
+import DataContext from '../Helpers/DataContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const [displayCode, setDisplayCode] = useState(false);
   const { URL } = useContext(DataContext);
   const [error,setError] = useState('')
+  const {setUser} = useContext(DataContext);
 
   const initialValues = {
     email: '',
@@ -41,14 +45,16 @@ const Login = () => {
       code,
     };
 
-    axios.post(`${URL}/login`, data).then((res) => {
-      if (res.data.error) {
-        setError(res.data.error);
-      } else {
-        localStorage.setItem('accessToken', res.data.token);
-        navigate('/Home');
-      }
-    });
+    axios.post("http://localhost:3001/auth/login_student", data).then((res) => {
+            if(res.data.error) alert(res.data.error);
+            else {
+                localStorage.setItem("accessToken",res.data.token);
+                setUser(res.data);
+                // setAuthState({username:res.data.username, id: res.data.id, status: true});
+                // setAuthState({username:"username", id: "id", status: true});
+                navigate("/Home");
+            }
+        })
   };
 
   const handleDisplayCode = () => {

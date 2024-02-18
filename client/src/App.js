@@ -13,6 +13,11 @@ import EquipmentTeamOwner from './Components/TeamOwnerView/EquipmentTeamOwner.js
 import Error from './Components/Error.js'
 import HousePage from './Components/HousePage.js';
 function App() {
+
+ 
+  //{headers: {accessToken: localStorage.getItem('accessToken')}}
+  // Sample state for role and userName
+  
   return (
     <div className="App">
 

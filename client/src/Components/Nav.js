@@ -7,7 +7,6 @@ import DataContext from '../Helpers/DataContext';
 const Nav = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(true);
   const {user} = useContext(DataContext)
-
   const toggleSidebar = () => {
     setIsSidebarHidden(!isSidebarHidden);
   };
@@ -45,6 +44,14 @@ const Nav = () => {
             <li onClick={closeSidebar}><Link to="/My-Groups-to"><i className="fa fa-my_group"></i>הקבוצות שלי</Link></li>
             <li onClick={closeSidebar}><Link to="/My-Houses-to"><i className="fa fa-my_group"></i>הבתים שלי</Link></li>
             <li onClick={closeSidebar}><Link to="/Equipment-to"><i className="fa fa-my_group"></i>ציוד נדרש</Link></li>
+            </>
+          )}
+          {user.role === 'Team Leader' && (
+            <>
+            <li onClick={closeSidebar}><Link to="/Groups-tl"><i className="fa fa-home"></i>קבוצות</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>הקבוצות שלי</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>הבתים שלי</Link></li>
+            <li onClick={closeSidebar}><Link to="/My-Groups"><i className="fa fa-my_group"></i>ציוד נדרש</Link></li>
             </>
           )}
         </ul>

@@ -9,7 +9,7 @@ export const DataProvider = ({children}) => {
     parentNumber: "0503428526", School: "מקיף ו", sex:"זכר", languages:["אנגלית", "עברית"], personalRequests:"כבד לי בלילות"
     , groupId:"002" })
     const navigate = useNavigate();
-    const URL = 'http://localhost:3000/posts';
+    const URL = 'http://localhost:3001';
     
 
       
