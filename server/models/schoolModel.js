@@ -1,16 +1,28 @@
-// models/schools.js
+// models/SchoolModel.js
 module.exports = (sequelize, DataTypes) => {
     const Schools = sequelize.define('Schools', {
-        SchoolID: {
-            type: DataTypes.STRING,
-            primaryKey: true
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
         },
-        SchoolName: DataTypes.STRING,
-        AreaID: DataTypes.STRING,
-        AreaName: DataTypes.STRING,
-        CityID: DataTypes.STRING,
-        CityName: DataTypes.STRING
+        schoolName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
+
+
+    Schools.associate = (models) => {
+        Schools.hasMany(models.Students, {
+            foreignKey: 'schoolId'
+        });
+
+        Schools.hasMany(models.Groups, {
+            foreignKey: 'schoolId'
+        });
+    };
+
 
     return Schools;
 };

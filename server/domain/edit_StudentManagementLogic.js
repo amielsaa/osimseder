@@ -1,5 +1,5 @@
 // Student Management
-const Students = require('../models/studentModel');
+const Students = require('../models/StudentModel');
 const bcrypt = require('bcrypt');
 
 class StudentManagementLogic {

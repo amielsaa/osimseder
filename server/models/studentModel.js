@@ -1,7 +1,7 @@
 // models/studentModel.js
 module.exports = (sequelize, DataTypes) => {
     const Students = sequelize.define('Students', {
-        ID: {
+        id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         gender: {
-            type: DataTypes.ENUM('Male', 'Female', 'Other', 'Not Relevant'),
+            type: DataTypes.STRING,
             allowNull: false,
         },
         parentName: {
@@ -42,17 +42,9 @@ module.exports = (sequelize, DataTypes) => {
         parentEmail: { // TODO YOAV check with Ofir if needed
             type: DataTypes.STRING,
             allowNull: false
-        },  
-        city: {
-            type: DataTypes.ENUM('BSV', 'JRS', 'TLV'),
-            allowNull: false,
-        },
-        school: { // Add more schools as necessary
-            type: DataTypes.ENUM('SchoolTest1', 'SchoolTest2', 'SchoolTest3'), 
-            allowNull: false
         },
         issuesChoose: {
-            type: DataTypes.ENUM('Accessability', 'Timing', 'Allergy', 'Other'),
+            type: DataTypes.STRING,
             allowNull: true
         }, 
         issuesText: { // free text explaining
@@ -61,18 +53,19 @@ module.exports = (sequelize, DataTypes) => {
 
         }, 
         languages: {
-            type: DataTypes.ENUM('English', 'Russian', 'Amharic', 'Arabic', 'French', 'other'),
-            allowNull: true
-        }, 
-        isInGroup: { // '' for no value, group ID if in
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }, 
         didParentApprove: { // TODO YOAV let the student know in screen but don't stop him from doing actions
             type: DataTypes.BOOLEAN,
             allowNull: false
+        }, 
+        verificationToken: { // TODO YOAV let the student know in screen but don't stop him from doing actions
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
+
 
     return Students;
 };
