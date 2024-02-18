@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { groupModel } = require('../models/groupModel'); // Import group model
+const {validateToken} = require('../../utils/JsonWebToken')
+const {validateAccess, accessGroup} = require('../../utils/Accesses')
 
 // Create a new group (POST)
 router.post('/', validateToken, async (req, res) => {
     try {
-        const group = await groupModel.create(req.body);
-        res.status(201).json(group);
+        
+        res.json(group);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.json({ message: err.message });
     }
 });
 

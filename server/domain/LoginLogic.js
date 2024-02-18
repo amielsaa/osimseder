@@ -16,8 +16,9 @@ class LoginLogic {
             if (!match) {
                 throw new Error('Wrong username and password combination');
             }
+            const {password, ...studentJson} =  student;
             const accessToken = sign({ username: email,role:'Student' ,id: student.id }, "importantsecret");
-            return { token: accessToken,role:'Student', username: email, id: student.id };
+            return { token: accessToken,role:'Student', user:studentJson, id: student.id };
         } catch (error) {
             throw new Error('Failed to login: ' + error);
         }
