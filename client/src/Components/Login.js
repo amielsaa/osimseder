@@ -2,10 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
-import DataContext from '../Helpers/DataContext';
 import './css/Login.css';
-import React, { useState , useContext} from 'react';
 import axios from "axios";
 import DataContext from '../Helpers/DataContext';
 
@@ -29,18 +26,18 @@ const Login = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('אימייל לא תקין').required('אימייל נדרש'),
     password: Yup.string().required('סיסמה נדרשת'),
-    code: Yup.string().when('email', {
-      is: (val) => val && val.length > 0,
-      then: Yup.string().required('קוד סודי נדרש'),
-      otherwise: Yup.string(),
-    }),
+    // code: Yup.string().when('email', {
+    //   is: (val) => val && val.length > 0,
+    //   then: Yup.string().required('קוד סודי נדרש'),
+    //   otherwise: Yup.string(),
+    // }),
   });
 
   const handleSubmit = (values) => {
     const { email, password, code } = values;
     
     const data = {
-      username: email.toLowerCase(),
+      email: email.toLowerCase(),
       password,
       code,
     };
@@ -48,9 +45,11 @@ const Login = () => {
     axios.post("http://localhost:3001/auth/login_student", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
+                //localStorage.clear();
                 localStorage.setItem("accessToken",res.data.token);
                 //res.data = { token: accessToken,role:'Student', user:student, id: student.id }
                 setUser(res.data);
+                console.log(res.data.token);
                 navigate("/Home");
             }
         })

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { groupModel } = require('../models/groupModel'); // Import group model
 const {validateToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
 
@@ -13,19 +12,35 @@ const {validateAccess, accessGroup} = require('../../utils/Accesses');
 router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         // implement to return all the groups that related to the school specified
-        const groups = {};
-        res.json(groups);
+        //dummy json, replace it when you finish implementing
+        res.json({groups:[{
+            groupId:'1',
+            groupMembersIds:['amiel@gmail.com','ari@gmail.com'], // emails or ids?
+            houseId: '1',
+        }, {
+            groupId:'2',
+            groupMembersIds:['feliks@gmail.com','yoav@gmail.com'], // emails or ids?
+            houseId: '2',
+        }
+    ]});
     } catch (err) {
         res.json({ error: err.message });
     }
 });
+
 
 // Get a single group by ID (GET)
 router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         // implement to return the correct group by groupid
         // access the :id argument by: req.params.id
-        
+
+        //dummy json
+        res.json({group: {
+            groupId:'1',
+            groupMembersIds:['amiel@gmail.com','ari@gmail.com'], //maybe emails?
+            houseId: '1',
+        }})
     } catch (err) {
         res.json({ error: err.message });
     }

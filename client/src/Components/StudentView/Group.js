@@ -3,7 +3,7 @@ import '../css/Group.css';
 import StudentsPopUp from './StudentsPopUp';
 import DataContext from '../../Helpers/DataContext';
 
-const Group = ({ groupId }) => {
+const Group = ({ groupId , groupJson}) => {
 
   const {user} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
