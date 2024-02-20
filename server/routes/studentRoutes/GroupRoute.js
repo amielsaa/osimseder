@@ -24,7 +24,8 @@ router.get('/', /*validateToken, validateAccess(accessGroup.A),*/ async (req, re
     
             const studentNames = students.map(student => {
                 const { firstName, lastName, ...rest } = student;
-                return { firstName, lastName };
+                // return { firstName, lastName };
+                return `${firstName} ${lastName}`;
             });
     
             group.dataValues.students = studentNames;            
