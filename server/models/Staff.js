@@ -1,4 +1,4 @@
-// models/staffModel.js
+// models/Staff.js
 module.exports = (sequelize, DataTypes) => {
     const Staffs = sequelize.define('Staffs', {
         id: {

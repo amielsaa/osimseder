@@ -1,4 +1,4 @@
-// setupTestDatabase.js
+// SetupTestDatabase.js
 const { Sequelize } = require('sequelize');
 const { exec } = require('child_process');
 

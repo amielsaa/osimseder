@@ -1,7 +1,7 @@
-// sequelize.test.js
+// Sequelize.test.js
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelizeConfig = require('../config/config.json').test; // Assuming you're using a separate configuration for testing
-const studentModel = require('../models/studentModel'); // Import your Sequelize model for testing
+const studentModel = require('../models/Student'); // Import your Sequelize model for testing
 const bcrypt = require('bcrypt');
 
 describe('Sequelize', () => {

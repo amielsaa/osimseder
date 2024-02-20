@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelizeConfig = require('../config/config.json').test; // Assuming you're using a separate configuration for testing
 const AuthenticationLogic = require('../domain/LoginLogic');
-const Students = require('../models/studentModel'); 
+const Students = require('../models/Student');
 const RegistrationLogic = require("../domain/RegistrationLogic")
 
 describe('verifyLoginStudent', () => {

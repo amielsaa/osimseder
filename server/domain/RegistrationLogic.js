@@ -2,7 +2,7 @@
 const { Students } = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const emailService = require('./services/emailService')
+const emailService = require('./services/EmailService')
 
 
 class RegistrationLogic {
