@@ -1,4 +1,4 @@
-// routes/studentRoute.js
+// routes/StudentRoute.js
 const express = require('express');
 const router = express.Router();
 const { validateToken } = require('../middlewares/authMiddleware');

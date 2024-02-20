@@ -1,4 +1,4 @@
-// models/AreaModel.js
+// models/Area.js
 module.exports = (sequelize, DataTypes) => {
     const Areas = sequelize.define('Areas', {
         ID: {

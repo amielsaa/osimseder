@@ -1,4 +1,4 @@
-const Students = require('../models/StudentModel');
+const Students = require('../models/Student');
 
 class StudentGroupManagementLogic {
     async joinGroup(studentId, groupId) {
