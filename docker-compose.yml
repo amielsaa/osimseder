@@ -14,15 +14,19 @@ services:
       # - database:/app/postgres
       - ./postgres:/var/lib/postgresql/data 
       - database:/var/lib/postgresql/data
-  # pgadmin:
-  #   container_name: pgadmin4_container
-  #   image: dpage/pgadmin4
-  #   restart: always
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
-  #     PGADMIN_DEFAULT_PASSWORD: root
-  #   ports:
-  #         - "5050:80"
+  postgres-test:
+    image: postgres
+    container_name: postgres_test
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: osimseder-test
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    volumes:
+      # - ./postgres:/app
+      # - database:/app/postgres
+      - ./postgres:/var/lib/postgresql/data 
   server:
     build: ./server
     container_name: server_c
