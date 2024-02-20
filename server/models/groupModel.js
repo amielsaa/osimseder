@@ -1,7 +1,7 @@
 // models/groups.js
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,

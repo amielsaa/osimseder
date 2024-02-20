@@ -1,7 +1,7 @@
 // models/TasksModel.js
 module.exports = (sequelize, DataTypes) => {
     const Tasks = sequelize.define('Tasks', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,

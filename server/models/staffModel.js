@@ -1,7 +1,7 @@
 // models/staffModel.js
 module.exports = (sequelize, DataTypes) => {
     const Staffs = sequelize.define('Staffs', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

@@ -1,7 +1,7 @@
 // models/AreaModel.js
 module.exports = (sequelize, DataTypes) => {
     const Cities = sequelize.define('Cities', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,

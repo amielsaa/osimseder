@@ -1,7 +1,7 @@
 // models/Houses.js
 module.exports = (sequelize, DataTypes) => {
     const Houses = sequelize.define('Houses', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
