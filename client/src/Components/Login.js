@@ -49,8 +49,7 @@ const Login = () => {
                 //localStorage.clear();
                 localStorage.setItem("accessToken",res.data.token);
                 //res.data = { token: accessToken,role:'Student', user:student, id: student.id }
-                setUser(res.data);
-                console.log(res.data.token);
+                setUser(res.data.user.dataValues);
                 navigate("/Home");
             }
         })

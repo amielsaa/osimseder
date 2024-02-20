@@ -17,8 +17,11 @@ class LoginLogic {
                 throw new Error('Wrong username and password combination');
             }
             const {password, ...studentJson} =  student;
+            studentJson.dataValues.role = 'Student';
+            //studentJson['role'] = 'Student';
             const accessToken = sign({ username: email,role:'Student' ,id: student.id }, "importantsecret");
-            return { token: accessToken,role:'Student', user:studentJson, id: student.id };
+            console.log(studentJson)
+            return { token: accessToken, user:studentJson, id: student.id };
         } catch (error) {
             throw new Error('Failed to login: ' + error);
         }

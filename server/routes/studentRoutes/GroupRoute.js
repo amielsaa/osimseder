@@ -15,9 +15,10 @@ const {verify} = require('jsonwebtoken')
 // req.body = {email:'', firstName:'', ...}
 
 // Get all groups by school name (GET)
-router.get('/', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
+router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const { schoolId } = req.body;
     try {
+
         const groups = await groupLogic.getAllGroupsBySchool(schoolId);
         for (let i = 0; i < groups.length; i++) {
             const group = groups[i];
@@ -49,7 +50,7 @@ router.get('/', /*validateToken, validateAccess(accessGroup.A),*/ async (req, re
 
 
 // Get a single group by ID (GET)
-router.get('/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
+router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const groupId = req.params.id;
     try {
         const group = await groupLogic.getAllGroupById(groupId);
@@ -80,7 +81,7 @@ router.get('/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req,
 });
 
 //Join Group by groupId
-router.post('/join/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
+router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const groupId = req.params.id;
     const verifiedUser = verifyToken(req.header("accessToken"));
     const userEmail = verifiedUser['username'];
