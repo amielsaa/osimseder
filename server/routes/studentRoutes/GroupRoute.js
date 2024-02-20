@@ -15,11 +15,11 @@ router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) =
         //dummy json, replace it when you finish implementing
         res.json({groups:[{
             groupId:'1',
-            groupMembersIds:['amiel@gmail.com','ari@gmail.com'], // emails or ids?
+            groupMemberNames:['amiel saad','ari oshri'], // emails or ids?
             houseId: '1',
         }, {
             groupId:'2',
-            groupMembersIds:['feliks@gmail.com','yoav@gmail.com'], // emails or ids?
+            groupMemberNames:['feliks roizman','yoav avital'], // emails or ids?
             houseId: '2',
         }
     ]});
@@ -50,7 +50,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
 router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         // implement to add a student to an existing group
-        const group = {};
+        const group = {work:'ing bitch'};
         //should return the group he just joined
         res.json(group)
     } catch (err) {
