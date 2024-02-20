@@ -1,0 +1,58 @@
+.content-Box-Equipment {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: #f2f2f2; /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    
+  }
+  .Equipment-title {
+    margin-top:6%;
+   color : #6200ee;
+  }
+  .Equipment-block{
+    margin-top: 10%;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 12px;
+    display: flex;
+    justify-content: right;
+    direction: rtl;
+    flex-direction: column;
+    gap: 2%;
+    font-weight: bold;
+    
+  }
+  .Equipment_title{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: darkblue;
+    margin-right: 3%;
+  }
+  .border-bottom{
+    width: 100%;
+    border:1px solid #6200ee ;
+  }
+  .single-equipment{
+    margin-right: 10%;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: purple;
+    display: flex;
+    margin-top: 2%;
+    flex-direction: row;
+    gap: 3%;
+  }
+  .icon_For_Equipment {
+    color:black
+  }
+  
