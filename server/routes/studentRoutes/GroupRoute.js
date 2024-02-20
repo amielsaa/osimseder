@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const {validateToken} = require('../../utils/JsonWebToken');
+const {validateToken, verifyToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
 const groupLogic = require('../../domain/GroupLogic')
 const groups = require('../../models/Group')
 const RegistrationLogic = require("../../domain/RegistrationLogic")
+const {verify} = require('jsonwebtoken')
+
 
 
 
@@ -80,32 +82,14 @@ router.get('/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req,
 //Join Group by groupId
 router.post('/join/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
     const groupId = req.params.id;
+    const verifiedUser = verifyToken(req.header("accessToken"));
+    const userEmail = verifiedUser['username'];
     try {
-        const group = await groupLogic.getAllGroupById(groupId);
-        
-        const students = await group.getStudents();
-    
-        const studentNames = students.map(student => {
-            const { firstName, lastName, ...rest } = student;
-            return `${firstName} ${lastName}`;
-        });
-    
-        group.dataValues.students = studentNames;            
-        
-
-        const responseData = {
-            ID: group.ID,
-            groupName: group.groupName,
-            students: group.dataValues.students,
-        };
-    
-        res.json({
-            group: responseData,
-        });
-        // implement to add a student to an existing group
         // const group = {};
+        const group = await groupLogic.joinGroup(groupId, userEmail);
+        // implement to add a student to an existing group
         //should return the group he just joined
-        // res.json(group)
+        res.json(group)
     } catch (err) {
         res.json({ error: err.message });
     }
