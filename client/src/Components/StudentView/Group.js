@@ -21,7 +21,7 @@ const Group = ({ groupId , groupJson}) => {
   }
 
   useEffect(() => {
-    setStudentsList(groupJson.groupMemberNames);
+    setStudentsList(groupJson.students);
   },[]);
 
 

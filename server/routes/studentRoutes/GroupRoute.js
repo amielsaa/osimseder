@@ -3,7 +3,8 @@ const router = express.Router();
 const {validateToken, verifyToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
 const groupLogic = require('../../domain/GroupLogic')
-const groups = require('../../models/Group')
+const {Groups} = require('../../models/')
+const {Schools} = require('../../models/')
 const RegistrationLogic = require("../../domain/RegistrationLogic")
 const {verify} = require('jsonwebtoken')
 
@@ -15,7 +16,7 @@ const {verify} = require('jsonwebtoken')
 // req.body = {email:'', firstName:'', ...}
 
 // Get all groups by school name (GET)
-router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const { schoolId } = req.body;
     try {
 
@@ -48,6 +49,10 @@ router.get('/', validateToken, validateAccess(accessGroup.A), async (req, res) =
     }
 });
 
+router.post('/init_test', async (req, res) => {
+    await Groups.create({groupName:'aa',teamOwnerId:'fe'})
+    await Schools.create({schoolName:'oo'})
+})
 
 // Get a single group by ID (GET)
 router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {

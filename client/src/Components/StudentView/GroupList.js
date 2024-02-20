@@ -21,10 +21,12 @@ const GroupList = () => {
   useEffect(() => {
     //const getGroups = (user) => {
       if (user.role === "Student") {
-        axios.get('http://localhost:3001/student/groups/',{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
+        console.log(user);
+        axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
           //setGroupIds(res.body.groups);
           if(res.data.error) {alert(res.data.error)};
           setGroupIds(res.data.groups)
+          console.log(res.data);
         })
         // Amiel - get all the groups from this student's school!   
       } else if (user.role === "TeamOwner") {
@@ -44,7 +46,7 @@ const GroupList = () => {
     <>
       
       {groupIds.map((groupJson) => (
-        <Group key={groupJson} groupId={groupJson.groupId} groupJson={groupJson} />
+        <Group key={groupJson} groupId={groupJson.ID} groupJson={groupJson} />
       ))}
     </>
   );
