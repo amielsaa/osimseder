@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Houses.associate = (models) => {
+        // Should it be: Houses.hasMany?
+
         Houses.hasOne(models.Groups, {
             foreignKey: 'houseId'
         });
