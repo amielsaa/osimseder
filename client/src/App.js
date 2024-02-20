@@ -9,7 +9,7 @@ import PersonalPage from './Components/PersonalPage.js';
 import { DataProvider } from './Helpers/DataContext';
 import MyGroupsTeamOwner from './Components/TeamOwnerView/MyGroupsTeamOwner.js';
 import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
-import EquipmentTeamOwner from './Components/TeamOwnerView/EquipmentTeamOwner.js';
+import Equipment from './Components/Equipment.js';
 import Error from './Components/Error.js'
 import HousePage from './Components/HousePage.js';
 function App() {
@@ -42,7 +42,7 @@ function App() {
 
           <Route path="/HousePage/:id" element={<HousePage/>}/>
 
-          <Route path="/Equipment-to" element={<EquipmentTeamOwner/>}/>
+          <Route path="/Equipment-to" element={<Equipment/>}/>
 
           
 
