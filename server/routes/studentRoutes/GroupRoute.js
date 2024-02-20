@@ -24,7 +24,6 @@ router.get('/', /*validateToken, validateAccess(accessGroup.A),*/ async (req, re
     
             const studentNames = students.map(student => {
                 const { firstName, lastName, ...rest } = student;
-                // return { firstName, lastName };
                 return `${firstName} ${lastName}`;
             });
     
@@ -48,29 +47,65 @@ router.get('/', /*validateToken, validateAccess(accessGroup.A),*/ async (req, re
 
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.get('/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
+    const groupId = req.params.id;
     try {
-        // implement to return the correct group by groupid
-        // access the :id argument by: req.params.id
+        const group = await groupLogic.getAllGroupById(groupId);
+        
+        const students = await group.getStudents();
+    
+        const studentNames = students.map(student => {
+            const { firstName, lastName, ...rest } = student;
+            return `${firstName} ${lastName}`;
+        });
+    
+        group.dataValues.students = studentNames;            
+        
 
-        //dummy json
-        res.json({group: {
-            groupId:'1',
-            groupMembersIds:['amiel@gmail.com','ari@gmail.com'], //maybe emails?
-            houseId: '1',
-        }})
+        const responseData = {
+            ID: group.ID,
+            groupName: group.groupName,
+            students: group.dataValues.students,
+        };
+    
+        res.json({
+            group: responseData,
+        });
+
     } catch (err) {
         res.json({ error: err.message });
     }
 });
 
 //Join Group by groupId
-router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.post('/join/:id', /*validateToken, validateAccess(accessGroup.A),*/ async (req, res) => {
+    const groupId = req.params.id;
     try {
+        const group = await groupLogic.getAllGroupById(groupId);
+        
+        const students = await group.getStudents();
+    
+        const studentNames = students.map(student => {
+            const { firstName, lastName, ...rest } = student;
+            return `${firstName} ${lastName}`;
+        });
+    
+        group.dataValues.students = studentNames;            
+        
+
+        const responseData = {
+            ID: group.ID,
+            groupName: group.groupName,
+            students: group.dataValues.students,
+        };
+    
+        res.json({
+            group: responseData,
+        });
         // implement to add a student to an existing group
-        const group = {};
+        // const group = {};
         //should return the group he just joined
-        res.json(group)
+        // res.json(group)
     } catch (err) {
         res.json({ error: err.message });
     }

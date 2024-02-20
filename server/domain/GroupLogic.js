@@ -17,6 +17,20 @@ class GroupLogic {
         }
     }
 
+    async getAllGroupById(groupId) {
+        try {
+            const group = await Groups.findOne({
+                where: { "ID": groupId }
+            });
+            if (!group) {
+                throw new Error('Group not found');
+            }
+            return group;
+        } catch (error) {
+            throw new Error('Failed to find groups by ID ' + error);
+        }
+    }
+
     
 }
 
