@@ -8,6 +8,7 @@ import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 
+
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
