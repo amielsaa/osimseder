@@ -1,9 +1,9 @@
-// AuthenticationLogic.js
+// LoginLogic.js
 const {Students} = require('../models/');
 const bcrypt = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
-class AuthenticationLogic {
+class LoginLogic {
     async verifyLoginStudent(email, givenPassword) {
         try {
             const student = await Students.findOne({
@@ -16,8 +16,9 @@ class AuthenticationLogic {
             if (!match) {
                 throw new Error('Wrong username and password combination');
             }
-            const accessToken = sign({ username: email, id: student.id }, "importantsecret");
-            return { token: accessToken, username: email, id: student.id };
+            const {password, ...studentJson} =  student;
+            const accessToken = sign({ username: email,role:'Student' ,id: student.id }, "importantsecret");
+            return { token: accessToken,role:'Student', user:studentJson, id: student.id };
         } catch (error) {
             throw new Error('Failed to login: ' + error);
         }
@@ -42,4 +43,4 @@ class AuthenticationLogic {
     }
 }
 
-module.exports = new AuthenticationLogic();
+module.exports = new LoginLogic();

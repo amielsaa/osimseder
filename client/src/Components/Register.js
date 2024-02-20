@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
+import DataContext from '../Helpers/DataContext';
 
 function Registration() {
+    const {navigate} = useContext(DataContext);
     const initialValues = {
         firstName: "",
         lastName: "",
         password: "",
-        email:"",
+        email:"", 
         confirmPassword: "",
         gender: "",
         parentName: "",
@@ -18,11 +20,15 @@ function Registration() {
         parentEmail: "",
         city: "",
         school: "",
-        language: "",
+        languages: "",
+        issuesChoose: "Accessability", //not presented in the form
+        issuesText: "", //not presented in the form
+        phoneNumber: "0", //not presented in the form
+
     };
     const schools = []
     const languages = []
-    const navigate = useNavigate();
+    
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required("שם פרטי נדרש"),
@@ -33,23 +39,24 @@ function Registration() {
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
         "סיסמה צריכה לכלול לפחות אות גדולה אחת, אות קטנה אחת, מספר אחד ולהיות באורך של 8 תווים לפחות"
         ),
+        email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
         confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('אישור סיסמה נדרש או סיסמאות לא תואמות'),
         gender: Yup.string().required("מגדר נדרש"),
         parentName: Yup.string().required("שם הורה נדרש"),
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
         parentEmail: Yup.string().email("אימייל לא תקין").required("אימייל הורה נדרש"),
         city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
-        language: Yup.string().required("לפחות שפה אחת נדרשת"),
+        languages: Yup.string().required("לפחות שפה אחת נדרשת"),
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001", data).then(() => {
+        console.log(data);
+        axios.post("http://localhost:3001/auth/register_student", data).then(() => {
             navigate('/');
-        });
+        });         
     };
 
     return (
@@ -70,13 +77,11 @@ function Registration() {
                         <Field id="lastName" name="lastName" placeholder="שם משפחה" />
                         <ErrorMessage name="lastName" component="span" />
                     </div>
-
                     <div>
-                        <label htmlFor="email">אימייל: </label>
-                        <Field type="email" id="email" name="email" placeholder="אימייל" />
+                        <label htmlFor="email">אימייל : </label>
+                        <Field type="email" id="email" name="email" placeholder="אימייל " />
                         <ErrorMessage name="email" component="span" />
                     </div>
-
                     <div>
                         <label htmlFor="password">סיסמה: </label>
                         <Field type="password" id="password" name="password" placeholder="סיסמה" />
@@ -93,9 +98,9 @@ function Registration() {
                         <label htmlFor="gender">מגדר: </label>
                         <Field as="select" id="gender" name="gender">
                             <option value="">בחר מגדר</option>
-                            <option value="male">זכר</option>
-                            <option value="female">נקבה</option>
-                            <option value="other">אחר</option>
+                            <option value="Male">זכר</option>
+                            <option value="Female">נקבה</option>
+                            <option value="Other">אחר</option>
                         </Field>
                         <ErrorMessage name="gender" component="span" />
                     </div>
@@ -123,7 +128,7 @@ function Registration() {
                       <Field as="select" id="city" name="city">
                           <option value="">בחר עיר</option>
                           <option value="אשדוד">אשדוד</option>
-                          <option value="באר שבע">באר שבע</option>
+                          <option value="BSV">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
@@ -132,24 +137,23 @@ function Registration() {
                       <label htmlFor="school">בית ספר: </label>
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
-                          <option value="english">נתיבי עם</option>
-                          <option value="spanish">רמבם</option>
+                          <option value="נתיבי עם">נתיבי עם</option>
+                          <option value="SchoolTest1">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="language">שפת אם: </label>
+                        <label htmlFor="languages">שפת אם: </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
-                            <option value="אנגלית">אנגלית</option>
+                            <option value="English">אנגלית</option>
                             <option value="עברית">עברית</option>
-                            
                         </Field>
                         <ErrorMessage name="languages" component="span" />
                     </div>
                     <div className='Button-Div'>
-                    <button type="submit">הירשם</button>
+                    <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>
                 </Form>
             </Formik>

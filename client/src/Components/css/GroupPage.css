@@ -26,6 +26,30 @@
     overflow-y: scroll;
 
   }
+  .Group-Info .Group_Member {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    background: gainsboro;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .kick_student {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+  }
+  
+  /* Hover effect */
+  .kick_student:hover {
+    background-color: darkred; /* Change color on hover */
+  }
   .Info {
     padding: 15px;
     font-weight: bold;
@@ -52,5 +76,19 @@
     direction: rtl;
     flex-wrap: wrap;
 }
+.purple_circle{
+  right:0;
+  position: absolute;
+  margin-right: 5%;
+  background-color: #6200ee;
+  border-radius: 100%;
+  width: 6%;
+  height: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
   

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { staffModel } = require('../models/houseModel'); // Import house model
+const { StaffModel } = require('../models/HouseModel'); // Import house model
 
 // Create a new house (POST)
 router.post('/', validateToken, async (req, res) => {
