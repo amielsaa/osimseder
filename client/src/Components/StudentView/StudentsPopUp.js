@@ -4,8 +4,8 @@ import '../css/StudentsPopUp.css'
 const StudentsPopUp = ({ studentsList }) => {
   return (
     <div className='pop-up_screen'>
-      {studentsList.map((studentName, index) => (
-        <div className='student-bar' key={index}>{studentName}</div>
+      {studentsList.map((studentName) => (
+        <div className='student-bar' key='0'>{studentName}</div>
       ))}
     </div>
   );

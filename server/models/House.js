@@ -1,7 +1,7 @@
 // models/Houses.js
 module.exports = (sequelize, DataTypes) => {
     const Houses = sequelize.define('Houses', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Houses.associate = (models) => {
+        // Should it be: Houses.hasMany?
+
         Houses.hasOne(models.Groups, {
             foreignKey: 'houseId'
         });

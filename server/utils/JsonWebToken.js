@@ -1,8 +1,9 @@
 const {verify} = require('jsonwebtoken');
 
 // Generate Token
- const generateToken =  (user, password) => {jwt.sign(user, password, { expiresIn: '1h' })}; // Expires in 1 hour
+const generateToken =  (user, password) => {jwt.sign(user, password, { expiresIn: '1h' })}; // Expires in 1 hour
 
+ const verifyToken = (accessToken) => {return verify(accessToken, "importantsecret")};
 
  const validateToken = (req, res, next) => {
   const accessToken = req.header("accessToken");
@@ -19,4 +20,4 @@ const {verify} = require('jsonwebtoken');
   }
 }
 
-module.exports = {generateToken, validateToken}
+module.exports = {generateToken, validateToken, verifyToken}

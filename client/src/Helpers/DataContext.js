@@ -10,14 +10,10 @@ export const DataProvider = ({children}) => {
     , groupId:"002" })
    
     const navigate = useNavigate();
-    const URL = 'http://localhost:3001';
-    
-    
-
       
     return (
         <DataContext.Provider value = { {
-            user, setUser, URL, navigate
+            user, setUser, navigate
         }}>
             {children}
             </DataContext.Provider>

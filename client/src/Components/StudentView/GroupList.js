@@ -10,8 +10,8 @@ const GroupList = () => {
   // Amiel - this consts are for me to just work with while you develope your backend,
   // its only an array of numbers so ill have some ID's
   // feel free the change them to match the groups that need to be here.
-  const initialGroupIds = Array.from({ length: 5 }, (_, index) => (index + 1).toString().padStart(3, '0'));
-  const [groupIds, setGroupIds] = useState(initialGroupIds);
+  //const initialGroupIds = Array.from({ length: 5 }, (_, index) => (index + 1).toString().padStart(3, '0'));
+  const [groupIds, setGroupIds] = useState([]);
 
 
   //Amiel - need to import Groups from the db and lay them for the user, Ill start the function for you
@@ -21,11 +21,12 @@ const GroupList = () => {
   useEffect(() => {
     //const getGroups = (user) => {
       if (user.role === "Student") {
-        axios.get('http://localhost:3001/student/groups/',{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
+        console.log(user);
+        axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
           //setGroupIds(res.body.groups);
           if(res.data.error) {alert(res.data.error)};
           setGroupIds(res.data.groups)
-
+          console.log(res.data);
         })
         // Amiel - get all the groups from this student's school!   
       } else if (user.role === "TeamOwner") {
@@ -38,14 +39,14 @@ const GroupList = () => {
     //console.log(groups);
     //setGroupIds(groups)
 
-  }, [user]);  // Add user to the dependency array
+  }, [user, groupIds]);  // Add user to the dependency array
   
 
   return (
     <>
       
       {groupIds.map((groupJson) => (
-        <Group key={groupJson} groupId={groupJson.groupId} groupJson={groupJson} />
+        <Group key={groupJson} groupId={groupJson.ID} groupJson={groupJson} />
       ))}
     </>
   );

@@ -1,7 +1,7 @@
-// models/studentModel.js
+// models/Student.js
 module.exports = (sequelize, DataTypes) => {
     const Students = sequelize.define('Students', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true

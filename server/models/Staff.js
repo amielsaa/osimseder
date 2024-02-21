@@ -1,45 +1,43 @@
-// models/TasksModel.js
+// models/Staff.js
 module.exports = (sequelize, DataTypes) => {
-    const Tasks = sequelize.define('Tasks', {
-        id: {
+    const Staffs = sequelize.define('Staffs', {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: true
         },
-        type: {
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        password: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        taskName: {
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        option: {
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        room: {
+        phoneNumber: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        freeText: {
+        gender: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        status: {
+        accesses: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        picBefore: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        picAfter: {
-            type: DataTypes.STRING,
-            allowNull: true
         }
     });
 
-
-    return Tasks;
+    return Staffs;
 };
+
+

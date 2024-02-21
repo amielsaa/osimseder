@@ -1,7 +1,7 @@
 // models/taskGearList.js
 module.exports = (sequelize, DataTypes) => {
     const TaskGears = sequelize.define('TaskGears', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
