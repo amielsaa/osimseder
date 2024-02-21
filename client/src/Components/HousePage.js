@@ -9,7 +9,6 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 
 
-
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
@@ -83,11 +82,10 @@ const HousePage = () => {
     <>
       <Header />
       <Nav />
-      <div className='content-Box'>
+      <div className='content-Box-House'>
       <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>
-      
         <div className="title_picture">
           <div className="House-title">
             <h1>בית מספר : {id}</h1>
@@ -122,7 +120,7 @@ const HousePage = () => {
             הערות: {house?.notes}
           </div>
           <div className="Info">
-            קבוצה : 
+            קבוצה :
           </div>
         </div>
         <div className='House-Info-Tasks'>
