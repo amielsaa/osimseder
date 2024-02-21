@@ -1,13 +1,19 @@
 .Task {
-    width: 40%;
-    height: 100%;
-    border: 1px solid #2e0fdb;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    align-items: center;
-  }
+  width: 40%;
+  height: 100%;
+  border: 1px solid #2e0fdb;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  transition: all 0.3s ease; /* Add transition for a smoother effect */
+}
+
+.Task.active {
+  transform: scale(2); /* Adjust the scale factor as needed */
+}
+
   
   .Room-Title {
     width: 100%;
@@ -58,5 +64,9 @@
   
   .red-circle {
     background-color: #ff6666; /* Red color */
+  }
+  .view-icon{
+   color:black;
+   margin-top:10%;
   }
   

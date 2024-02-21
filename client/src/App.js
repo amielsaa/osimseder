@@ -12,6 +12,7 @@ import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
 import Equipment from './Components/Equipment.js';
 import Error from './Components/Error.js'
 import HousePage from './Components/HousePage.js';
+import TaskPage from './Components/TaskPage.js';
 function App() {
 
  
@@ -36,15 +37,15 @@ function App() {
 
           <Route path="/Personal" element={<PersonalPage/>}/>
 
-          <Route path="/My-Groups-to" element={<MyGroupsTeamOwner/>}/>
+          <Route path="/My-Groups" element={<MyGroupsTeamOwner/>}/>
 
-          <Route path="/My-Houses-to" element={<HousesTeamOwner/>}/>
+          <Route path="/My-Houses" element={<HousesTeamOwner/>}/>
 
           <Route path="/HousePage/:id" element={<HousePage/>}/>
 
-          <Route path="/Equipment-to" element={<Equipment/>}/>
+          <Route path="/Equipment" element={<Equipment/>}/>
 
-          
+          <Route path="/TaskPage/:id" element={<TaskPage/>}/>
 
           <Route path="/404" element={<Error/>}/>
         

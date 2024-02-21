@@ -41,17 +41,13 @@ header .icons .settings-icon {
 .settings-icon {
   margin-right: 10px;
 }
-.header .icons a.Link .user-icon,
-.header .icons a.Link .user-icon:hover,
-.header .icons a.Link .user-icon:active {
-  color: white !important;
-  text-decoration: none;
-}
+
 
 
 
 .role-box {
-  margin-right: 10px;
+  margin-left: 12%;
+  margin-top: 1%;
   background-color: #3164f4;
   padding: 0.3rem;
   border-radius: 10px;
