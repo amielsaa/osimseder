@@ -7,6 +7,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
 import CleaningPicture from '../images/cleaningPicture.jpg'
 import PaintingPicture from '../images/paintingPicture.jpg'
+import Footer from './Footer';
 const TaskPage = () => {
     const {id} = useParams ()
     const {navigate} = useContext(DataContext)
@@ -34,9 +35,8 @@ const TaskPage = () => {
       </div>
     </div>
 
-    
-
     </div>
+    <Footer/>
     </>
   );
 }

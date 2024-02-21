@@ -61,4 +61,6 @@
     direction: rtl;
     flex-wrap: wrap;
     margin-top: 10%;
+    padding: 3%;
+    gap :3%;
   }

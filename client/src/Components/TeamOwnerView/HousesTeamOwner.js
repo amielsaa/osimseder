@@ -2,6 +2,7 @@ import '../css/HousesTeamOwner.css'
 import Header from '../Header'
 import Nav from '../Nav'
 import HouseList from './HouseList'
+import Footer from '../Footer'
 const HousesTeamOwner = () => {
   return (
     <>
@@ -12,6 +13,7 @@ const HousesTeamOwner = () => {
     <HouseList/>
       
     </div>
+    <Footer/>
     </>
   )
 }
