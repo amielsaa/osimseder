@@ -13,8 +13,10 @@ const MyGroupsTeamOwner = () => {
     <Header/>
       <Nav/>
     <div className='content-Box'>
+      <div className='To_main_content_groups'>
       <h1 className='title'>הקבוצות שלי</h1>
       <GroupListTO/>
+    </div>
     </div>
     <Footer/>
     </>
