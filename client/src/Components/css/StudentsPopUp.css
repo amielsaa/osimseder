@@ -1,16 +1,25 @@
 .pop-up_screen {
     width: 95%;
     height: 30%;
-    background-color: #6200ee;
+    border: 3px solid #6200ee;
+    color: black;
+    background-color: whitesmoke;
     border-radius: 5%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     direction: rtl;
     overflow-y: scroll;
+    gap:5%;
+
 }
 .student-bar{ 
-    color: whitesmoke;
+    color: black;
+    background-color: lightgrey;
+    height: 20%;
     padding: 15px;
     font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    font-size:1.5rem ;
 }  

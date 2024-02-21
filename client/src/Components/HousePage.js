@@ -7,6 +7,7 @@ import HousePicture from '../images/housepicture.jpg';
 import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
+import Footer from "./Footer";
 
 
 const HousePage = () => {
@@ -86,6 +87,7 @@ const HousePage = () => {
       <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>
+      <div className="House_main_content">
         <div className="title_picture">
           <div className="House-title">
             <h1>בית מספר : {id}</h1>
@@ -93,6 +95,12 @@ const HousePage = () => {
           <div className="House_picture">
             <img src={HousePicture} alt="אין תמונה" />
           </div>
+        </div>
+        <div className="buttons_for_house_logic">
+          <button/>
+
+          
+          
         </div>
         <div className="House_Info">
           <div className="Info">
@@ -128,8 +136,9 @@ const HousePage = () => {
             <TaskCard key={index} room={task.room} tasks={task.tasks} />
           ))}
         </div>
-        
       </div>
+    </div>
+    <Footer/>
     </>
   );
 }
