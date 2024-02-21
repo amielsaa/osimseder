@@ -36,13 +36,13 @@ function App() {
 
           <Route path="/Personal" element={<PersonalPage/>}/>
 
-          <Route path="/My-Groups-to" element={<MyGroupsTeamOwner/>}/>
+          <Route path="/My-Groups" element={<MyGroupsTeamOwner/>}/>
 
-          <Route path="/My-Houses-to" element={<HousesTeamOwner/>}/>
+          <Route path="/My-Houses" element={<HousesTeamOwner/>}/>
 
           <Route path="/HousePage/:id" element={<HousePage/>}/>
 
-          <Route path="/Equipment-to" element={<Equipment/>}/>
+          <Route path="/Equipment" element={<Equipment/>}/>
 
           
 

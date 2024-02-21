@@ -54,12 +54,6 @@ const PersonalPage = () => {
         <div className='Info'>שפות: {user.languages.join(', ')}</div>
         <div className='Info'>בקשות אישיות: {user.personalRequests}</div>
         </div>
-        <div className='FileInputContainer'>
-            <label htmlFor='fileInput' className='UploadButton'>
-              <AiOutlineUpload className='UploadIcon' /> העלאת תמונה
-            </label>
-            <input type='file' id='fileInput' className='FileInput' />
-        </div>
          
         <div className='ActionButtonsContainer'>
           {/* Edit button with pen icon */}

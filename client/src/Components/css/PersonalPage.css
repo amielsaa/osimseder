@@ -74,6 +74,8 @@
   padding: 10px 15px;
   border-radius: 20px;
   cursor: pointer;
+  width: 40%;
+  border: none;
 }
 
 .ActionButton:hover {
