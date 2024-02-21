@@ -12,6 +12,7 @@ import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
 import Equipment from './Components/Equipment.js';
 import Error from './Components/Error.js'
 import HousePage from './Components/HousePage.js';
+import TaskPage from './Components/TaskPage.js';
 function App() {
 
  
@@ -44,7 +45,7 @@ function App() {
 
           <Route path="/Equipment" element={<Equipment/>}/>
 
-          
+          <Route path="/TaskPage/:id" element={<TaskPage/>}/>
 
           <Route path="/404" element={<Error/>}/>
         

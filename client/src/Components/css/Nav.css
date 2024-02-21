@@ -8,6 +8,9 @@
   body.dark-mode {
     background: rgb(27, 27, 34);
   }
+  .nav_icon{
+    margin-right: 2%;
+  }
   
   nav {
     display: flex;

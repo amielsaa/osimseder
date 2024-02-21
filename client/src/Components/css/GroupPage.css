@@ -56,6 +56,8 @@
     font-size: 1rem;
     background: gainsboro;
     margin-top: 5%;
+    width: 100%;
+    font-size: 1.2rem;
   }
   .group-title {
    margin-top:6%;

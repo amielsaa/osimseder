@@ -18,26 +18,41 @@ const GroupPage = () => {
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
   const [tasks, setTasks] = useState([
-    { room: 'סלון', tasks: [
-      { description: 'ניקיון', status: true },
-      { description: 'סידור', status: false },
-    ]},
-    { room: 'חדר ילדים', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'מטבח', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'חדר שינה', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'מחסן', tasks: [
-      { description: 'ניקיון', status: true },
-      { description: 'סידור', status: false },
-    ]},
+    {
+      room: 'סלון',
+      tasks: [
+        { taskId: 1, description: 'ניקיון', status: true },
+        { taskId: 2, description: 'סידור', status: false },
+      ]
+    },
+    {
+      room: 'חדר ילדים',
+      tasks: [
+        { taskId: 3, description: 'תיקון', status: false },
+        { taskId: 4, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'מטבח',
+      tasks: [
+        { taskId: 5, description: 'תיקון', status: false },
+        { taskId: 6, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'חדר שינה',
+      tasks: [
+        { taskId: 7, description: 'תיקון', status: false },
+        { taskId: 8, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'מחסן',
+      tasks: [
+        { taskId: 9, description: 'ניקיון', status: true },
+        { taskId: 10, description: 'סידור', status: false },
+      ]
+    },
   ]);
 
   const handleRemoveMember = (index) => {
@@ -58,11 +73,9 @@ const GroupPage = () => {
       <div className='group-title'>
         <h1>קבוצה: {id}</h1>
         </div>
-        <div className='Group-Info'>
           <div className='Info'>חניך גרעין : </div>
           <div className='Info'>בית ספר : </div>
           <div className='Info'>בית : </div>
-        </div>
         <div className='group-title'>
           <h1>חברי הקבוצה</h1>
         </div>
@@ -82,7 +95,8 @@ const GroupPage = () => {
         </div>
         <div className='Group-Info-Tasks'>
           {tasks.map((task, index) => (
-            <TaskCard key={index} room={task.room} tasks={task.tasks} />
+            <TaskCard  key={index}
+             room={task.room} tasks={task.tasks} />
           ))}
         </div>
       </div>

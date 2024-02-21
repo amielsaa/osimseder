@@ -30,6 +30,8 @@
     font-size: 1rem;
     background: gainsboro;
     margin-top: 5%;
+    width: 100%;
+    font-size: 1.2rem;
    }
    /* Add styles for the file input container */
 .FileInputContainer {
