@@ -3,7 +3,7 @@ import '../css/Group.css';
 import StudentsPopUp from './StudentsPopUp';
 import DataContext from '../../Helpers/DataContext';
 import axios from 'axios';
-import {handleJoinGroup} from '../../Helpers/StudentFrontLogic'
+import {handleJoinGroup, fetchGroupById, fetchAllGroupsBySchool} from '../../Helpers/StudentFrontLogic'
 
 const Group = ({ groupId , groupJson}) => {
   const {user} = useContext(DataContext);
@@ -12,6 +12,7 @@ const Group = ({ groupId , groupJson}) => {
   const openStudentsPopUp = () => {
     //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
+
   };
   
   
@@ -21,8 +22,13 @@ const Group = ({ groupId , groupJson}) => {
   }
 
   useEffect(() => {
-    setStudentsList(groupJson.students);
-  },[]);
+    const updateStudentList = async () => {
+      const group = await fetchGroupById(groupId);
+      setStudentsList(group.students);
+    }
+    updateStudentList();
+    //setStudentsList(groupJson.students);
+  },[studentsList]);
 
 
 
