@@ -97,10 +97,9 @@ const HousePage = () => {
           </div>
         </div>
         <div className="buttons_for_house_logic">
-          <button/>
+          <button className="edit_house_button"> ערוך בית</button>
+          <button className="add_task_button">הוסף מטלה</button>
 
-          
-          
         </div>
         <div className="House_Info">
           <div className="Info">

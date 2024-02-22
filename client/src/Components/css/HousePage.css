@@ -54,6 +54,7 @@
     justify-content: flex-start;
     overflow-y: scroll;
     margin-top: 10%;
+    gap:3%;
   }
   .House-Info-Tasks {
     width: 100%;
@@ -71,6 +72,29 @@
     flex-wrap: wrap;
     margin-top: 10%;
     padding: 3%;
-    gap :3%;
+    gap :2%;
     margin-top: 37%;
+  }
+  .buttons_for_house_logic{
+    width: 100%;
+    min-height: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:20%
+  }
+  .edit_house_button , .add_task_button {
+    width: 30%;
+    height: 100%;
+    margin: 0%;
+    border-radius: 20px;
+    border: none;
+    transition: background-color 0.3s;
+    background-color: #6200ee;
+    color:whitesmoke;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
