@@ -14,3 +14,11 @@
     overflow-y: scroll;
     
   }
+  .To_main_content_groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90%;
+    align-items: center;
+    overflow-y: scroll;
+  }

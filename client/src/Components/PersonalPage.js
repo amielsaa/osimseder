@@ -5,6 +5,7 @@ import { IoMdCreate, IoMdLock } from 'react-icons/io';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
 import { useContext } from 'react';
+import Footer from './Footer';
 const PersonalPage = () => {
   const {user, navigate} = useContext(DataContext)
 
@@ -43,7 +44,7 @@ const PersonalPage = () => {
           </button>
         </div>     
     </div>
-    
+    <Footer/>
     </>
   )
 }

@@ -10,6 +10,7 @@
     align-items: center;
     margin:2%;
     font-weight: bold;
+    min-height: 7%;
     
 }
 .group-id , .users-in-group, .students-Count {

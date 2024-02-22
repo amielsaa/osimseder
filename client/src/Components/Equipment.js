@@ -5,6 +5,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import './css/Equipment.css'
 import EquipmentInfo from "./EquipmentInfo";
+import Footer from "./Footer";
 const Equipment = () => {
   const {user, navigate} = useContext(DataContext)
 
@@ -26,6 +27,7 @@ const Equipment = () => {
     <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>
+      <div className="main_content_Equipment">
       <div className='Equipment-title'>
         <h1>ציוד נדרש</h1>
         </div>
@@ -37,6 +39,8 @@ const Equipment = () => {
 
         </div>
     </div>
+    </div>
+    <Footer/>
     </>
   )
 }

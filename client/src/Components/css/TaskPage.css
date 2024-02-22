@@ -14,9 +14,9 @@
     overflow-y: scroll;
 }
 .Task-Content{
-    margin-top: 15%;
+    margin-top: 10%;
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: right;
     flex-direction: column;

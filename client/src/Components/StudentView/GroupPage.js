@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import React, { useState } from 'react';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer';
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -71,6 +72,7 @@ const GroupPage = () => {
         <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>
+      <div className='main_page_content'>
       <div className='group-title'>
         <h1>קבוצה: {id}</h1>
         </div>
@@ -100,8 +102,11 @@ const GroupPage = () => {
              room={task.room} tasks={task.tasks} />
           ))}
         </div>
+        </div>
       </div>
+      <Footer/>
     </div>
+    
   );
 }
 

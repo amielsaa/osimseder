@@ -4,6 +4,7 @@ import Header from '../Header';
 import GroupList from './GroupList';
 import { useContext } from 'react';
 import DataContext from '../../Helpers/DataContext';
+import Footer from '../Footer';
 
 const Groups = () => {
   const {user} = useContext(DataContext);
@@ -12,10 +13,13 @@ const Groups = () => {
     <Header/>
       <Nav/>
     <div className='content-Box'>
+      <div className='groups_main_content'>
       <h1 className='title'>אנא בחר קבוצה</h1>
       {user.role === "Student"  ? <h2 className='sub-title'>.שים לב! לאחר בחירת קבוצה לא ניתן לשנות</h2> : ""}
       <GroupList/>
     </div>
+    </div>
+    <Footer/>
     </>
   )
 }

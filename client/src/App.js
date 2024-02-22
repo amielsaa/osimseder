@@ -13,6 +13,7 @@ import Equipment from './Components/Equipment.js';
 import Error from './Components/Error.js'
 import HousePage from './Components/HousePage.js';
 import TaskPage from './Components/TaskPage.js';
+import Footer from './Components/Footer.js';
 function App() {
 
  

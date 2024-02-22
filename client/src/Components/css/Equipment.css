@@ -14,6 +14,15 @@
     overflow-y: scroll;
     
   }
+  .main_content_Equipment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    overflow-y: scroll;
+  }
   .Equipment-title {
     margin-top:6%;
    color : #6200ee;
