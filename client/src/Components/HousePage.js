@@ -42,32 +42,47 @@ const HousePage = () => {
     setHouse(generateRandomHouse());
   }, [id]); // Dependency array ensures it runs when the id changes
   const [tasks, setTasks] = useState([
-    { room: 'סלון', tasks: [
-      { description: 'ניקיון', status: true },
-      { description: 'סידור', status: false },
-    ]},
-    { room: 'חדר ילדים', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'מטבח', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'חדר שינה', tasks: [
-      { description: 'תיקון', status: false },
-      { description: 'ניקיון', status: true },
-    ]},
-    { room: 'מחסן', tasks: [
-      { description: 'ניקיון', status: true },
-      { description: 'סידור', status: false },
-    ]},
+    {
+      room: 'סלון',
+      tasks: [
+        { taskId: 1, description: 'ניקיון', status: true },
+        { taskId: 2, description: 'סידור', status: false },
+      ]
+    },
+    {
+      room: 'חדר ילדים',
+      tasks: [
+        { taskId: 3, description: 'תיקון', status: false },
+        { taskId: 4, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'מטבח',
+      tasks: [
+        { taskId: 5, description: 'תיקון', status: false },
+        { taskId: 6, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'חדר שינה',
+      tasks: [
+        { taskId: 7, description: 'תיקון', status: false },
+        { taskId: 8, description: 'ניקיון', status: true },
+      ]
+    },
+    {
+      room: 'מחסן',
+      tasks: [
+        { taskId: 9, description: 'ניקיון', status: true },
+        { taskId: 10, description: 'סידור', status: false },
+      ]
+    },
   ]);
   return (
     <>
       <Header />
       <Nav />
-      <div className='content-Box'>
+      <div className='content-Box-House'>
       <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>

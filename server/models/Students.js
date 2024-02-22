@@ -1,15 +1,9 @@
 // models/Student.js
 module.exports = (sequelize, DataTypes) => {
     const Students = sequelize.define('Students', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            primaryKey: true
         },
         password: {
             type: DataTypes.STRING,
@@ -39,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        parentEmail: { // TODO YOAV check with Ofir if needed
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         issuesChoose: {
             type: DataTypes.STRING,
             allowNull: true
@@ -50,21 +40,28 @@ module.exports = (sequelize, DataTypes) => {
         issuesText: { // free text explaining
             type: DataTypes.STRING,
             allowNull: true
-
         }, 
         languages: {
             type: DataTypes.STRING,
             allowNull: true
-        }, 
-        didParentApprove: { // TODO YOAV let the student know in screen but don't stop him from doing actions
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        }, 
+        },
         verificationToken: { // TODO YOAV let the student know in screen but don't stop him from doing actions
             type: DataTypes.STRING,
             allowNull: true
         }
     });
+
+    Students.associate = (models) => {
+        Students.belongsTo(models.Cities, {
+            foreignKey: 'cityId'
+        });
+        Students.belongsTo(models.Schools, {
+            foreignKey: 'schoolId'
+        });
+        Students.belongsTo(models.Groups, {
+            foreignKey: 'groupId'
+        });
+    };
 
 
     return Students;

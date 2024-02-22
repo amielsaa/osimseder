@@ -30,7 +30,7 @@ app.use("/auth", authRouter)
 //  }); //function that starts whenever the server starts
 //});
 
-db.sequelize.sync()
+db.sequelize.sync({force:true})
     .then(() => {
         console.log('Database synchronized successfully');
         app.listen(port, () => {

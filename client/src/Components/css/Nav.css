@@ -8,6 +8,9 @@
   body.dark-mode {
     background: rgb(27, 27, 34);
   }
+  .nav_icon{
+    margin-right: 2%;
+  }
   
   nav {
     display: flex;
@@ -119,7 +122,18 @@
     left: 0;
   }
   .menu-title{
-    border-bottom: 1px solid grey;
+    margin-right:4%
+  }
+  .close_nav_arrow{
+   margin-left:5%;
+   font-size: 2rem;
+  }
+  .menu-bar-title{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
   
   section h1 {
@@ -155,9 +169,9 @@
   
   @media only screen and (max-width: 480px) {
     nav{
-      width: 90%;
-      margin-top: 18%;
-      max-height: 90%;
+      width: 100%;
+      
+      max-height:100%;
       border-bottom-right-radius: 12px;
     }
     .sidebar-menu li a {
