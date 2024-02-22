@@ -27,10 +27,15 @@ router.post('/login_student', async (req, res) => {
         res.json({ error: error.message });
     }
 });
-
-// just testing validateAccess
-router.post('/some_operation', validateToken , validateAccess(accessGroup.A),async (req, res) => {
-    res.json("sup bich")
+// Endpoint to update user session
+router.get('/update_user_session', validateToken, async (req, res) => {
+    try{
+        const token = req.header("accessToken");
+        const student = await loginLogic.verifyToken(token);
+        res.json(student);
+    } catch(error) {
+        res.json({ error: error.message });
+    }
 });
 
 // Endpoint to register a new staff

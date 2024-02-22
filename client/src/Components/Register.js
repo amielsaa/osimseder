@@ -127,7 +127,7 @@ function Registration() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city">
                           <option value="">בחר עיר</option>
-                          <option value="אשדוד">אשדוד</option>
+                          <option value="JRS">ירושלים</option>
                           <option value="BSV">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />

@@ -11,6 +11,7 @@ const {verify} = require('jsonwebtoken')
 
 
 
+
 // data provided by the request:
 // json with all the studentModel properties except for 'password'
 // req.body = {email:'', firstName:'', ...}
@@ -49,9 +50,10 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     }
 });
 
+
 router.post('/init_test', async (req, res) => {
-    await Groups.create({groupName:'aa',teamOwnerId:'fe'})
-    await Schools.create({schoolName:'oo'})
+    await Groups.create({groupName:'bb',teamOwnerId:'fe', schoolId:'1'})
+    //await Schools.create({schoolName:'oo'})
 })
 
 // Get a single group by ID (GET)
