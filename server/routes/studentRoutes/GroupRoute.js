@@ -89,7 +89,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
 router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const groupId = req.params.id;
     const verifiedUser = verifyToken(req.header("accessToken"));
-    const userEmail = verifiedUser['username'];
+    const userEmail = verifiedUser['email'];
     try {
         // const group = {};
         const group = await groupLogic.joinGroup(groupId, userEmail);
