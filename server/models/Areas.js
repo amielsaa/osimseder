@@ -1,14 +1,13 @@
 // models/Area.js
 module.exports = (sequelize, DataTypes) => {
     const Areas = sequelize.define('Areas', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         areaName: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        areaManagerEmail: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 
@@ -17,16 +16,8 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'areaId'
         });
 
-        Areas.hasMany(models.Students, {
-            foreignKey: 'areaId'
-        });
-
-        Areas.hasMany(models.Staffs, {
-            foreignKey: 'areaId'
-        });
-
-        Areas.hasMany(models.Houses, {
-            foreignKey: 'areaId'
+        Areas.belongsTo(models.Cities, {
+            foreignKey: 'cityId'
         });
     };
 

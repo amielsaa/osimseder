@@ -1,43 +1,45 @@
-// models/Staff.js
+// models/Tasks.js
 module.exports = (sequelize, DataTypes) => {
-    const Staffs = sequelize.define('Staffs', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
-        password: {
+    const Tasks = sequelize.define('Tasks', {
+        type: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lastName: {
+        taskName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        firstName: {
+        option: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        phoneNumber: {
+        room: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        gender: {
+        freeText: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        accesses: {
+        status: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        picBefore: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        picAfter: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 
-    return Staffs;
+    Tasks.associate = (models) => {
+        Tasks.belongsTo(models.Houses, {
+            foreignKey: 'houseId'
+        });
+    };
+
+    return Tasks;
 };
-
-

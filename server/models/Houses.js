@@ -1,11 +1,6 @@
 // models/Houses.js
 module.exports = (sequelize, DataTypes) => {
     const Houses = sequelize.define('Houses', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         address: {
             type: DataTypes.STRING,
             allowNull: false
@@ -33,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Houses.associate = (models) => {
-        // Should it be: Houses.hasMany?
-
-        Houses.hasOne(models.Groups, {
+        Houses.belongsTo(models.Areas, {
+            foreignKey: 'areaId'
+        });
+        Houses.belongsTo(models.Cities, {
+            foreignKey: 'cityId'
+        });
+        Houses.hasMany(models.Groups, {
             foreignKey: 'houseId'
         });
         Houses.hasMany(models.Tasks, {
