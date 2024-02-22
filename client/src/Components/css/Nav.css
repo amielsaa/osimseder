@@ -8,20 +8,22 @@
   body.dark-mode {
     background: rgb(27, 27, 34);
   }
+  .nav_icon{
+    margin-right: 2%;
+  }
   
   nav {
     display: flex;
     position: fixed;
     flex-direction: column;
     flex-wrap: wrap;
-    align-items: start;
+    align-items: flex-start;
     position: fixed;
     width: 270px;
     height: 100%;
     min-height: 350px;
     color: white;
     background: #6200ee; /* Background color change */
-    border-top-right-radius: 20px;
     border-bottom-right-radius: 10px;
     transition: ease-in 0.3s;
     z-index: 1000;
@@ -45,7 +47,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     height: 70%;
     width: 100%;
     list-style: none;
@@ -120,7 +122,18 @@
     left: 0;
   }
   .menu-title{
-    border-bottom: 1px solid grey;
+    margin-right:4%
+  }
+  .close_nav_arrow{
+   margin-left:5%;
+   font-size: 2rem;
+  }
+  .menu-bar-title{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
   
   section h1 {
@@ -156,11 +169,15 @@
   
   @media only screen and (max-width: 480px) {
     nav{
-      width: 90%;
-      margin-top: 15%;
+      width: 100%;
+      
+      max-height:100%;
+      border-bottom-right-radius: 12px;
     }
     .sidebar-menu li a {
       justify-content: center;
+      margin-left: -30px;
+      margin-top: 20px;
       
     }
 

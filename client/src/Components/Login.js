@@ -1,77 +1,105 @@
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import './css/Login.css';
-import React, { useState , useContext} from 'react';
-import {AuthContext} from "../Helpers/AuthContext";
 import axios from "axios";
+import DataContext from '../Helpers/DataContext';
+
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [code, setCode] = useState('');
   const [displayCode, setDisplayCode] = useState(false);
-  const [error, setError] = useState('');
-  const {setAuthState} = useContext(AuthContext);
+  const { URL } = useContext(DataContext);
+  const [error,setError] = useState('')
+  const {setUser} = useContext(DataContext);
 
-  const handleEmailChange = (e) => {
-    const lowercaseEmail = e.target.value.toLowerCase();
-    setEmail(lowercaseEmail);
+  const initialValues = {
+    email: '',
+    password: '',
+    code: '',
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const handleRegisterStaff = () => {
 
-  const handleCodeChange = (e) => {
-    setCode(e.target.value);
+  }
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('אימייל לא תקין').required('אימייל נדרש'),
+    password: Yup.string().required('סיסמה נדרשת'),
+    // code: Yup.string().when('email', {
+    //   is: (val) => val && val.length > 0,
+    //   then: Yup.string().required('קוד סודי נדרש'),
+    //   otherwise: Yup.string(),
+    // }),
+  });
+
+  const handleSubmit = (values) => {
+    const { email, password, code } = values;
+    
+    const data = {
+      email: email.toLowerCase(),
+      password,
+      code,
+    };
+
+    axios.post("http://localhost:3001/auth/login_student", data).then((res) => {
+            if(res.data.error) alert(res.data.error);
+            else {
+                //localStorage.clear();
+                localStorage.setItem("accessToken",res.data.token);
+                //res.data = { token: accessToken,role:'Student', user:student, id: student.id }
+                setUser(res.data.user.dataValues);
+                navigate("/Home");
+            }
+        })
   };
 
   const handleDisplayCode = () => {
     setDisplayCode(!displayCode);
   };
 
-  const handleSignIn = () => {
-    const data = {username: email, password: password};
-        axios.post("http://localhost:3001/student/login", data).then((res) => {
-            if(res.data.error) alert(res.data.error);
-            else {
-                localStorage.setItem("accessToken",res.data.token);
-                // setAuthState({username:res.data.username, id: res.data.id, status: true});
-                setAuthState({username:"username", id: "id", status: true});
-                navigate("/Home");
-            }
-        })
-    
-  };
-  const handleSignInAsStaff = () => {
-    
-  };
-
   return (
     <div className="login-container">
+      <div className='header-container'>
       <h2>עושים סדר</h2>
-      <div className="input-box">
-        <label>:אימייל</label>
-        <input type="email" value={email} placeholder='אימייל' onChange={handleEmailChange} />
       </div>
-      <div className="input-box">
-        <label>:סיסמה</label>
-        <input type="password" value={password} placeholder='סיסמה' onChange={handlePasswordChange} />
-      </div>
-      <div className="input-box" style={{ display: displayCode ? 'block' : 'none' }}>
-        <label>:קוד סודי</label>
-        <input type="password" value={code} placeholder='קוד סודי' onChange={handleCodeChange} />
-        <div style={{"color": "red"}}>{error?error:""}</div>
-      </div>
-      <button onClick={handleSignInAsStaff} style={{ display: displayCode ? 'block' : 'none' }}>הרשם כסגל</button>
-      <button onClick={handleSignIn}>התחבר</button>
-      <div className="signup-link">
-        <p>
-          <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | <a href="/register" >הרשמה לסטודנט</a>
-        </p>
-      </div>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        <Form>
+          <div className="input-box">
+            <label style={{ display: !displayCode ? 'block' : 'none' }} >אימייל:</label>
+            <Field type="email" name="email" placeholder="אימייל" style={{ display: !displayCode ? 'block' : 'none' }} />
+            <ErrorMessage name="email" component="div" className="error-message" />
+          </div>
+
+          <div className="input-box">
+            <label style={{ display: !displayCode ? 'block' : 'none' }}>סיסמה:</label>
+            <Field type="password" name="password" placeholder="סיסמה" style={{ display: !displayCode ? 'block' : 'none' }} />
+            <ErrorMessage name="password" component="div" className="error-message" />
+          </div>
+
+          <div className="input-box" style={{ display: displayCode ? 'block' : 'none' }}>
+            <label>קוד סודי:</label>
+            <Field type="password" name="code" placeholder="קוד סודי" />
+            <ErrorMessage name="code" component="div" className="error-message" />
+          </div>
+
+          <div className='login_Buttons'>
+          <button type="submit" className='button-login' style={{ display: displayCode ? 'block' : 'none' }} onClick={handleRegisterStaff}>הרשם כסגל</button>
+          <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר</button>
+          </div>
+          
+
+          <div className="signup-link">
+            <p>
+              <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | <a href="/register">הרשמה לסטודנט</a>
+            </p>
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 };
 
 export default Login;
+

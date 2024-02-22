@@ -1,0 +1,98 @@
+.content-Box-Group {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: #f2f2f2; /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    direction: rtl;
+  }
+  
+  .Group-Info {
+    width: 100%;
+    height: 20%;
+    border:3px solid #6200ee;
+    margin-top:5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    overflow-y: scroll;
+
+  }
+  .Group-Info .Group_Member {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    background: gainsboro;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .kick_student {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+  }
+  
+  /* Hover effect */
+  .kick_student:hover {
+    background-color: darkred; /* Change color on hover */
+  }
+  .Info {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    background: gainsboro;
+    margin-top: 5%;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  .group-title {
+   margin-top:6%;
+   color : #6200ee;
+  }
+  .Group-Info-Tasks {
+    width: 100%;
+    height: 25%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    overflow-x: scroll; 
+    overflow-y: hidden;
+    gap:8%; 
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    direction: rtl;
+    flex-wrap: wrap;
+}
+.purple_circle{
+  right:0;
+  position: absolute;
+  margin-right: 5%;
+  background-color: #6200ee;
+  border-radius: 25%;
+  width: 6%;
+  height: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+
+
+  

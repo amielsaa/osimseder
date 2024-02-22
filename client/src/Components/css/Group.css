@@ -2,18 +2,49 @@
     height:5%;
     width: 95%;
     border-radius: 5px;
-    background-color: #6200ee;
+    background-color: whitesmoke;
+    border:1px solid #6200ee; 
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
-    margin:2%
+    margin:2%;
+    font-weight: bold;
     
 }
 .group-id , .users-in-group, .students-Count {
-    color:whitesmoke;
+    color:black;
 }
-.join-group-btn, .users-in-group-btn {
-    width: 30%;
-    margin:0%;
+.join-group-btn, .users-in-group-btn ,.exit-group-btn {
+    width: 20%;
+    height: 70%;
+    margin: 0%;
+    border-radius: 20px;
+    border:none;
+    transition: background-color 0.3s;
+}
+.title{
+    color: #6200ee;
+    font-size: 3rem;
+
+}
+.sub-title {
+    color: red;
+    text-wrap: nowrap;
+    font-size: 1rem;
+}
+.exit-group-btn {
+    background-color:#a078d6;
+    color:whitesmoke
+}
+.join-group-btn{
+    background-color:#6200ee;
+    color:whitesmoke
+}
+.users-in-group-btn {
+    background-color:#5d28a7;
+    color:whitesmoke
+}
+.join-group-btn:hover, .users-in-group-btn:hover .exit-group-btn{
+    background-color: #4b009c; 
 }

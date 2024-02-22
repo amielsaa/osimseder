@@ -2,7 +2,7 @@
 const { Students } = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const emailService = require('./services/emailService')
+const emailService = require('./services/EmailService')
 
 
 class RegistrationLogic {
@@ -13,7 +13,7 @@ class RegistrationLogic {
             const verificationToken = this.generateVerificationToken();
 
             const hashedPassword = await bcrypt.hash(studentData.password, 10);
-
+            
             const createdStudent = await Students.create({
                 "email": studentData.email,
                 "password": hashedPassword,
@@ -29,7 +29,6 @@ class RegistrationLogic {
                 "issuesChoose": studentData.issuesChoose,
                 "issuesText": studentData.issuesText,
                 "languages": studentData.languages,
-                "isInGroup": '',
                 "didParentApprove": false,
                 "verificationToken": verificationToken
             });

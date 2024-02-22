@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const emailService = require('../../domain/services/emailService');
+const emailService = require('../../domain/services/EmailService');
 
 // Endpoint to handle email verification
 router.get('/verify-email', async (req, res) => {

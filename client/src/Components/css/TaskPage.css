@@ -1,0 +1,67 @@
+.content_Box_Task_Page {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: #f2f2f2; /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+}
+.Task-Content{
+    margin-top: 15%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    direction: rtl;
+    overflow-y: scroll;
+}
+.Task_Id {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6200ee;
+}
+.room, .Task_kind , .Task_description  {
+    margin-top: 10%;
+    font-size: 1.5rem;
+    margin-right: 5%;
+    color: blue;
+    font-weight: bold;
+
+
+}
+
+.Task_description {
+    display: flex;
+    flex-direction: column;
+
+}
+ .Task_info_desc {
+    margin-right: 10%;
+    margin-top: 5%;
+    color:black
+}
+.TaskInfo{
+    color:black;
+    font-size: 1.5 rem;
+}
+.action_pic{
+    margin-top: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.action_pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures that the image covers the entire container while maintaining its aspect ratio */
+}
