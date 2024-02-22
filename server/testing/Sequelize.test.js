@@ -112,7 +112,7 @@ describe('Sequelize', () => {
       where: { firstName: 'anotherName' },
     });
 
-    console.log(updatedStudent);
+    // console.log(updatedStudent);
 
     // Assert that the user record is updated correctly
     expect(updatedStudent).toHaveProperty('firstName', 'anotherName');

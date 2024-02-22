@@ -198,4 +198,202 @@ describe('getAllGroupsBySchool', () => {
     
   });
 
+
+});
+
+describe('getAllGroupById', () => {
+  // let sequelize;
+  let student;
+  let group;
+  let school
+  let city;
+
+
+  beforeEach(async () => {
+      // sequelize = new Sequelize(sequelizeConfig);
+
+      // Define your Sequelize model
+      
+      student = Students(sequelize, DataTypes);
+      group = Groups(sequelize, DataTypes);
+      school = Schools(sequelize, DataTypes);
+      city = Cities(sequelize, DataTypes);
+      // Sync all models
+      await db.sequelize.sync({ force: true }); // This creates the table, dropping it first if it already existed
+  });
+
+  // afterEach(async () => {
+  //     // Drop all tables
+  //     await sequelize.drop(); // This drops all the tables defined through your models
+  // });
+
+
+  describe('getAllGroupById - good', () => {
+    it('given 1 group with id 1 - return it', async () => {  
+      const studentPassword = "password123";
+      const newStudent = await db.Students.create({
+        email: "test@example.com",
+        password: "password123",      
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
+
+      // const createdSchool = await db.Schools.create({schoolName: "school1"});
+
+      const groupWithSchool1 = await db.Groups.create({
+          teamOwnerEmail: "mashu@g.com",
+          membersCount: 1
+      });
+
+      // // Call the function under test and await its result
+      const result = await GroupLogic.getAllGroupById(groupWithSchool1.id);
+      
+      // // Assertions
+      expect(result).toHaveProperty('teamOwnerEmail', groupWithSchool1.teamOwnerEmail);
+      expect(result).toHaveProperty('membersCount', groupWithSchool1.membersCount);
+      
+    }); 
+
+  });
+
+  describe('getAllGroupById - bad', () => {
+    it('bad groupId', async () => {  
+      await expect(GroupLogic.getAllGroupById(5))
+        .rejects.toThrowError(/Group not found/);
+    });      
+    
+  });
+
+
+});
+
+describe('joinGroup', () => {
+  // let sequelize;
+  let student;
+  let group;
+  let school
+  let city;
+
+
+  beforeEach(async () => {
+      // sequelize = new Sequelize(sequelizeConfig);
+
+      // Define your Sequelize model
+      
+      student = Students(sequelize, DataTypes);
+      group = Groups(sequelize, DataTypes);
+      school = Schools(sequelize, DataTypes);
+      city = Cities(sequelize, DataTypes);
+      // Sync all models
+      await db.sequelize.sync({ force: true }); // This creates the table, dropping it first if it already existed
+  });
+
+  // afterEach(async () => {
+  //     // Drop all tables
+  //     await sequelize.drop(); // This drops all the tables defined through your models
+  // });
+
+
+  describe('joinGroup - good', () => {
+    it('given a student and an available group - join the group', async () => {  
+      const studentPassword = "password123";
+      const newStudent = await db.Students.create({
+        email: "test@example.com",
+        password: "password123",      
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
+
+      // const createdSchool = await db.Schools.create({schoolName: "school1"});
+
+      const groupWithSchool1 = await db.Groups.create({
+          teamOwnerEmail: "mashu@g.com",
+          membersCount: 1
+      });
+
+      // // Call the function under test and await its result
+      const result = await GroupLogic.joinGroup(groupWithSchool1.id, newStudent.email);
+      
+      // // Assertions
+      expect(result).toHaveProperty('id', groupWithSchool1.id);
+      expect(result).toHaveProperty('teamOwnerEmail', groupWithSchool1.teamOwnerEmail);
+      
+    }); 
+
+    it('given a group and a student in that group, when joining another group - throw error', async () => {  
+      // const studentPassword = "password123";
+      const newStudent = await db.Students.create({
+        email: "test@example.com",
+        password: "password123",      
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
+
+      // // const createdSchool = await db.Schools.create({schoolName: "school1"});
+
+      const groupWithSchool1 = await db.Groups.create({
+          teamOwnerEmail: "mashu@g.com",
+          membersCount: 1
+      });
+
+      const result = await GroupLogic.joinGroup(groupWithSchool1.id, newStudent.email);
+
+      const foundGroup = await db.Groups.findOne({
+          where: { teamOwnerEmail: "mashu@g.com" }
+      });
+
+      // // Call the function under test and await its result
+      await expect(GroupLogic.joinGroup(foundGroup.id, newStudent.email))
+        .rejects.toThrowError(/User already in a group/);
+      // // Assertions
+      
+      
+    }); 
+  });
+
+  describe('joinGroup - bad', () => {
+    it('bad groupId', async () => {  
+      await expect(GroupLogic.getAllGroupById(5))
+        .rejects.toThrowError(/Group not found/);
+    });      
+    
+  });
+
+
 });
