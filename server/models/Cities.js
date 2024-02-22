@@ -1,14 +1,13 @@
-// models/Area.js
+// models/Cities.js
 module.exports = (sequelize, DataTypes) => {
     const Cities = sequelize.define('Cities', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        areaName: {
+        cityName: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        cityManagerEmail: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 

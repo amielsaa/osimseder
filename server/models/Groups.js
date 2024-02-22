@@ -1,17 +1,12 @@
 // models/groups.js
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-        ID: {
+        teamOwnerEmail: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        membersCount: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        groupName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        teamOwnerId: {
-            type: DataTypes.STRING,
             allowNull: true
         }
     });
@@ -21,9 +16,15 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'groupId'
         });
 
-        Groups.hasOne(models.Houses, {
-            foreignKey: 'groupId'
+        Groups.belongsTo(models.Schools, {
+            foreignKey: 'schoolId'
         });
+
+        Groups.belongsTo(models.Houses, {
+            foreignKey: 'houseId'
+        });
+
+
     };
 
     return Groups;

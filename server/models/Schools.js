@@ -1,11 +1,6 @@
 // models/SchoolModel.js
 module.exports = (sequelize, DataTypes) => {
     const Schools = sequelize.define('Schools', {
-        ID: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
         schoolName: {
             type: DataTypes.STRING,
             allowNull: false
@@ -21,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
         Schools.hasMany(models.Groups, {
             foreignKey: 'schoolId'
         });
+
+        Schools.belongsTo(models.Areas, {
+            foreignKey: 'areaId'
+        });
+
+        Schools.belongsTo(models.Cities, {
+            foreignKey: 'cityId'
+        });
+
     };
 
 
