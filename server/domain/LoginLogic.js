@@ -19,7 +19,7 @@ class LoginLogic {
             const {password, ...studentJson} =  student;
             studentJson.dataValues.role = 'Student';
             //studentJson['role'] = 'Student';
-            const accessToken = sign({ username: email,role:'Student' ,id: student.id }, "importantsecret");
+            const accessToken = sign({ email: email,role:'Student' ,id: student.id }, "importantsecret");
             console.log(studentJson)
             return { token: accessToken, user:studentJson, id: student.id };
         } catch (error) {
