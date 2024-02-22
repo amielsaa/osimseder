@@ -36,7 +36,7 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
 //   logging: false, // Suppress Sequelize logging to keep test output clean
 // });
 
-describe('verifyLoginStudent', () => {
+describe('getAllGroupsBySchool', () => {
   // let sequelize;
   let student;
   let group;
@@ -64,6 +64,36 @@ describe('verifyLoginStudent', () => {
 
 
   describe('getAllGroupsBySchool - good', () => {
+    it('given 0 groups, return empty list', async () => {  
+      const studentPassword = "password123";
+      const newStudent = await RegistrationLogic.registerStudent({
+        email: "test@example.com",
+        password: "password123",      
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
+
+      const createdSchool = await db.Schools.create({schoolName: "school1"});
+
+      // // Call the function under test and await its result
+      const result = await GroupLogic.getAllGroupsBySchool(createdSchool.id);
+      
+      // // Assertions
+      expect(result).toEqual([]);
+      
+    }); 
     it('given 1 school and 2 groups, return 2 groups', async () => {  
       const studentPassword = "password123";
       const newStudent = await RegistrationLogic.registerStudent({
@@ -118,77 +148,54 @@ describe('verifyLoginStudent', () => {
 
   });
 
-  // describe('getAllGroupsBySchool - bad', () => {
-  //   it('bad schoolId', async () => {  
-  //     // await expect(AuthenticationLogic.verifyLoginStudent("test@example.com","password123"))
-  //     //   .rejects.toThrowError(/Student not found/);
-  //   }); 
+  describe('getAllGroupsBySchool - bad', () => {
+    it('bad schoolId', async () => {  
+      const studentPassword = "password123";
+      const newStudent = await RegistrationLogic.registerStudent({
+        email: "test@example.com",
+        password: "password123",      
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
 
-  //   it('add title', async () => {  
-  //     // const studentEmail = "password123";
-  //     // const newStudent = await RegistrationLogic.registerStudent({
-  //     //   email: "test@example.com",
-  //     //   password: "password123",      
-  //     //   lastName: "lastname",
-  //     //   firstName: "firstname",
-  //     //   phoneNumber: "0524587746",
-  //     //   gender: "Male",
-  //     //   parentName: "itzik",
-  //     //   parentPhoneNumber: "0529875509",
-  //     //   parentEmail: "mashu@mashu.com",
-  //     //   city: "JRS",
-  //     //   school: "SchoolTest1",
-  //     //   issuesChoose: "Accessability",
-  //     //   issuesText: "idk1",
-  //     //   languages: "English",
-  //     //   isInGroup: '',
-  //     //   didParentApprove: false
-  //     // });
+      const createdSchool = await db.Schools.create({schoolName: "school1"});
+
+      const groupWithSchool1 = await db.Groups.create({
+          teamOwnerEmail: "mashu@g.com",
+          membersCount: 1,
+          schoolId: createdSchool.id 
+      });
+
+      const groupWithSchool2 = await db.Groups.create({
+          teamOwnerEmail: "mashuaher@g.com",
+          membersCount: 2,
+          schoolId: createdSchool.id 
+      });
       
-  //     // const wrongResult = AuthenticationLogic.verifyLoginStudent(newStudent.email, "badpassword");
+      const groupWithSchool3 = await db.Groups.create({
+          teamOwnerEmail: "wrong@g.com",
+          membersCount: 5
+      });
       
-  //     // await expect(wrongResult).rejects.toThrowError(/Wrong username and password combination/);
-
-  //   }); 
-
-     
+      // // Call the function under test and await its result
+      const result = await GroupLogic.getAllGroupsBySchool(5);
+      
+      // // Assertions
+      expect(result).toEqual([]);
+    });      
     
-  // });
+  });
 
-  // describe('verifyLoginStudent - bad', () => {
-  //   it('add title', async () => {  
-  //     // await expect(AuthenticationLogic.verifyLoginStudent("test@example.com","password123"))
-  //     //   .rejects.toThrowError(/Student not found/);
-  //   }); 
-
-  //   it('add title', async () => {  
-  //     // const studentEmail = "password123";
-  //     // const newStudent = await RegistrationLogic.registerStudent({
-  //     //   email: "test@example.com",
-  //     //   password: "password123",      
-  //     //   lastName: "lastname",
-  //     //   firstName: "firstname",
-  //     //   phoneNumber: "0524587746",
-  //     //   gender: "Male",
-  //     //   parentName: "itzik",
-  //     //   parentPhoneNumber: "0529875509",
-  //     //   parentEmail: "mashu@mashu.com",
-  //     //   city: "JRS",
-  //     //   school: "SchoolTest1",
-  //     //   issuesChoose: "Accessability",
-  //     //   issuesText: "idk1",
-  //     //   languages: "English",
-  //     //   isInGroup: '',
-  //     //   didParentApprove: false
-  //     // });
-      
-  //     // const wrongResult = AuthenticationLogic.verifyLoginStudent(newStudent.email, "badpassword");
-      
-  //     // await expect(wrongResult).rejects.toThrowError(/Wrong username and password combination/);
-
-  //   }); 
-
-     
-    
-  // });
 });
