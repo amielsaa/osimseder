@@ -6,10 +6,10 @@ const GroupLogic = require('../domain/GroupLogic');
 const RegistrationLogic = require('../domain/RegistrationLogic');
 const LoginLogic = require('../domain/LoginLogic');
 // const { Students, Groups, Schools } = require('../models/');
-const Students = require('../models/Student');
-const Schools = require('../models/School');
-const Groups = require('../models/Group');
-const Cities = require('../models/City');
+const Students = require('../models/Students');
+const Schools = require('../models/Schools');
+const Groups = require('../models/Groups');
+const Cities = require('../models/Cities');
 // const { sequelize, Cities, Areas, Schools, Houses, Staffs, Students } = require('../models/');
 // const { sequelize } = require('../models/index');
 const { sequelize, DataTypes } = require('../SetupTestDatabase'); // Adjust the path accordingly
@@ -85,37 +85,35 @@ describe('verifyLoginStudent', () => {
         didParentApprove: false
       })
 
-      const newSchool = await school.create({
-        schoolName: "school1",
-      });      
+      const createdSchool = await db.Schools.create({schoolName: "school1"});
 
-      const newGroup1 = await group.create({
-        groupName: "group1",
-        teamOwnerId: "1",
-        schoolId: 1
+      const groupWithSchool1 = await db.Groups.create({
+          teamOwnerEmail: "mashu@g.com",
+          membersCount: 1,
+          schoolId: createdSchool.id 
       });
 
-      // await newGroup1.setSchool(newSchool);
-
-
-      const newGroup2 = await group.create({
-        groupName: "group2",
-        teamOwnerId: "1"
+      const groupWithSchool2 = await db.Groups.create({
+          teamOwnerEmail: "mashuaher@g.com",
+          membersCount: 2,
+          schoolId: createdSchool.id 
       });
-
-      const newCity = await city.create({
-        areaName: "area1"
-      });
-
       
+      const groupWithSchool3 = await db.Groups.create({
+          teamOwnerEmail: "wrong@g.com",
+          membersCount: 5
+      });
       
       // // Call the function under test and await its result
-      const result = await GroupLogic.getAllGroupsBySchool(newSchool.ID);
+      const result = await GroupLogic.getAllGroupsBySchool(createdSchool.id);
       
       // // Assertions
-      expect(result).toHaveProperty('groupName');
-      // expect(result).toHaveProperty('username', newStudent.email);
-      // expect(result).toHaveProperty('id', newStudent.id);
+      expect(result[0]).toHaveProperty('membersCount', 1);
+      expect(result[0]).toHaveProperty('teamOwnerEmail', 'mashu@g.com');
+      expect(result[0]).toHaveProperty('schoolId', 1);
+      expect(result[1]).toHaveProperty('membersCount', 2);
+      expect(result[1]).toHaveProperty('teamOwnerEmail', 'mashuaher@g.com');
+      expect(result[1]).toHaveProperty('schoolId', 1);
     }); 
 
   });
