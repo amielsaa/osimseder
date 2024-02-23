@@ -5,3 +5,10 @@
   box-sizing: border-box;
   font-family: 'Rubik';
 }
+:root {
+  --HEADER-BGCOLOR-OPACITY: rgba(88, 12, 31, 0.8);
+  --HEADER-BGCOLOR: #580C1F;
+  --ORANGE-COLOR: #CC5A0F;
+  --FONT-COLOR: whitesmoke;
+  --BTN-COLOR:#3164f4;
+}

@@ -23,7 +23,7 @@
     height: 100%;
     min-height: 350px;
     color: white;
-    background: #6200ee; /* Background color change */
+    background: var(--HEADER-BGCOLOR); /* Background color change */
     border-bottom-right-radius: 10px;
     transition: ease-in 0.3s;
     z-index: 1000;
@@ -73,8 +73,8 @@
   }
   
   .sidebar-menu li a:hover {
-    color: rgb(45, 209, 67);
-    border: 1px solid white;
+    color: #CC5A0F(45, 209, 67);
+    border: 1px solid #CC5A0F;
   }
   
   .sidebar-menu li a i {
@@ -91,7 +91,7 @@
     width: 40px;
     height: 40px;
     font-size: 18px;
-    background: #6200ee; /* Background color change */
+    background: #580C1F; /* Background color change */
     border-radius: 0 7px 7px 0;
     border: none;
     cursor: pointer;
@@ -101,7 +101,7 @@
   
   #toggle-btn:hover {
     background: rgba(0, 0, 0, 0.623);
-    color: rgb(45, 209, 67);
+    color: var(--ORANGE-COLOR);
   }
   
   section {
@@ -178,7 +178,8 @@
 
 .appear-from-top {
   opacity: 0;
-  animation: fadeInFromTop 1s ease-out forwards;
+  animation: fadeInFromTop 1.5s ease-out forwards;
+  animation-delay: 0.15s;
 }
 @keyframes fadeOutFromTop {
   0% {
@@ -193,7 +194,7 @@
 
 .disappear-from-top {
   opacity: 1;
-  animation: fadeOutFromTop 0.3s ease-out forwards;
+  animation: fadeOutFromTop 0.1s ease-out forwards;
 }
 
   

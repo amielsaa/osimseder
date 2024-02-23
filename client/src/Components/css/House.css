@@ -1,5 +1,5 @@
 .House {
-    height:10%;
+    min-height:10%;
     width: 95%;
     border-radius: 5px;
     background-color: whitesmoke;
@@ -30,8 +30,8 @@
     gap: 10%;
     overflow-y: scroll;
 }
-.group-id , .users-in-group, .students-Count {
-    color:black;
+.house-id  {
+    color:var(--FONT-COLOR);
 }
 .watch-house-btn {
     width: 20%;
