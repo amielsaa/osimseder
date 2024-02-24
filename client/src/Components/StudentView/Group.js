@@ -34,8 +34,9 @@ const Group = ({ groupId , groupJson}) => {
 
   return (
     <>
+      
       <div className="group">
-        <div className='group-id'>{`${groupId}: קבוצה`}</div>
+        <div className='group-id'>{`${groupId} : קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
         {user.role === "Student" &&
         <button className='join-group-btn' onClick={handleJoinGroup(groupId, user.id)}>הצטרף</button>

@@ -14,7 +14,9 @@ const MyGroupsTeamOwner = () => {
       <Nav/>
     <div className='content-Box'>
       <div className='To_main_content_groups'>
-      <h1 className='title'>הקבוצות שלי</h1>
+        <div className='groups_title'>
+      <h1>הקבוצות שלי</h1>
+      </div>
       <GroupListTO/>
     </div>
     </div>

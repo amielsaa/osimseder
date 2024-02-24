@@ -18,6 +18,7 @@ const PersonalPage = () => {
     <span className='purple_circle'>
       <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
       </span>
+      <div className='personal_page_main_content'>
     <div className='Personal-Title'>
       <h1>פרטים אישיים</h1>
         </div>
@@ -43,6 +44,7 @@ const PersonalPage = () => {
           <IoMdLock className='ActionIcon' /> שנה סיסמה
           </button>
         </div>     
+    </div>
     </div>
     <Footer/>
     </>

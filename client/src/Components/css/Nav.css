@@ -23,11 +23,10 @@
     height: 100%;
     min-height: 350px;
     color: white;
-    background: #6200ee; /* Background color change */
+    background: var(--PURPLE-COLOR); /* Background color change */
     border-bottom-right-radius: 10px;
     transition: ease-in 0.3s;
     z-index: 1000;
-    margin-top: 3.41%;
   }
   
   nav.hide {
@@ -57,6 +56,7 @@
   .sidebar-menu li {
     text-align: center;
     width: 100%;
+    border-bottom: 1px solid var(--ORANGE-COLOR);
   }
   
   .sidebar-menu li a {
@@ -72,11 +72,16 @@
     border-radius: 5px;
   }
   
-  .sidebar-menu li a:hover {
-    color: rgb(45, 209, 67);
-    border: 1px solid white;
+  .sidebar-menu li:hover ,.sidebar-menu li a:hover {
+    background-color: var(--GREY-COLOR);
+    color:black
   }
-  
+.sidebar-menu li a:focus {
+  background-color: var(--GREY-COLOR);
+  color:black
+}
+
+
   .sidebar-menu li a i {
     margin: 0 18px;
     width: 20px;
@@ -87,11 +92,11 @@
     display: flex;
     justify-content: center;
     align-items: center; /* Adjusted position */
-    right: -39px;
+    right: -45px;
     width: 40px;
-    height: 40px;
+    height: 55px;
     font-size: 18px;
-    background: #6200ee; /* Background color change */
+    background: var(--PURPLEOP-COLOR); /* Background color change */
     border-radius: 0 7px 7px 0;
     border: none;
     cursor: pointer;
@@ -101,7 +106,7 @@
   
   #toggle-btn:hover {
     background: rgba(0, 0, 0, 0.623);
-    color: rgb(45, 209, 67);
+    color: var(--ORANGE-COLOR);
   }
   
   section {
@@ -148,7 +153,7 @@
   .menu-icon,
   .menu-icon::before,
   .menu-icon::after{
-    background-color: whitesmoke;
+    background-color: var(--ORANGE-COLOR);
     width: 30px;
     height: 5px;
     border-radius: 5px;
@@ -165,12 +170,42 @@
 .menu-icon::after{
     transform: translate(-15px,+12px);
 }
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.appear-from-top {
+  opacity: 0;
+  animation: fadeInFromTop 1.5s ease-out forwards;
+  animation-delay: 0.15s;
+}
+@keyframes fadeOutFromTop {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+}
+
+.disappear-from-top {
+  opacity: 1;
+  animation: fadeOutFromTop 0.1s ease-out forwards;
+}
 
   
   @media only screen and (max-width: 480px) {
     nav{
-      width: 100%;
-      
+      width: 100%;      
       max-height:100%;
       border-bottom-right-radius: 12px;
     }
