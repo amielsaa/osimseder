@@ -27,7 +27,6 @@ const Group = ({ groupId , groupJson}) => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
     }
-
     updateStudentList();
     //setStudentsList(groupJson.students);
   },[studentsList]);

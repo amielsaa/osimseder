@@ -3,6 +3,7 @@ const {Groups, Schools, Students} = require('../models/');
 class StudentGroupLogic {
     async getAllGroupsBySchool(schoolId) {
         try {
+            console.log(schoolId)
             const groups = await Groups.findAll({
                 where: { "schoolId": schoolId }
             });
@@ -29,7 +30,8 @@ class StudentGroupLogic {
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length
             }));
-        
+            console.log(responseData)
+            
             // res.json({
             //     groups: responseData,
             // });

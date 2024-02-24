@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     const Areas = sequelize.define('Areas', {
         areaName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         areaManagerEmail: {
             type: DataTypes.STRING,

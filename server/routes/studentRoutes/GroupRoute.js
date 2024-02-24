@@ -22,7 +22,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     try {
 
         const groups = await groupLogic.getAllGroupsBySchool(schoolId);
-        return groups;
+        res.json({groups:groups});
 
     } catch (err) {
         res.json({ error: err.message });
@@ -41,7 +41,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
     try {
         const group = await groupLogic.getAllGroupById(groupId);
         
-        return group;
+        res.json({group:group});
 
     } catch (err) {
         res.json({ error: err.message });

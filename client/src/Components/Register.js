@@ -54,6 +54,7 @@ function Registration() {
 
     const onSubmit = (data) => {
         console.log(data);
+        data.languages = [data.languages]
         axios.post("http://localhost:3001/auth/register_student", data).then(() => {
             navigate('/');
         });         
@@ -138,7 +139,7 @@ function Registration() {
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
                           <option value="נתיבי עם">נתיבי עם</option>
-                          <option value="1">רמבם</option>
+                          <option value="bs">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>

@@ -1,5 +1,5 @@
 // StudentRegistrationLogic.js
-const { Students } = require('../models');
+const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
@@ -55,8 +55,9 @@ class RegistrationLogic {
             const verificationToken = this.generateVerificationToken();
 
             const hashedPassword = await bcrypt.hash(staffData.password, 10);
+            const cityId = await string2Int.getCityId(staffData.city);
 
-            const createdStaff = await Staff.create({
+            const createdStaff = await Staffs.create({
                 "email": staffData.email,
                 "password": hashedPassword,
                 "lastName": staffData.lastName,
@@ -65,6 +66,7 @@ class RegistrationLogic {
                 "gender": staffData.gender,
                 "verificationToken": verificationToken,
                 "isVerified": false,
+                "accesses": staffData.accesses,
                 "cityId": cityId
             });
 

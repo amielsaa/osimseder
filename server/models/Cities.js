@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     const Cities = sequelize.define('Cities', {
         cityName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         cityManagerEmail: {
             type: DataTypes.STRING,

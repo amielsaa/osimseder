@@ -1,6 +1,6 @@
 // EmailLogic.js
 const nodemailer = require('nodemailer');
-const { Students } = require('../../models');
+const { Students, Staffs } = require('../../models');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -28,13 +28,13 @@ class EmailLogic {
     async verifyEmailAndToken(email, token) {
         try {
             // Decrypt the email here
-            const email = decodeURIComponent(email);
+            const decoded_email = decodeURIComponent(email);
             const student = await Students.findOne({
-                where: { email: email }
+                where: { email: decoded_email }
             });
             if (!student) {
                 const staff = await Staffs.findOne({
-                    where: { email: email }
+                    where: { email: decoded_email }
                 });
                 if (!staff) {
                     throw new Error('No user with this email');
@@ -44,7 +44,7 @@ class EmailLogic {
                 console.log(token)
                 console.log(staffToken)
                 if (studentToken == null) {
-                    throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: staff with mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {
                     await staff.update({ isVerified: true, verificationToken: null });
@@ -59,7 +59,7 @@ class EmailLogic {
                 console.log(token)
                 console.log(studentToken)
                 if (studentToken == null) {
-                    throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: student in mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (studentToken == token) {
                     await student.update({ isVerified: true, verificationToken: null });
