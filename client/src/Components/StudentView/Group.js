@@ -9,6 +9,7 @@ const Group = ({ groupId , groupJson}) => {
   const {user} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
   const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
+  const [memberCount, setMemberCount] = useState({count:0, maxCount:0})
   const openStudentsPopUp = () => {
     //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
@@ -26,6 +27,7 @@ const Group = ({ groupId , groupJson}) => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
     }
+
     updateStudentList();
     //setStudentsList(groupJson.students);
   },[studentsList]);

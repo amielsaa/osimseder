@@ -26,7 +26,7 @@ class GroupLogic {
             }
             return group;
         } catch (error) {
-            throw new Error('Failed to find groups by ID ' + error);
+            throw new Error('Failed to find groups by ID: '+ groupId+", " + error);
         }
     }
     async joinGroup(groupId, userEmail) {

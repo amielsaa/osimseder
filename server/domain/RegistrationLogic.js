@@ -25,7 +25,7 @@ class RegistrationLogic {
                 "parentPhoneNumber": studentData.parentPhoneNumber,
                 "parentEmail": studentData.parentEmail,
                 "city": studentData.city,
-                "school": studentData.school,
+                "schoolId": studentData.school,
                 "issuesChoose": studentData.issuesChoose,
                 "issuesText": studentData.issuesText,
                 "languages": studentData.languages,

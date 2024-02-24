@@ -7,6 +7,14 @@ const accessGroup = {
     E: ["Admin"],
 }
 
+const roleGroup = {
+    A: 'Student',
+    B: 'TeamOwner',
+    C: 'AreaManager',
+    D: 'CityManager',
+    E: 'Admin'
+}
+
 const validateAccess = (permissions) => {
     return (req,res,next) => {
         console.log(req.something);
@@ -18,4 +26,4 @@ const validateAccess = (permissions) => {
     }
 }
 
-module.exports = {accessGroup, validateAccess}
+module.exports = {roleGroup, accessGroup, validateAccess}
