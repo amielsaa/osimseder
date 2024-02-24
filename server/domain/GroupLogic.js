@@ -3,7 +3,6 @@ const {Groups, Schools, Students} = require('../models/');
 class GroupLogic {
     async getAllGroupsBySchool(schoolId) {
         try {
-            
             const groups = await Groups.findAll({
                 where: { "schoolId": schoolId }
             });
@@ -20,7 +19,7 @@ class GroupLogic {
     async getAllGroupById(groupId) {
         try {
             const group = await Groups.findOne({
-                where: { "ID": groupId }
+                where: { "id": groupId }
             });
             if (!group) {
                 throw new Error('Group not found');
@@ -33,7 +32,7 @@ class GroupLogic {
     async joinGroup(groupId, userEmail) {
         try {
             const group = await Groups.findOne({
-                where: { "ID": groupId }
+                where: { "id": groupId }
             });
             if (!group) {
                 throw new Error('Group not found');
@@ -44,6 +43,10 @@ class GroupLogic {
             if (!user) {
                 throw new Error('User not found');
             }
+            if (user.groupId == groupId) {
+                throw new Error('User already in a group');
+            }
+
             const updatedGroup = await Students.update(
                 { "groupId": groupId },
                 { where: { "email": userEmail }}
