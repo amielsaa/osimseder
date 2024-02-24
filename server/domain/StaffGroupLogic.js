@@ -24,8 +24,24 @@ class GroupLogic {
             if (!group) {
                 throw new Error('Couldn\'t create a group.');
             }
+        
+            const students = await group.getStudents();
+    
+            const studentNames = students.map(student => {
+                const { firstName, lastName, ...rest } = student;
+                return `${firstName} ${lastName}`;
+            });
+    
+            group.dataValues.students = studentNames;            
+            
+            const responseData = {
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length
+            };
+        
+            return responseData;
 
-            return group;
         } catch (error) {
             throw new Error('Failed to create group: ' + error);
         }
