@@ -47,7 +47,7 @@ const GroupList = () => {
     <>
       {groupIds &&
       <>{groupIds.map((groupJson) => (
-        <Group key={groupJson} groupId={groupJson.ID} groupJson={groupJson} />
+        <Group key={groupJson} groupId={groupJson.id} groupJson={groupJson} />
       ))}
       </>}
     </>

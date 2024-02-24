@@ -138,7 +138,7 @@ function Registration() {
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
                           <option value="נתיבי עם">נתיבי עם</option>
-                          <option value="SchoolTest1">רמבם</option>
+                          <option value="1">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>

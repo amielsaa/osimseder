@@ -36,8 +36,9 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
         }
 
         const responseData = groups.map(group => ({
-            ID: group.ID,
+            id: group.id,
             groupName: group.groupName,
+            membersCount: group.membersCount,
             students: group.dataValues.students,
         }));
     
@@ -73,8 +74,9 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
         
 
         const responseData = {
-            ID: group.ID,
+            id: group.id,
             groupName: group.groupName,
+            membersCount: group.membersCount,
             students: group.dataValues.students,
         };
     
