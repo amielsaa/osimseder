@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         option: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         room: {
             type: DataTypes.STRING,
@@ -19,25 +19,18 @@ module.exports = (sequelize, DataTypes) => {
         },
         freeText: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         status: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        picBefore: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        picAfter: {
-            type: DataTypes.STRING,
-            allowNull: true
         }
     });
 
     Tasks.associate = (models) => {
         Tasks.belongsTo(models.Houses, {
-            foreignKey: 'houseId'
+            foreignKey: 'houseId',
+            allowNull: false
         });
     };
 

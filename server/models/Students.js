@@ -33,33 +33,32 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        issuesChoose: {
-            type: DataTypes.STRING,
-            allowNull: true
-        }, 
-        issuesText: { // free text explaining
-            type: DataTypes.STRING,
-            allowNull: true
-        }, 
-        languages: {
+        issuesText: { // "is there anything we should know about? (accessability issues, timimng, allergies, diet, etc..)
             type: DataTypes.STRING,
             allowNull: true
         },
         verificationToken: { // TODO YOAV let the student know in screen but don't stop him from doing actions
             type: DataTypes.STRING,
             allowNull: true
+        },
+        isVerified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     });
 
     Students.associate = (models) => {
         Students.belongsTo(models.Cities, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
         Students.belongsTo(models.Schools, {
-            foreignKey: 'schoolId'
+            foreignKey: 'schoolId',
+            allowNull: false
         });
         Students.belongsTo(models.Groups, {
-            foreignKey: 'groupId'
+            foreignKey: 'groupId',
+            allowNull: true
         });
     };
 

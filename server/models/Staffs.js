@@ -27,17 +27,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         accesses: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         verificationToken: { // TODO YOAV let the student know in screen but don't stop him from doing actions
             type: DataTypes.STRING,
             allowNull: true
+        },
+        isVerified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     });
 
     Staffs.associate = (models) => {
         Staffs.belongsTo(models.Cities, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: true
         });
     };
 
