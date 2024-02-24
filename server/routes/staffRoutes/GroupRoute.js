@@ -50,64 +50,9 @@ router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res)
     try {
         const userEmail = req.user.email;
 
-        // const newStaff1 = await Staffs.create({
-        //     email: "test@example.com",
-        //     password: "password123",      
-        //     lastName: "lastname",
-        //     firstName: "firstname",
-        //     phoneNumber: "0524587746",
-        //     gender: "Male",
-        //     city: "JRS",
-        //     accesses: "C"
-            
-        //   });
-        // const area1 = await Areas.create({
-        //     areaName: "area1",
-        //     areaManagerEmail: "test@example.com"
-        // })
-        // const school1 = await Schools.create({
-        //     schoolName: "school2",
-        //     areaId: 1
-        // });
-        // const school2 = await Schools.create({
-        //     schoolName: "school1"
-        // })
-
-        
-        //access email by : req.user.email
-        // area (mail==mail), school (areaId = id), get all groups (schoolId = id)
-
-        //pull staff user by email and check its area name, pull all groups by the area name
-        //return all groups that related to this user email
-
         // returns groups by schools (for now)
         const groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
 
-        
-        /*
-        for (let i = 0; i < groups.length; i++) {
-            const group = groups[i];
-    
-            const students = await group.getStudents();
-    
-            const studentNames = students.map(student => {
-                const { firstName, lastName, ...rest } = student;
-                return `${firstName} ${lastName}`;
-            });
-    
-            group.dataValues.students = studentNames;            
-        }
-
-        const responseData = groups.map(group => ({
-            id: group.id,
-            students: group.dataValues.students,
-        }));
-    
-        res.json({
-            groups: responseData,
-        });
-        */
-        
         res.json(groups);
 
     } catch (err) {
@@ -120,24 +65,10 @@ router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res)
     try {
         const userEmail = req.user.email;
 
-        // const newStaff1 = await Staffs.create({
-        //     email: "test2@example.com",
-        //     password: "password123",      
-        //     lastName: "lastname",
-        //     firstName: "firstname",
-        //     phoneNumber: "0524587746",
-        //     gender: "Male",
-        //     city: "JRS",
-        //     accesses: "D"
-            
-        // });
         const area1 = await Cities.create({
             cityName: "city1",
             cityManagerEmail: "test2@example.com"
         })
-        //access email by : req.user.email
-        //same as area manager just for cities
-        //return all groups that related to this user email
 
         // returns groups by schools (for now)
         const groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
@@ -153,20 +84,7 @@ router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res)
 router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, res) => {
     // const userEmail = /*req.user.email"test3@example.com";
     try {
-        // const newStaff1 = await Staffs.create({
-        //     email: "test3@example.com",
-        //     password: "password123",      
-        //     lastName: "lastname",
-        //     firstName: "firstname",
-        //     phoneNumber: "0524587746",
-        //     gender: "Male",
-        //     city: "JRS",
-        //     accesses: "E"
-            
-        // });
-        
         const groups = await staffGroupLogic.getAllGroups();
-
 
         res.json(groups);
     } catch (err) {
@@ -179,41 +97,11 @@ router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, r
 router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const groupId = req.params.id;
-        //req.params.id = groupId
-        //return all information regarding that group
-
 
         const group = await staffGroupLogic.getGroupById(groupId);
 
-
-        // const schools = await group.getSchools();
-        
-        // const studentNames = students.map(student => {
-        //     const { firstName, lastName, ...rest } = student;
-        //     return `${firstName} ${lastName}`;
-        // });
-
-        // group.dataValues.students = studentNames;            
-        // group.dataValues.schools = schools;            
-        
-
-        // const responseData = groups.map(group => ({
-        //     id: group.id,
-        //     students: group.dataValues.students,
-        // }));
-    
-        // res.json({
-        //     groups: responseData,
-        // });
-
         res.json(group);
 
-        // res.json({group: {
-        //     ID: '1',
-        //     groupName: 'stupidName',
-        //     teamOwner: 'firstName lastName',
-        //     school: 'schoolName',
-        // }})
     } catch (err) {
         res.json({ error: err.message });
     }

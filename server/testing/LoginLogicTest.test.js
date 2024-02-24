@@ -11,7 +11,7 @@
 const sequelizeConfig = require('../config/config.json'); // Assuming you're using a separate configuration for testing
 // const sequelizeConfig = require('../jest.config.js'); 
 // const { LoginLogic, RegistrationLogic, GroupLogic } = require('../domain');
-const GroupLogic = require('../domain/GroupLogic');
+const GroupLogic = require('../domain/StudentGroupLogic');
 const RegistrationLogic = require('../domain/RegistrationLogic');
 const LoginLogic = require('../domain/LoginLogic');
 // const { Students, Groups, Schools } = require('../models/');

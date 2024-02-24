@@ -1,6 +1,6 @@
 const {Groups, Schools, Students} = require('../models/');
 
-class GroupLogic {
+class StudentGroupLogic {
     async getAllGroupsBySchool(schoolId) {
         try {
             const groups = await Groups.findAll({
@@ -88,6 +88,15 @@ class GroupLogic {
             if (!user) {
                 throw new Error('User not found');
             }
+            const currentSize = await group.getStudents();
+            if(currentSize !== undefined) {
+                const hasRoom = group.capacity - currentSize.length;
+                if (!hasRoom) {
+                    throw new Error('Group is full');
+                }
+            }
+
+
             // if (user.groupId == groupId) {
             //     throw new Error('User already in a group');
             // }
@@ -127,4 +136,4 @@ class GroupLogic {
     
 }
 
-module.exports = new GroupLogic();
+module.exports = new StudentGroupLogic();
