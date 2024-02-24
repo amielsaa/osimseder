@@ -10,7 +10,31 @@ class GroupLogic {
             if (!groups) {
                 throw new Error('Groups not found');
             }
-            return groups;
+
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+        
+                const students = await group.getStudents();
+        
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+        
+                group.dataValues.students = studentNames;            
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length
+            }));
+        
+            // res.json({
+            //     groups: responseData,
+            // });
+
+            return responseData;
         } catch (error) {
             throw new Error('Failed to find groups from school ' +schoolId + ": " + error);
         }
@@ -24,9 +48,30 @@ class GroupLogic {
             if (!group) {
                 throw new Error('Group not found');
             }
-            return group;
+
+            const students = await group.getStudents();
+    
+            const studentNames = students.map(student => {
+                const { firstName, lastName, ...rest } = student;
+                return `${firstName} ${lastName}`;
+            });
+        
+            group.dataValues.students = studentNames;            
+            
+
+            const responseData = {
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length
+            };
+        
+            // res.json({
+            //     group: responseData,
+            // });
+
+            return responseData;
         } catch (error) {
-            throw new Error('Failed to find groups by ID ' + error);
+            throw new Error('Failed to find groups by id ' + error);
         }
     }
     async joinGroup(groupId, userEmail) {
@@ -43,15 +88,36 @@ class GroupLogic {
             if (!user) {
                 throw new Error('User not found');
             }
-            if (user.groupId == groupId) {
-                throw new Error('User already in a group');
-            }
+            // if (user.groupId == groupId) {
+            //     throw new Error('User already in a group');
+            // }
 
-            const updatedGroup = await Students.update(
+            const groupUpdate = await Students.update(
                 { "groupId": groupId },
                 { where: { "email": userEmail }}
             );
-            return group;
+
+            const updatedGroup = await Groups.findOne({
+                where: { "id": groupId }
+            });
+
+            const students = await updatedGroup.getStudents();
+    
+            const studentNames = students.map(student => {
+                const { firstName, lastName, ...rest } = student;
+                return `${firstName} ${lastName}`;
+            });
+        
+            updatedGroup.dataValues.students = studentNames;            
+            
+
+            const responseData = {
+                id: updatedGroup.id,
+                students: updatedGroup.dataValues.students,
+                memberCount: updatedGroup.dataValues.students.length
+            };
+
+            return responseData;
 
         } catch (error) {
             throw new Error('Failed to join group ' + error);

@@ -33,27 +33,8 @@ router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res)
         //access email by : req.user.email
         //return all groups that related to this user email
         const groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
-        for (let i = 0; i < groups.length; i++) {
-            const group = groups[i];
-    
-            const students = await group.getStudents();
-    
-            const studentNames = students.map(student => {
-                const { firstName, lastName, ...rest } = student;
-                return `${firstName} ${lastName}`;
-            });
-    
-            group.dataValues.students = studentNames;            
-        }
-
-        const responseData = groups.map(group => ({
-            id: group.id,
-            students: group.dataValues.students,
-        }));
-    
-        res.json({
-            groups: responseData,
-        });
+        
+        res.json(groups);
         
         // res.json({groups: [
         //     {ID: '1', groupName:'stupidName', 

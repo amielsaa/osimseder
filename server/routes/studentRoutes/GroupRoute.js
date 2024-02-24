@@ -22,29 +22,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     try {
 
         const groups = await groupLogic.getAllGroupsBySchool(schoolId);
-        for (let i = 0; i < groups.length; i++) {
-            const group = groups[i];
-    
-            const students = await group.getStudents();
-    
-            const studentNames = students.map(student => {
-                const { firstName, lastName, ...rest } = student;
-                return `${firstName} ${lastName}`;
-            });
-    
-            group.dataValues.students = studentNames;            
-        }
-
-        const responseData = groups.map(group => ({
-            ID: group.ID,
-            groupName: group.groupName,
-            students: group.dataValues.students,
-            memberCount: group.dataValues.students.length
-        }));
-    
-        res.json({
-            groups: responseData,
-        });
+        return groups;
 
     } catch (err) {
         res.json({ error: err.message });
@@ -63,26 +41,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
     try {
         const group = await groupLogic.getAllGroupById(groupId);
         
-        const students = await group.getStudents();
-    
-        const studentNames = students.map(student => {
-            const { firstName, lastName, ...rest } = student;
-            return `${firstName} ${lastName}`;
-        });
-    
-        group.dataValues.students = studentNames;            
-        
-
-        const responseData = {
-            ID: group.ID,
-            groupName: group.groupName,
-            students: group.dataValues.students,
-            memberCount: group.dataValues.students.length
-        };
-    
-        res.json({
-            group: responseData,
-        });
+        return group;
 
     } catch (err) {
         res.json({ error: err.message });

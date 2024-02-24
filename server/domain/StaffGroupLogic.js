@@ -45,7 +45,28 @@ class GroupLogic {
             if (!groups) {
                 throw new Error('Couldn\'t find groups by team owner.');
             }
-            return groups;
+
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+        
+                const students = await group.getStudents();
+        
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+        
+                group.dataValues.students = studentNames;            
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+            }));
+        
+            
+
+            return responseData;
         } catch (error) {
             throw new Error('Failed to find an area by team owner: ' + error);
         }
