@@ -13,23 +13,28 @@ module.exports = (sequelize, DataTypes) => {
 
     Cities.associate = (models) => {
         Cities.hasMany(models.Areas, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
 
         Cities.hasMany(models.Schools, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
 
         Cities.hasMany(models.Houses, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
 
         Cities.hasMany(models.Staffs, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
 
         Cities.hasMany(models.Students, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
     };
 

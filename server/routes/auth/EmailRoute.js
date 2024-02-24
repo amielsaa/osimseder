@@ -3,26 +3,36 @@ const router = express.Router();
 const emailService = require('../../domain/services/EmailService');
 
 // Endpoint to handle email verification
-router.get('/verify-email', async (req, res) => {
-    const token = req.query.token;
+router.post('/verify-email', async (req, res) => {
     try {
-        // Call a function from emailService to handle email verification
-        await emailService.verifyEmail(token);
-        res.send('Email verified successfully');
+        const token = req.query.token;
+        const email = req.query.email;
+
+        // Call the logic method to verify the email and token
+        await emailService.verifyEmailAndToken(email, token);
+
+        console.log('Email verified successfully!, student: ' + email + " can now login")
+        res.send(true);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error verifying email:', error);
+        res.status(500).send('Internal server error.');
     }
 });
 
 // Endpoint to handle password reset
-router.post('/reset-password', async (req, res) => {
-    const { email } = req.body;
+router.post('/verify-forgot-password', async (req, res) => {
     try {
-        // Call a function from emailService to handle password reset
-        const resetToken = await emailService.sendResetPasswordEmail(email);
-        res.json({ message: 'Password reset email sent successfully.', resetToken });
+        const token = req.query.token;
+        const email = req.query.email;
+
+        // Call the logic method to verify the email and token
+        await emailService.verifyEmailAndToken(email, token);
+
+        console.log('Email verified successfully!, student: ' + email + " can now change password")
+        res.send(true);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error verifying email:', error);
+        res.status(500).send('Internal server error.');
     }
 });
 

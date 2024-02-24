@@ -7,21 +7,24 @@ module.exports = (sequelize, DataTypes) => {
         },
         membersCount: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: false
         }
     });
 
     Groups.associate = (models) => {
         Groups.hasMany(models.Students, {
-            foreignKey: 'groupId'
+            foreignKey: 'groupId',
+            allowNull: true
         });
 
         Groups.belongsTo(models.Schools, {
-            foreignKey: 'schoolId'
+            foreignKey: 'schoolId',
+            allowNull: false
         });
 
         Groups.belongsTo(models.Houses, {
-            foreignKey: 'houseId'
+            foreignKey: 'houseId',
+            allowNull: true
         });
 
 

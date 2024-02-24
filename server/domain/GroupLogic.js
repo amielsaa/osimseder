@@ -1,4 +1,4 @@
-const {Groups, Schools, Students} = require('../models/');
+const {Groups, Students} = require('../models/');
 
 class GroupLogic {
     async getAllGroupsBySchool(schoolId) {

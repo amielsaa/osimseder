@@ -24,21 +24,33 @@ module.exports = (sequelize, DataTypes) => {
         freeText: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        picBefore: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        picAfter: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 
     Houses.associate = (models) => {
         Houses.belongsTo(models.Areas, {
-            foreignKey: 'areaId'
+            foreignKey: 'areaId',
+            allowNull: false
         });
         Houses.belongsTo(models.Cities, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
         Houses.hasMany(models.Groups, {
-            foreignKey: 'houseId'
+            foreignKey: 'houseId',
+            allowNull: true
         });
         Houses.hasMany(models.Tasks, {
-            foreignKey: 'houseId'
+            foreignKey: 'houseId',
+            allowNull: true
         });
     };
 
