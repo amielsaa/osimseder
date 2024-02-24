@@ -56,10 +56,7 @@ class RegistrationLogic {
 
             const hashedPassword = await bcrypt.hash(staffData.password, 10);
 
-            const cityId = await string2Int.getCityId(staffData.city);
-            const schoolId = await string2Int.getSchoolId(staffData.school);
-
-            const createdStaff = await Staffs.create({
+            const createdStaff = await Staff.create({
                 "email": staffData.email,
                 "password": hashedPassword,
                 "lastName": staffData.lastName,

@@ -127,7 +127,7 @@ function Registration() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city">
                           <option value="">בחר עיר</option>
-                          <option value="אשדוד">אשדוד</option>
+                          <option value="JRS">ירושלים</option>
                           <option value="BSV">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
@@ -138,7 +138,7 @@ function Registration() {
                       <Field as="select" id="school" name="school">
                           <option value="">בחר בית ספר</option>
                           <option value="נתיבי עם">נתיבי עם</option>
-                          <option value="SchoolTest1">רמבם</option>
+                          <option value="1">רמבם</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>

@@ -6,7 +6,6 @@ const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const {accessGroup, validateAccess} = require('../../utils/Accesses');
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
-    console.log("bla");
     const studentData = req.body;
     try {
         const createdStudent = await studentRegistrationLogic.registerStudent(studentData);
@@ -20,17 +19,22 @@ router.post('/register_student', async (req, res) => {
 router.post('/login_student', async (req, res) => {
     const { email, password } = req.body;
     try {
-        const loggedInStudent = await loginLogic.verifyLoginStudent(email, password);
-        res.json(loggedInStudent);
+        const user = await loginLogic.verifyLogin(email, password)
+        res.json(user);
     } catch (error) {
         
         res.json({ error: error.message });
     }
 });
-
-// just testing validateAccess
-router.post('/some_operation', validateToken , validateAccess(accessGroup.A),async (req, res) => {
-    res.json("sup bich")
+// Endpoint to update user session
+router.get('/update_user_session', validateToken, async (req, res) => {
+    try{
+        const token = req.header("accessToken");
+        const user = await loginLogic.verifyToken(token);
+        res.json(user);
+    } catch(error) {
+        res.json({ error: error.message });
+    }
 });
 
 // Endpoint to register a new staff
@@ -45,10 +49,10 @@ router.post('/register_staff', async (req, res) => {
 });
 
 // Endpoint to log in a staff
-router.post('/login_staff', validateToken, async (req, res) => {
+router.post('/login_staff', async (req, res) => {
     const { email, password } = req.body;
     try {
-        const loggedInStaff = await AuthenticationLogic.verifyLogin(email, password);
+        const loggedInStaff = await loginLogic.verifyLoginStaff(email, password);
         res.json(loggedInStaff);
     } catch (error) {
         res.status(500).json({ error: error.message });

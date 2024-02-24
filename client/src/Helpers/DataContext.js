@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -5,10 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 const DataContext = createContext({})
 export const DataProvider = ({children}) => {
-    const [user,setUser] = useState({userId:'1', userName: "ארי מאיר",role:'Admin' , phoneNumber:"0508639353", parentName: "אורלי אושרי",
+    const [user,setUser] = useState({userId:'1', userName: "ארי מאיר",role:'TeamOwner' , phoneNumber:"0508639353", parentName: "אורלי אושרי",
     parentNumber: "0503428526", School: "מקיף ו", sex:"זכר", languages:["אנגלית", "עברית"], personalRequests:"כבד לי בלילות"
     , groupId:"002" })
-   
+    
+    useEffect(() => {
+        if(localStorage.getItem("accessToken")) {
+            axios.get(`http://localhost:3001/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
+                if(res.data.error) alert(res.data.error);
+                else {setUser(res.data.user.dataValues)};
+            });
+        }
+    }, [])
+
     const navigate = useNavigate();
       
     return (

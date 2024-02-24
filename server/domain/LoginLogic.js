@@ -1,49 +1,93 @@
 // LoginLogic.js
 const {Students} = require('../models/');
 const bcrypt = require('bcrypt');
-const { sign } = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
+const {Staffs} = require('../models/');
+const {roleGroup} = require('../utils/Accesses')
 
 class LoginLogic {
-    async verifyLoginStudent(email, givenPassword) {
+    async verifyLogin(email, givenPassword ) {
         try {
-            const student = await Students.findOne({
+            const user = await Students.findOne({
                 where: { email: email }
             });
-            if (!student) {
-                throw new Error('Student not found');
+            if(!user) {
+                const staff = await Staffs.findOne({
+                    where: { email: email }
+                });
+                return this.verifyLoginStaff(staff, email, givenPassword)
+            } else {
+                return this.verifyLoginStudent(user, email, givenPassword)
             }
-            const match = await bcrypt.compare(givenPassword, student.password);
-            if (!match) {
-                throw new Error('Wrong username and password combination');
-            }
-            const {password, ...studentJson} =  student;
-            studentJson.dataValues.role = 'Student';
-            //studentJson['role'] = 'Student';
-            const accessToken = sign({ email: email,role:'Student' ,id: student.id }, "importantsecret");
-            console.log(studentJson)
-            return { token: accessToken, user:studentJson, id: student.id };
-        } catch (error) {
+        } catch(error) {
             throw new Error('Failed to login: ' + error);
         }
     }
-    async verifyLoginStaff(email, givenPassword) {
+
+    async verifyLoginStudent(student, email, givenPassword) {
+        const match = await bcrypt.compare(givenPassword, student.password);
+        if (!match) {
+            throw new Error('Wrong username and password combination');
+        }
+        const {password, ...studentJson} =  student;
+        studentJson.dataValues.role = 'Student';
+        //studentJson['role'] = 'Student';
+        const accessToken = sign({ email: email,role:'Student' ,id: student.id }, "importantsecret");
+        return { token: accessToken, user:studentJson, id: student.id };
+    }
+    async verifyLoginStaff(staff, email, givenPassword) {
+        if (!staff) {
+            throw new Error('Error: user not found');
+        }
+        const match = await bcrypt.compare(givenPassword, staff.password);
+        if (!match) {
+            throw new Error('Wrong username and password combination');
+        }
+        const {password, ...staffJson} =  staff;
+        staffJson.dataValues.role = roleGroup[staff.accesses];
+        const accessToken = sign({ email: email, role:roleGroup[staff.accesses], id: staff.id }, "importantsecret");
+        return { token: accessToken, user: staffJson, id: staff.id };
+        
+    }
+
+    async verifyToken(token) {
         try {
-            const staff = await Staffs.findOne({
-                where: { Email: email }
-            });
-            if (!staff) {
-                throw new Error('Error: staff user not found');
+            const user = verify(token, "importantsecret");
+            if(user.role == 'Student') {
+                return this.verifyTokenStudent(user, token);
+            } else {
+                return this.verifyTokenStaff(user, token);
             }
-            const match = await bcrypt.compare(givenPassword, staff.password);
-            if (!match) {
-                throw new Error('Wrong username and password combination');
-            }
-            const accessToken = sign({ username: email, id: staff.id }, "importantsecret");
-            return { token: accessToken, username: email, id: staff.id };
-        } catch (error) {
-            throw new Error('Failed to login: ' + error);
+            
+        } catch(error) {
+            throw new Error('Failed to verify token: ' + error);
         }
     }
+
+    async verifyTokenStudent(user, token) {
+        const student = await Students.findOne({
+            where: { email: user.email }
+        });
+        if (!student) {
+            throw new Error('Student not found');
+        }
+        const {password, ...studentJson} =  student;
+        studentJson.dataValues.role = 'Student';
+        return { token: token, user:studentJson, id: student.id };
+    }
+
+    async verifyTokenStaff(user, token) {
+        const staff = await Staffs.findOne({
+            where: {email: user.email }
+        })
+        if (!staff) {
+            throw new Error('Staff not found');
+        }
+        const {password, ...staffJson} =  staff;
+        staffJson.dataValues.role = roleGroup[staff.accesses];
+        return { token: token, user:staffJson, id: staff.id };
+    }
+    
 }
 
 module.exports = new LoginLogic();

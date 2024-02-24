@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const {validateToken, verifyToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
-const groupLogic = require('../../domain/GroupLogic')
+const groupLogic = require('../../domain/StudentGroupLogic')
 const {Groups} = require('../../models/')
 const {Schools} = require('../../models/')
 const RegistrationLogic = require("../../domain/RegistrationLogic")
 const {verify} = require('jsonwebtoken')
+
 
 
 
@@ -21,37 +22,17 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     try {
 
         const groups = await groupLogic.getAllGroupsBySchool(schoolId);
-        for (let i = 0; i < groups.length; i++) {
-            const group = groups[i];
-    
-            const students = await group.getStudents();
-    
-            const studentNames = students.map(student => {
-                const { firstName, lastName, ...rest } = student;
-                return `${firstName} ${lastName}`;
-            });
-    
-            group.dataValues.students = studentNames;            
-        }
-
-        const responseData = groups.map(group => ({
-            ID: group.ID,
-            groupName: group.groupName,
-            students: group.dataValues.students,
-        }));
-    
-        res.json({
-            groups: responseData,
-        });
+        return groups;
 
     } catch (err) {
         res.json({ error: err.message });
     }
 });
 
+
 router.post('/init_test', async (req, res) => {
-    await Groups.create({groupName:'aa',teamOwnerId:'fe'})
-    await Schools.create({schoolName:'oo'})
+    await Groups.create({groupName:'bb',teamOwnerId:'fe', schoolId:'1'})
+    //await Schools.create({schoolName:'oo'})
 })
 
 // Get a single group by ID (GET)
@@ -60,25 +41,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
     try {
         const group = await groupLogic.getAllGroupById(groupId);
         
-        const students = await group.getStudents();
-    
-        const studentNames = students.map(student => {
-            const { firstName, lastName, ...rest } = student;
-            return `${firstName} ${lastName}`;
-        });
-    
-        group.dataValues.students = studentNames;            
-        
-
-        const responseData = {
-            ID: group.ID,
-            groupName: group.groupName,
-            students: group.dataValues.students,
-        };
-    
-        res.json({
-            group: responseData,
-        });
+        return group;
 
     } catch (err) {
         res.json({ error: err.message });
@@ -90,6 +53,7 @@ router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (re
     const groupId = req.params.id;
     const verifiedUser = verifyToken(req.header("accessToken"));
     const userEmail = verifiedUser['email'];
+    // userEmail = ""
     try {
         // const group = {};
         const group = await groupLogic.joinGroup(groupId, userEmail);

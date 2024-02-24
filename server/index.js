@@ -18,6 +18,8 @@ const staffRouter = require("./routes/staffRoutes")
 app.use("/staff", staffRouter)
 const authRouter = require("./routes/auth")
 app.use("/auth", authRouter)
+// const setupRouter = require("./routes/auth/SetupRoute")
+// app.use("/setup", setupRouter)
 
 
 // app.listen(port, () => {
@@ -30,7 +32,7 @@ app.use("/auth", authRouter)
 //  }); //function that starts whenever the server starts
 //});
 
-db.sequelize.sync()
+db.sequelize.sync(/*{force: true}*/)
     .then(() => {
         console.log('Database synchronized successfully');
         app.listen(port, () => {

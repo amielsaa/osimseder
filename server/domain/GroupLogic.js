@@ -59,3 +59,4 @@ class GroupLogic {
 }
 
 module.exports = new GroupLogic();
+

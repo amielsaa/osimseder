@@ -8,9 +8,13 @@
     width: 100%; /* Adjust for the remaining width */
     height: calc(100vh - 7vh); /* Take the remaining viewport height */
     padding: 20px; /* Adjust padding as needed */
-    background-color: #f2f2f2; /* Set a background color or style as desired */
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
+    background-color: var(--WHITEBG-COLOR);
     
+  }
+  .Houses_title{
+    color: var(--ORANGE-COLOR);
+    font-size: 1.5rem;
   }

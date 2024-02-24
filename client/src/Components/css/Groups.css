@@ -12,13 +12,26 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
+    background-color: var(--WHITEBG-COLOR);
     
   }
-  .To_main_content_groups {
+  .groups_main_content , .To_main_content_groups, .main_content_houses {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 90%;
+    justify-content: flex-start;
     align-items: center;
+    height: 90%;
+    gap: 3%;
     overflow-y: scroll;
+  }
+  .groups_title {
+    color:var(--ORANGE-COLOR);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .groups_main_content , .To_main_content_groups{
+    /* background: url('../../images/groups-background-img.png') center/cover no-repeat; */
   }

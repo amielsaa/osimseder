@@ -87,7 +87,7 @@ const GroupPage = () => {
           <div key={index} className='Group_Member'>
             {student}
             {user.role !== 'Student' && (
-              <button className='kick_student' onClick={() => handleRemoveMember(index)}>X</button>
+              <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
             )}
           </div>
         ))}

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Group from './Group';
 import DataContext from '../../Helpers/DataContext';
 import axios from 'axios';
-
+import { fetchAllGroupsBySchool } from '../../Helpers/StudentFrontLogic';
 
 const GroupList = () => {
   
@@ -20,34 +20,36 @@ const GroupList = () => {
 
   useEffect(() => {
     //const getGroups = (user) => {
-      if (user.role === "Student") {
-        console.log(user);
-        axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
-          //setGroupIds(res.body.groups);
-          if(res.data.error) {alert(res.data.error)};
-          setGroupIds(res.data.groups)
-          console.log(res.data);
-        })
-        // Amiel - get all the groups from this student's school!   
-      } else if (user.role === "TeamOwner") {
-        // Amiel - get all the groups that the team owner can manage - teams from his city.
+      // //TODO: update only the joined group
+      const setGroups = async () => {
+        const groups = await fetchAllGroupsBySchool(user);
+        setGroupIds(groups);        
       }
-    //}; 
+      setGroups();      
 
-    // Call the getGroups function
-    //const groups = getGroups(user);
-    //console.log(groups);
-    //setGroupIds(groups)
+      // if (user.role === "Student") {
+      //   axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
+      //     //setGroupIds(res.body.groups);
+      //     if(res.data.error) {alert(res.data.error)};
+      //     setGroupIds(res.data.groups);
+      //   })
+      //   // Amiel - get all the groups from this student's school!   
+      // } else if (user.role === "TeamOwner") {
+      //   // Amiel - get all the groups that the team owner can manage - teams from his city.
+      // }
 
-  }, [user, groupIds]);  // Add user to the dependency array
+
+
+  }, [user]);  // Add user to the dependency array
   
 
   return (
     <>
-      
-      {groupIds.map((groupJson) => (
-        <Group key={groupJson} groupId={groupJson.ID} groupJson={groupJson} />
+      {groupIds &&
+      <>{groupIds.map((groupJson) => (
+        <Group key={groupJson} groupId={groupJson.id} groupJson={groupJson} />
       ))}
+      </>}
     </>
   );
 }

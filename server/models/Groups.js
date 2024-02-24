@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        membersCount: {
+        capacity: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         });
 
-
+        
     };
 
     return Groups;
