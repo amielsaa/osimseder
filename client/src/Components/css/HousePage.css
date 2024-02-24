@@ -12,7 +12,6 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    gap:5%
     
   }
 
@@ -21,10 +20,11 @@
     height: 70%;
     direction: rtl;
     margin-top:10%;
+    margin-bottom: 30%;
   }
  .House-title{
     margin-top:6%;
-    color : #6200ee;
+    color : var(--ORANGE-COLOR);
     font-size: 1rem;
  }
  .House_picture img {
@@ -54,11 +54,12 @@
     justify-content: flex-start;
     overflow-y: scroll;
     margin-top: 10%;
+    gap:3%;
   }
   .House-Info-Tasks {
     width: 100%;
     min-height: 27%; /* Adjust this value as needed */
-    border: 3px solid #6200ee;
+    border: 1px solid var(--ORANGE-COLOR);
     margin-top: 5%;
     display: flex;
     flex-direction: column;
@@ -71,6 +72,28 @@
     flex-wrap: wrap;
     margin-top: 10%;
     padding: 3%;
-    gap :3%;
+    gap :2%;
     margin-top: 37%;
+  }
+  .buttons_for_house_logic{
+    width: 100%;
+    min-height: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:20%
+  }
+  .edit_house_button , .add_task_button {
+    width: 30%;
+    height: 100%;
+    border-radius: var(--BORDER-RADIUS);
+    border: none;
+    transition: background-color 0.3s;
+    background-color: var(--ORANGE-COLOR);
+    color:whitesmoke;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }

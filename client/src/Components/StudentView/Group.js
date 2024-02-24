@@ -9,6 +9,7 @@ const Group = ({ groupId , groupJson}) => {
   const {user} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
   const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
+  const [memberCount, setMemberCount] = useState({count:0, maxCount:0})
   const openStudentsPopUp = () => {
     //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
@@ -26,6 +27,7 @@ const Group = ({ groupId , groupJson}) => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
     }
+
     updateStudentList();
     //setStudentsList(groupJson.students);
   },[studentsList]);
@@ -34,8 +36,9 @@ const Group = ({ groupId , groupJson}) => {
 
   return (
     <>
+      
       <div className="group">
-        <div className='group-id'>{`${groupId}: קבוצה`}</div>
+        <div className='group-id'>{`${groupId} : קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
         {user.role === "Student" &&
         <button className='join-group-btn' onClick={handleJoinGroup(groupId, user.id)}>הצטרף</button>

@@ -9,9 +9,12 @@ const HousesTeamOwner = () => {
     <Header/>
     <Nav/>
     <div className='content-Box'>
-    <h1 className='title'>הבתים שלי</h1>
-    <HouseList/>
-      
+      <div className='main_content_houses'>
+        <div className='Houses_title'>
+        <h1>הבתים שלי</h1>
+        </div>
+        <HouseList/>
+        </div>
     </div>
     <Footer/>
     </>

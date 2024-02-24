@@ -1,9 +1,9 @@
 .House {
-    height:10%;
+    min-height:12%;
     width: 95%;
     border-radius: 5px;
-    background-color: whitesmoke;
-    border:1px solid #6200ee; 
+    background-color: var(--GREY-COLOR);
+    color:var(--PURPLE-COLOR);
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -27,11 +27,11 @@
     display: flex;
     flex-direction: column;
     align-items: right;
-    gap: 10%;
+    gap: 3%;
     overflow-y: scroll;
 }
-.group-id , .users-in-group, .students-Count {
-    color:black;
+.house-id  {
+    color:var(--FONT-COLOR);
 }
 .watch-house-btn {
     width: 20%;
@@ -41,7 +41,7 @@
     border:none;
     transition: background-color 0.3s;
     margin-left: 5%;
-    background-color:#6200ee;
+    background-color:var(--ORANGE-COLOR);
     color:whitesmoke
 }
 .house_pic {

@@ -18,6 +18,8 @@ const staffRouter = require("./routes/staffRoutes")
 app.use("/staff", staffRouter)
 const authRouter = require("./routes/auth")
 app.use("/auth", authRouter)
+// const setupRouter = require("./routes/auth/SetupRoute")
+// app.use("/setup", setupRouter)
 
 
 // app.listen(port, () => {

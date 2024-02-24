@@ -28,11 +28,11 @@ const GroupTO = ({ groupId }) => {
 
   return (
     <>
+      
       <div className="group">
-        <div className='group-id'>{`${groupId}: קבוצה`}</div>
+        <div className='group-id'>{`${groupId} : קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
         <button className='join-group-btn'onClick={() => setChosenGroup(groupId)}>צפה</button>
-        <button className='exit-group-btn' onClick={handleExitGroup(groupId,user.userId)}>עזוב</button>
         <div className='students-Count'>1/5</div> {/* Ari - needs to be modified to the real group size after you have the data */ }
       </div>
       {studentsPopUp ?

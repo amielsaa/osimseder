@@ -44,9 +44,6 @@ select {
     width: 100%;
 }
 
-button:hover {
-    background-color: #6200ee;
-}
 .Title-Div ,.Button-Div{
     display: flex;
     justify-content: center;
