@@ -18,7 +18,7 @@
   .Room-Title {
     width: 100%;
     height: 20%;
-    background-color: #4a2ffa;
+    background-color: var(--PURPLE-COLOR);
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     display: flex;
@@ -67,6 +67,6 @@
   }
   .view-icon{
    color:black;
-   margin-top:10%;
+   margin-top:30%;
   }
   

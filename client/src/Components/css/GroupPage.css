@@ -8,7 +8,7 @@
     width: 100%; /* Adjust for the remaining width */
     height: calc(100vh - 7vh); /* Take the remaining viewport height */
     padding: 20px; /* Adjust padding as needed */
-    background-color: #f2f2f2; /* Set a background color or style as desired */
+    background-color: var( --WHITEBG-COLOR); /* Set a background color or style as desired */
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
@@ -18,27 +18,27 @@
   .Group-Info {
     width: 100%;
     height: 20%;
-    border:3px solid #6200ee;
+    border:1px solid var(--ORANGE-COLOR);
     margin-top:5%;
     display: flex;
     flex-direction: column;
     border-radius: 25px;
     overflow-y: scroll;
-    min-height: 40%;
+    min-height: 35%;
 
   }
   .Group-Info .Group_Member {
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
-    background: gainsboro;
+    background-color: var(--GREY-COLOR);
     margin-top: 5%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
   .kick_student {
-    background-color: red;
+    background-color: darkred;
     color: white;
     border: none;
     border-radius: 8px; /* Adjust the radius as needed for the desired roundness */
@@ -65,14 +65,14 @@
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
-    background: gainsboro;
+    background-color: var(--GREY-COLOR);
     margin-top: 5%;
     width: 100%;
     font-size: 1.2rem;
   }
   .group-title {
    margin-top:6%;
-   color : #6200ee;
+   color : var(--ORANGE-COLOR);
   }
   .Group-Info-Tasks {
     width: 100%;
@@ -83,7 +83,7 @@
     border-radius: 25px;
     overflow-x: scroll; 
     overflow-y: hidden;
-    border:3px solid #6200ee;
+    border:1px solid var(--ORANGE-COLOR);
     gap:3%;
     min-height: 27%;
     padding:3%; 
@@ -97,7 +97,7 @@
   right:0;
   position: absolute;
   margin-right: 5%;
-  background-color: #6200ee;
+  background-color: var(--PURPLE-COLOR);
   border-radius: 25%;
   width: 6%;
   height: 3%;

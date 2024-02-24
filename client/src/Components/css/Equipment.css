@@ -25,7 +25,7 @@
   }
   .Equipment-title {
     margin-top:6%;
-   color : #6200ee;
+   color : var(--ORANGE-COLOR);
   }
   .Equipment-block{
     margin-top: 10%;

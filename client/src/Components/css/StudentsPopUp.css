@@ -1,24 +1,29 @@
 .pop-up_screen {
     width: 95%;
     min-height: 30%;
-    border: 3px solid ;
-    background-color: var(--HEADER-BGCOLOR);
-    color: black;
+    background-color: var(--GREY-COLOR);
     border-radius: 5%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     direction: rtl;
     overflow-y: scroll;
-    gap:5%;
-
+    gap: 5%;
+    list-style-type: none; /* Remove default list styles */
+    border:1px solid var(--ORANGE-COLOR)
 }
-.student-bar{ 
-    color: var(--FONT-COLOR);
-    height: 20%;
+
+.student-bar {
+    color: var(--PURPLE-COLOR);
     padding: 15px;
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
-    font-size:1.5rem ;
-}  
+    align-items: center;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--PURPLE-COLOR);
+}
+
+.student-bar:last-child {
+    border-bottom: none;
+}

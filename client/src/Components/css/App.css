@@ -1,14 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Rubik:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Inter:wght@100..900&display=swap');
+:root {
+  --PURPLEOP-COLOR: rgba(121, 4, 62, 1);
+  --PURPLE-COLOR: #79043e;
+  --ORANGE-COLOR: #eb743e;
+  --FONT-COLOR: whitesmoke;
+  --BLUE-COLOR:#003061;
+  --LIGHTBLUE-COLOR:#008ad1;
+  --CYAN-COLOR:#7ad3f7;
+  --MAIN-FONT: 'Heebo', Arial, Helvetica, sans-serif;
+  --WHITEBG-COLOR:#f9f9fb;
+  --PINK-COLOR:#b4567d;
+  --PINKOP-COLOR:rgba(180, 86, 125, 0.5);
+  --GREY-COLOR:#efefef;
+  --SPACING1:20px;
+  --BORDER-RADIUS:20px
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Rubik';
-}
-:root {
-  --HEADER-BGCOLOR-OPACITY: rgba(88, 12, 31, 0.8);
-  --HEADER-BGCOLOR: #580C1F;
-  --ORANGE-COLOR: #CC5A0F;
-  --FONT-COLOR: whitesmoke;
-  --BTN-COLOR:#3164f4;
+  font-family: var(--MAIN-FONT);
 }

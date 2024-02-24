@@ -35,7 +35,7 @@ const Nav = () => {
           <div className="menu-icon"></div>
           <i className="fa fa-bars"></i>
         </button>
-        <div className='menu-bar-title'>
+        <div className='menu-bar-title'  >
           <IoMdArrowRoundBack className='close_nav_arrow' onClick={toggleSidebar} />
           <span className={`menu-title ${!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}`}> תפריט {userRole}</span>
         </div>

@@ -2,9 +2,8 @@
     height:5%;
     width: 95%;
     border-radius: 5px;
-    background-color: var(--HEADER-BGCOLOR-OPACITY);
-    border:3px solid ;
-
+    background-color: var(--GREY-COLOR);
+    /* border: 1px double var(--ORANGE-COLOR); */
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
@@ -14,31 +13,27 @@
     min-height: 7%;
     
 }
+.group_students_pop_up{
+    gap:0%
+}
 .group-id , .users-in-group, .students-Count {
-    color:var(--FONT-COLOR);
+    color:var(--PURPLE-COLOR);
 }
 .join-group-btn, .users-in-group-btn ,.exit-group-btn {
-    width: 20%;
-    height: 70%;
+    width: 15%;
+    height: 60%;
     margin: 0%;
     border-radius: 20px;
     border:none;
     transition: background-color 0.3s;
+    color:var(--FONT-COLOR);
+    background-color:var(--ORANGE-COLOR);
+    
+    
 }
 
 .sub-title {
     text-wrap: nowrap;
     font-size: 1rem;
 }
-.exit-group-btn {
-    background-color:var(--BTN-COLOR);
-    color:var(--FONT-COLOR)
-}
-.join-group-btn{
-    background-color:var(--BTN-COLOR);
-    color:var(--FONT-COLOR)
-}
-.users-in-group-btn {
-    background-color:var(--BTN-COLOR);
-    color:var(--FONT-COLOR)
-}
+

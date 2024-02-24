@@ -12,7 +12,7 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    background-color: var(--ORANGE-COLOR);
+    background-color: var(--WHITEBG-COLOR);
     
   }
   .groups_main_content , .To_main_content_groups, .main_content_houses {
@@ -26,12 +26,12 @@
     overflow-y: scroll;
   }
   .groups_title {
-    color:var(--HEADER-BGCOLOR);
+    color:var(--ORANGE-COLOR);
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .groups_main_content , .To_main_content_groups{
-    background: url('../../images/groups-background-img.png') center/cover no-repeat;
+    /* background: url('../../images/groups-background-img.png') center/cover no-repeat; */
   }

@@ -8,7 +8,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: var(--HEADER-BGCOLOR);
+  background-color: var(--PURPLE-COLOR);
   color: #fff;
   direction: rtl;
   z-index: 1000;
@@ -28,6 +28,10 @@ header {
 
 .hello, .role-box {
   font-size: 1.5em;
+}
+.hello{
+  color:var(--FONT-COLOR);
+  margin-top:1.5%
 }
 
 header .icons .user-icon,
@@ -53,9 +57,9 @@ header .icons .settings-icon {
 .role-box {
   margin-left: 12%;
   margin-top: 1%;
-  background-color: #3164f4;
+  background-color: var(--LIGHTBLUE-COLOR);
   padding: 0.3rem;
-  border-radius: 10px;
+  border-radius: var(--BORDER-RADIUS);
 }
 
 /* Media query for smaller screens (e.g., phones) */

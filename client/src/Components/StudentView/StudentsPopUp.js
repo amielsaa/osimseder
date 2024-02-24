@@ -3,11 +3,11 @@ import '../css/StudentsPopUp.css'
 
 const StudentsPopUp = ({ studentsList }) => {
   return (
-    <div className='pop-up_screen'>
-      {studentsList.map((studentName) => (
-        <div className='student-bar' key='0'>{studentName}</div>
+    <ul className='pop-up_screen'>
+      {studentsList.map((studentName, index) => (
+        <li className='student-bar' key={index}>{studentName}</li>
       ))}
-    </div>
+    </ul>
   );
 }
 
