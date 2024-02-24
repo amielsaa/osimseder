@@ -1,10 +1,25 @@
 const {Groups, Schools, Students, Areas, Cities, Staffs} = require('../models');
 
 class GroupLogic {
-    async createGroup(groupSize) {
+    async createGroup(groupSize, schoolId) {
         try {
+            if(groupSize==null || schoolId==null){
+                throw new Error('Group size and school ID can\'t be null');
+            }
+            if(groupSize<=0){
+                throw new Error('Group size can\'t be negative or 0.');
+            }
+
+            const school = await Schools.findOne({
+                where: {id: schoolId}
+            });
+            if (!school) {
+                throw new Error('School doesn\'t exist.');
+            }
+
             const group = await Groups.create({
-                membersCount: groupSize
+                membersCount: groupSize,
+                schoolId: schoolId
             });
             if (!group) {
                 throw new Error('Couldn\'t create a group.');
@@ -18,13 +33,18 @@ class GroupLogic {
 
     async getGroupsByTeamOwner(teamOwnerEmailAddr) {
         try {
+            if(teamOwnerEmailAddr==null){
+                throw new Error('Team owner email is null.');
+            }
+            if(teamOwnerEmailAddr==undefined){
+                throw new Error('Team owner email is undefined.');
+            }
             const groups = await Groups.findAll({
                 where: { "teamOwnerEmail": teamOwnerEmailAddr }
             });
             if (!groups) {
                 throw new Error('Couldn\'t find groups by team owner.');
             }
-
             return groups;
         } catch (error) {
             throw new Error('Failed to find an area by team owner: ' + error);
@@ -124,7 +144,7 @@ class GroupLogic {
 
             return group;
         } catch (error) {
-            throw new Error('Failed to find a group by ID ' + error);
+            throw new Error('Failed to find a ´group by ID ' + error);
         }
     }
 

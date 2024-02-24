@@ -39,6 +39,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
             ID: group.ID,
             groupName: group.groupName,
             students: group.dataValues.students,
+            memberCount: group.dataValues.students.length
         }));
     
         res.json({
@@ -76,6 +77,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res
             ID: group.ID,
             groupName: group.groupName,
             students: group.dataValues.students,
+            memberCount: group.dataValues.students.length
         };
     
         res.json({
