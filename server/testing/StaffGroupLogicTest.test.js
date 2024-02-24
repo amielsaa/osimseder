@@ -135,29 +135,29 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
 
 //       const groupWithSchool1 = await db.Groups.create({
 //           teamOwnerEmail: "mashu@g.com",
-//           membersCount: 1,
+//           capacity: 1,
 //           schoolId: createdSchool.id 
 //       });
 
 //       const groupWithSchool2 = await db.Groups.create({
 //           teamOwnerEmail: "mashuaher@g.com",
-//           membersCount: 2,
+//           capacity: 2,
 //           schoolId: createdSchool.id 
 //       });
       
 //       const groupWithSchool3 = await db.Groups.create({
 //           teamOwnerEmail: "wrong@g.com",
-//           membersCount: 5
+//           capacity: 5
 //       });
       
 //       // // Call the function under test and await its result
 //       const result = await GroupLogic.getAllGroupsBySchool(createdSchool.id);
       
 //       // // Assertions
-//       expect(result[0]).toHaveProperty('membersCount', 1);
+//       expect(result[0]).toHaveProperty('capacity', 1);
 //       expect(result[0]).toHaveProperty('teamOwnerEmail', 'mashu@g.com');
 //       expect(result[0]).toHaveProperty('schoolId', 1);
-//       expect(result[1]).toHaveProperty('membersCount', 2);
+//       expect(result[1]).toHaveProperty('capacity', 2);
 //       expect(result[1]).toHaveProperty('teamOwnerEmail', 'mashuaher@g.com');
 //       expect(result[1]).toHaveProperty('schoolId', 1);
 //     }); 
@@ -190,19 +190,19 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
 
 //       const groupWithSchool1 = await db.Groups.create({
 //           teamOwnerEmail: "mashu@g.com",
-//           membersCount: 1,
+//           capacity: 1,
 //           schoolId: createdSchool.id 
 //       });
 
 //       const groupWithSchool2 = await db.Groups.create({
 //           teamOwnerEmail: "mashuaher@g.com",
-//           membersCount: 2,
+//           capacity: 2,
 //           schoolId: createdSchool.id 
 //       });
       
 //       const groupWithSchool3 = await db.Groups.create({
 //           teamOwnerEmail: "wrong@g.com",
-//           membersCount: 5
+//           capacity: 5
 //       });
       
 //       // // Call the function under test and await its result
@@ -270,7 +270,7 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
 
 //       const groupWithSchool1 = await db.Groups.create({
 //           teamOwnerEmail: "mashu@g.com",
-//           membersCount: 1
+//           capacity: 1
 //       });
 
 //       // // Call the function under test and await its result
@@ -278,7 +278,7 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
       
 //       // // Assertions
 //       expect(result).toHaveProperty('teamOwnerEmail', groupWithSchool1.teamOwnerEmail);
-//       expect(result).toHaveProperty('membersCount', groupWithSchool1.membersCount);
+//       expect(result).toHaveProperty('capacity', groupWithSchool1.capacity);
       
 //     }); 
 

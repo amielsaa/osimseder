@@ -372,7 +372,7 @@ describe('joinGroup', () => {
 
     //   const groupWithSchool1 = await db.Groups.create({
     //       teamOwnerEmail: "mashu@g.com",
-    //       membersCount: 1
+    //       capacity: 1
     //   });
 
     //   const result = await GroupLogic.joinGroup(groupWithSchool1.id, newStudent.email);
