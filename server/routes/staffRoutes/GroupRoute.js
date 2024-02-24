@@ -2,13 +2,23 @@ const express = require('express');
 const router = express.Router();
 const {validateToken} = require('../../utils/JsonWebToken')
 const {validateAccess, accessGroup} = require('../../utils/Accesses')
+const staffGroupLogic = require('../../domain/StaffGroupLogic')
+const {Groups, Staffs, Areas, Schools, Cities} = require('../../models/');
+const RegistrationLogic = require('../../domain/RegistrationLogic');
+// const StaffGroupLogic = require('../../domain/StaffGroupLogic');
+
+// TODO: remove quotes from validateToken
 
 // Create a new group (POST)
 router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
+        const groupSize = req.body.groupSize;
+
+        const newGroup = await staffGroupLogic.createGroup(groupSize);
+
         //no arguments needed
         //return group information (all the fields)
-        res.json(group);
+        res.json(newGroup);
         
     } catch (err) {
         res.json({ error: err.message });
@@ -18,12 +28,18 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 // Get all groups related to team owner (GET)
 router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
+        const userEmail = req.user.email;
+
         //access email by : req.user.email
         //return all groups that related to this user email
-        res.json({groups: [
-            {ID: '1', groupName:'stupidName', 
-            students:['amiel@gmail.com','ari@gmail.com']},
-        ]});
+        const groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
+        
+        res.json(groups);
+        
+        // res.json({groups: [
+        //     {ID: '1', groupName:'stupidName', 
+        //     students:['amiel@gmail.com','ari@gmail.com']},
+        // ]});
     } catch (err) {
         res.json({ error: err.message });
     }
@@ -32,10 +48,13 @@ router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res)
 // Get all groups related to area manager (GET)
 router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        //access email by : req.user.email
-        //pull staff user by email and check its area name, pull all groups by the area name
-        //return all groups that related to this user email
+        const userEmail = req.user.email;
+
+        // returns groups by schools (for now)
+        const groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
+
         res.json(groups);
+
     } catch (err) {
         res.json({ error: err.message });
     }
@@ -44,10 +63,18 @@ router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res)
 // Get all groups related to city manager (GET)
 router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res) => {
     try {
-        //access email by : req.user.email
-        //same as area manager just for cities
-        //return all groups that related to this user email
+        const userEmail = req.user.email;
+
+        const area1 = await Cities.create({
+            cityName: "city1",
+            cityManagerEmail: "test2@example.com"
+        })
+
+        // returns groups by schools (for now)
+        const groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
+
         res.json(groups);
+
     } catch (err) {
         res.json({ error: err.message });
     }
@@ -55,9 +82,10 @@ router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res)
 
 // Get all groups (Admin) (GET)
 router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, res) => {
+    // const userEmail = /*req.user.email"test3@example.com";
     try {
-        //access email by : req.user.email
-        //return all groups that related to this user email
+        const groups = await staffGroupLogic.getAllGroups();
+
         res.json(groups);
     } catch (err) {
         res.json({ error: err.message });
@@ -68,14 +96,12 @@ router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, r
 // Get a single group by ID (GET)
 router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
-        //req.params.id = groupId
-        //return all information regarding that group
-        res.json({group: {
-            ID: '1',
-            groupName: 'stupidName',
-            teamOwner: 'firstName lastName',
-            school: 'schoolName',
-        }})
+        const groupId = req.params.id;
+
+        const group = await staffGroupLogic.getGroupById(groupId);
+
+        res.json(group);
+
     } catch (err) {
         res.json({ error: err.message });
     }

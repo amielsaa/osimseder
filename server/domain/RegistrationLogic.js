@@ -49,7 +49,7 @@ class RegistrationLogic {
 
             const hashedPassword = await bcrypt.hash(staffData.password, 10);
 
-            const createdStudent = await Students.create({
+            const createdStudent = await Staff.create({
                 "email": staffData.email,
                 "password": hashedPassword,
                 "lastName": staffData.lastName,

@@ -2,7 +2,7 @@
 const sequelizeConfig = require('../config/config.json'); // Assuming you're using a separate configuration for testing
 // const sequelizeConfig = require('../jest.config.js'); 
 // const { LoginLogic, RegistrationLogic, GroupLogic } = require('../domain');
-const GroupLogic = require('../domain/GroupLogic');
+const GroupLogic = require('../domain/StudentGroupLogic');
 const RegistrationLogic = require('../domain/RegistrationLogic');
 const LoginLogic = require('../domain/LoginLogic');
 // const { Students, Groups, Schools } = require('../models/');
@@ -138,12 +138,13 @@ describe('getAllGroupsBySchool', () => {
       const result = await GroupLogic.getAllGroupsBySchool(createdSchool.id);
       
       // // Assertions
-      expect(result[0]).toHaveProperty('membersCount', 1);
-      expect(result[0]).toHaveProperty('teamOwnerEmail', 'mashu@g.com');
-      expect(result[0]).toHaveProperty('schoolId', 1);
-      expect(result[1]).toHaveProperty('membersCount', 2);
-      expect(result[1]).toHaveProperty('teamOwnerEmail', 'mashuaher@g.com');
-      expect(result[1]).toHaveProperty('schoolId', 1);
+      console.log(result);
+      expect(result[0]).toHaveProperty('memberCount', 0);
+      expect(result[0]).toHaveProperty('id', 1);
+      expect(result[0]).toHaveProperty('students', []);
+      expect(result[1]).toHaveProperty('memberCount', 0);
+      expect(result[1]).toHaveProperty('id', 2);
+      expect(result[1]).toHaveProperty('students', []);
     }); 
 
   });
@@ -261,8 +262,9 @@ describe('getAllGroupById', () => {
       const result = await GroupLogic.getAllGroupById(groupWithSchool1.id);
       
       // // Assertions
-      expect(result).toHaveProperty('teamOwnerEmail', groupWithSchool1.teamOwnerEmail);
-      expect(result).toHaveProperty('membersCount', groupWithSchool1.membersCount);
+      expect(result).toHaveProperty('id', groupWithSchool1.id);
+      expect(result).toHaveProperty('memberCount', 0);
+      expect(result).toHaveProperty('students', []);
       
     }); 
 
@@ -340,15 +342,35 @@ describe('joinGroup', () => {
       
       // // Assertions
       expect(result).toHaveProperty('id', groupWithSchool1.id);
-      expect(result).toHaveProperty('teamOwnerEmail', groupWithSchool1.teamOwnerEmail);
+      expect(result).toHaveProperty('memberCount', 1);
+      expect(result).toHaveProperty('students', ["firstname lastname"]);
       
     }); 
 
-    it('given a group and a student in that group, when joining another group - throw error', async () => {  
+    it('given a student that is joining a full group - throw error', async () => {
       // const studentPassword = "password123";
       const newStudent = await db.Students.create({
         email: "test@example.com",
-        password: "password123",      
+        password: "password123",
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0524587746",
+        gender: "Male",
+        parentName: "itzik",
+        parentPhoneNumber: "0529875509",
+        parentEmail: "mashu@mashu.com",
+        city: "JRS",
+        school: "school1",
+        issuesChoose: "Accessability",
+        issuesText: "idk1",
+        languages: "English",
+        isInGroup: '',
+        didParentApprove: false
+      })
+
+      const newStudent2 = await db.Students.create({
+        email: "test2@example.com",
+        password: "password123",
         lastName: "lastname",
         firstName: "firstname",
         phoneNumber: "0524587746",
@@ -369,22 +391,18 @@ describe('joinGroup', () => {
 
       const groupWithSchool1 = await db.Groups.create({
           teamOwnerEmail: "mashu@g.com",
-          membersCount: 1
+          capacity: 1
       });
 
-      const result = await GroupLogic.joinGroup(groupWithSchool1.id, newStudent.email);
-
-      const foundGroup = await db.Groups.findOne({
-          where: { teamOwnerEmail: "mashu@g.com" }
-      });
+      await GroupLogic.joinGroup(groupWithSchool1.id, newStudent2.email);
 
       // // Call the function under test and await its result
-      await expect(GroupLogic.joinGroup(foundGroup.id, newStudent.email))
-        .rejects.toThrowError(/User already in a group/);
-      // // Assertions
+      await expect(GroupLogic.joinGroup(groupWithSchool1.id, newStudent.email))
+        .rejects.toThrowError(/Failed to join group Error: Group is full/);
+
       
       
-    }); 
+    });
   });
 
   describe('joinGroup - bad', () => {
