@@ -22,6 +22,3 @@
   box-sizing: border-box;
   font-family: var(--MAIN-FONT);
 }
-App {
-  z-index: -1000000;
-}
