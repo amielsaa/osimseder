@@ -1,7 +1,7 @@
 .Task {
   width: 40%;
   height: 100%;
-  border: 1px solid #2e0fdb;
+  border: 1px solid var(--PURPLE-COLOR);
   border-radius: 25px;
   display: flex;
   flex-direction: column;

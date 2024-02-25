@@ -49,13 +49,13 @@
   }
   .border-bottom{
     width: 100%;
-    border:1px solid #6200ee ;
+    border:1px solid var(--PURPLE-COLOR);
   }
   .single-equipment{
     margin-right: 10%;
     font-size: 1.1rem;
     font-weight: bold;
-    color: purple;
+    color: var(--PURPLE-COLOR);
     display: flex;
     margin-top: 2%;
     flex-direction: row;

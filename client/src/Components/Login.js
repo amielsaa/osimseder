@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import './css/Login.css';
 import axios from "axios";
 import DataContext from '../Helpers/DataContext';
+import Logo from '../images/g_udi_logo.png';  // Fix the import here
 
 
 const Login = () => {
@@ -60,6 +61,13 @@ const Login = () => {
   };
 
   return (
+    <>
+    
+    
+    <div className='background_login_page'>
+    <div className='logo_big'>
+    <img src={Logo} alt='לוגו חברה'/>
+      </div>
     <div className="login-container">
       <div className='header-container'>
       <h2>עושים סדר</h2>
@@ -98,6 +106,8 @@ const Login = () => {
         </Form>
       </Formik>
     </div>
+    </div>
+    </>
   );
 };
 
