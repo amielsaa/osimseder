@@ -36,12 +36,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    color: var(--PURPLE-COLOR);
   }
   .kick_student {
-    background-color: darkred;
+    background-color: var(--ORANGE-COLOR);
     color: white;
     border: none;
-    border-radius: 8px; /* Adjust the radius as needed for the desired roundness */
+    border-radius: var(--BORDER-RADIUS); /* Adjust the radius as needed for the desired roundness */
     padding: 8px 12px; /* Adjust padding as needed */
     cursor: pointer;
     outline: none; /* Remove default button outline */

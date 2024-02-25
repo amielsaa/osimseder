@@ -19,6 +19,7 @@ header {
 .logo {
   width: 30%;
   height: 90%;
+  display: flex;
 }
 .logo img {
   width: 100%;
