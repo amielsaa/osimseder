@@ -12,7 +12,9 @@ const RegistrationLogic = require('../../domain/RegistrationLogic');
 // Create a new group (POST)
 router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const groupSize = req.body.groupSize;
+        const groupSize = req.body.capacity;
+        const cityName = req.body.cityName;
+        const schoolId = req.body.schoolId;
 
         const newGroup = await staffGroupLogic.createGroup(groupSize);
 
@@ -24,6 +26,20 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         res.json({ error: err.message });
     }
 });
+
+// Return all schools related to the city
+router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    //req.data.city = BSV/JRS
+    res.json([
+        {
+            id: '1',
+            schoolName: 'bs'
+        }, {
+            id:'2',
+            schoolName: 'bs2'
+        }
+    ])
+})
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
