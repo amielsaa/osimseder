@@ -219,6 +219,12 @@ class GroupLogic {
 
     async getGroupsByStaffAccess(userEmail) {
         try {
+            if(userEmail === undefined){
+                throw new Error('User email is undefined.');
+            }
+            if(userEmail === null){
+                throw new Error('User email is null.');
+            }
             const staffUser = await Staffs.findOne({
                 where: {email: userEmail}
             });
@@ -240,10 +246,10 @@ class GroupLogic {
             }
 
             else throw new Error('Shouldn\'t get here.');
-            
+
             return groups;
         } catch (error) {
-            throw new Error('Failed to find a group by ID ' + error);
+            throw new Error('Failed to get all groups by access ' + error);
         }
     }
 

@@ -32,13 +32,14 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 // Get all groups related to current staff user (GET)
 router.get('/getGroups', validateToken, /*validateAccess(accessGroup.B),*/ async (req, res) => {
     try {
-        const userEmail = req.user.email;
+        const userEmail = /*req.user.email*/"test@example.com";
 
-        // alternative implementation:
-        /*
+        // Implementation One:
         const groups = await staffGroupLogic.getGroupsByStaffAccess(userEmail);
-        */
+        
 
+        // Implementation Two:
+        /*
         const userRole = req.user.role;
 
         if(accessGroup.D.includes(userRole)){
@@ -56,6 +57,7 @@ router.get('/getGroups', validateToken, /*validateAccess(accessGroup.B),*/ async
         else {
             res.json({error: "You don't have the permission to perform this action!"});
         }
+        */
         
         res.json(groups); 
         
