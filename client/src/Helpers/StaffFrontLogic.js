@@ -9,9 +9,28 @@ const fetchAllGroupsStaff = async () => {
     if(res.data.error) {
         alert(res.data.error)
     } else {
+        return res.data;
+    }
+}
+
+const fetchAllSchoolsByCity = async (cityName) => {
+    const res = await axios.post(`${URL}/staff/groups/schools`, {city:cityName} ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
         console.log(res.data);
         return res.data;
     }
 }
 
-export {fetchAllGroupsStaff}
+const addGroup = async (cityName, schoolId, capacity) => {
+    const res = await axios.post(`${URL}/staff/groups/`, {city:cityName, schoolId:schoolId, capacity:capacity} ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export {fetchAllGroupsStaff, fetchAllSchoolsByCity, addGroup}
