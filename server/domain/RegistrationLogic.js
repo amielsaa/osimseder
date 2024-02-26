@@ -34,7 +34,8 @@ class RegistrationLogic {
                 "verificationToken": verificationToken,
                 "isVerified": false,
                 "cityId": cityId,
-                "schoolId": schoolId
+                "schoolId": schoolId,
+                isVerified: false
             });
             for (language of studentData.languages) {
                 await Languages.create({

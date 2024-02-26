@@ -2,7 +2,7 @@
     max-width: 400px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--WHITEBG-COLOR);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(98, 0, 238, 0.1);
     display: flex;
@@ -20,6 +20,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
     direction: rtl;
+    color:var(--PURPLE-COLOR)
 }
 
 input,
@@ -29,19 +30,21 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: var(--GREY-COLOR);
 }
 .Button-Div{
     margin-top:5%
 }
 
 .Button-Div .RegisterButton  {
-    background-color: #6200ee;
-    color: #fff;
+    background-color: var(--ORANGE-COLOR);
+    color: var(--FONT-COLOR);
     padding: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--BORDER-RADIUS);
     cursor: pointer;
     width: 100%;
+
 }
 
 .Title-Div ,.Button-Div{
@@ -50,6 +53,6 @@ select {
 }
 
 .Title-Div{
-    color:#6200ee
+    color:var(--ORANGE-COLOR)
 }
 

@@ -119,19 +119,19 @@ describe('getAllGroupsBySchool', () => {
 
       const groupWithSchool1 = await db.Groups.create({
           teamOwnerEmail: "mashu@g.com",
-          membersCount: 1,
+          capacity: 1,
           schoolId: createdSchool.id 
       });
 
       const groupWithSchool2 = await db.Groups.create({
           teamOwnerEmail: "mashuaher@g.com",
-          membersCount: 2,
+          capacity: 2,
           schoolId: createdSchool.id 
       });
       
       const groupWithSchool3 = await db.Groups.create({
           teamOwnerEmail: "wrong@g.com",
-          membersCount: 5
+          capacity: 5
       });
       
       // // Call the function under test and await its result
@@ -175,19 +175,19 @@ describe('getAllGroupsBySchool', () => {
 
       const groupWithSchool1 = await db.Groups.create({
           teamOwnerEmail: "mashu@g.com",
-          membersCount: 1,
+          capacity: 1,
           schoolId: createdSchool.id 
       });
 
       const groupWithSchool2 = await db.Groups.create({
           teamOwnerEmail: "mashuaher@g.com",
-          membersCount: 2,
+          capacity: 2,
           schoolId: createdSchool.id 
       });
       
       const groupWithSchool3 = await db.Groups.create({
           teamOwnerEmail: "wrong@g.com",
-          membersCount: 5
+          capacity: 5
       });
       
       // // Call the function under test and await its result
@@ -248,14 +248,15 @@ describe('getAllGroupById', () => {
         issuesText: "idk1",
         languages: "English",
         isInGroup: '',
-        didParentApprove: false
+        didParentApprove: false,
+        isVerified: false
       })
 
       // const createdSchool = await db.Schools.create({schoolName: "school1"});
 
       const groupWithSchool1 = await db.Groups.create({
           teamOwnerEmail: "mashu@g.com",
-          membersCount: 1
+          capacity: 1
       });
 
       // // Call the function under test and await its result
@@ -327,14 +328,15 @@ describe('joinGroup', () => {
         issuesText: "idk1",
         languages: "English",
         isInGroup: '',
-        didParentApprove: false
+        didParentApprove: false,
+        isVerified: false
       })
 
       // const createdSchool = await db.Schools.create({schoolName: "school1"});
 
       const groupWithSchool1 = await db.Groups.create({
           teamOwnerEmail: "mashu@g.com",
-          membersCount: 1
+          capacity: 1
       });
 
       // // Call the function under test and await its result
@@ -365,7 +367,8 @@ describe('joinGroup', () => {
         issuesText: "idk1",
         languages: "English",
         isInGroup: '',
-        didParentApprove: false
+        didParentApprove: false,
+        isVerified: false
       })
 
       const newStudent2 = await db.Students.create({
@@ -384,7 +387,8 @@ describe('joinGroup', () => {
         issuesText: "idk1",
         languages: "English",
         isInGroup: '',
-        didParentApprove: false
+        didParentApprove: false,
+        isVerified: false
       })
 
       // // const createdSchool = await db.Schools.create({schoolName: "school1"});

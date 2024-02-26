@@ -25,60 +25,109 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
     }
 });
 
-// Get all groups related to team owner (GET)
-router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+
+// Get all groups related to current staff user (GET)
+router.get('/getgroups', validateToken, /*validateAccess(accessGroup.B),*/ async (req, res) => {
     try {
         const userEmail = req.user.email;
 
-        //access email by : req.user.email
-        //return all groups that related to this user email
-        const groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
+        // Implementation One:
+        /*
+        const groups = await staffGroupLogic.getGroupsByStaffAccess(userEmail);
+        */
+
+        // Implementation Two:
+
         
-        res.json(groups);
         
-        // res.json({groups: [
-        //     {ID: '1', groupName:'stupidName', 
-        //     students:['amiel@gmail.com','ari@gmail.com']},
-        // ]});
+        const userRole = req.user.role;
+        let groups = [];
+
+        if(accessGroup.D.includes(userRole)){
+            groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
+        }
+
+        else if(accessGroup.C.includes(userRole)){
+            groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
+        }
+
+        else if(accessGroup.B.includes(userRole)){
+            groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
+        }
+
+        else {
+            res.json({error: "You don't have the permission to perform this action!"});
+        }
+        
+        
+        res.json(groups); 
+        
     } catch (err) {
         res.json({ error: err.message });
     }
 });
 
-// Get all groups related to area manager (GET)
-router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res) => {
-    try {
-        const userEmail = req.user.email;
+// // Get all groups related to team owner (GET)
+// router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+//     try {
+//         const userEmail = req.user.email;
 
-        // returns groups by schools (for now)
-        const groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
+//         //access email by : req.user.email
+//         //return all groups that related to this user email
+//         const groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
+        
+//         res.json(groups);
+        
+//         // res.json({groups: [
+//         //     {ID: '1', groupName:'stupidName', 
+//         //     students:['amiel@gmail.com','ari@gmail.com']},
+//         // ]});
+//     } catch (err) {
+//         res.json({ error: err.message });
+//     }
+// });
 
-        res.json(groups);
+// // Get all groups related to area manager (GET)
+// router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+//     try {
+//         const userEmail = req.user.email;
 
-    } catch (err) {
-        res.json({ error: err.message });
-    }
-});
+//         // returns groups by schools (for now)
+//         const groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
 
-// Get all groups related to city manager (GET)
-router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res) => {
-    try {
-        const userEmail = req.user.email;
+//         res.json(groups);
 
-        const area1 = await Cities.create({
-            cityName: "city1",
-            cityManagerEmail: "test2@example.com"
-        })
+//     } catch (err) {
+//         res.json({ error: err.message });
+//     }
+// });
 
-        // returns groups by schools (for now)
-        const groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
+// // Get all groups related to city manager (GET)
+// router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res) => {
+//     try {
+//         const userEmail = req.user.email;
 
-        res.json(groups);
+//         // const area1 = await Cities.create({
+//         //     cityName: "city1",
+//         //     cityManagerEmail: "test2@example.com"
+//         // })
 
-    } catch (err) {
-        res.json({ error: err.message });
-    }
-});
+//         // returns groups by schools (for now)
+//         const groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
+
+//         res.json(groups);
+
+//     } catch (err) {
+//         res.json({ error: err.message });
+//     }
+// });
+
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 
 // Get all groups (Admin) (GET)
 router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, res) => {

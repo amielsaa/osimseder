@@ -32,7 +32,7 @@ const HousePage = () => {
         languages: [getRandomValue(languages)],
         phoneNumber: "123-456-7890",
         alternativeNumber: "987-654-3210",
-        notes: "אוהב משכבי זכר למיניהם",
+        notes: "אני מתקשה ללכת וצריכה עזרה",
       };
 
       return randomHouse;
