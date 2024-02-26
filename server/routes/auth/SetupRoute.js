@@ -7,11 +7,10 @@ const {Staffs, Cities, Areas} = require('../../models/');
 const registrationLogic = require('../../domain/RegistrationLogic');
 router.post('/setup', async (req,res) => {
     try{
-        console.log('hi');
         await setupCities();
         await setupAreas();
-        await setupUsers();
         await setupSchools();
+        await setupUsers();
         await setupGroups();
         res.json('DONE')
 
@@ -21,7 +20,33 @@ router.post('/setup', async (req,res) => {
 })
 
 const setupUsers = async () => {
-    
+    //students
+    await registrationLogic.registerStudent({
+        email: "amiel@gmail.com",
+        password: "123456",
+        lastName: "lastname",
+        firstName: "firstname",
+        phoneNumber: "0548552120",
+        gender: "Male",
+        parentName: "parent",
+        parentPhoneNumber: "0549552120",
+        issuesText: "",
+        city: "BSV",
+        school: "bs",
+        languages: ["English"]
+    })
+    //team owners
+    await registrationLogic.registerStaff({
+        email:'amiels@gmail.com',
+        password: '123456',
+        lastName: 'to',
+        firstName: 'amiel',
+        phoneNumber: '0549552120',
+        gender: 'Male',
+        accesses: 'B',
+        city: 'BSV',
+    })
+
     //area managers
     await registrationLogic.registerStaff({
         email:'amieleastbsv@gmail.com',
@@ -78,12 +103,12 @@ const setupSchools = async () => {
 
 const setupGroups = async () => {
     await Groups.create({
-        teamOwnerEmail:"wtf@gmail.com",
+        teamOwnerEmail:"amiels@gmail.com",
         capacity:4,
         schoolId:1
     })
     await Groups.create({
-        teamOwnerEmail:"wtf@gmail.com",
+        teamOwnerEmail:"amiels@gmail.com",
         capacity:4,
         schoolId:1
     })

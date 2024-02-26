@@ -30,7 +30,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 // ------------------------------------------------------------------------------------------------
 
 // Get all groups related to current staff user (GET)
-router.get('/getgroups', validateToken, /*validateAccess(accessGroup.B),*/ async (req, res) => {
+router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const userEmail = req.user.email;
 

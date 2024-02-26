@@ -1,5 +1,5 @@
 // StudentRegistrationLogic.js
-const { Students, Staffs } = require('../models');
+const { Students, Staffs , Languages} = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
@@ -37,12 +37,15 @@ class RegistrationLogic {
                 "schoolId": schoolId,
                 isVerified: false
             });
-            for (language of studentData.languages) {
-                await Languages.create({
-                    "email": studentData.email,
-                    "language": language
-                });
-            }
+            // console.log('here'+studentData.languages)
+            // for (language of studentData.languages) {
+            //     console.log(language)
+            //     await Languages.create({
+            //         "studentId": studentData.email,
+            //         "language": language
+            //     });
+            // }
+            console.log('here');
             await emailService.sendVerificationEmail(studentData.email, verificationToken);
             console.log("SABABA");
             return createdStudent;

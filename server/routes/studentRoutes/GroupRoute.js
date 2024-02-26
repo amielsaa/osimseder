@@ -32,7 +32,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
 
 router.post('/init_test', async (req, res) => {
     await Groups.create({groupName:'bb',teamOwnerId:'fe', schoolId:'1'})
-    //await Schools.create({schoolName:'oo'})
+    //await Schools.create({schoolName:'oo'}) 
 })
 
 // Get a single group by ID (GET)
