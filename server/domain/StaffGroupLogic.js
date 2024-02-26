@@ -214,7 +214,42 @@ class GroupLogic {
     //     }
     // }
 
+
+    // alternative implementation of joint routes
+
+    async getGroupsByStaffAccess(userEmail) {
+        try {
+            const staffUser = await Staffs.findOne({
+                where: {email: userEmail}
+            });
+            if(!staffUser){
+                throw new Error('Can\'t find staff member with that email.');
+            }
+            
+            const userRole = staffUser.accesses;
+            if(userRole == 'D'){
+                const groups = await getGroupsByCityManager(userEmail);
+            }
+        
+            else if(userRole == 'C'){
+                const groups = await getGroupsByAreaManager(userEmail);
+            }
+        
+            else if (userRole == 'B'){
+                const groups = await getGroupsByTeamOwner(userEmail);
+            }
+
+            else throw new Error('Shouldn\'t get here.');
+            
+            return groups;
+        } catch (error) {
+            throw new Error('Failed to find a group by ID ' + error);
+        }
+    }
+
     
+
+
 }
 
 module.exports = new GroupLogic();
