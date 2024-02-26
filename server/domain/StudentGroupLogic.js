@@ -28,15 +28,17 @@ class StudentGroupLogic {
             const responseData = groups.map(group => ({
                 id: group.id,
                 students: group.dataValues.students,
-                memberCount: group.dataValues.students.length
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
             }));
-            console.log(responseData)
+            // console.log(responseData)
             
             // res.json({
             //     groups: responseData,
             // });
 
             return responseData;
+            
         } catch (error) {
             throw new Error('Failed to find groups from school ' +schoolId + ": " + error);
         }
@@ -64,7 +66,8 @@ class StudentGroupLogic {
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
-                memberCount: group.dataValues.students.length
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
             };
         
             // res.json({
