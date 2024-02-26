@@ -18,7 +18,7 @@ class GroupLogic {
             }
 
             const group = await Groups.create({
-                membersCount: groupSize,
+                capacity: groupSize,
                 schoolId: schoolId
             });
             if (!group) {

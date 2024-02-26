@@ -442,11 +442,12 @@ describe('getGroupsByTeamOwner', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 4
+          capacity: 4
       });
       
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -465,21 +466,22 @@ describe('getGroupsByTeamOwner', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 1
+          capacity: 1
       });
       
       const group2 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 2
+          capacity: 2
       });
 
       const group3 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 3
+          capacity: 3
       });
       const groups = [group1, group2, group3];
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -501,7 +503,8 @@ describe('getGroupsByTeamOwner', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const newStaff2 = await db.Staffs.create({
         email: "test1@example.com",
@@ -511,21 +514,22 @@ describe('getGroupsByTeamOwner', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 1
+          capacity: 1
       });
       
       const group2 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 2
+          capacity: 2
       });
 
       const group3 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 3
+          capacity: 3
       });
       // const groups = [group1, group2, group3];
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff2.email);
@@ -591,11 +595,12 @@ describe('getGroupsByAreaManager', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 4
+          capacity: 4
       });
       
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -614,21 +619,22 @@ describe('getGroupsByAreaManager', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 1
+          capacity: 1
       });
       
       const group2 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 2
+          capacity: 2
       });
 
       const group3 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 3
+          capacity: 3
       });
       const groups = [group1, group2, group3];
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -650,7 +656,8 @@ describe('getGroupsByAreaManager', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const newStaff2 = await db.Staffs.create({
         email: "test1@example.com",
@@ -660,21 +667,22 @@ describe('getGroupsByAreaManager', () => {
         phoneNumber: "0524587746",
         gender: "Male",
         city: "JRS",
-        accesses: "B"
+        accesses: "B",
+        isVerified: false
       });
       const group1 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 1
+          capacity: 1
       });
       
       const group2 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 2
+          capacity: 2
       });
 
       const group3 = await db.Groups.create({
           teamOwnerEmail: newStaff1.email,
-          membersCount: 3
+          capacity: 3
       });
       // const groups = [group1, group2, group3];
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff2.email);
