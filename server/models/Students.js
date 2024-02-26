@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Students.associate = (models) => {
         Students.hasMany(models.Languages, {
-            foreignKey: 'languageId',
+            foreignKey: 'studentId',
             allowNull: false
         })
         Students.belongsTo(models.Cities, {
