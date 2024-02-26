@@ -9,7 +9,7 @@ const Group = ({ groupId , groupJson}) => {
   const {user} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
   const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
-  const [memberCount, setMemberCount] = useState({count:0, maxCount:0})
+  const [memberCount, setMemberCount] = useState({capacity:0, memberCount:0})
   const openStudentsPopUp = () => {
     //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
@@ -26,6 +26,7 @@ const Group = ({ groupId , groupJson}) => {
     const updateStudentList = async () => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
+      setMemberCount({capacity:group.capacity, memberCount:group.memberCount})
     }
     updateStudentList();
     //setStudentsList(groupJson.students);
@@ -45,7 +46,7 @@ const Group = ({ groupId , groupJson}) => {
         {user.role === "TeamOwner" &&
         <button className='join-group-btn' onClick={handleManageGroup(groupId, user.id)}>נהל</button>
         }
-        <div className='students-Count'>4/5</div>
+        <div className='students-Count'>{memberCount.memberCount}/{memberCount.capacity}</div>
       </div>
       {studentsPopUp ?
       <StudentsPopUp studentsList= {studentsList}/>

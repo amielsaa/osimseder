@@ -4,8 +4,8 @@ const URL = 'http://localhost:3001';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
-const fetchAllGroupsTeamOwner = async () => {
-    const res = await axios.get(`${URL}/staff/groups/to`, headers);
+const fetchAllGroupsStaff = async () => {
+    const res = await axios.get(`${URL}/staff/groups/getgroups`, headers);
     if(res.data.error) {
         alert(res.data.error)
     } else {
@@ -14,4 +14,4 @@ const fetchAllGroupsTeamOwner = async () => {
     }
 }
 
-export {fetchAllGroupsTeamOwner}
+export {fetchAllGroupsStaff}

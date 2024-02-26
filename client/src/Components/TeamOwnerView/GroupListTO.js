@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import GroupTO from './GroupTO';
 import DataContext from '../../Helpers/DataContext';
-import {fetchAllGroupsTeamOwner} from '../../Helpers/StaffFrontLogic'
+import {fetchAllGroupsStaff} from '../../Helpers/StaffFrontLogic'
 const GroupListTO = () => {
   const { user } = useContext(DataContext);
 
@@ -16,7 +16,7 @@ const GroupListTO = () => {
   
    useEffect(() => {
     const setGroups = async () => {
-      const groups = await fetchAllGroupsTeamOwner();
+      const groups = await fetchAllGroupsStaff();
       setGroupIds(groups);
     };
 
@@ -27,8 +27,8 @@ const GroupListTO = () => {
   return (
     <> 
       { groupIds && <>
-      {groupIds.map((groupId, index) => (
-        <GroupTO key={groupId} groupId={groupId} />
+      {groupIds.map((groupJson) => (
+        <GroupTO key={groupJson.id} groupId={groupJson.id} groupJson={groupJson} />
       ))} </>
       }
     </>
