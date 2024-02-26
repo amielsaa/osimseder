@@ -37,7 +37,8 @@ class GroupLogic {
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
-                memberCount: group.dataValues.students.length
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
             };
         
             return responseData;
@@ -78,9 +79,9 @@ class GroupLogic {
             const responseData = groups.map(group => ({
                 id: group.id,
                 students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
             }));
-        
-            
 
             return responseData;
         } catch (error) {
@@ -94,7 +95,7 @@ class GroupLogic {
                 where: { "areaManagerEmail": areaManagerEmail }
             });
             if (!area) {
-                throw new Error('Couldn\'t find an area by area manager.');
+                throw new Error('Couldn\'t find an area by area manager. email: ' + areaManagerEmail);
             }
             const schools = await Schools.findAll({
                 where: { "areaId": area.id }
@@ -154,7 +155,7 @@ class GroupLogic {
                 throw new Error('Couldn\'t get all schools (admin).');
             }
             
-            return newGroups;
+            return groups;
 
         } catch (error) {
             throw new Error('Failed to get all groups: ' + error);
@@ -179,9 +180,17 @@ class GroupLogic {
                 group.dataValues.teamManager = `${firstName} ${lastName}`;
             }
 
-            return group;
+            const responseData = {
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            };
+
+            return responseData;
+
         } catch (error) {
-            throw new Error('Failed to find a ´group by ID ' + error);
+            throw new Error('Failed to find a group by ID ' + error);
         }
     }
 
@@ -214,7 +223,47 @@ class GroupLogic {
     //     }
     // }
 
+
+    // NOT USED - alternative implementation of joint routes - NOT USED
+    // async getGroupsByStaffAccess(userEmail) {
+    //     try {
+    //         if(userEmail === undefined){
+    //             throw new Error('User email is undefined.');
+    //         }
+    //         if(userEmail === null){
+    //             throw new Error('User email is null.');
+    //         }
+    //         const staffUser = await Staffs.findOne({
+    //             where: {email: userEmail}
+    //         });
+    //         if(!staffUser){
+    //             throw new Error('Can\'t find staff member with that email.');
+    //         }
+            
+    //         const userRole = staffUser.accesses;
+    //         if(userRole == 'D'){
+    //             const groups = await getGroupsByCityManager(userEmail);
+    //         }
+        
+    //         else if(userRole == 'C'){
+    //             const groups = await getGroupsByAreaManager(userEmail);
+    //         }
+        
+    //         else if (userRole == 'B'){
+    //             const groups = await getGroupsByTeamOwner(userEmail);
+    //         }
+
+    //         else throw new Error('Shouldn\'t get here.');
+
+    //         return groups;
+    //     } catch (error) {
+    //         throw new Error('Failed to get all groups by access ' + error);
+    //     }
+    // }
+
     
+
+
 }
 
 module.exports = new GroupLogic();
