@@ -9,6 +9,7 @@ const fetchAllGroupsStaff = async () => {
     if(res.data.error) {
         alert(res.data.error)
     } else {
+        console.log(res.data)
         return res.data;
     }
 }
@@ -29,6 +30,7 @@ const addGroup = async (cityName, schoolId, capacity) => {
         alert(res.data.error);
         return false;
     } else {
+        console.log('adding group')
         return true;
     }
 }
