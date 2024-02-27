@@ -3,7 +3,10 @@ import Header from '../Header'
 import Nav from '../Nav'
 import HouseList from './HouseList'
 import Footer from '../Footer'
+import { useContext } from 'react'
+import DataContext from '../../Helpers/DataContext'
 const HousesTeamOwner = () => {
+  const { navigate } = useContext(DataContext)
   return (
     <>
     <Header/>
@@ -15,6 +18,7 @@ const HousesTeamOwner = () => {
         </div>
         <HouseList/>
         </div>
+        <button className='add_house_btn' onClick={() => navigate('/')}>הוסף בית</button>
     </div>
     <Footer/>
     </>

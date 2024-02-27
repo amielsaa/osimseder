@@ -13,21 +13,18 @@ function Registration() {
         lastName: "",
         password: "",
         email:"", 
+        phoneNumber: "",
         confirmPassword: "",
         gender: "",
         parentName: "",
         parentPhoneNumber: "",
-        parentEmail: "",
         city: "",
         school: "",
         languages: "",
-        issuesChoose: "Accessability", //not presented in the form
-        issuesText: "", //not presented in the form
-        phoneNumber: "0", //not presented in the form
 
     };
     const schools = []
-    const languages = []
+    const languages = ["ערבית","ספרדית","אמהרית","רוסית"]
     
 
     const validationSchema = Yup.object().shape({
@@ -41,15 +38,17 @@ function Registration() {
         ),
         email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
         confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('אישור סיסמה נדרש או סיסמאות לא תואמות'),
+        phoneNumber: Yup.string()
+        .required("מספר נייד נדרש")
+        .matches(/^05\d{8}$/, "מספר לא תקין"),
         gender: Yup.string().required("מגדר נדרש"),
         parentName: Yup.string().required("שם הורה נדרש"),
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        parentEmail: Yup.string().email("אימייל לא תקין").required("אימייל הורה נדרש"),
         city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
-        languages: Yup.string().required("לפחות שפה אחת נדרשת"),
+        languages: Yup.string(),
     });
 
     const onSubmit = (data) => {
@@ -84,6 +83,11 @@ function Registration() {
                         <ErrorMessage name="email" component="span" />
                     </div>
                     <div>
+                        <label htmlFor="phoneNumber">מספר נייד : </label>
+                        <Field  id="phoneNumber" name="phoneNumber" placeholder="מספר נייד " />
+                        <ErrorMessage name="phoneNumber" component="span" />
+                    </div>
+                    <div>
                         <label htmlFor="password">סיסמה: </label>
                         <Field type="password" id="password" name="password" placeholder="סיסמה" />
                         <ErrorMessage name="password" component="span" />
@@ -96,9 +100,9 @@ function Registration() {
                     </div>
 
                     <div>
-                        <label htmlFor="gender">מגדר: </label>
+                        <label htmlFor="gender">מין: </label>
                         <Field as="select" id="gender" name="gender">
-                            <option value="">בחר מגדר</option>
+                            <option value="">בחר מין</option>
                             <option value="Male">זכר</option>
                             <option value="Female">נקבה</option>
                             <option value="Other">אחר</option>
@@ -118,11 +122,7 @@ function Registration() {
                         <ErrorMessage name="parentPhoneNumber" component="span" />
                     </div>
 
-                    <div>
-                        <label htmlFor="parentEmail">אימייל הורה: </label>
-                        <Field type="email" id="parentEmail" name="parentEmail" placeholder="אימייל הורה" />
-                        <ErrorMessage name="parentEmail" component="span" />
-                    </div>
+                
 
                     <div>
                       <label htmlFor="city"> עיר: </label>
@@ -145,11 +145,12 @@ function Registration() {
                     </div>
 
                     <div>
-                        <label htmlFor="languages">שפת אם: </label>
+                        <label htmlFor="languages"> האם אתה דובר את אחת מהשפות הבאות? </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
-                            <option value="English">אנגלית</option>
-                            <option value="עברית">עברית</option>
+                            {languages.map((lang) => (
+                                <option key={lang} value={lang}>{lang}</option>
+                            ))}
                         </Field>
                         <ErrorMessage name="languages" component="span" />
                     </div>

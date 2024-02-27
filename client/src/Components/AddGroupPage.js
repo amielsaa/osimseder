@@ -7,20 +7,17 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import {fetchAllSchoolsByCity, addGroup} from '../Helpers/StaffFrontLogic'
 
 const AddGroupPage = () => {
   const { user, navigate } = useContext(DataContext);
   const [selectedCity, setSelectedCity] = useState('');
-  const [schoolsList, setSchoolsList] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
 
   const initialValues = {
     city: '',
     school: '',
-    capacity: '',
-    teamOwner: ''
+    capacity: ''
   };
 
   const validationSchema = Yup.object().shape({
@@ -32,10 +29,6 @@ const AddGroupPage = () => {
     capacity: Yup.number().when(['school'], {
       is: (school) => school && school.length > 0,
       then: Yup.number().required('הגבלת כמות נדרשת'),
-    }),
-    teamOwner: Yup.string().when(['capacity'], {
-      is: (capacity) => capacity && capacity.length > 0,
-      then: Yup.string(),
     })
   });
 
@@ -75,7 +68,7 @@ const AddGroupPage = () => {
 
               <div>
                 <label htmlFor="city"> עיר: </label>
-                <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
+                <Field as="select" id="city" name="city" onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
                   <option value="">בחר עיר</option>
                   <option value="JRS">ירושלים</option>
                   <option value="BSV">באר שבע</option>
@@ -88,11 +81,8 @@ const AddGroupPage = () => {
                   <label htmlFor="school"> בית ספר: </label>
                   <Field as="select" id="school" name="school" onChange={(e) => setSelectedSchool(e.target.value)} value={selectedSchool}>
                     <option value="">בחר בית ספר</option>
-                    {schoolsList &&
-                      <>{schoolsList.map((school) => (
-                        <option value={school.id}>{school.schoolName}</option>
-                      ))}
-                      </>}
+                    <option value="JRS">נתיבי עם</option>
+                    <option value="BSV">רמבם</option>
                   </Field>
                   <ErrorMessage name="school" component="span" />
                 </div>
@@ -103,26 +93,16 @@ const AddGroupPage = () => {
                   <label htmlFor="capacity"> הגבלה: </label>
                   <Field as="select" id="capacity" name="capacity" onChange={(e) => setSelectedCapacity(e.target.value)} value={selectedCapacity}>
                     <option value="">בחר הגבלה לקבוצה</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
+                    
+                    {Array.from({ length: 9 }, (_, index) => index + 2).map((size) => (
+                      <option key={size} value={size}>{size}</option>
+                    ))}
                   </Field>
                   <ErrorMessage name="capacity" component="span" />
                 </div>
               )}
+                    
 
-              {selectedCapacity && (
-                <div>
-                  <label htmlFor="teamOwner"> חניך גרעין: </label>
-                  <Field as="select" id="teamOwner" name="teamOwner">
-                    <option value="">בחר חניך גרעין (לא חובה)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </Field>
-                  <ErrorMessage name="teamOwner" component="span" />
-                </div>
-              )}
 
               {selectedCapacity && (
                 <div className='login_Buttons'>
