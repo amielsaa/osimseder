@@ -165,6 +165,12 @@ class GroupLogic {
 
     async getGroupById(groupId) {
         try {
+            if(groupId === undefined){
+                throw new Error('groupId is undefined');
+            }
+            if(groupId === null){
+                throw new Error('groupId is null');
+            }
             const group = await Groups.findOne({
                 where: { id: groupId }
             });
@@ -172,13 +178,22 @@ class GroupLogic {
                 throw new Error('Group not found');
             }
 
-            const teamManager = await Staffs.findOne({
-                where: {email: group.teamOwnerEmail}
+            // const teamManager = await Staffs.findOne({
+            //     where: {email: group.teamOwnerEmail}
+            // });
+            // if(teamManager){
+            //     const { firstName, lastName, ...rest } = teamManager;
+            //     group.dataValues.teamManager = `${firstName} ${lastName}`;
+            // }
+            
+            const students = await group.getStudents();
+        
+            const studentNames = students.map(student => {
+                const { firstName, lastName, ...rest } = student;
+                return `${firstName} ${lastName}`;
             });
-            if(teamManager){
-                const { firstName, lastName, ...rest } = teamManager;
-                group.dataValues.teamManager = `${firstName} ${lastName}`;
-            }
+            group.dataValues.students = studentNames;            
+            
 
             const responseData = {
                 id: group.id,
@@ -205,8 +220,6 @@ class GroupLogic {
             const city = await Cities.findOne({
                 where: { cityName: cityName },
             });
-            console.log(city)
-
             if (!city) {
                 throw new Error('City not found');
             }
@@ -217,8 +230,6 @@ class GroupLogic {
             if (!schools) {
                 throw new Error('Schools not found');
             }
-            console.log(schools)
-
             const responseData = schools.map(school => ({
                 id: school.id,
                 schoolName: school.schoolName
