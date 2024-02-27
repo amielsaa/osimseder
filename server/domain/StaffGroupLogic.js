@@ -194,6 +194,41 @@ class GroupLogic {
         }
     }
 
+    async getSchoolsByCity(cityName) {
+        try {
+            if(cityName === undefined){
+                throw new Error('cityname is undefined');
+            }
+            if(cityName === null){
+                throw new Error('cityname is null');
+            }
+            const city = await Cities.findOne({
+                where: { "cityName": cityName }
+            });
+            if (!city) {
+                throw new Error('City not found');
+            }
+
+            const schools = await Schools.findAll({
+                where: { cityId: city.id }
+            });
+            if (!schools) {
+                throw new Error('Schools not found');
+            }
+
+            const responseData = {
+                id: schools.id,
+                schoolName: schools.schoolName
+            };
+
+            return responseData;
+
+        } catch (error) {
+            throw new Error('Failed to get schools by city ' + error);
+        }
+    }
+    
+
     // async joinGroup(groupId, userEmail) {
     //     try {
     //         const group = await Groups.findOne({
