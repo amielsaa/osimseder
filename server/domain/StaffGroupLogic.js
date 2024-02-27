@@ -203,24 +203,26 @@ class GroupLogic {
                 throw new Error('cityname is null');
             }
             const city = await Cities.findOne({
-                where: { "cityName": cityName }
+                where: { cityName: cityName },
             });
+            console.log(city)
+
             if (!city) {
                 throw new Error('City not found');
             }
 
             const schools = await Schools.findAll({
-                where: { cityId: city.id }
+                where: { "cityId": city.id }
             });
             if (!schools) {
                 throw new Error('Schools not found');
             }
+            console.log(schools)
 
-            const responseData = {
-                id: schools.id,
-                schoolName: schools.schoolName
-            };
-
+            const responseData = schools.map(school => ({
+                id: school.id,
+                schoolName: school.schoolName
+            }));
             return responseData;
 
         } catch (error) {

@@ -40,6 +40,7 @@ router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req
         //no arguments needed
         //return group information (all the fields)
         res.json(schools);
+        // res.json('ok')
 
         
     } catch (err) {
