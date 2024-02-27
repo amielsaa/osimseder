@@ -8,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         areaManagerEmail: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         }
     });
 
     Areas.associate = (models) => {
-        Areas.hasMany(models.Schools, {
+        Areas.hasMany(models.Houses, {
             foreignKey: 'areaId',
             allowNull: false
         });

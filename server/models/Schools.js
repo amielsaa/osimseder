@@ -10,19 +10,18 @@ module.exports = (sequelize, DataTypes) => {
 
     Schools.associate = (models) => {
         Schools.hasMany(models.Students, {
-            foreignKey: 'schoolId'
+            foreignKey: 'schoolId',
+            allowNull: false
         });
 
         Schools.hasMany(models.Groups, {
-            foreignKey: 'schoolId'
-        });
-
-        Schools.belongsTo(models.Areas, {
-            foreignKey: 'areaId'
+            foreignKey: 'schoolId',
+            allowNull: false
         });
 
         Schools.belongsTo(models.Cities, {
-            foreignKey: 'cityId'
+            foreignKey: 'cityId',
+            allowNull: false
         });
 
     };

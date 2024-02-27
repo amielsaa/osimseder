@@ -44,14 +44,14 @@ module.exports = (sequelize, DataTypes) => {
         isVerified: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        extraLanguage: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 
     Students.associate = (models) => {
-        Students.hasMany(models.Languages, {
-            foreignKey: 'languageId',
-            allowNull: false
-        })
         Students.belongsTo(models.Cities, {
             foreignKey: 'cityId',
             allowNull: false

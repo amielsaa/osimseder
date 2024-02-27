@@ -35,14 +35,9 @@ class RegistrationLogic {
                 "isVerified": false,
                 "cityId": cityId,
                 "schoolId": schoolId,
-                isVerified: false
+                "isVerified": false,
+                "extraLanguage": studentData.extraLanguage //TODO AMIEL notice the name of the field
             });
-            for (language of studentData.languages) {
-                await Languages.create({
-                    "email": studentData.email,
-                    "language": language
-                });
-            }
             await emailService.sendVerificationEmail(studentData.email, verificationToken);
             console.log("SABABA");
             return createdStudent;

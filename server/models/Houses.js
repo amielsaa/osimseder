@@ -1,6 +1,14 @@
 // models/Houses.js
 module.exports = (sequelize, DataTypes) => {
     const Houses = sequelize.define('Houses', {
+        teamOwnerEmail: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        teamOwnerEmail_2: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         address: {
             type: DataTypes.STRING,
             allowNull: false
@@ -17,19 +25,27 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        residentAlternatePhoneNum: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        residentGender: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         languageNeeded: {
             type: DataTypes.STRING,
             allowNull: true
         },
+        numberOfRooms: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        membersNeeded: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         freeText: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        picBefore: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        picAfter: {
             type: DataTypes.STRING,
             allowNull: true
         }
@@ -50,7 +66,11 @@ module.exports = (sequelize, DataTypes) => {
         });
         Houses.hasMany(models.Tasks, {
             foreignKey: 'houseId',
-            allowNull: true
+            allowNull: false
+        });
+        Houses.hasMany(models.Photos, {
+            foreignKey: 'houseId',
+            allowNull: false
         });
     };
 

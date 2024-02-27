@@ -1,10 +1,6 @@
 // models/groups.js
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-        teamOwnerEmail: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         capacity: {
             type: DataTypes.INTEGER,
             allowNull: false
