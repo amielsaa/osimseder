@@ -39,10 +39,12 @@ const AddGroupPage = () => {
     })
   });
 
-  const handleSubmit = () => {
+  const onSubmit = (data) => {
     // Handle form submission
+    console.log('here');
     const res = addGroup(selectedCity,selectedSchool,selectedCapacity);
     if(res) {
+      navigate('/My-Groups')
       //navigate somewhere
     } 
   };
@@ -67,7 +69,7 @@ const AddGroupPage = () => {
             <h1>הוספת קבוצה</h1>
           </div>
 
-          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
 
               <div>

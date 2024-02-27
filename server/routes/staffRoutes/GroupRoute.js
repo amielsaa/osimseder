@@ -15,7 +15,6 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const schoolId = req.body.schoolId;
-
         const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId);
 
         //no arguments needed

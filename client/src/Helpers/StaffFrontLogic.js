@@ -29,6 +29,7 @@ const addGroup = async (cityName, schoolId, capacity) => {
         alert(res.data.error);
         return false;
     } else {
+        console.log('adding group')
         return true;
     }
 }
