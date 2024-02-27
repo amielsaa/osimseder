@@ -13,10 +13,10 @@ const RegistrationLogic = require('../../domain/RegistrationLogic');
 router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const groupSize = req.body.capacity;
-        const cityName = req.body.cityName;
+        // const cityName = req.body.cityName;
         const schoolId = req.body.schoolId;
 
-        const newGroup = await staffGroupLogic.createGroup(groupSize);
+        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId);
 
         //no arguments needed
         //return group information (all the fields)
@@ -30,15 +30,23 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 // Return all schools related to the city
 router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     //req.data.city = BSV/JRS
-    res.json([
-        {
-            id: '1',
-            schoolName: 'bs'
-        }, {
-            id:'2',
-            schoolName: 'bs2'
-        }
-    ])
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityName = req.body.city;
+        // cityName = 'bsv';
+        const schools = await staffGroupLogic.getSchoolsByCity(cityName);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
 })
 
 // ------------------------------------------------------------------------------------------------
