@@ -135,14 +135,14 @@ class GroupLogic {
 
     async getGroupsByCityManager(cityManagerEmail) {
         try {
-            const city = await Cities.findOne({
-                where: { "cityManagerEmail": cityManagerEmail }
+            const staff = await Staffs.findOne({
+                where: { "email": cityManagerEmail }
             });
-            if (!city) {
-                throw new Error('Couldn\'t find an area by city manager.');
+            if (!staff) {
+                throw new Error('Couldn\'t find an staff member.');
             }
             const schools = await Schools.findAll({
-                where: { "cityId": city.id }
+                where: { "cityId": staff.cityId }
             });
             if (!schools) {
                 throw new Error('Couldn\'t find a schools by area.');
