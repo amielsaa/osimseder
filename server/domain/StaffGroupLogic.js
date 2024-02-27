@@ -103,37 +103,29 @@ class GroupLogic {
             if (!schools) {
                 throw new Error('Couldn\'t find a schools by area.');
             }
-            const newGroups = {};
-            
-    
+            const newGroups = [];
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
                 const groupsBySchool = await school.getGroups();
-
-                for (let i = 0; i < groupsBySchool.length; i++) {
-                    const group = groupsBySchool[i];
-            
+                for (const group of groupsBySchool) {
                     const students = await group.getStudents();
-            
                     const studentNames = students.map(student => {
                         const { firstName, lastName, ...rest } = student;
                         return `${firstName} ${lastName}`;
                     });
-            
                     group.dataValues.students = studentNames;            
+                    newGroups.push(group);
                 }
-
-                newGroups[school.id] = groupsBySchool.map(group => ({
-                    id: group.id,
-                    students: group.dataValues.students,
-                    memberCount: group.dataValues.students.length,
-                    capacity: group.capacity
-                }));            
             }
 
-            
-
-            return newGroups;
+            const responseData = newGroups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+    
+            return responseData;
 
         } catch (error) {
             throw new Error('Failed to find an area by area manager: ' + error);
@@ -155,34 +147,30 @@ class GroupLogic {
             if (!schools) {
                 throw new Error('Couldn\'t find a schools by area.');
             }
-            const newGroups = {};
+            const newGroups = [];
+            
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
                 const groupsBySchool = await school.getGroups();
-
-                for (let i = 0; i < groupsBySchool.length; i++) {
-                    const group = groupsBySchool[i];
-            
+                for (const group of groupsBySchool) {
                     const students = await group.getStudents();
-            
                     const studentNames = students.map(student => {
                         const { firstName, lastName, ...rest } = student;
                         return `${firstName} ${lastName}`;
                     });
-            
                     group.dataValues.students = studentNames;            
+                    newGroups.push(group);
                 }
-
-                newGroups[school.id] = groupsBySchool.map(group => ({
-                    id: group.id,
-                    students: group.dataValues.students,
-                    memberCount: group.dataValues.students.length,
-                    capacity: group.capacity
-                }));            
             }
 
-
-            return newGroups;
+            const responseData = newGroups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+    
+            return responseData;
 
         } catch (error) {
             throw new Error('Failed to find an area by city manager: ' + error);
