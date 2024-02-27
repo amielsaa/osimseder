@@ -104,12 +104,34 @@ class GroupLogic {
                 throw new Error('Couldn\'t find a schools by area.');
             }
             const newGroups = {};
+            
+    
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
-                const groupsBySchool = await school.getGroups();                
-                newGroups[school.id] = groupsBySchool;
+                const groupsBySchool = await school.getGroups();
+
+                for (let i = 0; i < groupsBySchool.length; i++) {
+                    const group = groupsBySchool[i];
+            
+                    const students = await group.getStudents();
+            
+                    const studentNames = students.map(student => {
+                        const { firstName, lastName, ...rest } = student;
+                        return `${firstName} ${lastName}`;
+                    });
+            
+                    group.dataValues.students = studentNames;            
+                }
+
+                newGroups[school.id] = groupsBySchool.map(group => ({
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity
+                }));            
             }
 
+            
 
             return newGroups;
 
@@ -136,8 +158,27 @@ class GroupLogic {
             const newGroups = {};
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
-                const groupsBySchool = await school.getGroups();                
-                newGroups[school.id] = groupsBySchool;
+                const groupsBySchool = await school.getGroups();
+
+                for (let i = 0; i < groupsBySchool.length; i++) {
+                    const group = groupsBySchool[i];
+            
+                    const students = await group.getStudents();
+            
+                    const studentNames = students.map(student => {
+                        const { firstName, lastName, ...rest } = student;
+                        return `${firstName} ${lastName}`;
+                    });
+            
+                    group.dataValues.students = studentNames;            
+                }
+
+                newGroups[school.id] = groupsBySchool.map(group => ({
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity
+                }));            
             }
 
 
@@ -154,8 +195,28 @@ class GroupLogic {
             if (!groups) {
                 throw new Error('Couldn\'t get all schools (admin).');
             }
-            
-            return groups;
+
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+        
+                const students = await group.getStudents();
+        
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+        
+                group.dataValues.students = studentNames;            
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+
+            return responseData;
 
         } catch (error) {
             throw new Error('Failed to get all groups: ' + error);
