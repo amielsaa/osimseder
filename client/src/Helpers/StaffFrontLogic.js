@@ -9,6 +9,7 @@ const fetchAllGroupsStaff = async () => {
     if(res.data.error) {
         alert(res.data.error)
     } else {
+        console.log(res.data)
         return res.data;
     }
 }

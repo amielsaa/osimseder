@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import './css/AddGroupPage.css';
 import Nav from "./Nav";
@@ -54,6 +54,7 @@ const AddGroupPage = () => {
     const schools = await fetchAllSchoolsByCity(e.target.value);
     setSchoolsList(schools);
   }
+
 
   return (
     <>
@@ -125,7 +126,7 @@ const AddGroupPage = () => {
 
               {selectedCapacity && (
                 <div className='login_Buttons'>
-                <button type="submit" className='button-login' >צור קבוצה</button>
+                <button type="submit" onClick={onSubmit} className='button-login' >צור קבוצה</button>
                 </div>
               )}
             </Form>
