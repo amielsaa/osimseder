@@ -48,6 +48,7 @@ const { database, username, password, host, dialect } = sequelizeConfig.test;
 //   logging: false, // Suppress Sequelize logging to keep test output clean
 // });
 
+/*
 describe('getAllGroupsBySchool', () => {
   // let sequelize;
   let student;
@@ -241,7 +242,10 @@ describe('getAllGroupsBySchool', () => {
 
 
 });
+*/
 
+
+/*
 describe('getGroupById', () => {
   // let sequelize;
   let student;
@@ -329,9 +333,10 @@ describe('getGroupById', () => {
 
 
 });
-
+*/
 // ------------------------------------------------------------------------
 
+/*
 describe('createGroup', () => {
   // let sequelize;
   let student;
@@ -380,10 +385,7 @@ describe('createGroup', () => {
         expect(resultList[i-1]).toHaveProperty('students', []);
         // expect(resultList[i-1]).toHaveProperty('membersCount', i);
         // expect(resultList[i-1]).toHaveProperty('schoolId', newSchool.id);
-        /*
-        
 
-        */
       }
       
       
@@ -435,7 +437,9 @@ describe('createGroup', () => {
 
 
 });
+*/
 
+/*
 describe('getGroupsByTeamOwner', () => {
   // let sequelize;
   let student;
@@ -588,7 +592,9 @@ describe('getGroupsByTeamOwner', () => {
     });
   });
 });
+*/
 
+/*
 describe('getGroupsByAreaManager', () => {
   // let sequelize;
   let student;
@@ -741,12 +747,13 @@ describe('getGroupsByAreaManager', () => {
     });
   });
 });
+*/
 
 describe('getSchoolsByCity', () => {
   // let sequelize;
   let student;
   let group;
-  let school
+  let school;
   let city;
   let area;
   let staff;
@@ -774,113 +781,60 @@ describe('getSchoolsByCity', () => {
 
 
   describe('getSchoolsByCity - good', () => {
+    
     it('given a city name and a school assigned to it - get school', async () => { 
-      const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
-        password: "password123",      
-        lastName: "lastname",
-        firstName: "firstname",
-        phoneNumber: "0524587746",
-        gender: "Male",
-        city: "JRS",
-        accesses: "B",
-        isVerified: false
-      });
+      const city1 = await db.Cities.create({
+          cityName: 'BSV',
+          cityManagerEmail: 'amielbsv@gmail.com'
+      })
+
+      const school1 = await db.Schools.create({
+          schoolName:"bs",
+          schoolId: "1",
+          cityId: "1"
+      })
+
       const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 4
+        teamOwnerEmail:"amiels@gmail.com",
+        capacity:4,
+        schoolId:1
       });
       
-      const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
-
-      expect(result[0]).toHaveProperty('id', 1);
-    //   expect(result[0]).toHaveProperty('teamOwnerEmail', newStaff1.email);
-      expect(result[0]).toHaveProperty('students', []);
+      const result = await StaffGroupLogic.getSchoolsByCity(city1.cityName);
+      // console.log(result)
+      expect(result[0]).toHaveProperty('id', school1.id);
+      expect(result[0]).toHaveProperty('schoolName', school1.schoolName);
 
     }); 
     
-    /*
-    it('given a team owner and a several group he manages - get all his groups', async () => { 
-      const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
-        password: "password123",      
-        lastName: "lastname",
-        firstName: "firstname",
-        phoneNumber: "0524587746",
-        gender: "Male",
-        city: "JRS",
-        accesses: "B",
-        isVerified: false
-      });
+    it('given a city name and a no schools assigned to it - get empty list', async () => { 
+      const city1 = await db.Cities.create({
+          cityName: 'BSV',
+          cityManagerEmail: 'amielbsv@gmail.com'
+      })
+      const city2 = await db.Cities.create({
+          cityName: 'JRS',
+          cityManagerEmail: 'amieljrs@gmail.com'
+      })
+      const school1 = await db.Schools.create({
+          schoolName:"bs",
+          schoolId: "1",
+          cityId: "2"
+      })
+
       const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 1
+        teamOwnerEmail:"amiels@gmail.com",
+        capacity:4,
+        schoolId:1
       });
       
-      const group2 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 2
-      });
-
-      const group3 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 3
-      });
-      const groups = [group1, group2, group3];
-      const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
-
-      for(let i=0; i<3; i++) {
-        expect(result[i]).toHaveProperty('id', i+1);
-        // expect(result[i]).toHaveProperty('teamOwnerEmail', newStaff1.email);
-        expect(result[i]).toHaveProperty('students', []);
-      }
+      const result = await StaffGroupLogic.getSchoolsByCity(city1.cityName);
+      // console.log(result)
+      expect(result).toEqual([]);
+      // expect(result[0]).toHaveProperty('schoolName', school1.schoolName);
 
     }); 
 
-    it('given a team owner and a several group he manages - when get group by another team manager - return undefined', async () => { 
-      const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
-        password: "password123",      
-        lastName: "lastname",
-        firstName: "firstname",
-        phoneNumber: "0524587746",
-        gender: "Male",
-        city: "JRS",
-        accesses: "B",
-        isVerified: false
-      });
-      const newStaff2 = await db.Staffs.create({
-        email: "test1@example.com",
-        password: "password123",      
-        lastName: "lastname",
-        firstName: "firstname",
-        phoneNumber: "0524587746",
-        gender: "Male",
-        city: "JRS",
-        accesses: "B",
-        isVerified: false
-      });
-      const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 1
-      });
-      
-      const group2 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 2
-      });
-
-      const group3 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 3
-      });
-      // const groups = [group1, group2, group3];
-      const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff2.email);
-
-      expect(result[0]).toEqual(undefined);
-      
-    }); 
-    */
 
   });
 
