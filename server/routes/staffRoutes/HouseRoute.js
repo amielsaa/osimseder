@@ -39,9 +39,23 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 });
 
 // Get all houses (GET)
-router.get('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
-        const houses = await StaffHouseLogic.getAllHouses();
+        // team owner - only his groups
+        // area and city managers - the city's houses
+        let houses;
+        houses = await StaffHouseLogic.getAllHouses();
+
+        if((accessGroup.C.includes(userRole))){ //for area and city managers
+            houses = await StaffHouseLogic.getAllHouses("city");
+        }
+
+        else {
+            houses = await StaffHouseLogic.getAllHouses("team");
+        }
+        
+        
+        res.json(houses); 
 
         //returns like this:
         // [
@@ -77,7 +91,7 @@ router.get('/', validateToken, validateAccess(accessGroup.C), async (req, res) =
         //     }
         // ]
         
-        res.json(houses);
+        // res.json(houses);
         
     } catch (err) {
         res.json({ error: err.message });

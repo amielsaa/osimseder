@@ -70,13 +70,13 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
         const userRole = req.user.role;
         let groups = [];
 
-        if(accessGroup.D.includes(userRole)){
+        if(accessGroup.D.includes(userRole) || (accessGroup.C.includes(userRole))){
             groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
         }
 
-        else if(accessGroup.C.includes(userRole)){
-            groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
-        }
+        // else if(accessGroup.C.includes(userRole)){
+        //     groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
+        // }
 
         else if(accessGroup.B.includes(userRole)){
             groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
