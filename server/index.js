@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const app = express();
 const port = 3001;
 //const encryption = require('./utils/Encryption')
@@ -13,15 +14,21 @@ app.use(cors())
 // const helloRouter = require("./routes/Hello")
 // app.use("/", helloRouter)
 const studentRouter = require("./routes/studentRoutes")
-app.use("/student", studentRouter)
+app.use("/api/student", studentRouter)
 const staffRouter = require("./routes/staffRoutes")
-app.use("/staff", staffRouter)
+app.use("/api/staff", staffRouter)
 const authRouter = require("./routes/auth")
-app.use("/auth", authRouter)
+app.use("/api/auth", authRouter)
 // const setupRouter = require("./routes/auth/SetupRoute")
 // app.use("/setup", setupRouter)
+const buildPath = path.normalize(path.join(__dirname, './build'));
+app.use(express.static(buildPath));
+const rootRouter = express.Router();
 
-
+rootRouter.get('/', async (req, res, next) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+  });
+app.use(rootRouter);
 // app.listen(port, () => {
 //   console.log(`Example app listening at http://localhost:${port}`);
 // });

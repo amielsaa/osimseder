@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "4I0m4wfH5BGSBuWQljtq3YxVpAzzO3AA",
     "database": "osimseder",
-    "host": "postgres",
+    "host": "dpg-cnffk1v109ks73b0oc00-a",
     "dialect": "postgres"
   },
   "test": {
@@ -15,9 +15,9 @@
   },
   "production": {
     "username": "root",
-    "password": "password",
+    "password": "4I0m4wfH5BGSBuWQljtq3YxVpAzzO3AA",
     "database": "osimseder",
-    "host": "postgres",
+    "host": "dpg-cnffk1v109ks73b0oc00-a",
     "dialect": "postgres"
   }
 }
