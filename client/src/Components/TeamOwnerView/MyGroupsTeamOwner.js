@@ -7,7 +7,7 @@ import DataContext from '../../Helpers/DataContext';
 import Footer from '../Footer';
 
 const MyGroupsTeamOwner = () => {
-  const {user} = useContext(DataContext);
+  const {user, navigate} = useContext(DataContext);
   return (
     <>
     <Header/>
@@ -19,7 +19,8 @@ const MyGroupsTeamOwner = () => {
       </div>
       <GroupListTO/>
     </div>
-    </div>
+    <button className='add_group_btn' onClick={() => navigate('/addGroup')}>הוסף קבוצה</button>
+    </div> 
     <Footer/>
     </>
   )

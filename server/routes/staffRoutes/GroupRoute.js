@@ -12,9 +12,10 @@ const RegistrationLogic = require('../../domain/RegistrationLogic');
 // Create a new group (POST)
 router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const groupSize = req.body.groupSize;
-
-        const newGroup = await staffGroupLogic.createGroup(groupSize);
+        const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const schoolId = req.body.schoolId;
+        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId);
 
         //no arguments needed
         //return group information (all the fields)
@@ -25,12 +26,34 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
     }
 });
 
+// Return all schools related to the city
+router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    //req.data.city = BSV/JRS
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityName = req.body.city;
+        // cityName = 'bsv';
+        const schools = await staffGroupLogic.getSchoolsByCity(cityName);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
+})
+
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
 
 // Get all groups related to current staff user (GET)
-router.get('/getgroups', validateToken, /*validateAccess(accessGroup.B),*/ async (req, res) => {
+router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const userEmail = req.user.email;
 
@@ -46,13 +69,13 @@ router.get('/getgroups', validateToken, /*validateAccess(accessGroup.B),*/ async
         const userRole = req.user.role;
         let groups = [];
 
-        if(accessGroup.D.includes(userRole)){
+        if(accessGroup.D.includes(userRole) || (accessGroup.C.includes(userRole))){
             groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
         }
 
-        else if(accessGroup.C.includes(userRole)){
-            groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
-        }
+        // else if(accessGroup.C.includes(userRole)){
+        //     groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
+        // }
 
         else if(accessGroup.B.includes(userRole)){
             groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);

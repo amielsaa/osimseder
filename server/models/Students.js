@@ -52,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Students.associate = (models) => {
+
         Students.belongsTo(models.Cities, {
             foreignKey: 'cityId',
             allowNull: false

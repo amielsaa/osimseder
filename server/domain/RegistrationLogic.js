@@ -1,5 +1,5 @@
 // StudentRegistrationLogic.js
-const { Students, Staffs } = require('../models');
+const { Students, Staffs , Languages} = require('../models');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
@@ -32,12 +32,12 @@ class RegistrationLogic {
                 "issuesText": studentData.issuesText,
                 "didParentApprove": false,
                 "verificationToken": verificationToken,
-                "isVerified": false,
                 "cityId": cityId,
                 "schoolId": schoolId,
                 "isVerified": false,
                 "extraLanguage": studentData.extraLanguage //TODO AMIEL notice the name of the field
             });
+
             await emailService.sendVerificationEmail(studentData.email, verificationToken);
             console.log("SABABA");
             return createdStudent;

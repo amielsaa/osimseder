@@ -25,11 +25,16 @@ const HousePage = () => {
       const languages = ["עברית", "אנגלית", "ערבית"];
 
       const randomHouse = {
+        teamOwner1: "איזה מישהו",
+        teamOwner2: "מישהו אחר",
         contactName: "דוד כהן",
         gender: getRandomValue(genders),
         city: getRandomValue(cities),
+        neighborhood: "שכונה ב",
         address: "רחוב הראשון 123",
         languages: [getRandomValue(languages)],
+        numberOfRooms:5,
+        groupSizeNeeded:3,
         phoneNumber: "123-456-7890",
         alternativeNumber: "987-654-3210",
         notes: "אני מתקשה ללכת וצריכה עזרה",
@@ -103,31 +108,34 @@ const HousePage = () => {
         </div>
         <div className="House_Info">
           <div className="Info">
-            שם איש קשר: {house?.contactName}
+              חבר גרעין אחראי 1: {house?.teamOwner1}
           </div>
           <div className="Info">
-            מגדר: {house?.gender}
+              חבר גרעין אחראי 2: {house?.teamOwner2}
           </div>
           <div className="Info">
             עיר: {house?.city}
           </div>
           <div className="Info">
-            כתובת: {house?.address}
+            שכונה: {house?.neighborhood}
           </div>
           <div className="Info">
-            שפות: {house?.languages.join(", ")}
+            שם איש קשר: {house?.contactName}
           </div>
           <div className="Info">
-            מספר פלאפון: {house?.phoneNumber}
+            מין: {house?.gender}
           </div>
           <div className="Info">
-            מספר חלופי: {house?.alternativeNumber}
+             שפה נחוצה: {house?.languages.join(", ")}
           </div>
           <div className="Info">
-            הערות: {house?.notes}
+            מספר חדרים: {house?.numberOfRooms}
           </div>
           <div className="Info">
-            קבוצה :
+            גודל קבוצה נחוץ: {house?.groupSizeNeeded}
+          </div>
+          <div className="Info">
+            הערות : {house?.notes}
           </div>
         </div>
         <div className='House-Info-Tasks'>
