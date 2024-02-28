@@ -12,7 +12,7 @@ export const DataProvider = ({children}) => {
     
     useEffect(() => {
         if(localStorage.getItem("accessToken")) {
-            axios.get(`http://https://osimseder.onrender.com/api/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
+            axios.get(`https://osimseder.onrender.com/api/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
                 if(res.data.error) alert(res.data.error);
                 else {setUser(res.data.user.dataValues)};
             });
