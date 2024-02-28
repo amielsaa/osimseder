@@ -5,14 +5,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        taskName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        option: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
         room: {
             type: DataTypes.STRING,
             allowNull: false

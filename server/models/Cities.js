@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         cityManagerEmail: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         }
     });
 
