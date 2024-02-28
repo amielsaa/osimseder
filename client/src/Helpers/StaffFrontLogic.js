@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3001/api';
+const URL = 'http://https://osimseder.onrender.com/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
