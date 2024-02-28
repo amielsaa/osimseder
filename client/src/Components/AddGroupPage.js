@@ -7,13 +7,14 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
+import {fetchAllSchoolsByCity, addGroup} from '../Helpers/StaffFrontLogic'
 
 const AddGroupPage = () => {
   const { user, navigate } = useContext(DataContext);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
-
+  const [schoolsList, setSchoolsList] = useState([]);
   const initialValues = {
     city: '',
     school: '',
@@ -68,7 +69,7 @@ const AddGroupPage = () => {
 
               <div>
                 <label htmlFor="city"> עיר: </label>
-                <Field as="select" id="city" name="city" onChange={(e) => setSelectedCity(e.target.value)} value={selectedCity}>
+                <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>
                   <option value="JRS">ירושלים</option>
                   <option value="BSV">באר שבע</option>
@@ -81,8 +82,11 @@ const AddGroupPage = () => {
                   <label htmlFor="school"> בית ספר: </label>
                   <Field as="select" id="school" name="school" onChange={(e) => setSelectedSchool(e.target.value)} value={selectedSchool}>
                     <option value="">בחר בית ספר</option>
-                    <option value="JRS">נתיבי עם</option>
-                    <option value="BSV">רמבם</option>
+                    {schoolsList &&
+                       <>{schoolsList.map((school) => (
+                         <option value={school.id}>{school.schoolName}</option>
+                       ))}
+                       </>}
                   </Field>
                   <ErrorMessage name="school" component="span" />
                 </div>
