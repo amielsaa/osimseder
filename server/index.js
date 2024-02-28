@@ -25,7 +25,7 @@ const buildPath = path.normalize(path.join(__dirname, './build'));
 app.use(express.static(buildPath));
 const rootRouter = express.Router();
 
-rootRouter.get('/', async (req, res, next) => {
+rootRouter.get('(/*)?', async (req, res, next) => {
     res.sendFile(path.join(buildPath, 'index.html'));
   });
 app.use(rootRouter);
