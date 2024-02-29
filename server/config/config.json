@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "osimseder",
+    "database": "osimsederdb",
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "dialectOptions": { 
+    "dialectOptions": {
       "ssl": {
-        "require": true, 
-        "rejectUnauthorized": false 
+        "require": true,
+        "rejectUnauthorized": false
       }
     }
   },
   "test": {
     "username": "root",
     "password": "password",
-    "database": "osimseder",
+    "database": "osimsederdb",
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
@@ -30,7 +30,7 @@
   "production": {
     "username": "root",
     "password": "password",
-    "database": "osimseder",
+    "database": "osimsederdb",
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
