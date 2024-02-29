@@ -120,6 +120,9 @@ const HousePage = () => {
             שכונה: {house?.neighborhood}
           </div>
           <div className="Info">
+            כתובת: {house?.address}
+          </div>
+          <div className="Info">
             שם איש קשר: {house?.contactName}
           </div>
           <div className="Info">
