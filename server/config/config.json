@@ -6,10 +6,10 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "dialectOptions": { // Additional options for the PostgreSQL client
+    "dialectOptions": { 
       "ssl": {
-        "require": true, // Enable SSL connection
-        "rejectUnauthorized": false // Allow self-signed certificates (if applicable)
+        "require": true, 
+        "rejectUnauthorized": false 
       }
     }
   },
@@ -20,10 +20,10 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "dialectOptions": { // Additional options for the PostgreSQL client
+    "dialectOptions": { 
       "ssl": {
-        "require": true, // Enable SSL connection
-        "rejectUnauthorized": false // Allow self-signed certificates (if applicable)
+        "require": true,
+        "rejectUnauthorized": false
       }
     }
   },
@@ -34,10 +34,10 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "dialectOptions": { // Additional options for the PostgreSQL client
+    "dialectOptions": { 
       "ssl": {
-        "require": true, // Enable SSL connection
-        "rejectUnauthorized": false // Allow self-signed certificates (if applicable)
+        "require": true, 
+        "rejectUnauthorized": false
       }
     }
   }
