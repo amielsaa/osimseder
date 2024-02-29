@@ -1,0 +1,29 @@
+.content-Box-Add-Task{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: var( --WHITEBG-COLOR); /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    direction: rtl;
+}
+.main-content-Add-Task{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    height: 90%;
+    overflow-y: scroll;
+}
+.add-task-title{
+    margin-top:6%;
+    color : var(--ORANGE-COLOR);
+}
