@@ -103,7 +103,7 @@ const HousePage = () => {
         </div>
         <div className="buttons_for_house_logic">
           <button className="edit_house_button"> ערוך בית</button>
-          <button className="add_task_button">הוסף מטלה</button>
+          <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
 
         </div>
         <div className="House_Info">
