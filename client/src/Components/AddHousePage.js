@@ -14,6 +14,7 @@ const AddHousePage = () => {
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedSchool, setSelectedSchool] = useState('');
     const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
+    const [address, setAddress] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
@@ -29,6 +30,7 @@ const AddHousePage = () => {
   const initialValues = {
     city: '',
     neighborhood: '',
+    address: '',
     firstName: '',
     lastName: '',
     gender: '',
@@ -41,6 +43,7 @@ const AddHousePage = () => {
   const validationSchema = Yup.object().shape({
     city: Yup.string().required('עיר נדרשת'),
     neighborhood: Yup.string().required('שכונה נדרשת'),
+    address: Yup.string().required('כתובת נדרשת'),
     firstName: Yup.string().required('שם פרטי נדרש'),
     lastName: Yup.string().required('שם משפחה נדרש'),
     gender: Yup.string().required('מין נדרש'),
@@ -54,6 +57,7 @@ const AddHousePage = () => {
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
   // navigate back to "/My-Houses".
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
+  // the page works ! but the yup does problems with his warnings
   console.log(selectedCity)
   };
 
@@ -110,7 +114,13 @@ const AddHousePage = () => {
 
               {(selectedCity && selectedNeighborhood) && (
                <>
-               <div>
+                    <div>
+                        <label htmlFor="address">כתובת :</label>
+                        <Field id="address" name="address" placeholder="כתובת" onChange={(e) => {setAddress(e.target.value)}} value={address} />
+                        <ErrorMessage name="address" component="span" />
+                    </div>
+                    
+                    <div>
                         <label htmlFor="firstName">שם איש קשר :</label>
                         <Field id="firstName" name="firstName" placeholder="שם פרטי" onChange={(e) => {setFirstName(e.target.value)}} value={firstName} />
                         <ErrorMessage name="firstName" component="span" />
