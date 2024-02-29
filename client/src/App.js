@@ -16,6 +16,7 @@ import ErrorPage from './Components/ErrorPage.js'
 import HousePage from './Components/HousePage.js';
 import TaskPage from './Components/TaskPage.js';
 import AddGroupPage from './Components/AddGroupPage.js';
+import AddHousePage from './Components/AddHousePage.js';
 
 function App() {
   const { width } = useWindowEvents();
@@ -35,6 +36,7 @@ function App() {
             <Route path="/Personal" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>
+            <Route path="/addHouse" element={<AddHousePage/>}/>
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/Equipment" element={<Equipment />} />

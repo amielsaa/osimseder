@@ -20,11 +20,14 @@ const Houses = () => {
           {(user.role === "AreaManager" || user.role === "CityManager"  ) && (
              <h1>בתים באזורי</h1>
           )}
+          {(user.role === "Admin") && (
+             <h1>כל הבתים</h1>
+          )}
        
         </div>
         <HouseList/>
         </div>
-        <button className='add_house_btn' onClick={() => navigate('/')}>הוסף בית</button>
+        <button className='add_house_btn' onClick={() => navigate('/addHouse')}>הוסף בית</button>
     </div>
     <Footer/>
     </>
