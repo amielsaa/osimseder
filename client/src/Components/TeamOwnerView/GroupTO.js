@@ -7,7 +7,7 @@ const GroupTO = ({ groupId , groupJson}) => {
 
   const {user, navigate} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
-  const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
+  const [studentsList, setStudentsList] = useState(['פליקס רויזמן', 'עמיאל סעד']);
   const [memberCount, setMemberCount] = useState({capacity:0, memberCount:0})
 
   const openStudentsPopUp = () => {

@@ -1,12 +1,12 @@
-import '../css/HousesTeamOwner.css'
+import '../css/Houses.css'
 import Header from '../Header'
 import Nav from '../Nav'
 import HouseList from './HouseList'
 import Footer from '../Footer'
 import { useContext } from 'react'
 import DataContext from '../../Helpers/DataContext'
-const HousesTeamOwner = () => {
-  const { navigate } = useContext(DataContext)
+const Houses = () => {
+  const { user,navigate } = useContext(DataContext)
   return (
     <>
     <Header/>
@@ -14,7 +14,13 @@ const HousesTeamOwner = () => {
     <div className='content-Box'>
       <div className='main_content_houses'>
         <div className='Houses_title'>
-        <h1>הבתים שלי</h1>
+          {user.role === "TeamOwner" && (
+             <h1>הבתים שלי</h1>
+          )}
+          {(user.role === "AreaManager" || user.role === "CityManager"  ) && (
+             <h1>בתים באזורי</h1>
+          )}
+       
         </div>
         <HouseList/>
         </div>
@@ -25,4 +31,4 @@ const HousesTeamOwner = () => {
   )
 }
 
-export default HousesTeamOwner;
+export default Houses;

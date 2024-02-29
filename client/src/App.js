@@ -10,7 +10,7 @@ import GroupPage from './Components/StudentView/GroupPage.js';
 import PersonalPage from './Components/PersonalPage.js';
 import { DataProvider } from './Helpers/DataContext';
 import MyGroupsTeamOwner from './Components/TeamOwnerView/MyGroupsTeamOwner.js';
-import HousesTeamOwner from './Components/TeamOwnerView/HousesTeamOwner.js';
+import Houses from './Components/TeamOwnerView/Houses.js';
 import Equipment from './Components/Equipment.js';
 import ErrorPage from './Components/ErrorPage.js'
 import HousePage from './Components/HousePage.js';
@@ -35,7 +35,7 @@ function App() {
             <Route path="/Personal" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>
-            <Route path="/My-Houses" element={<HousesTeamOwner />} />
+            <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/Equipment" element={<Equipment />} />
             <Route path="/TaskPage/:id" element={<TaskPage />} />
