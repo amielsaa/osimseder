@@ -1,0 +1,34 @@
+.content-Box-add-House {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: var( --WHITEBG-COLOR); /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    direction: rtl;
+}
+.main_content_add_House{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    height: 90%;
+    overflow-y: scroll;
+}
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--GREY-COLOR);
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}

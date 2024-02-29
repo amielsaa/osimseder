@@ -25,7 +25,11 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    user.role === "Student" ? setUserRole("סטודנט") : setUserRole("חניך גרעין");
+    user.role === "Student" ? setUserRole("סטודנט") :
+      user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
+      user.role === "AreaManager" ? setUserRole("רכז גרעין") :
+      user.role === "CityManager" ? setUserRole("רכז עירוני"):
+      setUserRole("אדמין")  ;
   }, [user.role]);
 
   return (
@@ -36,7 +40,12 @@ const Nav = () => {
           <i className="fa fa-bars"></i>
         </button>
         <div className='menu-bar-title'  >
-          <IoMdArrowRoundBack className='close_nav_arrow' onClick={toggleSidebar} />
+        <IoMdArrowRoundBack 
+                    className={`${
+                    !isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'
+                    } close_nav_arrow`}
+                    onClick={toggleSidebar}
+                    />
           <span className={`menu-title ${!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}`}> תפריט {userRole}</span>
         </div>
 

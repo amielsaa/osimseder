@@ -21,11 +21,14 @@ const MyGroupsTeamOwner = () => {
           {(user.role === "AreaManager" || user.role === "CityManager"  ) && (
              <h1>קבוצות באיזורי</h1>
           )}
+          {(user.role === "Admin") && (
+             <h1>כל הקבוצות</h1>
+          )}
       </div>
       <GroupListTO/>
       
     </div>
-    {(user.role === "AreaManager" || user.role === "CityManager"  ) && (
+    {(user.role !== "TeamOwner") && (
           <button className='add_group_btn' onClick={() => navigate('/addGroup')}>הוסף קבוצה</button>
     )}
     </div> 
