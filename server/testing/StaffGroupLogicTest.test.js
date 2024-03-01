@@ -12,6 +12,7 @@ const Groups = require('../models/Groups');
 const Cities = require('../models/Cities');
 const Areas = require('../models/Areas');
 const Staffs = require('../models/Staffs');
+// const Houses = require('../models/Houses');
 // const { sequelize, Cities, Areas, Schools, Houses, Staffs, Students } = require('../models/');
 // const { sequelize } = require('../models/index');
 const { sequelize, DataTypes } = require('../SetupTestDatabase'); // Adjust the path accordingly
@@ -31,6 +32,7 @@ const { sequelize, DataTypes } = require('../SetupTestDatabase'); // Adjust the 
 
 process.env.NODE_ENV = 'test';
 const db = require('../models');
+const {Houses} = require("../models");
 
 // Import Sequelize configuration
 // const sequelizeConfig = require('./config/config.json');
@@ -245,7 +247,7 @@ describe('getAllGroupsBySchool', () => {
 */
 
 
-/*
+
 describe('getGroupById', () => {
   // let sequelize;
   let student;
@@ -333,10 +335,10 @@ describe('getGroupById', () => {
 
 
 });
-*/
+
 // ------------------------------------------------------------------------
 
-/*
+
 describe('createGroup', () => {
   // let sequelize;
   let student;
@@ -437,9 +439,9 @@ describe('createGroup', () => {
 
 
 });
-*/
 
-/*
+
+
 describe('getGroupsByTeamOwner', () => {
   // let sequelize;
   let student;
@@ -472,9 +474,9 @@ describe('getGroupsByTeamOwner', () => {
 
 
   describe('getGroupsByTeamOwner - good', () => {
-    it('given a team owner and a group he manages - get group', async () => { 
+    it('given a team owner and a group he manages (with a connected house) - get group', async () => {
       const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
+        email: "amiels@gmail.com",
         password: "password123",      
         lastName: "lastname",
         firstName: "firstname",
@@ -484,9 +486,18 @@ describe('getGroupsByTeamOwner', () => {
         accesses: "B",
         isVerified: false
       });
+      const house1 = await db.Houses.create({
+          teamOwnerEmail:"amiels@gmail.com",
+          address:"mashu mashu 4",
+          residentLastName:"kashish",
+          residentFirstName:"meod",
+          residentPhoneNum:"0123123123",
+          residentAlternatePhoneNum:"0876876876",
+          residentGender:"male"
+      });
       const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 4
+          capacity: 4,
+          houseId: 1
       });
       
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -494,11 +505,12 @@ describe('getGroupsByTeamOwner', () => {
       expect(result[0]).toHaveProperty('id', 1);
     //   expect(result[0]).toHaveProperty('teamOwnerEmail', newStaff1.email);
       expect(result[0]).toHaveProperty('students', []);
+      expect(result[0]).toHaveProperty('capacity', 4);
 
     }); 
-    it('given a team owner and a several group he manages - get all his groups', async () => { 
+    it('given a team owner and a several group he manages (each group assigned to same house) - get all his groups', async () => {
       const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
+        email: "amiels@gmail.com",
         password: "password123",      
         lastName: "lastname",
         firstName: "firstname",
@@ -508,19 +520,28 @@ describe('getGroupsByTeamOwner', () => {
         accesses: "B",
         isVerified: false
       });
+    const house1 = await db.Houses.create({
+        teamOwnerEmail:"amiels@gmail.com",
+        address:"mashu mashu 4",
+        residentLastName:"kashish",
+        residentFirstName:"meod",
+        residentPhoneNum:"0123123123",
+        residentAlternatePhoneNum:"0876876876",
+        residentGender:"male"
+    });
       const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 1
+          capacity: 1,
+          houseId: 1
       });
       
       const group2 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 2
+          capacity: 2,
+          houseId: 1
       });
 
       const group3 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 3
+          capacity: 3,
+          houseId: 1
       });
       const groups = [group1, group2, group3];
       const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff1.email);
@@ -533,9 +554,9 @@ describe('getGroupsByTeamOwner', () => {
 
     }); 
 
-    it('given a team owner and a several group he manages - when get group by another team manager - return undefined', async () => { 
+    it('given a team owner and a several group he manages (each group assigned to same house) - when get group by another team manager - return undefined', async () => {
       const newStaff1 = await db.Staffs.create({
-        email: "test@example.com",
+        email: "amiels@gmail.com",
         password: "password123",      
         lastName: "lastname",
         firstName: "firstname",
@@ -545,6 +566,15 @@ describe('getGroupsByTeamOwner', () => {
         accesses: "B",
         isVerified: false
       });
+    const house1 = await db.Houses.create({
+        teamOwnerEmail:"amiels@gmail.com",
+        address:"mashu mashu 4",
+        residentLastName:"kashish",
+        residentFirstName:"meod",
+        residentPhoneNum:"0123123123",
+        residentAlternatePhoneNum:"0876876876",
+        residentGender:"male"
+    });
       const newStaff2 = await db.Staffs.create({
         email: "test1@example.com",
         password: "password123",      
@@ -557,24 +587,23 @@ describe('getGroupsByTeamOwner', () => {
         isVerified: false
       });
       const group1 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 1
+          capacity: 1,
+          houseId:1
       });
       
       const group2 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 2
+          capacity: 2,
+          houseId:1
       });
 
       const group3 = await db.Groups.create({
-          teamOwnerEmail: newStaff1.email,
-          capacity: 3
+          capacity: 3,
+          houseId:1
       });
-      // const groups = [group1, group2, group3];
-      const result = await StaffGroupLogic.getGroupsByTeamOwner(newStaff2.email);
 
-      expect(result[0]).toEqual(undefined);
-      
+      await expect(StaffGroupLogic.getGroupsByTeamOwner(newStaff2.email))
+          .rejects.toThrowError(/Failed to find an area by team owner: Error: Couldn't find houses by team owner./);
+
     }); 
     
   });
@@ -592,7 +621,7 @@ describe('getGroupsByTeamOwner', () => {
     });
   });
 });
-*/
+
 
 /*
 describe('getGroupsByAreaManager', () => {
@@ -626,7 +655,7 @@ describe('getGroupsByAreaManager', () => {
   // });
 
 
-  describe('getGroupsByTeamOwner - good', () => {
+  describe('getGroupsByAreaManager - good', () => {
     it('given a team owner and a group he manages - get group', async () => { 
       const newStaff1 = await db.Staffs.create({
         email: "test@example.com",
@@ -734,7 +763,7 @@ describe('getGroupsByAreaManager', () => {
     
   });
 
-  describe('getGroupsByTeamOwner - bad', () => {
+  describe('getGroupsByAreaManager - bad', () => {
 
     it('teamOwner is null - throws error', async () => {  
       await expect(StaffGroupLogic.getGroupsByTeamOwner(null))

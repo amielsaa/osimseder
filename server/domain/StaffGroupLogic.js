@@ -1,4 +1,5 @@
-const {Groups, Schools, Students, Areas, Cities, Staffs} = require('../models');
+const { Sequelize } = require('sequelize');
+const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
 
 class GroupLogic {
     async createGroup(groupSize, schoolId) {
@@ -56,12 +57,33 @@ class GroupLogic {
             if(teamOwnerEmailAddr==undefined){
                 throw new Error('Team owner email is undefined.');
             }
-            const groups = await Groups.findAll({
-                where: { "teamOwnerEmail": teamOwnerEmailAddr }
+            const houses = await Houses.findAll({
+                where: {
+                    [Sequelize.Op.or]: [
+                        { "teamOwnerEmail": teamOwnerEmailAddr },
+                        { "teamOwnerEmail_2": teamOwnerEmailAddr }
+                    ]
+                }
             });
-            if (!groups) {
-                throw new Error('Couldn\'t find groups by team owner.');
+            if (!houses || houses.length === 0) {
+                throw new Error('Couldn\'t find houses by team owner.');
             }
+
+            // console.log(houses)
+
+            let groups = [];
+            for (let i = 0; i < houses.length; i++) {
+                const house = houses[i];
+                const houseGroups = await house.getGroups();
+
+                if (houseGroups && houseGroups.length > 0) {
+                    groups.push(...houseGroups);
+                }
+            }
+            if (!groups || groups.length === 0) {
+                throw new Error('Couldn\'t find groups by the houses.');
+            }
+            // console.log(groups)
 
             for (let i = 0; i < groups.length; i++) {
                 const group = groups[i];
