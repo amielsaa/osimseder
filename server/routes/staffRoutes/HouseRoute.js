@@ -56,7 +56,6 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
             houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);
         }
         
-        
         res.json(houses); 
 
         //returns like this:
@@ -121,6 +120,12 @@ router.get('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
         // "cityId": null,
         // "areaId": null
 
+        // needed:
+        // house.city = 'BSV'
+        // house.neighborhood = 'Shuna Bet'
+        // house.teamOwner = amiel saad
+        // house.teamOwner_2 = same
+        
         res.json(house);
         
     } catch (err) {

@@ -35,4 +35,23 @@ const addGroup = async (cityName, schoolId, capacity) => {
     }
 }
 
-export {fetchAllGroupsStaff, fetchAllSchoolsByCity, addGroup}
+const fetchAllHouses = async () => {
+    const res = await axios.get(`${URL}/staff/houses`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        console.log(res.data);
+        return res.data;
+    }
+}
+const getHouseById = async (id) => {
+    const res = await axios.get(`${URL}/staff/houses/${id}`, headers)
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        console.log(res.data);
+        return res.data;
+    }
+}
+
+export {fetchAllGroupsStaff, getHouseById, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
