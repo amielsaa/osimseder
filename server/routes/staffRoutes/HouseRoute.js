@@ -171,4 +171,85 @@ router.delete('/:id', validateToken, validateAccess(accessGroup.C), async (req, 
     }
 });
 
+// Assign house to group
+router.post('/:houseid/:groupid', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const groupId= req.params.groupid;
+        const houseId= req.params.houseid;
+        const group = await StaffHouseLogic.assignGroupToHouse(houseId, groupId);
+
+        //returns the group assigned to the house
+        res.json(group);
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
+
+// Assign second team owner to house
+router.post('/assignsecondonwer', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const newUserEmail = req.body.newUserEmail;
+
+        // const groupId= req.params.groupid;
+        const houseId= req.body.houseId;
+        const house = await StaffHouseLogic.assignSecondTeamOwner(houseId, newUserEmail);
+
+        //returns the group assigned to the house
+        res.json(house);
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
+
+// get all areas grouped by city
+// TODO: move this to another route, maybe city route?
+router.post('/getareas', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        
+        const areas = await StaffHouseLogic.getAllAreasByCity();
+
+        res.json(areas);
+
+        // returns like this:
+        /*
+        {
+            "BSV": [
+                {
+                    "id": 1,
+                    "areaName": "eastbsv",
+                    "areaManagerEmail": "amieleastbsv@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.446Z",
+                    "updatedAt": "2024-02-28T17:26:24.446Z",
+                    "cityId": 1
+                }
+            ],
+            "JRS": [
+                {
+                    "id": 2,
+                    "areaName": "eastjrs",
+                    "areaManagerEmail": "amieleastjrs@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.452Z",
+                    "updatedAt": "2024-02-28T17:26:24.452Z",
+                    "cityId": 2
+                },
+                {
+                    "id": 3,
+                    "areaName": "testbsv",
+                    "areaManagerEmail": "amieleastjrs@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.452Z",
+                    "updatedAt": "2024-02-28T17:26:24.452Z",
+                    "cityId": 2
+                }
+            ]
+        }
+        */
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
+
+
 module.exports = router;
