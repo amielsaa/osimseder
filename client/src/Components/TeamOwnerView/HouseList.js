@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DataContext from "../../Helpers/DataContext";
 import House from "./House";
-
+import {fetchAllHouses} from '../../Helpers/StaffFrontLogic'
 const HouseList = () => {
   const { user } = useContext(DataContext);
 
@@ -43,18 +43,30 @@ const HouseList = () => {
     }
   ];
 
-  const [houses, setHouses] = useState(initialHouses);
+  const [houses, setHouses] = useState();
+
+  const setHousesList = async () => {
+    const housesList = await fetchAllHouses();
+    setHouses(housesList);
+  }
+
+  useEffect(() => {
+    
+    setHousesList();
+  }, [houses]);
 
   return (
     <>
-      {houses.map((house) => (
+      {houses && 
+      <> {houses.map((house) => (
         <House
           key={house.id}
           id={house.id}
-          landlordName={house.landlordName}
+          landlordName={house.residentFirstName + " " + house.residentLastName }
           address={house.address}
         />
-      ))}
+      ))} </>
+      }
     </>
   );
 }

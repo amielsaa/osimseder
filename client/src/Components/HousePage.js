@@ -8,45 +8,54 @@ import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
-
+import {getHouseById} from '../Helpers/StaffFrontLogic'
 
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
   const {navigate} = useContext(DataContext)
 
+  const generateRandomHouse = () => {
+    const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
+
+    const genders = ["זכר", "נקבה"];
+    const cities = ["תל אביב", "ירושלים", "חיפה", "באר שבע"];
+    const languages = ["עברית", "אנגלית", "ערבית"];
+
+    const randomHouse = {
+      teamOwner1: "איזה מישהו",
+      teamOwner2: "מישהו אחר",
+      contactName: "דוד כהן",
+      gender: getRandomValue(genders),
+      city: getRandomValue(cities),
+      neighborhood: "שכונה ב",
+      address: "רחוב הראשון 123",
+      languages: [getRandomValue(languages)],
+      numberOfRooms:5,
+      groupSizeNeeded:3,
+      phoneNumber: "123-456-7890",
+      alternativeNumber: "987-654-3210",
+      notes: "אני מתקשה ללכת וצריכה עזרה",
+    };
+
+    return randomHouse;
+  };
+
+const setHouseRequest = async () => {
+  const houseJson = await getHouseById(id);
+  setHouse(houseJson);
+  console.log(houseJson)
+}
+
   useEffect(() => {
     // Generate a random House object for testing
-    const generateRandomHouse = () => {
-      const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
-
-      const genders = ["זכר", "נקבה"];
-      const cities = ["תל אביב", "ירושלים", "חיפה", "באר שבע"];
-      const languages = ["עברית", "אנגלית", "ערבית"];
-
-      const randomHouse = {
-        teamOwner1: "איזה מישהו",
-        teamOwner2: "מישהו אחר",
-        contactName: "דוד כהן",
-        gender: getRandomValue(genders),
-        city: getRandomValue(cities),
-        neighborhood: "שכונה ב",
-        address: "רחוב הראשון 123",
-        languages: [getRandomValue(languages)],
-        numberOfRooms:5,
-        groupSizeNeeded:3,
-        phoneNumber: "123-456-7890",
-        alternativeNumber: "987-654-3210",
-        notes: "אני מתקשה ללכת וצריכה עזרה",
-      };
-
-      return randomHouse;
-    };
-    
-
+        
+    setHouseRequest();
     // Set the generated random house to the state
-    setHouse(generateRandomHouse());
+    //setHouse(generateRandomHouse());
   }, [id]); // Dependency array ensures it runs when the id changes
+
+  
   const [tasks, setTasks] = useState([
     {
       room: 'סלון',
@@ -108,10 +117,10 @@ const HousePage = () => {
         </div>
         <div className="House_Info">
           <div className="Info">
-              חבר גרעין אחראי 1: {house?.teamOwner1}
+              חבר גרעין אחראי 1: {house?.teamOwnerEmail}
           </div>
           <div className="Info">
-              חבר גרעין אחראי 2: {house?.teamOwner2}
+              חבר גרעין אחראי 2: {house?.teamOwnerEmail_2}
           </div>
           <div className="Info">
             עיר: {house?.city}
@@ -123,22 +132,22 @@ const HousePage = () => {
             כתובת: {house?.address}
           </div>
           <div className="Info">
-            שם איש קשר: {house?.contactName}
+            שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
           </div>
           <div className="Info">
-            מין: {house?.gender}
+            מין: {house?.residentGender}
           </div>
           <div className="Info">
-             שפה נחוצה: {house?.languages.join(", ")}
+             שפה נחוצה: {house?.languageNeeded}
           </div>
           <div className="Info">
             מספר חדרים: {house?.numberOfRooms}
           </div>
           <div className="Info">
-            גודל קבוצה נחוץ: {house?.groupSizeNeeded}
+            גודל קבוצה נחוץ: {house?.membersNeeded}
           </div>
           <div className="Info">
-            הערות : {house?.notes}
+            הערות : {house?.freeText}
           </div>
         </div>
         <div className='House-Info-Tasks'>
