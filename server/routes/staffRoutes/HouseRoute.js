@@ -41,17 +41,19 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 // Get all houses (GET)
 router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
+        const userEmail = req.user.email;
+        const userRole = req.user.role;
         // team owner - only his groups
         // area and city managers - the city's houses
         let houses;
-        houses = await StaffHouseLogic.getAllHouses();
+        // houses = await StaffHouseLogic.getAllHouses();
 
         if((accessGroup.C.includes(userRole))){ //for area and city managers
-            houses = await StaffHouseLogic.getAllHouses("city");
+            houses = await StaffHouseLogic.getAllHousesOfCity(userEmail);
         }
 
         else {
-            houses = await StaffHouseLogic.getAllHouses("team");
+            houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);
         }
         
         

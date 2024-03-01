@@ -15,15 +15,18 @@ class StaffHouseLogic {
         return true;
     }
 
-    async createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded) {
+    async createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, teamOwnerEmail, residentAlternatePhoneNum, residentGender) {
         try {
-            this.checkArguments([address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded]);
+            this.checkArguments([address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, teamOwnerEmail, residentAlternatePhoneNum, residentGender]);
             const house = await Houses.create({
                 address: address,
                 residentLastName: residentLastName,
                 residentFirstName: residentFirstName, 
                 residentPhoneNum: residentPhoneNum, 
-                languageNeeded: languageNeeded 
+                languageNeeded: languageNeeded,
+                teamOwnerEmail: teamOwnerEmail,
+                residentAlternatePhoneNum: residentAlternatePhoneNum,
+                residentGender: residentGender
             });
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
@@ -52,13 +55,22 @@ class StaffHouseLogic {
         }
     }
 
-    async getAllHouses() {
+    
+    async getAllHousesOfCity(userEmail) {
         try {
-            const houses = await Houses.findAll();
-            if (!houses) {
-                throw new Error('Couldn\'t get houses.');
+            const user = await Staffs.findOne({
+                where: {email: userEmail}
+            });
+            if(!user){
+                throw new Error('Couldn\'t find a staff user.');
             }
-        
+            // console.log(user);
+            const houses = await Houses.findAll({
+                where: { cityId: user.cityId }
+            });
+            if(!houses){
+                throw new Error('Couldn\'t find houses.');
+            }
             // const students = await group.getStudents();
     
             // const studentNames = students.map(student => {
@@ -78,9 +90,43 @@ class StaffHouseLogic {
             return houses;
 
         } catch (error) {
-            throw new Error('Failed to create house: ' + error);
+            throw new Error('Failed to get all houses of city: ' + error);
         }
     }
+
+    async getAllHousesOfTeamOwner(userEmail) {
+        try {
+            // console.log(user);
+            const houses = await Houses.findAll({
+                where: { teamOwnerEmail: userEmail }
+            });
+            if(!houses){
+                throw new Error('Couldn\'t find houses.');
+            }
+            // const students = await group.getStudents();
+    
+            // const studentNames = students.map(student => {
+            //     const { firstName, lastName, ...rest } = student;
+            //     return `${firstName} ${lastName}`;
+            // });
+    
+            // group.dataValues.students = studentNames;            
+            
+            // const responseData = {
+            //     id: group.id,
+            //     students: group.dataValues.students,
+            //     memberCount: group.dataValues.students.length,
+            //     capacity: group.capacity
+            // };
+        
+            return houses;
+
+        } catch (error) {
+            throw new Error('Failed to get all houses of team owner: ' + error);
+        }
+    }
+
+    
     
     async getHouseById(houseId) {
         try {
