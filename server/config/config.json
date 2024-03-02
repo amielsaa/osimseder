@@ -9,9 +9,6 @@
     "ssl": {
       "require": true,
       "rejectUnauthorized": false
-    },
-    "dialectOptions": {
-      "ssl": true
     }
   },
   "test": {
@@ -24,9 +21,6 @@
     "ssl": {
       "require": true,
       "rejectUnauthorized": false
-    },
-    "dialectOptions": {
-      "ssl": true
     }
   },
   "production": {
@@ -39,9 +33,6 @@
     "ssl": {
       "require": true,
       "rejectUnauthorized": false
-    },
-    "dialectOptions": {
-      "ssl": true
     }
   }
 }
