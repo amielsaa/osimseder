@@ -6,6 +6,7 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
+    "ssl": true,
     "dialectOptions": {
       "ssl": {
         "require": true,
@@ -20,6 +21,7 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
+    "ssl": true,
     "dialectOptions": {
       "ssl": {
         "require": true,
@@ -34,6 +36,7 @@
     "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
+    "ssl": true,
     "dialectOptions": {
       "ssl": {
         "require": true,
