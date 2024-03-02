@@ -146,21 +146,50 @@ class StaffHouseLogic {
                 throw new Error('Couldn\'t get house with that ID.');
             }
         
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
+
+            // cityName, neiborhoodName, teamOwner1 and 2 names
+            const city = await house.getCity();
+            if (!city) {
+                throw new Error('Couldn\'t get city assigned to house.');
+            }
+            const area = await house.getArea();
+            if (!area) {
+                throw new Error('Couldn\'t get area assigned to house.');
+            }
             
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
+            const teamOwner1 = await Staffs.findOne({
+                where: {email: house.teamOwnerEmail}
+            });
+            if (!teamOwner1) {
+                throw new Error('Couldn\'t get team owner 1 assigned to house.');
+            }
+
+            let teamOwner2 = undefined;
+            if(house.teamOwnerEmail_2){
+                teamOwner2 = await Staffs.findOne({
+                    where: {email: house.teamOwnerEmail_2}
+                });
+                if (!teamOwner2) {
+                    throw new Error('Couldn\'t get team owner 2 assigned to house.');
+                }
+            }
+
+            const getFormattedNames = (person) => {
+                const { firstName, lastName, ...rest } = person;
+                return `${firstName} ${lastName}`;
+            };
+            
+            const formattedTeamOwner1 = getFormattedNames(teamOwner1);
+            
+            let formattedTeamOwner2 = undefined;
+            if (teamOwner2) {
+                formattedTeamOwner2 = getFormattedNames(teamOwner2);
+            }
+
+            house.dataValues["teamOwner1"] = formattedTeamOwner1;
+            house.dataValues["teamOwner2"] = formattedTeamOwner2;
+            house.dataValues["cityName"] = city.cityName;
+            house.dataValues["areaName"] = area.areaName;
         
             return house;
 
