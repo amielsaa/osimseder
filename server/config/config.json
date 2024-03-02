@@ -11,7 +11,8 @@
         "require": true,
         "rejectUnauthorized": true
       }
-    },
+    }
+  },
   "test": {
     "username": "root",
     "password": "password",
@@ -24,7 +25,8 @@
         "require": true,
         "rejectUnauthorized": true
       }
-    },
+    }
+  },
   "production": {
     "username": "root",
     "password": "password",
@@ -38,4 +40,5 @@
         "rejectUnauthorized": true
       }
     }
+  }
 }
