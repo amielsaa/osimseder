@@ -6,9 +6,8 @@
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "ssl": {
-      "require": true,
-      "rejectUnauthorized": false
+    "dialectOptions": {
+      "ssl": true
     }
   },
   "test": {
@@ -18,9 +17,8 @@
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "ssl": {
-      "require": true,
-      "rejectUnauthorized": false
+    "dialectOptions": {
+      "ssl": true
     }
   },
   "production": {
@@ -30,9 +28,8 @@
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
-    "ssl": {
-      "require": true,
-      "rejectUnauthorized": false
+    "dialectOptions": {
+      "ssl": true
     }
   }
 }
