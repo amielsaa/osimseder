@@ -2,46 +2,40 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "osimsederdb",
-    "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
+    "database": "osimseder",
+    
+    "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
     "ssl": true,
     "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
+      "ssl": true
     }
   },
   "test": {
     "username": "root",
     "password": "password",
-    "database": "osimsederdb",
-    "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
+    "database": "osimseder",
+    
+    "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
     "ssl": true,
     "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
+      "ssl": true
     }
   },
   "production": {
     "username": "root",
     "password": "password",
-    "database": "osimsederdb",
-    "host": "osimsederdb.cpucswaogqgs.eu-north-1.rds.amazonaws.com",
+    "database": "osimseder",
+    
+    "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
     "ssl": true,
     "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
+      "ssl": true
     }
   }
 }
