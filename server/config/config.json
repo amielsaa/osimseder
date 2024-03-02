@@ -3,7 +3,6 @@
     "username": "root",
     "password": "password",
     "database": "osimseder",
-    
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
@@ -16,7 +15,6 @@
     "username": "root",
     "password": "password",
     "database": "osimseder",
-    
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
@@ -29,7 +27,6 @@
     "username": "root",
     "password": "password",
     "database": "osimseder",
-    
     "host": "osimseder.cpomu46i8y4w.us-east-1.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
