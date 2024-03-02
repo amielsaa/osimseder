@@ -7,9 +7,11 @@
     "port": 5432,
     "dialect": "postgres",
     "dialectOptions": {
-      "ssl": true
-    }
-  },
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": true
+      }
+    },
   "test": {
     "username": "root",
     "password": "password",
@@ -18,9 +20,11 @@
     "port": 5432,
     "dialect": "postgres",
     "dialectOptions": {
-      "ssl": true
-    }
-  },
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": true
+      }
+    },
   "production": {
     "username": "root",
     "password": "password",
@@ -29,7 +33,9 @@
     "port": 5432,
     "dialect": "postgres",
     "dialectOptions": {
-      "ssl": true
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": true
+      }
     }
-  }
 }
