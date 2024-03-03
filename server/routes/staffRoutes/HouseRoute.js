@@ -13,7 +13,14 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const residentFirstName = req.body.residentFirstName;
         const residentPhoneNum = req.body.residentPhoneNum;
         const languageNeeded = req.body.languageNeeded;
-
+        
+        //need to add
+        //req.body.city = 'BSV'
+        //req.body.neighborhood = 'ShunaB'
+        //req.body.gender = 'Male'
+        //req.body.numberOfRooms = 4
+        //req.body.membersNeeded = 6
+        //req.body.freeText = 'blabla'
         const newHouse = await StaffHouseLogic.createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded);
 
         //returns like this:
