@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import {fetchAllSchoolsByCity, addGroup} from '../Helpers/StaffFrontLogic'
+import { addHouse, fetchAllAreasByCity} from '../Helpers/StaffFrontLogic'
 
 const AddHousePage = () => {
     const { user, navigate } = useContext(DataContext);
@@ -22,6 +22,7 @@ const AddHousePage = () => {
     const [rooms, setRooms] = useState('');
     const [teamSize, setTeamSize] = useState('');
     const [comments, setComments] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [schoolsList, setSchoolsList] = useState(['נתיבי עם']);
     const [neighborhoodsList, setNeighborhoodsList] = useState(['שכונה א', 'שכונה ב']);
     const languages = ["ערבית","ספרדית","אמהרית","רוסית"]
@@ -37,7 +38,8 @@ const AddHousePage = () => {
     language: '',
     rooms: '',
     teamSize: '',
-    comments: ''
+    comments: '',
+    phoneNumber: ''
   };
 
   const validationSchema = Yup.object().shape({
@@ -50,16 +52,45 @@ const AddHousePage = () => {
     language: Yup.string(),
     rooms: Yup.string().required('מספר חדרים נדרש'),
     teamSize: Yup.string().required('גודל קבוצה נדרש'),
-    comments: Yup.string()
+    comments: Yup.string(),
+    phoneNumber: Yup.string()
+        .required("מספר נייד נדרש")
+        .matches(/^05\d{8}$/, "מספר לא תקין"),
   });
 
   const onSubmit = () => {
+    const information = {
+      city: selectedCity,
+      neighborhood: selectedNeighborhood,
+      address: address,
+      residentFirstName: firstName,
+      residentLastName: lastName,
+      residentPhoneNum: phoneNumber,
+      gender: gender,
+      languageNeeded: language,
+      numberOfRooms: rooms,
+      membersNeeded: teamSize,
+      freeText: comments
+    }
+    const res = addHouse(information);
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
   // navigate back to "/My-Houses".
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
   // the page works ! but the yup does problems with his warnings
+
   console.log(selectedCity)
   };
+
+  const setNeighborhoods = async () => {
+    const res = await fetchAllAreasByCity(selectedCity);
+    setNeighborhoodsList();
+
+  }
+
+  useEffect(() => {
+    setNeighborhoods();
+
+  },[selectedCity])
 
 
   return (
@@ -131,7 +162,11 @@ const AddHousePage = () => {
                         <Field id="lastName" name="lastName" placeholder=" שם משפחה איש קשר " onChange={(e) => {setLastName(e.target.value)}} value={lastName}/>
                         <ErrorMessage name="lastName" component="span" />
                     </div>
-
+                    <div>
+                        <label htmlFor="phoneNumber"> מספר פלאפון : </label>
+                        <Field id="phoneNumber" name="phoneNumber" placeholder=" מספר פלאפון " onChange={(e) => {setPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <ErrorMessage name="phoneNumber" component="span" />
+                    </div>
                     
                     <div>
                         <label htmlFor="gender">מין איש קשר: </label>

@@ -54,4 +54,24 @@ const getHouseById = async (id) => {
     }
 }
 
-export {fetchAllGroupsStaff, getHouseById, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+const addHouse = async (information) => {
+    const res = await axios.post(`${URL}/staff/houses`,information, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        console.log('adding house')
+        return true;
+    }
+
+}
+
+const fetchAllCities = async () => {
+
+}
+
+const fetchAllAreasByCity = async (city) => {
+
+}
+
+export {fetchAllAreasByCity, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
