@@ -13,8 +13,15 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const residentFirstName = req.body.residentFirstName;
         const residentPhoneNum = req.body.residentPhoneNum;
         const languageNeeded = req.body.languageNeeded;
+        const city = req.body.city;
+        const area = req.body.area;
+        const gender = req.body.gender;
+        const numberOfRooms = req.body.numberOfRooms;
+        const membersNeeded = req.body.membersNeeded;
+        const freetext = req.body.freetext;
 
-        const newHouse = await StaffHouseLogic.createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded);
+        const newHouse = await StaffHouseLogic.createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded,
+            city, area, gender, numberOfRooms, membersNeeded, freetext);
 
         //returns like this:
         // "id": 2,
