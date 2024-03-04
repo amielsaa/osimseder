@@ -392,6 +392,32 @@ class StaffHouseLogic {
         }
     }
 
+    async updateHouse(id, updatedFields) {
+        try {
+            this.checkArguments([id],
+                ["id"]);
+            const house = await Houses.findOne({
+                where: {id: id}
+            });
+            if(!house){
+                throw new Error('Couldn\'t find a house with that id.');
+            }
+
+            for (const key in updatedFields) {
+                if (Object.hasOwnProperty.call(updatedFields, key)) {
+                    house[key] = updatedFields[key];
+                }
+            }
+
+            await house.save();
+        
+            return house;
+
+        } catch (error) {
+            throw new Error('Failed to update a house by id: ' + error);
+        }
+    }
+
     
 
 }

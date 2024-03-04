@@ -147,13 +147,11 @@ router.get('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
 // Update a house by ID (PUT)
 router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const house = await houseModel.findByPk(req.params.id);
-        if (house) {
-            await house.update(req.body);
-            res.json(house);
-        } else {
-            res.status(404).json({ message: 'house not found' });
-        }
+        const id = req.params.id;
+        const updatedFields = req.body;
+
+        const newHouse = await StaffHouseLogic.updateHouse(id, updatedFields);
+        res.json(newHouse);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
