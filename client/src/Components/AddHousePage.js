@@ -61,7 +61,7 @@ const AddHousePage = () => {
   const onSubmit = () => {
     const information = {
       city: selectedCity,
-      neighborhood: selectedNeighborhood,
+      area: selectedNeighborhood,
       address: address,
       residentFirstName: firstName,
       residentLastName: lastName,
@@ -70,9 +70,13 @@ const AddHousePage = () => {
       languageNeeded: language,
       numberOfRooms: rooms,
       membersNeeded: teamSize,
-      freeText: comments
+      freeText: comments,
+      residentAlternatePhoneNum: "08980808"
     }
     const res = addHouse(information);
+    if(res) {
+      navigate('/My-Houses')
+    }
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
   // navigate back to "/My-Houses".
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
@@ -83,8 +87,9 @@ const AddHousePage = () => {
 
   const setNeighborhoods = async () => {
     const res = await fetchAllAreasByCity(selectedCity);
-    setNeighborhoodsList();
-
+    //setNeighborhoodsList();
+    console.log(res[selectedCity]);
+    setNeighborhoodsList(res[selectedCity]);
   }
 
   useEffect(() => {
@@ -132,8 +137,8 @@ const AddHousePage = () => {
                     {neighborhoodsList && (
                         <>
                         {neighborhoodsList.map((neighborhood) => (
-                            <option key={neighborhood} value={neighborhood}>
-                            {neighborhood}
+                            <option key={neighborhood.areaName} value={neighborhood.areaName}>
+                            {neighborhood.areaName}
                             </option>
                         ))}
                         </>
