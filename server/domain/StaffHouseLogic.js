@@ -44,7 +44,7 @@ class StaffHouseLogic {
                 languageNeeded: languageNeeded,
                 numberOfRooms: numberOfRooms,
                 membersNeeded: membersNeeded,
-                freetext: freetext,
+                freeText: freetext,
                 residentGender: gender,
                 cityId: cityId.id,
                 areaId: areaId.id,

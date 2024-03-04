@@ -71,7 +71,12 @@ const fetchAllCities = async () => {
 }
 
 const fetchAllAreasByCity = async (city) => {
-
+    const res = await axios.post(`${URL}/staff/houses/getareas`,{},headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
 }
 
 export {fetchAllAreasByCity, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

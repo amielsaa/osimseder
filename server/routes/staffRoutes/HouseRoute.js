@@ -6,7 +6,7 @@ const StaffHouseLogic = require('../../domain/StaffHouseLogic')
 const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/');
 
 // Create a new house (POST)
-router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const userEmail = req.user.email;
         const address= req.body.address;
@@ -21,7 +21,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const gender = req.body.gender;
         const numberOfRooms = req.body.numberOfRooms;
         const membersNeeded = req.body.membersNeeded;
-        const freetext = req.body.freetext;
+        const freetext = req.body.freeText;
 
         const newHouse = await StaffHouseLogic.createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded,
             city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum);
@@ -111,7 +111,7 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
 });
 
 // Get a single house by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const houseId= req.params.id;
         const house = await StaffHouseLogic.getHouseById(houseId);
@@ -221,7 +221,7 @@ router.post('/assignsecondonwer', validateToken, validateAccess(accessGroup.C), 
 
 // get all areas grouped by city
 // TODO: move this to another route, maybe city route?
-router.post('/getareas', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/getareas', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         
         const areas = await StaffHouseLogic.getAllAreasByCity();

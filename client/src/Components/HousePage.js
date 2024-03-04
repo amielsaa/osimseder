@@ -45,7 +45,6 @@ const HousePage = () => {
 const setHouseRequest = async () => {
   const houseJson = await getHouseById(id);
   setHouse(houseJson);
-  console.log(houseJson)
 }
   useEffect(() => {
     // Generate a random House object for testing
@@ -139,16 +138,16 @@ const setHouseRequest = async () => {
           
         <div className="House_Info">
           <div className="Info">
-              חבר גרעין  1: {house?.teamOwnerEmail}
+              חבר גרעין  1: {house?.teamOwner1}
           </div>
           <div className="Info">
               חבר גרעין  2: {house?.teamOwnerEmail_2}
           </div>
           <div className="Info">
-            עיר: {house?.city}
+            עיר: {house?.cityName}
           </div>
           <div className="Info">
-            שכונה: {house?.neighborhood}
+            שכונה: {house?.areaName}
           </div>
           <div className="Info">
             כתובת: {house?.address}
