@@ -8,20 +8,24 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/'
 // Create a new house (POST)
 router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
+        const userEmail = req.user.email;
         const address= req.body.address;
         const residentLastName = req.body.residentLastName;
         const residentFirstName = req.body.residentFirstName;
         const residentPhoneNum = req.body.residentPhoneNum;
         const languageNeeded = req.body.languageNeeded;
-        
-        //need to add
-        //req.body.city = 'BSV'
-        //req.body.neighborhood = 'ShunaB'
-        //req.body.gender = 'Male'
-        //req.body.numberOfRooms = 4
-        //req.body.membersNeeded = 6
-        //req.body.freeText = 'blabla'
-        const newHouse = await StaffHouseLogic.createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded);
+
+        const residentAlternatePhoneNum = req.body.residentAlternatePhoneNum;
+        const city = req.body.city;
+        const area = req.body.area;
+        const gender = req.body.gender;
+        const numberOfRooms = req.body.numberOfRooms;
+        const membersNeeded = req.body.membersNeeded;
+        const freetext = req.body.freetext;
+
+        const newHouse = await StaffHouseLogic.createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded,
+            city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum);
+
 
         //returns like this:
         // "id": 2,
