@@ -8,12 +8,13 @@ import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
+import { MdGroups } from "react-icons/md";
 import {getHouseById} from '../Helpers/StaffFrontLogic'
 
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
-  const {navigate} = useContext(DataContext)
+  const {navigate, user} = useContext(DataContext)
 
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -46,7 +47,6 @@ const setHouseRequest = async () => {
   setHouse(houseJson);
   console.log(houseJson)
 }
-
   useEffect(() => {
     // Generate a random House object for testing
         
@@ -110,17 +110,39 @@ const setHouseRequest = async () => {
             <img src={HousePicture} alt="אין תמונה" />
           </div>
         </div>
+        {user.role !== "Student" && 
         <div className="buttons_for_house_logic">
           <button className="edit_house_button"> ערוך בית</button>
           <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
-
         </div>
+        }
+        
+
+          {user.role !== 'Student' && user.role !== 'TeamOwner' &&
+           <div className="groups_of_house">
+           <div className="house_group_info">
+             קבוצה משוייכת: 
+             <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ id }`)}/> 
+             {/* <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> */}
+ 
+             {/* Amiel - when pressing on the הסר button, you need to remove the group from the house */}
+             <button className="add_group_button" > הסר </button>
+ 
+           </div>
+           <div className="house_group_info">
+             קבוצה משוייכת: 
+            {/*  <MdGroups className='group_of_house_icon'/>  */}
+             <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button>
+             {/*<button className="add_group_button" > הסר </button>*/}
+           </div>
+           </div> }
+          
         <div className="House_Info">
           <div className="Info">
-              חבר גרעין אחראי 1: {house?.teamOwnerEmail}
+              חבר גרעין  1: {house?.teamOwnerEmail}
           </div>
           <div className="Info">
-              חבר גרעין אחראי 2: {house?.teamOwnerEmail_2}
+              חבר גרעין  2: {house?.teamOwnerEmail_2}
           </div>
           <div className="Info">
             עיר: {house?.city}
@@ -146,9 +168,11 @@ const setHouseRequest = async () => {
           <div className="Info">
             גודל קבוצה נחוץ: {house?.membersNeeded}
           </div>
+          
           <div className="Info">
             הערות : {house?.freeText}
           </div>
+        
         </div>
         <div className='House-Info-Tasks'>
           {tasks.map((task, index) => (
