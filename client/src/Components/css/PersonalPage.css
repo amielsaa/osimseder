@@ -32,7 +32,11 @@
     margin-top: 5%;
     width: 100%;
     font-size: 1.2rem;
-    color:var(--PURPLE-COLOR)
+    color:var(--PURPLE-COLOR);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
    }
    /* Add styles for the file input container */
 .FileInputContainer {

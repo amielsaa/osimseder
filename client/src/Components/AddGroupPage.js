@@ -20,6 +20,7 @@ const AddGroupPage = () => {
     school: '',
     capacity: ''
   };
+  
 
   const validationSchema = Yup.object().shape({
     city: Yup.string().required('עיר נדרשת'),

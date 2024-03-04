@@ -95,3 +95,50 @@
     justify-content: center;
     align-items: center;
   }
+
+
+  .add_group_button {
+    background-color: var(--ORANGE-COLOR);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    height: 40%;
+    width: 15%;
+    border-radius: var(--BORDER-RADIUS); /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+    margin-left: 5%;
+
+  }
+  .house_group_info {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between;
+    color: var(--PURPLE-COLOR);
+    font-weight: bold;
+    background-color: var(--GREY-COLOR);
+    flex-wrap: wrap;
+    min-height: 40%;
+    padding-right: 5%;
+ 
+  }
+  
+
+  .group_of_house_icon{
+    margin-left:40%
+  }
+  .groups_of_house{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 20%;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--ORANGE-COLOR);
+    gap: 20%;
+  }

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {Schools} = require('../../models/');
 const {Groups} = require('../../models/');
-const {Staffs, Cities, Areas, Houses} = require('../../models/');
+const {Staffs, Cities, Areas} = require('../../models/');
 const registrationLogic = require('../../domain/RegistrationLogic');
 router.post('/setup', async (req,res) => {
     try{
@@ -12,7 +12,6 @@ router.post('/setup', async (req,res) => {
         await setupSchools();
         await setupUsers();
         await setupGroups();
-        await setupHouses();
         res.json('DONE')
 
     }catch(error) {
@@ -112,18 +111,6 @@ const setupGroups = async () => {
         teamOwnerEmail:"amiels@gmail.com",
         capacity:4,
         schoolId:1
-    })
-}
-
-const setupHouses = async () => {
-    await Houses.create({
-        teamOwnerEmail:"amiels@gmail.com",
-        address:"mashu mashu 4",
-        residentLastName:"kashish",
-        residentFirstName:"meod",
-        residentPhoneNum:"0123123123",
-        residentAlternatePhoneNum:"0876876876",
-        residentGender:"male"
     })
 }
 

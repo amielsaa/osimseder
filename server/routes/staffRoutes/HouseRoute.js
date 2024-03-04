@@ -14,6 +14,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const residentFirstName = req.body.residentFirstName;
         const residentPhoneNum = req.body.residentPhoneNum;
         const languageNeeded = req.body.languageNeeded;
+
         const residentAlternatePhoneNum = req.body.residentAlternatePhoneNum;
         const city = req.body.city;
         const area = req.body.area;
@@ -24,6 +25,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 
         const newHouse = await StaffHouseLogic.createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded,
             city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum);
+
 
         //returns like this:
         // "id": 2,
@@ -64,7 +66,6 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
         else {
             houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);
         }
-        
         
         res.json(houses); 
 
@@ -130,6 +131,12 @@ router.get('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
         // "cityId": null,
         // "areaId": null
 
+        // needed:
+        // house.city = 'BSV'
+        // house.neighborhood = 'Shuna Bet'
+        // house.teamOwner = amiel saad
+        // house.teamOwner_2 = same
+        
         res.json(house);
         
     } catch (err) {
