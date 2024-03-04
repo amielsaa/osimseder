@@ -277,15 +277,19 @@ describe('StaffHouseLogic', () => {
       });
     });
     
-      it('should throw an error if the staff user is not found', async () => {
-        // Arrange
-        const userEmail = "nonexistentuser@example.com";
+    it('should throw an error if the staff user is not found (doesnt exist)', async () => {
+      // Arrange
+      const userEmail = "nonexistentuser@example.com";
 
-        // Act & Assert
-        await expect(async () => {
-          await StaffHouseLogic.getAllHousesOfCity(userEmail);
-        }).rejects.toThrowError('Couldn\'t find a staff user.');
-      });
+      // Act & Assert
+      await expect(async () => {
+        await StaffHouseLogic.getAllHousesOfCity(userEmail);
+      }).rejects.toThrowError('Couldn\'t find a staff user.');
+    });
+
+    it('should throw an error if the staff user is not associated with that city', async () => {
+    
+    });
   });
 
   describe('getAllHousesOfTeamOwner', () => {
@@ -305,7 +309,7 @@ describe('StaffHouseLogic', () => {
 
      
 
-    it('should throw an error if the staff user is not found', async () => {
+    it('should throw an error if the staff user is not found (doesnt exist)', async () => {
       // Arrange
       const userEmail = "nonexistentuser@example.com";
 
@@ -313,6 +317,10 @@ describe('StaffHouseLogic', () => {
       await expect(async () => {
         await StaffHouseLogic.getAllHousesOfCity(userEmail);
       }).rejects.toThrowError('Couldn\'t find a staff user.');
+    });
+
+    it('should throw an error if the staff user is not associated with that house', async () => {
+    
     });
   });
   
@@ -374,6 +382,14 @@ describe('StaffHouseLogic', () => {
         await StaffHouseLogic.getHouseById(houseId);
       }).rejects.toThrowError('Parameter houseId is undefined');
     });
+
+    it('should throw an error if the house is not associated with a city', async () => {
+    
+    });
+
+    it('should throw an error if the house is not associated with an area', async () => {
+    
+    });
   });
 
   describe('deleteHouse', () => {
@@ -408,4 +424,85 @@ describe('StaffHouseLogic', () => {
       }).rejects.toThrowError('Parameter houseId is undefined');
     });
   });
+
+  describe('assignGroupToHouse', () => {
+    it('should assign a group to a house', async () => {
+      // Arrange
+      const houseId = 1;
+      const groupId = 1;
+      const group = { id: groupId };
+
+      // Mock the necessary functions
+      Houses.findOne = jest.fn().mockResolvedValue({ id: houseId });
+      Groups.findOne = jest.fn().mockResolvedValue(group);
+      Groups.update = jest.fn().mockResolvedValue(true);
+
+      // Act
+      const result = await staffHouseLogic.assignGroupToHouse(houseId, groupId);
+
+      // Assert
+      expect(Houses.findOne).toHaveBeenCalledWith({ where: { id: houseId } });
+      expect(Groups.findOne).toHaveBeenCalledWith({ where: { id: groupId } });
+      expect(Groups.update).toHaveBeenCalledWith({ houseId: houseId }, { where: { id: groupId } });
+      expect(result).toEqual(group);
+    });
+
+    it('should throw an error if house is not found', async () => {
+      // Arrange
+      const houseId = 1;
+      const groupId = 1;
+
+      // Mock the necessary functions
+      Houses.findOne = jest.fn().mockResolvedValue(null);
+
+      // Act & Assert
+      await expect(async () => {
+        await staffHouseLogic.assignGroupToHouse(houseId, groupId);
+      }).rejects.toThrowError('Couldn\'t get house with that ID.');
+    });
+
+    it('should throw an error if group is not found', async () => {
+      // Arrange
+      const houseId = 1;
+      const groupId = 1;
+
+      // Mock the necessary functions
+      Houses.findOne = jest.fn().mockResolvedValue({ id: houseId });
+      Groups.findOne = jest.fn().mockResolvedValue(null);
+
+      // Act & Assert
+      await expect(async () => {
+        await staffHouseLogic.assignGroupToHouse(houseId, groupId);
+      }).rejects.toThrowError('Couldn\'t get group with that ID.');
+    });
+  });
+
+  describe('assignSecondTeamOwner', () => {
+    it('should throw an error if house is not found', async () => {
+        
+    });
+
+    it('should throw an error if user is not found', async () => {
+       
+    });
+
+    it('should successfully assign second team owner', async () => {
+       
+    });
+  });
+
+  describe('getAllAreasByCity', () => {
+    it('should return areas for each city', async () => {
+        
+    });
+
+    it('should handle case with no cities in the database', async () => {
+        
+    });
+
+    it('should handle case with cities having no associated areas', async () => {
+        
+    });
+  });
+
 });

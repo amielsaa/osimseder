@@ -81,7 +81,8 @@ class GroupLogic {
                 }
             }
             if (!groups || groups.length === 0) {
-                throw new Error('Couldn\'t find groups by the houses.');
+                // throw new Error('Couldn\'t find groups by the houses.');
+                return {};
             }
             // console.log(groups)
 
