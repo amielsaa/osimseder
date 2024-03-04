@@ -18,6 +18,7 @@ import TaskPage from './Components/TaskPage.js';
 import AddGroupPage from './Components/AddGroupPage.js';
 import AddHousePage from './Components/AddHousePage.js';
 import AddTaskPage from './Components/AddTaskPage.js';
+import AddGroupToHousePage from './Components/AddGroupToHousePage.js';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/addGroup" element={<AddGroupPage/>}/>
             <Route path="/addHouse" element={<AddHousePage/>}/>
             <Route path="/addTask/:id" element={<AddTaskPage/>}/>
+            <Route path="/addGroupToHouse/:id" element={<AddGroupToHousePage/>}/>
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/Equipment" element={<Equipment />} />
