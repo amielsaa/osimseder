@@ -15,20 +15,42 @@ class StaffHouseLogic {
         return true;
     }
 
-    async createHouse(address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, teamOwnerEmail, residentAlternatePhoneNum, residentGender) {
+    async createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum) {
         try {
-            this.checkArguments([address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, teamOwnerEmail, residentAlternatePhoneNum, residentGender],
-                ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "teamOwnerEmail", "residentAlternatePhoneNum", "residentGender"]
+            //city, area, gender, numberOfRooms, membersNeeded, freetext
+            this.checkArguments([userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum],
+                ["userEmail", "address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area", "gender", "numberOfRooms", "membersNeeded", "freetext", "residentAlternatePhoneNum"]
                 );
+
+            const cityId = await Cities.findOne({
+                where: {cityName: city}
+            });
+            if(!cityId){
+                throw new Error('Cant get a city by that name');
+            }
+            const areaId = await Areas.findOne({
+                where: {areaName: area}
+            });
+            if(!areaId){
+                throw new Error('Cant get a area by that name');
+            }
+            
+
             const house = await Houses.create({
                 address: address,
                 residentLastName: residentLastName,
                 residentFirstName: residentFirstName, 
                 residentPhoneNum: residentPhoneNum, 
                 languageNeeded: languageNeeded,
-                teamOwnerEmail: teamOwnerEmail,
-                residentAlternatePhoneNum: residentAlternatePhoneNum,
-                residentGender: residentGender
+                numberOfRooms: numberOfRooms,
+                membersNeeded: membersNeeded,
+                freetext: freetext,
+                residentGender: gender,
+                cityId: cityId.id,
+                areaId: areaId.id,
+                teamOwnerEmail: userEmail,
+                residentAlternatePhoneNum: residentAlternatePhoneNum
+
             });
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
