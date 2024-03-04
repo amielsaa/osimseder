@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
+import { FaHouseChimney } from "react-icons/fa6";
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -78,7 +79,7 @@ const GroupPage = () => {
         </div>
           <div className='Info'>חניך גרעין : </div>
           <div className='Info'>בית ספר : </div>
-          <div className='Info'>בית : </div>
+          <div className='Info'>בית : <FaHouseChimney className='house_for_group' onClick={() => {navigate('/HousePage/001')}}/></div>
         <div className='group-title'>
           <h1>חברי הקבוצה</h1>
         </div>

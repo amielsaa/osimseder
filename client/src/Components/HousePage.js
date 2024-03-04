@@ -14,7 +14,7 @@ import {getHouseById} from '../Helpers/StaffFrontLogic'
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
-  const {navigate} = useContext(DataContext)
+  const {navigate, user} = useContext(DataContext)
 
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -110,29 +110,33 @@ const setHouseRequest = async () => {
             <img src={HousePicture} alt="אין תמונה" />
           </div>
         </div>
+        {user.role !== "Student" && 
         <div className="buttons_for_house_logic">
           <button className="edit_house_button"> ערוך בית</button>
           <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
-
-        
         </div>
-          <div className="groups_of_house">
-          <div className="house_group_info">
-            קבוצה משוייכת: 
-            <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ id }`)}/> 
-            {/* <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> */}
+        }
+        
 
-            {/* Amiel - when pressing on the הסר button, you need to remove the group from the house */}
-            <button className="add_group_button" > הסר </button>
-
-          </div>
-          <div className="house_group_info">
-            קבוצה משוייכת: 
-           {/*  <MdGroups className='group_of_house_icon'/>  */}
-            <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button>
-            {/*<button className="add_group_button" > הסר </button>*/}
-          </div>
-          </div>
+          {user.role !== 'Student' && user.role !== 'TeamOwner' &&
+           <div className="groups_of_house">
+           <div className="house_group_info">
+             קבוצה משוייכת: 
+             <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ id }`)}/> 
+             {/* <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> */}
+ 
+             {/* Amiel - when pressing on the הסר button, you need to remove the group from the house */}
+             <button className="add_group_button" > הסר </button>
+ 
+           </div>
+           <div className="house_group_info">
+             קבוצה משוייכת: 
+            {/*  <MdGroups className='group_of_house_icon'/>  */}
+             <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button>
+             {/*<button className="add_group_button" > הסר </button>*/}
+           </div>
+           </div> }
+          
         <div className="House_Info">
           <div className="Info">
               חבר גרעין  1: {house?.teamOwnerEmail}
