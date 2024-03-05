@@ -16,9 +16,6 @@ class LoginLogic {
                 const staff = await Staffs.findOne({
                     where: { email: email }
                 });
-                if (!staff) {
-                    throw new Error("Can't find a user with this email");
-                }
                 return this.verifyLoginStaff(staff, email, givenPassword)
             } else {
                 return this.verifyLoginStudent(user, email, givenPassword)
