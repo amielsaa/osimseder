@@ -41,8 +41,6 @@ class EmailLogic {
                 }
                 const isStudent = false;
                 const staffToken = staff.verificationToken;
-                console.log(token)
-                console.log(staffToken)
                 if (studentToken == null) {
                     throw new Error("Error: staff with mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
                 }
@@ -56,8 +54,6 @@ class EmailLogic {
             else {
                 const isStudent = true;
                 const studentToken = student.verificationToken;
-                console.log(token)
-                console.log(studentToken)
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
                 }
@@ -77,14 +73,76 @@ class EmailLogic {
 
 
     async sendResetPasswordEmail(email, token) {
-        const resetLink = `https://localhost:3001/reset-password?token=${token}&email=${encodeURIComponent(email)}`;
-
+        const resetLink = `https://localhost:3001/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
+        const isStudent = false;
+        const student = await Students.findOne({
+            where: { email: email }
+        });
+        if (!student) {
+            const staff = await Staffs.findOne({
+                where: { email: email }
+            });
+            if (!staff) {
+                throw new Error('No user with this email');
+            }
+        } else {
+            const isStudent = true;
+        }
         await transporter.sendMail({
             to: email,
             subject: 'Reset Your Password',
             html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`
         });
+        return isStudent;
+
     }
+    async verifyEmailForPassword(email, token) {
+        try {
+            // Decrypt the email here
+            console.log("Entered verifyEmailForPassword");
+            const decoded_email = decodeURIComponent(email);
+            const student = await Students.findOne({
+                where: { email: decoded_email }
+            });
+            if (!student) {
+                const staff = await Staffs.findOne({
+                    where: { email: decoded_email }
+                });
+                if (!staff) {
+                    throw new Error('No user with this email');
+                }
+                const isStudent = false;
+                const staffToken = staff.verificationToken;
+                if (studentToken == null) {
+                    throw new Error("Error: staff with mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                }
+                if (staffToken == token) {
+                    return isStudent;
+                } else {
+                    throw new Error('Error: Token saved for user is different from the one given here.');
+                }
+            }
+            else {
+                const isStudent = true;
+                const studentToken = student.verificationToken;
+                if (studentToken == null) {
+                    throw new Error("Error: student in mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                }
+                console.log("Entered Check");
+                if (studentToken == token) {
+                    return isStudent;
+                } else {
+                    throw new Error('Error: Token saved for user is different from the one given here.');
+                }
+            }
+
+        } catch (error) {
+            console.error('Error verifying email and token:', error);
+            throw new Error('Error verifying email and token.');
+        }
+    }
+
+
 }
 
 module.exports = new EmailLogic();

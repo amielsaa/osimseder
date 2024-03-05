@@ -8,6 +8,7 @@ const {roleGroup} = require('../utils/Accesses')
 class LoginLogic {
     async verifyLogin(email, givenPassword ) {
         try {
+            console.log("Enter login logic");
             const user = await Students.findOne({
                 where: { email: email }
             });
@@ -15,6 +16,9 @@ class LoginLogic {
                 const staff = await Staffs.findOne({
                     where: { email: email }
                 });
+                if (!staff) {
+                    throw new Error("Can't find a user with this email");
+                }
                 return this.verifyLoginStaff(staff, email, givenPassword)
             } else {
                 return this.verifyLoginStudent(user, email, givenPassword)
@@ -25,6 +29,10 @@ class LoginLogic {
     }
 
     async verifyLoginStudent(student, email, givenPassword) {
+        console.log("Enter verify student");
+        if (!student.isVerified) {
+            throw new Error("Your account hasn't been verified yet. Check your email");
+        }
         const match = await bcrypt.compare(givenPassword, student.password);
         if (!match) {
             throw new Error('Wrong username and password combination');
@@ -36,6 +44,9 @@ class LoginLogic {
         return { token: accessToken, user:studentJson, id: student.id };
     }
     async verifyLoginStaff(staff, email, givenPassword) {
+        if (!staff.isVerified) {
+            throw new Error("Your account hasn't been verified yet. Check your email");
+        }
         if (!staff) {
             throw new Error('Error: user not found');
         }
@@ -87,7 +98,25 @@ class LoginLogic {
         staffJson.dataValues.role = roleGroup[staff.accesses];
         return { token: token, user:staffJson, id: staff.id };
     }
-    
+
+    async logout(email) {
+        try {
+            const user = await Students.findOne({
+                where: { email: email }
+            });
+            if (!user) {
+                const staff = await Staffs.findOne({
+                    where: { email: email }
+                });
+                if (!staff) {
+                    throw new Error("Can't find a user with this email");
+                }
+            }
+            //TODO AMIEL SHOULD ANYTHING ELSE BE HERE?
+        } catch (error) {
+            throw new Error('Failed to login: ' + error);
+        }
+    }
 }
 
 module.exports = new LoginLogic();
