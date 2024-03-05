@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import ConfirmationMessage from "../Components/ConfirmationMessage";
 
 
 
@@ -18,9 +19,8 @@ export const DataProvider = ({children}) => {
             });
         }
     }, [])
-
+    
     const navigate = useNavigate();
-      
     return (
         <DataContext.Provider value = { {
             user, setUser, navigate
