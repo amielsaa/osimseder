@@ -17,6 +17,9 @@ function AddGroupToHousePage() {
     const [schoolOptions, setSchoolOptions] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState('');
 
+    //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
+
+
     /* useEffect(() => {
        useEffect(() => {
     const fetchSchools = async () => {

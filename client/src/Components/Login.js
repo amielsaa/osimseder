@@ -76,13 +76,13 @@ const Login = () => {
         <Form>
           <div className="input-box">
             <label style={{ display: !displayCode ? 'block' : 'none' }} >אימייל:</label>
-            <Field type="email" name="email" placeholder="אימייל" style={{ display: !displayCode ? 'block' : 'none' }} />
+            <Field type="email" name="email"  style={{ display: !displayCode ? 'block' : 'none' }} />
             <ErrorMessage name="email" component="div" className="error-message" />
           </div>
 
           <div className="input-box">
             <label style={{ display: !displayCode ? 'block' : 'none' }}>סיסמה:</label>
-            <Field type="password" name="password" placeholder="סיסמה" style={{ display: !displayCode ? 'block' : 'none' }} />
+            <Field type="password" name="password"  style={{ display: !displayCode ? 'block' : 'none' }} />
             <ErrorMessage name="password" component="div" className="error-message" />
           </div>
 
