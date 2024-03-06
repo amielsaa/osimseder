@@ -43,7 +43,7 @@ const HouseList = () => {
     }
   ];
 
-  const [houses, setHouses] = useState();
+  const [houses, setHouses] = useState([]);
 
   const setHousesList = async () => {
     const housesList = await fetchAllHouses();

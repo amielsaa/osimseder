@@ -18,7 +18,7 @@ const GroupList = () => {
   // function name is getGroups and should be inside useEffect as the page renders
 
 
-  useEffect(() => {
+   useEffect(() => {
     //const getGroups = (user) => {
       // //TODO: update only the joined group
       const setGroups = async () => {
@@ -48,7 +48,7 @@ const GroupList = () => {
     <>
       {groupIds &&
       <>{groupIds.map((groupJson) => (
-        <Group key={groupJson} groupId={groupJson.id} groupJson={groupJson} />
+        <Group key={groupJson} groupId={groupJson} groupJson={groupJson} />
       ))}
       </>}
     </>

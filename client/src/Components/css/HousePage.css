@@ -59,7 +59,8 @@
   .House-Info-Tasks {
     width: 100%;
     min-height: 27%; /* Adjust this value as needed */
-    border: 1px solid var(--ORANGE-COLOR);
+    border-right:2px solid var(--ORANGE-COLOR);
+    border-left:2px solid var(--ORANGE-COLOR);
     display: flex;
     flex-direction: column;
     border-radius: 25px;
