@@ -15,62 +15,16 @@ class StaffHouseLogic {
         return true;
     }
 
-    async createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum) {
+    async createHouse(newFields, userEmail) {
         try {
             //city, area, gender, numberOfRooms, membersNeeded, freetext
-            this.checkArguments([userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum],
-                ["userEmail", "address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area", "gender", "numberOfRooms", "membersNeeded", "freetext", "residentAlternatePhoneNum"]
-                );
 
-            const cityId = await Cities.findOne({
-                where: {cityName: city}
-            });
-            if(!cityId){
-                throw new Error('Cant get a city by that name');
-            }
-            const areaId = await Areas.findOne({
-                where: {areaName: area}
-            });
-            if(!areaId){
-                throw new Error('Cant get a area by that name');
-            }
-            
+            newFields["teamOwnerEmail"] = userEmail;
+            const house = await Houses.create(newFields);
 
-            const house = await Houses.create({
-                address: address,
-                residentLastName: residentLastName,
-                residentFirstName: residentFirstName, 
-                residentPhoneNum: residentPhoneNum, 
-                languageNeeded: languageNeeded,
-                numberOfRooms: numberOfRooms,
-                membersNeeded: membersNeeded,
-                freeText: freetext,
-                residentGender: gender,
-                cityId: cityId.id,
-                areaId: areaId.id,
-                teamOwnerEmail: userEmail,
-                residentAlternatePhoneNum: residentAlternatePhoneNum
-
-            });
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
             }
-        
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
         
             return house;
 
@@ -79,6 +33,70 @@ class StaffHouseLogic {
         }
     }
 
+
+    // async createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum) {
+    //        try {
+    //         //city, area, gender, numberOfRooms, membersNeeded, freetext
+    //         this.checkArguments([userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum],
+    //             ["userEmail", "address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area", "gender", "numberOfRooms", "membersNeeded", "freetext", "residentAlternatePhoneNum"]
+    //             );
+
+    //         const cityId = await Cities.findOne({
+    //             where: {cityName: city}
+    //         });
+    //         if(!cityId){
+    //             throw new Error('Cant get a city by that name');
+    //         }
+    //         const areaId = await Areas.findOne({
+    //             where: {areaName: area}
+    //         });
+    //         if(!areaId){
+    //             throw new Error('Cant get a area by that name');
+    //         }
+            
+
+    //         const house = await Houses.create({
+    //             address: address,
+    //             residentLastName: residentLastName,
+    //             residentFirstName: residentFirstName, 
+    //             residentPhoneNum: residentPhoneNum, 
+    //             languageNeeded: languageNeeded,
+    //             numberOfRooms: numberOfRooms,
+    //             membersNeeded: membersNeeded,
+    //             freetext: freetext,
+    //             residentGender: gender,
+    //             cityId: cityId.id,
+    //             areaId: areaId.id,
+    //             teamOwnerEmail: userEmail,
+    //             residentAlternatePhoneNum: residentAlternatePhoneNum
+
+    //         });
+    //         if (!house) {
+    //             throw new Error('Couldn\'t create a house.');
+    //         }
+        
+    //         // const students = await group.getStudents();
+    
+    //         // const studentNames = students.map(student => {
+    //         //     const { firstName, lastName, ...rest } = student;
+    //         //     return `${firstName} ${lastName}`;
+    //         // });
+    
+    //         // group.dataValues.students = studentNames;            
+            
+    //         // const responseData = {
+    //         //     id: group.id,
+    //         //     students: group.dataValues.students,
+    //         //     memberCount: group.dataValues.students.length,
+    //         //     capacity: group.capacity
+    //         // };
+        
+    //         return house;
+
+    //     } catch (error) {
+    //         throw new Error('Failed to create house: ' + error);
+    //     }
+    // }
     
     async getAllHousesOfCity(userEmail) {
         try {
@@ -389,6 +407,32 @@ class StaffHouseLogic {
 
         } catch (error) {
             throw new Error('Failed to get areas by city: ' + error);
+        }
+    }
+
+    async updateHouse(id, updatedFields) {
+        try {
+            this.checkArguments([id],
+                ["id"]);
+            const house = await Houses.findOne({
+                where: {id: id}
+            });
+            if(!house){
+                throw new Error('Couldn\'t find a house with that id.');
+            }
+
+            for (const key in updatedFields) {
+                if (Object.hasOwnProperty.call(updatedFields, key)) {
+                    house[key] = updatedFields[key];
+                }
+            }
+
+            await house.save();
+        
+            return house;
+
+        } catch (error) {
+            throw new Error('Failed to update a house by id: ' + error);
         }
     }
 
