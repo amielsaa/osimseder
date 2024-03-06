@@ -21,6 +21,7 @@ class StaffHouseLogic {
 
             newFields["teamOwnerEmail"] = userEmail;
             const house = await Houses.create(newFields);
+
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
             }
