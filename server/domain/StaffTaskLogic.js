@@ -81,13 +81,51 @@ class StaffTaskLogic {
                 throw new Error('Couldn\'t find a house with that id.');
             }
             const tasks = await house.getTasks();
+
+            const tasksByRoom = tasks.reduce((result, task) => {
+                const { id, room, status, freeText } = task;
+                const existingRoom = result.find(r => r.room === room);
+    
+                if (existingRoom) {
+                    existingRoom.tasks.push({ taskId: id, status: status, description: freeText });
+                } else {
+                    result.push({
+                        room: room,
+                        tasks: [{ taskId: id, status: status, description: freeText }]
+                    });
+                }
+    
+                return result;
+            }, []);
+    
+            return tasksByRoom;
         
-            return tasks;
+            // return tasks;
 
         } catch (error) {
             throw new Error('Failed to get all tasks by houseId: ' + error);
         }
     }
+
+    // backup
+    // async getAllTasksByHouse(houseId) {
+    //     try {
+    //         this.checkArguments([houseId],
+    //             ["houseId"]);
+    //         const house = await Houses.findOne({
+    //             where: {id: houseId}
+    //         });
+    //         if(!house){
+    //             throw new Error('Couldn\'t find a house with that id.');
+    //         }
+    //         const tasks = await house.getTasks();
+        
+    //         return tasks;
+
+    //     } catch (error) {
+    //         throw new Error('Failed to get all tasks by houseId: ' + error);
+    //     }
+    // }
 
     async getTaskById(id) {
         try {
