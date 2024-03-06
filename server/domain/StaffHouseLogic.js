@@ -20,12 +20,32 @@ class StaffHouseLogic {
             //city, area, gender, numberOfRooms, membersNeeded, freetext
 
             newFields["teamOwnerEmail"] = userEmail;
+            try{
+                const cityId = await Cities.findOne({
+                    where: {cityName: newFields["city"]}
+                });
+                if(!cityId){
+                    throw new Error('Cant get a city by that name');
+                }
+                const areaId = await Areas.findOne({
+                    where: {areaName: newFields["area"]}
+                });
+                if(!areaId){
+                    throw new Error('Cant get a area by that name');
+                }
+                newFields["cityId"]=cityId.id;
+                newFields["areaId"]=areaId.id;
+            }
+            catch (e){
+                throw new Error(e);
+            }
+            
             const house = await Houses.create(newFields);
 
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
             }
-        
+
             return house;
 
         } catch (error) {
