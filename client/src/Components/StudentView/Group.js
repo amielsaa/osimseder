@@ -17,10 +17,7 @@ const Group = ({ groupId , groupJson}) => {
   };
   
   
-  const handleManageGroup = (groupId, userId) => {
-  //Amiel - Team Owner join a group as a team owner.
-  // notice that if there is a team owner already he cannot do it.
-  }
+
 
   useEffect(() => {
     const updateStudentList = async () => {
@@ -43,9 +40,7 @@ const Group = ({ groupId , groupJson}) => {
         {user.role === "Student" &&
         <button className='join-group-btn' onClick={handleJoinGroup(groupId, user.id)}>הצטרף</button>
         }
-        {user.role === "TeamOwner" &&
-        <button className='join-group-btn' onClick={handleManageGroup(groupId, user.id)}>נהל</button>
-        }
+        
         <div className='students-Count'>{memberCount.memberCount}/{memberCount.capacity}</div>
       </div>
       {studentsPopUp ?

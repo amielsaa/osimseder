@@ -23,6 +23,7 @@ const GroupPage = () => {
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
   const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
+  const [studentToRemove, setStudentToRemove] = useState('')
   const [tasks, setTasks] = useState([
     {
       room: 'סלון',
@@ -58,11 +59,12 @@ const GroupPage = () => {
         { taskId: 9, description: 'ניקיון', status: true },
         { taskId: 10, description: 'סידור', status: false },
       ]
-    },
+  },
   ]);
 
   const handleRemoveMember = (index) => {
     // Display the confirmation message
+    setStudentToRemove(studentList[index])
     setShowRemoveConfirmation(true);
     setRemoveConfirmationIndex(index);
   };
@@ -74,8 +76,11 @@ const GroupPage = () => {
       setStudentsList(updatedStudents);
     }
 
+
+
     // Close the confirmation message
     setShowRemoveConfirmation(false);
+    setStudentToRemove('')
     setRemoveConfirmationIndex(null);
   };
 
@@ -124,9 +129,10 @@ const GroupPage = () => {
         </div>
         </div>
       </div>
+      
       {showRemoveConfirmation && (
         <ConfirmationMessage
-          confirmationMessage={'להסיר את החניך מהקבוצה?'}
+          confirmationMessage={`להסיר את ${studentToRemove} מהקבוצה?`}
           handleConfirmation={confirmRemoveMember}
           setShowConfirmation={setShowRemoveConfirmation}
         />
