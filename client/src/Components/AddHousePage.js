@@ -23,6 +23,7 @@ const AddHousePage = () => {
     const [teamSize, setTeamSize] = useState('');
     const [comments, setComments] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
     const [schoolsList, setSchoolsList] = useState(['נתיבי עם']);
     const [neighborhoodsList, setNeighborhoodsList] = useState(['שכונה א', 'שכונה ב']);
     const languages = ["ערבית","ספרדית","אמהרית","רוסית"]
@@ -39,7 +40,8 @@ const AddHousePage = () => {
     rooms: '',
     teamSize: '',
     comments: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    secondPhoneNumber: ''
   };
 
   const validationSchema = Yup.object().shape({
@@ -55,6 +57,8 @@ const AddHousePage = () => {
     comments: Yup.string(),
     phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
+        .matches(/^05\d{8}$/, "מספר לא תקין"),
+    secondPhoneNumber: Yup.string()
         .matches(/^05\d{8}$/, "מספר לא תקין"),
   });
 
@@ -152,25 +156,30 @@ const AddHousePage = () => {
                <>
                     <div>
                         <label htmlFor="address">כתובת :</label>
-                        <Field id="address" name="address" placeholder="כתובת" onChange={(e) => {setAddress(e.target.value)}} value={address} />
+                        <Field id="address" name="address"  onChange={(e) => {setAddress(e.target.value)}} value={address} />
                         <ErrorMessage name="address" component="span" />
                     </div>
                     
                     <div>
                         <label htmlFor="firstName">שם איש קשר :</label>
-                        <Field id="firstName" name="firstName" placeholder="שם פרטי" onChange={(e) => {setFirstName(e.target.value)}} value={firstName} />
+                        <Field id="firstName" name="firstName"  onChange={(e) => {setFirstName(e.target.value)}} value={firstName} />
                         <ErrorMessage name="firstName" component="span" />
                     </div>
 
                     <div>
                         <label htmlFor="lastName">שם משפחה איש קשר : </label>
-                        <Field id="lastName" name="lastName" placeholder=" שם משפחה איש קשר " onChange={(e) => {setLastName(e.target.value)}} value={lastName}/>
+                        <Field id="lastName" name="lastName"  onChange={(e) => {setLastName(e.target.value)}} value={lastName}/>
                         <ErrorMessage name="lastName" component="span" />
                     </div>
                     <div>
                         <label htmlFor="phoneNumber"> מספר פלאפון : </label>
-                        <Field id="phoneNumber" name="phoneNumber" placeholder=" מספר פלאפון " onChange={(e) => {setPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <Field id="phoneNumber" name="phoneNumber"  onChange={(e) => {setPhoneNumber(e.target.value)}} value={phoneNumber}/>
                         <ErrorMessage name="phoneNumber" component="span" />
+                    </div>
+                    <div>
+                        <label htmlFor="secondPhoneNumber">   מספר פלאפון חלופי : </label>
+                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <ErrorMessage name="secondPhoneNumber" component="span" />
                     </div>
                     
                     <div>
@@ -222,7 +231,7 @@ const AddHousePage = () => {
 
                 <div>
                     <label htmlFor="comments"> הערות: </label>
-                    <Field as="textarea" id="comments" name="comments" placeholder="הערות" onChange={(e) => {setComments(e.target.value)}} value={comments} />
+                    <Field as="textarea" id="comments" name="comments"  onChange={(e) => {setComments(e.target.value)}} value={comments} />
                     <ErrorMessage name="comments" component="span" />
                 </div>
                </>

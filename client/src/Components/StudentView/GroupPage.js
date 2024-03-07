@@ -10,6 +10,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FaHouseChimney } from "react-icons/fa6";
+import ConfirmationMessage from '../ConfirmationMessage';
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -20,6 +21,9 @@ const GroupPage = () => {
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
+  const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
+  const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
+  const [studentToRemove, setStudentToRemove] = useState('')
   const [tasks, setTasks] = useState([
     {
       room: 'סלון',
@@ -55,14 +59,34 @@ const GroupPage = () => {
         { taskId: 9, description: 'ניקיון', status: true },
         { taskId: 10, description: 'סידור', status: false },
       ]
-    },
+  },
   ]);
 
   const handleRemoveMember = (index) => {
-    const updatedStudents = [...studentList];
-    updatedStudents.splice(index, 1);
-    setStudentsList(updatedStudents);
+    // Display the confirmation message
+    setStudentToRemove(studentList[index])
+    setShowRemoveConfirmation(true);
+    setRemoveConfirmationIndex(index);
   };
+
+  const confirmRemoveMember = (confirmed) => {
+    if (confirmed) {
+      const updatedStudents = [...studentList];
+      updatedStudents.splice(removeConfirmationIndex, 1);
+      setStudentsList(updatedStudents);
+    }
+
+
+
+    // Close the confirmation message
+    setShowRemoveConfirmation(false);
+    setStudentToRemove('')
+    setRemoveConfirmationIndex(null);
+  };
+
+
+
+  
 
   return (
     <div>
@@ -105,6 +129,16 @@ const GroupPage = () => {
         </div>
         </div>
       </div>
+      
+      {showRemoveConfirmation && (
+        <ConfirmationMessage
+          confirmationMessage={`להסיר את ${studentToRemove} מהקבוצה?`}
+          handleConfirmation={confirmRemoveMember}
+          setShowConfirmation={setShowRemoveConfirmation}
+        />
+      )}        
+
+
       <Footer/>
     </div>
     

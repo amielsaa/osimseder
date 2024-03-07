@@ -68,34 +68,34 @@ function Registration() {
                     </div>
                     <div>
                         <label htmlFor="firstName">שם פרטי:</label>
-                        <Field id="firstName" name="firstName" placeholder="שם פרטי" />
+                        <Field id="firstName" name="firstName"  />
                         <ErrorMessage name="firstName" component="span" />
                     </div>
 
                     <div>
                         <label htmlFor="lastName">שם משפחה: </label>
-                        <Field id="lastName" name="lastName" placeholder="שם משפחה" />
+                        <Field id="lastName" name="lastName"  />
                         <ErrorMessage name="lastName" component="span" />
                     </div>
                     <div>
                         <label htmlFor="email">אימייל : </label>
-                        <Field type="email" id="email" name="email" placeholder="אימייל " />
+                        <Field type="email" id="email" name="email"  />
                         <ErrorMessage name="email" component="span" />
                     </div>
                     <div>
                         <label htmlFor="phoneNumber">מספר נייד : </label>
-                        <Field  id="phoneNumber" name="phoneNumber" placeholder="מספר נייד " />
+                        <Field  id="phoneNumber" name="phoneNumber"  />
                         <ErrorMessage name="phoneNumber" component="span" />
                     </div>
                     <div>
                         <label htmlFor="password">סיסמה: </label>
-                        <Field type="password" id="password" name="password" placeholder="סיסמה" />
+                        <Field type="password" id="password" name="password"  />
                         <ErrorMessage name="password" component="span" />
                     </div>
 
                     <div>
                         <label htmlFor="confirmPassword">אשר סיסמה: </label>
-                        <Field type="password" id="confirmPassword" name="confirmPassword" placeholder="אשר סיסמה" />
+                        <Field type="password" id="confirmPassword" name="confirmPassword"  />
                         <ErrorMessage name="confirmPassword" component="span" />
                     </div>
 
@@ -112,13 +112,13 @@ function Registration() {
 
                     <div>
                         <label htmlFor="parentName">שם הורה: </label>
-                        <Field id="parentName" name="parentName" placeholder="שם הורה" />
+                        <Field id="parentName" name="parentName"  />
                         <ErrorMessage name="parentName" component="span" />
                     </div>
 
                     <div>
                         <label htmlFor="parentPhoneNumber">מספר פלאפון הורה: </label>
-                        <Field id="parentPhoneNumber" name="parentPhoneNumber" placeholder="מספר פלאפון הורה" />
+                        <Field id="parentPhoneNumber" name="parentPhoneNumber" />
                         <ErrorMessage name="parentPhoneNumber" component="span" />
                     </div>
 

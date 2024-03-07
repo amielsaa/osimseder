@@ -100,7 +100,7 @@ class StaffTaskLogic {
     
             return tasksByRoom;
         
-            return tasks;
+            // return tasks;
 
         } catch (error) {
             throw new Error('Failed to get all tasks by houseId: ' + error);
