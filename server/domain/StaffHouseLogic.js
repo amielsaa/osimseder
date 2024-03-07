@@ -53,6 +53,8 @@ class StaffHouseLogic {
         }
     }
 
+    
+    
 
     // async createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum) {
     //        try {
@@ -450,6 +452,47 @@ class StaffHouseLogic {
             await house.save();
         
             return house;
+
+        } catch (error) {
+            throw new Error('Failed to update a house by id: ' + error);
+        }
+    }
+
+    async getHouseGroups(houseId) {
+        try {
+            this.checkArguments([houseId],
+                ["houseId"]);
+            const house = await Houses.findOne({
+                where: {id: houseId}
+            });
+            if(!house){
+                throw new Error('Couldn\'t find a house with that id.');
+            }
+            
+            const groups = await house.getGroups();
+        
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+        
+                const students = await group.getStudents();
+        
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+        
+                group.dataValues.students = studentNames;            
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+
+            return responseData;
+            // return groups;
 
         } catch (error) {
             throw new Error('Failed to update a house by id: ' + error);

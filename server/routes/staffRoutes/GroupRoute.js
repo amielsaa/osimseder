@@ -205,19 +205,17 @@ router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
 
 
 // Update a group by ID (PUT)
-// router.put('/:id', validateToken, async (req, res) => {
-//     try {
-//         const group = await GroupModel.findByPk(req.params.id);
-//         if (group) {
-//             await group.update(req.body);
-//             res.json(group);
-//         } else {
-//             res.status(404).json({ message: 'group not found' });
-//         }
-//     } catch (err) {
-//         res.status(400).json({ message: err.message });
-//     }
-// });
+router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedFields = req.body;
+
+        const newGroup = await staffGroupLogic.updateGroup(id, updatedFields);
+        res.json(newGroup);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 
 // Delete a group by ID (DELETE)
 // router.delete('/:id', validateToken, async (req, res) => {
