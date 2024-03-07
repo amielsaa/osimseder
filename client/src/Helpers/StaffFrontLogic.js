@@ -9,7 +9,6 @@ const fetchAllGroupsStaff = async () => {
     if(res.data.error) {
         alert(res.data.error)
     } else {
-        console.log(res.data)
         return res.data;
     }
 }
@@ -19,7 +18,6 @@ const fetchAllSchoolsByCity = async (cityName) => {
     if(res.data.error) {
         alert(res.data.error);
     } else {
-        console.log(res.data);
         return res.data;
     }
 }
@@ -40,7 +38,6 @@ const fetchAllHouses = async () => {
     if(res.data.error) {
         alert(res.data.error);
     } else {
-        console.log(res.data);
         return res.data;
     }
 }
@@ -49,7 +46,6 @@ const getHouseById = async (id) => {
     if(res.data.error) {
         alert(res.data.error);
     } else {
-        console.log(res.data);
         return res.data;
     }
 }
@@ -60,7 +56,6 @@ const addHouse = async (information) => {
         alert(res.data.error);
         return false;
     } else {
-        console.log('adding house')
         return true;
     }
 
@@ -84,7 +79,6 @@ const addTask = async (data) => {
     if(res.data.error) {
         alert(res.data.error);
     } else {
-        console.log(res);
         return true;
     }
 }
@@ -107,4 +101,22 @@ const getTaskById = async (id) => {
     }
 }
 
-export {fetchAllAreasByCity, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+const getAllGroupsWithoutHouse = async (schoolId) => {
+    const res = await axios.post(`${URL}/staff/groups/emptygroups`,{schoolId: schoolId}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+const assignGroupToHouse = async (groupId, houseId) => {
+    const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
+    if(res.data.error) { 
+        console.log(res.data.error);
+        return false; 
+    }
+    else { return true; }
+}
+
+export {fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
