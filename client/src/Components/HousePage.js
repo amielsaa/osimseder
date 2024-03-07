@@ -53,9 +53,7 @@ const HousePage = () => {
     setTasks(tasksJson);
   }
 
-  useEffect(() => {
-    // Generate a random House object for testing
-        
+  useEffect(() => {        
     setHouseRequest();
     setTasksRequest();
   }, [tasks]); // Dependency array ensures it runs when the id changes

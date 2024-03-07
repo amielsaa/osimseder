@@ -312,6 +312,62 @@ class GroupLogic {
             throw new Error('Failed to get schools by city ' + error);
         }
     }
+
+    async getAllGroupsWithoutHouse(schoolId) {
+        try {
+            if(schoolId === undefined){
+                throw new Error('schoolId is undefined');
+            }
+            if(schoolId === null){
+                throw new Error('schoolId is null');
+            }
+
+            const groups = await Groups.findAll({
+                where: { schoolId: schoolId, houseId: null }
+            });
+            if (!groups) {
+                throw new Error('groups not found');
+            }
+
+            // const schools = await Schools.findAll({
+            //     where: { "cityId": city.id }
+            // });
+            // if (!schools) {
+            //     throw new Error('Schools not found');
+            // }
+            // const responseData = schools.map(school => ({
+            //     id: school.id,
+            //     schoolName: school.schoolName
+            // }));
+            // return groups;
+
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+        
+                const students = await group.getStudents();
+        
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+        
+                group.dataValues.students = studentNames;            
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+
+            return responseData;
+
+        } catch (error) {
+            throw new Error('Failed to get school\'s groups without a house ' + error);
+        }
+    }
+    
     
 
     // async joinGroup(groupId, userEmail) {
