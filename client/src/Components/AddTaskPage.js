@@ -9,6 +9,7 @@ import Header from './Header';
 import Nav from './Nav';
 import Footer from './Footer';
 import { IoChevronForwardCircle } from "react-icons/io5";
+import {addTask} from '../Helpers/StaffFrontLogic'
 
 function AddTaskPage() {
     const { id } = useParams()
@@ -29,7 +30,17 @@ function AddTaskPage() {
 
     });
 
+    //const addTaskAndNavigate = async ()
+
     const onSubmit = (data) => {
+      data.type = data.taskType;
+      data.freeText = data.taskDescription;
+      data.status = 'GREEN';
+      data.houseId = id;
+      const res = addTask(data);
+      if(res) {
+        navigate(`/HousePage/${id}`)
+      }
        console.log(data)
        // Amiel - I managed to get this page working without the yup problem.
        // when submitting here you need to add the new task to the house Id. you have the house id in the params

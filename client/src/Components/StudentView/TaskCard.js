@@ -1,5 +1,5 @@
 // TaskCard.js
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import { IoSearchOutline } from 'react-icons/io5';
 import '../css/TaskCard.css';
@@ -17,6 +17,10 @@ const TaskCard = ({ room, tasks }) => {
       setTaskList(updatedTasks);
     }
   };
+
+  useEffect(() => {
+    console.log(taskList);
+  },[])
 
   return (
     <div className='Task'>

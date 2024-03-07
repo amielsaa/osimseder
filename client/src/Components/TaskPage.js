@@ -8,14 +8,21 @@ import DataContext from '../Helpers/DataContext';
 import CleaningPicture from '../images/cleaningPicture.jpg'
 import PaintingPicture from '../images/paintingPicture.jpg'
 import Footer from './Footer';
+import {getTaskById} from '../Helpers/StaffFrontLogic'
 const TaskPage = () => {
     const {id} = useParams ()
     const {navigate} = useContext(DataContext)
     const [task, SetTask] = useState({taskId: '001' , room: 'סלון', taskKind: 'ניקיון', taskDescription: 'יש לנקות את החדר ולקרצף את הריצפה יש גם המון לכלוך בחלונות אז לשים לב לזה'})
 
+    const setTaskRequest = async () => {
+      const taskById = await getTaskById(id);
+      SetTask(taskById);
+    }
+
     useEffect(() => {
+      setTaskRequest();
       // Amiel - you have the Task ID in in line 11, I need you to get it from the DB and set it to task.
-    })
+    }, [])
 
   return (
     <>
@@ -26,12 +33,12 @@ const TaskPage = () => {
     <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
     </span>
     <div className='Task-Content'>
-      <div className='Task_Id'>מספר המטלה :  {task.taskId} </div>
+      <div className='Task_Id'>מספר המטלה :  {task.id} </div>
       <div className='room'>חדר : <span className='TaskInfo'> {task.room} </span>  </div>
-      <div className='Task_kind'>סוג מטלה : <span className='TaskInfo'> {task.taskKind} </span>  </div>
-      <div className='Task_description'>תיאור : <span className='Task_info_desc'> {task.taskDescription} </span></div>
+      <div className='Task_kind'>סוג מטלה : <span className='TaskInfo'> {task.type} </span>  </div>
+      <div className='Task_description'>תיאור : <span className='Task_info_desc'> {task.freeText} </span></div>
       <div className='action_pic'>
-        <img src={task.taskKind === 'ניקיון' ? CleaningPicture : PaintingPicture }/>
+        <img src={task.type === 'ניקיון' ? CleaningPicture : PaintingPicture }/>
       </div>
     </div>
 
