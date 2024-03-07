@@ -9,12 +9,13 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import {getHouseById} from '../Helpers/StaffFrontLogic'
+import {getHouseById, getTasksByHouseId} from '../Helpers/StaffFrontLogic'
 
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
   const {navigate, user} = useContext(DataContext)
+  const [tasks, setTasks] = useState([]);
 
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -42,56 +43,24 @@ const HousePage = () => {
     return randomHouse;
   };
 
-const setHouseRequest = async () => {
-  const houseJson = await getHouseById(id);
-  setHouse(houseJson);
-}
+  const setHouseRequest = async () => {
+    const houseJson = await getHouseById(id);
+    setHouse(houseJson);
+  }
+
+  const setTasksRequest = async () => {
+    const tasksJson = await getTasksByHouseId(id);
+    setTasks(tasksJson);
+  }
+
   useEffect(() => {
     // Generate a random House object for testing
         
     setHouseRequest();
-    // Set the generated random house to the state
-    //setHouse(generateRandomHouse());
-  }, [id]); // Dependency array ensures it runs when the id changes
+    setTasksRequest();
+  }, [tasks]); // Dependency array ensures it runs when the id changes
 
   
-  const [tasks, setTasks] = useState([
-    {
-      room: 'סלון',
-      tasks: [
-        { taskId: 1, description: 'ניקיון', status: true },
-        { taskId: 2, description: 'סידור', status: false },
-      ]
-    },
-    {
-      room: 'חדר ילדים',
-      tasks: [
-        { taskId: 3, description: 'תיקון', status: false },
-        { taskId: 4, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'מטבח',
-      tasks: [
-        { taskId: 5, description: 'תיקון', status: false },
-        { taskId: 6, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'חדר שינה',
-      tasks: [
-        { taskId: 7, description: 'תיקון', status: false },
-        { taskId: 8, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'מחסן',
-      tasks: [
-        { taskId: 9, description: 'ניקיון', status: true },
-        { taskId: 10, description: 'סידור', status: false },
-      ]
-    },
-  ]);
   return (
     <>
       <Header />

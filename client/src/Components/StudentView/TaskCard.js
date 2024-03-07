@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+// TaskCard.js
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import { IoSearchOutline } from 'react-icons/io5';
 import '../css/TaskCard.css';
 import DataContext from '../../Helpers/DataContext';
@@ -31,6 +32,10 @@ const TaskCard = ({ room, tasks }) => {
     setShowConfirmation(false);
     setSelectedTaskIndex(null);
   };
+
+  useEffect(() => {
+    console.log(taskList);
+  },[])
 
   return (
     <div className='Task'>

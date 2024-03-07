@@ -79,4 +79,32 @@ const fetchAllAreasByCity = async (city) => {
     }
 }
 
-export {fetchAllAreasByCity, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+const addTask = async (data) => {
+    const res = await axios.post(`${URL}/staff/tasks/`,data, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        console.log(res);
+        return true;
+    }
+}
+
+const getTasksByHouseId = async (id) => {
+    const res = await axios.get(`${URL}/staff/tasks/${id}`,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+const getTaskById = async (id) => {
+    const res = await axios.post(`${URL}/staff/tasks/${id}`,{}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+export {fetchAllAreasByCity, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

@@ -65,13 +65,12 @@ const AddHousePage = () => {
   const onSubmit = () => {
     const information = {
       city: selectedCity,
-      area: selectedNeighborhood,
+      area: selectedNeighborhood.areaName,
       address: address,
       residentFirstName: firstName,
       residentLastName: lastName,
       residentPhoneNum: phoneNumber,
-      secondPhoneNumber: secondPhoneNumber,
-      gender: gender,
+      residentGender: gender,
       languageNeeded: language,
       numberOfRooms: rooms,
       membersNeeded: teamSize,
@@ -142,7 +141,7 @@ const AddHousePage = () => {
                     {neighborhoodsList && (
                         <>
                         {neighborhoodsList.map((neighborhood) => (
-                            <option key={neighborhood.areaName} value={neighborhood.areaName}>
+                            <option key={neighborhood.areaName} value={neighborhood}>
                             {neighborhood.areaName}
                             </option>
                         ))}
