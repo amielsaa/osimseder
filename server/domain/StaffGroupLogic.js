@@ -369,7 +369,29 @@ class GroupLogic {
     }
     
     
+    async updateGroup(id, updatedFields) {
+        try {
+            const group = await Groups.findOne({
+                where: {id: id}
+            });
+            if(!group){
+                throw new Error('Couldn\'t find a group with that id.');
+            }
 
+            for (const key in updatedFields) {
+                if (Object.hasOwnProperty.call(updatedFields, key)) {
+                    group[key] = updatedFields[key];
+                }
+            }
+
+            await group.save();
+        
+            return group;
+
+        } catch (error) {
+            throw new Error('Failed to update a group by id: ' + error);
+        }
+    }
     // async joinGroup(groupId, userEmail) {
     //     try {
     //         const group = await Groups.findOne({
