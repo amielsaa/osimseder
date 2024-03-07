@@ -269,5 +269,19 @@ router.post('/getareas', validateToken, validateAccess(accessGroup.B), async (re
     }
 });
 
+// Assign second team owner to house
+router.get('/getgroups/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const houseId = req.params.id;
+        const houses = await StaffHouseLogic.getHouseGroups(houseId);
+
+        //returns the group assigned to the house
+        res.json(houses);
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
+
 
 module.exports = router;
