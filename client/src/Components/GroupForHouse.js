@@ -10,10 +10,9 @@ const GroupForHouse = ({ groupJson, houseId }) => {
   // Function to handle the confirmation of connecting the group to the house
   const handleConnectConfirmation = (confirmed) => {
     if (confirmed) {
-      console.log(groupJson, houseId)
       const res = assignGroupToHouse(groupJson.id, houseId);
       if(res) {
-        navigate(-1);
+        navigate(`/HousePage/${houseId}`);
       }
     }
     // Close the confirmation message

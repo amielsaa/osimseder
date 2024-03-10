@@ -3,8 +3,7 @@ import GroupForHouse from './GroupForHouse';
 import {getAllGroupsWithoutHouse} from '../Helpers/StaffFrontLogic';
 
 const GroupListForHouse = ({ houseId, selectedSchool }) => {
-  const initialGroupIds = Array.from({ length: 30 }, (_, index) => (index + 1).toString().padStart(3, '0'));
-  const [groupIds, setGroupIds] = useState(initialGroupIds);
+  const [groupIds, setGroupIds] = useState([]);
 
 
     // Amiel - you have the houseId in the parameter here, I need you to bring all the groups that are 

@@ -5,6 +5,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 import '../css/TaskCard.css';
 import DataContext from '../../Helpers/DataContext';
 import ConfirmationMessage from '../ConfirmationMessage';
+import {updateTaskStatus} from '../../Helpers/StaffFrontLogic';
 
 const TaskCard = ({ room, tasks }) => {
   const { user } = useContext(DataContext);
@@ -24,7 +25,12 @@ const TaskCard = ({ room, tasks }) => {
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
       const updatedTasks = [...taskList];
-      updatedTasks[selectedTaskIndex].status = !updatedTasks[selectedTaskIndex].status;
+      let newStatus = 'GREEN';
+      if(updatedTasks[selectedTaskIndex].status === 'GREEN') {
+        newStatus = 'RED';
+      }
+      const updatedTask = updateTaskStatus(updatedTasks[selectedTaskIndex].taskId, newStatus);
+      updatedTasks[selectedTaskIndex].status = updatedTask.status;
       setTaskList(updatedTasks);
     }
 
@@ -43,12 +49,12 @@ const TaskCard = ({ room, tasks }) => {
       <div className='Description-Status'>
         {taskList.map((task, index) => (
           <div className='mini-Task' key={index}>
-            {task.description} :
+            {task.type} :
             <Link to={`/TaskPage/${task.taskId}`}>
               <IoSearchOutline className='view-icon' />
             </Link>{' '}
             <span
-              className={task.status ? 'green-circle' : 'red-circle'}
+              className={task.status === 'GREEN' ? 'green-circle' : 'red-circle'}
               onClick={() => toggleStatus(index)}
             ></span>
           </div>

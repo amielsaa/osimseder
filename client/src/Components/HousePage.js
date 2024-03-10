@@ -9,13 +9,15 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import {getHouseById, getTasksByHouseId} from '../Helpers/StaffFrontLogic'
+import {getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse} from '../Helpers/StaffFrontLogic'
 
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
   const {navigate, user} = useContext(DataContext)
   const [tasks, setTasks] = useState([]);
+  const [firstGroup, setFirstGroup] = useState('');
+  const [secondGroup, setSecondGroup] = useState('');
 
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -52,11 +54,33 @@ const HousePage = () => {
     const tasksJson = await getTasksByHouseId(id);
     setTasks(tasksJson);
   }
+  const removeGroupFromHouse = (groupId) => {
+    const res = removeGroupByHouse(groupId);
+    if(res) {
+      if(firstGroup.id === groupId) {
+        setFirstGroup('');
+      } else {
+        setSecondGroup('');
+      }
+    }
+  }
 
-  useEffect(() => {        
+  const setGroupsRequest = async () => {
+   const res = await fetchGroupsForHouse(id); 
+   console.log(res);
+   if(res[0]) {
+    setFirstGroup(res[0]);
+   }
+   if(res[1]) {
+    setSecondGroup(res[1]);
+   }
+  }
+
+  useEffect(() => {  
+    setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
-  }, [tasks]); // Dependency array ensures it runs when the id changes
+  }, []); // Dependency array ensures it runs when the id changes
 
   
   return (
@@ -84,22 +108,34 @@ const HousePage = () => {
         }
         
 
-          {user.role !== 'Student' && user.role !== 'TeamOwner' &&
+          {user.role !== 'Student'&&
            <div className="groups_of_house">
            <div className="house_group_info">
-             קבוצה משוייכת: 
-             <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ id }`)}/> 
-             {/* <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> */}
- 
-             {/* Amiel - when pressing on the הסר button, you need to remove the group from the house */}
-             <button className="add_group_button" > הסר </button>
+             קבוצה משוייכת:
+             {firstGroup && (
+              <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ firstGroup.id }`)}/> 
+             )}
+             {!firstGroup && user.role !== "TeamOwner" && (
+              <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> 
+
+             )}
+              {firstGroup && user.role !== "TeamOwner" && (
+               <button className="add_group_button" onClick={() => removeGroupFromHouse(firstGroup.id)} > הסר </button>
+              )}
  
            </div>
            <div className="house_group_info">
              קבוצה משוייכת: 
-            {/*  <MdGroups className='group_of_house_icon'/>  */}
-             <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button>
-             {/*<button className="add_group_button" > הסר </button>*/}
+             {secondGroup && (
+              <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ secondGroup.id }`)}/> 
+             )}
+             {!secondGroup && user.role !== "TeamOwner" && (
+              <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> 
+
+             )}
+              {secondGroup && user.role !== "TeamOwner" && (
+               <button className="add_group_button" onClick={() => removeGroupFromHouse(secondGroup.id)} > הסר </button>
+              )}
            </div>
            </div> }
           
