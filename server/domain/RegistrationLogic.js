@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
 const string2Int = require('./utils/String2Int');
+const { register } = require('module');
 
 
 class RegistrationLogic {
@@ -78,16 +79,22 @@ class RegistrationLogic {
         try {
             const verificationToken = this.generateVerificationToken();
 
-            const isStundet = emailService.sendVerificationEmail(staffData.email, verificationToken);
+            const isStudent = emailService.sendResetPasswordEmail(email, verificationToken);
 
             if (isStudent) {
-                await Students.update({
+                const student = await Students.findOne({
+                    where: { email: email }
+                });
+                await student.update({
                     "verificationToken": verificationToken,
                     "isVerified": false
                 })
             }
             else {
-                await Staffs.update({
+                const staff = await Staffs.findOne({
+                    where: { email: email }
+                });
+                await staff.update({
                     "verificationToken": verificationToken,
                     "isVerified": false
                 })
@@ -95,6 +102,36 @@ class RegistrationLogic {
             return email;
         } catch (error) {
             throw new Error('Failed to initiate forgot password proccess: ' + error);
+        }
+    }
+
+    async changePassword(email,password,isStudent) {
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            if (isStudent) {
+                const student = await Students.findOne({
+                    where: { email: email }
+                });
+                await student.update({
+                    "verificationToken": null,
+                    "isVerified": true,
+                    "password": hashedPassword
+                })
+            }
+            else {
+                const staff = await Staffs.findOne({
+                    where: { email: email }
+                });
+                await staff.update({
+                    "verificationToken": null,
+                    "isVerified": true,
+                    "password": hashedPassword
+                })
+            }
+            return email;
+        } catch (error) {
+            throw new Error('Failed to initiate change password proccess: ' + error);
         }
     }
 
