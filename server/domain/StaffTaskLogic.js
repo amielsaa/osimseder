@@ -83,15 +83,15 @@ class StaffTaskLogic {
             const tasks = await house.getTasks();
 
             const tasksByRoom = tasks.reduce((result, task) => {
-                const { id, room, status, freeText } = task;
+                const { id, room, status, freeText, type } = task;
                 const existingRoom = result.find(r => r.room === room);
     
                 if (existingRoom) {
-                    existingRoom.tasks.push({ taskId: id, status: status, description: freeText });
+                    existingRoom.tasks.push({ taskId: id, status: status, description: freeText , type: type});
                 } else {
                     result.push({
                         room: room,
-                        tasks: [{ taskId: id, status: status, description: freeText }]
+                        tasks: [{ taskId: id, status: status, description: freeText, type: type}]
                     });
                 }
     

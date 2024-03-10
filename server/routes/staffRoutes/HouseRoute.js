@@ -149,7 +149,7 @@ router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
 });
 
 // Update a house by ID (PUT)
-router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedFields = req.body;
@@ -270,7 +270,7 @@ router.post('/getareas', validateToken, validateAccess(accessGroup.B), async (re
 });
 
 // Assign second team owner to house
-router.get('/getgroups/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.get('/getgroups/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const houseId = req.params.id;
         const houses = await StaffHouseLogic.getHouseGroups(houseId);
