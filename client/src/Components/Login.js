@@ -44,7 +44,7 @@ const Login = () => {
       code,
     };
 
-    axios.post("http://localhost:3001/auth/login_student", data).then((res) => {
+    axios.post("http://localhost:3001/auth/login", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 //localStorage.clear();

@@ -41,9 +41,9 @@ class LoginLogic {
         return { token: accessToken, user:studentJson, id: student.id };
     }
     async verifyLoginStaff(staff, email, givenPassword) {
-        if (!staff.isVerified) {
-            throw new Error("Your account hasn't been verified yet. Check your email");
-        }
+        // if (!staff.isVerified) {
+        //     throw new Error("Your account hasn't been verified yet. Check your email");
+        // }
         if (!staff) {
             throw new Error('Error: user not found');
         }
