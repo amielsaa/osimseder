@@ -147,4 +147,24 @@ const updateTaskStatus = async (taskId, taskStatus) => {
     }
 }
 
-export {updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+const getGroupById = async (groupId) => {
+    const res = await axios.get(`${URL}/staff/groups/${groupId}`,headers);
+    if(res.data.error) {
+        alert(res.data.error)
+    } else {
+        return res.data;
+    }
+}
+
+const removeGroupMember = async (email) => {
+    const res = await axios.put(`${URL}/staff/students/${email}`,{groupId:null}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+
+}
+
+export {removeGroupMember, getGroupById, updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

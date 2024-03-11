@@ -261,8 +261,8 @@ class GroupLogic {
             const students = await group.getStudents();
         
             const studentNames = students.map(student => {
-                const { firstName, lastName, ...rest } = student;
-                return `${firstName} ${lastName}`;
+                const { firstName, lastName, email,...rest } = student;
+                return {fullname:`${firstName} ${lastName}`, email:email};
             });
             group.dataValues.students = studentNames;            
             
@@ -271,7 +271,8 @@ class GroupLogic {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                houseId: group.houseId
             };
 
             return responseData;

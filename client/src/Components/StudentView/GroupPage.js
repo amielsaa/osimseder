@@ -4,13 +4,14 @@ import Nav from '../Nav';
 import TaskCard from './TaskCard';
 import '../css/GroupPage.css'
 import DataContext from '../../Helpers/DataContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import React, { useState } from 'react';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FaHouseChimney } from "react-icons/fa6";
 import ConfirmationMessage from '../ConfirmationMessage';
+import {getGroupById, removeGroupMember} from '../../Helpers/StaffFrontLogic';
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -24,6 +25,7 @@ const GroupPage = () => {
   const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
   const [studentToRemove, setStudentToRemove] = useState('')
+  const [groupInfo, setGroupInfo] = useState({});
   const [tasks, setTasks] = useState([
     {
       room: 'סלון',
@@ -71,11 +73,13 @@ const GroupPage = () => {
 
   const confirmRemoveMember = (confirmed) => {
     if (confirmed) {
-      const updatedStudents = [...studentList];
-      updatedStudents.splice(removeConfirmationIndex, 1);
-      setStudentsList(updatedStudents);
+      const res = removeGroupMember(studentToRemove.email)
+      if(res) {
+        const updatedStudents = [...studentList];
+        updatedStudents.splice(removeConfirmationIndex, 1);
+        setStudentsList(updatedStudents);
+      }
     }
-
 
 
     // Close the confirmation message
@@ -84,9 +88,18 @@ const GroupPage = () => {
     setRemoveConfirmationIndex(null);
   };
 
+  const setGroupRequest = async () => {
+    const group = await getGroupById(id);
+    console.log(group);
+    setGroupInfo(group);
+    setStudentsList(group.students);
+  }
 
+  useEffect(() => {
+    setGroupRequest();
 
-  
+  },[])
+
 
   return (
     <div>
@@ -103,14 +116,14 @@ const GroupPage = () => {
         </div>
           <div className='Info'>חניך גרעין : </div>
           <div className='Info'>בית ספר : </div>
-          <div className='Info'>בית : <FaHouseChimney className='house_for_group' onClick={() => {navigate('/HousePage/001')}}/></div>
+          {groupInfo && groupInfo.houseId && <div className='Info'>בית : <FaHouseChimney className='house_for_group' onClick={() => {navigate(`/HousePage/${groupInfo.houseId}`)}}/></div>}
         <div className='group-title'>
           <h1>חברי הקבוצה</h1>
         </div>
         <div className='Group-Info'>
         {studentList.map((student, index) => (
           <div key={index} className='Group_Member'>
-            {student}
+            {student.fullname}
             {user.role !== 'Student' && (
               <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
             )}
