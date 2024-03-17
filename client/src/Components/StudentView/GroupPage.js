@@ -26,43 +26,7 @@ const GroupPage = () => {
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
   const [studentToRemove, setStudentToRemove] = useState('')
   const [groupInfo, setGroupInfo] = useState({});
-  const [tasks, setTasks] = useState([
-    {
-      room: 'סלון',
-      tasks: [
-        { taskId: 1, description: 'ניקיון', status: true },
-        { taskId: 2, description: 'סידור', status: false },
-      ]
-    },
-    {
-      room: 'חדר ילדים',
-      tasks: [
-        { taskId: 3, description: 'תיקון', status: false },
-        { taskId: 4, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'מטבח',
-      tasks: [
-        { taskId: 5, description: 'תיקון', status: false },
-        { taskId: 6, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'חדר שינה',
-      tasks: [
-        { taskId: 7, description: 'תיקון', status: false },
-        { taskId: 8, description: 'ניקיון', status: true },
-      ]
-    },
-    {
-      room: 'מחסן',
-      tasks: [
-        { taskId: 9, description: 'ניקיון', status: true },
-        { taskId: 10, description: 'סידור', status: false },
-      ]
-  },
-  ]);
+
 
   const handleRemoveMember = (index) => {
     // Display the confirmation message
@@ -108,30 +72,35 @@ const GroupPage = () => {
       
       <div className='content-Box-Group'>
         <span className='purple_circle'>
-      <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
-      </span>
-      <div className='main_page_content'>
-      <div className='group-title'>
-        <h1>קבוצה: {id}</h1>
-        </div>
-          <div className='Info'>חניך גרעין : </div>
+          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+        </span>
+        <div className='main_page_content'>
+          <div className='group-title'>
+            <h1>קבוצה: {id}</h1>
+          </div>
           <div className='Info'>בית ספר : </div>
-          {groupInfo && groupInfo.houseId && <div className='Info'>בית : <FaHouseChimney className='house_for_group' onClick={() => {navigate(`/HousePage/${groupInfo.houseId}`)}}/></div>}
-        <div className='group-title'>
-          <h1>חברי הקבוצה</h1>
-        </div>
-        <div className='Group-Info'>
-        {studentList.map((student, index) => (
-          <div key={index} className='Group_Member'>
-            {student.fullname}
-            {user.role !== 'Student' && (
-              <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
+          <div className='Info'>בית משוייך :
+            {groupInfo && groupInfo.houseId && <FaHouseChimney className='house_for_group' onClick={() => {navigate(`/HousePage/${groupInfo.houseId}`)}}/>}
+          </div>
+          <div className='group-title'>
+            <h1>חברי הקבוצה</h1>
+          </div>
+          <div className='Group-Info'>
+            {studentList.length > 0 ? (
+              studentList.map((student, index) => (
+                <div key={index} className='Group_Member'>
+                  {student.fullname}
+                  {user.role !== 'Student' && (
+                    <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="empty-group">
+                <h1>הקבוצה ריקה</h1>
+              </div>
             )}
           </div>
-        ))}
-      </div>
-
-        
         </div>
       </div>
       
@@ -143,10 +112,8 @@ const GroupPage = () => {
         />
       )}        
 
-
       <Footer/>
     </div>
-    
   );
 }
 

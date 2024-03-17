@@ -13,7 +13,7 @@ const AddHousePage = () => {
     const { user, navigate } = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedSchool, setSelectedSchool] = useState('');
-    const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
+    const [areaName, setAreaName] = useState('');
     const [address, setAddress] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -31,7 +31,7 @@ const AddHousePage = () => {
 
   const initialValues = {
     city: '',
-    neighborhood: '',
+    areaName: '',
     address: '',
     firstName: '',
     lastName: '',
@@ -46,7 +46,7 @@ const AddHousePage = () => {
 
   const validationSchema = Yup.object().shape({
     city: Yup.string().required('עיר נדרשת'),
-    neighborhood: Yup.string().required('שכונה נדרשת'),
+    areaName: Yup.string().required('שכונה נדרשת'),
     address: Yup.string().required('כתובת נדרשת'),
     firstName: Yup.string().required('שם פרטי נדרש'),
     lastName: Yup.string().required('שם משפחה נדרש'),
@@ -65,7 +65,7 @@ const AddHousePage = () => {
   const onSubmit = () => {
     const information = {
       city: selectedCity,
-      neighborhood: selectedNeighborhood.areaName,
+      areaName: areaName,
       address: address,
       residentFirstName: firstName,
       residentLastName: lastName,
@@ -134,8 +134,8 @@ const AddHousePage = () => {
 
               {selectedCity && (
                 <div>
-                    <label htmlFor="neighborhood"> שכונה: </label>
-                    <Field as="select" id="neighborhood" name="neighborhood" onChange={(e) => setSelectedNeighborhood(e.target.value)} value={selectedNeighborhood}>
+                    <label htmlFor="areaName"> שכונה: </label>
+                    <Field as="select" id="areaName" name="areaName" onChange={(e) => setAreaName(e.target.value)} value={areaName}>
                     <option value="">בחר שכונה</option>
                     {neighborhoodsList && (
                         <>
@@ -147,11 +147,11 @@ const AddHousePage = () => {
                         </>
                     )}
                     </Field>
-                    <ErrorMessage name="neighborhood" component="span" />
+                    <ErrorMessage name="areaName" component="span" />
                 </div>
                 )}
 
-              {(selectedCity && selectedNeighborhood) && (
+              {(selectedCity && areaName) && (
                <>
                     <div>
                         <label htmlFor="address">כתובת :</label>
@@ -237,7 +237,7 @@ const AddHousePage = () => {
               )}
 
 
-              {(selectedCity && selectedNeighborhood) && (
+              {(selectedCity && areaName) && (
                 <div className='login_Buttons'>
                 <button type="submit" onClick={onSubmit} className='button-login' >צור בית</button>
                 </div>

@@ -181,12 +181,12 @@ const HousePage = () => {
           <div className="Info">
             גודל קבוצה נחוץ: {house?.membersNeeded}
           </div>
-          
           <div className="Info">
             הערות : {house?.freeText}
           </div>
         </div>
-        <div className="House-title">
+        <div className="House-Tasks">
+        <div className="House-title-Tasks">
             <h1>מטלות הבית</h1>
           </div>
         <div className='House-Info-Tasks'>
@@ -194,6 +194,7 @@ const HousePage = () => {
             <TaskCard key={index} room={task.room} tasks={task.tasks} />
           ))}
         </div>
+      </div>
       </div>
     </div>
     <Footer/>

@@ -28,3 +28,7 @@
 .student-bar:last-child {
     border-bottom: none;
 }
+.empty-students{
+    margin:auto;
+    color: var(--PURPLE-COLOR)
+}

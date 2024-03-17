@@ -17,7 +17,7 @@
   
   .Group-Info {
     width: 100%;
-    height: 20%;
+    height: 50%;
     border-top:2px solid var(--ORANGE-COLOR);
     border-bottom:2px solid var(--ORANGE-COLOR);
     margin-top:5%;
@@ -111,6 +111,10 @@
 }
 .house_for_group{
   margin-right: 3%;
+}
+.empty-group {
+  margin: auto;
+  color: var(--PURPLEOP-COLOR);
 }
 
 
