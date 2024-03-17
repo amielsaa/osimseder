@@ -26,7 +26,7 @@ const GroupListForHouse = ({ houseId, selectedSchool }) => {
       {groupIds && (
         <>
           {groupIds.map((groupJson) => (
-            <GroupForHouse key={groupJson} groupJson={groupJson} houseId={houseId} />
+            <GroupForHouse key={groupJson.id} groupJson={groupJson} houseId={houseId} />
           ))}
         </>
       )}

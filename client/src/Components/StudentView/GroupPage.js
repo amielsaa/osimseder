@@ -90,7 +90,7 @@ const GroupPage = () => {
 
   const setGroupRequest = async () => {
     const group = await getGroupById(id);
-    console.log(group);
+
     setGroupInfo(group);
     setStudentsList(group.students);
   }
@@ -131,15 +131,7 @@ const GroupPage = () => {
         ))}
       </div>
 
-        <div className='group-title'>
-          <h1>מטלות</h1>
-        </div>
-        <div className='Group-Info-Tasks'>
-          {tasks.map((task, index) => (
-            <TaskCard  key={index}
-             room={task.room} tasks={task.tasks} />
-          ))}
-        </div>
+        
         </div>
       </div>
       

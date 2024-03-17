@@ -29,21 +29,26 @@ const HousePage = () => {
     const randomHouse = {
       teamOwner1: "איזה מישהו",
       teamOwner2: "מישהו אחר",
-      contactName: "דוד כהן",
-      gender: getRandomValue(genders),
-      city: getRandomValue(cities),
-      neighborhood: "שכונה ב",
+      residentFirstName: "דוד",
+      residentLastName: "כהן",
+      residentGender: getRandomValue(genders),
+      cityName: getRandomValue(cities),
+      areaName: "שכונה ב",
       address: "רחוב הראשון 123",
-      languages: [getRandomValue(languages)],
+      languageNeeded: [getRandomValue(languages)],
       numberOfRooms:5,
-      groupSizeNeeded:3,
+      membersNeeded:3,
       phoneNumber: "123-456-7890",
       alternativeNumber: "987-654-3210",
-      notes: "אני מתקשה ללכת וצריכה עזרה",
+      freeText: "אני מתקשה ללכת וצריכה עזרה",
     };
 
     return randomHouse;
   };
+  //TO REMOVE
+  useEffect(() => {
+    setHouse(generateRandomHouse)
+  },[])
 
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
@@ -75,12 +80,12 @@ const HousePage = () => {
     setSecondGroup(res[1]);
    }
   }
-
-  useEffect(() => {  
+  // TO REMOVE
+  /* useEffect(() => {  
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
-  }, []); // Dependency array ensures it runs when the id changes
+  }, []); */ // Dependency array ensures it runs when the id changes
 
   
   return (
@@ -102,7 +107,7 @@ const HousePage = () => {
         </div>
         {user.role !== "Student" && 
         <div className="buttons_for_house_logic">
-          <button className="edit_house_button"> ערוך בית</button>
+          <button className="edit_house_button" onClick={() => navigate(`/EditHouse/${id}`)}> ערוך בית</button>
           <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
         </div>
         }
@@ -159,7 +164,13 @@ const HousePage = () => {
             שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
           </div>
           <div className="Info">
-            מין: {house?.residentGender}
+            מספר איש קשר: {house?.phoneNumber}
+          </div>
+          <div className="Info">
+            מספר חלופי: {house?.alternativeNumber}
+          </div>
+          <div className="Info">
+            מין הדייר/ת: {house?.residentGender}
           </div>
           <div className="Info">
              שפה נחוצה: {house?.languageNeeded}
@@ -174,8 +185,10 @@ const HousePage = () => {
           <div className="Info">
             הערות : {house?.freeText}
           </div>
-        
         </div>
+        <div className="House-title">
+            <h1>מטלות הבית</h1>
+          </div>
         <div className='House-Info-Tasks'>
           {tasks.map((task, index) => (
             <TaskCard key={index} room={task.room} tasks={task.tasks} />

@@ -65,7 +65,7 @@ const AddHousePage = () => {
   const onSubmit = () => {
     const information = {
       city: selectedCity,
-      area: selectedNeighborhood.areaName,
+      neighborhood: selectedNeighborhood.areaName,
       address: address,
       residentFirstName: firstName,
       residentLastName: lastName,
@@ -92,7 +92,6 @@ const AddHousePage = () => {
   const setNeighborhoods = async () => {
     const res = await fetchAllAreasByCity(selectedCity);
     //setNeighborhoodsList();
-    console.log(res[selectedCity]);
     setNeighborhoodsList(res[selectedCity]);
   }
 
@@ -177,7 +176,7 @@ const AddHousePage = () => {
                         <ErrorMessage name="phoneNumber" component="span" />
                     </div>
                     <div>
-                        <label htmlFor="secondPhoneNumber">   מספר פלאפון חלופי : </label>
+                        <label htmlFor="secondPhoneNumber">   מספר  חלופי : </label>
                         <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={phoneNumber}/>
                         <ErrorMessage name="secondPhoneNumber" component="span" />
                     </div>

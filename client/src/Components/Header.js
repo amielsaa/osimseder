@@ -32,7 +32,7 @@ const Header = () => {
         </Link>
         </div>
         
-        <h1 className='hello'>שלום {user.userName}</h1>
+        <h1 className='hello'>שלום {user.firstName}</h1>
         <div className='role-box' style={roleBoxStyle}>{userRole}</div>
       </header>
     </>
