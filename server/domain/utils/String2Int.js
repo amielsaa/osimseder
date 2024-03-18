@@ -1,5 +1,5 @@
 // String2Int.js
-const { Students, Cities, Schools } = require('../../models');
+const { Students, Cities, Schools, Areas } = require('../../models');
 
 class String2Int {
     
