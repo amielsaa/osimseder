@@ -12,8 +12,7 @@ import { addHouse, fetchAllAreasByCity} from '../Helpers/StaffFrontLogic'
 const AddHousePage = () => {
     const { user, navigate } = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
-    const [selectedSchool, setSelectedSchool] = useState('');
-    const [areaName, setAreaName] = useState('');
+    const [selectedArea, setSelectedArea] = useState('');
     const [address, setAddress] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -31,7 +30,7 @@ const AddHousePage = () => {
 
   const initialValues = {
     city: '',
-    areaName: '',
+    area: '',
     address: '',
     firstName: '',
     lastName: '',
@@ -46,7 +45,7 @@ const AddHousePage = () => {
 
   const validationSchema = Yup.object().shape({
     city: Yup.string().required('עיר נדרשת'),
-    areaName: Yup.string().required('שכונה נדרשת'),
+    area: Yup.string().required('שכונה נדרשת'),
     address: Yup.string().required('כתובת נדרשת'),
     firstName: Yup.string().required('שם פרטי נדרש'),
     lastName: Yup.string().required('שם משפחה נדרש'),
@@ -65,7 +64,7 @@ const AddHousePage = () => {
   const onSubmit = () => {
     const information = {
       city: selectedCity,
-      areaName: areaName,
+      area: selectedArea,
       address: address,
       residentFirstName: firstName,
       residentLastName: lastName,
@@ -75,7 +74,7 @@ const AddHousePage = () => {
       numberOfRooms: rooms,
       membersNeeded: teamSize,
       freeText: comments,
-      residentAlternatePhoneNum: "08980808"
+      residentAlternatePhoneNum: secondPhoneNumber
     }
     const res = addHouse(information);
     if(res) {
@@ -134,8 +133,8 @@ const AddHousePage = () => {
 
               {selectedCity && (
                 <div>
-                    <label htmlFor="areaName"> שכונה: </label>
-                    <Field as="select" id="areaName" name="areaName" onChange={(e) => setAreaName(e.target.value)} value={areaName}>
+                    <label htmlFor="area"> שכונה: </label>
+                    <Field as="select" id="area" name="area" onChange={(e) => setSelectedArea(e.target.value)} value={selectedArea}>
                     <option value="">בחר שכונה</option>
                     {neighborhoodsList && (
                         <>
@@ -147,11 +146,11 @@ const AddHousePage = () => {
                         </>
                     )}
                     </Field>
-                    <ErrorMessage name="areaName" component="span" />
+                    <ErrorMessage name="area" component="span" />
                 </div>
                 )}
 
-              {(selectedCity && areaName) && (
+              {(selectedCity && selectedArea) && (
                <>
                     <div>
                         <label htmlFor="address">כתובת :</label>
@@ -237,7 +236,7 @@ const AddHousePage = () => {
               )}
 
 
-              {(selectedCity && areaName) && (
+              {(selectedCity && selectedArea) && (
                 <div className='login_Buttons'>
                 <button type="submit" onClick={onSubmit} className='button-login' >צור בית</button>
                 </div>
