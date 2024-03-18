@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3001';
+const URL = 'http://localhost:3000/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
