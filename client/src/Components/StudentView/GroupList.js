@@ -23,8 +23,7 @@ const GroupList = () => {
       // //TODO: update only the joined group
       const setGroups = async () => {
         const groups = await fetchAllGroupsBySchool(user);
-        setGroupIds(groups);     
-        console.log(groups)   
+        setGroupIds(groups);      
       }
       setGroups();      
 

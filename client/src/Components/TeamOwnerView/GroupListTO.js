@@ -17,7 +17,6 @@ const GroupListTO = () => {
    useEffect(() => {
     const setGroups = async () => {
       const groups = await fetchAllGroupsStaff();
-      console.log(groups)
       setGroupIds(groups);
     };
 

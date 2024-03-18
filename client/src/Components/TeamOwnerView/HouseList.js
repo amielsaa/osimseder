@@ -53,7 +53,7 @@ const HouseList = () => {
   useEffect(() => {
     
     setHousesList();
-  }, [houses]);
+  }, []);
 
   return (
     <>

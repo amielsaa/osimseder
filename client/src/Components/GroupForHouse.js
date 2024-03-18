@@ -30,7 +30,7 @@ const GroupForHouse = ({ groupJson, houseId }) => {
 
       {showConfirmation && (
         <ConfirmationMessage
-          confirmationMessage={`האם לשייך את הבית לקבוצה ${groupJson.groupId} ?`}
+          confirmationMessage={`האם לשייך את הבית לקבוצה ${groupJson.id} ?`}
           handleConfirmation={handleConnectConfirmation}
           setShowConfirmation={setShowConfirmation}
         />

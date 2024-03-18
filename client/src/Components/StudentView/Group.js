@@ -15,7 +15,11 @@ const Group = ({ groupId , groupJson}) => {
     setStudentsPopUp(!studentsPopUp);
 
   };
-  
+  //Amiel import the House data - city is unchangeable.
+        //after you imported to house data put its data in the initialValues instead of ""
+        //look inside the JSX (the HTML down in this page) code, there is more comments
+        //Amiel - notice ! only area manager and upper ranks will see the neightborhood change bar
+        //Amiel - you need to check the city of the house and bring me all the possible neighborhoods or
   
 
 
