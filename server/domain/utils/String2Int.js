@@ -21,6 +21,7 @@ class String2Int {
 
     async getAreaId(areaName) {
         try {
+            console.log(areaName)
             const area = await Areas.findOne({
                 where: { "areaName": areaName }
             });
@@ -46,6 +47,48 @@ class String2Int {
             console.log(school)
             console.log(school.id)
             return school.id;
+        } catch (error) {
+            throw new Error('Error: process of finding the school: "' + schoolName + '" failed. Description: ' + error);
+        }
+    }
+    
+    async getCityNameById(cityId) {
+        try {
+            const city = await Cities.findOne({
+                where: { "id": cityId }
+            });
+            if (!city) {
+                throw new Error('Problem - City with id: "' + cityId + '" was not found in the system');
+            }
+            return city.cityName;
+        } catch (error) {
+            throw new Error('Error: process of finding the city: "' + cityName + '" failed. Description: ' + error);
+        }
+    }
+
+    async getAreaNameById(areaId) {
+        try {
+            const area = await Areas.findOne({
+                where: { "id": areaId }
+            });
+            if (!area) {
+                throw new Error('Problem - Area with id: "' + areaName + '" was not found in the system');
+            }
+            return area.areaName;
+        } catch (error) {
+            throw new Error('Error: process of finding the area: "' + areaName + '" failed. Description: ' + error);
+        }
+    }
+
+    async getSchoolNameById(schoolId) {
+        try {
+            const school = await Schools.findOne({
+                where: { "id": schoolId }
+            });
+            if (!school) {
+                throw new Error('Problem - School with id: "' + schoolName + '" was not found in the system');
+            }
+            return school.schoolName;
         } catch (error) {
             throw new Error('Error: process of finding the school: "' + schoolName + '" failed. Description: ' + error);
         }

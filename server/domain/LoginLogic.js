@@ -81,6 +81,8 @@ class LoginLogic {
         }
         const {password, ...studentJson} =  student;
         studentJson.dataValues.role = 'Student';
+        studentJson.dataValues.cityName = await string2Int.getCityNameById(studentJson.dataValues.cityId);
+        studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(studentJson.dataValues.schoolId);
         return { token: token, user:studentJson, id: student.id };
     }
 
@@ -93,6 +95,7 @@ class LoginLogic {
         }
         const {password, ...staffJson} =  staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
+        staffJson.dataValues.cityName = await string2Int.getCityNameById(staffJson.dataValues.cityId);
         return { token: token, user:staffJson, id: staff.id };
     }
 
