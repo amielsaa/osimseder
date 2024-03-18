@@ -18,7 +18,8 @@ export const DataProvider = ({children}) => {
             axios.get(`http://localhost:3001/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
                 if(res.data.error) alert(res.data.error);
                 else {
-                    setUser(res.data.user.dataValues)
+                    setUser(res.data.user.dataValues);
+                    console.log(res.data.user.dataValues)
                 };
             });
         }

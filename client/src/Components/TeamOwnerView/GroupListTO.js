@@ -14,15 +14,14 @@ const GroupListTO = () => {
   // Amiel - when I give you a user that is a Group Owner, give me all the groups that he currently owns.
   // this should be done inside this useEffect.
   
-   useEffect(() => {
+    useEffect(() => {
     const setGroups = async () => {
       const groups = await fetchAllGroupsStaff();
       setGroupIds(groups);
     };
-
     setGroups();
 
-  }, [user]); // Add user to the dependency array */
+  }, [user]);  // Add user to the dependency array */
 
   return (
     <> 
