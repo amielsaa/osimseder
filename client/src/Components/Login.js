@@ -39,7 +39,7 @@ const Login = () => {
     const { email, password, code } = values;
     
     const data = {
-      email: email.toLowerCase(),
+      email: email,
       password,
       code,
     };

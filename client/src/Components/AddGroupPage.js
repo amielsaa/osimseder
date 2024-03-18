@@ -36,14 +36,13 @@ const AddGroupPage = () => {
 
   const onSubmit = (data) => {
     // Handle form submission
-    console.log('here');
     const res = addGroup(selectedCity,selectedSchool,selectedCapacity);
     if(res) {
       navigate('/My-Groups')
       //navigate somewhere
     } 
   };
-
+  
   const handleCityChange = async (e) => {
     setSelectedCity(e.target.value)
     const schools = await fetchAllSchoolsByCity(e.target.value);

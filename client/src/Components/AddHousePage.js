@@ -23,10 +23,8 @@ const AddHousePage = () => {
     const [comments, setComments] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
-    const [schoolsList, setSchoolsList] = useState(['נתיבי עם']);
-    const [neighborhoodsList, setNeighborhoodsList] = useState(['שכונה א', 'שכונה ב']);
-    const languages = ["ערבית","ספרדית","אמהרית","רוסית"]
-    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [areaList, setAreaList] = useState([]);
+    const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
 
   const initialValues = {
     city: '',
@@ -50,7 +48,7 @@ const AddHousePage = () => {
     firstName: Yup.string().required('שם פרטי נדרש'),
     lastName: Yup.string().required('שם משפחה נדרש'),
     gender: Yup.string().required('מין נדרש'),
-    language: Yup.string(),
+    language: Yup.string().required('שפה נדרשת'),
     rooms: Yup.string().required('מספר חדרים נדרש'),
     teamSize: Yup.string().required('גודל קבוצה נדרש'),
     comments: Yup.string(),
@@ -85,17 +83,15 @@ const AddHousePage = () => {
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
   // the page works ! but the yup does problems with his warnings
 
-  console.log(selectedCity)
   };
 
-  const setNeighborhoods = async () => {
+  const setAreas = async () => {
     const res = await fetchAllAreasByCity(selectedCity);
-    //setNeighborhoodsList();
-    setNeighborhoodsList(res[selectedCity]);
+    setAreaList(res[selectedCity]);
   }
 
   useEffect(() => {
-    setNeighborhoods();
+    setAreas();
 
   },[selectedCity])
 
@@ -113,7 +109,7 @@ const AddHousePage = () => {
           <div className='add-group-title'>
             <h1>הוספת בית</h1>
           </div>
-          <div className='Info'>חבר גרעין אחראי : {user.userName}</div>
+          <div className='Info'>חבר גרעין אחראי : {user.firstName + " " + user.lastName}</div>
           <div className='add-group-title'>
             <h2>אנא מלא את הפרטים : </h2>
           </div>
@@ -136,11 +132,11 @@ const AddHousePage = () => {
                     <label htmlFor="area"> שכונה: </label>
                     <Field as="select" id="area" name="area" onChange={(e) => setSelectedArea(e.target.value)} value={selectedArea}>
                     <option value="">בחר שכונה</option>
-                    {neighborhoodsList && (
+                    {areaList && (
                         <>
-                        {neighborhoodsList.map((neighborhood) => (
-                            <option key={neighborhood.areaName} value={neighborhood}>
-                            {neighborhood.areaName}
+                        {areaList.map((area) => (
+                            <option key={area.areaName} value={area.areaName}>
+                            {area.areaName}
                             </option>
                         ))}
                         </>
