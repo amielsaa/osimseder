@@ -45,10 +45,7 @@ const HousePage = () => {
 
     return randomHouse;
   };
-  //TO REMOVE
-  useEffect(() => {
-    setHouse(generateRandomHouse)
-  },[])
+
 
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
@@ -80,12 +77,12 @@ const HousePage = () => {
     setSecondGroup(res[1]);
    }
   }
-  // TO REMOVE
-  /* useEffect(() => {  
+  
+   useEffect(() => {  
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
-  }, []); */ // Dependency array ensures it runs when the id changes
+  }, []);  // Dependency array ensures it runs when the id changes
 
   
   return (
@@ -189,11 +186,17 @@ const HousePage = () => {
         <div className="House-title-Tasks">
             <h1>מטלות הבית</h1>
           </div>
-        <div className='House-Info-Tasks'>
-          {tasks.map((task, index) => (
-            <TaskCard key={index} room={task.room} tasks={task.tasks} />
-          ))}
-        </div>
+          <div className='House-Info-Tasks'>
+              {tasks.length > 0 ? (
+                tasks.map((task, index) => (
+                  <TaskCard key={index} room={task.room} tasks={task.tasks} />
+                ))
+              ) : (
+                <div className="empty-tasks">
+                  <h2>אין מטלות כרגע</h2>
+                </div>
+              )}
+            </div>
       </div>
       </div>
     </div>

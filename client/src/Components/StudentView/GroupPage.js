@@ -21,7 +21,7 @@ const GroupPage = () => {
   
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
-  const [studentList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד'])
+  const [studentList, setStudentsList] = useState([])
   const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
   const [studentToRemove, setStudentToRemove] = useState('')
