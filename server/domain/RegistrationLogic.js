@@ -31,7 +31,6 @@ class RegistrationLogic {
                 "parentName": studentData.parentName,
                 "parentPhoneNumber": studentData.parentPhoneNumber,
                 "issuesText": studentData.issuesText,
-                "didParentApprove": false,
                 "verificationToken": verificationToken,
                 "cityId": cityId,
                 "schoolId": schoolId,

@@ -19,6 +19,22 @@ class String2Int {
         }
     }
 
+    async getAreaId(areaName) {
+        try {
+            const area = await Areas.findOne({
+                where: { "areaName": areaName }
+            });
+            if (!area) {
+                throw new Error('Problem - Area: "' + areaName + '" was not found in the system');
+            }
+            console.log(area)
+            console.log(area.id)
+            return area.id;
+        } catch (error) {
+            throw new Error('Error: process of finding the area: "' + areaName + '" failed. Description: ' + error);
+        }
+    }
+
     async getSchoolId(schoolName) {
         try {
             const school = await Schools.findOne({
