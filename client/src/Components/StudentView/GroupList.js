@@ -28,7 +28,7 @@ const GroupList = () => {
       setGroups();      
 
       // if (user.role === "Student") {
-      //   axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
+      //   axios.post('http://localhost:3000/api/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} ).then((res) => {
       //     //setGroupIds(res.body.groups);
       //     if(res.data.error) {alert(res.data.error)};
       //     setGroupIds(res.data.groups);
