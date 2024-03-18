@@ -44,7 +44,7 @@ const PersonalPage = () => {
               </>
             }
             
-          </div>
+          
           {user.role !== "Student" &&
               <>
                 <div className='Info'>שם: {user.firstName +" " + user.lastName}</div>
@@ -53,7 +53,9 @@ const PersonalPage = () => {
               </>
             }
 
-          <div className='ActionButtonsContainer'>
+          </div>
+        </div>
+        <div className='ActionButtonsContainer'>
             <button className='ActionButton'>
               <IoMdCreate className='ActionIcon' /> ערוך
             </button>
@@ -61,9 +63,7 @@ const PersonalPage = () => {
             <button className='ActionButton'>
               <IoMdLock className='ActionIcon' /> שנה סיסמה
             </button>
-          </div>
-        </div>
-
+          </div>    
 
 
 

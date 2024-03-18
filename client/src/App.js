@@ -46,7 +46,7 @@ function App() {
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
-            <Route path="/Equipment" element={<Equipment />} />
+           {/*<Route path="/Equipment" element={<Equipment />} />*/} 
             <Route path="/TaskPage/:id" element={<TaskPage />} />
             <Route path="/404" element={<ErrorPage />} />
           </Routes>
