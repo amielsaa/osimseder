@@ -6,9 +6,16 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
 import { useContext,useState,useEffect } from 'react';
 import Footer from './Footer';
+import { useParams } from 'react-router-dom';
 
 const PersonalPage = () => {
-  const { user, navigate } = useContext(DataContext);
+  const { id } = useParams();
+  const { navigate } = useContext(DataContext);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    // Amiel - get me the user by the user id form the params, and set it to user
+  })
 
   const [userRole, setUserRole] = useState('');
   useEffect(() => {
