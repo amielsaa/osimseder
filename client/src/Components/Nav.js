@@ -25,7 +25,7 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    user.role === "Student" ? setUserRole("סטודנט") :
+    user.role === "Student" ? setUserRole("חניך") :
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):

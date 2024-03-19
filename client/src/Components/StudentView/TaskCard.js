@@ -39,9 +39,6 @@ const TaskCard = ({ room, tasks }) => {
     setSelectedTaskIndex(null);
   };
 
-  useEffect(() => {
-    console.log(taskList);
-  },[])
 
   return (
     <div className='Task'>

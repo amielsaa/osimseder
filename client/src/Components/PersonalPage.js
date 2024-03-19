@@ -4,11 +4,21 @@ import Nav from './Nav';
 import { IoMdCreate, IoMdLock } from 'react-icons/io';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
-import { useContext } from 'react';
+import { useContext,useState,useEffect } from 'react';
 import Footer from './Footer';
 
 const PersonalPage = () => {
   const { user, navigate } = useContext(DataContext);
+
+  const [userRole, setUserRole] = useState('');
+  useEffect(() => {
+    user.role === "Student" ? setUserRole("חניך") :
+      user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
+      user.role === "AreaManager" ? setUserRole("רכז גרעין") :
+      user.role === "CityManager" ? setUserRole("רכז עירוני"):
+      setUserRole("אדמין")  ;
+  }, [user.role]);
+
 
   return (
     <>
@@ -34,6 +44,7 @@ const PersonalPage = () => {
             {user.role === "Student" &&
               <>
                 <div className='Info'>שם: {user.firstName +" " + user.lastName}</div>
+                <div className='Info'>תפקיד: {userRole}</div>
                 <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
                 <div className='Info'>שם הורה: {user.parentName}</div>
                 <div className='Info'>מספר פלאפון הורה: {user.parentNumber}</div>
@@ -48,6 +59,7 @@ const PersonalPage = () => {
           {user.role !== "Student" &&
               <>
                 <div className='Info'>שם: {user.firstName +" " + user.lastName}</div>
+                <div className='Info'>תפקיד: {userRole}</div>
                 <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
                 <div className='Info'>מין: {user.gender}</div>
               </>

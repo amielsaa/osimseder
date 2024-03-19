@@ -97,7 +97,7 @@
   }
 
 
-  .add_group_button {
+  .add_group_button , .add_core_member_button {
     background-color: var(--ORANGE-COLOR);
     color: white;
     display: flex;
@@ -113,7 +113,7 @@
     margin-left: 5%;
 
   }
-  .house_group_info {
+  .house_group_info, .member_in_charge_info {
     width: 100%;
     display: flex;
     direction: rtl;
@@ -122,6 +122,7 @@
     color: var(--PURPLE-COLOR);
     font-weight: bold;
     background-color: var(--GREY-COLOR);
+    border-radius: var(--BORDER-RADIUS);
     flex-wrap: wrap;
     min-height: 40%;
     padding-right: 5%;
@@ -134,15 +135,18 @@
   .group_of_house_icon{
     margin-left:40%
   }
-  .groups_of_house{
+  .groups_of_house , .members_of_house{
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 20%;
+    min-height: 90%;
     justify-content: center;
     align-items: center;
-    border-color: var(--ORANGE-COLOR);
+    border-radius: var(--BORDER-RADIUS);
+    border-top:2px solid var(--ORANGE-COLOR);
+    border-bottom:2px solid var(--ORANGE-COLOR);
     gap: 20%;
+
   }
   .House-Tasks{
     display: flex;
@@ -170,4 +174,24 @@
    .empty-tasks {
     margin: auto;
     color:var(--PURPLE-COLOR)
+   }
+   .groups_of_house_content , .members_of_house_content{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    min-height: 38%;
+    justify-content: center;
+    align-items: center;
+   }
+   .title_for_groups_of_house, .title_for_members_of_house{
+    color: var(--ORANGE-COLOR);
+    font-size: 1.5rem;
+    font-weight: bold;
+   }
+   .house_Info_Title{
+    color: var(--ORANGE-COLOR);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
    }

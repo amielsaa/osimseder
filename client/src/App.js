@@ -37,7 +37,7 @@ function App() {
             <Route path="/Home" element={<Home />} />
             <Route path="/Groups" element={<Groups />} />
             <Route path="/GroupPage/:id" element={<GroupPage />} />
-            <Route path="/Personal" element={<PersonalPage />} />
+            <Route path="/Personal/:id" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>
             <Route path="/addHouse" element={<AddHousePage/>}/>
