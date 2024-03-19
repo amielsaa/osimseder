@@ -30,10 +30,17 @@ header {
 .hello, .role-box {
   font-size: 1.5em;
   margin-left: 15%;
+  min-width: 17%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .hello{
   color:var(--FONT-COLOR);
   margin-top:1.5%;
+  margin-right: 4%;
+  flex-wrap: wrap;
+  min-width: 20%;
   
 }
 
@@ -63,6 +70,7 @@ header .icons .settings-icon {
   background-color: var(--LIGHTBLUE-COLOR);
   padding: 0.3rem;
   border-radius: var(--BORDER-RADIUS);
+  flex-wrap: wrap;
 }
 
 /* Media query for smaller screens (e.g., phones) */

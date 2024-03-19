@@ -109,8 +109,8 @@ const AddGroupPage = () => {
 
 
               {selectedCapacity && (
-                <div className='login_Buttons'>
-                <button type="submit" onClick={onSubmit} className='button-login' >צור קבוצה</button>
+                <div className='submit_Buttons'>
+                <button type="submit" onClick={onSubmit} className='submit-button' >צור קבוצה</button>
                 </div>
               )}
             </Form>

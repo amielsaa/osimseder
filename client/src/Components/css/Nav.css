@@ -94,7 +94,7 @@
     align-items: center; /* Adjusted position */
     right: -45px;
     width: 40px;
-    height: 55px;
+    height: 7vh;
     font-size: 18px;
     background: var(--PURPLEOP-COLOR); /* Background color change */
     border-radius: 0 7px 7px 0;

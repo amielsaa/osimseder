@@ -1,8 +1,7 @@
 .login-container {
-  width: 90%;
+  width: 95%;
   height:60%;
   margin: auto;
-  padding: 20px;
   border: 1px solid #ccc;
   background-color: var(--WHITEBG-COLOR);
   border-radius: 5px;
@@ -19,6 +18,7 @@
     align-items: center;
     font-size: 1.5rem;
     color: var(--ORANGE-COLOR);
+    margin-top:5%;
 }
 
 label {
@@ -54,13 +54,11 @@ input {
   padding: 10px;
   border: none;
   cursor: pointer;
-  margin-top: 5%;
 }
 
 
 
 .signup-link {
-    margin-top: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,6 +86,7 @@ input {
   justify-content: center;
   align-items: center;
   position: fixed;
+  overflow-y: scroll;
 }
 .logo_big {
 

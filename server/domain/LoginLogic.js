@@ -79,24 +79,25 @@ class LoginLogic {
         if (!student) {
             throw new Error('Student not found');
         }
-        const {password, ...studentJson} =  student;
+        const { password, ...studentJson } = student;
+        console.log(student)
         studentJson.dataValues.role = 'Student';
-        studentJson.dataValues.cityName = await string2Int.getCityNameById(studentJson.dataValues.cityId);
-        studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(studentJson.dataValues.schoolId);
-        return { token: token, user:studentJson, id: student.id };
+        studentJson.cityName = await string2Int.getCityNameById(student.cityId);
+        studentJson.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+        return { token: token, user: studentJson, id: student.id };
     }
 
     async verifyTokenStaff(user, token) {
         const staff = await Staffs.findOne({
-            where: {email: user.email }
+            where: { email: user.email }
         })
         if (!staff) {
             throw new Error('Staff not found');
         }
-        const {password, ...staffJson} =  staff;
+        const { password, ...staffJson } = staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
-        staffJson.dataValues.cityName = await string2Int.getCityNameById(staffJson.dataValues.cityId);
-        return { token: token, user:staffJson, id: staff.id };
+        staffJson.cityName = await string2Int.getCityNameById(staff.cityId);
+        return { token: token, user: staffJson, id: staff.id };
     }
 
     async logout(email) {

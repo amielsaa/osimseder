@@ -37,7 +37,7 @@ function App() {
             <Route path="/Home" element={<Home />} />
             <Route path="/Groups" element={<Groups />} />
             <Route path="/GroupPage/:id" element={<GroupPage />} />
-            <Route path="/Personal" element={<PersonalPage />} />
+            <Route path="/Personal/:id" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>
             <Route path="/addHouse" element={<AddHousePage/>}/>
@@ -46,7 +46,7 @@ function App() {
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
-            <Route path="/Equipment" element={<Equipment />} />
+           {/*<Route path="/Equipment" element={<Equipment />} />*/} 
             <Route path="/TaskPage/:id" element={<TaskPage />} />
             <Route path="/404" element={<ErrorPage />} />
           </Routes>

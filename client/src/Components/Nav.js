@@ -15,6 +15,7 @@ const Nav = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(true);
   const { user } = useContext(DataContext);
   const [userRole, setUserRole] = useState('');
+  const [studentGroup,setStudentGroup] = useState('')
 
   const toggleSidebar = () => {
     setIsSidebarHidden(!isSidebarHidden);
@@ -25,7 +26,15 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    user.role === "Student" ? setUserRole("סטודנט") :
+    if (user.role === "Student" && user.groupId !== undefined)
+    {
+      setStudentGroup(user.groupId)
+    }
+
+  })
+
+  useEffect(() => {
+    user.role === "Student" ? setUserRole("חניך") :
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):
@@ -54,15 +63,15 @@ const Nav = () => {
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Groups"><i className="fa fa-my_group"></i> <MdOutlineGroups3 className='nav_icon'/>כל הקבוצות</Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/> כל הבתים</Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>
+              {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
             </>
           )}
           {user.role === 'Student' && (
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Groups"><i className="fa fa-home"></i> <MdGroups className='nav_icon'/> קבוצות </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/GroupPage/${user.groupId}`}><i className="fa fa-my_group"></i> <MdGroup className='nav_icon'/>הקבוצה שלי</Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Personal"><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
+              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={studentGroup? `/GroupPage/${user.groupId}` : '/NoneGroupPage'}><i className="fa fa-my_group"></i> <MdGroup className='nav_icon'/>הקבוצה שלי</Link></li>
+              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.id}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י </Link></li>
             </>
           )}
@@ -70,8 +79,8 @@ const Nav = () => {
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Groups"><i className="fa fa-my_group"></i> <MdOutlineGroups3 className='nav_icon'/>הקבוצות שלי </Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/>הבתים שלי </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Personal"><i className="fa fa-home"></i><FaInfo className='nav_icon'/>פרטים אישיים</Link></li>
+               {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
+               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.id}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
             </>
           )}
@@ -79,8 +88,8 @@ const Nav = () => {
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Groups"><i className="fa fa-my_group"></i> <MdOutlineGroups3 className='nav_icon'/>קבוצות</Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/>בתים</Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Personal"><i className="fa fa-home"></i><FaInfo className='nav_icon'/>פרטים אישיים</Link></li>
+               {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
+               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.id}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
             </>
           )}

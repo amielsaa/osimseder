@@ -1,4 +1,4 @@
-import {  useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
@@ -9,15 +9,17 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import {getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse} from '../Helpers/StaffFrontLogic'
+import { getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
 
 const HousePage = () => {
   const { id } = useParams();
   const [house, setHouse] = useState(null);
-  const {navigate, user} = useContext(DataContext)
+  const { navigate, user } = useContext(DataContext);
   const [tasks, setTasks] = useState([]);
   const [firstGroup, setFirstGroup] = useState('');
   const [secondGroup, setSecondGroup] = useState('');
+  const [firstMember, setFirstMember] = useState('');
+  const [secondMember, setSecondMember] = useState('');
 
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -36,8 +38,8 @@ const HousePage = () => {
       areaName: "שכונה ב",
       address: "רחוב הראשון 123",
       languageNeeded: [getRandomValue(languages)],
-      numberOfRooms:5,
-      membersNeeded:3,
+      numberOfRooms: 5,
+      membersNeeded: 3,
       phoneNumber: "123-456-7890",
       alternativeNumber: "987-654-3210",
       freeText: "אני מתקשה ללכת וצריכה עזרה",
@@ -58,135 +60,169 @@ const HousePage = () => {
   }
   const removeGroupFromHouse = (groupId) => {
     const res = removeGroupByHouse(groupId);
-    if(res) {
-      if(firstGroup.id === groupId) {
+    if (res) { 
+      if (firstGroup.id === groupId) {
         setFirstGroup('');
       } else {
         setSecondGroup('');
       }
     }
   }
-
-  const setGroupsRequest = async () => {
-   const res = await fetchGroupsForHouse(id); 
-   console.log(res);
-   if(res[0]) {
-    setFirstGroup(res[0]);
-   }
-   if(res[1]) {
-    setSecondGroup(res[1]);
-   }
+  const removeMemberFromHouse = async (memberId) => {
+    //Amiel - remove the memeber from the house
   }
-  
-   useEffect(() => {  
+  const setGroupsRequest = async () => {
+    const res = await fetchGroupsForHouse(id);
+    if (res[0]) {
+      setFirstGroup(res[0]);
+    }
+    if (res[1]) {
+      setSecondGroup(res[1]);
+    }
+  }
+
+  useEffect(() => {
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
   }, []);  // Dependency array ensures it runs when the id changes
 
-  
+
   return (
     <>
       <Header />
       <Nav />
       <div className='content-Box-House'>
-      <span className='purple_circle'>
-      <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
-      </span>
-      <div className="House_main_content">
-        <div className="title_picture">
-          <div className="House-title">
-            <h1>בית מספר : {id}</h1>
+        <span className='purple_circle'>
+          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+        </span>
+        <div className="House_main_content">
+          <div className="title_picture">
+            <div className="House-title">
+              <h1>בית מספר : {id}</h1>
+            </div>
+            <div className="House_picture">
+              <img src={HousePicture} alt="אין תמונה" />
+            </div>
           </div>
-          <div className="House_picture">
-            <img src={HousePicture} alt="אין תמונה" />
-          </div>
-        </div>
-        {user.role !== "Student" && 
-        <div className="buttons_for_house_logic">
-          <button className="edit_house_button" onClick={() => navigate(`/EditHouse/${id}`)}> ערוך בית</button>
-          <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
-        </div>
-        }
-        
+          {user.role !== "Student" &&
+            <div className="buttons_for_house_logic">
+              <button className="edit_house_button" onClick={() => navigate(`/EditHouse/${id}`)}> ערוך בית</button>
+              <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
+            </div>
+          }
 
-          {user.role !== 'Student'&&
-           <div className="groups_of_house">
-           <div className="house_group_info">
-             קבוצה משוייכת:
-             {firstGroup && (
-              <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ firstGroup.id }`)}/> 
-             )}
-             {!firstGroup && user.role !== "TeamOwner" && (
-              <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> 
 
-             )}
-              {firstGroup && user.role !== "TeamOwner" && (
-               <button className="add_group_button" onClick={() => removeGroupFromHouse(firstGroup.id)} > הסר </button>
-              )}
- 
-           </div>
-           <div className="house_group_info">
-             קבוצה משוייכת: 
-             {secondGroup && (
-              <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${ secondGroup.id }`)}/> 
-             )}
-             {!secondGroup && user.role !== "TeamOwner" && (
-              <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${ id }`)}> הוסף </button> 
+          {user.role !== 'Student' &&
+            <div className="groups_of_house_content">
+              <div className="title_for_groups_of_house">קבוצות משוייכות</div>
+              <div className="groups_of_house">
+                <div className="house_group_info">
+                  קבוצה משוייכת:
+                  {firstGroup && (
+                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${firstGroup.id}`)} />
+                  )}
+                  {!firstGroup && user.role !== "TeamOwner" && (
+                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
 
-             )}
-              {secondGroup && user.role !== "TeamOwner" && (
-               <button className="add_group_button" onClick={() => removeGroupFromHouse(secondGroup.id)} > הסר </button>
-              )}
-           </div>
-           </div> }
-          
-        <div className="House_Info">
-          <div className="Info">
-              חבר גרעין  1: {house?.teamOwner1}
+                  )}
+                  {firstGroup && user.role !== "TeamOwner" && (
+                    <button className="add_group_button" onClick={() => removeGroupFromHouse(firstGroup.id)} > הסר </button>
+                  )}
+
+                </div>
+                <div className="house_group_info">
+                  קבוצה משוייכת:
+                  {secondGroup && (
+                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${secondGroup.id}`)} />
+                  )}
+                  {!secondGroup && user.role !== "TeamOwner" && (
+                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
+
+                  )}
+                  {secondGroup && user.role !== "TeamOwner" && (
+                    <button className="add_group_button" onClick={() => removeGroupFromHouse(secondGroup.id)} > הסר </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          }
+          {user.role !== 'Student' &&
+            <div className="members_of_house_content">
+              <div className="title_for_members_of_house">חברי גרעין אחראים</div>
+              <div className="members_of_house">
+                <div className="member_in_charge_info">
+                   חבר גרעין א:
+                  {firstMember && (
+                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${firstGroup.id}`)} />
+                  )}
+                  {!firstMember && user.role !== "TeamOwner" && (
+                    <button className="add_core_member_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
+
+                  )}
+                  {firstMember && user.role !== "TeamOwner" && (
+                    <button className="add_core_member_button" onClick={() => removeMemberFromHouse(firstMember.id)} > הסר </button>
+                  )}
+
+                </div>
+                <div className="member_in_charge_info">
+                  חבר גרעין ב:
+                  {secondMember && (
+                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${secondGroup.id}`)} />
+                  )}
+                  {!secondMember && user.role !== "TeamOwner" && (
+                    <button className="add_core_member_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
+
+                  )}
+                  {secondMember && user.role !== "TeamOwner" && (
+                    <button className="add_core_member_button" onClick={() => removeMemberFromHouse(secondMember.id)} > הסר </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          }
+
+          <div className="House_Info">
+            <div className="house_Info_Title"><h1>פרטי הבית</h1></div>
+            <div className="Info">
+              עיר: {house?.cityName}
+            </div>
+            <div className="Info">
+              שכונה: {house?.areaName}
+            </div>
+            <div className="Info">
+              כתובת: {house?.address}
+            </div>
+            <div className="Info">
+              שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
+            </div>
+            <div className="Info">
+              מספר איש קשר: {house?.phoneNumber}
+            </div>
+            <div className="Info">
+              מספר חלופי: {house?.alternativeNumber}
+            </div>
+            <div className="Info">
+              מין הדייר/ת: {house?.residentGender}
+            </div>
+            <div className="Info">
+              שפה נחוצה: {house?.languageNeeded}
+            </div>
+            <div className="Info">
+              מספר חדרים: {house?.numberOfRooms}
+            </div>
+            <div className="Info">
+              גודל קבוצה נחוץ: {house?.membersNeeded}
+            </div>
+            <div className="Info">
+              הערות : {house?.freeText}
+            </div>
           </div>
-          <div className="Info">
-              חבר גרעין  2: {house?.teamOwnerEmail_2}
-          </div>
-          <div className="Info">
-            עיר: {house?.cityName}
-          </div>
-          <div className="Info">
-            שכונה: {house?.areaName}
-          </div>
-          <div className="Info">
-            כתובת: {house?.address}
-          </div>
-          <div className="Info">
-            שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
-          </div>
-          <div className="Info">
-            מספר איש קשר: {house?.phoneNumber}
-          </div>
-          <div className="Info">
-            מספר חלופי: {house?.alternativeNumber}
-          </div>
-          <div className="Info">
-            מין הדייר/ת: {house?.residentGender}
-          </div>
-          <div className="Info">
-             שפה נחוצה: {house?.languageNeeded}
-          </div>
-          <div className="Info">
-            מספר חדרים: {house?.numberOfRooms}
-          </div>
-          <div className="Info">
-            גודל קבוצה נחוץ: {house?.membersNeeded}
-          </div>
-          <div className="Info">
-            הערות : {house?.freeText}
-          </div>
-        </div>
-        <div className="House-Tasks">
-        <div className="House-title-Tasks">
-            <h1>מטלות הבית</h1>
-          </div>
-          <div className='House-Info-Tasks'>
+          <div className="House-Tasks">
+            <div className="House-title-Tasks">
+              <h1>מטלות הבית</h1>
+            </div>
+            <div className='House-Info-Tasks'>
               {tasks.length > 0 ? (
                 tasks.map((task, index) => (
                   <TaskCard key={index} room={task.room} tasks={task.tasks} />
@@ -197,10 +233,10 @@ const HousePage = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 }

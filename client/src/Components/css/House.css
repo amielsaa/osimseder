@@ -29,6 +29,7 @@
     align-items: right;
     gap: 3%;
     overflow-y: scroll;
+    font-size: 0.9rem;
 }
 .house-id  {
     color:var(--FONT-COLOR);

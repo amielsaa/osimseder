@@ -59,8 +59,18 @@
   }
   
   /* Button styling */
-  .login_Buttons {
+  .submit_Buttons {
     margin-top: 20px;
+  }
+  .submit_Buttons .submit-button {
+    background-color: var(--ORANGE-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+  width: 100%;
+  font-size: 1.2em;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
   }
   
   .button-login {
