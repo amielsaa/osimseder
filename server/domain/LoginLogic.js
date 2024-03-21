@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { sign, verify } = require('jsonwebtoken');
 const {Staffs} = require('../models/');
 const {roleGroup} = require('../utils/Accesses')
+const string2Int = require('./utils/String2Int');
 
 class LoginLogic {
     async verifyLogin(email, givenPassword ) {
@@ -80,7 +81,6 @@ class LoginLogic {
             throw new Error('Student not found');
         }
         const { password, ...studentJson } = student;
-        console.log(student)
         studentJson.dataValues.role = 'Student';
         studentJson.cityName = await string2Int.getCityNameById(student.cityId);
         studentJson.schoolName = await string2Int.getSchoolNameById(student.schoolId);

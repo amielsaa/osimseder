@@ -4,13 +4,11 @@ const URL = 'http://localhost:3001';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
-const handleJoinGroup = (groupId, userId) => {
-    return () => {
-        axios.post(`${URL}/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
-      })
-    }
-  //Amiel - Student joins in a group backend logic.
-}
+const handleJoinGroup = (groupId, userId) => 
+    axios.post(`${URL}/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
+    })   
+//Amiel handle leave group !!!
+
 
 const fetchAllGroupsBySchool = async (user) => {
   if (user.role === "Student") {

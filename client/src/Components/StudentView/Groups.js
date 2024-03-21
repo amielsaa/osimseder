@@ -17,7 +17,6 @@ const Groups = () => {
         <div className='groups_title'>
       <h1>אנא בחר קבוצה</h1>
       </div>
-      {user.role === "Student"  ? <h2 className='sub-title'>.שים לב! לאחר בחירת קבוצה לא ניתן לשנות</h2> : ""}
       <GroupList/>
     </div>
     </div>

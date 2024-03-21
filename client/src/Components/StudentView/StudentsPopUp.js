@@ -1,9 +1,9 @@
 import React from 'react';
-import '../css/StudentsPopUp.css'
+import '../css/StudentsPopUp.css';
 
 const StudentsPopUp = ({ studentsList }) => {
   return (
-    <div className='pop-up_container'>
+    <div className={`pop-up_container ${studentsList.length > 0 ? 'has-students' : ''}`}>
       {studentsList.length > 0 ? (
         <ul className='pop-up_screen'>
           {studentsList.map((studentName, index) => (
