@@ -1,7 +1,5 @@
 import React from 'react';
 import './css/Header.css';
-import { FaUser } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import DataContext from '../Helpers/DataContext';
 import { useState,useEffect,useContext } from 'react';
 import Logo from '../images/g_udi_logo.png';  // Fix the import here
@@ -15,11 +13,11 @@ const Header = () => {
   const [userRole, setUserRole] = useState('');
 
   useEffect(() => {
-    user.role === "Student" ? setUserRole("סטודנט") :
+    user.role === "Student" ? setUserRole("חניך") :
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):
-      setUserRole("אדמין")  ;
+      user.role === "Admin" ? setUserRole("אדמין") : setUserRole("        ")  ;
   }, [user.role]);
 
   return (

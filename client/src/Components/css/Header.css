@@ -80,6 +80,6 @@ header .icons .settings-icon {
   .role-box,
   .user-icon,
   .settings-icon {
-    font-size: 0.8em; /* Adjust the font size for smaller screens */
+    font-size: 0.7em; /* Adjust the font size for smaller screens */
   }
 }

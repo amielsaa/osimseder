@@ -4,23 +4,33 @@ import StudentsPopUp from './StudentsPopUp';
 import DataContext from '../../Helpers/DataContext';
 import axios from 'axios';
 import {handleJoinGroup, fetchGroupById, fetchAllGroupsBySchool} from '../../Helpers/StudentFrontLogic'
+import ConfirmationMessage from '../ConfirmationMessage';
 
 const Group = ({ groupId , groupJson}) => {
   const {user} = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
   const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
   const [memberCount, setMemberCount] = useState({capacity:0, memberCount:0})
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedGroupId, setSelectedGroupId] = useState(null);
   const openStudentsPopUp = () => {
-    //need to send Axios request to fetch the users from the DB
     setStudentsPopUp(!studentsPopUp);
-  };
-  //Amiel import the House data - city is unchangeable.
-        //after you imported to house data put its data in the initialValues instead of ""
-        //look inside the JSX (the HTML down in this page) code, there is more comments
-        //Amiel - notice ! only area manager and upper ranks will see the neightborhood change bar
-        //Amiel - you need to check the city of the house and bring me all the possible neighborhoods or
-  
 
+  };
+  const toggleStatus = (id) => {
+      // Display the confirmation message
+      setShowConfirmation(true);
+      setSelectedGroupId(id);
+  };
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      handleJoinGroup(groupId, user.id)
+      console.log(user)
+    }
+    // Close the confirmation message
+    setShowConfirmation(false);
+    setSelectedGroupId(null);
+  };
 
   useEffect(() => {
     const updateStudentList = async () => {
@@ -30,14 +40,9 @@ const Group = ({ groupId , groupJson}) => {
     }
     updateStudentList();
     //setStudentsList(groupJson.students);
-  },[]);
+  },[studentsList]);
 
-  const joinGroup = async (groupId, userId) => {
-      await handleJoinGroup(groupId,userId)
-      const group = await fetchGroupById(groupId);
-      setStudentsList(group.students);
-      setMemberCount({capacity:group.capacity, memberCount:group.memberCount})
-  }
+
 
   return (
     <>
@@ -46,14 +51,20 @@ const Group = ({ groupId , groupJson}) => {
         <div className='group-id'>{`${groupId} : קבוצה`}</div>
         <button className='users-in-group-btn' onClick={openStudentsPopUp}>חניכים</button>
         {user.role === "Student" &&
-        <button className='join-group-btn' onClick={() => joinGroup(groupId, user.id)}>הצטרף</button>
+        <button className='join-group-btn' onClick={() => toggleStatus(groupId)}>הצטרף</button>
         }
-        
         <div className='students-Count'>{memberCount.memberCount}/{memberCount.capacity}</div>
       </div>
       {studentsPopUp ?
       <StudentsPopUp studentsList= {studentsList}/>
-      : ''}
+      : ''}  
+
+
+      {showConfirmation && (
+        <ConfirmationMessage confirmationMessage={`האם אתה בטוח שתרצה להצטרף לקבוצה ${selectedGroupId}?`}
+                              handleConfirmation={handleConfirmation}
+                              setShowConfirmation={setShowConfirmation}/>
+      )} 
     </>
   );
 }

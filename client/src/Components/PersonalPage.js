@@ -9,12 +9,12 @@ import Footer from './Footer';
 import { useParams } from 'react-router-dom';
 
 const PersonalPage = () => {
-  const { id } = useParams();
+  const { email } = useParams();
   const { navigate } = useContext(DataContext);
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    // Amiel - get me the user by the user id form the params, and set it to user
+    // Amiel - get me the user by the user email form the params, and set it to user
   })
 
   const [userRole, setUserRole] = useState('');
@@ -42,7 +42,7 @@ const PersonalPage = () => {
 
 
 
-          <div className='Personal-Title'> {/* Corrected the typo here */}
+          <div className='Personal-Title'> 
             <h1>פרטים אישיים</h1>
           </div>
           <div className='Personal-Info'>
@@ -54,11 +54,12 @@ const PersonalPage = () => {
                 <div className='Info'>תפקיד: {userRole}</div>
                 <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
                 <div className='Info'>שם הורה: {user.parentName}</div>
-                <div className='Info'>מספר פלאפון הורה: {user.parentNumber}</div>
-                <div className='Info'>בית ספר: {user.School}</div>
+                <div className='Info'>מספר פלאפון הורה: {user.parentPhoneNumber}</div>
+                <div className='Info'>עיר: {user.cityName}</div>
+                <div className='Info'>בית ספר: {user.schoolName}</div>
                 <div className='Info'>מין: {user.gender}</div>
-                <div className='Info'>שפות: {user.languages.join(', ')}</div>
-                <div className='Info'>בקשות אישיות: {user.personalRequests}</div>
+                <div className='Info'>שפה נוספת: {user.extraLanguage}</div>
+                <div className='Info'>בקשות אישיות: {user.issuesText}</div>
               </>
             }
             
@@ -67,6 +68,7 @@ const PersonalPage = () => {
               <>
                 <div className='Info'>שם: {user.firstName +" " + user.lastName}</div>
                 <div className='Info'>תפקיד: {userRole}</div>
+                <div className='Info'>עיר: {user.cityName}</div>
                 <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
                 <div className='Info'>מין: {user.gender}</div>
               </>
