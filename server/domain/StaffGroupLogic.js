@@ -168,10 +168,10 @@ class GroupLogic {
                 where: { "cityId": staff.cityId }
             });
             if (!schools) {
-                throw new Error('Couldn\'t find a schools by area.');
+                throw new Error('Couldn\'t find schools by area.');
             }
             const newGroups = [];
-            
+
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
                 const groupsBySchool = await school.getGroups();
@@ -192,7 +192,7 @@ class GroupLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             }));
-    
+
             return responseData;
 
         } catch (error) {
