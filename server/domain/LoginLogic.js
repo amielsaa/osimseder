@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { sign, verify } = require('jsonwebtoken');
 const {Staffs} = require('../models/');
 const {roleGroup} = require('../utils/Accesses')
+const string2Int = require('./utils/String2Int');
 
 class LoginLogic {
     async verifyLogin(email, givenPassword ) {
@@ -82,8 +83,8 @@ class LoginLogic {
         const { password, ...studentJson } = student;
         console.log(student)
         studentJson.dataValues.role = 'Student';
-        studentJson.cityName = await string2Int.getCityNameById(student.cityId);
-        studentJson.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+        studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
+        studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
         return { token: token, user: studentJson, id: student.id };
     }
 
@@ -96,7 +97,7 @@ class LoginLogic {
         }
         const { password, ...staffJson } = staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
-        staffJson.cityName = await string2Int.getCityNameById(staff.cityId);
+        staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
         return { token: token, user: staffJson, id: staff.id };
     }
 
