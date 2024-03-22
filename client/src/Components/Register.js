@@ -11,6 +11,8 @@ function Registration() {
     const {navigate} = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
     const [schoolsList, setSchoolsList] = useState([]);
+    const [selectedSchool, setSelectedSchool] = useState('');
+
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -149,7 +151,7 @@ function Registration() {
 
                     {selectedCity && <div>
                       <label htmlFor="school">בית ספר: </label>
-                      <Field as="select" id="school" name="school">
+                      <Field as="select" id="school" name="school" >
                           <option value="">בחר בית ספר</option>
                           {schoolsList && (
                                 <>
