@@ -25,15 +25,16 @@ const TaskCard = ({ room, tasks }) => {
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
       const updatedTasks = [...taskList];
-      let newStatus = 'GREEN';
-      if(updatedTasks[selectedTaskIndex].status === 'GREEN') {
-        newStatus = 'RED';
-      }
-      const updatedTask = updateTaskStatus(updatedTasks[selectedTaskIndex].taskId, newStatus);
-      updatedTasks[selectedTaskIndex].status = updatedTask.status;
-      setTaskList(updatedTasks);
+      const newStatus = updatedTasks[selectedTaskIndex].status === 'GREEN' ? 'RED' : 'GREEN';
+  
+      // Update task status
+      updatedTasks[selectedTaskIndex].status = newStatus;
+      setTaskList(updatedTasks); // Update state with the latest tasks
+  
+      // Update status in the database
+      updateTaskStatus(updatedTasks[selectedTaskIndex].taskId, newStatus);
     }
-
+  
     // Close the confirmation message
     setShowConfirmation(false);
     setSelectedTaskIndex(null);
