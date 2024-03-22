@@ -35,7 +35,7 @@ function AddTaskPage() {
     const onSubmit = (data) => {
       data.type = data.taskType;
       data.freeText = data.taskDescription;
-      data.status = 'GREEN';
+      data.status = 'RED';
       data.houseId = id;
       const res = addTask(data);
       if(res) {

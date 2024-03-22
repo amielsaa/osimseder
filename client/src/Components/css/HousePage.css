@@ -195,3 +195,11 @@
     justify-content: center;
     width: 100%;
    }
+   .member_select_wrapper{
+    width: 70%;
+    padding-top:5% ;
+   }
+   .assign_button_wrapper{
+    width: 15%;
+   }
+  

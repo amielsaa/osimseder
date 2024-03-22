@@ -12,7 +12,7 @@ import {getTaskById} from '../Helpers/StaffFrontLogic'
 const TaskPage = () => {
     const {id} = useParams ()
     const {navigate} = useContext(DataContext)
-    const [task, SetTask] = useState({taskId: '001' , room: 'סלון', taskKind: 'ניקיון', taskDescription: 'יש לנקות את החדר ולקרצף את הריצפה יש גם המון לכלוך בחלונות אז לשים לב לזה'})
+    const [task, SetTask] = useState({})
 
     const setTaskRequest = async () => {
       const taskById = await getTaskById(id);
@@ -21,7 +21,6 @@ const TaskPage = () => {
 
     useEffect(() => {
       setTaskRequest();
-      // Amiel - you have the Task ID in in line 11, I need you to get it from the DB and set it to task.
     }, [])
 
   return (
