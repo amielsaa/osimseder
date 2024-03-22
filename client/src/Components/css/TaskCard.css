@@ -36,6 +36,7 @@
     align-items: right;
     font-size: 1.2rem;
     overflow-y: scroll;
+    height: 79%;
   }
   
   .mini-Task {

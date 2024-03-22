@@ -27,9 +27,8 @@ const GroupTO = ({ groupId , groupJson}) => {
   useEffect(() => {
     if (chosenGroup)
     navigate(`/GroupPage/${chosenGroup}`)
-    
     updateStudentList();
-  },[chosenGroup, studentsList])
+  },[chosenGroup])
   
   const handleExitGroup = (groupId) => {
     //Amiel -  updating leaving group in the data base after TeamOwner leaves the group send me from the backend the new list
