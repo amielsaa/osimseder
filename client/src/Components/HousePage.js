@@ -86,7 +86,9 @@ const HousePage = () => {
 
     return randomHouse;
   };
+  const doNothing = () => {
 
+  }
 
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
@@ -124,7 +126,6 @@ const HousePage = () => {
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
-    console.log(tasks)
   }, []);  // Dependency array ensures it runs when the id changes
 
 
@@ -158,10 +159,7 @@ const HousePage = () => {
               <div className="title_for_groups_of_house">קבוצות משוייכות</div>
               <div className="groups_of_house">
                 <div className="house_group_info">
-                  קבוצה משוייכת:
-                  {firstGroup && (
-                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${firstGroup.id}`)} />
-                  )}
+                  <h4 onClick={firstGroup ? ()=> navigate(`/GroupPage/${firstGroup.id}`): doNothing()}>קבוצה משוייכת : {firstGroup? firstGroup.id : ""}</h4>
                   {!firstGroup && user.role !== "TeamOwner" && (
                     <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
 
@@ -172,10 +170,7 @@ const HousePage = () => {
 
                 </div>
                 <div className="house_group_info">
-                  קבוצה משוייכת:
-                  {secondGroup && (
-                    <MdGroups className='group_of_house_icon' onClick={() => navigate(`/GroupPage/${secondGroup.id}`)} />
-                  )}
+                <h4 onClick={secondGroup ? ()=> navigate(`/GroupPage/${secondGroup.id}`) : doNothing()}>קבוצה משוייכת : {secondGroup? secondGroup.id : ""}</h4>
                   {!secondGroup && user.role !== "TeamOwner" && (
                     <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
 
@@ -265,7 +260,7 @@ const HousePage = () => {
           <div className="House_Info">
             <div className="house_Info_Title"><h1>פרטי הבית</h1></div>
             <div className="Info">
-              עיר: {house?.cityName}
+              עיר: {house?.cityName === "BSV" ? "באר שבע" : "ירושלים"}
             </div>
             <div className="Info">
               שכונה: {house?.areaName}
