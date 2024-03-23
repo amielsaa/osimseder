@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userManagementLogic = require('../../domain/UserManagementLogic')
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
+const { accessGroup, validateAccess } = require('../../utils/Accesses');
 
 // Endpoint to fetch all students
 router.get('/getAllUsers', validateToken, validateAccess(accessGroup.C), async (req, res) => {

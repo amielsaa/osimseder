@@ -17,7 +17,7 @@ const PersonalPage = () => {
   const encryptedEmailToDecryptedEmail = async () => {
     const decryptedEmail = await decryptEmail(encryptedEmail);
     console.log(decryptedEmail)
-    const getuserInfo = await getUserByEmail(decryptEmail);
+    const getuserInfo = await getUserByEmail(decryptedEmail);
     console.log(getuserInfo)
   }
 
