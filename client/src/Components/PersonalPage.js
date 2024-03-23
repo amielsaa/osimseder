@@ -23,7 +23,7 @@ const PersonalPage = () => {
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):
-      setUserRole("אדמין")  ;
+      user.role === "Admin" ? setUserRole("אדמין") : setUserRole("")  ;
   }, [user.role]);
 
 
