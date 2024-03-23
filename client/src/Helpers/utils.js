@@ -17,7 +17,7 @@ const getUserByEmail = async (email) => {
     if(res.data.error) {
         alert(res.data.error)
     } else {
-        return res.data;
+        return res.data.dataValues;
     }
 }
 
