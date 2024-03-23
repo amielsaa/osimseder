@@ -54,7 +54,6 @@ const GroupPage = () => {
 
   const setGroupRequest = async () => {
     const group = await getGroupById(id);
-
     setGroupInfo(group);
     setStudentsList(group.students);
   }

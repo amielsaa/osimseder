@@ -8,7 +8,6 @@ const GroupList = () => {
   
   const {user} = useContext(DataContext)
   const [rerender, setRerender] = useState(false)
-
   const [groupIds, setGroupIds] = useState([]);
 
    useEffect(() => {
@@ -20,20 +19,16 @@ const GroupList = () => {
 
 
 
-  }, [rerender,user]);  // Add user to the dependency array
+  }, [user]);  // Add user to the dependency array
 
-  const rerenderGroups = async () => {
-    const groups = await fetchAllGroupsBySchool(user);
-    setGroupIds(groups);
-    setRerender(true)
-  }
+  
   
 
   return (
     <>
       {groupIds &&
       <>{groupIds.map((groupJson) => (
-        <Group key={groupJson.id} groupId={groupJson.id} groupJson={groupJson} rerenderGroups={rerenderGroups} />
+        <Group key={groupJson.id} groupId={groupJson.id} groupJson={groupJson}  />
       ))}
       </>}
     </>
