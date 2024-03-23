@@ -126,6 +126,7 @@ const HousePage = () => {
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
+    console.log(house)
   }, []);  // Dependency array ensures it runs when the id changes
 
 
@@ -272,10 +273,10 @@ const HousePage = () => {
               שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
             </div>
             <div className="Info">
-              מספר איש קשר: {house?.phoneNumber}
+              מספר איש קשר: {house?.residentPhoneNum}
             </div>
             <div className="Info">
-              מספר חלופי: {house?.alternativeNumber}
+              מספר חלופי: {house?.residentAlternatePhoneNum}
             </div>
             <div className="Info">
               מין הדייר/ת: {house?.residentGender}
