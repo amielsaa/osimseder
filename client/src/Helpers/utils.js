@@ -13,7 +13,7 @@ const decryptEmail = async (encryptedEmail) => {
     }
 }
 const getUserByEmail = async (email) => {
-    const res = await axios.get(`${URL}/auth//getUser/${email}`, headers);
+    const res = await axios.get(`${URL}/auth/getUser/${email}`, headers);
     if(res.data.error) {
         alert(res.data.error)
     } else {

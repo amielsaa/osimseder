@@ -13,23 +13,28 @@ const PersonalPage = () => {
   const { encryptedEmail } = useParams();
   const { navigate } = useContext(DataContext);
   const [user, setUser] = useState({});
+  const [userRole, setUserRole] = useState('');
 
-  const encryptedEmailToDecryptedEmail = async () => {
+  const encryptedEmailTouser = async () => {
     const decryptedEmail = await decryptEmail(encryptedEmail);
     console.log(decryptedEmail)
     const getuserInfo = await getUserByEmail(decryptedEmail);
     console.log(getuserInfo)
   }
-
-
-  const [userRole, setUserRole] = useState('');
   useEffect(() => {
+    const setUpPage = async() => {
+      const tmpuser = await encryptedEmailTouser(encryptedEmail)
+      setUser(tmpuser)
+      console.log(user)
       user.role === "Student" ? setUserRole("חניך") :
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):
       user.role === "Admin" ? setUserRole("אדמין") : setUserRole("")  ;
-  }, [user.role]);
+    }
+    setUpPage()
+  },[])
+
 
 
   return (
@@ -82,7 +87,7 @@ const PersonalPage = () => {
           </div>
         </div>
         <div className='ActionButtonsContainer'>
-            <button className='ActionButton' onClick={() => encryptedEmailToDecryptedEmail()}>
+            <button className='ActionButton' >
               <IoMdCreate className='ActionIcon' /> ערוך
             </button>
 

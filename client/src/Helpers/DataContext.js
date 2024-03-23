@@ -19,7 +19,6 @@ export const DataProvider = ({children}) => {
                 if(res.data.error) alert(res.data.error);
                 else {
                     setUser(res.data.user.dataValues);
-                    console.log(res.data.user.dataValues)
                 };
             });
         }
