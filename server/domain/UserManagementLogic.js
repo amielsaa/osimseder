@@ -1,5 +1,5 @@
 // Student Management
-const Students = require('../models/Students');
+const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
 
 class UserManagementLogic {
@@ -14,7 +14,7 @@ class UserManagementLogic {
 
     async getUserByEmail(email) {
         try {
-            const user = await Students.findOne({
+            const student = await Students.findOne({
                 where: { email: email }
             });
             if (!student) {
@@ -29,7 +29,7 @@ class UserManagementLogic {
                 }
             }
             else {
-                return user;
+                return student;
             }
         } catch (error) {
             throw new Error('Failed to fetch user: ' + error);
