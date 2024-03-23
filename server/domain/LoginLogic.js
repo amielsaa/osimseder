@@ -99,7 +99,7 @@ class LoginLogic {
         const { password, ...staffJson } = staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
         staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
-        studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
+        staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
         return { token: token, user: staffJson, id: staff.id };
     }
 
