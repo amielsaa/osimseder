@@ -7,7 +7,7 @@ import DataContext from '../Helpers/DataContext';
 import { useContext,useState,useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
-import { decryptEmail } from '../Helpers/utils'
+import { decryptEmail, getUserByEmail } from '../Helpers/utils'
 
 const PersonalPage = () => {
   const { encryptedEmail } = useParams();
@@ -15,8 +15,10 @@ const PersonalPage = () => {
   const [user, setUser] = useState({});
 
   const encryptedEmailToDecryptedEmail = async () => {
-    const decryptedEmail = await decryptEmail(encryptedEmail)
-    //const getuserInfo = await 
+    const decryptedEmail = await decryptEmail(encryptedEmail);
+    console.log(decryptedEmail)
+    const getuserInfo = await getUserByEmail(decryptEmail);
+    console.log(getuserInfo)
   }
 
 

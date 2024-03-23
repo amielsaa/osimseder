@@ -12,6 +12,14 @@ const decryptEmail = async (encryptedEmail) => {
         return res.data;
     }
 }
+const getUserByEmail = async (email) => {
+    const res = await axios.get(`${URL}/auth//getUser/${email}`, headers);
+    if(res.data.error) {
+        alert(res.data.error)
+    } else {
+        return res.data;
+    }
+}
 
 
-export {decryptEmail}
+export {decryptEmail, getUserByEmail}
