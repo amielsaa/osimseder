@@ -7,23 +7,28 @@ import DataContext from '../Helpers/DataContext';
 import { useContext,useState,useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
+import { decryptEmail, getUserByEmail } from '../Helpers/utils'
 
 const PersonalPage = () => {
-  const { email } = useParams();
+  const { encryptedEmail } = useParams();
   const { navigate } = useContext(DataContext);
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    // Amiel - get me the user by the user email form the params, and set it to user
-  })
+  const encryptedEmailToDecryptedEmail = async () => {
+    const decryptedEmail = await decryptEmail(encryptedEmail);
+    console.log(decryptedEmail)
+    const getuserInfo = await getUserByEmail(decryptEmail);
+    console.log(getuserInfo)
+  }
+
 
   const [userRole, setUserRole] = useState('');
   useEffect(() => {
-    user.role === "Student" ? setUserRole("חניך") :
+      user.role === "Student" ? setUserRole("חניך") :
       user.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
       user.role === "AreaManager" ? setUserRole("רכז גרעין") :
       user.role === "CityManager" ? setUserRole("רכז עירוני"):
-      setUserRole("אדמין")  ;
+      user.role === "Admin" ? setUserRole("אדמין") : setUserRole("")  ;
   }, [user.role]);
 
 
@@ -77,7 +82,7 @@ const PersonalPage = () => {
           </div>
         </div>
         <div className='ActionButtonsContainer'>
-            <button className='ActionButton'>
+            <button className='ActionButton' onClick={() => encryptedEmailToDecryptedEmail()}>
               <IoMdCreate className='ActionIcon' /> ערוך
             </button>
 
