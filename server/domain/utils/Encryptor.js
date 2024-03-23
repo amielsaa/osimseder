@@ -34,7 +34,7 @@ function decryptEmail(encodedEmail) {
 }
 
 // Example usage
-const email = "student7@gmail.com";
+/* const email = "student7@gmail.com";
 
 // Encrypt the email address
 const encryptedEmail = encryptEmail(email);
@@ -42,4 +42,8 @@ console.log("Encrypted email:", encryptedEmail);
 
 // Decrypt the email address
 const decryptedEmail = decryptEmail(encryptedEmail);
-console.log("Decrypted email:", decryptedEmail);
+console.log("Decrypted email:", decryptedEmail); */
+module.exports = {
+    encryptEmail,
+    decryptEmail
+};

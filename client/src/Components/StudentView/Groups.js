@@ -8,6 +8,7 @@ import Footer from '../Footer';
 
 const Groups = () => {
   const {user} = useContext(DataContext);
+  
   return (
     <>
     <Header/>

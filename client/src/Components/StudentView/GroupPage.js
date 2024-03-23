@@ -44,7 +44,7 @@ const GroupPage = () => {
         setStudentsList(updatedStudents);
       }
     }
-
+    
 
     // Close the confirmation message
     setShowRemoveConfirmation(false);
@@ -89,7 +89,7 @@ const GroupPage = () => {
             {studentList.length > 0 ? (
               studentList.map((student, index) => (
                 <div key={index} className='Group_Member'>
-                  {student.fullname}
+                  <h4>{student.fullname}</h4>
                   {user.role !== 'Student' && (
                     <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
                   )}
