@@ -1,9 +1,7 @@
 // Student Management
 const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
-const { roleGroup } = require('../utils/Accesses')
-const Encryptor = require('./utils/Encryptor');
-const string2Int = require('./utils/String2Int');
+const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 
 class UserManagementLogic {
     async getStudents() {
@@ -28,19 +26,12 @@ class UserManagementLogic {
                     throw new Error('No user with this email');
                 }
                 else {
-                    const { password, ...staffJson } = staff;
-                    staffJson.dataValues.role = roleGroup[staff.accesses];
-                    staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
-                    staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
+                    const staffJson = await formatStaffValues(staff);
                     return staffJson;
                 }
             }
             else {
-                const { password, ...studentJson } = student;
-                studentJson.dataValues.role = 'Student';
-                studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
-                studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
-                studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
+                const studentJson = await formatStudentValues(student);
                 return studentJson;
             }
         } catch (error) {
