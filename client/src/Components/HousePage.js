@@ -260,7 +260,7 @@ const HousePage = () => {
           <div className="House_Info">
             <div className="house_Info_Title"><h1>פרטי הבית</h1></div>
             <div className="Info">
-              עיר: {house?.cityName === "BSV" ? "באר שבע" : "ירושלים"}
+              עיר: {house?.cityName}
             </div>
             <div className="Info">
               שכונה: {house?.areaName}
