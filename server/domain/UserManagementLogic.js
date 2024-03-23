@@ -28,20 +28,20 @@ class UserManagementLogic {
                     throw new Error('No user with this email');
                 }
                 else {
-                    //const { ...staffJson } = staff;
-                    staff.role = roleGroup[staff.accesses];
-                    staff.cityName = await string2Int.getCityNameById(staff.cityId);
-                    staff.encryptedEmail = await Encryptor.encryptEmail(staff.email);
-                    return staff;
+                    const { password, ...staffJson } = staff;
+                    staffJson.dataValues.role = roleGroup[staff.accesses];
+                    staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
+                    staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
+                    return staffJson;
                 }
             }
             else {
-                //const { ...studentJson } = student;
-                student.role = 'Student';
-                student.cityName = await string2Int.getCityNameById(student.cityId);
-                student.schoolName = await string2Int.getSchoolNameById(student.schoolId);
-                student.encryptedEmail = await Encryptor.encryptEmail(student.email);
-                return student;
+                const { password, ...studentJson } = student;
+                studentJson.dataValues.role = 'Student';
+                studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
+                studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+                studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
+                return studentJson;
             }
         } catch (error) {
             throw new Error('Failed to fetch user: ' + error);
