@@ -5,6 +5,7 @@ const { sign, verify } = require('jsonwebtoken');
 const {Staffs} = require('../models/');
 const {roleGroup} = require('../utils/Accesses')
 const string2Int = require('./utils/String2Int');
+const Encryptor = require('./utils/Encryptor');
 
 class LoginLogic {
     async verifyLogin(email, givenPassword ) {
@@ -37,7 +38,9 @@ class LoginLogic {
         }
         const {password, ...studentJson} =  student;
         studentJson.dataValues.role = 'Student';
-        //studentJson['role'] = 'Student';
+        studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
+        studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+        studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
         const accessToken = sign({ email: email,role:'Student' ,id: student.id }, "importantsecret");
         return { token: accessToken, user:studentJson, id: student.id };
     }
@@ -54,6 +57,8 @@ class LoginLogic {
         }
         const {password, ...staffJson} =  staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
+        staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
+        staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
         const accessToken = sign({ email: email, role:roleGroup[staff.accesses], id: staff.id }, "importantsecret");
         return { token: accessToken, user: staffJson, id: staff.id };
         
@@ -84,6 +89,7 @@ class LoginLogic {
         studentJson.dataValues.role = 'Student';
         studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
         studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+        studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
         return { token: token, user: studentJson, id: student.id };
     }
 
@@ -97,6 +103,7 @@ class LoginLogic {
         const { password, ...staffJson } = staff;
         staffJson.dataValues.role = roleGroup[staff.accesses];
         staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
+        staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
         return { token: token, user: staffJson, id: staff.id };
     }
 
