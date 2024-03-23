@@ -23,8 +23,8 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
     }
 });
 
-// Get all tasks (GET)
-router.get('/:houseId', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+// Get all tasks by house (GET)
+router.get('/:houseId', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const houseId = req.params.houseId;
 
@@ -36,7 +36,7 @@ router.get('/:houseId', validateToken, validateAccess(accessGroup.C), async (req
 });
 
 // Get a single task by ID (GET)
-router.post('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -48,7 +48,7 @@ router.post('/:id', validateToken, validateAccess(accessGroup.C), async (req, re
 });
 
 // Update a task by ID (PUT)
-router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         const id = req.params.id;
         const updatedFields = req.body;
