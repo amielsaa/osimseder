@@ -1,6 +1,9 @@
 // Student Management
 const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
+const { roleGroup } = require('../utils/Accesses')
+const Encryptor = require('./utils/Encryptor');
+const string2Int = require('./utils/String2Int');
 
 class UserManagementLogic {
     async getStudents() {
@@ -25,11 +28,20 @@ class UserManagementLogic {
                     throw new Error('No user with this email');
                 }
                 else {
-                    return staff;
+                    const { ...staffJson } = staff;
+                    staffJson.dataValues.role = roleGroup[staff.accesses];
+                    staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
+                    staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
+                    return staffJson;
                 }
             }
             else {
-                return student;
+                const { ...studentJson } = student;
+                studentJson.dataValues.role = 'Student';
+                studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
+                studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
+                studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
+                return studentJson;
             }
         } catch (error) {
             throw new Error('Failed to fetch user: ' + error);
