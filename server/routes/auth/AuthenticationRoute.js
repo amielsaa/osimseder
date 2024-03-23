@@ -88,7 +88,7 @@ router.post('/log_out', async (req, res) => {
 });
 
 // decrypt an email (GET)
-router.get('decryptEmail/:encryptedEmail', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.get('/decryptEmail/:encryptedEmail', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         const encryptedEmail = req.params.encryptedEmail;
         const decryptedEmail = await Encryptor.decryptEmail(encryptedEmail);
