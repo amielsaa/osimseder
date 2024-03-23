@@ -50,7 +50,7 @@ const AddHousePage = () => {
     gender: Yup.string().required('מין נדרש'),
     language: Yup.string().required('שפה נדרשת'),
     rooms: Yup.string().required('מספר חדרים נדרש'),
-    teamSize: Yup.string().required('גודל קבוצה נדרש'),
+    teamSize: Yup.string(),
     comments: Yup.string(),
     phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
@@ -117,7 +117,7 @@ const AddHousePage = () => {
             <Form>
 
               <div>
-                <label htmlFor="city"> עיר: </label>
+                <label htmlFor="city"> עיר(*): </label>
                 <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
                   <option value="">בחר עיר</option>
                   <option value="JRS">ירושלים</option>
@@ -129,7 +129,7 @@ const AddHousePage = () => {
 
               {selectedCity && (
                 <div>
-                    <label htmlFor="area"> שכונה: </label>
+                    <label htmlFor="area"> שכונה(*): </label>
                     <Field as="select" id="area" name="area" onChange={(e) => setSelectedArea(e.target.value)} value={selectedArea}>
                     <option value="">בחר שכונה</option>
                     {areaList && (
@@ -149,24 +149,24 @@ const AddHousePage = () => {
               {(selectedCity && selectedArea) && (
                <>
                     <div>
-                        <label htmlFor="address">כתובת :</label>
+                        <label htmlFor="address">כתובת(*):</label>
                         <Field id="address" name="address"  onChange={(e) => {setAddress(e.target.value)}} value={address} />
                         <ErrorMessage name="address" component="span" />
                     </div>
                     
                     <div>
-                        <label htmlFor="firstName">שם איש קשר :</label>
+                        <label htmlFor="firstName">שם איש קשר(*):</label>
                         <Field id="firstName" name="firstName"  onChange={(e) => {setFirstName(e.target.value)}} value={firstName} />
                         <ErrorMessage name="firstName" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="lastName">שם משפחה איש קשר : </label>
+                        <label htmlFor="lastName">שם משפחה איש קשר(*): </label>
                         <Field id="lastName" name="lastName"  onChange={(e) => {setLastName(e.target.value)}} value={lastName}/>
                         <ErrorMessage name="lastName" component="span" />
                     </div>
                     <div>
-                        <label htmlFor="phoneNumber"> מספר פלאפון : </label>
+                        <label htmlFor="phoneNumber"> מספר פלאפון(*): </label>
                         <Field id="phoneNumber" name="phoneNumber"  onChange={(e) => {setPhoneNumber(e.target.value)}} value={phoneNumber}/>
                         <ErrorMessage name="phoneNumber" component="span" />
                     </div>
@@ -177,18 +177,18 @@ const AddHousePage = () => {
                     </div>
                     
                     <div>
-                        <label htmlFor="gender">מין איש קשר: </label>
+                        <label htmlFor="gender">מין איש קשר(*) : </label>
                         <Field as="select" id="gender" name="gender" onChange={(e) => {setGender(e.target.value)}} value={gender}>
                             <option value="">בחר מין</option>
-                            <option value="Male">זכר</option>
-                            <option value="Female">נקבה</option>
-                            <option value="Other">אחר</option>
+                            <option value="זכר">זכר</option>
+                            <option value="נקבה">נקבה</option>
+                            <option value="אחר">אחר</option>
                         </Field>
                         <ErrorMessage name="gender" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="languages">שפה נחוצה (לא חובה)</label>
+                        <label htmlFor="languages">שפה נחוצה(*)</label>
                         <Field as="select" id="language" name="language" onChange={(e) => {setLanguage(e.target.value)}} value={language}>
                             <option value="">שפות</option>
                             {languages.map((lang) => (
@@ -199,7 +199,7 @@ const AddHousePage = () => {
                     </div>
 
                 <div>
-                  <label htmlFor="rooms"> מספר חדרים בבית: </label>
+                  <label htmlFor="rooms"> מספר חדרים בבית(*) : </label>
                   <Field as="select" id="rooms" name="rooms" onChange={(e) => {setRooms(e.target.value)}} value={rooms}>
                     <option value="">בחר מספר חדרים בבית</option>
                     
