@@ -33,16 +33,18 @@ function decryptEmail(encodedEmail) {
     return decryptedEmail.toString();
 }
 
-// Example usage
-/* const email = "student7@gmail.com";
+//// Example usage
+//const email = "student7@gmail.com";
+//
+//// Encrypt the email address
+//const encryptedEmail = encryptEmail(email);
+//console.log("Encrypted email:", encryptedEmail);
+//
+//// Decrypt the email address
+//const decryptedEmail = decryptEmail(encryptedEmail);
+//console.log("Decrypted email:", decryptedEmail);
 
-// Encrypt the email address
-const encryptedEmail = encryptEmail(email);
-console.log("Encrypted email:", encryptedEmail);
-
-// Decrypt the email address
-const decryptedEmail = decryptEmail(encryptedEmail);
-console.log("Decrypted email:", decryptedEmail); */
+// Export the encryptEmail and decryptEmail functions
 module.exports = {
     encryptEmail,
     decryptEmail
