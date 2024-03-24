@@ -67,7 +67,7 @@ const AddGroupPage = () => {
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
 
-              <div>
+              {user.role === "Admin" && (<div>
                 <label htmlFor="city"> עיר: </label>
                 <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>
@@ -75,7 +75,16 @@ const AddGroupPage = () => {
                   <option value="BSV">באר שבע</option>
                 </Field>
                 <ErrorMessage name="city" component="span" />
-              </div>
+              </div>)}
+              {user.role === "AreaManager" || user.role === "CityManager"  && (<div>
+                <label htmlFor="city"> עיר: </label>
+                <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
+                  <option value="">בחר עיר</option>
+                  <option value={user.cityName}>{user.cityName}</option>
+                </Field>
+                <ErrorMessage name="city" component="span" />
+              </div>)}
+              
 
               {selectedCity && (
                 <div>

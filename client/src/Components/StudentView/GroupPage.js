@@ -105,7 +105,7 @@ const GroupPage = () => {
       
       {showRemoveConfirmation && (
         <ConfirmationMessage
-          confirmationMessage={`להסיר את ${studentToRemove} מהקבוצה?`}
+          confirmationMessage={`להסיר את ${studentToRemove.fullname} מהקבוצה?`}
           handleConfirmation={confirmRemoveMember}
           setShowConfirmation={setShowRemoveConfirmation}
         />

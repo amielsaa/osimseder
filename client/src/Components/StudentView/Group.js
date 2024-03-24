@@ -23,6 +23,7 @@ const Group = ({ groupId , groupJson}) => {
 
 
   useEffect(() => {
+    console.log(user)
     const updateStudentList = async () => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
@@ -33,10 +34,16 @@ const Group = ({ groupId , groupJson}) => {
   },[]);
 
   const joinGroup = async (groupId, userId) => {
+    try{
       await handleJoinGroup(groupId,userId)
       const group = await fetchGroupById(groupId);
+      
       setStudentsList(group.students);
       setMemberCount({capacity:group.capacity, memberCount:group.memberCount})
+    }
+    catch(e){
+
+    }
   }
 
   return (
