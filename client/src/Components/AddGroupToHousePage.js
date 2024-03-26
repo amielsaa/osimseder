@@ -10,7 +10,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 import { IoChevronForwardCircle } from "react-icons/io5";
 import GroupListForHouse from './GroupListForHouse';
-import {fetchAllSchoolsByCity} from '../Helpers/StaffFrontLogic';
+import {fetchSchoolsByCityId} from '../Helpers/StaffFrontLogic';
 
 function AddGroupToHousePage() {
     const { id } = useParams();
@@ -26,7 +26,7 @@ function AddGroupToHousePage() {
     }
     const setSchoolsRequest = async () => {
       if(user.cityId) {
-        const res = await fetchAllSchoolsByCity(cities[user.cityId]);
+        const res = await fetchSchoolsByCityId(user.cityId);
         setSchoolOptions(res);
       }
     }

@@ -51,12 +51,13 @@ router.post('/register_staff', async (req, res) => {
     }
 });
 
-router.post('/reset_password', async (req, res) => {
+router.post('/forgot_password', async (req, res) => {
     const {email} = req.body;
     try {
         const createdStudent = await RegistrationLogic.forgotPassword(email);
         res.json(createdStudent);
     } catch (error) {
+        console.error('Error initiating forgot password:', error);
         res.json({ error: error.message });
     }
 });
@@ -69,7 +70,7 @@ router.post('/change_password', async (req, res) => {
         await RegistrationLogic.changePassword(email, password, isStudent);
         res.send(true);
     } catch (error) {
-        console.error('Error verifying email:', error);
+        console.error('Error changing password:', error);
         res.status(500).send('Internal server error.');
     }
 });

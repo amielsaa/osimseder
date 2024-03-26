@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import { addHouse, fetchAllAreasByCity} from '../Helpers/StaffFrontLogic'
+import { addHouse, fetchAllAreasGroupedByCity} from '../Helpers/StaffFrontLogic'
 
 const AddHousePage = () => {
     const { user, navigate } = useContext(DataContext);
@@ -86,7 +86,7 @@ const AddHousePage = () => {
   };
 
   const setAreas = async () => {
-    const res = await fetchAllAreasByCity(selectedCity);
+    const res = await fetchAllAreasGroupedByCity(selectedCity);
     setAreaList(res[selectedCity]);
   }
 

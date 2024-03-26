@@ -23,33 +23,53 @@ router.post('/setup', async (req,res) => {
 
 const setupCities = async () => {
     await Cities.create({
-        cityName: 'באר שבע',
-        cityManagerEmail: 'amielbsv@gmail.com'
-    })
-    await Cities.create({
         cityName: 'ירושלים',
         cityManagerEmail: 'amieljrs@gmail.com'
+    })
+    await Cities.create({
+        cityName: 'באר שבע',
+        cityManagerEmail: 'amielbsv@gmail.com'
     })
 }
 
 const setupAreas = async () => {
     await Areas.create({
-        areaName:'באר שבע - מזרח',
+        areaName:'בקעה רבתי',
         areaManagerEmail: 'amieleastbsv@gmail.com',
         cityId: '1'
     })
     await Areas.create({
-        areaName:'באר שבע - מערב',
+        areaName:'גוננים',
         areaManagerEmail: 'amielwestbsv@gmail.com',
         cityId: '1'
     })
     await Areas.create({
-        areaName:'ירושלים - מזרח',
+        areaName:'גילה',
+        areaManagerEmail: 'amieleastbsv@gmail.com',
+        cityId: '1'
+    })
+    await Areas.create({
+        areaName:'פסגת זאב',
+        areaManagerEmail: 'amielwestbsv@gmail.com',
+        cityId: '1'
+    })
+    await Areas.create({
+        areaName:'קריית יובל/מנחם',
+        areaManagerEmail: 'amieleastbsv@gmail.com',
+        cityId: '1'
+    })
+    await Areas.create({
+        areaName:'רמות',
+        areaManagerEmail: 'amielwestbsv@gmail.com',
+        cityId: '1'
+    })
+    await Areas.create({
+        areaName:'נתיבי עם',
         areaManagerEmail: 'amieleastjrs@gmail.com',
         cityId: '2'
     })
     await Areas.create({
-        areaName:'ירושלים - מערב',
+        areaName:'רמות',
         areaManagerEmail: 'amielwestjrs@gmail.com',
         cityId: '2'
     })
@@ -58,23 +78,53 @@ const setupAreas = async () => {
 
 const setupSchools = async () => {
     await Schools.create({
-        schoolName: 'מקיף א ב"ש',
+        schoolName: 'אורט גבעת רם',
         schoolId: "1",
         cityId: "1"
     })
     await Schools.create({
-        schoolName: 'מקיף ב ב"ש',
+        schoolName: 'המסורתי',
         schoolId: "2",
         cityId: "1"
     })
     await Schools.create({
-        schoolName: 'אורט ירושלים',
+        schoolName: 'טדי קולק',
         schoolId: "3",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'פלך בנות',
+        schoolId: "4",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'פלך בנים',
+        schoolId: "5",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'קשת סליסברג',
+        schoolId: "6",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'רעות',
+        schoolId: "7",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'תבל רמות',
+        schoolId: "8",
+        cityId: "1"
+    })
+    await Schools.create({
+        schoolName: 'מקיף ז',
+        schoolId: "9",
         cityId: "2"
     })
     await Schools.create({
-        schoolName: 'נווה ציון ירושלים',
-        schoolId: "4",
+        schoolName: 'זיברמן',
+        schoolId: "10",
         cityId: "2"
     })
 }
@@ -275,14 +325,102 @@ const setupStudents = async () => {
     await createdUser.update({ isVerified: true, verificationToken: null });
 
 }
+//ALL PASSWORDS ARE EMAIL_START+phonenum
 const setupStaffs = async () => {
+    //admin
+    createdUser = await registrationLogic.registerStaff({
+        email: 'Itaibc@udi.org.il',
+        password: 'Itaibc0549552120',
+        lastName: 'בן חיים',
+        firstName: 'איתי',
+        phoneNumber: '0549552120',
+        gender: 'נקבה',
+        accesses: 'E',
+        city: ''
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    //city managers
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amieljrs@gmail.com',
+        password: '123456',
+        lastName: 'מנהל-ים',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'D',
+        city: 'JRS'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amielbsv@gmail.com',
+        password: '123456',
+        lastName: 'מנהל-בש',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'D',
+        city: 'BSV'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    //area managers
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amieleastbsv@gmail.com',
+        password: '123456',
+        lastName: 'מזרח-בש',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'C',
+        city: 'BSV'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amielwestbsv@gmail.com',
+        password: '123456',
+        lastName: 'מערב-בש',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'C',
+        city: 'BSV'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amieleastjrs@gmail.com',
+        password: '123456',
+        lastName: 'מזרח-ים',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'C',
+        city: 'JRS'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
+    createdUser = await registrationLogic.registerStaff({
+        email: 'amielwestjrs@gmail.com',
+        password: '123456',
+        lastName: 'מערב-ים',
+        firstName: 'עמיאל',
+        phoneNumber: '0549552120',
+        gender: 'זכר',
+        accesses: 'C',
+        city: 'JRS'
+    })
+    await createdUser.update({ isVerified: true, verificationToken: null });
+
     //team owners
     createdUser = await registrationLogic.registerStaff({
         email: 'teamOwner1@gmail.com',
         password: '123456',
         lastName: 'קבוצה1',
-        firstName: 'ראש',
-        phoneNumber: '0549552120',
+        firstName: 'איתח',
+        phoneNumber: '0526864229',
         gender: 'זכר',
         accesses: 'B',
         city: 'BSV'
@@ -345,93 +483,6 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'נקבה',
         accesses: 'B',
-        city: 'JRS'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    //area managers
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amieleastbsv@gmail.com',
-        password: '123456',
-        lastName: 'מזרח-בש',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'C',
-        city: 'BSV'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amielwestbsv@gmail.com',
-        password: '123456',
-        lastName: 'מערב-בש',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'C',
-        city: 'BSV'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amieleastjrs@gmail.com',
-        password: '123456',
-        lastName: 'מזרח-ים',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'C',
-        city: 'JRS'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amielwestjrs@gmail.com',
-        password: '123456',
-        lastName: 'מערב-ים',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'C',
-        city: 'JRS'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    //city managers
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amieljrs@gmail.com',
-        password: '123456',
-        lastName: 'מנהל-ים',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'D',
-        city: 'JRS'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    createdUser = await registrationLogic.registerStaff({
-        email: 'amielbsv@gmail.com',
-        password: '123456',
-        lastName: 'מנהל-בש',
-        firstName: 'עמיאל',
-        phoneNumber: '0549552120',
-        gender: 'זכר',
-        accesses: 'D',
-        city: 'BSV'
-    })
-    await createdUser.update({ isVerified: true, verificationToken: null });
-
-    //admin
-    createdUser = await registrationLogic.registerStaff({
-        email: 'admin@gmail.com',
-        password: '123456',
-        lastName: 'מלך',
-        firstName: 'אדמין',
-        phoneNumber: '0549552120',
-        gender: 'נקבה',
-        accesses: 'E',
         city: 'JRS'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });

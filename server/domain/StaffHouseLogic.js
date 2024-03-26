@@ -325,6 +325,7 @@ class StaffHouseLogic {
         }
     }
 
+    //TODO needed? theres updateHouse
     async assignSecondTeamOwner(houseId, userEmail) {
         try {
             this.checkArguments([houseId, userEmail], ["houseId", "userEmail"])
@@ -371,47 +372,7 @@ class StaffHouseLogic {
         }
     }
 
-    async getAllAreasByCity() {
-        try {
-            const cities = await Cities.findAll({});
-            if (!cities) {
-                throw new Error('Couldn\'t get cities.');
-            }
-
-            let result = {};
-
-            for(let i=0; i<cities.length; i++){
-                const areas = await cities[i].getAreas();
-                result[cities[i].cityName] = areas;
-            }
-
-            return result;
-            
-            
-
-            // const students = await group.getStudents();
     
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
-            // return house;
-
-        } catch (error) {
-            throw new Error('Failed to get areas by city: ' + error);
-        }
-    }
-
     async updateHouse(id, updatedFields) {
         try {
             this.checkArguments([id],
