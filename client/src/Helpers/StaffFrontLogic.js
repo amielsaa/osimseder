@@ -5,7 +5,7 @@ const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
 const fetchAllGroupsStaff = async () => {
-    const res = await axios.get(`${URL}/staff/groups/getgroups`, headers);
+    const res = await axios.get(`${URL}/api/staff/groups/getgroups`, headers);
     if(res.data.error) {
         alert(res.data.error)
     } else {
@@ -14,7 +14,7 @@ const fetchAllGroupsStaff = async () => {
 }
 
 const fetchAllSchoolsByCity = async (cityName) => {
-    const res = await axios.post(`${URL}/staff/groups/schools`, {city:cityName} ,headers);
+    const res = await axios.post(`${URL}/api/staff/groups/schools`, {city:cityName} ,headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -23,7 +23,7 @@ const fetchAllSchoolsByCity = async (cityName) => {
 }
 
 const addGroup = async (cityName, schoolId, capacity) => {
-    const res = await axios.post(`${URL}/staff/groups/`, {city:cityName, schoolId:schoolId, capacity:capacity} ,headers);
+    const res = await axios.post(`${URL}/api/staff/groups/`, {city:cityName, schoolId:schoolId, capacity:capacity} ,headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;
@@ -34,7 +34,7 @@ const addGroup = async (cityName, schoolId, capacity) => {
 }
 
 const fetchAllHouses = async () => {
-    const res = await axios.get(`${URL}/staff/houses`, headers);
+    const res = await axios.get(`${URL}/api/staff/houses`, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -42,7 +42,7 @@ const fetchAllHouses = async () => {
     }
 }
 const getHouseById = async (id) => {
-    const res = await axios.get(`${URL}/staff/houses/${id}`, headers)
+    const res = await axios.get(`${URL}/api/staff/houses/${id}`, headers)
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -51,7 +51,7 @@ const getHouseById = async (id) => {
 }
 
 const addHouse = async (information) => {
-    const res = await axios.post(`${URL}/staff/houses`,information, headers);
+    const res = await axios.post(`${URL}/api/staff/houses`,information, headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;
@@ -62,7 +62,7 @@ const addHouse = async (information) => {
 }
 
 const updateHouse = async (information, id) => {
-    const res = await axios.put(`${URL}/staff/houses/${id}`, information, headers)
+    const res = await axios.put(`${URL}/api/staff/houses/${id}`, information, headers)
     if(res.data.error) {
         alert(res.data.error);
         return false;
@@ -76,7 +76,7 @@ const fetchAllCities = async () => {
 }
 
 const fetchAllAreasByCity = async (city) => {
-    const res = await axios.post(`${URL}/staff/houses/getareas`,{},headers);
+    const res = await axios.post(`${URL}/api/staff/houses/getareas`,{},headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -85,7 +85,7 @@ const fetchAllAreasByCity = async (city) => {
 }
 
 const addTask = async (data) => {
-    const res = await axios.post(`${URL}/staff/tasks/`,data, headers);
+    const res = await axios.post(`${URL}/api/staff/tasks/`,data, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -94,7 +94,7 @@ const addTask = async (data) => {
 }
 
 const getTasksByHouseId = async (id) => {
-    const res = await axios.get(`${URL}/staff/tasks/${id}`,headers);
+    const res = await axios.get(`${URL}/api/staff/tasks/${id}`,headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -103,7 +103,7 @@ const getTasksByHouseId = async (id) => {
 }
 
 const getTaskById = async (id) => {
-    const res = await axios.post(`${URL}/staff/tasks/${id}`,{}, headers);
+    const res = await axios.post(`${URL}/api/staff/tasks/${id}`,{}, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -112,7 +112,7 @@ const getTaskById = async (id) => {
 }
 
 const getAllGroupsWithoutHouse = async (schoolId) => {
-    const res = await axios.post(`${URL}/staff/groups/emptygroups`,{schoolId: schoolId}, headers);
+    const res = await axios.post(`${URL}/api/staff/groups/emptygroups`,{schoolId: schoolId}, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -121,7 +121,7 @@ const getAllGroupsWithoutHouse = async (schoolId) => {
 }
 
 const assignGroupToHouse = async (groupId, houseId) => {
-    const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
+    const res = await axios.post(`${URL}/api/staff/houses/${houseId}/${groupId}`,{},headers);
     if(res.data.error) { 
         console.log(res.data.error);
         return false; 
@@ -130,7 +130,7 @@ const assignGroupToHouse = async (groupId, houseId) => {
 }
 
 const fetchGroupsForHouse = async (houseId) => {
-    const res = await axios.get(`${URL}/staff/houses/getgroups/${houseId}`, headers);
+    const res = await axios.get(`${URL}/api/staff/houses/getgroups/${houseId}`, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -139,7 +139,7 @@ const fetchGroupsForHouse = async (houseId) => {
 }
 
 const removeGroupByHouse = async (groupId) => {
-    const res = await axios.put(`${URL}/staff/groups/${groupId}`,{houseId:null},headers);
+    const res = await axios.put(`${URL}/api/staff/groups/${groupId}`,{houseId:null},headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;
@@ -149,7 +149,7 @@ const removeGroupByHouse = async (groupId) => {
 }
 
 const updateTaskStatus = async (taskId, taskStatus) => {
-    const res = await axios.put(`${URL}/staff/tasks/${taskId}`,{status:taskStatus}, headers);
+    const res = await axios.put(`${URL}/api/staff/tasks/${taskId}`,{status:taskStatus}, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -158,7 +158,7 @@ const updateTaskStatus = async (taskId, taskStatus) => {
 }
 
 const getGroupById = async (groupId) => {
-    const res = await axios.get(`${URL}/staff/groups/${groupId}`,headers);
+    const res = await axios.get(`${URL}/api/staff/groups/${groupId}`,headers);
     if(res.data.error) {
         alert(res.data.error)
     } else {
@@ -167,7 +167,7 @@ const getGroupById = async (groupId) => {
 }
 
 const removeGroupMember = async (email) => {
-    const res = await axios.put(`${URL}/staff/students/${email}`,{groupId:null}, headers);
+    const res = await axios.put(`${URL}/api/staff/students/${email}`,{groupId:null}, headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;

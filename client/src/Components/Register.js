@@ -60,7 +60,7 @@ function Registration() {
         data.city = selectedCity;
         console.log(data);
         data.languages = [data.languages]
-        axios.post("http://localhost:3001/auth/register_student", data).then(() => {
+        axios.post("http://localhost:3001/api/auth/register_student", data).then(() => {
             navigate('/');
         });         
     };

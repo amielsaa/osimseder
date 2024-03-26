@@ -5,14 +5,14 @@ const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
 const handleJoinGroup = (groupId, userId) => 
-    axios.post(`${URL}/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
+    axios.post(`${URL}/api/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
     })   
 //Amiel handle leave group !!!
 
 
 const fetchAllGroupsBySchool = async (user) => {
   if (user.role === "Student") {
-    const res = await axios.post('http://localhost:3001/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} );
+      const res = await axios.post('http://localhost:3001/api/student/groups/',{schoolId:user.schoolId},{headers: {accessToken: localStorage.getItem('accessToken')}} );
     if(res.data.error) {alert(res.data.error)};
     return res.data.groups;
 
@@ -29,7 +29,7 @@ const fetchAllGroupsBySchool = async (user) => {
 }
 
 const fetchGroupById = async (groupId) => {
-  const res = await axios.get(`${URL}/student/groups/${groupId}`, headers);
+    const res = await axios.get(`${URL}/api/student/groups/${groupId}`, headers);
   //.then((res) => {
   if(res.data.error) {alert(res.data.error)};
   return res.data.group
