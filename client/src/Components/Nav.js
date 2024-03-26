@@ -10,10 +10,12 @@ import { BsTools } from "react-icons/bs";
 import { FaInfo } from "react-icons/fa";
 import { FaDoorOpen } from "react-icons/fa";
 import { MdGroup } from "react-icons/md";
+import ConfirmationMessage from './ConfirmationMessage';
 
 const Nav = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(true);
-  const { user } = useContext(DataContext);
+  const { user,navigate } = useContext(DataContext);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [userRole, setUserRole] = useState('');
   const [studentGroup,setStudentGroup] = useState('')
 
@@ -24,7 +26,13 @@ const Nav = () => {
   const closeSidebar = () => {
     setIsSidebarHidden(true);
   };
-
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      localStorage.removeItem("accessToken");
+      navigate("/");
+    }
+    setShowConfirmation(false);
+  };
   useEffect(() => {
     if (user.role === "Student" && user.groupId !== undefined)
     {
@@ -64,15 +72,15 @@ const Nav = () => {
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Groups"><i className="fa fa-my_group"></i> <MdOutlineGroups3 className='nav_icon'/>כל הקבוצות</Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/> כל הבתים</Link></li>
               {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
+              <li onClick={() => {setShowConfirmation(true)}} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</li>
             </>
           )}
           {user.role === 'Student' && (
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Groups"><i className="fa fa-home"></i> <MdGroups className='nav_icon'/> קבוצות </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={studentGroup? `/GroupPage/${user.groupId}` : '/NoneGroupPage'}><i className="fa fa-my_group"></i> <MdGroup className='nav_icon'/>הקבוצה שלי</Link></li>
+              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={studentGroup? `/GroupPage/${user.groupId}` : `/GroupPage/-1`}><i className="fa fa-my_group"></i> <MdGroup className='nav_icon'/>הקבוצה שלי</Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.encryptedEmail}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י </Link></li>
+              <li onClick={() => {setShowConfirmation(true)}} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י </li>
             </>
           )}
           {user.role === 'TeamOwner' && (
@@ -81,7 +89,7 @@ const Nav = () => {
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/>הבתים שלי </Link></li>
                {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
                <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.encryptedEmail}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
+              <li onClick={() => {setShowConfirmation(true)}} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</li>
             </>
           )}
           {(user.role === 'AreaManager' || user.role === 'CityManager') && (
@@ -90,13 +98,25 @@ const Nav = () => {
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/>בתים</Link></li>
                {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
                <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/Personal/${user.encryptedEmail}`}><i className="fa fa-home"></i> <FaInfo className='nav_icon'/>פרטים אישיים </Link></li>
-              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to={`/`}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</Link></li>
+              <li onClick={() => {setShowConfirmation(true)}} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</li>
             </>
           )}
         </ul>
+
+
+
+
       </nav>
+      
+      {showConfirmation && !isSidebarHidden &&  (
+        <ConfirmationMessage confirmationMessage={"האם את/ה בטוח/ה שברצונך להתנתק?"}
+                              handleConfirmation={handleConfirmation}
+                              setShowConfirmation={setShowConfirmation}/>
+      )}
     </div>
   );
+
+  
 };
 
 export default Nav;

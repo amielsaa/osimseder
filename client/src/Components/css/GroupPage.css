@@ -117,6 +117,32 @@
   color: var(--PURPLEOP-COLOR);
 }
 
+.user_not_in_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:auto
+}
 
+.user_not_in_group .group-title {
+  margin-top: 6%;
+  color: var(--ORANGE-COLOR);
+}
+
+.user_not_in_group .move_to_groups_button {
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+  margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+.user_not_in_group .move_to_groups_button:hover {
+  background-color: darkred;
+}
 
   

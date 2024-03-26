@@ -46,3 +46,6 @@
     cursor: pointer;
     margin-top: 5%;
   }
+  .groups_semi_title{
+    color:  var(--PURPLE-COLOR);
+  }
