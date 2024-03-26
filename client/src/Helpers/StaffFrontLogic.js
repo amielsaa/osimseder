@@ -61,6 +61,16 @@ const addHouse = async (information) => {
 
 }
 
+const updateHouse = async (information, id) => {
+    const res = await axios.put(`${URL}/staff/houses/${id}`, information, headers)
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 const fetchAllCities = async () => {
 
 }
@@ -167,4 +177,4 @@ const removeGroupMember = async (email) => {
 
 }
 
-export {removeGroupMember, getGroupById, updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+export {updateHouse, removeGroupMember, getGroupById, updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

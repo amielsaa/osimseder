@@ -27,7 +27,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 });
 
 // Return all schools related to the city
-router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     //req.data.city = BSV/JRS
     try {
         // const groupSize = req.body.capacity;
