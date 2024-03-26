@@ -189,7 +189,7 @@
 
 .appear-from-top {
   opacity: 0;
-  animation: fadeInFromTop 1.5s ease-out forwards;
+  animation: fadeInFromTop 0.3s ease-out forwards;
   animation-delay: 0.15s;
 }
 @keyframes fadeOutFromTop {
@@ -218,8 +218,17 @@
     .sidebar-menu li a {
       justify-content: center;
       margin-left: -30px;
-      margin-top: 20px;
+      
       
     }
+    .sidebar-menu li:last-child {
+      padding-left: 30px;
+     
+     }
+    .sidebar-menu li:first-child {
+      border-top:2px solid var(--ORANGE-COLOR);
+     
+     }
+ 
 
   }

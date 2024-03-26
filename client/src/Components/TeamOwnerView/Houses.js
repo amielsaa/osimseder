@@ -3,10 +3,15 @@ import Header from '../Header'
 import Nav from '../Nav'
 import HouseList from './HouseList'
 import Footer from '../Footer'
-import { useContext } from 'react'
+import { useContext,useEffect } from 'react'
 import DataContext from '../../Helpers/DataContext'
 const Houses = () => {
   const { user,navigate } = useContext(DataContext)
+   useEffect(() => {
+    if (user.role==="Student") {
+      navigate('/404')
+    }
+  })
   return (
     <>
     <Header/>

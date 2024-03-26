@@ -27,7 +27,11 @@ const GroupPage = () => {
   const [studentToRemove, setStudentToRemove] = useState('')
   const [groupInfo, setGroupInfo] = useState({});
 
-
+ /*  useEffect(() => {
+    if (user.role==="Student" && user.groupId !== id) {
+      navigate('/404')
+    }
+  }, []) */
   const handleRemoveMember = (index) => {
     // Display the confirmation message
     setStudentToRemove(studentList[index])
@@ -63,6 +67,7 @@ const GroupPage = () => {
       setGroupRequest();
     }
   }, [id])
+  
 
 
   return (
