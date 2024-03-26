@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -51,12 +51,13 @@ function Registration() {
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        city: Yup.string().required("עיר נדרשת"),
+        //city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
         languages: Yup.string(),
     });
 
     const onSubmit = (data) => {
+        data.city = selectedCity;
         console.log(data);
         data.languages = [data.languages]
         axios.post("http://localhost:3001/auth/register_student", data).then(() => {
@@ -70,9 +71,6 @@ function Registration() {
         console.log(res);
         setSchoolsList(res);
     }
-
-    useEffect(() => {
-    },[]);
 
     return (
         <div className="formContainer">
