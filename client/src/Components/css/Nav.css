@@ -56,7 +56,13 @@
   .sidebar-menu li {
     text-align: center;
     width: 100%;
+    height: 10%;
     border-bottom: 1px solid var(--ORANGE-COLOR);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    
   }
   
   .sidebar-menu li a {

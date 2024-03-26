@@ -8,7 +8,7 @@ import ConfirmMessage from '../ConfirmMessage'; // Import ConfirmMessage compone
 
 
 const Group = ({ groupId }) => {
-  const { user,navigate } = useContext(DataContext);
+  const { user,navigate, updateUserGroupId } = useContext(DataContext);
   const [studentsPopUp, setStudentsPopUp] = useState(false);
   const [studentsList, setStudentsList] = useState(['ארי מאיר', 'יואב אביטל', 'פליקס רויזמן', 'עמיאל סעד']);
   const [memberCount, setMemberCount] = useState({ capacity: 0, memberCount: 0 });
@@ -36,6 +36,7 @@ const Group = ({ groupId }) => {
       const group = await fetchGroupById(selectedGroupId);
       setStudentsList(group.students);
       setMemberCount({ capacity: group.capacity, memberCount: group.memberCount });
+      updateUserGroupId(selectedGroupId)
       navigate(`/GroupPage/${selectedGroupId}`)
      /*  setShowConfirm(true); // Show the confirmation after successfully joining the group */
     }
@@ -47,7 +48,7 @@ const Group = ({ groupId }) => {
       <div className="group">
         <div className='group-id'>{`${groupId} : קבוצה`}</div>
         <button className='users-in-group-btn' onClick={() => setStudentsPopUp(!studentsPopUp)}>חניכים</button>
-        {user.role === "Student" &&
+        {user.role === "Student" && user.groupId !== groupId &&
           <button className='join-group-btn' onClick={() => joinGroup(groupId, user.id)}>הצטרף</button>
         }
         <div className='students-Count'>{memberCount.memberCount}/{memberCount.capacity}</div>
