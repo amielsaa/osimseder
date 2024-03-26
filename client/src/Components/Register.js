@@ -60,7 +60,7 @@ function Registration() {
         data.city = selectedCity;
         console.log(data);
         data.languages = [data.languages]
-        axios.post("http://localhost:3000/api/auth/register_student", data).then(() => {
+        axios.post("https://garineiudi.org.il/api/auth/register_student", data).then(() => {
             navigate('/');
         });         
     };

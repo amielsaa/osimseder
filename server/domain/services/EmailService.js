@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 class EmailLogic {
 
     async sendVerificationEmail(email, token) {
-        const verificationLink = `https://localhost:3000/api/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
+        const verificationLink = `https://garineiudi.org.il/api/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
         console.log(verificationLink);
         await transporter.sendMail({
             to: email,
@@ -73,7 +73,7 @@ class EmailLogic {
 
 
     async sendResetPasswordEmail(email, token) {
-        const resetLink = `https://localhost:3000/api/auth/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
+        const resetLink = `https://garineiudi.org.il/api/auth/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
         const isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
