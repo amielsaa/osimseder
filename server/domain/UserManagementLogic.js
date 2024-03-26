@@ -125,6 +125,20 @@ class UserManagementLogic {
         }
     }
 
+    //Needed - Get the Student's groupId
+    async getGroupIdOfStudent(email) {
+        try {
+            const student = await Students.findOne({
+                where: { email: email }
+            });
+            if (!student) {
+                throw new Error('Student not found');
+            }
+            return student.groupId;
+        } catch (error) {
+            throw new Error('Failed to get the students group: ' + error);
+        }
+    }
 }
 
 module.exports = new UserManagementLogic();
