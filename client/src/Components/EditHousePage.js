@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -9,18 +9,47 @@ import Header from './Header';
 import Nav from './Nav';
 import Footer from './Footer';
 import { IoChevronForwardCircle } from "react-icons/io5";
-
+import {getHouseById, updateHouse, fetchAllAreasByCity} from '../Helpers/StaffFrontLogic'
 
 function EditHousePage() {
     const { id } = useParams()
     const {navigate,user} = useContext(DataContext);
+    const [areas, setAreas] = useState([]);
 
+    const getHouseInfo = async () => {
+      const houseInfo = await getHouseById(id);
+      initialValues.areaName = houseInfo.areaName;
+      initialValues.address = houseInfo.address;
+      initialValues.residentLastName = houseInfo.residentLastName;
+      initialValues.residentFirstName = houseInfo.residentFirstName;
+      initialValues.phoneNumber = houseInfo.residentPhoneNum;
+      initialValues.alternativeNumber = houseInfo.residentAlternatePhoneNum;
+      initialValues.residentGender = houseInfo.residentGender;
+      initialValues.languageNeeded = houseInfo.languageNeeded;
+      initialValues.numberOfRooms = houseInfo.numberOfRooms;
+      initialValues.membersNeeded = houseInfo.membersNeeded;
+      initialValues.freeText = houseInfo.freeText;
+    }
+
+    const getAreas = async () => {
+      const res = await fetchAllAreasByCity();
+      if(user.cityId == 1) {
+        const ars = res.BSV;
+        setAreas(ars);
+      } else {
+        const ars = res.JRS;
+        setAreas(ars);
+      }
+    }
 
     useEffect(() => {
         //Amiel import the House data - city is unchangeable.
         //after you imported to house data put its data in the initialValues instead of ""
         //look inside the JSX (the HTML down in this page) code, there is more comments
-    })
+        getAreas();
+
+        getHouseInfo();
+    },[])
 
     const initialValues = {
         areaName:"",
@@ -57,6 +86,10 @@ function EditHousePage() {
     const onSubmit = (data) => {
      console.log(data)
         //take all the data and edit it in the db
+      const res = updateHouse(data,id);
+      if(res) {
+        navigate(`/HousePage/${id}`)
+      }
     };
 
     return (
@@ -80,15 +113,21 @@ function EditHousePage() {
                         <label htmlFor="areaName"> בחר שכונה : </label> {/*Amiel - Change that to the initial value*/}
                         <Field as="select" id="areaName" name="areaName">
                             <option value="">בחר שכונה</option>
-                            <option value="n1">שכונה א</option>
-                            <option value="n2">שכונה ב</option>
-                            <option value="n3">שכונה ג</option>
+                            {areas && (
+                                <>
+                                {areas.map((area) => (
+                                    <option key={area.areaName} value={area.areaName}>
+                                    {area.areaName}
+                                    </option>
+                                ))}
+                                </>
+                            )}
                         </Field>
                         <ErrorMessage name="areaName" component="span" />
                     </div>)
                     : ""}
                     <div>
-                        <label htmlFor="address">   כתובת :</label>
+                        <label htmlFor="address">   כתובת : </label>
                         <Field id="address" name="address" />
                         <ErrorMessage name="address" component="span" />
                     </div>
@@ -117,8 +156,8 @@ function EditHousePage() {
                         <label htmlFor="residentGender">מין הדייר/ת : </label>
                         <Field as="select" id="residentGender" name="residentGender">
                             <option value="">בחר את מין הדייר/ת</option>
-                            <option value="male">זכר</option>
-                            <option value="female">נקבה</option>
+                            <option value="Male">זכר</option>
+                            <option value="Female">נקבה</option>
                             <option value="Other">אחר</option>
                         </Field>
                         <ErrorMessage name="residentGender" component="span" />

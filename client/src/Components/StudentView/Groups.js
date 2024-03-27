@@ -18,6 +18,12 @@ const Groups = () => {
         <div className='groups_title'>
       <h1>אנא בחר קבוצה</h1>
       </div>
+      {user.groupId && (
+         <div className='groups_semi_title'>
+         <h2>הינך נמצא בקבוצה {user.groupId} כרגע</h2>
+       </div>
+      )}
+       
       <GroupList/>
     </div>
     </div>

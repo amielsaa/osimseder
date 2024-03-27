@@ -27,7 +27,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 });
 
 // Return all schools related to the city
-router.post('/schools', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     //req.data.city = BSV/JRS
     try {
         // const groupSize = req.body.capacity;
@@ -189,11 +189,12 @@ router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, r
 
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+router.get('/:id', validateToken, async (req, res) => {
     try {
         const groupId = req.params.id;
+        const user = req.user;
 
-        const group = await staffGroupLogic.getGroupById(groupId);
+        const group = await staffGroupLogic.getGroupById(groupId, user);
 
         res.json(group);
 

@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
+import {fetchAllSchoolsByCity} from '../Helpers/StaffFrontLogic'
 
 function Registration() {
     const {navigate} = useContext(DataContext);
+    const [selectedCity, setSelectedCity] = useState('');
+    const [schoolsList, setSchoolsList] = useState([]);
+    const [selectedSchool, setSelectedSchool] = useState('');
+
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -46,18 +51,26 @@ function Registration() {
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        city: Yup.string().required("עיר נדרשת"),
+        //city: Yup.string().required("עיר נדרשת"),
         school: Yup.string().required("בית ספר נדרש"),
         languages: Yup.string(),
     });
 
     const onSubmit = (data) => {
+        data.city = selectedCity;
         console.log(data);
         data.languages = [data.languages]
         axios.post("http://localhost:3001/auth/register_student", data).then(() => {
             navigate('/');
         });         
     };
+
+    const handleCityChange = async (cityName) => {
+        setSelectedCity(cityName);
+        const res = await fetchAllSchoolsByCity(cityName);
+        console.log(res);
+        setSchoolsList(res);
+    }
 
     return (
         <div className="formContainer">
@@ -126,7 +139,7 @@ function Registration() {
 
                     <div>
                       <label htmlFor="city"> עיר: </label>
-                      <Field as="select" id="city" name="city">
+                      <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
                           <option value="">בחר עיר</option>
                           <option value="JRS">ירושלים</option>
                           <option value="BSV">באר שבע</option>
@@ -134,15 +147,22 @@ function Registration() {
                       <ErrorMessage name="school" component="span" />
                     </div>
 
-                    <div>
+                    {selectedCity && <div>
                       <label htmlFor="school">בית ספר: </label>
-                      <Field as="select" id="school" name="school">
+                      <Field as="select" id="school" name="school" >
                           <option value="">בחר בית ספר</option>
-                          <option value="נתיבי עם">נתיבי עם</option>
-                          <option value="bs">רמבם</option>
+                          {schoolsList && (
+                                <>
+                                {schoolsList.map((school) => (
+                                    <option key={school.schoolName} value={school.schoolName}>
+                                    {school.schoolName}
+                                    </option>
+                                ))}
+                                </>
+                            )}
                       </Field>
                       <ErrorMessage name="school" component="span" />
-                    </div>
+                    </div>}
 
                     <div>
                         <label htmlFor="languages"> האם אתה דובר את אחת מהשפות הבאות? </label>
