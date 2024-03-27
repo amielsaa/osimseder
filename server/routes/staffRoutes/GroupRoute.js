@@ -189,7 +189,7 @@ router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, r
 
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.get('/:id', validateToken, async (req, res) => {
     try {
         const groupId = req.params.id;
         const user = req.user;
