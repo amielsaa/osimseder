@@ -113,48 +113,6 @@ class StaffGroupLogic {
         }
     }
 
-    async getGroupsByAreaManager(areaManagerEmail) {
-        try {
-            const area = await Areas.findOne({
-                where: { "areaManagerEmail": areaManagerEmail }
-            });
-            if (!area) {
-                throw new Error('Couldn\'t find an area by area manager. email: ' + areaManagerEmail);
-            }
-            const schools = await Schools.findAll({
-                where: { "areaId": area.id }
-            });
-            if (!schools) {
-                throw new Error('Couldn\'t find a schools by area.');
-            }
-            const newGroups = [];
-            for (let i = 0; i < schools.length; i++) {
-                const school = schools[i];
-                const groupsBySchool = await school.getGroups();
-                for (const group of groupsBySchool) {
-                    const students = await group.getStudents();
-                    const studentNames = students.map(student => {
-                        const { firstName, lastName, ...rest } = student;
-                        return `${firstName} ${lastName}`;
-                    });
-                    group.dataValues.students = studentNames;            
-                    newGroups.push(group);
-                }
-            }
-
-            const responseData = newGroups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
-            }));
-    
-            return responseData;
-
-        } catch (error) {
-            throw new Error('Failed to find an area by area manager: ' + error);
-        }
-    }
     //Get all groups related to area manager
 
     async getGroupsByCityManager(cityManagerEmail) {
@@ -246,6 +204,11 @@ class StaffGroupLogic {
             }
             if (user.role == "Student") {
                 const studentsGroupId = await userManagementLogic.getGroupIdOfStudent(user.email);
+                console.log("groupIDofStudent")
+                console.log(studentsGroupId)
+                console.log("groupID")
+                console.log(groupId)
+
                 if (groupId != studentsGroupId) {
                     throw new Error("You can't enter a group you are not a part of");
                 }
@@ -377,6 +340,32 @@ class StaffGroupLogic {
     }
     
     
+    async deleteGroup(id) {
+        try {
+            const group = await Groups.findOne({
+                where: {id: id}
+            });
+            if (!group) {
+                throw new Error('Couldn\'t find a group with that id.');
+            }
+            const students = await group.getStudents();
+
+            for (let i = 0; i < students.length; i++) {
+                const student = students[i];
+                await student.update({
+                    "groupId": null
+                })
+            }
+            await group.destroy();
+        
+            return;
+
+        } catch (error) {
+            throw new Error('Failed to delete a group by id: ' + error);
+        }
+    }
+
+    
     async updateGroup(id, updatedFields) {
         try {
             const group = await Groups.findOne({
@@ -400,34 +389,10 @@ class StaffGroupLogic {
             throw new Error('Failed to update a group by id: ' + error);
         }
     }
-    // async joinGroup(groupId, userEmail) {
-    //     try {
-    //         const group = await Groups.findOne({
-    //             where: { "id": groupId }
-    //         });
-    //         if (!group) {
-    //             throw new Error('Group not found');
-    //         }
-    //         const user = await Students.findOne({
-    //             where: { "email": userEmail }
-    //         });
-    //         if (!user) {
-    //             throw new Error('User not found');
-    //         }
-    //         if (user.groupId == groupId) {
-    //             throw new Error('User already in a group');
-    //         }
+}
 
-    //         const updatedGroup = await Students.update(
-    //             { "groupId": groupId },
-    //             { where: { "email": userEmail }}
-    //         );
-    //         return group;
+module.exports = new StaffGroupLogic();
 
-    //     } catch (error) {
-    //         throw new Error('Failed to join group ' + error);
-    //     }
-    // }
 
 
     // NOT USED - alternative implementation of joint routes - NOT USED
@@ -445,16 +410,16 @@ class StaffGroupLogic {
     //         if(!staffUser){
     //             throw new Error('Can\'t find staff member with that email.');
     //         }
-            
+
     //         const userRole = staffUser.accesses;
     //         if(userRole == 'D'){
     //             const groups = await getGroupsByCityManager(userEmail);
     //         }
-        
+
     //         else if(userRole == 'C'){
     //             const groups = await getGroupsByAreaManager(userEmail);
     //         }
-        
+
     //         else if (userRole == 'B'){
     //             const groups = await getGroupsByTeamOwner(userEmail);
     //         }
@@ -467,9 +432,48 @@ class StaffGroupLogic {
     //     }
     // }
 
-    
 
+/***async getGroupsByAreaManager(areaManagerEmail) {
+    try {
+        const area = await Areas.findOne({
+            where: { "areaManagerEmail": areaManagerEmail }
+        });
+        if (!area) {
+            throw new Error('Couldn\'t find an area by area manager. email: ' + areaManagerEmail);
+        }
+        const schools = await Schools.findAll({
+            where: { "areaId": area.id }
+        });
+        if (!schools) {
+            throw new Error('Couldn\'t find a schools by area.');
+        }
+        const newGroups = [];
+        for (let i = 0; i < schools.length; i++) {
+            const school = schools[i];
+            const groupsBySchool = await school.getGroups();
+            for (const group of groupsBySchool) {
+                const students = await group.getStudents();
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+                group.dataValues.students = studentNames;            
+                newGroups.push(group);
+            }
+        }
 
+        const responseData = newGroups.map(group => ({
+            id: group.id,
+            students: group.dataValues.students,
+            memberCount: group.dataValues.students.length,
+            capacity: group.capacity
+        }));
+ 
+        return responseData;
+
+    } catch (error) {
+        throw new Error('Failed to find an area by area manager: ' + error);
+    }
 }
+***/
 
-module.exports = new StaffGroupLogic();

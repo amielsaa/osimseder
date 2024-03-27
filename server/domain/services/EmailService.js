@@ -1,4 +1,4 @@
-// EmailLogic.js
+// EmailService.js
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-class EmailLogic {
+class EmailService {
 
     async sendVerificationEmail(email, token) {
         const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
@@ -145,4 +145,4 @@ class EmailLogic {
 
 }
 
-module.exports = new EmailLogic();
+module.exports = new EmailService();

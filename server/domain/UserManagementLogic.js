@@ -2,14 +2,25 @@
 const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
+const EmailService = require('./services/EmailService');
+const RegistrationLogic = require('./RegistrationLogic');
 
 class UserManagementLogic {
-    async getStudents() {
+    async getAllStudents() {
         try {
             const students = await Students.findAll();
             return students;
         } catch (error) {
             throw new Error('Failed to fetch students');
+        }
+    }
+
+    async getAllStaffs() {
+        try {
+            const staffs = await Staffs.findAll();
+            return staffs;
+        } catch (error) {
+            throw new Error('Failed to fetch staffs');
         }
     }
 
@@ -36,20 +47,6 @@ class UserManagementLogic {
             }
         } catch (error) {
             throw new Error('Failed to fetch user: ' + error);
-        }
-    }
-    
-    async getStudentByEmail(email) {
-        try {
-            const student = await Students.findOne({
-                where: { email: email }
-            });
-            if (!student) {
-                throw new Error('Student not found');
-            }
-            return student;
-        } catch (error) {
-            throw new Error('Failed to fetch student: ' + error);
         }
     }
 
@@ -88,8 +85,8 @@ class UserManagementLogic {
             if (!student) {
                 throw new Error('Student not found');
             }
-            const resetToken = await EmailLogic.generateResetToken();
-            await EmailLogic.sendResetPasswordEmail(email, resetToken);
+            const resetToken = await RegistrationLogic.generateVerificationToken();
+            await EmailService.sendResetPasswordEmail(email, resetToken);
             return resetToken;
         } catch (error) {
             throw new Error('Failed to reset password: ' + error);
@@ -98,7 +95,7 @@ class UserManagementLogic {
 
     async handleResetPassword(token, newPassword) {
         try {
-            const decodedToken = await EmailLogic.decodeResetToken(token);
+            const decodedToken = await EmailService.decodeResetToken(token);
             const student = await Students.findByPk(decodedToken.studentId);
             if (!student) {
                 throw new Error('Student not found');
@@ -109,22 +106,6 @@ class UserManagementLogic {
             throw new Error('Failed to handle password reset: ' + error);
         }
     }
-
-    async admin_changeStudentPassword(email, newPassword) {
-        try {
-            const student = await Students.findOne({
-                where: { Email: email }
-            });
-            if (!student) {
-                throw new Error('Student not found');
-            }
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
-            await student.update({ password: hashedPassword });
-        } catch (error) {
-            throw new Error('Failed to change student password: ' + error);
-        }
-    }
-
     //Needed - Get the Student's groupId
     async getGroupIdOfStudent(email) {
         try {
@@ -142,3 +123,22 @@ class UserManagementLogic {
 }
 
 module.exports = new UserManagementLogic();
+
+
+
+/***
+async admin_changeStudentPassword(email, newPassword) {
+    try {
+        const student = await Students.findOne({
+            where: { Email: email }
+        });
+        if (!student) {
+            throw new Error('Student not found');
+        }
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await student.update({ password: hashedPassword });
+    } catch (error) {
+        throw new Error('Failed to change student password: ' + error);
+    }
+}
+***/

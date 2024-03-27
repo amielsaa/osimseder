@@ -5,18 +5,9 @@ const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const { accessGroup, validateAccess } = require('../../utils/Accesses');
 
 // Endpoint to fetch all students
-router.get('/getAllUsers', validateToken, validateAccess(accessGroup.C), async (req, res) => {
-    try {
-        const students = await userManagementLogic.getStudents();
-        res.json(students);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
 router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const students = await userManagementLogic.getStudents();
+        const students = await userManagementLogic.getAllStudents();
         res.json(students);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -25,7 +16,7 @@ router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), asyn
 
 router.get('/getAllStaffs', validateToken, validateAccess(accessGroup.D), async (req, res) => {
     try {
-        const students = await userManagementLogic.getStudents();
+        const students = await userManagementLogic.getAllStaffs();
         res.json(students);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -64,7 +55,7 @@ router.get('/getUser/:email', validateToken, validateAccess(accessGroup.A), asyn
 //});
 
 // Endpoint to delete a student by id
-router.delete('/student/:studentId', validateToken, async (req, res) => {
+router.delete('/deleteStudent/:studentId', validateToken, async (req, res) => {
     const studentId = req.params.studentId;
     try {
         await userManagementLogic.deleteStudent(studentId);
@@ -75,7 +66,7 @@ router.delete('/student/:studentId', validateToken, async (req, res) => {
 });
 
 // Endpoint to update a student by email
-router.put('/student/:email', validateToken, async (req, res) => {
+router.put('/updateStudent/:email', validateToken, async (req, res) => {
     const email = req.params.email;
     const updatedData = req.body;
     try {
