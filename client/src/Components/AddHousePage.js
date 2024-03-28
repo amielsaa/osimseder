@@ -26,7 +26,11 @@ const AddHousePage = () => {
     const [areaList, setAreaList] = useState([]);
     const [errorMessage, setErrorMessage] = useState(false)
     const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
-
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
   const initialValues = {
     city: '',
     area: '',

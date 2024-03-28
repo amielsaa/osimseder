@@ -20,7 +20,7 @@ import AddHousePage from './Components/AddHousePage.js';
 import AddTaskPage from './Components/AddTaskPage.js';
 import AddGroupToHousePage from './Components/AddGroupToHousePage.js';
 import EditHousePage from './Components/EditHousePage.js'
-import NoneGroupPage from './Components/StudentView/NoneGroupPage.js';
+
 
 
 function App() {
