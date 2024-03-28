@@ -115,7 +115,8 @@ class StaffTaskLogic {
         try {
             housesLogger.info("Updating a task by id: " + id + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([id, userEmail], ["id", "userEmail"]);
-            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["type", "room", "status"]);
+            //argumentChecker.checkByKeys(updatedFields, "updatedFields", ["type", "room", "status"]);
+            // TODO add check on the updated fields values
 
             const task = await Tasks.findOne({
                 where: {id: id}

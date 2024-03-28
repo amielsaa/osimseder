@@ -13,10 +13,9 @@ class StaffStudentLogic {
         try {
             usersLogger.info('Updating a student by email: ' + studentEmail + '. By email: ' + requesterEmail);
             argumentChecker.checkSingleArugments([studentEmail, requesterEmail], ['studentEmail', 'requesterEmail']);
-            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["email", "password", "lastName", "firstName", "phoneNumber", "gender", "parentName", "parentPhoneNumber", "city", "school"]);
-
+            //TODO add check on the updated fields values
             const student = await Students.findOne({
-                where: {email: email}
+                where: { email: studentEmail }
             });
             if(!student){
                 throw new Error('Couldn\'t find a student with that email.');
@@ -30,7 +29,7 @@ class StaffStudentLogic {
 
             await student.save();
 
-            usersLogger.info('Successfully updated a student by email: ' + email);
+            usersLogger.info('Successfully updated a student by email: ' + studentEmail + '. Performed by email: ' + requesterEmail);
             return student;
 
         } catch (error) {

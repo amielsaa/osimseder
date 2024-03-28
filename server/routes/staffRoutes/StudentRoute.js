@@ -8,7 +8,7 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/'
 
 
 // Update a student by ID (PUT)
-// The student changing himself
+// The student is changed by the staff
 router.put('/:email', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const studentEmail = req.params.email;

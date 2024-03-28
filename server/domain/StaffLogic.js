@@ -10,7 +10,7 @@ class StaffLogic {
     async getTeamOwnersByCityName(cityName) {
         try {
             housesLogger.debug('Getting all team owners by city name: ' + cityName);
-            argumentChecker([cityName], ['cityName']);
+            argumentChecker.checkSingleArugments([cityName], ['cityName']);
 
             const city = await Cities.findOne({
                 where: {cityName: cityName}
@@ -41,12 +41,9 @@ class StaffLogic {
 
     async getStaffName(staffEmail) {
         try {
-            if(staffEmail==null){
-                throw new Error('Staff name is null.');
-            }
-            if(staffEmail==undefined){
-                throw new Error('Staff name is undefined.');
-            }
+            housesLogger.debug('Initiating get staff name with email: ' + staffEmail);
+            argumentChecker.checkSingleArugments([staffEmail], ['staffEmail']);
+
             const staffMember = await Staffs.findOne({
                 where: {email: staffEmail}
             });
@@ -65,10 +62,12 @@ class StaffLogic {
             //     memberCount: group.dataValues.students.length,
             //     capacity: group.capacity
             // };
-    
+
+            housesLogger.debug('Successfully found staff member by email: ' + staffEmail);  
             return responseData;
 
         } catch (error) {
+            housesLogger.error('Failed to find staff member by email: ' + error);
             throw new Error('Failed to find staff member by email: ' + error);
         }
     }

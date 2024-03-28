@@ -286,7 +286,8 @@ class StaffHouseLogic {
         try {
             housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
             argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
-            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "areaId"]);
+            //argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "areaId"]);
+            //TODO add check on the updated fields values
             const house = await Houses.findOne({
                 where: { id: houseId }
             });
