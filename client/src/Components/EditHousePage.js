@@ -36,7 +36,7 @@ function EditHousePage() {
 
     const getHouseInfo = async () => {
         const houseInfo = await getHouseById(id);
-        initialValues.areaName = houseInfo.areaName;
+        initialValues.areaName = houseInfo.areaId;
         initialValues.address = houseInfo.address;
         initialValues.residentLastName = houseInfo.residentLastName;
         initialValues.residentFirstName = houseInfo.residentFirstName;
@@ -90,15 +90,20 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
-        data.areaId = data.areaName;
-        data.residentPhoneNum = data.phoneNumber;
-        data.residentAlternatePhoneNum = data.alternativeNumber;
-
-        //take all the data and edit it in the db
-        const res = updateHouse(data, id);
-        if (res) {
-            navigate(`/HousePage/${id}`)
+        if (data.areaName.length !== 0) {
+            data.areaId = data.areaName;
+            data.residentPhoneNum = data.phoneNumber;
+            data.residentAlternatePhoneNum = data.alternativeNumber;
+            if (user.role === 'TeamOwner') {
+                delete data.areaId;
+            }
+            //take all the data and edit it in the db
+            const res = updateHouse(data, id);
+            if (res) {
+                navigate(`/HousePage/${id}`)
+            }
         }
+
     };
 
     return (
