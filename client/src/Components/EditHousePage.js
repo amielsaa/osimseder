@@ -15,6 +15,19 @@ function EditHousePage() {
     const { id } = useParams()
     const {navigate,user} = useContext(DataContext);
     const [areas, setAreas] = useState([]);
+    const initialValues = {
+      areaName:"",
+      address: "",
+      residentFirstName: "",
+      residentLastName: "",
+      phoneNumber:"",
+      alternativeNumber:"",
+      residentGender:"",
+      languageNeeded:"",
+      numberOfRooms:"",
+      membersNeeded:"",
+      freeText:""
+  };
 
     const getHouseInfo = async () => {
       const houseInfo = await getHouseById(id);
@@ -51,19 +64,7 @@ function EditHousePage() {
         getHouseInfo();
     },[])
 
-    const initialValues = {
-        areaName:"",
-        address: "",
-        residentFirstName: "",
-        residentLastName: "",
-        phoneNumber:"",
-        alternativeNumber:"",
-        residentGender:"",
-        languageNeeded:"",
-        numberOfRooms:"",
-        membersNeeded:"",
-        freeText:""
-    };
+   
 
 
     const validationSchema = Yup.object().shape({

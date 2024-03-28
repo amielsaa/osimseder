@@ -182,7 +182,7 @@ const HousePage = () => {
               </div>
             </div>
           }
-          {user.role !== 'Student' && user.role!= 'TeamOwner' &&
+          {user.role !== 'Student' &&
             <div className="members_of_house_content">
               <div className="title_for_members_of_house">חברי גרעין אחראים</div>
               <div className="members_of_house">
