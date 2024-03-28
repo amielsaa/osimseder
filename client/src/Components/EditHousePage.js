@@ -94,7 +94,9 @@ function EditHousePage() {
         data.areaId = data.areaName;
         data.residentPhoneNum = data.phoneNumber;
         data.residentAlternatePhoneNum = data.alternativeNumber;
-       
+        if(user.role === 'TeamOwner') {
+          delete data.areaId;
+        }
           //take all the data and edit it in the db
         const res = updateHouse(data,id);
         if(res) {
