@@ -15,6 +15,11 @@ const AddGroupPage = () => {
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
   const [schoolsList, setSchoolsList] = useState([]);
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
   const initialValues = {
     city: '',
     school: '',
@@ -23,24 +28,26 @@ const AddGroupPage = () => {
   
 
   const validationSchema = Yup.object().shape({
-    city: Yup.string().required('עיר נדרשת'),
+    city: Yup.string(),
     school: Yup.string().when(['city'], {
       is: (city) => city && city.length > 0,
-      then: Yup.string().required('בית ספר נדרש'),
+      then: Yup.string(),
     }),
     capacity: Yup.number().when(['school'], {
       is: (school) => school && school.length > 0,
-      then: Yup.number().required('הגבלת כמות נדרשת'),
+      then: Yup.number(),
     })
   });
 
   const onSubmit = (data) => {
     // Handle form submission
     const res = addGroup(selectedCity,selectedSchool,selectedCapacity);
+    if(selectedCity && selectedSchool && selectedCapacity) {
     if(res) {
       navigate('/My-Groups')
       //navigate somewhere
     } 
+   }
   };
   
   const handleCityChange = async (e) => {
@@ -62,6 +69,9 @@ const AddGroupPage = () => {
 
           <div className='add-group-title'>
             <h1>הוספת קבוצה</h1>
+          </div>
+          <div className='add-group-semi-title'>
+            <h2>אנא מלא את הפרטים :</h2>
           </div>
 
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>

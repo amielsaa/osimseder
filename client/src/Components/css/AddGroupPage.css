@@ -82,3 +82,7 @@
     cursor: pointer;
     font-size: 16px;
   }
+  .add-group-semi-title{
+    margin-top: 5%;
+    color:var(--PURPLE-COLOR)
+  }

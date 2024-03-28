@@ -26,6 +26,11 @@ const HousePage = () => {
   const [memberBChoosingStatus,setMemberBChoosingStatus] = useState(false)
   const [selectedMemberA,setSelectedMemberA] = useState('')
   const [selectedMemberB,setSelectedMemberB] = useState('')
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
 
   const prepareToAssignTeamOwnerA = async () => {
     const res = await fetchTeamOwners(user.cityName);
@@ -213,7 +218,7 @@ const HousePage = () => {
               </div>
             </div>
           }
-          {user.role !== 'Student' && user.role!= 'TeamOwner' &&
+          {user.role !== 'Student' &&
             <div className="members_of_house_content">
               <div className="title_for_members_of_house">חברי גרעין אחראים</div>
               <div className="members_of_house">

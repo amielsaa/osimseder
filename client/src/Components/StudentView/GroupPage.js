@@ -17,7 +17,12 @@ const GroupPage = () => {
   const { id } = useParams();
   const { user } = useContext(DataContext)
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
+  
 
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
@@ -26,6 +31,7 @@ const GroupPage = () => {
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
   const [studentToRemove, setStudentToRemove] = useState('')
   const [groupInfo, setGroupInfo] = useState({});
+  const [loading, setLoading] = useState(true)
 
 
   const handleRemoveMember = (index) => {
@@ -61,6 +67,7 @@ const GroupPage = () => {
   useEffect(() => {
     if (id !== '-1') {
       setGroupRequest();
+      setLoading(false)
     }
   }, [id])
 
@@ -73,9 +80,10 @@ const GroupPage = () => {
         <span className='purple_circle'>
           <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
         </span>
+        
         <div className='main_page_content'>
 
-          {/* Content to conditionally hide */}
+         
           {(user.role !== 'Student' || (user.role === "Student" && user.groupId !== null)) && (
             <>
               <div className='group-title'>
@@ -113,7 +121,6 @@ const GroupPage = () => {
               </div>
               <button className='move_to_groups_button' onClick={() => navigate('/groups')}>להצטרפות לקבוצה</button>
               </div>
-      
           )}
 
 
@@ -122,7 +129,7 @@ const GroupPage = () => {
 
       {showRemoveConfirmation && (
         <ConfirmationMessage
-          confirmationMessage={`להסיר את ${studentToRemove} מהקבוצה?`}
+          confirmationMessage={`להסיר את ${studentToRemove.fullname} מהקבוצה?`}
           handleConfirmation={confirmRemoveMember}
           setShowConfirmation={setShowRemoveConfirmation}
         />
