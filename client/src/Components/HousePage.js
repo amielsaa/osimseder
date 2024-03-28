@@ -112,11 +112,13 @@ const HousePage = () => {
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
     setHouse(houseJson);
-    const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
-    setFirstMember(teamOwner_1);
-    if(houseJson.teamOwnerEmail_2) {
-      const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
-      setSecondMember(teamOwner_2);
+    if(user.role !== 'Student') {
+      const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
+      setFirstMember(teamOwner_1);
+      if(houseJson.teamOwnerEmail_2) {
+        const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
+        setSecondMember(teamOwner_2);
+      }
     }
   }
 
@@ -138,13 +140,16 @@ const HousePage = () => {
     //Amiel - remove the memeber from the house
   }
   const setGroupsRequest = async () => {
-    const res = await fetchGroupsForHouse(id);
-    if (res[0]) {
-      setFirstGroup(res[0]);
+    if(user.role !== 'Student') {
+      const res = await fetchGroupsForHouse(id);
+      if (res[0]) {
+        setFirstGroup(res[0]);
+      }
+      if (res[1]) {
+        setSecondGroup(res[1]);
+      }
     }
-    if (res[1]) {
-      setSecondGroup(res[1]);
-    }
+    
   }
 
   const setTeamOwners = async () => {
