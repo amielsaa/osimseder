@@ -194,7 +194,16 @@ const assignTeamOwner = async (email, index, id) => {
     }
 }
 
-export {assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
+const fetchTeamOwnerInfo = async (email) => {
+    const res = await axios.post(`${URL}/staff/staff/staffinfo`, {staffEmail:email}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+export {fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,

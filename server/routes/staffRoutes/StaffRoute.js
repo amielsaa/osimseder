@@ -24,7 +24,7 @@ router.post('/teamowners', validateToken, validateAccess(accessGroup.C), async (
 });
 
 // Get staff email and name by email (GET)
-router.get('/staffinfo', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/staffinfo', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         // const userEmail = req.user.email;
         const staffEmail = req.body.staffEmail;

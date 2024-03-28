@@ -9,7 +9,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import { assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
+import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
 
 const HousePage = () => {
   const { id } = useParams();
@@ -107,6 +107,12 @@ const HousePage = () => {
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
     setHouse(houseJson);
+    const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
+    setFirstMember(teamOwner_1);
+    if(houseJson.teamOwnerEmail_2) {
+      const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
+      setSecondMember(teamOwner_2);
+    }
   }
 
   const setTasksRequest = async () => {
@@ -136,9 +142,20 @@ const HousePage = () => {
     }
   }
 
+  const setTeamOwners = async () => {
+    await setHouseRequest();
+    console.log(house);
+
+    const teamOwner_1 = await fetchTeamOwnerInfo(house.teamOwnerEmail);
+    //const teamOwner_2 = await fetchTeamOwnerInfo(house.teamOwnerEmail_2);
+    setFirstMember(teamOwner_1);
+    //setSecondMember(teamOwner_2);
+  }
+
   useEffect(() => {
     setGroupsRequest()
     setHouseRequest();
+    // setTeamOwners();
     setTasksRequest();
   }, []);  // Dependency array ensures it runs when the id changes
 

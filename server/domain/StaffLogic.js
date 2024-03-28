@@ -18,7 +18,7 @@ class StaffLogic {
                 throw new Error('Couldn\'t find a city by that name.');
             }
             const teamowners = await Staffs.findAll({
-                where: {cityId: city.id}
+                where: {cityId: city.id, accesses:'B'}
             });
             if (!teamowners) {
                 throw new Error('Couldn\'t find team owners by that city.');

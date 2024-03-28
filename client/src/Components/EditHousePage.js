@@ -84,7 +84,10 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
-     console.log(data)
+      data.areaId = data.areaName;
+      data.residentPhoneNum = data.phoneNumber;
+      data.residentAlternatePhoneNum = data.alternativeNumber;
+      
         //take all the data and edit it in the db
       const res = updateHouse(data,id);
       if(res) {
@@ -116,7 +119,7 @@ function EditHousePage() {
                             {areas && (
                                 <>
                                 {areas.map((area) => (
-                                    <option key={area.areaName} value={area.areaName}>
+                                    <option key={area.areaName} value={area.id}>
                                     {area.areaName}
                                     </option>
                                 ))}
