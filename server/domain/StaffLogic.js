@@ -18,7 +18,7 @@ class StaffLogic {
                 throw new Error('Couldn\'t find a city by that name.');
             }
             const teamowners = await Staffs.findAll({
-                where: {cityId: city.id}
+                where: {cityId: city.id, accesses:'B'}
             });
             if (!teamowners) {
                 throw new Error('Couldn\'t find team owners by that city.');
@@ -36,6 +36,40 @@ class StaffLogic {
 
         } catch (error) {
             throw new Error('Failed to find all team owners by city name: ' + error);
+        }
+    }
+
+    async getStaffName(staffEmail) {
+        try {
+            if(staffEmail==null){
+                throw new Error('Staff name is null.');
+            }
+            if(staffEmail==undefined){
+                throw new Error('Staff name is undefined.');
+            }
+            const staffMember = await Staffs.findOne({
+                where: {email: staffEmail}
+            });
+            if (!staffMember) {
+                throw new Error('Couldn\'t find staff member by that email.');
+            }
+
+            const responseData = {
+                email: staffMember.dataValues.email,
+                fullName: `${staffMember.dataValues.firstName} ${staffMember.dataValues.lastName}`
+            };
+
+            // const responseData = {
+            //     id: group.id,
+            //     students: group.dataValues.students,
+            //     memberCount: group.dataValues.students.length,
+            //     capacity: group.capacity
+            // };
+    
+            return responseData;
+
+        } catch (error) {
+            throw new Error('Failed to find staff member by email: ' + error);
         }
     }
 

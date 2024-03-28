@@ -9,7 +9,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import { getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
+import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
 
 const HousePage = () => {
   const { id } = useParams();
@@ -32,38 +32,52 @@ const HousePage = () => {
     }
   })
 
-  const prepareToAssignTeamOwnerA = () => {
+  const prepareToAssignTeamOwnerA = async () => {
+    const res = await fetchTeamOwners(user.cityName);
+    setDropdownOptionsA(res);
+
     setMemberBChoosingStatus(false);
     setMemberAChoosingStatus(true)
-    //Amiel - this is your time to shine, get all the Team owners and set them to the options for dropdownOptionsA
   }
-  const removeFirstMember = () => {
-    setFirstMember('')
-    //Amiel - removes the first Member
+  const removeFirstMember = async () => {
+    const res = await assignTeamOwner('', 'A', id);
+    if(res) {
+      setFirstMember('')
+    }
   }
 
-  const handleAssignMemberA = () => {
-    //Amiel- you need to put selected Member A in the database, as the teamOwner responsible for this house
-    setFirstMember(selectedMemberA)
-    setMemberAChoosingStatus(false)
+  const handleAssignMemberA = async () => {
+    const res = await assignTeamOwner(dropdownOptionsA[selectedMemberA].email, 'A', id);
+    if(res) {
+      setFirstMember(dropdownOptionsA[selectedMemberA])
+      setMemberAChoosingStatus(false)
+    }
 
   }
-  const prepareToAssignTeamOwnerB = () => {
+  const prepareToAssignTeamOwnerB = async () => {
+    const res = await fetchTeamOwners(user.cityName);
+    setDropdownOptionsA(res);
     setMemberAChoosingStatus(false)
     setMemberBChoosingStatus(true);
 
      //Amiel - this is your time to shine, get all the Team owners and set them to the options for dropdownOptionsB
   };
   
-  const removeSecondMember = () => {
-    setSecondMember('');
-    //Amiel - removes the second Member
+  const removeSecondMember = async () => {
+    const res = await assignTeamOwner('', 'B', id);
+    if(res) {
+      setSecondMember('');
+    }
   };
   
-  const handleAssignMemberB = () => {
+  const handleAssignMemberB = async () => {
+    const res = await assignTeamOwner(dropdownOptionsA[selectedMemberB].email, 'B', id);
+    if(res) {
+      setSecondMember(dropdownOptionsA[selectedMemberB]);
+      setMemberBChoosingStatus(false);
+    }
     //Amiel - you need to put selected Member B in the database, as the teamOwner responsible for this house
-    setSecondMember(selectedMemberB);
-    setMemberBChoosingStatus(false);
+
   };
   const generateRandomHouse = () => {
     const getRandomValue = (array) => array[Math.floor(Math.random() * array.length)];
@@ -98,6 +112,12 @@ const HousePage = () => {
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
     setHouse(houseJson);
+    const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
+    setFirstMember(teamOwner_1);
+    if(houseJson.teamOwnerEmail_2) {
+      const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
+      setSecondMember(teamOwner_2);
+    }
   }
 
   const setTasksRequest = async () => {
@@ -127,9 +147,20 @@ const HousePage = () => {
     }
   }
 
+  const setTeamOwners = async () => {
+    await setHouseRequest();
+    console.log(house);
+
+    const teamOwner_1 = await fetchTeamOwnerInfo(house.teamOwnerEmail);
+    //const teamOwner_2 = await fetchTeamOwnerInfo(house.teamOwnerEmail_2);
+    setFirstMember(teamOwner_1);
+    //setSecondMember(teamOwner_2);
+  }
+
   useEffect(() => {
     setGroupsRequest()
     setHouseRequest();
+    // setTeamOwners();
     setTasksRequest();
   }, []);  // Dependency array ensures it runs when the id changes
 
@@ -199,7 +230,7 @@ const HousePage = () => {
 
                 {!memberAChoosingStatus && (
                   <>
-                    חבר גרעין א: {firstMember? firstMember : ""}
+                    חבר גרעין א: {firstMember? firstMember.fullName : ""}
                     
                     {!firstMember && user.role !== "TeamOwner" && (
                       <button className="add_core_member_button" onClick={() => prepareToAssignTeamOwnerA()}> הוסף </button>
@@ -215,7 +246,7 @@ const HousePage = () => {
                     <select value={selectedMemberA} onChange={(e) => setSelectedMemberA(e.target.value)}>
                       <option value="">בחר חבר גרעין</option>
                       {dropdownOptionsA.map((member, index) => (
-                        <option key={index} value={member}>{member}</option>
+                        <option key={index} value={index}>{member.fullName}</option>
                       ))} 
                     </select>
                   </div>
@@ -235,7 +266,7 @@ const HousePage = () => {
                 <div className="member_in_charge_info">
                 {!memberBChoosingStatus && (
                       <>
-                        חבר גרעין ב: {secondMember ? secondMember : ""}
+                        חבר גרעין ב: {secondMember ? secondMember.fullName : ""}
                         {!secondMember && user.role !== "TeamOwner" && (
                           <button className="add_core_member_button" onClick={prepareToAssignTeamOwnerB}> הוסף </button>
                         )}
@@ -250,7 +281,7 @@ const HousePage = () => {
                           <select value={selectedMemberB} onChange={(e) => setSelectedMemberB(e.target.value)}>
                             <option value="">בחר חבר גרעין</option>
                             {dropdownOptionsA.map((member, index) => (
-                              <option key={index} value={member}>{member}</option>
+                              <option key={index} value={index}>{member.fullName}</option>
                             ))}
                           </select>
                         </div>

@@ -101,7 +101,7 @@ const Login = () => {
 
           <div className="signup-link">
             <p>
-              <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | <a href="/register">הרשמה לסטודנט</a>
+              {/* <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | */} <a href="/register">הרשמה לסטודנט</a>
             </p>
           </div>
         </Form>
