@@ -41,7 +41,6 @@ function AddTaskPage() {
       if(res) {
         navigate(`/HousePage/${id}`)
       }
-       console.log(data)
        // Amiel - I managed to get this page working without the yup problem.
        // when submitting here you need to add the new task to the house Id. you have the house id in the params
     };
