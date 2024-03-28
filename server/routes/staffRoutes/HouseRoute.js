@@ -221,54 +221,6 @@ router.post('/assignsecondonwer', validateToken, validateAccess(accessGroup.C), 
     }
 });
 
-// get all areas grouped by city
-// TODO: move this to another route, maybe city route?
-router.post('/getareas', validateToken, validateAccess(accessGroup.B), async (req, res) => {
-    try {
-        
-        const areas = await StaffHouseLogic.getAllAreasByCity();
-
-        res.json(areas);
-
-        // returns like this:
-        /*
-        {
-            "BSV": [
-                {
-                    "id": 1,
-                    "areaName": "eastbsv",
-                    "areaManagerEmail": "amieleastbsv@gmail.com",
-                    "createdAt": "2024-02-28T17:26:24.446Z",
-                    "updatedAt": "2024-02-28T17:26:24.446Z",
-                    "cityId": 1
-                }
-            ],
-            "JRS": [
-                {
-                    "id": 2,
-                    "areaName": "eastjrs",
-                    "areaManagerEmail": "amieleastjrs@gmail.com",
-                    "createdAt": "2024-02-28T17:26:24.452Z",
-                    "updatedAt": "2024-02-28T17:26:24.452Z",
-                    "cityId": 2
-                },
-                {
-                    "id": 3,
-                    "areaName": "testbsv",
-                    "areaManagerEmail": "amieleastjrs@gmail.com",
-                    "createdAt": "2024-02-28T17:26:24.452Z",
-                    "updatedAt": "2024-02-28T17:26:24.452Z",
-                    "cityId": 2
-                }
-            ]
-        }
-        */
-        
-    } catch (err) {
-        res.json({ error: err.message });
-    }
-});
-
 // Assign second team owner to house
 router.get('/getgroups/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {

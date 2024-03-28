@@ -250,20 +250,13 @@ class StaffGroupLogic {
                     throw new Error("You can't enter a group you are not a part of");
                 }
             }
+          
             const group = await Groups.findOne({
                 where: { id: groupId }
             });
             if (!group) {
                 throw new Error('Group not found');
             }
-
-            // const teamManager = await Staffs.findOne({
-            //     where: {email: group.teamOwnerEmail}
-            // });
-            // if(teamManager){
-            //     const { firstName, lastName, ...rest } = teamManager;
-            //     group.dataValues.teamManager = `${firstName} ${lastName}`;
-            // }
             
             const students = await group.getStudents();
         
@@ -286,38 +279,6 @@ class StaffGroupLogic {
 
         } catch (error) {
             throw new Error('Failed to find a group by ID ' + error);
-        }
-    }
-
-    async getSchoolsByCity(cityName) {
-        try {
-            if(cityName === undefined){
-                throw new Error('cityname is undefined');
-            }
-            if(cityName === null){
-                throw new Error('cityname is null');
-            }
-            const city = await Cities.findOne({
-                where: { cityName: cityName },
-            });
-            if (!city) {
-                throw new Error('City not found');
-            }
-
-            const schools = await Schools.findAll({
-                where: { "cityId": city.id }
-            });
-            if (!schools) {
-                throw new Error('Schools not found');
-            }
-            const responseData = schools.map(school => ({
-                id: school.id,
-                schoolName: school.schoolName
-            }));
-            return responseData;
-
-        } catch (error) {
-            throw new Error('Failed to get schools by city ' + error);
         }
     }
 
@@ -445,16 +406,16 @@ class StaffGroupLogic {
     //         if(!staffUser){
     //             throw new Error('Can\'t find staff member with that email.');
     //         }
-            
+
     //         const userRole = staffUser.accesses;
     //         if(userRole == 'D'){
     //             const groups = await getGroupsByCityManager(userEmail);
     //         }
-        
+
     //         else if(userRole == 'C'){
     //             const groups = await getGroupsByAreaManager(userEmail);
     //         }
-        
+
     //         else if (userRole == 'B'){
     //             const groups = await getGroupsByTeamOwner(userEmail);
     //         }
@@ -467,7 +428,42 @@ class StaffGroupLogic {
     //     }
     // }
 
+    async getAllGroupsBySchool(schoolId) {
+        try {
+            console.log(schoolId)
+            const groups = await Groups.findAll({
+                where: { "schoolId": schoolId }
+            });
     
+            if (!groups) {
+                throw new Error('Groups not found');
+            }
+    
+            for (let i = 0; i < groups.length; i++) {
+                const group = groups[i];
+    
+                const students = await group.getStudents();
+    
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+    
+                group.dataValues.students = studentNames;
+            }
+    
+            const responseData = groups.map(group => ({
+                id: group.id,
+                students: group.dataValues.students,
+                memberCount: group.dataValues.students.length,
+                capacity: group.capacity
+            }));
+            return responseData;
+    
+        } catch (error) {
+            throw new Error('Failed to find groups from school ' +schoolId + ": " + error);
+        }
+    }
 
 
 }

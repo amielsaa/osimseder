@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import {fetchAllSchoolsByCity, addGroup} from '../Helpers/StaffFrontLogic'
+import {fetchSchoolsByCityId, addGroup} from '../Helpers/StaffFrontLogic'
 
 const AddGroupPage = () => {
   const { user, navigate } = useContext(DataContext);
@@ -52,7 +52,7 @@ const AddGroupPage = () => {
   
   const handleCityChange = async (e) => {
     setSelectedCity(e.target.value)
-    const schools = await fetchAllSchoolsByCity(e.target.value);
+    const schools = await fetchSchoolsByCityId(e.target.value);
     setSchoolsList(schools);
   }
 

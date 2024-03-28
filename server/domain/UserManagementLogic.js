@@ -1,7 +1,10 @@
-// Student Management
+// User Management
 const { Students, Staffs } = require('../models');
 const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
+const crypto = require('crypto');
+const emailService = require('./services/EmailService');
+const string2Int = require('./utils/String2Int');
 
 class UserManagementLogic {
     async getStudents() {

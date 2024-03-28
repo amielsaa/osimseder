@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {validateToken, verifyToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
-const groupLogic = require('../../domain/StudentGroupLogic')
+const studentGroupLogic = require('../../domain/StudentGroupLogic')
+const staffGroupLogic = require('../../domain/StaffGroupLogic')
 const {Groups} = require('../../models/')
 const {Schools} = require('../../models/')
 const RegistrationLogic = require("../../domain/RegistrationLogic")
@@ -21,7 +22,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     const { schoolId } = req.body;
     try {
 
-        const groups = await groupLogic.getAllGroupsBySchool(schoolId);
+        const groups = await staffGroupLogic.getAllGroupsBySchool(schoolId);
         res.json({groups:groups});
 
     } catch (err) {
@@ -39,7 +40,7 @@ router.post('/init_test', async (req, res) => {
 router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     const groupId = req.params.id;
     try {
-        const group = await groupLogic.getAllGroupById(groupId);
+        const group = await staffGroupLogic.getGroupById(groupId);
         
         res.json({group:group});
 
@@ -56,7 +57,7 @@ router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (re
     // userEmail = ""
     try {
         // const group = {};
-        const group = await groupLogic.joinGroup(groupId, userEmail);
+        const group = await studentGroupLogic.joinGroup(groupId, userEmail);
         // implement to add a student to an existing group
         //should return the group he just joined
         res.json(group)

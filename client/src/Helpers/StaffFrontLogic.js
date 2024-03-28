@@ -14,7 +14,16 @@ const fetchAllGroupsStaff = async () => {
 }
 
 const fetchAllSchoolsByCity = async (cityName) => {
-    const res = await axios.post(`${URL}/staff/groups/schools`, {city:cityName} ,headers);
+    const res = await axios.post(`${URL}/helpers/getAllSchoolByCity`, {city:cityName} ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+const fetchSchoolsByCityId = async (cityId) => {
+    const res = await axios.post(`${URL}/helpers/getSchoolsByCityId`, {cityId:cityId} ,headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -71,11 +80,16 @@ const updateHouse = async (information, id) => {
 }
 
 const fetchAllCities = async () => {
-
+    const res = await axios.post(`${URL}/helpers/getAllCities`, {}, headers);
+    if (res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
 }
 
-const fetchAllAreasByCity = async (city) => {
-    const res = await axios.post(`${URL}/staff/houses/getareas`,{},headers);
+const fetchAllAreasGroupedByCity = async (city) => {
+    const res = await axios.post(`${URL}/helpers/getAllAreasByCity`,{},headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {

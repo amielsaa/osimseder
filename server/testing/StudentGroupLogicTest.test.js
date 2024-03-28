@@ -202,7 +202,7 @@ describe('getAllGroupsBySchool', () => {
 
 });
 
-describe('getAllGroupById', () => {
+describe('getGroupById', () => {
   // let sequelize;
   let student;
   let group;
@@ -229,7 +229,7 @@ describe('getAllGroupById', () => {
   // });
 
 
-  describe('getAllGroupById - good', () => {
+  describe('getGroupById - good', () => {
     it('given 1 group with id 1 - return it', async () => {  
       const studentPassword = "password123";
       const newStudent = await db.Students.create({
@@ -260,7 +260,7 @@ describe('getAllGroupById', () => {
       });
 
       // // Call the function under test and await its result
-      const result = await GroupLogic.getAllGroupById(groupWithSchool1.id);
+      const result = await GroupLogic.getGroupById(groupWithSchool1.id);
       
       // // Assertions
       expect(result).toHaveProperty('id', groupWithSchool1.id);
@@ -271,9 +271,9 @@ describe('getAllGroupById', () => {
 
   });
 
-  describe('getAllGroupById - bad', () => {
+  describe('getGroupById - bad', () => {
     it('bad groupId', async () => {  
-      await expect(GroupLogic.getAllGroupById(5))
+      await expect(GroupLogic.getGroupById(5))
         .rejects.toThrowError(/Group not found/);
     });      
     
@@ -411,7 +411,7 @@ describe('joinGroup', () => {
 
   describe('joinGroup - bad', () => {
     it('bad groupId', async () => {  
-      await expect(GroupLogic.getAllGroupById(5))
+      await expect(GroupLogic.getGroupById(5))
         .rejects.toThrowError(/Group not found/);
     });      
     
