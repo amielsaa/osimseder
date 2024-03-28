@@ -7,7 +7,7 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/'
 
 
 // Get all team owners by city name (GET)
-router.get('/teamowners', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/teamowners', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         // const userEmail = req.user.email;
         const cityName = req.body.cityName;
@@ -17,6 +17,21 @@ router.get('/teamowners', validateToken, validateAccess(accessGroup.C), async (r
         res.json(teamowners); 
 
         // res.json(houses);
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
+
+// Get staff email and name by email (GET)
+router.post('/staffinfo', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+    try {
+        // const userEmail = req.user.email;
+        const staffEmail = req.body.staffEmail;
+
+        const staffMember = await StaffLogic.getStaffName(staffEmail);
+        
+        res.json(staffMember); 
         
     } catch (err) {
         res.json({ error: err.message });

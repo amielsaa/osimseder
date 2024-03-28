@@ -63,7 +63,7 @@ const Group = ({ groupId }) => {
           setShowConfirmation={setShowConfirmation}
         />
       )}
-    
+      
     </>
   );
 }

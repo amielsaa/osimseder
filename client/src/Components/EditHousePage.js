@@ -15,6 +15,24 @@ function EditHousePage() {
     const { id } = useParams()
     const {navigate,user} = useContext(DataContext);
     const [areas, setAreas] = useState([]);
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
+    const initialValues = {
+      areaName:"",
+      address: "",
+      residentFirstName: "",
+      residentLastName: "",
+      phoneNumber:"",
+      alternativeNumber:"",
+      residentGender:"",
+      languageNeeded:"",
+      numberOfRooms:"",
+      membersNeeded:"",
+      freeText:""
+  };
 
     const getHouseInfo = async () => {
       const houseInfo = await getHouseById(id);
@@ -51,19 +69,7 @@ function EditHousePage() {
         getHouseInfo();
     },[])
 
-    const initialValues = {
-        area:"",
-        address: "",
-        residentFirstName: "",
-        residentLastName: "",
-        residentPhoneNum:"",
-        residentAlternatePhoneNum:"",
-        residentGender:"",
-        languageNeeded:"",
-        numberOfRooms:"",
-        membersNeeded:"",
-        freeText:""
-    };
+   
 
 
     const validationSchema = Yup.object().shape({
@@ -84,7 +90,10 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
-     console.log(data)
+      data.areaId = data.areaName;
+      data.residentPhoneNum = data.phoneNumber;
+      data.residentAlternatePhoneNum = data.alternativeNumber;
+     
         //take all the data and edit it in the db
       const res = updateHouse(data,id);
       if(res) {
@@ -116,7 +125,7 @@ function EditHousePage() {
                             {areas && (
                                 <>
                                 {areas.map((area) => (
-                                    <option key={area.areaName} value={area.areaName}>
+                                    <option key={area.areaName} value={area.id}>
                                     {area.areaName}
                                     </option>
                                 ))}
