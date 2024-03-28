@@ -26,6 +26,52 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
     }
 });
 
+// Return all schools related to the city
+router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+    //req.data.city = BSV/JRS
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityName = req.body.city;
+        // cityName = 'bsv';
+        const schools = await staffGroupLogic.getSchoolsByCity(cityName);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
+})
+
+// need to move to other route someday
+// Return all schools related to the city
+router.post('/schools_for_register', async (req, res) => {
+    //req.data.city = BSV/JRS
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityName = req.body.city;
+        // cityName = 'bsv';
+        const schools = await staffGroupLogic.getSchoolsByCity(cityName);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
+})
+
+
 // Return all groups in a school without a house
 router.post('/emptygroups', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     //req.data.city = BSV/JRS
@@ -166,11 +212,12 @@ router.get('/admin', validateToken, validateAccess(accessGroup.E), async (req, r
 
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+router.get('/:id', validateToken, async (req, res) => {
     try {
         const groupId = req.params.id;
+        const user = req.user;
 
-        const group = await staffGroupLogic.getGroupById(groupId);
+        const group = await staffGroupLogic.getGroupById(groupId, user);
 
         res.json(group);
 

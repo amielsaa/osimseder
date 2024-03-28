@@ -2,10 +2,17 @@ import './css/Home.css'
 import Header from './Header'
 import Nav from './Nav'
 import DataContext from '../Helpers/DataContext';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Footer from './Footer';
 const Home = () => {
-  const {user} = useContext(DataContext)
+  const {user, loginRefresh, setLoginRefresh} = useContext(DataContext)
+  useEffect(() => {
+    if(loginRefresh) {
+      setLoginRefresh(false);
+      window.location.reload();
+    }
+
+  },[])
   return (
     <>
     <Header/>

@@ -37,7 +37,6 @@ const addGroup = async (cityName, schoolId, capacity) => {
         alert(res.data.error);
         return false;
     } else {
-        console.log('adding group')
         return true;
     }
 }
@@ -68,6 +67,16 @@ const addHouse = async (information) => {
         return true;
     }
 
+}
+
+const updateHouse = async (information, id) => {
+    const res = await axios.put(`${URL}/staff/houses/${id}`, information, headers)
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
 }
 
 const fetchAllCities = async () => {
@@ -181,4 +190,34 @@ const removeGroupMember = async (email) => {
 
 }
 
-export { removeGroupMember, getGroupById, updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasGroupedByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, fetchSchoolsByCityId, addGroup}
+const fetchTeamOwners = async (cityName) => {
+    const res = await axios.post(`${URL}/staff/staff/teamowners`,{cityName:cityName}, headers);
+    if(res.data.error) {
+        alert(res.data.error)
+    } else {
+        return res.data;
+    }
+}
+
+const assignTeamOwner = async (email, index, id) => {
+    if(index === 'A') {
+        return updateHouse({teamOwnerEmail: email}, id);
+    } else {
+        return updateHouse({teamOwnerEmail_2: email}, id);
+    }
+}
+
+const fetchTeamOwnerInfo = async (email) => {
+    const res = await axios.post(`${URL}/staff/staff/staffinfo`, {staffEmail:email}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+export {fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
+     updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
+      fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
+       getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
+        getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

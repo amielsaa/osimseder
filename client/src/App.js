@@ -20,7 +20,7 @@ import AddHousePage from './Components/AddHousePage.js';
 import AddTaskPage from './Components/AddTaskPage.js';
 import AddGroupToHousePage from './Components/AddGroupToHousePage.js';
 import EditHousePage from './Components/EditHousePage.js'
-import NoneGroupPage from './Components/StudentView/NoneGroupPage.js';
+
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
             <Route path="/Home" element={<Home />} />
             <Route path="/Groups" element={<Groups />} />
             <Route path="/GroupPage/:id" element={<GroupPage />} />
-            <Route path="/NoneGroupPage" element={<NoneGroupPage />} />
+
             <Route path="/Personal/:encryptedEmail" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>

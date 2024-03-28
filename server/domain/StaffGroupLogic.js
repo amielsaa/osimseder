@@ -1,7 +1,8 @@
 const { Sequelize } = require('sequelize');
 const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
+const userManagementLogic = require("./UserManagementLogic")
 
-class GroupLogic {
+class StaffGroupLogic {
     async createGroup(groupSize, schoolId) {
         try {
             if(groupSize==null || schoolId==null){
@@ -235,8 +236,21 @@ class GroupLogic {
     }
     
 
-    async getGroupById(groupId) {
+    async getGroupById(groupId, user) {
         try {
+            if(groupId === undefined){
+                throw new Error('groupId is undefined');
+            }
+            if(groupId === null){
+                throw new Error('groupId is null');
+            }
+            if (user.role == "Student") {
+                const studentsGroupId = await userManagementLogic.getGroupIdOfStudent(user.email);
+                if (groupId != studentsGroupId) {
+                    throw new Error("You can't enter a group you are not a part of");
+                }
+            }
+          
             const group = await Groups.findOne({
                 where: { id: groupId }
             });
@@ -454,4 +468,4 @@ class GroupLogic {
 
 }
 
-module.exports = new GroupLogic();
+module.exports = new StaffGroupLogic();

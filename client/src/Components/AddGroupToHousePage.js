@@ -17,6 +17,11 @@ function AddGroupToHousePage() {
     const { navigate , user } = useContext(DataContext)
     const [schoolOptions, setSchoolOptions] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState();
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
 
     //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
     //TO DELETE!!!!

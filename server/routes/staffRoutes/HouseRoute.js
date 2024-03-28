@@ -115,7 +115,7 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
 });
 
 // Get a single house by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         const houseId= req.params.id;
         const house = await StaffHouseLogic.getHouseById(houseId);
