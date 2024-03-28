@@ -1,6 +1,8 @@
-// EmailLogic.js
+// EmailService.js
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
+const argumentChecker = require('../utils/ArgumentChecker');
+const { usersLogger } = require('../../utils/logger');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -13,20 +15,28 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-class EmailLogic {
+class EmailService {
 
     async sendVerificationEmail(email, token) {
-        const verificationLink = `http://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
+        usersLogger.info("Intiating sending verification email to: " + email);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+
+        const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
         console.log(verificationLink);
         await transporter.sendMail({
             to: email,
             subject: 'Verify Your Email Address',
             html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
         });
+
+        usersLogger.info("Successfully sent email to: " + email);
     }
 
     async verifyEmailAndToken(email, token) {
         try {
+            usersLogger.info("Initiating verification of email (for verify register) and token for email: " + email);
+            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+
             // Decrypt the email here
             const decoded_email = decodeURIComponent(email);
             const student = await Students.findOne({
@@ -65,6 +75,8 @@ class EmailLogic {
                 }
             }
 
+            usersLogger.info("Successfully verified email and token for email: " + email);
+
         } catch (error) {
             console.error('Error verifying email and token:', error);
             throw new Error('Error verifying email and token.');
@@ -73,8 +85,11 @@ class EmailLogic {
 
 
     async sendResetPasswordEmail(email, token) {
+        usersLogger.info("Initiating sending reset password email to: " + email);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+
         const resetLink = `https://localhost:3001/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
-        const isStudent = false;
+        let isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
         });
@@ -86,20 +101,23 @@ class EmailLogic {
                 throw new Error('No user with this email');
             }
         } else {
-            const isStudent = true;
+            isStudent = true;
         }
         await transporter.sendMail({
             to: email,
             subject: 'Reset Your Password',
             html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`
         });
+
+        usersLogger.info("Successfully sent email to: " + email);
         return isStudent;
 
     }
     async verifyEmailForPassword(email, token) {
         try {
-            // Decrypt the email here
-            console.log("Entered verifyEmailForPassword");
+            usersLogger.info("Initiating verification of email (to change password) and token for email: " + email);
+            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+
             const decoded_email = decodeURIComponent(email);
             const student = await Students.findOne({
                 where: { email: decoded_email }
@@ -135,6 +153,7 @@ class EmailLogic {
                     throw new Error('Error: Token saved for user is different from the one given here.');
                 }
             }
+            usersLogger.info("Successfully verified email and token for email: " + email);
 
         } catch (error) {
             console.error('Error verifying email and token:', error);
@@ -145,4 +164,4 @@ class EmailLogic {
 
 }
 
-module.exports = new EmailLogic();
+module.exports = new EmailService();

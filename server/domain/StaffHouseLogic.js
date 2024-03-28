@@ -1,109 +1,49 @@
-const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
+const {Groups, Cities, Staffs, Houses} = require('../models');
 const string2Int = require('./utils/String2Int');
+const argumentChecker = require('./utils/ArgumentChecker');
+const { housesLogger } = require('../utils/logger');
+
 
 class StaffHouseLogic {
-    checkArguments(parameters, parameterNames) {
-        // const parameterNames = ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded"];
-        for (let i = 0; i < parameters.length; i++) {
-            const param = parameters[i];
-            if (param === undefined || param === null) {
-                throw new Error(`Parameter ${parameterNames[i]} is undefined`);
-            }
-            if (param === null) {
-                throw new Error(`Parameter ${parameterNames[i]} is null`);
-            }
-        }
-        return true;
-    }
 
+// Create a new house
+// Input: newFields - object with the following REQUIRED fields: address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area
+//        userEmail - the email of the user creating the house
+// Output: the created house object
     async createHouse(newFields, userEmail) {
         try {
-            //city, area, gender, numberOfRooms, membersNeeded, freetext
+
+            housesLogger.info("Initiating Create House By email: " + userEmail);
+            argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
+            argumentChecker.checkByKeys(newFields, "newFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "city", "area"]);
+
             newFields["cityId"] = await string2Int.getCityId(newFields["city"]);
             newFields["areaId"] = await string2Int.getAreaId(newFields["area"]);
             newFields["teamOwnerEmail"] = userEmail;
+
             const house = await Houses.create(newFields);
             if (!house) {
                 throw new Error('Couldn\'t create a house.');
             }
+
+            housesLogger.info("Successfully created house for city: " + newFields["cityId"] + ". By email: " + userEmail);
             return house;
 
         } catch (error) {
+            housesLogger.error("Error creating house By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to create house: ' + error);
         }
     }
 
-    
-    
 
-    // async createHouse(userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum) {
-    //        try {
-    //         //city, area, gender, numberOfRooms, membersNeeded, freetext
-    //         this.checkArguments([userEmail, address, residentLastName, residentFirstName, residentPhoneNum, languageNeeded, city, area, gender, numberOfRooms, membersNeeded, freetext, residentAlternatePhoneNum],
-    //             ["userEmail", "address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area", "gender", "numberOfRooms", "membersNeeded", "freetext", "residentAlternatePhoneNum"]
-    //             );
-
-    //         const cityId = await Cities.findOne({
-    //             where: {cityName: city}
-    //         });
-    //         if(!cityId){
-    //             throw new Error('Cant get a city by that name');
-    //         }
-    //         const areaId = await Areas.findOne({
-    //             where: {areaName: area}
-    //         });
-    //         if(!areaId){
-    //             throw new Error('Cant get a area by that name');
-    //         }
-            
-
-    //         const house = await Houses.create({
-    //             address: address,
-    //             residentLastName: residentLastName,
-    //             residentFirstName: residentFirstName, 
-    //             residentPhoneNum: residentPhoneNum, 
-    //             languageNeeded: languageNeeded,
-    //             numberOfRooms: numberOfRooms,
-    //             membersNeeded: membersNeeded,
-    //             freetext: freetext,
-    //             residentGender: gender,
-    //             cityId: cityId.id,
-    //             areaId: areaId.id,
-    //             teamOwnerEmail: userEmail,
-    //             residentAlternatePhoneNum: residentAlternatePhoneNum
-
-    //         });
-    //         if (!house) {
-    //             throw new Error('Couldn\'t create a house.');
-    //         }
-        
-    //         // const students = await group.getStudents();
-    
-    //         // const studentNames = students.map(student => {
-    //         //     const { firstName, lastName, ...rest } = student;
-    //         //     return `${firstName} ${lastName}`;
-    //         // });
-    
-    //         // group.dataValues.students = studentNames;            
-            
-    //         // const responseData = {
-    //         //     id: group.id,
-    //         //     students: group.dataValues.students,
-    //         //     memberCount: group.dataValues.students.length,
-    //         //     capacity: group.capacity
-    //         // };
-        
-    //         return house;
-
-    //     } catch (error) {
-    //         throw new Error('Failed to create house: ' + error);
-    //     }
-    // }
-    
+// Get all houses in the requester's city
+// Input: userEmail - the email of the user requesting the houses
+// Output: an array of all houses
     async getAllHousesOfCity(userEmail) {
         try {
-            this.checkArguments([userEmail],
-                ["userEmail"]);
+            housesLogger.debug("Initiate get all houses of city by email: " + userEmail);
+            argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
+
             const user = await Staffs.findOne({
                 where: {email: userEmail}
             });
@@ -117,70 +57,47 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
+            housesLogger.debug("Successfully got all houses of city by email: " + userEmail);
             return houses;
 
         } catch (error) {
+            housesLogger.error("Failed to get all houses of city by email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to get all houses of city: ' + error);
         }
     }
 
+ // Get all houses of teamOwner
+ // Input: userEmail - the email of the user requesting the houses
+ // Output: an array of all houses
     async getAllHousesOfTeamOwner(userEmail) {
         try {
-            this.checkArguments([userEmail],
-                ["userEmail"]);
-            // console.log(user);
+            housesLogger.debug("Initiate get all houses of team owner by email: " + userEmail);
+            argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
+
             const houses = await Houses.findAll({
                 where: { teamOwnerEmail: userEmail }
             });
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
+            housesLogger.debug("Successfully got all houses of team owner by email: " + userEmail);
             return houses;
 
         } catch (error) {
+            housesLogger.error("Failed to get all houses of team owner by email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to get all houses of team owner: ' + error);
         }
     }
 
     
-    
+// Get house by ID
+// Input: houseId - the id of the house to get
+// Output: the house object
     async getHouseById(houseId) {
         try {
-            this.checkArguments([houseId],
-                ["houseId"]);
-            
+            housesLogger.debug("Initiate get house by id: " + houseId);
+            argumentChecker.checkSingleArugments([houseId], ["houseId"]);
+
             const house = await Houses.findOne({
                 where: {id: houseId}
             });
@@ -189,7 +106,6 @@ class StaffHouseLogic {
             }
         
 
-            // cityName, neiborhoodName, teamOwner1 and 2 names
             const city = await house.getCity();
             if (!city) {
                 throw new Error('Couldn\'t get city assigned to house.');
@@ -198,12 +114,15 @@ class StaffHouseLogic {
             if (!area) {
                 throw new Error('Couldn\'t get area assigned to house.');
             }
-            
-            const teamOwner1 = await Staffs.findOne({
-                where: {email: house.teamOwnerEmail}
-            });
-            if (!teamOwner1) {
-                throw new Error('Couldn\'t get team owner 1 assigned to house.');
+
+            let teamOwner1 = undefined;
+            if (house.teamOwnerEmail) {
+                teamOwner1 = await Staffs.findOne({
+                    where: { email: house.teamOwnerEmail }
+                });
+                if (!teamOwner1) {
+                    throw new Error('Couldn\'t get team owner 1 assigned to house.');
+                }
             }
 
             let teamOwner2 = undefined;
@@ -220,9 +139,12 @@ class StaffHouseLogic {
                 const { firstName, lastName, ...rest } = person;
                 return `${firstName} ${lastName}`;
             };
-            
-            const formattedTeamOwner1 = getFormattedNames(teamOwner1);
-            
+                        
+            let formattedTeamOwner1 = undefined;
+            if (teamOwner1) {
+                formattedTeamOwner1 = getFormattedNames(teamOwner1);
+            }            
+
             let formattedTeamOwner2 = undefined;
             if (teamOwner2) {
                 formattedTeamOwner2 = getFormattedNames(teamOwner2);
@@ -232,18 +154,26 @@ class StaffHouseLogic {
             house.dataValues["teamOwner2"] = formattedTeamOwner2;
             house.dataValues["cityName"] = city.cityName;
             house.dataValues["areaName"] = area.areaName;
-        
+
+            housesLogger.debug("Successfully got house by id: " + houseId);
             return house;
 
         } catch (error) {
+            housesLogger.error("Failed to get house by id: " + houseId + ". Reason: " + error);
             throw new Error('Failed to get house by id: ' + error);
         }
     }
 
-    async deleteHouse(houseId) {
+// Delete house by ID
+// Input: houseId - the id of the house to delete
+//        userEmail - the email of the user assigning the house
+// Output: success message
+    async deleteHouse(houseId, userEmail) {
         try {
-            this.checkArguments([houseId],
-                ["houseId"]);
+            housesLogger.info("Initiate delete house by id: " + houseId + ". By email: " + userEmail);
+            argumentChecker.checkSingleArugments([houseId, userEmail], ["houseId", "userEmail"]);
+
+
             const house = await Houses.findOne({
                 where: {id: houseId}
             });
@@ -254,40 +184,25 @@ class StaffHouseLogic {
                 where: { id: houseId }
             });
 
+            housesLogger.info("Successfully deleted house by id: " + houseId + ". By email: " + userEmail);
             return { success: true, message: 'House deleted successfully' };
         
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
-            // return house;
-
         } catch (error) {
+            housesLogger.error("Failed to delete house by id: " + houseId + ". Reason: " + error);
             throw new Error('Failed to delete house: ' + error);
         }
     }
 
-    async assignGroupToHouse(houseId, groupId) {
+// Assign house to group
+// Input: houseId - the id of the house to assign
+//        groupId - the id of the group to assign to
+//        userEmail - the email of the user assigning the house
+// Output: the group object
+    async assignGroupToHouse(houseId, groupId, userEmail) {
         try {
-            this.checkArguments([houseId, groupId], ["houseId", "groupId"])
-            // const house = await Houses.findOne({
-            //     where: {id: houseId}
-            // });
-            // if (!house) {
-            //     throw new Error('Couldn\'t get house with that ID.');
-            // }
+            housesLogger.info("Initiate assign group to house by house id: " + houseId + " and group id: " + groupId + ". By email: " + userEmail);
+            argumentChecker.checkSingleArugments([houseId, groupId, userEmail], ["houseId", "groupId", "userEmail"]);
+
             const group = await Groups.findOne({
                 where: {id: groupId}
             });
@@ -298,81 +213,55 @@ class StaffHouseLogic {
                 { houseId: houseId },
                 { where: { id: groupId }}
             );
+
+            housesLogger.info("Successfully assigned group to house by house id: " + houseId + " and group id: " + groupId + ". By email: " + userEmail);
             return group;
             
             
 
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
-            // return house;
-
         } catch (error) {
+            housesLogger.error("Failed to assign group to house by house id: " + houseId + " and group id: " + groupId + ". By email: " + userEmail+ ". Reason: " + error);
             throw new Error('Failed to assign house to group: ' + error);
         }
     }
 
-    async assignSecondTeamOwner(houseId, userEmail) {
+// Assign second team owner to house
+// Input: houseId - the id of the house to assign
+//        newTeamOwner - the email of the new team owner
+//        userEmail - the email of the user assigning the house
+// Output: the house object
+    async assignSecondTeamOwner(houseId, newTeamOwner, requesterEmail) {
         try {
-            this.checkArguments([houseId, userEmail], ["houseId", "userEmail"])
+            housesLogger.info("Initiate assign second team owner to house by house id: " + houseId + ". New Team Owner: " + newTeamOwner + ". By email: " + requesterEmail);
+            argumentChecker.checkSingleArugments([houseId, newTeamOwner, requesterEmail], ["houseId", "newTeamOwner", "requesterEmail"]);
+
             const house = await Houses.findOne({
                 where: {id: houseId}
             });
             if (!house) {
                 throw new Error('Couldn\'t get house with that ID.');
             }
-            // const group = await Groups.findOne({
-            //     where: {id: groupId}
-            // });
-            // if (!group) {
-            //     throw new Error('Couldn\'t get group with that ID.');
-            // }
             const updatedHouse = await Houses.update(
-                { "teamOwnerEmail_2": userEmail },
+                { "teamOwnerEmail_2": newTeamOwner },
                 { where: { id: houseId }}
             );
-            return house;
-            
-            
 
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
-            // return house;
+
+            housesLogger.info("Successfully assigned second team owner to house by house id: " + houseId + ". New Team Owner: " + newTeamOwner + ". By email: " + requesterEmail);
+            return house;
 
         } catch (error) {
+            housesLogger.error("Failed to assign second team owner to house by house id: " + houseId + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to assign house to group: ' + error);
         }
     }
 
+// Get all areas grouped by city
+// Output: an object with city names as keys and arrays of areas as values
     async getAllAreasByCity() {
         try {
+            housesLogger.debug("Initiate get all areas by city");
+
             const cities = await Cities.findAll({});
             if (!cities) {
                 throw new Error('Couldn\'t get cities.');
@@ -385,63 +274,61 @@ class StaffHouseLogic {
                 result[cities[i].cityName] = areas;
             }
 
+            housesLogger.debug("Successfully got all areas by city");
             return result;
-            
-            
-
-            // const students = await group.getStudents();
-    
-            // const studentNames = students.map(student => {
-            //     const { firstName, lastName, ...rest } = student;
-            //     return `${firstName} ${lastName}`;
-            // });
-    
-            // group.dataValues.students = studentNames;            
-            
-            // const responseData = {
-            //     id: group.id,
-            //     students: group.dataValues.students,
-            //     memberCount: group.dataValues.students.length,
-            //     capacity: group.capacity
-            // };
-        
-            // return house;
 
         } catch (error) {
+            housesLogger.error("Failed to get all areas by city. Reason: " + error);
             throw new Error('Failed to get areas by city: ' + error);
         }
     }
 
-    async updateHouse(id, updatedFields) {
+// Update house by ID
+// Input: houseId - the id of the house to update
+//        updatedFields - object with the fields to update
+//        userEmail - the email of the user updating the house
+// Output: the updated house object
+    async updateHouse(houseId, updatedFields, requesterEmail) {
         try {
-            this.checkArguments([id],
-                ["id"]);
+            housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
+            console.log(houseId)
+            console.log(updatedFields)
+            console.log(requesterEmail)
+            argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
+            //argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "areaId"]);
+            //TODO add check on the updated fields values
             const house = await Houses.findOne({
-                where: {id: id}
+                where: { id: houseId }
             });
             if(!house){
                 throw new Error('Couldn\'t find a house with that id.');
             }
-
+            console.log(houseId)
+            console.log(updatedFields["areaId"])
             for (const key in updatedFields) {
                 if (Object.hasOwnProperty.call(updatedFields, key)) {
                     house[key] = updatedFields[key];
                 }
             }
-
             await house.save();
-        
+
+            housesLogger.info("Successfully updated house by id: " + houseId + ". By email: " + requesterEmail);        
             return house;
 
         } catch (error) {
+            housesLogger.error("Failed to update house by id: " + houseId + ". By email: " + requesterEmail + ". Reason: " + error);
             throw new Error('Failed to update a house by id: ' + error);
         }
     }
 
+// Get all groups of house
+// Input: houseId - the id of the house to get groups for
+// Output: an array of groups
     async getHouseGroups(houseId) {
         try {
-            this.checkArguments([houseId],
-                ["houseId"]);
+            housesLogger.debug("Initiate get house groups by house id: " + houseId);
+            argumentChecker.checkSingleArugments([houseId], ["houseId"]);
+
             const house = await Houses.findOne({
                 where: {id: houseId}
             });
@@ -471,16 +358,14 @@ class StaffHouseLogic {
                 capacity: group.capacity
             }));
 
+            housesLogger.debug("Successfully got house groups by house id: " + houseId);
             return responseData;
-            // return groups;
 
         } catch (error) {
+            housesLogger.error("Failed to get house groups by house id: " + houseId + ". Reason: " + error);
             throw new Error('Failed to update a house by id: ' + error);
         }
     }
-
-    
-
 }
 
 module.exports = new StaffHouseLogic();

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {validateToken, verifyToken} = require('../../utils/JsonWebToken');
 const {validateAccess, accessGroup} = require('../../utils/Accesses');
-const groupLogic = require('../../domain/StudentGroupLogic')
+const studentGroupLogic = require('../../domain/StudentGroupLogic')
 const {Groups} = require('../../models/')
 const {Schools} = require('../../models/')
 const RegistrationLogic = require("../../domain/RegistrationLogic")
@@ -21,7 +21,7 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     const { schoolId } = req.body;
     try {
 
-        const groups = await groupLogic.getAllGroupsBySchool(schoolId);
+        const groups = await studentGroupLogic.getAllGroupsBySchool(schoolId);
         res.json({groups:groups});
 
     } catch (err) {
@@ -29,17 +29,17 @@ router.post('/', validateToken, validateAccess(accessGroup.A), async (req, res) 
     }
 });
 
-
+//TODO needed?
 router.post('/init_test', async (req, res) => {
     await Groups.create({groupName:'bb',teamOwnerId:'fe', schoolId:'1'})
     //await Schools.create({schoolName:'oo'}) 
 })
 
 // Get a single group by ID (GET)
-router.get('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+router.get('/:id', validateToken, async (req, res) => {
     const groupId = req.params.id;
     try {
-        const group = await groupLogic.getAllGroupById(groupId);
+        const group = await studentGroupLogic.getAllGroupById(groupId);
         
         res.json({group:group});
 
@@ -56,7 +56,7 @@ router.post('/join/:id', validateToken, validateAccess(accessGroup.A), async (re
     // userEmail = ""
     try {
         // const group = {};
-        const group = await groupLogic.joinGroup(groupId, userEmail);
+        const group = await studentGroupLogic.joinGroup(groupId, userEmail);
         // implement to add a student to an existing group
         //should return the group he just joined
         res.json(group)
