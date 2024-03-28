@@ -23,11 +23,11 @@ router.post('/setup', async (req,res) => {
 
 const setupCities = async () => {
     await Cities.create({
-        cityName: 'BSV',
+        cityName: 'באר שבע',
         cityManagerEmail: 'amielbsv@gmail.com'
     })
     await Cities.create({
-        cityName: 'JRS',
+        cityName: 'ירושלים',
         cityManagerEmail: 'amieljrs@gmail.com'
     })
 }
