@@ -42,18 +42,18 @@ const AddHousePage = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    city: Yup.string().required('עיר נדרשת'),
-    area: Yup.string().required('שכונה נדרשת'),
-    address: Yup.string().required('כתובת נדרשת'),
-    firstName: Yup.string().required('שם פרטי נדרש'),
-    lastName: Yup.string().required('שם משפחה נדרש'),
-    gender: Yup.string().required('מין נדרש'),
-    language: Yup.string().required('שפה נדרשת'),
-    rooms: Yup.string().required('מספר חדרים נדרש'),
+    city: Yup.string(),
+    area: Yup.string(),
+    address: Yup.string(),
+    firstName: Yup.string(),
+    lastName: Yup.string(),
+    gender: Yup.string(),
+    language: Yup.string(),
+    rooms: Yup.string(),
     teamSize: Yup.string(),
     comments: Yup.string(),
     phoneNumber: Yup.string()
-        .required("מספר נייד נדרש")
+        
         .matches(/^05\d{8}$/, "מספר לא תקין"),
     secondPhoneNumber: Yup.string()
         .matches(/^05\d{8}$/, "מספר לא תקין"),
@@ -74,10 +74,13 @@ const AddHousePage = () => {
       freeText: comments,
       residentAlternatePhoneNum: secondPhoneNumber
     }
-    const res = addHouse(information);
+    if(gender && language && rooms && address && firstName && lastName && selectedCity && selectedArea && phoneNumber){
+      const res = addHouse(information);
     if(res) {
       navigate('/My-Houses')
     }
+    }
+    
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
   // navigate back to "/My-Houses".
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
@@ -187,12 +190,12 @@ const AddHousePage = () => {
                     </div>
                     <div>
                         <label htmlFor="secondPhoneNumber">   מספר  חלופי : </label>
-                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={secondPhoneNumber}/>
                         <ErrorMessage name="secondPhoneNumber" component="span" />
                     </div>
                     
                     <div>
-                        <label htmlFor="gender">מין איש קשר(*) : </label>
+                        <label htmlFor="gender">מין איש קשר(*): </label>
                         <Field as="select" id="gender" name="gender" onChange={(e) => {setGender(e.target.value)}} value={gender}>
                             <option value="">בחר מין</option>
                             <option value="זכר">זכר</option>
@@ -203,7 +206,7 @@ const AddHousePage = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="languages">שפה נחוצה(*)</label>
+                        <label htmlFor="languages">שפה נחוצה(*):</label>
                         <Field as="select" id="language" name="language" onChange={(e) => {setLanguage(e.target.value)}} value={language}>
                             <option value="">שפות</option>
                             {languages.map((lang) => (
@@ -214,7 +217,7 @@ const AddHousePage = () => {
                     </div>
 
                 <div>
-                  <label htmlFor="rooms"> מספר חדרים בבית(*) : </label>
+                  <label htmlFor="rooms"> מספר חדרים בבית(*): </label>
                   <Field as="select" id="rooms" name="rooms" onChange={(e) => {setRooms(e.target.value)}} value={rooms}>
                     <option value="">בחר מספר חדרים בבית</option>
                     
