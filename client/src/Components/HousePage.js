@@ -112,14 +112,16 @@ const HousePage = () => {
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
     setHouse(houseJson);
-    if(user.role !== 'Student') {
-      const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
-      setFirstMember(teamOwner_1);
-      if(houseJson.teamOwnerEmail_2) {
-        const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
-        setSecondMember(teamOwner_2);
+      if (user.role !== 'Student') {
+          if (houseJson.teamOwnerEmail) {
+              const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
+              setFirstMember(teamOwner_1);
+          }
+          if (houseJson.teamOwnerEmail_2) {
+              const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
+              setSecondMember(teamOwner_2);
+          }
       }
-    }
   }
 
   const setTasksRequest = async () => {
