@@ -177,4 +177,25 @@ const removeGroupMember = async (email) => {
 
 }
 
-export {updateHouse, removeGroupMember, getGroupById, updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse, fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff, getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+const fetchTeamOwners = async (cityName) => {
+    const res = await axios.post(`${URL}/staff/staff/teamowners`,{cityName:cityName}, headers);
+    if(res.data.error) {
+        alert(res.data.error)
+    } else {
+        return res.data;
+    }
+}
+
+const assignTeamOwner = async (email, index, id) => {
+    if(index === 'A') {
+        return updateHouse({teamOwnerEmail: email}, id);
+    } else {
+        return updateHouse({teamOwnerEmail_2: email}, id);
+    }
+}
+
+export {assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
+     updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
+      fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
+       getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
+        getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}

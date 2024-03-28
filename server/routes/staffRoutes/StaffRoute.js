@@ -7,7 +7,7 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/'
 
 
 // Get all team owners by city name (GET)
-router.get('/teamowners', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/teamowners', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         // const userEmail = req.user.email;
         const cityName = req.body.cityName;
