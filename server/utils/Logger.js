@@ -1,40 +1,80 @@
 const winston = require('winston');
-//const { createLogger, transports, format } = winston;
-const { combine, timestamp, printf, prettyPrint, errors} = winston.format
+const { transports } = winston;
+const { combine, timestamp, printf, errors, cli, json } = winston.format;
 
-
-const logger = winston.createLogger({
-  level: 'info',   // minimum level to transport
-  //format: windows.format.json(), 
-  //format: windows.format.cli(), 
-    format: combine(
-        errors({stack: true}),
-        timestamp(),
-        printf((info) => '${info.timestamp} ${info.level}: ${info.message}')
-        //hes suggesting instead of the above line to put 
-        //,json(), 
-        //prettyPrint()
-    ),
-    transports: [
-        new winston.transports.Console(),
-        new transports.File({ filename: 'logfile.log', level: 'error' }) // min level to filename 
-  ],
+// Custom format for JSON logs on a single line with tabs
+const singleLineTabbedFormat = printf(info => {
+    let logMessage = `${info.timestamp} \t${info.level.toUpperCase()} \t${info.message}`;
+    if (info.error) {
+        logMessage += ` \t${info.error.message} \t${info.error.stack}`;
+    }
+    return logMessage;
 });
 
+// Combined format for housesLogger
+const myCombinedFormat = combine(
+    timestamp(),
+    errors({ stack: true }),
+    singleLineTabbedFormat
+);
 
-// This is how you use the logger !
-// when you use this logger it will create a file called logfile.log
-logger.info('This is an informational message');
-logger.warn('This is a warning message');
-logger.error('This is an error message');
+// create, edit, remove, add task, edit task, add photos
+const housesLogger = winston.createLogger({
+    level: 'info',   // minimum level to transport
+    format: myCombinedFormat,
+    transports: [
+        new transports.File({ filename: 'loggers/housesLogFile.log' }) // min level to filename 
+    ],
+});
 
+// create, edit, remove, add TO
+const groupsLogger = winston.createLogger({
+    level: 'info',   // minimum level to transport
+    format: myCombinedFormat,
+    transports: [
+        new transports.File({ filename: 'loggers/groupsLogFile.log' }) // min level to filename 
+    ],
+});
 
+//// create, editDetails, moveToGroups
+//const studentsLogger = winston.createLogger({
+//    level: 'info',   // minimum level to transport
+//    format: myCombinedFormat,
+//    transports: [
+//        new transports.File({ filename: 'loggers/studentsLogFile.log' }) // min level to filename 
+//    ],
+//});
+//
+//// create, editDetails
+//const staffsLogger = winston.createLogger({
+//    level: 'info',   // minimum level to transport
+//    format: myCombinedFormat,
+//    transports: [
+//        new transports.File({ filename: 'loggers/staffsLogFile.log' }) // min level to filename 
+//    ],
+//});
 
-const requestLog = {method: "GET", "isAuthenticated": false} //example for add extra fields
-logger.error('This is an error message', requestLog);
+// create, editDetails
+const usersLogger = winston.createLogger({
+    level: 'info',   // minimum level to transport
+    format: myCombinedFormat,
+    transports: [
+        new transports.File({ filename: 'loggers/usersLogFile.log' }) // min level to filename 
+    ],
+});
 
+// create, editDetails
+const routesLogger = winston.createLogger({
+    level: 'info',   // minimum level to transport
+    format: myCombinedFormat,
+    transports: [
+        new transports.File({ filename: 'loggers/usersLogFile.log' }) // min level to filename 
+    ],
+});
 
-const childLogger = logger.child(requestLog)//example for new logger
-childLogger.error('This is an error message');
-
-module.exports = logger;
+module.exports = {
+    housesLogger,
+    groupsLogger,
+    usersLogger,
+    routesLogger
+};

@@ -1,0 +1,12 @@
+[32minfo[39m:    Initiating Get Group by ID for group ID: 1. By user: student7@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 1. By user: student7@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 1. By user: student7@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 1. By user: student7@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 38. By user: student11@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 38. By user: student11@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 38. By user: student11@gmail.com
+[32minfo[39m:    Initiating Get Group by ID for group ID: 38. By user: student11@gmail.com
+{"timestamp":"2024-03-28T11:25:38.637Z","level":"info","message":"Initiating Get Group by ID for group ID: 36. By user: student7@gmail.com"}
+{"timestamp":"2024-03-28T11:25:38.657Z","level":"info","message":"Initiating Get Group by ID for group ID: 36. By user: student7@gmail.com"}
+{"timestamp":"2024-03-28T11:25:44.485Z","level":"info","message":"Initiating Get Group by ID for group ID: 36. By user: student9@gmail.com"}
+{"timestamp":"2024-03-28T11:25:44.545Z","level":"info","message":"Initiating Get Group by ID for group ID: 36. By user: student9@gmail.com"}

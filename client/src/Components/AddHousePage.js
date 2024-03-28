@@ -24,8 +24,13 @@ const AddHousePage = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
     const [areaList, setAreaList] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(false)
     const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
-
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
   const initialValues = {
     city: '',
     area: '',
@@ -42,24 +47,25 @@ const AddHousePage = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    city: Yup.string().required('עיר נדרשת'),
-    area: Yup.string().required('שכונה נדרשת'),
-    address: Yup.string().required('כתובת נדרשת'),
-    firstName: Yup.string().required('שם פרטי נדרש'),
-    lastName: Yup.string().required('שם משפחה נדרש'),
-    gender: Yup.string().required('מין נדרש'),
-    language: Yup.string().required('שפה נדרשת'),
-    rooms: Yup.string().required('מספר חדרים נדרש'),
+    city: Yup.string(),
+    area: Yup.string(),
+    address: Yup.string(),
+    firstName: Yup.string(),
+    lastName: Yup.string(),
+    gender: Yup.string(),
+    language: Yup.string(),
+    rooms: Yup.string(),
     teamSize: Yup.string(),
     comments: Yup.string(),
     phoneNumber: Yup.string()
-        .required("מספר נייד נדרש")
+        
         .matches(/^05\d{8}$/, "מספר לא תקין"),
     secondPhoneNumber: Yup.string()
         .matches(/^05\d{8}$/, "מספר לא תקין"),
   });
 
   const onSubmit = () => {
+    setErrorMessage(false)
     const information = {
       city: selectedCity,
       area: selectedArea,
@@ -74,10 +80,16 @@ const AddHousePage = () => {
       freeText: comments,
       residentAlternatePhoneNum: secondPhoneNumber
     }
-    const res = addHouse(information);
+    if(gender && language && rooms && address && firstName && lastName && selectedCity && selectedArea && phoneNumber){
+      const res = addHouse(information);
     if(res) {
       navigate('/My-Houses')
     }
+    }
+    else {
+      setErrorMessage(true)
+    }
+    
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
   // navigate back to "/My-Houses".
   // dont forget! after you place a city you need to give me all the neighborhoods. like in group page in school
@@ -109,14 +121,18 @@ const AddHousePage = () => {
           <div className='add-group-title'>
             <h1>הוספת בית</h1>
           </div>
-          <div className='Info'>חבר גרעין אחראי : {user.firstName + " " + user.lastName}</div>
-          <div className='add-group-title'>
+         
+          <div className='add-house-semi-title'>
             <h2>אנא מלא את הפרטים : </h2>
           </div>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
 
-              <div>
+              
+
+
+              {user.role === "Admin" && (
+                <div>
                 <label htmlFor="city"> עיר(*): </label>
                 <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
                   <option value="">בחר עיר</option>
@@ -125,7 +141,18 @@ const AddHousePage = () => {
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>
+              )}
+              {(user.role === "CityManager" || user.role === "AreaManager"|| user.role === "TeamOwner" ) && (
+                <div>
+                <label htmlFor="city"> עיר(*): </label>
+                <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
+                  <option value="">בחר עיר</option>
+                  <option value={user.cityName}>{user.cityName}</option>
 
+                </Field>
+                <ErrorMessage name="city" component="span" />
+              </div>
+              )}
 
               {selectedCity && (
                 <div>
@@ -172,12 +199,12 @@ const AddHousePage = () => {
                     </div>
                     <div>
                         <label htmlFor="secondPhoneNumber">   מספר  חלופי : </label>
-                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={secondPhoneNumber}/>
                         <ErrorMessage name="secondPhoneNumber" component="span" />
                     </div>
                     
                     <div>
-                        <label htmlFor="gender">מין איש קשר(*) : </label>
+                        <label htmlFor="gender">מין איש קשר(*): </label>
                         <Field as="select" id="gender" name="gender" onChange={(e) => {setGender(e.target.value)}} value={gender}>
                             <option value="">בחר מין</option>
                             <option value="זכר">זכר</option>
@@ -188,7 +215,7 @@ const AddHousePage = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="languages">שפה נחוצה(*)</label>
+                        <label htmlFor="languages">שפה נחוצה(*):</label>
                         <Field as="select" id="language" name="language" onChange={(e) => {setLanguage(e.target.value)}} value={language}>
                             <option value="">שפות</option>
                             {languages.map((lang) => (
@@ -199,7 +226,7 @@ const AddHousePage = () => {
                     </div>
 
                 <div>
-                  <label htmlFor="rooms"> מספר חדרים בבית(*) : </label>
+                  <label htmlFor="rooms"> מספר חדרים בבית(*): </label>
                   <Field as="select" id="rooms" name="rooms" onChange={(e) => {setRooms(e.target.value)}} value={rooms}>
                     <option value="">בחר מספר חדרים בבית</option>
                     
@@ -233,9 +260,15 @@ const AddHousePage = () => {
 
 
               {(selectedCity && selectedArea) && (
+                <>
+                {errorMessage && 
+                (<div className="error_msg" style={{color: "red" , margin: "auto"}}>
+                  <p>חסר שדות חובה</p>
+                </div>)}
                 <div className='login_Buttons'>
                 <button type="submit" onClick={onSubmit} className='button-login' >צור בית</button>
                 </div>
+                </>
               )}
             </Form>
           </Formik>

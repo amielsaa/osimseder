@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
-import {fetchAllSchoolsByCity} from '../Helpers/StaffFrontLogic'
+import {fetchAllSchoolsByCityForRegister} from '../Helpers/StudentFrontLogic'
 
 function Registration() {
     const {navigate} = useContext(DataContext);
@@ -67,7 +67,7 @@ function Registration() {
 
     const handleCityChange = async (cityName) => {
         setSelectedCity(cityName);
-        const res = await fetchAllSchoolsByCity(cityName);
+        const res = await fetchAllSchoolsByCityForRegister(cityName);
         console.log(res);
         setSchoolsList(res);
     }

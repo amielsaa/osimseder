@@ -36,5 +36,14 @@ const fetchGroupById = async (groupId) => {
   //})
 }
 
+const fetchAllSchoolsByCityForRegister = async (cityName) => {
+  const res = await axios.post(`${URL}/staff/groups/schools_for_register`, {city:cityName});
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
 
-export {handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById}
+
+export {fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById}

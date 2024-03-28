@@ -12,6 +12,7 @@ export const DataProvider = ({children}) => {
     // , groupId:"002" })
     
     const [user,setUser] = useState({});
+    const [loginRefresh, setLoginRefresh] = useState(false);
 
     useEffect(() => {
         if(localStorage.getItem("accessToken")) {
@@ -19,19 +20,28 @@ export const DataProvider = ({children}) => {
                 if(res.data.error) alert(res.data.error);
                 else {
                     setUser(res.data.user.dataValues);
+                    //window.location.reload();
                 };
             });
         }
-    }, [])
-    
+    }, [loginRefresh])
+   
+    const updateUserGroupId = (newGroupId) => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          groupId: newGroupId
+        }));
+      };
     const navigate = useNavigate();
     return (
         <DataContext.Provider value = { {
-            user, setUser, navigate
+            user, setUser, navigate , updateUserGroupId,loginRefresh, setLoginRefresh
         }}>
             {children}
             </DataContext.Provider>
     )
+
+    
 }
 
 export default DataContext;
