@@ -1,16 +1,21 @@
 const { Sequelize } = require('sequelize');
 const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
 const userManagementLogic = require("./UserManagementLogic")
+const { usersLogger, groupsLogger } = require('../utils/logger');
+const argumentChecker = require('./utils/ArgumentChecker');
+const StaffStudentLogic = require('./StaffStudentLogic');
 
 class StaffGroupLogic {
-    async createGroup(groupSize, schoolId) {
+
+// Create a group
+// Input: groupSize - the size of the group to create
+//        schoolId - the id of the school to create the group for
+//        userEmail - the email of the user creating the group
+// Output: the group object
+    async createGroup(groupSize, schoolId, userEmail) {
         try {
-            if(groupSize==null || schoolId==null){
-                throw new Error('Group size and school ID can\'t be null');
-            }
-            if(groupSize<=0){
-                throw new Error('Group size can\'t be negative or 0.');
-            }
+            groupsLogger.info("Initiating Create Group for school ID: " + schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
+            argumentChecker.checkSingleArugments([groupSize, schoolId, userEmail], ["groupSize", "schoolId", "userEmail"]);
 
             const school = await Schools.findOne({
                 where: {id: schoolId}
@@ -42,22 +47,23 @@ class StaffGroupLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             };
-        
+            groupsLogger.info("Successfully created group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to create group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to create group: ' + error);
         }
     }
 
+// get all groups related to team owner
+// Input: teamOwnerEmailAddr - the email of the team owner
+// Output: an array of groups
     async getGroupsByTeamOwner(teamOwnerEmailAddr) {
         try {
-            if(teamOwnerEmailAddr==null){
-                throw new Error('Team owner email is null.');
-            }
-            if(teamOwnerEmailAddr==undefined){
-                throw new Error('Team owner email is undefined.');
-            }
+            groupsLogger.debug("Initiating Get Groups by Team Owner for email: " + teamOwnerEmailAddr);
+            argumentChecker.checkSingleArugments([teamOwnerEmailAddr], ["teamOwnerEmailAddr"]);
+
             const houses = await Houses.findAll({
                 where: {
                     [Sequelize.Op.or]: [
@@ -106,17 +112,23 @@ class StaffGroupLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             }));
-
+            groupsLogger.debug("Successfully got groups by Team Owner for email: " + teamOwnerEmailAddr);
             return responseData;
         } catch (error) {
+            groupsLogger.error("Failed to get groups by Team Owner for email: " + teamOwnerEmailAddr + ". Reason: " + error);
             throw new Error('Failed to find an area by team owner: ' + error);
         }
     }
 
-    //Get all groups related to area manager
 
+// get all groups related to city manager
+// Input: cityManagerEmail - the email of the city manager
+// Output: an array of groups
     async getGroupsByCityManager(cityManagerEmail) {
         try {
+            groupsLogger.debug("Initiating Get Groups by City Manager for email: " + cityManagerEmail);
+            argumentChecker.checkSingleArugments([cityManagerEmail], ["cityManagerEmail"]);
+
             const staff = await Staffs.findOne({
                 where: { "email": cityManagerEmail }
             });
@@ -151,16 +163,21 @@ class StaffGroupLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             }));
-
+            groupsLogger.debug("Successfully got groups by City Manager for email: " + cityManagerEmail);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to get groups by City Manager for email: " + cityManagerEmail + ". Reason: " + error);
             throw new Error('Failed to find an area by city manager: ' + error);
         }
     }
 
+// get all groups in the requester city
+// Output: an array of groups
     async getAllGroups() {
         try {
+            groupsLogger.debug("Initiating Get All Groups");
+
             const groups = await Groups.findAll();
             if (!groups) {
                 throw new Error('Couldn\'t get all schools (admin).');
@@ -186,28 +203,27 @@ class StaffGroupLogic {
                 capacity: group.capacity
             }));
 
+            groupsLogger.debug("Successfully got all groups");
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to get all groups. Reason: " + error);
             throw new Error('Failed to get all groups: ' + error);
         }
     }
     
 
+// get a group by id
+// Input: groupId - the id of the group to get
+//        user - the user requesting the group
+// Output: the group object
     async getGroupById(groupId, user) {
         try {
-            if(groupId === undefined){
-                throw new Error('groupId is undefined');
-            }
-            if(groupId === null){
-                throw new Error('groupId is null');
-            }
+            groupsLogger.debug("Initiating Get Group by ID for group ID: " + groupId + ". By user: " + user.email);
+            argumentChecker.checkSingleArugments([groupId, user], ["groupId", "user"]);
+
             if (user.role == "Student") {
-                const studentsGroupId = await userManagementLogic.getGroupIdOfStudent(user.email);
-                console.log("groupIDofStudent")
-                console.log(studentsGroupId)
-                console.log("groupID")
-                console.log(groupId)
+                const studentsGroupId = await StaffStudentLogic.getGroupIdOfStudent(user.email);
 
                 if (groupId != studentsGroupId) {
                     throw new Error("You can't enter a group you are not a part of");
@@ -219,14 +235,6 @@ class StaffGroupLogic {
             if (!group) {
                 throw new Error('Group not found');
             }
-
-            // const teamManager = await Staffs.findOne({
-            //     where: {email: group.teamOwnerEmail}
-            // });
-            // if(teamManager){
-            //     const { firstName, lastName, ...rest } = teamManager;
-            //     group.dataValues.teamManager = `${firstName} ${lastName}`;
-            // }
             
             const students = await group.getStudents();
         
@@ -244,22 +252,24 @@ class StaffGroupLogic {
                 capacity: group.capacity,
                 houseId: group.houseId
             };
-
+            groupsLogger.debug("Successfully got group by ID for group ID: " + groupId + ". By user: " + user.email);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to get group by ID for group ID: " + groupId + ". By user: " + user.email + ". Reason: " + error);
             throw new Error('Failed to find a group by ID ' + error);
         }
     }
 
+// get all groups in the city
+// Input: cityName - the name of the city to get the groups for
+// Output: an array of groups
     async getSchoolsByCity(cityName) {
         try {
-            if(cityName === undefined){
-                throw new Error('cityname is undefined');
-            }
-            if(cityName === null){
-                throw new Error('cityname is null');
-            }
+            groupsLogger.debug("Initiating Get Schools by City for city: " + cityName);
+            argumentChecker.checkSingleArugments([cityName], ["cityName"]);
+
+
             const city = await Cities.findOne({
                 where: { cityName: cityName },
             });
@@ -277,21 +287,23 @@ class StaffGroupLogic {
                 id: school.id,
                 schoolName: school.schoolName
             }));
+
+            groupsLogger.debug("Successfully got schools by City for city: " + cityName);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to get schools by City for city: " + cityName + ". Reason: " + error);
             throw new Error('Failed to get schools by city ' + error);
         }
     }
 
+// get all groups without a house
+// Input: schoolId - the id of the school to get the groups for
+// Output: an array of groups
     async getAllGroupsWithoutHouse(schoolId) {
         try {
-            if(schoolId === undefined){
-                throw new Error('schoolId is undefined');
-            }
-            if(schoolId === null){
-                throw new Error('schoolId is null');
-            }
+            groupsLogger.debug("Initiating Get all groups without house for school: " + schoolId);
+            argumentChecker.checkSingleArugments([schoolId], ["schoolId"]);
 
             const groups = await Groups.findAll({
                 where: { schoolId: schoolId, houseId: null }
@@ -299,18 +311,6 @@ class StaffGroupLogic {
             if (!groups) {
                 throw new Error('groups not found');
             }
-
-            // const schools = await Schools.findAll({
-            //     where: { "cityId": city.id }
-            // });
-            // if (!schools) {
-            //     throw new Error('Schools not found');
-            // }
-            // const responseData = schools.map(school => ({
-            //     id: school.id,
-            //     schoolName: school.schoolName
-            // }));
-            // return groups;
 
             for (let i = 0; i < groups.length; i++) {
                 const group = groups[i];
@@ -332,16 +332,25 @@ class StaffGroupLogic {
                 capacity: group.capacity
             }));
 
+            groupsLogger.debug("Successfully got all groups without house for school: " + schoolId);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error("Failed to get all groups without house for school: " + schoolId + ". Reason: " + error);
             throw new Error('Failed to get school\'s groups without a house ' + error);
         }
     }
     
-    
-    async deleteGroup(id) {
+
+// delete a group by id
+// Input: id - the id of the group to delete
+//        userEmail - the email of the user deleting the group
+// Output: none
+    async deleteGroup(id, userEmail) {
         try {
+            groupsLogger.info("Initiating Delete Group by ID for group ID: " + id + ". By email: " + userEmail);
+            argumentChecker.checkSingleArugments([id, userEmail], ["id", "userEmail"]);
+
             const group = await Groups.findOne({
                 where: {id: id}
             });
@@ -357,17 +366,27 @@ class StaffGroupLogic {
                 })
             }
             await group.destroy();
-        
+
+            groupsLogger.info("Successfully deleted group by ID for group ID: " + id + ". By email: " + userEmail);
             return;
 
         } catch (error) {
+            groupsLogger.error("Failed to delete group by ID for group ID: " + id + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to delete a group by id: ' + error);
         }
     }
 
-    
-    async updateGroup(id, updatedFields) {
+
+// update a group by id
+// Input: id - the id of the group to update
+//        updatedFields - the fields to update
+//        userEmail - the email of the user updating the group
+// Output: the updated group object
+    async updateGroup(id, updatedFields, userEmail) {
         try {
+            groupsLogger.info("Initiating Update Group by ID for group ID: " + id + ". By email: " + userEmail);
+            argumentChecker.checkSingleArugments([id, updatedFields, userEmail], ["id", "updatedFields", "userEmail"]);
+
             const group = await Groups.findOne({
                 where: {id: id}
             });
@@ -382,10 +401,12 @@ class StaffGroupLogic {
             }
 
             await group.save();
-        
+
+            groupsLogger.info("Successfully updated group by ID for group ID: " + id + ". By email: " + userEmail); 
             return group;
 
         } catch (error) {
+            groupsLogger.error("Failed to update group by ID for group ID: " + id + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to update a group by id: ' + error);
         }
     }
@@ -393,9 +414,8 @@ class StaffGroupLogic {
 
 module.exports = new StaffGroupLogic();
 
-
-
     // NOT USED - alternative implementation of joint routes - NOT USED
+    // TODO IF BRING BACK - REFACTOR WITH LOGGER
     // async getGroupsByStaffAccess(userEmail) {
     //     try {
     //         if(userEmail === undefined){
@@ -432,7 +452,7 @@ module.exports = new StaffGroupLogic();
     //     }
     // }
 
-
+// TODO IF BRING BACK - REFACTOR WITH LOGGER
 /***async getGroupsByAreaManager(areaManagerEmail) {
     try {
         const area = await Areas.findOne({
@@ -476,4 +496,3 @@ module.exports = new StaffGroupLogic();
     }
 }
 ***/
-

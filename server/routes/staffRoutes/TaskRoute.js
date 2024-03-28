@@ -52,8 +52,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
     try {
         const id = req.params.id;
         const updatedFields = req.body;
+        const userEmail = req.user.email;
 
-        const newTask = await StaffTaskLogic.updateTask(id, updatedFields);
+        const newTask = await StaffTaskLogic.updateTask(id, updatedFields, userEmail);
         res.json(newTask);
 
     } catch (err) {
@@ -65,7 +66,8 @@ router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
 router.delete('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const id = req.params.id;
-        const newTask = await StaffTaskLogic.deleteTask(id);
+        const userEmail = req.user.email;
+        const newTask = await StaffTaskLogic.deleteTask(id, userEmail);
         res.json(newTask);
 
     } catch (err) {

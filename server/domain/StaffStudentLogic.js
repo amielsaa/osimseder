@@ -1,24 +1,19 @@
-const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
+const {Students} = require('../models');
+const argumentChecker = require('./utils/ArgumentChecker');
+const {usersLogger} = require('../utils/logger');
 
 class StaffStudentLogic {
-    checkArguments(parameters, parameterNames) {
-        // const parameterNames = ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded"];
-        for (let i = 0; i < parameters.length; i++) {
-            const param = parameters[i];
-            if (param === undefined || param === null) {
-                throw new Error(`Parameter ${parameterNames[i]} is undefined`);
-            }
-            if (param === null) {
-                throw new Error(`Parameter ${parameterNames[i]} is null`);
-            }
-        }
-        return true;
-    }
 
-    async updateStudent(email, updatedFields) {
+// update a student
+// Input: email - the email of the student
+//        updatedFields - the fields to update
+// Output: the updated student object
+    async updateStudent(studentEmail, requesterEmail, updatedFields) {
         try {
-            this.checkArguments([email],
-                ["email"]);
+            usersLogger.info('Updating a student by email: ' + studentEmail + '. By email: ' + requesterEmail);
+            argumentChecker.checkSingleArugments([studentEmail, requesterEmail], ['studentEmail', 'requesterEmail']);
+            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["email", "password", "lastName", "firstName", "phoneNumber", "gender", "parentName", "parentPhoneNumber", "city", "school"]);
+
             const student = await Students.findOne({
                 where: {email: email}
             });
@@ -33,15 +28,30 @@ class StaffStudentLogic {
             }
 
             await student.save();
-        
+
+            usersLogger.info('Successfully updated a student by email: ' + email);
             return student;
 
         } catch (error) {
+            usersLogger.error('Failed to update a student by email: ' + error);
             throw new Error('Failed to update a student by email: ' + error);
         }
     }
 
-    
+    //Needed - Get the Student's groupId
+    async getGroupIdOfStudent(email) {
+        try {
+            const student = await Students.findOne({
+                where: { email: email }
+            });
+            if (!student) {
+                throw new Error('Student not found');
+            }
+            return student.groupId;
+        } catch (error) {
+            throw new Error('Failed to get the students group: ' + error);
+        }
+    }
 
 }
 

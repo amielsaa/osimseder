@@ -164,8 +164,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
 // Delete a house by ID (DELETE)
 router.delete('/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const houseId= req.params.id;
-        const house = await StaffHouseLogic.deleteHouse(houseId);
+        const houseId = req.params.id;
+        const userEmail = req.user.email;
+        const house = await StaffHouseLogic.deleteHouse(houseId, userEmail);
 
         //returns like this:
         // "id": 2,
@@ -193,8 +194,9 @@ router.delete('/:id', validateToken, validateAccess(accessGroup.C), async (req, 
 router.post('/:houseid/:groupid', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const groupId= req.params.groupid;
-        const houseId= req.params.houseid;
-        const group = await StaffHouseLogic.assignGroupToHouse(houseId, groupId);
+        const houseId = req.params.houseid;
+        const userEmail = req.user.email;
+        const group = await StaffHouseLogic.assignGroupToHouse(houseId, groupId, userEmail);
 
         //returns the group assigned to the house
         res.json(group);
@@ -210,8 +212,9 @@ router.post('/assignsecondonwer', validateToken, validateAccess(accessGroup.C), 
         const newUserEmail = req.body.newUserEmail;
 
         // const groupId= req.params.groupid;
-        const houseId= req.body.houseId;
-        const house = await StaffHouseLogic.assignSecondTeamOwner(houseId, newUserEmail);
+        const houseId = req.body.houseId;
+        const requesterEmail = req.user.email;
+        const house = await StaffHouseLogic.assignSecondTeamOwner(houseId, newUserEmail, requesterEmail);
 
         //returns the group assigned to the house
         res.json(house);

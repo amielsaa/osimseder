@@ -8,12 +8,14 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses} = require('../../models/'
 
 
 // Update a student by ID (PUT)
+// The student changing himself
 router.put('/:email', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const email = req.params.email;
+        const studentEmail = req.params.email;
+        const requesterEmail = req.user.email;
         const updatedFields = req.body;
 
-        const newStudent = await StaffStudentLogic.updateStudent(email, updatedFields);
+        const newStudent = await StaffStudentLogic.updateStudent(studentEmail, requesterEmail, updatedFields);
         res.json(newStudent);
     } catch (err) {
         res.status(400).json({ message: err.message });

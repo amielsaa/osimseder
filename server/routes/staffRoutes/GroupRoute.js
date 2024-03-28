@@ -15,7 +15,8 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const schoolId = req.body.schoolId;
-        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId);
+        const userEmail = req.user.email;
+        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId, userEmail);
 
         //no arguments needed
         //return group information (all the fields)
@@ -156,8 +157,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
     try {
         const id = req.params.id;
         const updatedFields = req.body;
+        const userEmail = req.user.email;
 
-        const newGroup = await staffGroupLogic.updateGroup(id, updatedFields);
+        const newGroup = await staffGroupLogic.updateGroup(id, updatedFields, userEmail);
         res.json(newGroup);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -168,8 +170,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
 router.delete('/deleteGroup/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const id = req.params.id;
+        const userEmail = req.user.email;
 
-        const deletedGroup = await staffGroupLogic.deleteGroup(id);
+        const deletedGroup = await staffGroupLogic.deleteGroup(id, userEmail);
         res.json(deletedGroup);
     } catch (err) {
         res.status(400).json({ message: err.message });
