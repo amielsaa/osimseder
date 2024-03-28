@@ -24,6 +24,7 @@ const AddHousePage = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
     const [areaList, setAreaList] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(false)
     const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
 
   const initialValues = {
@@ -60,6 +61,7 @@ const AddHousePage = () => {
   });
 
   const onSubmit = () => {
+    setErrorMessage(false)
     const information = {
       city: selectedCity,
       area: selectedArea,
@@ -79,6 +81,9 @@ const AddHousePage = () => {
     if(res) {
       navigate('/My-Houses')
     }
+    }
+    else {
+      setErrorMessage(true)
     }
     
   // Amiel - all the data you need are in the useStates. after you do whatever you need to do with the data
@@ -112,8 +117,8 @@ const AddHousePage = () => {
           <div className='add-group-title'>
             <h1>הוספת בית</h1>
           </div>
-          <div className='Info'>חבר גרעין אחראי : {user.firstName + " " + user.lastName}</div>
-          <div className='add-group-title'>
+         
+          <div className='add-house-semi-title'>
             <h2>אנא מלא את הפרטים : </h2>
           </div>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -251,9 +256,15 @@ const AddHousePage = () => {
 
 
               {(selectedCity && selectedArea) && (
+                <>
+                {errorMessage && 
+                (<div className="error_msg" style={{color: "red" , margin: "auto"}}>
+                  <p>חסר שדות חובה</p>
+                </div>)}
                 <div className='login_Buttons'>
                 <button type="submit" onClick={onSubmit} className='button-login' >צור בית</button>
                 </div>
+                </>
               )}
             </Form>
           </Formik>
