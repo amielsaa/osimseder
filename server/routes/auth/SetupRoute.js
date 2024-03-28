@@ -12,8 +12,8 @@ router.post('/setup', async (req,res) => {
         await setupSchools();
         await setupStudents();
         await setupStaffs();
-        await verifyUsers();
-        await setupGroups();
+        //await verifyUsers();
+        //await setupGroups();
         res.json('DONE')
 
     }catch(error) {
