@@ -36,7 +36,7 @@ function EditHousePage() {
 
     const getHouseInfo = async () => {
       const houseInfo = await getHouseById(id);
-      initialValues.areaName = houseInfo.areaName;
+      initialValues.areaName = houseInfo.areaId;
       initialValues.address = houseInfo.address;
       initialValues.residentLastName = houseInfo.residentLastName;
       initialValues.residentFirstName = houseInfo.residentFirstName;
@@ -69,7 +69,7 @@ function EditHousePage() {
         getHouseInfo();
     },[])
 
-   
+
 
 
     const validationSchema = Yup.object().shape({
@@ -90,15 +90,20 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
-      data.areaId = data.areaName;
-      data.residentPhoneNum = data.phoneNumber;
-      data.residentAlternatePhoneNum = data.alternativeNumber;
-     
-        //take all the data and edit it in the db
-      const res = updateHouse(data,id);
-      if(res) {
-        navigate(`/HousePage/${id}`)
+      if(data.areaName.length !== 0) {
+        data.areaId = data.areaName;
+        data.residentPhoneNum = data.phoneNumber;
+        data.residentAlternatePhoneNum = data.alternativeNumber;
+        if(user.role === 'TeamOwner') {
+          delete data.areaId;
+        }
+          //take all the data and edit it in the db
+        const res = updateHouse(data,id);
+        if(res) {
+          navigate(`/HousePage/${id}`)
+        }
       }
+
     };
 
     return (
@@ -110,14 +115,14 @@ function EditHousePage() {
               <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
             </span>
             <div className="main-content-Add-Task">
-    
+
               <div className='add-task-title'>
                 <h1>עריכת בית</h1>
               </div>
-    
+
               <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 <Form>
-                    {user.role !== "TeamOwner" ? 
+                    {user.role !== "TeamOwner" ?
                     (<div>
                         <label htmlFor="areaName"> בחר שכונה : </label> {/*Amiel - Change that to the initial value*/}
                         <Field as="select" id="areaName" name="areaName">
@@ -187,7 +192,7 @@ function EditHousePage() {
                   <label htmlFor="membersNeeded">  גודל קבוצה נחוץ: </label>
                   <Field as="select" id="membersNeeded" name="membersNeeded">
                     <option value="">בחר גודל קבוצה נחוץ</option> {/*Amiel - Change that to the initial value*/}
-                    
+
                     {Array.from({ length: 7 }, (_, index) => index + 2).map((size) => (
                       <option key={size} value={size}>{size}</option>
                     ))}
@@ -201,13 +206,13 @@ function EditHousePage() {
                     <Field as="textarea" id="freeText" name="freeText"/>
                     <ErrorMessage name="freeText" component="span" />
                 </div>
-                 
+
                 <div className='Button-Div'>
                     <button type="submit" className='RegisterButton'>ערוך פרטי בית</button>
                 </div>
                 </Form>
               </Formik>
-    
+
             </div>
           </div>
           <Footer />
