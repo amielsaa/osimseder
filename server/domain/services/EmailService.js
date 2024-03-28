@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 class EmailLogic {
 
     async sendVerificationEmail(email, token) {
-        const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
+        const verificationLink = `http://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
         console.log(verificationLink);
         await transporter.sendMail({
             to: email,
