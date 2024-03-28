@@ -13,7 +13,7 @@ const Login = () => {
   const [displayCode, setDisplayCode] = useState(false);
   const { URL } = useContext(DataContext);
   const [error,setError] = useState('')
-  const {setUser} = useContext(DataContext);
+  const {setUser, setLoginRefresh} = useContext(DataContext);
 
   const initialValues = {
     email: '',
@@ -40,8 +40,8 @@ const Login = () => {
     
     const data = {
       email: email,
-      password,
-      code,
+      password: password,
+      code: code,
     };
 
     axios.post("http://localhost:3001/auth/login", data).then((res) => {
@@ -51,6 +51,7 @@ const Login = () => {
                 localStorage.setItem("accessToken",res.data.token);
                 //res.data = { token: accessToken,role:'Student', user:student, id: student.id }
                 setUser(res.data.user.dataValues);
+                setLoginRefresh(true);
                 navigate("/Home");
             }
         })

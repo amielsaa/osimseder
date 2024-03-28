@@ -63,12 +63,7 @@ const Group = ({ groupId }) => {
           setShowConfirmation={setShowConfirmation}
         />
       )}
-      {/* {showConfirm && (
-        <ConfirmMessage
-          confirmationMessage={`הצטרפת לקבוצה ${selectedGroupId} בהצלחה`}
-          handleConfirm={() => navigate(`GroupPage/${selectedGroupId}`)}
-        />
-      )} */}
+    
     </>
   );
 }

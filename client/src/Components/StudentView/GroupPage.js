@@ -76,7 +76,7 @@ const GroupPage = () => {
         <div className='main_page_content'>
 
           {/* Content to conditionally hide */}
-          {user.role !== 'Student' || user.groupId !== null && (
+          {(user.role !== 'Student' || (user.role === "Student" && user.groupId !== null)) && (
             <>
               <div className='group-title'>
                 <h1>קבוצה: {id}</h1>
