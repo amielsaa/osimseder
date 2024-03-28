@@ -18,12 +18,12 @@ function EditHousePage() {
 
     const getHouseInfo = async () => {
       const houseInfo = await getHouseById(id);
-      initialValues.areaName = houseInfo.areaName;
+      initialValues.area = houseInfo.areaName;
       initialValues.address = houseInfo.address;
       initialValues.residentLastName = houseInfo.residentLastName;
       initialValues.residentFirstName = houseInfo.residentFirstName;
-      initialValues.phoneNumber = houseInfo.residentPhoneNum;
-      initialValues.alternativeNumber = houseInfo.residentAlternatePhoneNum;
+      initialValues.residentPhoneNum = houseInfo.residentPhoneNum;
+      initialValues.residentAlternatePhoneNum = houseInfo.residentAlternatePhoneNum;
       initialValues.residentGender = houseInfo.residentGender;
       initialValues.languageNeeded = houseInfo.languageNeeded;
       initialValues.numberOfRooms = houseInfo.numberOfRooms;
@@ -52,12 +52,12 @@ function EditHousePage() {
     },[])
 
     const initialValues = {
-        areaName:"",
+        area:"",
         address: "",
         residentFirstName: "",
         residentLastName: "",
-        phoneNumber:"",
-        alternativeNumber:"",
+        residentPhoneNum:"",
+        residentAlternatePhoneNum:"",
         residentGender:"",
         languageNeeded:"",
         numberOfRooms:"",
@@ -70,10 +70,10 @@ function EditHousePage() {
         address: Yup.string(),
         residentFirstName: Yup.string().required('שם דייר נדרש'),
         residentLastName: Yup.string().required('שם משפחה נדרש'),
-        phoneNumber: Yup.string().
+        residentPhoneNum: Yup.string().
             required("מספר נייד נדרש")
             .matches(/^05\d{8}$/, "מספר לא תקין"),
-        alternativeNumber: Yup.string()
+        residentAlternatePhoneNum: Yup.string()
             .matches(/^05\d{8}$/, "מספר לא תקין"),
         residentGender: Yup.string(),
         languageNeeded: Yup.string(),
@@ -110,8 +110,8 @@ function EditHousePage() {
                 <Form>
                     {user.role !== "TeamOwner" ? 
                     (<div>
-                        <label htmlFor="areaName"> בחר שכונה : </label> {/*Amiel - Change that to the initial value*/}
-                        <Field as="select" id="areaName" name="areaName">
+                        <label htmlFor="area"> בחר שכונה : </label> {/*Amiel - Change that to the initial value*/}
+                        <Field as="select" id="area" name="area">
                             <option value="">בחר שכונה</option>
                             {areas && (
                                 <>
@@ -123,7 +123,7 @@ function EditHousePage() {
                                 </>
                             )}
                         </Field>
-                        <ErrorMessage name="areaName" component="span" />
+                        <ErrorMessage name="area" component="span" />
                     </div>)
                     : ""}
                     <div>
@@ -142,14 +142,14 @@ function EditHousePage() {
                         <ErrorMessage name="residentLastName" component="span" />
                     </div>
                     <div>
-                        <label htmlFor="phoneNumber">    מספר פלאפון  :</label>
-                        <Field id="phoneNumber" name="phoneNumber"  />
-                        <ErrorMessage name="phoneNumber" component="span" />
+                        <label htmlFor="residentPhoneNum">    מספר פלאפון  :</label>
+                        <Field id="residentPhoneNum" name="residentPhoneNum"  />
+                        <ErrorMessage name="residentPhoneNum" component="span" />
                     </div>
                     <div>
-                        <label htmlFor="alternativeNumber">   מספר חלופי :</label>
-                        <Field id="alternativeNumber" name="alternativeNumber" />
-                        <ErrorMessage name="alternativeNumber" component="span" />
+                        <label htmlFor="residentAlternatePhoneNum">   מספר חלופי :</label>
+                        <Field id="residentAlternatePhoneNum" name="residentAlternatePhoneNum" />
+                        <ErrorMessage name="residentAlternatePhoneNum" component="span" />
                     </div>
 
                     <div>

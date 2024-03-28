@@ -5,7 +5,8 @@ const {usersLogger} = require('../utils/logger');
 class StaffStudentLogic {
 
 // update a student
-// Input: email - the email of the student
+// Input: studentEmail - the email of the student
+//        requesterEmail - the email of the user who is updating the student
 //        updatedFields - the fields to update
 // Output: the updated student object
     async updateStudent(studentEmail, requesterEmail, updatedFields) {

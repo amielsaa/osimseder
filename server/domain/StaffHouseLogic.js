@@ -12,9 +12,10 @@ class StaffHouseLogic {
 // Output: the created house object
     async createHouse(newFields, userEmail) {
         try {
+
             housesLogger.info("Initiating Create House By email: " + userEmail);
             argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
-            argumentChecker.checkByKeys(newFields, "newFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area"]);
+            argumentChecker.checkByKeys(newFields, "newFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "city", "area"]);
 
             newFields["cityId"] = await string2Int.getCityId(newFields["city"]);
             newFields["areaId"] = await string2Int.getAreaId(newFields["area"]);
@@ -285,8 +286,7 @@ class StaffHouseLogic {
         try {
             housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
             argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
-            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area"]);
-
+            argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "area"]);
             const house = await Houses.findOne({
                 where: { id: houseId }
             });

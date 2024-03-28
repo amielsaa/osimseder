@@ -66,8 +66,7 @@ router.delete('/deleteStudent/:studentId', validateToken, async (req, res) => {
     }
 });
 
-// Endpoint to update a student by email
-// by staff
+// Endpoint to update a student by student
 router.put('/updateStudent/:email', validateToken, async (req, res) => {
     const studentEmail = req.params.email;
     const updatedData = req.body;
