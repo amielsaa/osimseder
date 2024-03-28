@@ -138,7 +138,7 @@ const AddHousePage = () => {
                 <ErrorMessage name="city" component="span" />
               </div>
               )}
-              {(user.role === "CityManager" || user.role === "AreaManager") && (
+              {(user.role === "CityManager" || user.role === "AreaManager"|| user.role === "TeamOwner" ) && (
                 <div>
                 <label htmlFor="city"> עיר(*): </label>
                 <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
