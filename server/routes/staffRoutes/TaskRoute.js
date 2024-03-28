@@ -6,7 +6,7 @@ const StaffTaskLogic = require('../../domain/StaffTaskLogic')
 const {Groups, Staffs, Areas, Schools, Cities, Houses, Tasks} = require('../../models/');
 
 // Create a new task (POST)
-router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
         
         const houseId = req.body.houseId;
@@ -24,7 +24,7 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 });
 
 // Get all tasks by house (GET)
-router.get('/:houseId', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+router.get('/:houseId', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         const houseId = req.params.houseId;
 
@@ -36,7 +36,7 @@ router.get('/:houseId', validateToken, validateAccess(accessGroup.B), async (req
 });
 
 // Get a single task by ID (GET)
-router.post('/:id', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+router.post('/:id', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         const id = req.params.id;
 
