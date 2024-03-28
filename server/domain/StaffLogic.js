@@ -39,6 +39,40 @@ class StaffLogic {
         }
     }
 
+    async getStaffName(staffEmail) {
+        try {
+            if(staffEmail==null){
+                throw new Error('Staff name is null.');
+            }
+            if(staffEmail==undefined){
+                throw new Error('Staff name is undefined.');
+            }
+            const staffMember = await Staffs.findOne({
+                where: {email: staffEmail}
+            });
+            if (!staffMember) {
+                throw new Error('Couldn\'t find staff member by that email.');
+            }
+
+            const responseData = {
+                email: staffMember.dataValues.email,
+                fullName: `${staffMember.dataValues.firstName} ${staffMember.dataValues.lastName}`
+            };
+
+            // const responseData = {
+            //     id: group.id,
+            //     students: group.dataValues.students,
+            //     memberCount: group.dataValues.students.length,
+            //     capacity: group.capacity
+            // };
+    
+            return responseData;
+
+        } catch (error) {
+            throw new Error('Failed to find staff member by email: ' + error);
+        }
+    }
+
 }
 
 module.exports = new StaffLogic();
