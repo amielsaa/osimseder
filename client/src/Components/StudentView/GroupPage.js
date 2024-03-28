@@ -18,7 +18,11 @@ const GroupPage = () => {
   const { user } = useContext(DataContext)
   const navigate = useNavigate();
 
-
+  useEffect(() => {
+    if(!(localStorage.getItem('accessToken'))){
+      navigate('/404')
+    }
+  },[])
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
   const [studentList, setStudentsList] = useState([])

@@ -24,6 +24,7 @@ export const DataProvider = ({children}) => {
                 };
             });
         }
+        
     }, [loginRefresh])
    
     const updateUserGroupId = (newGroupId) => {
