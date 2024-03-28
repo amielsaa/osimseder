@@ -12,18 +12,19 @@ export const DataProvider = ({children}) => {
     // , groupId:"002" })
     
     const [user,setUser] = useState({});
-    
+    const [loginRefresh, setLoginRefresh] = useState(false);
+
     useEffect(() => {
         if(localStorage.getItem("accessToken")) {
             axios.get(`http://localhost:3001/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
                 if(res.data.error) alert(res.data.error);
                 else {
                     setUser(res.data.user.dataValues);
-                    console.log(res.data.user.dataValues);
+                    //window.location.reload();
                 };
             });
         }
-    }, [])
+    }, [loginRefresh])
    
     const updateUserGroupId = (newGroupId) => {
         setUser((prevUser) => ({
@@ -34,7 +35,7 @@ export const DataProvider = ({children}) => {
     const navigate = useNavigate();
     return (
         <DataContext.Provider value = { {
-            user, setUser, navigate , updateUserGroupId
+            user, setUser, navigate , updateUserGroupId,loginRefresh, setLoginRefresh
         }}>
             {children}
             </DataContext.Provider>
