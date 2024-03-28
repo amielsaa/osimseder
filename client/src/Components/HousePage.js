@@ -126,7 +126,6 @@ const HousePage = () => {
     setGroupsRequest()
     setHouseRequest();
     setTasksRequest();
-    console.log(house)
   }, []);  // Dependency array ensures it runs when the id changes
 
 

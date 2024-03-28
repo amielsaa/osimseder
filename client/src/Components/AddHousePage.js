@@ -116,7 +116,11 @@ const AddHousePage = () => {
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
 
-              <div>
+              
+
+
+              {user.role === "Admin" && (
+                <div>
                 <label htmlFor="city"> עיר(*): </label>
                 <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
                   <option value="">בחר עיר</option>
@@ -125,7 +129,18 @@ const AddHousePage = () => {
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>
+              )}
+              {(user.role === "CityManager" || user.role === "AreaManager") && (
+                <div>
+                <label htmlFor="city"> עיר(*): </label>
+                <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
+                  <option value="">בחר עיר</option>
+                  <option value={user.cityName}>{user.cityName}</option>
 
+                </Field>
+                <ErrorMessage name="city" component="span" />
+              </div>
+              )}
 
               {selectedCity && (
                 <div>
