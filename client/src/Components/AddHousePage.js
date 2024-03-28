@@ -187,7 +187,7 @@ const AddHousePage = () => {
                     </div>
                     <div>
                         <label htmlFor="secondPhoneNumber">   מספר  חלופי : </label>
-                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={phoneNumber}/>
+                        <Field id="secondPhoneNumber" name="secondPhoneNumber"  onChange={(e) => {setSecondPhoneNumber(e.target.value)}} value={secondPhoneNumber}/>
                         <ErrorMessage name="secondPhoneNumber" component="span" />
                     </div>
                     
