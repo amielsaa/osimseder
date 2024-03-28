@@ -40,7 +40,7 @@ class StaffHouseLogic {
 // Output: an array of all houses
     async getAllHousesOfCity(userEmail) {
         try {
-            houseLogger.debug("Initiate get all houses of city by email: " + userEmail);
+            housesLogger.debug("Initiate get all houses of city by email: " + userEmail);
             argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
             const user = await Staffs.findOne({
@@ -281,10 +281,10 @@ class StaffHouseLogic {
 //        updatedFields - object with the fields to update
 //        userEmail - the email of the user updating the house
 // Output: the updated house object
-    async updateHouse(houseId, updatedFields, userEmail) {
+    async updateHouse(houseId, updatedFields, requesterEmail) {
         try {
-            housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + userEmail);
-            argumentChecker.checkSingleArugments([houseId, userEmail], ["houseId", "userEmail"]);
+            housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
+            argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
             argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "languageNeeded", "city", "area"]);
 
             const house = await Houses.findOne({
@@ -301,11 +301,11 @@ class StaffHouseLogic {
             }
             await house.save();
 
-            housesLogger.info("Successfully updated house by id: " + houseId + ". By email: " + userEmail);        
+            housesLogger.info("Successfully updated house by id: " + houseId + ". By email: " + requesterEmail);        
             return house;
 
         } catch (error) {
-            housesLogger.error("Failed to update house by id: " + houseId + ". By email: " + userEmail + ". Reason: " + error);
+            housesLogger.error("Failed to update house by id: " + houseId + ". By email: " + requesterEmail + ". Reason: " + error);
             throw new Error('Failed to update a house by id: ' + error);
         }
     }

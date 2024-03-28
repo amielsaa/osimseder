@@ -153,8 +153,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.B), async (req, res
     try {
         const id = req.params.id;
         const updatedFields = req.body;
+        const requesterEmail = req.user.email;
 
-        const newHouse = await StaffHouseLogic.updateHouse(id, updatedFields);
+        const newHouse = await StaffHouseLogic.updateHouse(id, updatedFields, requesterEmail);
         res.json(newHouse);
     } catch (err) {
         res.status(400).json({ message: err.message });

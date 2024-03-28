@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
 const RegistrationLogic = require('./RegistrationLogic');
-const { userLogger, usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 class UserManagementLogic {
@@ -13,13 +13,13 @@ class UserManagementLogic {
 // Output: a list of all students
     async getAllStudents() {
         try {
-            userLogger.debug('Getting all students');
+            usersLogger.debug('Getting all students');
             const students = await Students.findAll();
 
-            userLogger.debug('Successfully found all students');
+            usersLogger.debug('Successfully found all students');
             return students;
         } catch (error) {
-            userLogger.error('Failed to fetch students: ' + error);
+            usersLogger.error('Failed to fetch students: ' + error);
             throw new Error('Failed to fetch students');
         }
     }
@@ -28,13 +28,13 @@ class UserManagementLogic {
 // Output: a list of all staffs
     async getAllStaffs() {
         try {
-            userLogger.debug('Getting all staffs');
+            usersLogger.debug('Getting all staffs');
             const staffs = await Staffs.findAll();
 
-            userLogger.debug('Successfully found all staffs');
+            usersLogger.debug('Successfully found all staffs');
             return staffs;
         } catch (error) {
-            userLogger.error('Failed to fetch staffs: ' + error);
+            usersLogger.error('Failed to fetch staffs: ' + error);
             throw new Error('Failed to fetch staffs');
         }
     }
@@ -44,8 +44,8 @@ class UserManagementLogic {
 // Output: the user object
     async getUserByEmail(email) {
         try {
-            userLogger.debug('Getting user by email: ' + email);
-            argumentChecker.checkSingleArugments([email], ['email']);
+            usersLogger.debug('Getting user by email: ' + email);
+            await argumentChecker.checkSingleArugments([email], ["email"]);
 
             const student = await Students.findOne({
                 where: { email: email }
@@ -58,18 +58,22 @@ class UserManagementLogic {
                     throw new Error('No user with this email');
                 }
                 else {
+                    console.log("YOAV2")
                     const staffJson = await formatStaffValues(staff);
+                    console.log("YOAV3")
                     return staffJson;
                 }
             }
             else {
+                console.log("HERE3")
                 const studentJson = await formatStudentValues(student);
+                console.log("HERE4")
                 return studentJson;
             }
 
-            userLogger.debug('Successfully found user by email: ' + email);
+            usersLogger.debug('Successfully found user by email: ' + email);
         } catch (error) {
-            userLogger.error('Failed to fetch user: ' + error);
+            usersLogger.error('Failed to fetch user: ' + error);
             throw new Error('Failed to fetch user: ' + error);
         }
     }
@@ -80,7 +84,7 @@ class UserManagementLogic {
 // Output: none
     async deleteStudent(studentId, requesterEmail) {
         try {
-            userLogger.info('Deleting student with id: ' + studentId + ". Requester email: " + requesterEmail);
+            usersLogger.info('Deleting student with id: ' + studentId + ". Requester email: " + requesterEmail);
             argumentChecker.checkSingleArugments([studentId, requesterEmail], ['studentId', 'requesterEmail']);
 
             const student = await Students.findByPk(studentId);
@@ -88,10 +92,10 @@ class UserManagementLogic {
                 throw new Error('Student not found');
             }
             await student.destroy();
-            userLogger.info('Successfully deleted student with id: ' + studentId + ". Requester email: " + requesterEmail);
+            usersLogger.info('Successfully deleted student with id: ' + studentId + ". Requester email: " + requesterEmail);
 
         } catch (error) {
-            userLogger.error('Failed to delete student: ' + error);
+            usersLogger.error('Failed to delete student: ' + error);
             throw new Error('Failed to delete student');
         }
     }

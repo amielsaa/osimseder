@@ -1,5 +1,5 @@
 const {Houses, Tasks} = require('../models');
-const { houseLogger } = require('../utils/logger');
+const { housesLogger } = require('../utils/logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 class StaffTaskLogic {
@@ -14,7 +14,7 @@ class StaffTaskLogic {
 // Output: the task object
     async createTask(type, room, freeText, status, houseId, userEmail) {
         try {
-            houseLogger.info("Initiate create task for houseId: " + houseId + ". By email: " + userEmail);
+            housesLogger.info("Initiate create task for houseId: " + houseId + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments(
                 [type, room, freeText, status, houseId],
                 ["type", "room", "freeText", "status", "houseId"] );
@@ -31,11 +31,11 @@ class StaffTaskLogic {
                 throw new Error('Couldn\'t create a task (tasks.create).');
             }
 
-            houseLogger.info("Successfully created task for houseId: " + houseId + ". In room: " + room + ". Of type: " + type+ ". By email: " + userEmail);
+            housesLogger.info("Successfully created task for houseId: " + houseId + ". In room: " + room + ". Of type: " + type+ ". By email: " + userEmail);
             return task;
 
         } catch (error) {
-            houseLogger.error("Failed to create task for houseId: " + houseId + ". By email: " + userEmail);
+            housesLogger.error("Failed to create task for houseId: " + houseId + ". By email: " + userEmail);
             throw new Error('Failed to create task: ' + error);
         }
     }
@@ -47,7 +47,7 @@ class StaffTaskLogic {
     async getAllTasksByHouse(houseId) {
         try {
             argumentChecker.checkByKeys([houseId], ["houseId"]);
-            houseLogger.debug('Getting all tasks by houseId: ' + houseId);
+            housesLogger.debug('Getting all tasks by houseId: ' + houseId);
 
             const house = await Houses.findOne({
                 where: {id: houseId}
@@ -73,11 +73,11 @@ class StaffTaskLogic {
                 return result;
             }, []);
 
-            houseLogger.debug('Successfully found all tasks by houseId: ' + houseId);
+            housesLogger.debug('Successfully found all tasks by houseId: ' + houseId);
             return tasksByRoom;
 
         } catch (error) {
-            houseLogger.error('Failed to get all tasks by houseId: ' + error);
+            housesLogger.error('Failed to get all tasks by houseId: ' + error);
             throw new Error('Failed to get all tasks by houseId: ' + error);
         }
     }
@@ -87,7 +87,7 @@ class StaffTaskLogic {
 // Output: the task object
     async getTaskById(id) {
         try {
-            houseLogger.debug(" Getting a task by id: " + id);
+            housesLogger.debug(" Getting a task by id: " + id);
             argumentChecker.checkSingleArugments([id], ["id"]);
 
             const task = await Tasks.findOne({
@@ -97,11 +97,11 @@ class StaffTaskLogic {
                 throw new Error('Couldn\'t find a task with that id.');
             }
 
-            houseLogger.debug("Successfully found a task by id: " + id);
+            housesLogger.debug("Successfully found a task by id: " + id);
             return task;
 
         } catch (error) {
-            houseLogger.error("Failed to get a task by id: " + error);
+            housesLogger.error("Failed to get a task by id: " + error);
             throw new Error('Failed to get a task by id: ' + error);
         }
     }
@@ -113,7 +113,7 @@ class StaffTaskLogic {
 // Output: the updated task object
     async updateTask(id, updatedFields, userEmail) {
         try {
-            houseLogger.info("Updating a task by id: " + id + ". By email: " + userEmail);
+            housesLogger.info("Updating a task by id: " + id + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([id, userEmail], ["id", "userEmail"]);
             argumentChecker.checkByKeys(updatedFields, "updatedFields", ["type", "room", "status"]);
 
@@ -132,11 +132,11 @@ class StaffTaskLogic {
 
             await task.save();
 
-            houseLogger.info("Successfully updated a task by id: " + id + ". By email: " + userEmail);
+            housesLogger.info("Successfully updated a task by id: " + id + ". By email: " + userEmail);
             return task;
 
         } catch (error) {
-            houseLogger.error("Failed to update a task by id: " + error);
+            housesLogger.error("Failed to update a task by id: " + error);
             throw new Error('Failed to update a task by id: ' + error);
         }
     }
@@ -148,7 +148,7 @@ class StaffTaskLogic {
 // Output: a message of success
     async deleteTask(id, userEmail) {
         try {
-            houseLogger.info("Deleting a task by id: " + id + ". By email: " + userEmail);
+            housesLogger.info("Deleting a task by id: " + id + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([id, userEmail], ["id", "userEmail"]);
 
             const task = await Tasks.findOne({
@@ -161,11 +161,11 @@ class StaffTaskLogic {
                 where: { id: task.id }
             });
 
-            houseLogger.info("Successfully deleted a task by id: " + id + ". By email: " + userEmail);
+            housesLogger.info("Successfully deleted a task by id: " + id + ". By email: " + userEmail);
             return { success: true, message: 'Task deleted successfully' };
 
         } catch (error) {
-            houseLogger.error("Failed to delete a task by id: " + error);
+            housesLogger.error("Failed to delete a task by id: " + error);
             throw new Error('Failed to delete task: ' + error);
         }
     }
@@ -177,10 +177,10 @@ module.exports = new StaffTaskLogic();
 
 
     // backup
-    // TODO IF RETURNING ADD LOGGER AND CHECKARGUMENTS
+    // TODO IF RETURNING ADD LOGGER AND checkByKeys
     // async getAllTasksByHouse(houseId) {
     //     try {
-    //         this.checkArguments([houseId],
+    //         this.checkSingleArugments([houseId],
     //             ["houseId"]);
     //         const house = await Houses.findOne({
     //             where: {id: houseId}

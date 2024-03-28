@@ -18,7 +18,7 @@ class LoginLogic {
     async verifyLogin(email, givenPassword) {
         try {
             usersLogger.info("Initiating Login for email: " + email);
-            argumentChecker.checkArguments([email, givenPassword], ["email", "givenPassword"]);
+            argumentChecker.checkSingleArugments([email, givenPassword], ["email", "givenPassword"]);
 
             const user = await Students.findOne({
                 where: { email: email }

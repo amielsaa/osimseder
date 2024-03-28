@@ -19,7 +19,7 @@ class EmailService {
 
     async sendVerificationEmail(email, token) {
         usersLogger.info("Intiating sending verification email to: " + email);
-        argumentChecker.checkArguments([email, token], ["email", "token"]);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
         const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
         console.log(verificationLink);
@@ -35,7 +35,7 @@ class EmailService {
     async verifyEmailAndToken(email, token) {
         try {
             usersLogger.info("Initiating verification of email (for verify register) and token for email: " + email);
-            argumentChecker.checkArguments([email, token], ["email", "token"]);
+            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
             // Decrypt the email here
             const decoded_email = decodeURIComponent(email);
@@ -86,7 +86,7 @@ class EmailService {
 
     async sendResetPasswordEmail(email, token) {
         usersLogger.info("Initiating sending reset password email to: " + email);
-        argumentChecker.checkArguments([email, token], ["email", "token"]);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
         const resetLink = `https://localhost:3001/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
         let isStudent = false;
@@ -116,7 +116,7 @@ class EmailService {
     async verifyEmailForPassword(email, token) {
         try {
             usersLogger.info("Initiating verification of email (to change password) and token for email: " + email);
-            argumentChecker.checkArguments([email, token], ["email", "token"]);
+            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
             const decoded_email = decodeURIComponent(email);
             const student = await Students.findOne({

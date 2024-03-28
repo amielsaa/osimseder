@@ -9,7 +9,7 @@ class ArgumentChecker {
         }
         if (parameterKeys) {
             for (let i = 0; i < parameterKeys.length; i++) {
-                keyName = parameterKeys[i];
+                let keyName = parameterKeys[i];
                 const param = parameter[keyName];
                 if (param === undefined || param === null) {
                     throw new Error(`Value ${keyName} of argument ${parameterName} is undefined or null`);
@@ -18,10 +18,10 @@ class ArgumentChecker {
         }
     }
 
-    async checkSingleArugments(parameters, parametersName) {
+    async checkSingleArugments(parameters, parametersNames) {
         for (let i = 0; i < parameters.length; i++) {
             if (parameters[i] === undefined || parameters[i] === null) {
-                throw new Error(`Parameter ${parametersName[i]} is undefined or null`);
+                throw new Error(`Parameter ${parametersNames[i]} is undefined or null`);
             }
         }
     }
