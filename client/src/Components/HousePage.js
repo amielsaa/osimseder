@@ -24,7 +24,7 @@ const HousePage = () => {
   // for selecting memebers to the group
   const [memberAChoosingStatus,setMemberAChoosingStatus] = useState(false)
   const [memberBChoosingStatus,setMemberBChoosingStatus] = useState(false)
-  const [selectedMemberA,setSelectedMemberA] = useState('')
+  const [selectedMemberA,setSelectedMemberA] = useState("")
   const [selectedMemberB,setSelectedMemberB] = useState('')
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
@@ -47,12 +47,13 @@ const HousePage = () => {
   }
 
   const handleAssignMemberA = async () => {
-    const res = await assignTeamOwner(dropdownOptionsA[selectedMemberA].email, 'A', id);
-    if(res) {
-      setFirstMember(dropdownOptionsA[selectedMemberA])
-      setMemberAChoosingStatus(false)
+    if(selectedMemberA.length !== 0) {
+      const res = await assignTeamOwner(dropdownOptionsA[selectedMemberA].email, 'A', id);
+      if(res) {
+        setFirstMember(dropdownOptionsA[selectedMemberA])
+        setMemberAChoosingStatus(false)
+      }
     }
-
   }
   const prepareToAssignTeamOwnerB = async () => {
     const res = await fetchTeamOwners(user.cityName);
@@ -71,11 +72,14 @@ const HousePage = () => {
   };
   
   const handleAssignMemberB = async () => {
-    const res = await assignTeamOwner(dropdownOptionsA[selectedMemberB].email, 'B', id);
-    if(res) {
-      setSecondMember(dropdownOptionsA[selectedMemberB]);
-      setMemberBChoosingStatus(false);
+    if(selectedMemberB.length !== 0) {
+      const res = await assignTeamOwner(dropdownOptionsA[selectedMemberB].email, 'B', id);
+      if(res) {
+        setSecondMember(dropdownOptionsA[selectedMemberB]);
+        setMemberBChoosingStatus(false);
+      }
     }
+    
     //Amiel - you need to put selected Member B in the database, as the teamOwner responsible for this house
 
   };
@@ -156,7 +160,6 @@ const HousePage = () => {
 
   const setTeamOwners = async () => {
     await setHouseRequest();
-    console.log(house);
 
     const teamOwner_1 = await fetchTeamOwnerInfo(house.teamOwnerEmail);
     //const teamOwner_2 = await fetchTeamOwnerInfo(house.teamOwnerEmail_2);

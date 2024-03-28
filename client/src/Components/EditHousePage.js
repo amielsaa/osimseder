@@ -35,18 +35,18 @@ function EditHousePage() {
     };
 
     const getHouseInfo = async () => {
-        const houseInfo = await getHouseById(id);
-        initialValues.areaName = houseInfo.areaName;
-        initialValues.address = houseInfo.address;
-        initialValues.residentLastName = houseInfo.residentLastName;
-        initialValues.residentFirstName = houseInfo.residentFirstName;
-        initialValues.phoneNumber = houseInfo.residentPhoneNum;
-        initialValues.alternativeNumber = houseInfo.residentAlternatePhoneNum;
-        initialValues.residentGender = houseInfo.residentGender;
-        initialValues.languageNeeded = houseInfo.languageNeeded;
-        initialValues.numberOfRooms = houseInfo.numberOfRooms;
-        initialValues.membersNeeded = houseInfo.membersNeeded;
-        initialValues.freeText = houseInfo.freeText;
+      const houseInfo = await getHouseById(id);
+      initialValues.areaName = houseInfo.areaId;
+      initialValues.address = houseInfo.address;
+      initialValues.residentLastName = houseInfo.residentLastName;
+      initialValues.residentFirstName = houseInfo.residentFirstName;
+      initialValues.phoneNumber = houseInfo.residentPhoneNum;
+      initialValues.alternativeNumber = houseInfo.residentAlternatePhoneNum;
+      initialValues.residentGender = houseInfo.residentGender;
+      initialValues.languageNeeded = houseInfo.languageNeeded;
+      initialValues.numberOfRooms = houseInfo.numberOfRooms;
+      initialValues.membersNeeded = houseInfo.membersNeeded;
+      initialValues.freeText = houseInfo.freeText;
     }
 
     const getAreas = async () => {
@@ -90,15 +90,20 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
+      if(data.areaName.length !== 0) {
         data.areaId = data.areaName;
         data.residentPhoneNum = data.phoneNumber;
         data.residentAlternatePhoneNum = data.alternativeNumber;
-
-        //take all the data and edit it in the db
-        const res = updateHouse(data, id);
-        if (res) {
-            navigate(`/HousePage/${id}`)
+        if(user.role === 'TeamOwner') {
+          delete data.areaId;
         }
+          //take all the data and edit it in the db
+        const res = updateHouse(data,id);
+        if(res) {
+          navigate(`/HousePage/${id}`)
+        }
+      }
+      
     };
 
     return (
