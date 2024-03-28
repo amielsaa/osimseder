@@ -15,6 +15,11 @@ const AddGroupPage = () => {
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
   const [schoolsList, setSchoolsList] = useState([]);
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
   const initialValues = {
     city: '',
     school: '',

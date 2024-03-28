@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -21,6 +21,11 @@ function AddTaskPage() {
      
 
     };
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
 
 
     const validationSchema = Yup.object().shape({
@@ -71,9 +76,9 @@ function AddTaskPage() {
                         <label htmlFor="taskType">סוג מטלה: </label>
                         <Field as="select" id="taskType" name="taskType">
                             <option value="">בחר סוג מטלה</option>
-                            <option value="cleaning">ניקיון</option>
-                            <option value="painting">צביעה</option>
-                            <option value="Other">אחר</option>
+                            <option value="ניקיון">ניקיון</option>
+                            <option value="צביעה">צביעה</option>
+                            <option value="אחר">אחר</option>
                         </Field>
                         <ErrorMessage name="taskType" component="span" />
                     </div>

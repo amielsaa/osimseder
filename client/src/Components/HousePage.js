@@ -26,6 +26,11 @@ const HousePage = () => {
   const [memberBChoosingStatus,setMemberBChoosingStatus] = useState(false)
   const [selectedMemberA,setSelectedMemberA] = useState('')
   const [selectedMemberB,setSelectedMemberB] = useState('')
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
 
   const prepareToAssignTeamOwnerA = () => {
     setMemberBChoosingStatus(false);

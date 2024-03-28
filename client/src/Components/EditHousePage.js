@@ -15,6 +15,11 @@ function EditHousePage() {
     const { id } = useParams()
     const {navigate,user} = useContext(DataContext);
     const [areas, setAreas] = useState([]);
+    useEffect(() => {
+      if(!(localStorage.getItem("accessToken"))){
+        navigate('/404')
+      }
+    })
     const initialValues = {
       areaName:"",
       address: "",
@@ -85,7 +90,6 @@ function EditHousePage() {
 
 
     const onSubmit = (data) => {
-     console.log(data)
         //take all the data and edit it in the db
       const res = updateHouse(data,id);
       if(res) {
