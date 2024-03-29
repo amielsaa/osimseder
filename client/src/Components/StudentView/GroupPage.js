@@ -17,12 +17,13 @@ const GroupPage = () => {
   const { id } = useParams();
   const { user } = useContext(DataContext)
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading
+
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
       navigate('/404')
     }
   })
-  
 
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
@@ -31,8 +32,6 @@ const GroupPage = () => {
   const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
   const [studentToRemove, setStudentToRemove] = useState('')
   const [groupInfo, setGroupInfo] = useState({});
-  const [loading, setLoading] = useState(true)
-
 
   const handleRemoveMember = (index) => {
     // Display the confirmation message
@@ -50,8 +49,6 @@ const GroupPage = () => {
         setStudentsList(updatedStudents);
       }
     }
-
-
     // Close the confirmation message
     setShowRemoveConfirmation(false);
     setStudentToRemove('')
@@ -60,18 +57,21 @@ const GroupPage = () => {
 
   const setGroupRequest = async () => {
     const group = await getGroupById(id);
-    console.log(group);
     setGroupInfo(group);
     setStudentsList(group.students);
+    setIsLoading(false); // Set loading to false when data is fetched
   }
 
   useEffect(() => {
     if (id !== '-1') {
       setGroupRequest();
-      setLoading(false)
     }
   }, [id])
 
+  // Render loading indicator if still loading
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -81,7 +81,6 @@ const GroupPage = () => {
         <span className='purple_circle'>
           <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
         </span>
-        
         <div className='main_page_content'>
 
          
@@ -90,7 +89,7 @@ const GroupPage = () => {
               <div className='group-title'>
                 <h1>קבוצה: {id}</h1>
               </div>
-              <div className='Info'>בית ספר : </div>
+              <div className='Info'>בית ספר : {groupInfo.schoolName} </div>
               <div className='Info'>בית משוייך :
                 {groupInfo && groupInfo.houseId && <FaHouseChimney className='house_for_group' onClick={() => { navigate(`/HousePage/${groupInfo.houseId}`) }} />}
               </div>
@@ -101,7 +100,7 @@ const GroupPage = () => {
                 {studentList.length > 0 ? (
                   studentList.map((student, index) => (
                     <div key={index} className='Group_Member'>
-                      <h4 onClick={() => {navigate(`/Personal/${student.encryptedEmail}`)}}>{student.fullname}</h4>
+                      <h4>{student.fullname}</h4>
                       {user.role !== 'Student' && (
                         <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
                       )}
@@ -123,8 +122,6 @@ const GroupPage = () => {
               <button className='move_to_groups_button' onClick={() => navigate('/groups')}>להצטרפות לקבוצה</button>
               </div>
           )}
-
-
         </div>
       </div>
 
