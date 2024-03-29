@@ -36,7 +36,6 @@ function AddGroupToHousePage() {
       }
     }
  
-
     useEffect(() => {
       setSchoolsRequest();
     }, [user])

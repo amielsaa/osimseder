@@ -11,7 +11,6 @@ const GroupListForHouse = ({ houseId, selectedSchool }) => {
 
 
   const setGroupsRequest = async () => {
-    
     const res = await getAllGroupsWithoutHouse(selectedSchool);
     setGroupIds(res);
   }
