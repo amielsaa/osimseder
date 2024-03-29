@@ -4,3 +4,4 @@
 /postgres
 /server/run-test-container.sh
 /server/down-run-test-container.sh
+/server/loggers/*
