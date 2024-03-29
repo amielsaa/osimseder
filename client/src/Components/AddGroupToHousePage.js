@@ -16,7 +16,7 @@ function AddGroupToHousePage() {
     const { id } = useParams();
     const { navigate , user } = useContext(DataContext)
     const [schoolOptions, setSchoolOptions] = useState([]);
-    const [selectedSchool, setSelectedSchool] = useState();
+    const [selectedSchool, setSelectedSchool] = useState('');
     useEffect(() => {
       if(!(localStorage.getItem("accessToken"))){
         navigate('/404')
