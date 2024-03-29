@@ -60,6 +60,7 @@ const GroupPage = () => {
 
   const setGroupRequest = async () => {
     const group = await getGroupById(id);
+    console.log(group);
     setGroupInfo(group);
     setStudentsList(group.students);
   }
@@ -100,7 +101,7 @@ const GroupPage = () => {
                 {studentList.length > 0 ? (
                   studentList.map((student, index) => (
                     <div key={index} className='Group_Member'>
-                      <h4>{student.fullname}</h4>
+                      <h4 onClick={() => {navigate(`/Personal/${student.encryptedEmail}`)}}>{student.fullname}</h4>
                       {user.role !== 'Student' && (
                         <button className='kick_student' onClick={() => handleRemoveMember(index)}>הסר</button>
                       )}
