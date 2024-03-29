@@ -15,7 +15,8 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
         const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const schoolId = req.body.schoolId;
-        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId);
+        const userEmail = req.user.email;
+        const newGroup = await staffGroupLogic.createGroup(groupSize, schoolId, userEmail);
 
         //no arguments needed
         //return group information (all the fields)
@@ -139,60 +140,6 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
     }
 });
 
-// // Get all groups related to team owner (GET)
-// router.get('/to', validateToken, validateAccess(accessGroup.B), async (req, res) => {
-//     try {
-//         const userEmail = req.user.email;
-
-//         //access email by : req.user.email
-//         //return all groups that related to this user email
-//         const groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
-        
-//         res.json(groups);
-        
-//         // res.json({groups: [
-//         //     {ID: '1', groupName:'stupidName', 
-//         //     students:['amiel@gmail.com','ari@gmail.com']},
-//         // ]});
-//     } catch (err) {
-//         res.json({ error: err.message });
-//     }
-// });
-
-// // Get all groups related to area manager (GET)
-// router.get('/am', validateToken, validateAccess(accessGroup.C), async (req, res) => {
-//     try {
-//         const userEmail = req.user.email;
-
-//         // returns groups by schools (for now)
-//         const groups = await staffGroupLogic.getGroupsByAreaManager(userEmail);
-
-//         res.json(groups);
-
-//     } catch (err) {
-//         res.json({ error: err.message });
-//     }
-// });
-
-// // Get all groups related to city manager (GET)
-// router.get('/cm', validateToken, validateAccess(accessGroup.D), async (req, res) => {
-//     try {
-//         const userEmail = req.user.email;
-
-//         // const area1 = await Cities.create({
-//         //     cityName: "city1",
-//         //     cityManagerEmail: "test2@example.com"
-//         // })
-
-//         // returns groups by schools (for now)
-//         const groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
-
-//         res.json(groups);
-
-//     } catch (err) {
-//         res.json({ error: err.message });
-//     }
-// });
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
@@ -233,8 +180,9 @@ router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
     try {
         const id = req.params.id;
         const updatedFields = req.body;
+        const userEmail = req.user.email;
 
-        const newGroup = await staffGroupLogic.updateGroup(id, updatedFields);
+        const newGroup = await staffGroupLogic.updateGroup(id, updatedFields, userEmail);
         res.json(newGroup);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -242,18 +190,16 @@ router.put('/:id', validateToken, validateAccess(accessGroup.C), async (req, res
 });
 
 // Delete a group by ID (DELETE)
-// router.delete('/:id', validateToken, async (req, res) => {
-//     try {
-//         const group = await GroupModel.findByPk(req.params.id);
-//         if (group) {
-//             await group.destroy();
-//             res.json({ message: 'group deleted' });
-//         } else {
-//             res.status(404).json({ message: 'group not found' });
-//         }
-//     } catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// });
+router.delete('/deleteGroup/:id', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const userEmail = req.user.email;
+
+        const deletedGroup = await staffGroupLogic.deleteGroup(id, userEmail);
+        res.json(deletedGroup);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
 
 module.exports = router;

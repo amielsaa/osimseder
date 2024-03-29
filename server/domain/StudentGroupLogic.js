@@ -1,9 +1,18 @@
-const {Groups, Schools, Students} = require('../models/');
+const { Groups, Students } = require('../models/');
+const { groupsLogger } = require('../utils/logger');
+const argumentChecker = require('./utils/ArgumentChecker');
+const String2Int = require('./utils/String2Int');
 
 class StudentGroupLogic {
+
+// get all groups by school
+// Input: schoolId - the id of the school
+// Output: a list of groups in the school
     async getAllGroupsBySchool(schoolId) {
         try {
-            console.log(schoolId)
+            groupsLogger.debug('Getting all groups by schoolId: ' + schoolId);
+            argumentChecker.checkSingleArugments([schoolId], ['schoolId']);
+
             const groups = await Groups.findAll({
                 where: { "schoolId": schoolId }
             });
@@ -24,28 +33,36 @@ class StudentGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
-    
-            const responseData = groups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+            const responseData = await Promise.all(groups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
-            // console.log(responseData)
-            
-            // res.json({
-            //     groups: responseData,
-            // });
 
+            groupsLogger.debug('Successfully found all groups by schoolId: ' + schoolId);
             return responseData;
             
         } catch (error) {
-            throw new Error('Failed to find groups from school ' +schoolId + ": " + error);
+            groupsLogger.error('Failed to find groups from school ' + schoolId + ": " + error);
+            throw new Error('Failed to find groups from school ' + schoolId + ": " + error);
         }
     }
 
+//TODO CHANGE NAME
+// get group by id
+// Input: groupId - the id of the group
+// Output: the group object
     async getAllGroupById(groupId) {
         try {
+            groupsLogger.debug('Getting all groups by groupId: ' + groupId);
+            argumentChecker.checkSingleArugments([groupId], ['groupId']);
+
             const group = await Groups.findOne({
                 where: { "id": groupId }
             });
@@ -62,25 +79,34 @@ class StudentGroupLogic {
         
             group.dataValues.students = studentNames;            
             
+            const schoolName = await String2Int.getSchoolNameById(group.schoolId)
 
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
-        
-            // res.json({
-            //     group: responseData,
-            // });
 
+            groupsLogger.debug('Successfully found all groups by groupId: ' + groupId);
             return responseData;
         } catch (error) {
+            groupsLogger.error('Failed to find groups by id ' + error);
             throw new Error('Failed to find groups by id ' + error);
         }
     }
+
+// join a group
+// Input: groupId - the id of the group
+//        userEmail - the email of the user
+// Output: the group object
     async joinGroup(groupId, userEmail) {
         try {
+            groupsLogger.info('Joining group by groupId: ' + groupId + ' and userEmail: ' + userEmail);
+            argumentChecker.checkSingleArugments([groupId, userEmail], ['groupId', 'userEmail']);
+
             const group = await Groups.findOne({
                 where: { "id": groupId }
             });
@@ -100,11 +126,6 @@ class StudentGroupLogic {
                     throw new Error('Group is full');
                 }
             }
-
-
-            // if (user.groupId == groupId) {
-            //     throw new Error('User already in a group');
-            // }
 
             const groupUpdate = await Students.update(
                 { "groupId": groupId },
@@ -128,12 +149,16 @@ class StudentGroupLogic {
             const responseData = {
                 id: updatedGroup.id,
                 students: updatedGroup.dataValues.students,
-                memberCount: updatedGroup.dataValues.students.length
+                memberCount: updatedGroup.dataValues.students.length,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
 
+            groupsLogger.info('Successfully joined group by groupId: ' + groupId + ' and userEmail: ' + userEmail);
             return responseData;
 
         } catch (error) {
+            groupsLogger.error('Failed to join group ' + error);
             throw new Error('Failed to join group ' + error);
         }
     }
