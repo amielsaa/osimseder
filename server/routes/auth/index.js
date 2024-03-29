@@ -7,11 +7,13 @@ const router = express.Router();
 const authenticationRouter = require('./AuthenticationRoute');
 const emailRouter = require('./EmailRoute');
 const setupRouter = require('./SetupRoute');
+const realSetupRouter = require('./RealSetupRoute');
 const userManagementRouter = require('./UserManagementRoute');
 
 router.use(authenticationRouter);
 router.use(emailRouter);
 router.use(setupRouter);
+router.use(realSetupRouter);
 router.use(userManagementRouter);
 
 module.exports = router;
