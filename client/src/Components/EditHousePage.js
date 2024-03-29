@@ -103,7 +103,7 @@ function EditHousePage() {
           navigate(`/HousePage/${id}`)
         }
       }
-
+      
     };
 
     return (
