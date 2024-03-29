@@ -1,6 +1,7 @@
 const { Groups, Students } = require('../models/');
 const { groupsLogger } = require('../utils/logger');
 const argumentChecker = require('./utils/ArgumentChecker');
+const String2Int = require('./utils/String2Int');
 
 class StudentGroupLogic {
 
@@ -32,12 +33,16 @@ class StudentGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
-    
-            const responseData = groups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+            const responseData = await Promise.all(groups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
 
             groupsLogger.debug('Successfully found all groups by schoolId: ' + schoolId);
@@ -74,12 +79,15 @@ class StudentGroupLogic {
         
             group.dataValues.students = studentNames;            
             
+            const schoolName = await String2Int.getSchoolNameById(group.schoolId)
 
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
 
             groupsLogger.debug('Successfully found all groups by groupId: ' + groupId);
@@ -141,7 +149,9 @@ class StudentGroupLogic {
             const responseData = {
                 id: updatedGroup.id,
                 students: updatedGroup.dataValues.students,
-                memberCount: updatedGroup.dataValues.students.length
+                memberCount: updatedGroup.dataValues.students.length,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
 
             groupsLogger.info('Successfully joined group by groupId: ' + groupId + ' and userEmail: ' + userEmail);
