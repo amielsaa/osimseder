@@ -330,6 +330,48 @@ class StaffGroupLogic {
             throw new Error('Failed to get schools by city ' + error);
         }
     }
+    
+// get all groups in the city of house
+// Input: houseId - the id of the house to get the city's groups for
+// Output: an array of groups
+    async getSchoolsByHouseCity(houseId) {
+        try {
+            groupsLogger.debug("Initiating Get Schools by House City for house: " + houseId);
+            argumentChecker.checkSingleArugments([houseId], ["houseId"]);
+
+            const house = await Houses.findOne({
+                where: { id: houseId },
+            });
+            if (!house) {
+                throw new Error('House not found');
+            }
+
+            const city = await Cities.findOne({
+                where: { id: house.cityId },
+            });
+            if (!city) {
+                throw new Error('City not found');
+            }
+
+            const schools = await Schools.findAll({
+                where: { "cityId": city.id }
+            });
+            if (!schools) {
+                throw new Error('Schools not found');
+            }
+            const responseData = schools.map(school => ({
+                id: school.id,
+                schoolName: school.schoolName
+            }));
+
+            groupsLogger.debug("Successfully got schools by House City for house: " + houseId);
+            return responseData;
+
+        } catch (error) {
+            groupsLogger.error("Failed to get schools by House City for house: " + houseId + ". Reason: " + error);
+            throw new Error('Failed to get schools by house city ' + error);
+        }
+    }
 
 // get all groups without a house
 // Input: schoolId - the id of the school to get the groups for

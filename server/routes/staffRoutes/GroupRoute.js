@@ -49,6 +49,21 @@ router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req
     
 })
 
+// Return all schools related to the city of the houseId
+router.post('/schoolsForHouse', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+    //req.data.city = BSV/JRS
+    try {
+        const houseId = req.body.houseId;
+        const schools = await staffGroupLogic.getSchoolsByHouseCity(houseId);
+        res.json(schools);
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
+})
+
+
 // need to move to other route someday
 // Return all schools related to the city
 router.post('/schools_for_register', async (req, res) => {
