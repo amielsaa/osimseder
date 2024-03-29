@@ -16,15 +16,15 @@ function AddGroupToHousePage() {
     const { id } = useParams();
     const { navigate , user } = useContext(DataContext)
     const [schoolOptions, setSchoolOptions] = useState([]);
-    const [selectedSchool, setSelectedSchool] = useState();
+    const [selectedSchool, setSelectedSchool] = useState('');
+    const [groupsByCity, setGroupsByCity] = useState([])
+    const [groupsBySchool, setGroupsBySchool] = useState([])
     useEffect(() => {
       if(!(localStorage.getItem("accessToken"))){
         navigate('/404')
       }
     })
 
-    //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
-    //TO DELETE!!!!
     const cities = {
       '1': 'BSV',
       '2': 'JRS'
@@ -35,9 +35,28 @@ function AddGroupToHousePage() {
         setSchoolOptions(res);
       }
     }
- 
+    const setGroups = async () => {
+      const groups = await getAllGroupsWithoutHouseForCity(user.cityID)
+      setGroupsByCity(groups)
+    }
 
     useEffect(() => {
+      const filterGroupsBySchool = async () => {
+          if (selectedSchool) {
+              // Filter groups by school
+              const filteredGroupsBySchool = groupsByCity.filter(group => group.schoolId === selectedSchool);
+              setGroupsBySchool(filteredGroupsBySchool);
+          }
+          else {
+            setGroupsBySchool(groupsByCity);
+          }
+      };
+  
+      filterGroupsBySchool();
+    }, [selectedSchool, groupsByCity]);
+
+    useEffect(() => {
+      setGroups()
       setSchoolsRequest();
     }, [user])
    
@@ -75,7 +94,7 @@ function AddGroupToHousePage() {
           </div>
 
           {selectedSchool && <div className='groups_container'>
-              <GroupListForHouse houseId={id} selectedSchool={selectedSchool}/>
+              <GroupListForHouse houseId={id} groupsBySchool={groupsBySchool}/>
               </div>  }
 
           </div>

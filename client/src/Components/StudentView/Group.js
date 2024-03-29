@@ -21,6 +21,7 @@ const Group = ({ groupId }) => {
       const group = await fetchGroupById(groupId);
       setStudentsList(group.students);
       setMemberCount({ capacity: group.capacity, memberCount: group.memberCount });
+      console.log(group)
     }
     updateStudentList();
   }, []);
