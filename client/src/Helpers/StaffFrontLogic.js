@@ -119,6 +119,15 @@ const getAllGroupsWithoutHouse = async (schoolId) => {
     }
 }
 
+const getAllGroupsWithoutHouseForCity = async (cityId) => {
+    const res = await axios.post(`${URL}/staff/groups/emptygroupsbycity`, { cityId: cityId }, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
 const assignGroupToHouse = async (groupId, houseId) => {
     const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
     if(res.data.error) { 
@@ -204,6 +213,6 @@ const fetchTeamOwnerInfo = async (email) => {
 
 export {fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
-      fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
+    fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse, getAllGroupsWithoutHouseForCity,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
         getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
