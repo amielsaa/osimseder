@@ -14,6 +14,7 @@ import {fetchAllSchoolsByCity} from '../Helpers/StaffFrontLogic';
 
 function AddGroupToHousePage() {
     const { id } = useParams();
+    const houseId = id
     const { navigate , user } = useContext(DataContext)
     const [schoolOptions, setSchoolOptions] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState('');
@@ -24,16 +25,12 @@ function AddGroupToHousePage() {
     })
 
     //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
-    //TO DELETE!!!!
-    const cities = {
-      '1': 'BSV',
-      '2': 'JRS'
-    }
+
+
     const setSchoolsRequest = async () => {
-      if(user.cityId) {
-        const res = await fetchAllSchoolsByCity(cities[user.cityId]);
+        const res = await fetchAllSchoolsByCity(houseId);
         setSchoolOptions(res);
-      }
+      
     }
  
     useEffect(() => {
