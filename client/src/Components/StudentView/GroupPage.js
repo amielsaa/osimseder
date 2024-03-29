@@ -60,6 +60,7 @@ const GroupPage = () => {
 
   const setGroupRequest = async () => {
     const group = await getGroupById(id);
+    console.log(group);
     setGroupInfo(group);
     setStudentsList(group.students);
   }

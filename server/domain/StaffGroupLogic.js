@@ -1,6 +1,11 @@
 const { Sequelize } = require('sequelize');
 const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
 const userManagementLogic = require("./UserManagementLogic")
+// const { usersLogger, groupsLogger } = require('../utils/logger');
+// const argumentChecker = require('./utils/ArgumentChecker');
+// const StaffStudentLogic = require('./StaffStudentLogic');
+const Encryptor = require('./utils/Encryptor');
+
 
 class StaffGroupLogic {
     async createGroup(groupSize, schoolId) {
@@ -269,7 +274,9 @@ class StaffGroupLogic {
         
             const studentNames = students.map(student => {
                 const { firstName, lastName, email,...rest } = student;
-                return {fullname:`${firstName} ${lastName}`, email:email};
+                const encryptedEmail = Encryptor.encryptEmail(email);
+
+                return {fullname:`${firstName} ${lastName}`, email:email, encryptedEmail:encryptedEmail};
             });
             group.dataValues.students = studentNames;            
             
