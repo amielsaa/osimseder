@@ -4,6 +4,7 @@ const userManagementLogic = require("./UserManagementLogic")
 const { usersLogger, groupsLogger } = require('../utils/logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const StaffStudentLogic = require('./StaffStudentLogic');
+const String2Int = require('./utils/String2Int');
 
 class StaffGroupLogic {
 
@@ -45,7 +46,9 @@ class StaffGroupLogic {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: await String2Int.getSchoolNameById(group.schoolId)
             };
             groupsLogger.info("Successfully created group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
             return responseData;
@@ -110,7 +113,9 @@ class StaffGroupLogic {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: await String2Int.getSchoolNameById(group.schoolId)
             }));
             groupsLogger.debug("Successfully got groups by Team Owner for email: " + teamOwnerEmailAddr);
             return responseData;
@@ -161,7 +166,9 @@ class StaffGroupLogic {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: await String2Int.getSchoolNameById(group.schoolId)
             }));
             groupsLogger.debug("Successfully got groups by City Manager for email: " + cityManagerEmail);
             return responseData;
@@ -200,7 +207,10 @@ class StaffGroupLogic {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: await String2Int.getSchoolNameById(group.schoolId)
+
             }));
 
             groupsLogger.debug("Successfully got all groups");
@@ -244,14 +254,15 @@ class StaffGroupLogic {
             });
             group.dataValues.students = studentNames;            
             
-
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity,
-                houseId: group.houseId
+                houseId: group.houseId,
+                schoolName: await String2Int.getSchoolNameById(group.schoolId)
             };
+
             groupsLogger.debug("Successfully got group by ID for group ID: " + groupId + ". By user: " + user.email);
             return responseData;
 
@@ -324,12 +335,15 @@ class StaffGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
+
     
             const responseData = groups.map(group => ({
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: schoolId,
+                schoolName: await String2Int.getSchoolNameById(schoolId)
             }));
 
             groupsLogger.debug("Successfully got all groups without house for school: " + schoolId);

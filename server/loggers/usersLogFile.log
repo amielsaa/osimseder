@@ -41,3 +41,9 @@
 2024-03-28T12:11:54.277Z 	INFO 	Initiating Login for email: student77777777@gmail.com
 2024-03-28T12:11:54.284Z 	ERROR 	User does not exist. Email: student77777777@gmail.com
 2024-03-28T12:11:54.284Z 	ERROR 	Failed to login for email: student77777777@gmail.com. Reason: Error: Username or password aren't correct
+2024-03-29T08:23:21.353Z 	INFO 	Initiating Login for email: teamOwner1@gmail.com
+2024-03-29T08:23:21.476Z 	INFO 	Successfully logged in staff for email: teamOwner1@gmail.com
+2024-03-29T08:24:01.153Z 	INFO 	Initiating Login for email: amieljrs@gmail.com
+2024-03-29T08:24:01.279Z 	INFO 	Successfully logged in staff for email: amieljrs@gmail.com
+2024-03-29T08:31:46.204Z 	INFO 	Initiating Login for email: teamOwner1@gmail.com
+2024-03-29T08:31:46.355Z 	INFO 	Successfully logged in staff for email: teamOwner1@gmail.com
