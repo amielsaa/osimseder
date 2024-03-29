@@ -380,6 +380,51 @@ class StaffGroupLogic {
         }
     }
     
+// get all groups without a house for a city
+// Input: cityId - the id of the city to get the groups for
+// Output: an array of groups
+    async getAllGroupsWithoutHouseForCity(cityId) {
+        try {
+            groupsLogger.debug("Initiating Get all groups without house for city: " + cityId);
+            argumentChecker.checkSingleArugments([cityId], ["cityId"]);
+
+            const schools = await Schools.findAll({
+                where: { cityId: cityId }
+            });
+            if (!schools) {
+                throw new Error('Couldn\'t find a schools by city.');
+            }
+
+            const newGroups = [];
+            for (let i = 0; i < schools.length; i++) {
+                const school = schools[i];
+                const groupsBySchool = await school.getGroups();
+                for (const group of groupsBySchool) {
+                    newGroups.push(group);
+                }
+            }
+
+            const responseData = await Promise.all(newGroups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
+            }));
+
+            groupsLogger.debug("Successfully got all groups without house for city: " + cityId);
+
+            return responseData;
+
+        } catch (error) {
+            groupsLogger.error("Failed to get all groups without house for city: " + cityId + ". Reason: " + error);
+            throw new Error('Failed to get school\'s groups without a house for city' + error);
+        }
+    }
+    
 
 // delete a group by id
 // Input: id - the id of the group to delete

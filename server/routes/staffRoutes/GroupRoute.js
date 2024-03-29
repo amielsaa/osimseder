@@ -95,6 +95,28 @@ router.post('/emptygroups', validateToken, validateAccess(accessGroup.C), async 
     
 })
 
+// Return all groups in a school without a house for a city
+router.post('/emptygroupsbycity', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    //req.data.city = BSV/JRS
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityId = req.body.cityId;
+        // cityName = 'bsv';
+        const groups = await staffGroupLogic.getAllGroupsWithoutHouseForCity(cityId);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(groups);
+        // res.json('ok')
+
+        
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+    
+})
+
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
