@@ -157,7 +157,7 @@ class StaffGroupLogic {
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
                 const groupsBySchool = await school.getGroups();
-                for (const group of groupsBySchool) {
+                for (let group of groupsBySchool) {
                     const students = await group.getStudents();
                     const studentNames = students.map(student => {
                         const { firstName, lastName, ...rest } = student;
@@ -176,7 +176,7 @@ class StaffGroupLogic {
             //    schoolId: group.schoolId,
             //    schoolName: await String2Int.getSchoolNameById(group.schoolId)
             //}));
-            const responseData = await Promise.all(groups.map(async group => {
+            const responseData = await Promise.all(newGroups.map(async group => {
                 const schoolName = await String2Int.getSchoolNameById(group.schoolId);
                 return {
                     id: group.id,

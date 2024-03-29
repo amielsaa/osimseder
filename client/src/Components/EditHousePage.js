@@ -70,6 +70,8 @@ function EditHousePage() {
     }, [])
 
 
+
+
     const validationSchema = Yup.object().shape({
         address: Yup.string(),
         residentFirstName: Yup.string().required('שם דייר נדרש'),
@@ -106,62 +108,16 @@ function EditHousePage() {
 
     return (
         <>
-          <Header />
-          <Nav />
-          <div className='content-Box-Add-Task'>
-            <span className='purple_circle'>
-              <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
-            </span>
-            <div className="main-content-Add-Task">
+            <Header />
+            <Nav />
+            <div className='content-Box-Add-Task'>
+                <span className='purple_circle'>
+                    <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+                </span>
+                <div className="main-content-Add-Task">
 
-              <div className='add-task-title'>
-                <h1>עריכת בית</h1>
-              </div>
-
-              <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-                <Form>
-                    {user.role !== "TeamOwner" ?
-                    (<div>
-                        <label htmlFor="areaName"> בחר שכונה : </label> {/*Amiel - Change that to the initial value*/}
-                        <Field as="select" id="areaName" name="areaName">
-                            <option value="">בחר שכונה</option>
-                            {areas && (
-                                <>
-                                {areas.map((area) => (
-                                    <option key={area.areaName} value={area.id}>
-                                    {area.areaName}
-                                    </option>
-                                ))}
-                                </>
-                            )}
-                        </Field>
-                        <ErrorMessage name="areaName" component="span" />
-                    </div>)
-                    : ""}
-                    <div>
-                        <label htmlFor="address">   כתובת : </label>
-                        <Field id="address" name="address" />
-                        <ErrorMessage name="address" component="span" />
-                    </div>
-                    <div>
-                        <label htmlFor="residentFirstName">   שם איש קשר :</label>
-                        <Field id="residentFirstName" name="residentFirstName" />
-                        <ErrorMessage name="residentFirstName" component="span" />
-                    </div>
-                    <div>
-                        <label htmlFor="residentLastName">   שם משפחה איש קשר :</label>
-                        <Field id="residentLastName" name="residentLastName"  />
-                        <ErrorMessage name="residentLastName" component="span" />
-                    </div>
-                    <div>
-                        <label htmlFor="phoneNumber">    מספר פלאפון  :</label>
-                        <Field id="phoneNumber" name="phoneNumber"  />
-                        <ErrorMessage name="phoneNumber" component="span" />
-                    </div>
-                    <div>
-                        <label htmlFor="alternativeNumber">   מספר חלופי :</label>
-                        <Field id="alternativeNumber" name="alternativeNumber" />
-                        <ErrorMessage name="alternativeNumber" component="span" />
+                    <div className='add-task-title'>
+                        <h1>עריכת בית</h1>
                     </div>
 
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -258,31 +214,6 @@ function EditHousePage() {
                     </Formik>
 
                 </div>
-                <div>
-                  <label htmlFor="membersNeeded">  גודל קבוצה נחוץ: </label>
-                  <Field as="select" id="membersNeeded" name="membersNeeded">
-                    <option value="">בחר גודל קבוצה נחוץ</option> {/*Amiel - Change that to the initial value*/}
-
-                    {Array.from({ length: 7 }, (_, index) => index + 2).map((size) => (
-                      <option key={size} value={size}>{size}</option>
-                    ))}
-                  </Field>
-                  <ErrorMessage name="membersNeeded" component="span" />
-                </div>
-
-
-                    <div>
-                    <label htmlFor="freeText">  הערות: </label>
-                    <Field as="textarea" id="freeText" name="freeText"/>
-                    <ErrorMessage name="freeText" component="span" />
-                </div>
-
-                <div className='Button-Div'>
-                    <button type="submit" className='RegisterButton'>ערוך פרטי בית</button>
-                </div>
-                </Form>
-              </Formik>
-
             </div>
             <Footer />
         </>
