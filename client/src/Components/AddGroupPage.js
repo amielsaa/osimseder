@@ -81,8 +81,8 @@ const AddGroupPage = () => {
                 <label htmlFor="city"> עיר: </label>
                 <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>
-                  <option value="JRS">ירושלים</option>
-                  <option value="BSV">באר שבע</option>
+                  <option value="ירושלים">ירושלים</option>
+                  <option value="באר שבע">באר שבע</option>
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>

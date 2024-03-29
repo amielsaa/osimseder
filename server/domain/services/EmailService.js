@@ -18,18 +18,18 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        usersLogger.info("Intiating sending verification email to: " + email);
-        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-
-        const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
-        console.log(verificationLink);
-        await transporter.sendMail({
-            to: email,
-            subject: 'Verify Your Email Address',
-            html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
-        });
-
-        usersLogger.info("Successfully sent email to: " + email);
+        //usersLogger.info("Intiating sending verification email to: " + email);
+        //argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+        //
+        //const verificationLink = `https://localhost:3001/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
+        //console.log(verificationLink);
+        //await transporter.sendMail({
+        //    to: email,
+        //    subject: 'Verify Your Email Address',
+        //    html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
+        //});
+        //
+        //usersLogger.info("Successfully sent email to: " + email);
     }
 
     async verifyEmailAndToken(email, token) {
