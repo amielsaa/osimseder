@@ -10,41 +10,29 @@ function xorEncryptDecrypt(data, key) {
     return result;
 }
 
-// Encode the encrypted email in base64
-function encodeBase64(data) {
-    return Buffer.from(data).toString('base64');
+// Encode the encrypted email in hexadecimal
+function encodeHex(data) {
+    return Buffer.from(data).toString('hex');
 }
 
-// Encode the email address using XOR and then encode in base64
+// Encode the email address using XOR and then encode in hexadecimal
 function encryptEmail(email) {
     const encryptedEmail = xorEncryptDecrypt(Buffer.from(email), Buffer.from(key));
-    return encodeBase64(encryptedEmail);
+    return encodeHex(encryptedEmail);
 }
 
-// Decode the base64 encoded data
-function decodeBase64(encodedData) {
-    return Buffer.from(encodedData, 'base64');
+// Decode the hexadecimal encoded data
+function decodeHex(encodedData) {
+    return Buffer.from(encodedData, 'hex');
 }
 
-// Decrypt the email address using XOR and then decode from base64
+// Decrypt the email address using XOR and then decode from hexadecimal
 function decryptEmail(encodedEmail) {
-    const decodedEmail = decodeBase64(encodedEmail);
+    const decodedEmail = decodeHex(encodedEmail);
     const decryptedEmail = xorEncryptDecrypt(decodedEmail, Buffer.from(key));
     return decryptedEmail.toString();
 }
 
-//// Example usage
-//const email = "student7@gmail.com";
-//
-//// Encrypt the email address
-//const encryptedEmail = encryptEmail(email);
-//console.log("Encrypted email:", encryptedEmail);
-//
-//// Decrypt the email address
-//const decryptedEmail = decryptEmail(encryptedEmail);
-//console.log("Decrypted email:", decryptedEmail);
-
-// Export the encryptEmail and decryptEmail functions
 module.exports = {
     encryptEmail,
     decryptEmail
