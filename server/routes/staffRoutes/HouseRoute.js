@@ -63,14 +63,18 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
         let houses;
         // houses = await StaffHouseLogic.getAllHouses();
 
-        if((accessGroup.C.includes(userRole))){ //for area and city managers
+        if((accessGroup.D.includes(userRole))){ //for city managers
             houses = await StaffHouseLogic.getAllHousesOfCity(userEmail);
+        }
+
+        else if ((accessGroup.C.includes(userRole))) { //for area managers
+            houses = await StaffHouseLogic.getAllHousesOfArea(userEmail);
         }
 
         else {
             houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);
         }
-        
+
         res.json(houses); 
 
         //returns like this:
