@@ -21,7 +21,7 @@ class EmailService {
     async sendVerificationEmail(email, token) {
         usersLogger.info("Intiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        const verificationLink = `https://garineiudi.org.il/api/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        const verificationLink = `https://garineiudi.org.il/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         console.log(verificationLink);
         await transporter.sendMail({
            to: email,
