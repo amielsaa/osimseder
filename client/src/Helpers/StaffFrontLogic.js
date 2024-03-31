@@ -187,7 +187,7 @@ const getStudentsWithoutGroupBySchoolId = async (schoolId) => {
 }
 
 const addGroupMember = async (email, groupId) => {
-    const res = await axios.put(`${URL}/staff/students/${email}`, { groupId: groupId }, headers);
+    const res = await axios.put(`${URL}/staff/students/addGroupMember${email}`, { groupId: groupId }, headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;

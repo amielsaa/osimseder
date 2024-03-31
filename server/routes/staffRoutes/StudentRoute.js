@@ -22,6 +22,19 @@ router.put('/:email', validateToken, validateAccess(accessGroup.C), async (req, 
     }
 });
 
+// add a student to a group by email and group id
+router.post('/addGroupMember', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const studentEmail = req.params.email;
+        const groupId = req.body.groupId;
+
+        const newStudent = await StaffStudentLogic.addStudentToGroup(studentEmail, groupId);
+        res.json(newStudent);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 // get students from a school without a group
 router.get('/getStudentsWithoutGroupBySchool/:schoolId', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
