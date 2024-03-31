@@ -23,7 +23,7 @@ const housesLogger = winston.createLogger({
     level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
-        new transports.File({ filename: 'loggers/housesLogFile.log' }) // min level to filename 
+        new transports.File({ filename: 'loggers/housesLogFile.log' }) 
     ],
 });
 
@@ -32,49 +32,19 @@ const groupsLogger = winston.createLogger({
     level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
-        new transports.File({ filename: 'loggers/groupsLogFile.log' }) // min level to filename 
+        new transports.File({ filename: 'loggers/groupsLogFile.log' })
     ],
 });
 
-//// create, editDetails, moveToGroups
-//const studentsLogger = winston.createLogger({
-//    level: 'info',   // minimum level to transport
-//    format: myCombinedFormat,
-//    transports: [
-//        new transports.File({ filename: 'loggers/studentsLogFile.log' }) // min level to filename 
-//    ],
-//});
-//
-//// create, editDetails
-//const staffsLogger = winston.createLogger({
-//    level: 'info',   // minimum level to transport
-//    format: myCombinedFormat,
-//    transports: [
-//        new transports.File({ filename: 'loggers/staffsLogFile.log' }) // min level to filename 
-//    ],
-//});
-
-// create, editDetails
 const usersLogger = winston.createLogger({
     level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
-        new transports.File({ filename: 'loggers/usersLogFile.log' }) // min level to filename 
-    ],
-});
-
-// create, editDetails
-const routesLogger = winston.createLogger({
-    level: 'info',   // minimum level to transport
-    format: myCombinedFormat,
-    transports: [
-        new transports.File({ filename: 'loggers/usersLogFile.log' }) // min level to filename 
+        new transports.File({ filename: 'loggers/usersLogFile.log' })  
     ],
 });
 
 module.exports = {
     housesLogger,
     groupsLogger,
-    usersLogger,
-    routesLogger
-};
+    usersLogger};

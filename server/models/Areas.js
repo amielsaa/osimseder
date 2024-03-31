@@ -4,13 +4,27 @@ module.exports = (sequelize, DataTypes) => {
         areaName: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            // Custom validation function to ensure uniqueness of areaName within the same city
+            validate: {
+                isUniquePerCity: async function () {
+                    const existingArea = await Areas.findOne({
+                        where: {
+                            areaName: this.areaName,
+                            cityId: this.cityId
+                        }
+                    });
+                    if (existingArea) {
+                        throw new Error('Area name must be unique within the same city');
+                    }
+                }
+            }
         },
         areaManagerEmail: {
             type: DataTypes.STRING,
             allowNull: false
         }
     });
+
 
     Areas.associate = (models) => {
         Areas.hasMany(models.Houses, {

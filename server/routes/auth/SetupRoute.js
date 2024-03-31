@@ -23,11 +23,11 @@ router.post('/setup', async (req,res) => {
 
 const setupCities = async () => {
     await Cities.create({
-        cityName: 'BSV',
+        cityName: 'באר שבע',
         cityManagerEmail: 'amielbsv@gmail.com'
     })
     await Cities.create({
-        cityName: 'JRS',
+        cityName: 'ירושלים',
         cityManagerEmail: 'amieljrs@gmail.com'
     })
 }
@@ -92,9 +92,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף א ב"ש',
-        extraLanguage: "English"
+        extraLanguage: "ספרדית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -108,7 +108,7 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "אלרגי לחתולים",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף א ב"ש',
         extraLanguage: ""
     })
@@ -124,9 +124,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף א ב"ש',
-        extraLanguage: "Russian"
+        extraLanguage: "רוסית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -140,9 +140,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף ב ב"ש',
-        extraLanguage: "Spanish"
+        extraLanguage: "ספרדית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -156,7 +156,7 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף ב ב"ש',
         extraLanguage: ""
     })
@@ -172,9 +172,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "",
-        city: "BSV",
+        city: "באר שבע",
         school: 'מקיף ב ב"ש',
-        extraLanguage: "Russian"
+        extraLanguage: "רוסית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -188,9 +188,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
-        city: "JRS",
+        city: "ירושלים",
         school: 'אורט ירושלים',
-        extraLanguage: "English"
+        extraLanguage: "ספרדית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -204,7 +204,7 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "צריך לסיים מוקדם",
-        city: "JRS",
+        city: "ירושלים",
         school: 'אורט ירושלים',
         extraLanguage: ""
     })
@@ -220,9 +220,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "",
-        city: "JRS",
+        city: "ירושלים",
         school: 'אורט ירושלים',
-        extraLanguage: "Russian"
+        extraLanguage: "רוסית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -236,9 +236,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
-        city: "JRS",
+        city: "ירושלים",
         school: 'נווה ציון ירושלים',
-        extraLanguage: "English"
+        extraLanguage: "ספרדית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -252,7 +252,7 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "אלרגי לחתולים",
-        city: "JRS",
+        city: "ירושלים",
         school: 'נווה ציון ירושלים',
         extraLanguage: ""
     })
@@ -268,9 +268,9 @@ const setupStudents = async () => {
         parentName: "אבוש",
         parentPhoneNumber: "0549552120",
         issuesText: "",
-        city: "JRS",
+        city: "ירושלים",
         school: 'נווה ציון ירושלים',
-        extraLanguage: "Arabic"
+        extraLanguage: "ערבית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -285,7 +285,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'B',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -297,7 +297,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'B',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -309,7 +309,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'נקבה',
         accesses: 'B',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -321,7 +321,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'B',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -333,7 +333,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'B',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -345,7 +345,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'נקבה',
         accesses: 'B',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -358,7 +358,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'C',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -370,7 +370,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'C',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -382,7 +382,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'C',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -394,7 +394,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'C',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -407,7 +407,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'D',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -419,7 +419,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'זכר',
         accesses: 'D',
-        city: 'BSV'
+        city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -432,7 +432,7 @@ const setupStaffs = async () => {
         phoneNumber: '0549552120',
         gender: 'נקבה',
         accesses: 'E',
-        city: 'JRS'
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 

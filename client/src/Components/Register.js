@@ -6,12 +6,16 @@ import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
 import {fetchAllSchoolsByCityForRegister} from '../Helpers/StudentFrontLogic'
+import ConfirmMessage from './ConfirmMessage';
 
 function Registration() {
     const {navigate} = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
     const [schoolsList, setSchoolsList] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState('');
+    const [email, setEmail] = useState('')
+    const [showConfirm, setShowConfirm] = useState(false)
+    const [showConfirmError, setShowConfirmError] = useState(false)
 
     const initialValues = {
         firstName: "",
@@ -58,11 +62,17 @@ function Registration() {
 
     const onSubmit = (data) => {
         data.city = selectedCity;
-        console.log(data);
+        setEmail(data.email)
         data.languages = [data.languages]
-        axios.post("https://garineiudi.org.il/api/auth/register_student", data).then(() => {
-            navigate('/');
-        });         
+        axios.post("https://garineiudi.org.il/api/auth/register_student", data)
+            .then(response => {
+                // If the response is successful (status 200), show confirmation
+                setShowConfirm(true);
+            })
+            .catch(error => {
+                // If there's an error in the response, show error
+                setShowConfirmError(true);
+            });
     };
 
     const handleCityChange = async (cityName) => {
@@ -74,7 +84,8 @@ function Registration() {
 
     return (
         <div className="formContainer">
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+            {!showConfirm && (
+                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
                     <div className='Title-Div'>
                     <h2>הרשמה</h2>
@@ -116,9 +127,9 @@ function Registration() {
                         <label htmlFor="gender">מין: </label>
                         <Field as="select" id="gender" name="gender">
                             <option value="">בחר מין</option>
-                            <option value="Male">זכר</option>
-                            <option value="Female">נקבה</option>
-                            <option value="Other">אחר</option>
+                            <option value="זכר">זכר</option>
+                            <option value="נקבה">נקבה</option>
+                            <option value="אחר">אחר</option>
                         </Field>
                         <ErrorMessage name="gender" component="span" />
                     </div>
@@ -141,8 +152,8 @@ function Registration() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
                           <option value="">בחר עיר</option>
-                          <option value="JRS">ירושלים</option>
-                          <option value="BSV">באר שבע</option>
+                          <option value="ירושלים">ירושלים</option>
+                          <option value="באר שבע">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
@@ -179,6 +190,22 @@ function Registration() {
                     </div>
                 </Form>
             </Formik>
+            )}
+            
+        {showConfirm && (
+        <ConfirmMessage
+            title = {"...עוד צעד אחד קטן"}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל ${email}\n`}
+            handleConfirm={() => navigate('/')}
+        />
+      )}
+        {showConfirmError && (
+        <ConfirmMessage
+            title = {"שגיאה"}
+            confirmationMessage={`אחד או יותר מהשדות לא מאושרים ע"י המערכת, נסה להחליף אימייל או סיסמה`}
+            handleConfirm={() => setShowConfirmError(false)}
+        />
+      )}
         </div>
     );
 }

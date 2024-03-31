@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 const argumentChecker = require('../utils/ArgumentChecker');
 const { usersLogger } = require('../../utils/logger');
+const EmailEncryptor = require('../utils/EmailEncryptor');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -18,33 +19,36 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        usersLogger.info("Intiating sending verification email to: " + email);
-        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-
-        const verificationLink = `https://garineiudi.org.il/api/auth/verify-email?token=${token}&email=${encodeURIComponent(email)}`;
-        console.log(verificationLink);
-        await transporter.sendMail({
-            to: email,
-            subject: 'Verify Your Email Address',
-            html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
-        });
-
-        usersLogger.info("Successfully sent email to: " + email);
+        //usersLogger.info("Intiating sending verification email to: " + email);
+        //argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+        //const verificationLink = `https://garineiudi.org.il/api/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        //console.log(verificationLink);
+        //await transporter.sendMail({
+        //    to: email,
+        //    subject: 'Verify Your Email Address',
+        //    html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
+        //});
+        //
+        //usersLogger.info("Successfully sent email to: " + email);
     }
 
-    async verifyEmailAndToken(email, token) {
+    async verifyEmailAndToken(encryptedEmail, token) {
         try {
-            usersLogger.info("Initiating verification of email (for verify register) and token for email: " + email);
-            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+            usersLogger.info("Initiating verification of email (for verify register) and token for (encrypted) email: " + encryptedEmail);
+            argumentChecker.checkSingleArugments([encryptedEmail, token], ["encryptedEmail", "token"]);
 
+            const email = await EmailEncryptor.decryptEmail(encryptedEmail);
+            usersLogger.debug("While verifiyng email, decrypted email: " + email);
             // Decrypt the email here
-            const decoded_email = decodeURIComponent(email);
+            console.log("HERE!!!!")
+            console.log(email)
+
             const student = await Students.findOne({
-                where: { email: decoded_email }
+                where: { email: email }
             });
             if (!student) {
                 const staff = await Staffs.findOne({
-                    where: { email: decoded_email }
+                    where: { email: email }
                 });
                 if (!staff) {
                     throw new Error('No user with this email');
@@ -52,7 +56,7 @@ class EmailService {
                 const isStudent = false;
                 const staffToken = staff.verificationToken;
                 if (studentToken == null) {
-                    throw new Error("Error: staff with mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {
                     await staff.update({ isVerified: true, verificationToken: null });
@@ -65,7 +69,7 @@ class EmailService {
                 const isStudent = true;
                 const studentToken = student.verificationToken;
                 if (studentToken == null) {
-                    throw new Error("Error: student in mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (studentToken == token) {
                     await student.update({ isVerified: true, verificationToken: null });
@@ -89,7 +93,7 @@ class EmailService {
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `https://garineiudi.org.il/api/auth/verify-reset-password?token=${token}&email=${encodeURIComponent(email)}`;
+        const resetLink = `https://garineiudi.org.il/api/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
         let isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
@@ -114,18 +118,20 @@ class EmailService {
         return isStudent;
 
     }
-    async verifyEmailForPassword(email, token) {
+    async verifyEmailAndTokenForPassword(encryptedEmail, token) {
         try {
-            usersLogger.info("Initiating verification of email (to change password) and token for email: " + email);
-            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+            usersLogger.info("Initiating verification of email (to change password) and token for (encrypted) email: " + encryptedEmail);
+            argumentChecker.checkSingleArugments([encryptedEmail, token], ["encryptedEmail", "token"]);
 
-            const decoded_email = decodeURIComponent(email);
+            const email = await EmailEncryptor.decryptEmail(encryptedEmail);
+            console.log("HERE!!!!")
+            console.log(email)
             const student = await Students.findOne({
-                where: { email: decoded_email }
+                where: { email: email }
             });
             if (!student) {
                 const staff = await Staffs.findOne({
-                    where: { email: decoded_email }
+                    where: { email: email }
                 });
                 if (!staff) {
                     throw new Error('No user with this email');
@@ -133,7 +139,7 @@ class EmailService {
                 const isStudent = false;
                 const staffToken = staff.verificationToken;
                 if (studentToken == null) {
-                    throw new Error("Error: staff with mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {
                     return isStudent;
@@ -145,7 +151,7 @@ class EmailService {
                 const isStudent = true;
                 const studentToken = student.verificationToken;
                 if (studentToken == null) {
-                    throw new Error("Error: student in mail: " + decoded_email + " has no token, meaning there's not any process that needs verification ")
+                    throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 console.log("Entered Check");
                 if (studentToken == token) {

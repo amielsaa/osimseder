@@ -26,8 +26,8 @@ function AddGroupToHousePage() {
     //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
     //TO DELETE!!!!
     const cities = {
-      '1': 'BSV',
-      '2': 'JRS'
+      '1': 'באר שבע',
+      '2': 'ירושלים'
     }
     const setSchoolsRequest = async () => {
       if(user.cityId) {
@@ -65,7 +65,7 @@ function AddGroupToHousePage() {
             value={selectedSchool}
             onChange={(e) => setSelectedSchool(e.target.value)}
           >
-            <option value=''>הכל</option>
+            <option value=''>בחר/י בית ספר</option>
             {schoolOptions.map((school) => (
               <option key={school.id} value={school.id}>
                 {school.schoolName}

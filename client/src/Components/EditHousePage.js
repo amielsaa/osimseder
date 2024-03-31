@@ -51,11 +51,11 @@ function EditHousePage() {
 
     const getAreas = async () => {
         const res = await fetchAllAreasByCity();
-        if (user.cityId == 1) {
-            const ars = res.BSV;
+        if (user.cityId === 1) {
+            const ars = res["באר שבע"];
             setAreas(ars);
         } else {
-            const ars = res.JRS;
+            const ars = res["ירושלים"];
             setAreas(ars);
         }
     }
@@ -170,9 +170,9 @@ function EditHousePage() {
                                 <label htmlFor="residentGender">מין הדייר/ת : </label>
                                 <Field as="select" id="residentGender" name="residentGender">
                                     <option value="">בחר את מין הדייר/ת</option>
-                                    <option value="Male">זכר</option>
-                                    <option value="Female">נקבה</option>
-                                    <option value="Other">אחר</option>
+                                    <option value="זכר">זכר</option>
+                                    <option value="נקבה">נקבה</option>
+                                    <option value="אחר">אחר</option>
                                 </Field>
                                 <ErrorMessage name="residentGender" component="span" />
                             </div>

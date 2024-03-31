@@ -1,4 +1,4 @@
-const {Groups, Cities, Staffs, Houses} = require('../models');
+const { Groups, Cities, Staffs, Houses, Areas } = require('../models');
 const string2Int = require('./utils/String2Int');
 const argumentChecker = require('./utils/ArgumentChecker');
 const { housesLogger } = require('../utils/logger');
@@ -57,12 +57,56 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of city by email: " + userEmail);
             return houses;
 
         } catch (error) {
             housesLogger.error("Failed to get all houses of city by email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to get all houses of city: ' + error);
+        }
+    }
+    
+
+// Get all houses in the requester's area
+// Input: areaManagerEmail - the email of the user requesting the houses
+// Output: an array of all houses
+    async getAllHousesOfArea(areaManagerEmail) {
+        try {
+            housesLogger.debug("Initiate get all houses of area by email: " + areaManagerEmail);
+            argumentChecker.checkSingleArugments([areaManagerEmail], ["areaManagerEmail"]);
+
+            const user = await Staffs.findOne({
+                where: { email: areaManagerEmail }
+            });
+            if(!user){
+                throw new Error('Couldn\'t find a staff user.');
+            }
+            const area = await Areas.findOne({
+                where: { "areaManagerEmail": areaManagerEmail }
+            });
+
+            const houses = await Houses.findAll({
+                where: { areaId: area.id }
+            });
+            if(!houses){
+                throw new Error('Couldn\'t find houses.');
+            }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
+            housesLogger.debug("Successfully got all houses of area by email: " + areaManagerEmail);
+            return houses;
+
+        } catch (error) {
+            housesLogger.error("Failed to get all houses of area by email: " + areaManagerEmail + ". Reason: " + error);
+            throw new Error('Failed to get all houses of area: ' + error);
         }
     }
 
@@ -80,6 +124,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of team owner by email: " + userEmail);
             return houses;
 
@@ -357,6 +406,9 @@ class StaffHouseLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             housesLogger.debug("Successfully got house groups by house id: " + houseId);
             return responseData;

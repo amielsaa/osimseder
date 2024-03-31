@@ -1,0 +1,14 @@
+"email","password","lastName","firstName","phoneNumber","gender","accesses","verificationToken","isVerified","createdAt","updatedAt","cityId"
+"admin@gmail.com","$2b$10$f/r1gZJMEuaUuNBOMJ7a5uwPjgg3OtDYX7Y6J6AM9ojZEo7wJidPa","מלך","אדמין","0549552120","נקבה","E",NULL,True,"2024-03-18 15:50:59.596+00","2024-03-18 15:51:01.344+00",2
+"amielbsv@gmail.com","$2b$10$nzgurfNFC3v.m7aoZQASZ.os0tP0OKAMEJ7gULwoEkKDupvZpyLOO","מנהל-בש","עמיאל","0549552120","זכר","D",NULL,True,"2024-03-18 15:50:57.71+00","2024-03-18 15:50:59.519+00",1
+"amieleastbsv@gmail.com","$2b$10$hJ7ecXhFqQ4iZM1njOFdm.SiWYr43XKjoHq.qUz4vTSPTT0sjb0ZS","מזרח-בש","עמיאל","0549552120","זכר","C",NULL,True,"2024-03-18 15:50:49.433+00","2024-03-18 15:50:51.012+00",1
+"amieleastjrs@gmail.com","$2b$10$bza9NxXvkvYcN/v4RukgWeZnQ8p1E6SeqF6OXUyStzLWNa0Fh.5Dq","מזרח-ים","עמיאל","0549552120","זכר","C",NULL,True,"2024-03-18 15:50:52.968+00","2024-03-18 15:50:54.72+00",2
+"amieljrs@gmail.com","$2b$10$pwITmHRTsf68dQZR.N0iCOwdlBzfnxbS.eeC0o6rUxsxaJUperYf6","מנהל-ים","עמיאל","0549552120","זכר","D",NULL,True,"2024-03-18 15:50:56.207+00","2024-03-18 15:50:57.626+00",2
+"amielwestbsv@gmail.com","$2b$10$YkP1b2k9dtnNyRoWZReFCuw9FjUnyOy8rvdNwUJx8Quzn747tPmJm","מערב-בש","עמיאל","0549552120","זכר","C",NULL,True,"2024-03-18 15:50:51.097+00","2024-03-18 15:50:52.869+00",1
+"amielwestjrs@gmail.com","$2b$10$.J/lwdhpQFA4yZPbkXxvvefuXodYqkqWBCGNg.GKn7uNsdzwhl/9W","מערב-ים","עמיאל","0549552120","זכר","C",NULL,True,"2024-03-18 15:50:54.793+00","2024-03-18 15:50:56.135+00",2
+"teamOwner1@gmail.com","$2b$10$ANgRnntpsctZRedSmBK9FuTVaGgpzXqeShKFdmiPZ.6q3BTU8MGY2","קבוצה1","ראש","0549552120","זכר","B",NULL,True,"2024-03-18 15:50:39.13+00","2024-03-18 15:50:40.858+00",1
+"teamOwner2@gmail.com","$2b$10$.FRHKtmH8Yr9/5pb2WYmCebimkK.ugaRHhzArTX39qN9YcezEGloy","קבוצה2","ראש","0549552120","זכר","B",NULL,True,"2024-03-18 15:50:40.94+00","2024-03-18 15:50:42.424+00",1
+"teamOwner3@gmail.com","$2b$10$VBWvwJWnWIv6tqh9gHE.V.b0ygkhhDk0RZg7G0Q1cUUt.BQ1UAkj.","קבוצה3","ראש","0549552120","נקבה","B",NULL,True,"2024-03-18 15:50:42.495+00","2024-03-18 15:50:44.042+00",1
+"teamOwner4@gmail.com","$2b$10$i2u1nYMaMzylO3UdARh5Xu.RBC6ErVlNQLP42sBFZspI4djBgw9PW","קבוצה4","ראש","0549552120","זכר","B",NULL,True,"2024-03-18 15:50:44.112+00","2024-03-18 15:50:45.7+00",2
+"teamOwner5@gmail.com","$2b$10$cjxerYNRxRTc10J9xMKv9OjPFaSwl6nRtn9KMPpW6.mFu/YXZZxn.","קבוצה5","ראש","0549552120","זכר","B",NULL,True,"2024-03-18 15:50:45.771+00","2024-03-18 15:50:47.445+00",2
+"teamOwner6@gmail.com","$2b$10$JKxd0PgQpqOP.AWXsnACTepaTskjFkBb8RAWiB3v103rj1Uc5xD7O","קבוצה6","ראש","0549552120","נקבה","B",NULL,True,"2024-03-18 15:50:47.517+00","2024-03-18 15:50:49.357+00",2

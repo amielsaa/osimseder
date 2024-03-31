@@ -12,17 +12,22 @@
     z-index: 1000; /* Ensure it's above other elements */
     border: 2px double var(--ORANGE-COLOR);
   }
+  .confirm_title{
+    color: var(--PURPLE-COLOR);
+    margin-bottom: 3%;
+  }
   
   .confirm-button {
     background-color: var(--ORANGE-COLOR);
     width: 30%;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--BORDER-RADIUS);
     padding: 8px 12px;
     cursor: pointer;
     outline: none;
     margin-top: 10px;
     font-size: 1.2rem;
   }
+ 
   

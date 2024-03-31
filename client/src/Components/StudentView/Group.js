@@ -32,14 +32,23 @@ const Group = ({ groupId }) => {
 
   const handleConfirmation = async (confirmed) => {
     if (confirmed) {
-      await handleJoinGroup(selectedGroupId, user.id);
+      try{
       const group = await fetchGroupById(selectedGroupId);
+      if(group.capacity > group.memberCount){ 
+      await handleJoinGroup(selectedGroupId, user.id);
+      await updateUserGroupId(selectedGroupId)
       setStudentsList(group.students);
       setMemberCount({ capacity: group.capacity, memberCount: group.memberCount });
-      updateUserGroupId(selectedGroupId)
       navigate(`/GroupPage/${selectedGroupId}`)
+      }
+      else {
+        setShowConfirm(true)
+      }
      /*  setShowConfirm(true); // Show the confirmation after successfully joining the group */
     }
+    catch(e){
+    }
+ }
     setShowConfirmation(false);
   }
 
@@ -61,6 +70,12 @@ const Group = ({ groupId }) => {
           confirmationMessage={`האם תרצה להצטרף לקבוצה ${selectedGroupId}?`}
           handleConfirmation={handleConfirmation}
           setShowConfirmation={setShowConfirmation}
+        />
+      )}
+      {showConfirm && (
+        <ConfirmMessage
+          confirmationMessage={`!אופס, קבוצה ${selectedGroupId} מלאה`}
+          handleConfirm={() => setShowConfirm(false)}
         />
       )}
       

@@ -1,9 +1,11 @@
 const { Sequelize } = require('sequelize');
 const {Groups, Schools, Students, Areas, Cities, Staffs, Houses} = require('../models');
 const userManagementLogic = require("./UserManagementLogic")
+const EmailEncryptor = require('./utils/EmailEncryptor');
 const { usersLogger, groupsLogger } = require('../utils/logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const StaffStudentLogic = require('./StaffStudentLogic');
+const String2Int = require('./utils/String2Int');
 
 class StaffGroupLogic {
 
@@ -40,12 +42,15 @@ class StaffGroupLogic {
             });
     
             group.dataValues.students = studentNames;            
-            
+
+            const schoolName = await String2Int.getSchoolNameById(schoolId)
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+                capacity: group.capacity,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
             groupsLogger.info("Successfully created group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
             return responseData;
@@ -105,13 +110,21 @@ class StaffGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
-    
-            const responseData = groups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+
+            const responseData = await Promise.all(groups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             groupsLogger.debug("Successfully got groups by Team Owner for email: " + teamOwnerEmailAddr);
             return responseData;
         } catch (error) {
@@ -146,7 +159,7 @@ class StaffGroupLogic {
             for (let i = 0; i < schools.length; i++) {
                 const school = schools[i];
                 const groupsBySchool = await school.getGroups();
-                for (const group of groupsBySchool) {
+                for (let group of groupsBySchool) {
                     const students = await group.getStudents();
                     const studentNames = students.map(student => {
                         const { firstName, lastName, ...rest } = student;
@@ -157,12 +170,29 @@ class StaffGroupLogic {
                 }
             }
 
-            const responseData = newGroups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+            //const responseData = newGroups.map(group => ({
+            //    id: group.id,
+            //    students: group.dataValues.students,
+            //    memberCount: group.dataValues.students.length,
+            //    capacity: group.capacity,
+            //    schoolId: group.schoolId,
+            //    schoolName: await String2Int.getSchoolNameById(group.schoolId)
+            //}));
+            const responseData = await Promise.all(newGroups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             groupsLogger.debug("Successfully got groups by City Manager for email: " + cityManagerEmail);
             return responseData;
 
@@ -195,13 +225,21 @@ class StaffGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
-    
-            const responseData = groups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+
+            const responseData = await Promise.all(groups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got all groups");
             return responseData;
@@ -240,18 +278,23 @@ class StaffGroupLogic {
         
             const studentNames = students.map(student => {
                 const { firstName, lastName, email,...rest } = student;
-                return {fullname:`${firstName} ${lastName}`, email:email};
-            });
-            group.dataValues.students = studentNames;            
-            
+                const encryptedEmail = EmailEncryptor.encryptEmail(email);
 
+                return {fullname:`${firstName} ${lastName}`, email:email, encryptedEmail:encryptedEmail};
+            });
+            group.dataValues.students = studentNames;       
+            
+            const schoolName = await String2Int.getSchoolNameById(group.schoolId)
             const responseData = {
                 id: group.id,
                 students: group.dataValues.students,
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity,
-                houseId: group.houseId
+                houseId: group.houseId,
+                schoolId: group.schoolId,
+                schoolName: schoolName
             };
+
             groupsLogger.debug("Successfully got group by ID for group ID: " + groupId + ". By user: " + user.email);
             return responseData;
 
@@ -287,6 +330,9 @@ class StaffGroupLogic {
                 id: school.id,
                 schoolName: school.schoolName
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got schools by City for city: " + cityName);
             return responseData;
@@ -324,13 +370,21 @@ class StaffGroupLogic {
         
                 group.dataValues.students = studentNames;            
             }
-    
-            const responseData = groups.map(group => ({
-                id: group.id,
-                students: group.dataValues.students,
-                memberCount: group.dataValues.students.length,
-                capacity: group.capacity
+
+            const responseData = await Promise.all(groups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName
+                };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got all groups without house for school: " + schoolId);
             return responseData;
@@ -488,6 +542,9 @@ module.exports = new StaffGroupLogic();
             memberCount: group.dataValues.students.length,
             capacity: group.capacity
         }));
+
+                // Sort responseData by id
+        responseData.sort((a, b) => a.id - b.id);
  
         return responseData;
 
