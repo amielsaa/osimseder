@@ -38,6 +38,47 @@ class StaffStudentLogic {
         }
     }
 
+// add student to group by email and group id
+// Input: studentEmail - the email of the student
+//        groupId - the id of the group
+// Output: the updated student object
+    async addStudentToGroup(studentEmail, groupId) {
+        try {
+            usersLogger.info('Adding a student to a group by email: ' + studentEmail + '. Group id: ' + groupId);
+            argumentChecker.checkSingleArugments([studentEmail, groupId], ['studentEmail', 'groupId']);
+
+            const student = await Students.findOne({
+                where: { email: studentEmail }
+            });
+            if(!student){
+                throw new Error('Couldn\'t find a student with that email.');
+            }
+
+            // need to check in group logic if the group is full
+            const group = await Groups.findOne({ where: { id: groupId } });
+            if (!group) {
+                throw new Error('Couldn\'t find a group with that id.');
+            }
+            const currentSize = await group.getStudents();
+            if (currentSize !== undefined) {
+                const hasRoom = group.capacity - currentSize.length;
+                if (!hasRoom) {
+                    throw new Error('Group is full');
+                }
+            }
+
+            student.groupId = groupId;
+            await student.save();
+
+            usersLogger.info('Successfully added a student to a group by email: ' + studentEmail + '. Group id: ' + groupId);
+            return student;
+
+        } catch (error) {
+            usersLogger.error('Failed to add a student to a group by email: ' + error);
+            throw new Error('Failed to add a student to a group by email: ' + error);
+        }
+    }
+
     //Needed - Get the Student's groupId
     async getGroupIdOfStudent(email) {
         try {
