@@ -144,5 +144,24 @@
 .user_not_in_group .move_to_groups_button:hover {
   background-color: darkred;
 }
+.join_student_to_group_div{
+  
+    width: 100%;
+    display: flex;
+    align-items: center;
+    min-height: 5%;
+    justify-content: space-between;
+}
+.add_to_group_button{
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+  
+}
+
 
   
