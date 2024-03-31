@@ -1,12 +1,12 @@
 const { roleGroup } = require('../../utils/Accesses')
-const Encryptor = require('./Encryptor');
+const EmailEncryptor = require('./EmailEncryptor');
 const string2Int = require('./String2Int');
 
 async function formatStaffValues(staff) {
     const { password, ...staffJson } = staff;
     staffJson.dataValues.role = roleGroup[staff.accesses];
     staffJson.dataValues.cityName = await string2Int.getCityNameById(staff.cityId);
-    staffJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(staff.email);
+    staffJson.dataValues.encryptedEmail = await EmailEncryptor.encryptEmail(staff.email);
     return staffJson;
 }
 
@@ -15,7 +15,7 @@ async function formatStudentValues(student) {
     studentJson.dataValues.role = "Student";
     studentJson.dataValues.cityName = await string2Int.getCityNameById(student.cityId);
     studentJson.dataValues.schoolName = await string2Int.getSchoolNameById(student.schoolId);
-    studentJson.dataValues.encryptedEmail = await Encryptor.encryptEmail(student.email);
+    studentJson.dataValues.encryptedEmail = await EmailEncryptor.encryptEmail(student.email);
     return studentJson;
 }
 

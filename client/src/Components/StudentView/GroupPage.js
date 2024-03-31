@@ -24,11 +24,12 @@ const GroupPage = () => {
       navigate('/404')
     }
   })
-  useEffect(() => {
+  /* useEffect(() => {
+
     if(user.role === "Student" && user.groupId !== id && id !== "-1"){
       navigate('/404')
     }
-  })
+  }) */
 
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request

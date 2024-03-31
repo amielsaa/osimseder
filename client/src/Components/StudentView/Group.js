@@ -36,9 +36,9 @@ const Group = ({ groupId }) => {
       const group = await fetchGroupById(selectedGroupId);
       if(group.capacity > group.memberCount){ 
       await handleJoinGroup(selectedGroupId, user.id);
+      await updateUserGroupId(selectedGroupId)
       setStudentsList(group.students);
       setMemberCount({ capacity: group.capacity, memberCount: group.memberCount });
-      updateUserGroupId(selectedGroupId)
       navigate(`/GroupPage/${selectedGroupId}`)
       }
       else {
