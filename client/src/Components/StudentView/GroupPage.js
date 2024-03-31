@@ -24,6 +24,11 @@ const GroupPage = () => {
       navigate('/404')
     }
   })
+  useEffect(() => {
+    if(user.role === "Student" && user.groupId !== id && id !== "-1"){
+      navigate('/404')
+    }
+  })
 
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
@@ -59,19 +64,15 @@ const GroupPage = () => {
     const group = await getGroupById(id);
     setGroupInfo(group);
     setStudentsList(group.students);
-    setIsLoading(false); // Set loading to false when data is fetched
+    
   }
 
   useEffect(() => {
-    if (id !== '-1') {
+    if (id !== '-1' && (user.role === "Student" && user.groupId !== id)) {
       setGroupRequest();
     }
   }, [id])
 
-  // Render loading indicator if still loading
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>

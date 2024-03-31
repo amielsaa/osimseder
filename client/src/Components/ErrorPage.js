@@ -1,5 +1,10 @@
+
+import { useContext } from 'react';
 import './css/ErrorPage.css'
+import DataContext from '../Helpers/DataContext';
+
 const ErrorPage = () => {
+  const {navigate} = useContext(DataContext)
   return (
     <div className="error_body">
       <div className="center_error">
@@ -9,6 +14,7 @@ const ErrorPage = () => {
         <p>2. רזולוציית המסך שלך הינה לא של מובייל</p>
         <p> לצערנו, האתר זמין כרגע רק למשתמשי מובייל</p>
         <p>3. אין לך גישה לעמוד הזה</p>
+        <button className='home_route' onClick={() => {navigate('/Home')}}>חזור לעמוד הבית</button>
       </div>
     </div>
   );
