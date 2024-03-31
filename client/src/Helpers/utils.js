@@ -20,6 +20,14 @@ const getUserByEmail = async (email) => {
         return res.data.dataValues;
     }
 }
+const authenticateRegisterEmail = async (token, encryptedEmail) => {
+    const res = await axios.get(`${URL}/auth/verify-email/${token}/${encryptedEmail}`, headers);
+    if(res.data.error) {
+        alert(res.data.error)
+    } else {
+        return res.data;
+    }
+}
 
 
-export {decryptEmail, getUserByEmail}
+export {decryptEmail, getUserByEmail, authenticateRegisterEmail}

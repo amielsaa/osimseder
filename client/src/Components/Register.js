@@ -6,12 +6,16 @@ import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
 import {fetchAllSchoolsByCityForRegister} from '../Helpers/StudentFrontLogic'
+import ConfirmMessage from './ConfirmMessage';
 
 function Registration() {
     const {navigate} = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
     const [schoolsList, setSchoolsList] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState('');
+    const [email, setEmail] = useState('')
+    const [showConfirm, setShowConfirm] = useState(false)
+    const [showConfirmError, setShowConfirmError] = useState(false)
 
     const initialValues = {
         firstName: "",
@@ -58,11 +62,17 @@ function Registration() {
 
     const onSubmit = (data) => {
         data.city = selectedCity;
-        console.log(data);
+        setEmail(data.email)
         data.languages = [data.languages]
-        axios.post("http://localhost:3001/auth/register_student", data).then(() => {
-            navigate('/');
-        });         
+        axios.post("http://localhost:3001/auth/register_student", data)
+            .then(response => {
+                // If the response is successful (status 200), show confirmation
+                setShowConfirm(true);
+            })
+            .catch(error => {
+                // If there's an error in the response, show error
+                setShowConfirmError(true);
+            });
     };
 
     const handleCityChange = async (cityName) => {
@@ -74,7 +84,8 @@ function Registration() {
 
     return (
         <div className="formContainer">
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+            {!showConfirm && (
+                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
                     <div className='Title-Div'>
                     <h2>הרשמה</h2>
@@ -179,6 +190,22 @@ function Registration() {
                     </div>
                 </Form>
             </Formik>
+            )}
+            
+        {showConfirm && (
+        <ConfirmMessage
+            title = {"...עוד צעד אחד קטן"}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל ${email}\n`}
+            handleConfirm={() => navigate('/')}
+        />
+      )}
+        {showConfirmError && (
+        <ConfirmMessage
+            title = {"שגיאה"}
+            confirmationMessage={`אחד או יותר מהשדות לא מאושרים ע"י המערכת, נסה להחליף אימייל או סיסמה`}
+            handleConfirm={() => setShowConfirmError(false)}
+        />
+      )}
         </div>
     );
 }
