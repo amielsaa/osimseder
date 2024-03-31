@@ -25,6 +25,7 @@ const GroupForHouse = ({ groupJson, houseId }) => {
         <div className='group-id'>{` קבוצה : ${groupJson.id} `}</div>
         <button className='join-group-btn' onClick={() => navigate(`/GroupPage/${groupJson.id}`)}>צפה</button>
         <button className='join-group-btn' onClick={() => setShowConfirmation(true)}>שייך</button>
+        <div className='students-Count'>{groupJson.memberCount}/{groupJson.capacity}</div>
       </div>
 
 
