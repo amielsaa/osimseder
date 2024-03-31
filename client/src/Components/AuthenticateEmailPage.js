@@ -7,22 +7,24 @@ import {authenticateRegisterEmail} from '../Helpers/utils'
 
 const AuthenticateEmailPage = () => {
     const {navigate} = useContext(DataContext)
-    const {token, encryptedEmail} = useParams()
+    const { token, encryptedEmail } = useParams()
     const [response, setResponse] = useState(false)
     const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         const authenticate = async () => {
             setResponse(await authenticateRegisterEmail(token, encryptedEmail))
             setLoading(false)
         }
         authenticate()
-    })
+    }, [token])
+
   return (
     <>
     {response && !loading && (
         <ConfirmMessage
-            title = {"ההרשמה הסתיימה בהצלחה!"}
-            confirmationMessage={`ברוכים הבאים!`}
+            title = {"!ההרשמה הסתיימה בהצלחה"}
+            confirmationMessage={`!ברוכים הבאים`}
             handleConfirm={() => navigate('/')}
         />
       )}

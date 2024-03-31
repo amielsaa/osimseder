@@ -21,12 +21,12 @@ const getUserByEmail = async (email) => {
     }
 }
 const authenticateRegisterEmail = async (token, encryptedEmail) => {
-    const res = await axios.get(`${URL}/auth/verify-email/${token}/${encryptedEmail}`, headers);
-    if(res.data.error) {
-        alert(res.data.error)
-    } else {
-        return res.data;
+    const res = await axios.post(`${URL}/auth/verify-email/${token}/${encryptedEmail}`, {}, headers);
+    if (res.data.error) {
+        console.log(res.data.error);
+        return false;
     }
+    else { return true; }
 }
 
 

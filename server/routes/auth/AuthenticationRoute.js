@@ -5,7 +5,7 @@ const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const {accessGroup, validateAccess} = require('../../utils/Accesses');
 const LoginLogic = require("../../domain/LoginLogic");
-const Encryptor = require("../../domain/utils/Encryptor");
+const EmailEncryptor = require("../../domain/utils/EmailEncryptor");
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
     const studentData = req.body;
@@ -91,7 +91,7 @@ router.post('/log_out', async (req, res) => {
 router.get('/decryptEmail/:encryptedEmail', validateToken, validateAccess(accessGroup.A), async (req, res) => {
     try {
         const encryptedEmail = req.params.encryptedEmail;
-        const decryptedEmail = await Encryptor.decryptEmail(encryptedEmail);
+        const decryptedEmail = await EmailEncryptor.decryptEmail(encryptedEmail);
         res.json(decryptedEmail);
     } catch (err) {
         res.status(400).json({ message: err.message });
