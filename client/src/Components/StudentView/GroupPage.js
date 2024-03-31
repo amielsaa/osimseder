@@ -64,18 +64,35 @@ const GroupPage = () => {
     setAddStudent(true)
   }
 
-  const confirmAddMember = async () => {
-    const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
-    if (!res) {
-      setShowAddConfirmation(false)
-      setAddStudent(false)
-      setErrorConfirm(true)
-    }
-    else {
-      setGroupRequest();
-      setShowAddConfirmation(false)
-      setAddStudent(false)
-    }
+    const confirmAddMember = async () => {
+        try {
+            const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
+            if (!res) {
+                setShowAddConfirmation(false)
+                setAddStudent(false)
+                setErrorConfirm(true)
+            }
+            else {
+                setGroupRequest();
+                setShowAddConfirmation(false)
+                setAddStudent(false)
+            }
+        } catch {
+            setShowAddConfirmation(false)
+            setAddStudent(false)
+            setErrorConfirm(true)
+        }
+    //const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
+    //if (!res) {
+    //  setShowAddConfirmation(false)
+    //  setAddStudent(false)
+    //  setErrorConfirm(true)
+    //}
+    //else {
+    //  setGroupRequest();
+    //  setShowAddConfirmation(false)
+    //  setAddStudent(false)
+    //}
     
   }
   const confirmRemoveMember = (confirmed) => {

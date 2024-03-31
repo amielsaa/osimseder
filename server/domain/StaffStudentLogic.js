@@ -1,4 +1,4 @@
-const {Students} = require('../models');
+const {Students, Groups} = require('../models');
 const argumentChecker = require('./utils/ArgumentChecker');
 const {usersLogger} = require('../utils/logger');
 
@@ -55,10 +55,13 @@ class StaffStudentLogic {
             }
 
             // need to check in group logic if the group is full
-            const group = await Groups.findOne({ where: { id: groupId } });
+            const group = await Groups.findOne({
+                where: { id: groupId }
+            });
             if (!group) {
                 throw new Error('Couldn\'t find a group with that id.');
             }
+
             const currentSize = await group.getStudents();
             if (currentSize !== undefined) {
                 const hasRoom = group.capacity - currentSize.length;

@@ -23,7 +23,7 @@ router.put('/:email', validateToken, validateAccess(accessGroup.C), async (req, 
 });
 
 // add a student to a group by email and group id
-router.post('/addGroupMember', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.put('/addGroupMember/:email', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const studentEmail = req.params.email;
         const groupId = req.body.groupId;
