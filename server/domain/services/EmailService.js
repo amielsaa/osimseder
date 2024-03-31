@@ -53,7 +53,7 @@ class EmailService {
                 if (!staff) {
                     throw new Error('No user with this email');
                 }
-                const isStudent = false;
+                let isStudent = false;
                 const staffToken = staff.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -66,7 +66,7 @@ class EmailService {
                 }
             }
             else {
-                const isStudent = true;
+                let isStudent = true;
                 const studentToken = student.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -89,12 +89,12 @@ class EmailService {
 
 
     async sendResetPasswordEmail(email, token) {
-        const isStudent = false;
+        let isStudent = false;
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
         const resetLink = `https://garineiudi.org.il/api/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        let isStudent = false;
+        isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
         });
