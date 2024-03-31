@@ -31,7 +31,7 @@ const buildPath = path.normalize(path.join(__dirname, './build'));
    });
  app.use(rootRouter);
 
-db.sequelize.sync()
+db.sequelize.sync({ force: true})
     .then(() => {
         console.log('Database synchronized successfully');
         app.listen(port, () => {
