@@ -1,0 +1,294 @@
+2024-03-31T10:19:19.058Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:19.078Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:19.085Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:19.089Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:37.285Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:37.289Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:37.302Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:37.307Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T10:19:38.010Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T10:19:38.015Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T10:19:38.045Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T10:19:38.053Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T10:19:38.064Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T10:19:38.077Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T10:19:38.094Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T10:19:38.097Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T10:19:38.115Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T10:19:38.128Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T10:19:38.134Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T10:19:38.146Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T10:19:38.152Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T10:19:38.157Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T10:19:38.188Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T10:19:38.190Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T11:53:46.269Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T11:53:46.272Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T11:53:46.295Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T11:53:46.298Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T11:53:50.160Z 	DEBUG 	Initiate get house groups by house id: 1
+2024-03-31T11:53:50.163Z 	DEBUG 	Initiate get house by id: 1
+2024-03-31T11:53:50.176Z 	DEBUG 	Successfully got house groups by house id: 1
+2024-03-31T11:53:50.179Z 	DEBUG 	Successfully got house by id: 1
+2024-03-31T11:53:50.214Z 	DEBUG 	Initiate get house by id: 1
+2024-03-31T11:53:50.229Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T11:53:50.244Z 	DEBUG 	Initiate get house groups by house id: 1
+2024-03-31T11:53:50.246Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T11:53:50.260Z 	DEBUG 	Getting all tasks by houseId: 1
+2024-03-31T11:53:50.282Z 	DEBUG 	Successfully got house by id: 1
+2024-03-31T11:53:50.284Z 	DEBUG 	Successfully found all tasks by houseId: 1
+2024-03-31T11:53:50.291Z 	DEBUG 	Successfully got house groups by house id: 1
+2024-03-31T11:53:50.299Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T11:53:50.302Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T11:53:50.313Z 	DEBUG 	Getting all tasks by houseId: 1
+2024-03-31T11:53:50.319Z 	DEBUG 	Successfully found all tasks by houseId: 1
+2024-03-31T11:53:55.749Z 	DEBUG 	Initiate get house groups by house id: 100
+2024-03-31T11:53:55.753Z 	ERROR 	Failed to get house groups by house id: 100. Reason: Error: Couldn't find a house with that id.
+2024-03-31T11:53:55.764Z 	DEBUG 	Initiate get house by id: 100
+2024-03-31T11:53:55.766Z 	ERROR 	Failed to get house by id: 100. Reason: Error: Couldn't get house with that ID.
+2024-03-31T11:53:55.779Z 	DEBUG 	Getting all tasks by houseId: 100
+2024-03-31T11:53:55.781Z 	ERROR 	Failed to get all tasks by houseId: Error: Couldn't find a house with that id.
+2024-03-31T11:53:55.807Z 	DEBUG 	Initiate get house groups by house id: 100
+2024-03-31T11:53:55.809Z 	ERROR 	Failed to get house groups by house id: 100. Reason: Error: Couldn't find a house with that id.
+2024-03-31T11:53:55.823Z 	DEBUG 	Getting all tasks by houseId: 100
+2024-03-31T11:53:55.836Z 	DEBUG 	Initiate get house by id: 100
+2024-03-31T11:53:55.838Z 	ERROR 	Failed to get all tasks by houseId: Error: Couldn't find a house with that id.
+2024-03-31T11:53:55.839Z 	ERROR 	Failed to get house by id: 100. Reason: Error: Couldn't get house with that ID.
+2024-03-31T11:54:12.644Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T11:54:12.667Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T11:54:12.671Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T11:54:12.673Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T12:29:47.342Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T12:29:47.366Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T12:29:47.458Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T12:29:47.461Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T12:29:48.582Z 	DEBUG 	Initiate get house groups by house id: 1
+2024-03-31T12:29:48.586Z 	DEBUG 	Initiate get house by id: 1
+2024-03-31T12:29:48.602Z 	DEBUG 	Successfully got house groups by house id: 1
+2024-03-31T12:29:48.607Z 	DEBUG 	Successfully got house by id: 1
+2024-03-31T12:29:48.629Z 	DEBUG 	Initiate get house by id: 1
+2024-03-31T12:29:48.642Z 	DEBUG 	Initiate get house groups by house id: 1
+2024-03-31T12:29:48.648Z 	DEBUG 	Getting all tasks by houseId: 1
+2024-03-31T12:29:48.664Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T12:29:48.674Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T12:29:48.676Z 	DEBUG 	Successfully found all tasks by houseId: 1
+2024-03-31T12:29:48.678Z 	DEBUG 	Successfully got house groups by house id: 1
+2024-03-31T12:29:48.679Z 	DEBUG 	Successfully got house by id: 1
+2024-03-31T12:29:48.702Z 	DEBUG 	Getting all tasks by houseId: 1
+2024-03-31T12:29:48.710Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T12:29:48.718Z 	DEBUG 	Successfully found all tasks by houseId: 1
+2024-03-31T12:29:48.733Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T12:29:50.227Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:29:50.230Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:29:57.062Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:29:57.078Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:16.571Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:16.594Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:16.963Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:16.969Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:18.375Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:30:18.378Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:30:20.031Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:30:20.034Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:30:21.170Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:30:21.173Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:30:23.098Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:23.105Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:23.799Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:30:23.802Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:30:25.474Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:25.489Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:25.804Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:25.811Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:38.764Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:38.794Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:40.245Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T12:30:40.249Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T12:30:47.254Z 	INFO 	Initiate update house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T12:30:47.261Z 	INFO 	Successfully updated house by id: 1. By email: amielbsv@gmail.com
+2024-03-31T15:11:27.958Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:27.995Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:28.006Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:28.009Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:29.075Z 	DEBUG 	Initiate get house by id: 9
+2024-03-31T15:11:29.083Z 	DEBUG 	Initiate get house groups by house id: 9
+2024-03-31T15:11:29.088Z 	DEBUG 	Successfully got house groups by house id: 9
+2024-03-31T15:11:29.091Z 	DEBUG 	Successfully got house by id: 9
+2024-03-31T15:11:29.114Z 	DEBUG 	Getting all tasks by houseId: 9
+2024-03-31T15:11:29.128Z 	DEBUG 	Initiate get house by id: 9
+2024-03-31T15:11:29.131Z 	DEBUG 	Initiate get house groups by house id: 9
+2024-03-31T15:11:29.143Z 	DEBUG 	Successfully found all tasks by houseId: 9
+2024-03-31T15:11:29.152Z 	DEBUG 	Successfully got house groups by house id: 9
+2024-03-31T15:11:29.156Z 	DEBUG 	Successfully got house by id: 9
+2024-03-31T15:11:29.171Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:29.177Z 	DEBUG 	Getting all tasks by houseId: 9
+2024-03-31T15:11:29.177Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:29.180Z 	DEBUG 	Successfully found all tasks by houseId: 9
+2024-03-31T15:11:29.209Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:29.211Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:31.682Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T15:11:31.685Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T15:11:33.644Z 	INFO 	Initiate update house by id: 9. By email: amielbsv@gmail.com
+2024-03-31T15:11:33.651Z 	INFO 	Successfully updated house by id: 9. By email: amielbsv@gmail.com
+2024-03-31T15:11:36.881Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:36.885Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:36.896Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:36.900Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:37.957Z 	DEBUG 	Initiate get house groups by house id: 10
+2024-03-31T15:11:37.960Z 	DEBUG 	Successfully got house groups by house id: 10
+2024-03-31T15:11:37.974Z 	DEBUG 	Initiate get house by id: 10
+2024-03-31T15:11:37.980Z 	DEBUG 	Successfully got house by id: 10
+2024-03-31T15:11:37.988Z 	DEBUG 	Initiate get house groups by house id: 10
+2024-03-31T15:11:37.992Z 	DEBUG 	Successfully got house groups by house id: 10
+2024-03-31T15:11:38.005Z 	DEBUG 	Initiate get house by id: 10
+2024-03-31T15:11:38.010Z 	DEBUG 	Successfully got house by id: 10
+2024-03-31T15:11:38.020Z 	DEBUG 	Getting all tasks by houseId: 10
+2024-03-31T15:11:38.022Z 	DEBUG 	Successfully found all tasks by houseId: 10
+2024-03-31T15:11:38.029Z 	DEBUG 	Getting all tasks by houseId: 10
+2024-03-31T15:11:38.033Z 	DEBUG 	Successfully found all tasks by houseId: 10
+2024-03-31T15:11:38.057Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:38.060Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:38.064Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:38.066Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:40.322Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:40.325Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:40.342Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:40.346Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:41.255Z 	DEBUG 	Initiate get house groups by house id: 8
+2024-03-31T15:11:41.258Z 	DEBUG 	Successfully got house groups by house id: 8
+2024-03-31T15:11:41.276Z 	DEBUG 	Initiate get house by id: 8
+2024-03-31T15:11:41.279Z 	DEBUG 	Getting all tasks by houseId: 8
+2024-03-31T15:11:41.311Z 	DEBUG 	Successfully found all tasks by houseId: 8
+2024-03-31T15:11:41.314Z 	DEBUG 	Initiate get house groups by house id: 8
+2024-03-31T15:11:41.319Z 	DEBUG 	Successfully got house by id: 8
+2024-03-31T15:11:41.334Z 	DEBUG 	Successfully got house groups by house id: 8
+2024-03-31T15:11:41.374Z 	DEBUG 	Getting all tasks by houseId: 8
+2024-03-31T15:11:41.377Z 	DEBUG 	Successfully found all tasks by houseId: 8
+2024-03-31T15:11:41.381Z 	DEBUG 	Initiate get house by id: 8
+2024-03-31T15:11:41.385Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:41.415Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:41.416Z 	DEBUG 	Successfully got house by id: 8
+2024-03-31T15:11:41.444Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:41.445Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:42.996Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:43.001Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:43.024Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:43.027Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:43.790Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:11:43.794Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:11:43.796Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:11:43.808Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:11:43.810Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:11:43.812Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:11:43.827Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:11:43.830Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:11:43.834Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:11:43.848Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:11:43.848Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:11:43.851Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:11:43.904Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:43.905Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:43.924Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:43.925Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:45.585Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:45.588Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:45.616Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:45.618Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:46.858Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T15:11:46.860Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T15:11:46.863Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T15:11:46.877Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T15:11:46.878Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T15:11:46.878Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T15:11:46.890Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T15:11:46.894Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T15:11:46.906Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T15:11:46.909Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T15:11:46.912Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T15:11:46.925Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:46.928Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:46.939Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T15:11:46.940Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:46.940Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:49.358Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T15:11:49.360Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T15:11:51.455Z 	INFO 	Initiate update house by id: 2. By email: amielbsv@gmail.com
+2024-03-31T15:11:51.464Z 	INFO 	Successfully updated house by id: 2. By email: amielbsv@gmail.com
+2024-03-31T15:11:54.565Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:54.568Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:54.579Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:54.583Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:11:55.282Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:11:55.284Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:11:55.287Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:11:55.291Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:11:55.296Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:11:55.319Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:11:55.320Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:11:55.334Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:11:55.337Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:11:55.350Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:11:55.351Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:11:55.352Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:11:55.374Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:55.375Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:11:55.387Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:11:55.388Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:12:03.589Z 	DEBUG 	Getting all team owners by city name: BSV
+2024-03-31T15:12:03.591Z 	DEBUG 	Successfully found team owners by city name: BSV
+2024-03-31T15:12:05.559Z 	INFO 	Initiate update house by id: 3. By email: amielbsv@gmail.com
+2024-03-31T15:12:05.572Z 	INFO 	Successfully updated house by id: 3. By email: amielbsv@gmail.com
+2024-03-31T15:12:06.883Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:06.886Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:06.907Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:06.909Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:10.717Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T15:12:10.723Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T15:12:10.753Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T15:12:10.757Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T15:12:10.759Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T15:12:10.761Z 	DEBUG 	Initiate get house by id: 2
+2024-03-31T15:12:10.776Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:12:10.790Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:12:10.794Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T15:12:10.806Z 	DEBUG 	Successfully got house by id: 2
+2024-03-31T15:12:10.840Z 	DEBUG 	Initiating get staff name with email: teamOwner1@gmail.com
+2024-03-31T15:12:10.857Z 	DEBUG 	Successfully found staff member by email: teamOwner1@gmail.com
+2024-03-31T15:12:10.859Z 	DEBUG 	Getting all tasks by houseId: 2
+2024-03-31T15:12:10.862Z 	DEBUG 	Initiate get house groups by house id: 2
+2024-03-31T15:12:10.875Z 	DEBUG 	Successfully found all tasks by houseId: 2
+2024-03-31T15:12:10.878Z 	DEBUG 	Successfully got house groups by house id: 2
+2024-03-31T15:12:10.894Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:12:10.897Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:12:10.927Z 	DEBUG 	Initiating get staff name with email: teamOwner1@gmail.com
+2024-03-31T15:12:10.928Z 	DEBUG 	Successfully found staff member by email: teamOwner1@gmail.com
+2024-03-31T15:12:13.685Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:13.688Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:13.709Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:13.711Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:15.894Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:12:15.898Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:12:15.927Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:12:15.945Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:12:15.950Z 	DEBUG 	Initiate get house groups by house id: 3
+2024-03-31T15:12:15.952Z 	DEBUG 	Successfully got house groups by house id: 3
+2024-03-31T15:12:15.978Z 	DEBUG 	Initiate get house by id: 3
+2024-03-31T15:12:15.983Z 	DEBUG 	Successfully got house by id: 3
+2024-03-31T15:12:15.996Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:12:15.998Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:12:16.001Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:12:16.013Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:12:16.025Z 	DEBUG 	Initiating get staff name with email: amielbsv@gmail.com
+2024-03-31T15:12:16.029Z 	DEBUG 	Initiating get staff name with email: teamOwner1@gmail.com
+2024-03-31T15:12:16.030Z 	DEBUG 	Successfully found staff member by email: amielbsv@gmail.com
+2024-03-31T15:12:16.031Z 	DEBUG 	Successfully found staff member by email: teamOwner1@gmail.com
+2024-03-31T15:12:16.050Z 	DEBUG 	Initiating get staff name with email: teamOwner1@gmail.com
+2024-03-31T15:12:16.052Z 	DEBUG 	Successfully found staff member by email: teamOwner1@gmail.com
+2024-03-31T15:12:16.059Z 	DEBUG 	Getting all tasks by houseId: 3
+2024-03-31T15:12:16.065Z 	DEBUG 	Successfully found all tasks by houseId: 3
+2024-03-31T15:12:18.137Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:18.139Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:18.160Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:12:18.162Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:14:38.304Z 	DEBUG 	Initiate get all houses of city by email: amielbsv@gmail.com
+2024-03-31T15:14:38.322Z 	DEBUG 	Successfully got all houses of city by email: amielbsv@gmail.com

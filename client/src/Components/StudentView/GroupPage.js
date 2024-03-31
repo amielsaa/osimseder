@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FaHouseChimney } from "react-icons/fa6";
 import ConfirmationMessage from '../ConfirmationMessage';
-import { getGroupById, removeGroupMember, getStudentsWithoutGroupBySchoolId } from '../../Helpers/StaffFrontLogic';
+import { getGroupById, removeGroupMember, getStudentsWithoutGroupBySchoolId, addGroupMember } from '../../Helpers/StaffFrontLogic';
+import ConfirmMessage from '../ConfirmMessage';
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const GroupPage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true); // State to manage loading
   const [addStudent, setAddStudent] = useState(false)
-  const [selectedStudent, setSelectedStudent] = useState({})
+  const [selectedStudent, setSelectedStudent] = useState("")
   const [studentsFromSchoolWithNoGroup,setStudentsFromSchoolWithNoGroup] = useState([])
   const [studentList, setStudentsList] = useState([])
   const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
@@ -27,6 +28,7 @@ const GroupPage = () => {
   const [studentToRemove, setStudentToRemove] = useState('')
   const [groupInfo, setGroupInfo] = useState({});
   const [showAddConfirmation, setShowAddConfirmation] = useState(false);
+  const [errorConfirm,setErrorConfirm] = useState(false)
 
 
   useEffect(() => {
@@ -58,14 +60,23 @@ const GroupPage = () => {
   }
   const prepareToAddStudent = async () => {
     const res = await getStudentsWithoutGroupBySchoolId(groupInfo.schoolId)
-    console.log(res)
-    setStudentsFromSchoolWithNoGroup()
+    setStudentsFromSchoolWithNoGroup(res)
     setAddStudent(true)
   }
 
-  const confirmAddMember = () => {
-    setShowAddConfirmation(false)
-    setAddStudent(false)
+  const confirmAddMember = async () => {
+    const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
+    if (!res) {
+      setShowAddConfirmation(false)
+      setAddStudent(false)
+      setErrorConfirm(true)
+    }
+    else {
+      setGroupRequest();
+      setShowAddConfirmation(false)
+      setAddStudent(false)
+    }
+    
   }
   const confirmRemoveMember = (confirmed) => {
     if (confirmed) {
@@ -86,12 +97,15 @@ const GroupPage = () => {
     const group = await getGroupById(id);
     setGroupInfo(group);
     setStudentsList(group.students);
+    console.log(group.students)
     
   }
 
   useEffect(() => {
     if (id !== '-1' && ((user.role === "Student" && user.groupId !== id) || user.role !== "Student")) {
       setGroupRequest();
+      
+
     }
   }, [id])
 
@@ -131,8 +145,8 @@ const GroupPage = () => {
                   <div className="member_select_wrapper">
                     <select value={selectedStudent} onChange={(e) => setSelectedStudent(e.target.value)}>
                       <option value="">בחר/י חניך</option>
-                      {studentsFromSchoolWithNoGroup.map((member, index) => (
-                        <option key={index} value={index}>{member.fullName}</option>
+                      {studentsFromSchoolWithNoGroup.map((student, index) => (
+                        <option key={index} value={index}>{student.firstName + " " + student.lastName}</option>
                       ))} 
                     </select>
                   </div>
@@ -185,9 +199,15 @@ const GroupPage = () => {
       )}
       {showAddConfirmation && (
         <ConfirmationMessage
-          confirmationMessage={`להוסיף את ${selectedStudent.fullname} לקבוצה?`}
+          confirmationMessage={`להוסיף את ${studentsFromSchoolWithNoGroup[selectedStudent].firstName + " " + studentsFromSchoolWithNoGroup[selectedStudent].lastName } לקבוצה?`}
           handleConfirmation={confirmAddMember}
           setShowConfirmation={setShowAddConfirmation}
+        />
+      )}
+       {errorConfirm && (
+        <ConfirmMessage
+          confirmationMessage={`ההוספה לא הצליחה, ייתכן כי הקבוצה הגיע לסף המקסימלי של המקומות או שתיתכן שגיאה פנימית במערכת`}
+          handleConfirm={() => setErrorConfirm(false)}
         />
       )}
 
