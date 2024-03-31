@@ -412,6 +412,31 @@ const setupStaffs = async () => {
         city: 'ירושלים'
     });
     await createdUser.update({ isVerified: true, verificationToken: null });
+    //=======================================================================================================
+    // Ours
+    createdUser = await registrationLogic.registerStaff({
+        email: 'teamOwner1@gmail.com',
+        password: '123456', // Please provide the password
+        lastName: 'שש',
+        firstName: 'ראש קבוצה בש',
+        phoneNumber: '0505050505',
+        gender: 'זכר',
+        accesses: 'B',
+        city: 'ירושלים'
+    });
+    await createdUser.update({ isVerified: true, verificationToken: null });
+    // Ours
+    createdUser = await registrationLogic.registerStaff({
+        email: 'teamOwner2@gmail.com',
+        password: '123456', // Please provide the password
+        lastName: 'שש',
+        firstName: 'ראש קבוצה בש',
+        phoneNumber: '0505050505',
+        gender: 'נקבה',
+        accesses: 'B',
+        city: 'ירושלים'
+    });
+    await createdUser.update({ isVerified: true, verificationToken: null });
 }
 
 

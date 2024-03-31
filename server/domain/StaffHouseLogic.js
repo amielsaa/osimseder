@@ -57,6 +57,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of city by email: " + userEmail);
             return houses;
 
@@ -91,6 +96,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of area by email: " + areaManagerEmail);
             return houses;
 
@@ -114,6 +124,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of team owner by email: " + userEmail);
             return houses;
 
