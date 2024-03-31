@@ -22,5 +22,15 @@ router.put('/:email', validateToken, validateAccess(accessGroup.C), async (req, 
     }
 });
 
+// get students from a school without a group
+router.get('/getStudentsWithoutGroupBySchool/:schoolId', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const schoolId = req.params.schoolId;
+        const students = await StaffStudentLogic.getStudentsWithoutGroup(schoolId);
+        res.json(students);
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+});
 
 module.exports = router;

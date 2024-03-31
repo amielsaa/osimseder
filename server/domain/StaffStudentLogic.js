@@ -53,6 +53,27 @@ class StaffStudentLogic {
         }
     }
 
+// Get all students from school without a group
+// Input: schoolId - the id of the school to draw the studetnts from
+// Output: array of students
+    async getStudentsWithoutGroup(schoolId) {
+        try {
+            usersLogger.debug('Getting all students from school without a group. School id: ' + schoolId);
+            argumentChecker.checkSingleArugments([schoolId], ['schoolId']);
+
+            const students = await Students.findAll({
+                where: {schoolId: schoolId, groupId: null}
+            });
+
+            usersLogger.info('Successfully found all students from school without a group. School id: ' + schoolId);
+            return students;
+
+        } catch (error) {
+            usersLogger.error('Failed to find all students from school without a group: ' + error);
+            throw new Error('Failed to find all students from school without a group: ' + error);
+        }
+    }
+
 }
 
 module.exports = new StaffStudentLogic();
