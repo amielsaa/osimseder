@@ -97,7 +97,7 @@ const GroupPage = () => {
     const group = await getGroupById(id);
     setGroupInfo(group);
     setStudentsList(group.students);
-    console.log(group.students)
+    
     
   }
 
