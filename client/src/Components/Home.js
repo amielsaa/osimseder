@@ -27,6 +27,7 @@ const Home = () => {
     
     <div className='content-Box-Home'>
         <h1>עושים סדר</h1>
+        <h1>!ברוכים הבאים ותודה על ההשתתפות</h1>
     </div>
     <Footer/>
     </>
