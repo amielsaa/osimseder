@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . /app
 
-EXPOSE 3001
+EXPOSE 3000
 
 # Add wait-for-it.sh to the image
 # COPY wait-for-it.sh /app

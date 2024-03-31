@@ -44,7 +44,7 @@ const Login = () => {
       code: code,
     };
 
-    axios.post("http://localhost:3001/auth/login", data).then((res) => {
+    axios.post("https://garineiudi.org.il/api/auth/login", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 //localStorage.clear();

@@ -21,7 +21,7 @@ class EmailService {
     async sendVerificationEmail(email, token) {
         //usersLogger.info("Intiating sending verification email to: " + email);
         //argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        //const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        //const verificationLink = `https://garineiudi.org.il/api/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         //console.log(verificationLink);
         //await transporter.sendMail({
         //    to: email,
@@ -89,10 +89,11 @@ class EmailService {
 
 
     async sendResetPasswordEmail(email, token) {
+        const isStudent = false;
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `http://localhost:3000/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        const resetLink = `https://garineiudi.org.il/api/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
         let isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
