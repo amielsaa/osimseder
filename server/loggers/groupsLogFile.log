@@ -582,3 +582,793 @@
 2024-03-29T16:03:22.224Z 	DEBUG 	Successfully found all groups by groupId: 1
 2024-03-29T16:03:33.996Z 	DEBUG 	Getting all groups by groupId: 8
 2024-03-29T16:03:34.014Z 	DEBUG 	Successfully found all groups by groupId: 8
+2024-03-29T23:13:23.912Z 	DEBUG 	Getting all groups by schoolId: 10
+2024-03-29T23:13:23.915Z 	DEBUG 	Successfully found all groups by schoolId: 10
+2024-03-29T23:13:23.919Z 	DEBUG 	Getting all groups by schoolId: 10
+2024-03-29T23:13:23.921Z 	DEBUG 	Successfully found all groups by schoolId: 10
+2024-03-29T23:13:27.206Z 	DEBUG 	Getting all groups by schoolId: 10
+2024-03-29T23:13:27.209Z 	DEBUG 	Successfully found all groups by schoolId: 10
+2024-03-29T23:13:27.217Z 	DEBUG 	Getting all groups by schoolId: 10
+2024-03-29T23:13:27.219Z 	DEBUG 	Successfully found all groups by schoolId: 10
+2024-03-29T23:14:33.488Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:14:33.494Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:14:33.500Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:14:33.505Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:48.442Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:48.452Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:48.463Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:48.469Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:53.801Z 	DEBUG 	Initiating Get Schools by City for city: באר שבע
+2024-03-29T23:21:53.808Z 	DEBUG 	Successfully got schools by City for city: באר שבע
+2024-03-29T23:21:56.519Z 	INFO 	Initiating Create Group for school ID: 1. of size:3. By email: ofirnp@gmail.com
+2024-03-29T23:21:56.561Z 	INFO 	Successfully created group for school ID: 1. of size:3. By email: ofirnp@gmail.com
+2024-03-29T23:21:56.568Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:56.581Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:56.590Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:56.625Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:21:56.639Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:21:56.645Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:21:56.653Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:21:56.668Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:22:14.103Z 	DEBUG 	Getting all groups by schoolId: 2
+2024-03-29T23:22:14.105Z 	DEBUG 	Successfully found all groups by schoolId: 2
+2024-03-29T23:22:14.220Z 	DEBUG 	Getting all groups by schoolId: 2
+2024-03-29T23:22:14.222Z 	DEBUG 	Successfully found all groups by schoolId: 2
+2024-03-29T23:22:35.467Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:22:35.473Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:22:35.502Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:22:35.507Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:22:35.541Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:22:35.559Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:22:35.576Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:22:35.587Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:22:37.304Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:22:37.311Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:22:37.336Z 	INFO 	Joining group by groupId: 1 and userEmail: student4@gmail.com
+2024-03-29T23:22:37.362Z 	ERROR 	Failed to join group ReferenceError: schoolName is not defined
+2024-03-29T23:22:37.472Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student4@gmail.com
+2024-03-29T23:22:37.485Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student4@gmail.com
+2024-03-29T23:22:37.493Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student4@gmail.com
+2024-03-29T23:22:37.502Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student4@gmail.com
+2024-03-29T23:22:49.833Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:22:49.848Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:22:49.878Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:22:49.889Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:23:04.770Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:23:04.775Z 	DEBUG 	Getting all groups by schoolId: 1
+2024-03-29T23:23:04.793Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:23:04.795Z 	DEBUG 	Successfully found all groups by schoolId: 1
+2024-03-29T23:23:04.880Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:23:04.892Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:23:04.901Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:23:04.915Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:23:06.296Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:23:06.301Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:23:06.320Z 	INFO 	Joining group by groupId: 1 and userEmail: student5@gmail.com
+2024-03-29T23:23:06.362Z 	ERROR 	Failed to join group ReferenceError: schoolName is not defined
+2024-03-29T23:23:06.441Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:06.449Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:06.469Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:06.502Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:16.077Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:16.085Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:16.095Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:23:16.104Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: student5@gmail.com
+2024-03-29T23:31:48.355Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:48.368Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:48.373Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:48.389Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:48.392Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:48.399Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:48.404Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:48.412Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:50.378Z 	DEBUG 	Initiating Get Schools by City for city: באר שבע
+2024-03-29T23:31:50.384Z 	DEBUG 	Successfully got schools by City for city: באר שבע
+2024-03-29T23:31:52.835Z 	INFO 	Initiating Create Group for school ID: 2. of size:5. By email: ofirnp@gmail.com
+2024-03-29T23:31:52.856Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:52.871Z 	INFO 	Successfully created group for school ID: 2. of size:5. By email: ofirnp@gmail.com
+2024-03-29T23:31:52.887Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:52.895Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:52.905Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:52.921Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:31:52.923Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:52.932Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:52.936Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:52.937Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:31:52.946Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:31:52.951Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:52.952Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:31:54.322Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:54.329Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:54.338Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:31:54.343Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:31:54.348Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:31:54.354Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:31:57.361Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:57.374Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:57.379Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:57.396Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:31:57.399Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:57.413Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:31:57.414Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:31:57.417Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:57.422Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:31:57.426Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:31:57.431Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:31:57.442Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:31:58.147Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:31:58.158Z 	DEBUG 	Initiating Get Group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:31:58.163Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:31:58.175Z 	DEBUG 	Successfully got group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:31:58.180Z 	DEBUG 	Initiating Get Group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:31:58.189Z 	DEBUG 	Successfully got group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:32:01.117Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:01.129Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:01.133Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:01.146Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:01.153Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:01.160Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:01.162Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:01.165Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:01.167Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:01.170Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:01.175Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:01.177Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:04.126Z 	DEBUG 	Initiating Get Schools by City for city: באר שבע
+2024-03-29T23:32:04.130Z 	DEBUG 	Successfully got schools by City for city: באר שבע
+2024-03-29T23:32:07.180Z 	INFO 	Initiating Create Group for school ID: 2. of size:6. By email: ofirnp@gmail.com
+2024-03-29T23:32:07.190Z 	INFO 	Successfully created group for school ID: 2. of size:6. By email: ofirnp@gmail.com
+2024-03-29T23:32:07.204Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:07.221Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:07.225Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:07.249Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:07.251Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:07.257Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:07.262Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:07.267Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:07.269Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:07.272Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:07.277Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:07.281Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:07.282Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:07.287Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:07.289Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:07.293Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:10.523Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:10.528Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:10.538Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:32:10.543Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:32:10.548Z 	DEBUG 	Initiating Get Group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:32:10.553Z 	DEBUG 	Successfully got group by ID for group ID: 1. By user: ofirnp@gmail.com
+2024-03-29T23:32:11.568Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:11.581Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:11.587Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:11.593Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:11.598Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:11.602Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:11.614Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:11.614Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:11.617Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:11.619Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:11.622Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:11.624Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:11.632Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:11.637Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:11.638Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:11.643Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:12.231Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:12.235Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:12.249Z 	DEBUG 	Initiating Get Group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:32:12.253Z 	DEBUG 	Successfully got group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:32:12.257Z 	DEBUG 	Initiating Get Group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:32:12.266Z 	DEBUG 	Successfully got group by ID for group ID: 2. By user: ofirnp@gmail.com
+2024-03-29T23:32:13.082Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:13.096Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:13.101Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:13.124Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:13.131Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:13.134Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:13.141Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:13.149Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:13.150Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:13.151Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:13.155Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:13.160Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:13.163Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:13.169Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:13.173Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:13.176Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:13.786Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:13.792Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:13.812Z 	DEBUG 	Initiating Get Group by ID for group ID: 3. By user: ofirnp@gmail.com
+2024-03-29T23:32:13.815Z 	DEBUG 	Successfully got group by ID for group ID: 3. By user: ofirnp@gmail.com
+2024-03-29T23:32:13.821Z 	DEBUG 	Initiating Get Group by ID for group ID: 3. By user: ofirnp@gmail.com
+2024-03-29T23:32:13.828Z 	DEBUG 	Successfully got group by ID for group ID: 3. By user: ofirnp@gmail.com
+2024-03-29T23:32:16.378Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:16.390Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:16.397Z 	DEBUG 	Initiating Get Groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:16.411Z 	DEBUG 	Successfully got groups by City Manager for email: ofirnp@gmail.com
+2024-03-29T23:32:16.416Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:16.420Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:16.423Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:16.429Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:16.432Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:16.435Z 	DEBUG 	Getting all groups by groupId: 2
+2024-03-29T23:32:16.437Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:16.441Z 	DEBUG 	Getting all groups by groupId: 3
+2024-03-29T23:32:16.445Z 	DEBUG 	Getting all groups by groupId: 1
+2024-03-29T23:32:16.448Z 	DEBUG 	Successfully found all groups by groupId: 2
+2024-03-29T23:32:16.453Z 	DEBUG 	Successfully found all groups by groupId: 3
+2024-03-29T23:32:16.454Z 	DEBUG 	Successfully found all groups by groupId: 1
+2024-03-29T23:32:38.973Z 	DEBUG 	Initiating Get Schools by City for city: באר שבע
+2024-03-29T23:32:38.977Z 	DEBUG 	Successfully got schools by City for city: באר שבע
+2024-03-29T23:32:38.982Z 	DEBUG 	Initiating Get Schools by City for city: באר שבע
+2024-03-29T23:32:38.985Z 	DEBUG 	Successfully got schools by City for city: באר שבע
+2024-03-29T23:32:40.771Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.777Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.780Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.784Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.804Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.808Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.814Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.817Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.833Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.837Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.846Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.847Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.856Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.860Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.871Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.875Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.885Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.889Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.901Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.904Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.913Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.918Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.926Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.930Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.939Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.943Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.952Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.956Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.965Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.969Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.977Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.980Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:40.989Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:40.993Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.001Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.005Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.013Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.016Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.024Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.028Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.036Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.039Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.048Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.052Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.061Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.064Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.073Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.077Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.087Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.091Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.100Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.104Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.113Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.117Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.126Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.129Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.139Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.143Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.150Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.155Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.163Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.166Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.175Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.179Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.187Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.191Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.199Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.203Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.211Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.215Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.224Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.228Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.236Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.240Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.247Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.250Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.258Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.262Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.269Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.274Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.281Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.285Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.293Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.297Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.305Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.309Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.316Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.320Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.328Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.332Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.339Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.342Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.350Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.354Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.362Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.365Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.373Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.377Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.384Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.389Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.396Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.399Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.407Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.412Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.421Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.424Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.434Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.439Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.447Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.450Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.463Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.467Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.475Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.478Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.486Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.489Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.497Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.500Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.509Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.512Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.552Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.556Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.573Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.577Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.601Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.606Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.619Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.625Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.633Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.637Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.650Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.654Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.664Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.668Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.678Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.681Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.693Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.697Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.706Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.710Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.720Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.725Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.735Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.740Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.748Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.752Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.762Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.766Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.775Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.780Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.790Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.793Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.803Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.807Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.815Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.819Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.829Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.832Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.847Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.851Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.859Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.863Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.875Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.880Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.889Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.894Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.903Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.906Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.914Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.917Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.926Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.929Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.937Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.942Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.950Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.954Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.963Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.967Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.975Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.979Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:41.987Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:41.991Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.000Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.004Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.012Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.015Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.025Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.029Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.038Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.042Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.051Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.056Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.064Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.067Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.075Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.081Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.089Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.093Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.101Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.105Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.114Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.117Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.126Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.130Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.139Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.142Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.150Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.154Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.162Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.166Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.174Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.177Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.185Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.190Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.197Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.200Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.208Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.211Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.219Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.223Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.231Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.236Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.244Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.247Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.254Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.257Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.265Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.267Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.274Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.278Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.284Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.288Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.294Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.297Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.304Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.307Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.314Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:42.321Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:42.338Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.343Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.353Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.361Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.372Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.377Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.386Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.391Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.401Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.406Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.417Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.422Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.430Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.435Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.446Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.450Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.458Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.462Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.470Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.475Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.484Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.489Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.497Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.502Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.509Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.513Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.522Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.526Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.535Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.540Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.556Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.560Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.569Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.574Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.581Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.585Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.594Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.599Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.606Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.610Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.617Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.621Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.628Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.632Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.639Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.644Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.650Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.656Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.663Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.667Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.675Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.679Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.687Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.692Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.699Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.704Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.712Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.716Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.724Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.728Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.736Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.740Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.747Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.752Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.761Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.765Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.773Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.778Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.785Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.789Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.796Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.800Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.807Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.811Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.836Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.841Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.856Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.860Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.887Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.892Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.909Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.913Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.923Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.930Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.940Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.951Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.961Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.966Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.975Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.980Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:42.993Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:42.998Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.006Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.012Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.020Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.027Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.036Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.042Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.053Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.060Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.072Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.077Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.087Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.093Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.103Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.109Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.119Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.124Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.141Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.146Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.155Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.161Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.170Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.175Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.182Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.188Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.196Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.201Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.210Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.214Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.222Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.228Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.237Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.243Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.252Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.259Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.266Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.272Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.278Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.283Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.290Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.294Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.302Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.307Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.314Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.319Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.325Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.330Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.336Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.339Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:43.346Z 	DEBUG 	Initiating Get all groups without house for school: 2
+2024-03-29T23:32:43.354Z 	DEBUG 	Successfully got all groups without house for school: 2
+2024-03-29T23:32:46.738Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.740Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.745Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.745Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.753Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.758Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.761Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.763Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.772Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.774Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.779Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.780Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.789Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.791Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.796Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.796Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.807Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.810Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.815Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.816Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.827Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.831Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.843Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.846Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.854Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.857Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.864Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.869Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.879Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.882Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.891Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.894Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.904Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.907Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.914Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.917Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.927Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.930Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.940Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.943Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.958Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.961Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.969Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.973Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.980Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.984Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:46.992Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:46.995Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.003Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.005Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.013Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.016Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.024Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.028Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.036Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.040Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.047Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.050Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.057Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.061Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.070Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.073Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.080Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.084Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.092Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.095Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.103Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.105Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.113Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.116Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.123Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.126Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.134Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.138Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.145Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.148Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.156Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.159Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.166Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.169Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.176Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.179Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.186Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.190Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.223Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.228Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.244Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.246Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.264Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.268Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.289Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.293Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.304Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.308Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.316Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.320Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.329Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.333Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.342Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.345Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.356Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.359Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.372Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.375Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.391Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.394Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.402Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.405Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.413Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.417Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.426Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.429Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.438Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.442Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.451Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.454Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.464Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.468Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.475Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.478Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.488Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.491Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.501Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.504Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.518Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.521Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.528Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.531Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.539Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.542Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.550Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.553Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.560Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.563Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.570Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.573Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.580Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.583Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.591Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.594Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.602Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.605Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.613Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.616Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.623Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.626Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.634Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.636Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.644Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.648Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.656Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.659Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.668Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.671Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.678Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.682Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.690Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.693Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.701Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.704Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.710Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.713Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.721Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.724Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.732Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.735Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.743Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.746Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.754Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.757Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.766Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.769Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.776Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.779Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.787Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.791Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.799Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.802Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.809Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.813Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.820Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.824Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.831Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.834Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.842Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.845Z 	DEBUG 	Successfully got all groups without house for school: 1
+2024-03-29T23:32:47.853Z 	DEBUG 	Initiating Get all groups without house for school: 1
+2024-03-29T23:32:47.857Z 	DEBUG 	Successfully got all groups without house for school: 1

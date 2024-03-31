@@ -127,9 +127,9 @@ function Registration() {
                         <label htmlFor="gender">מין: </label>
                         <Field as="select" id="gender" name="gender">
                             <option value="">בחר מין</option>
-                            <option value="Male">זכר</option>
-                            <option value="Female">נקבה</option>
-                            <option value="Other">אחר</option>
+                            <option value="זכר">זכר</option>
+                            <option value="נקבה">נקבה</option>
+                            <option value="אחר">אחר</option>
                         </Field>
                         <ErrorMessage name="gender" component="span" />
                     </div>
@@ -152,8 +152,8 @@ function Registration() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
                           <option value="">בחר עיר</option>
-                          <option value="JRS">ירושלים</option>
-                          <option value="BSV">באר שבע</option>
+                          <option value="ירושלים">ירושלים</option>
+                          <option value="באר שבע">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
