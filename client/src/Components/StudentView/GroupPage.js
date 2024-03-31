@@ -11,13 +11,25 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FaHouseChimney } from "react-icons/fa6";
 import ConfirmationMessage from '../ConfirmationMessage';
-import { getGroupById, removeGroupMember } from '../../Helpers/StaffFrontLogic';
+import { getGroupById, removeGroupMember, getStudentsWithoutGroupBySchoolId, addGroupMember } from '../../Helpers/StaffFrontLogic';
+import ConfirmMessage from '../ConfirmMessage';
 
 const GroupPage = () => {
   const { id } = useParams();
   const { user } = useContext(DataContext)
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true); // State to manage loading
+  const [addStudent, setAddStudent] = useState(false)
+  const [selectedStudent, setSelectedStudent] = useState("")
+  const [studentsFromSchoolWithNoGroup,setStudentsFromSchoolWithNoGroup] = useState([])
+  const [studentList, setStudentsList] = useState([])
+  const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
+  const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
+  const [studentToRemove, setStudentToRemove] = useState('')
+  const [groupInfo, setGroupInfo] = useState({});
+  const [showAddConfirmation, setShowAddConfirmation] = useState(false);
+  const [errorConfirm,setErrorConfirm] = useState(false)
+
 
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
@@ -33,11 +45,7 @@ const GroupPage = () => {
 
   //Amiel - take group Id and get for me all the necesecry data, the id from the useParams is the groupId!
   //Amiel - make sure I get the info like that from Axios request
-  const [studentList, setStudentsList] = useState([])
-  const [showRemoveConfirmation, setShowRemoveConfirmation] = useState(false);
-  const [removeConfirmationIndex, setRemoveConfirmationIndex] = useState(null);
-  const [studentToRemove, setStudentToRemove] = useState('')
-  const [groupInfo, setGroupInfo] = useState({});
+ 
 
   const handleRemoveMember = (index) => {
     // Display the confirmation message
@@ -45,7 +53,48 @@ const GroupPage = () => {
     setShowRemoveConfirmation(true);
     setRemoveConfirmationIndex(index);
   };
+  const popUpAddingScreen = () => {
+    if(selectedStudent !== "")
+    setShowAddConfirmation(true)
 
+  }
+  const prepareToAddStudent = async () => {
+    const res = await getStudentsWithoutGroupBySchoolId(groupInfo.schoolId)
+    setStudentsFromSchoolWithNoGroup(res)
+    setAddStudent(true)
+  }
+
+    const confirmAddMember = async () => {
+        try {
+            const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
+            if (!res) {
+                setShowAddConfirmation(false)
+                setAddStudent(false)
+                setErrorConfirm(true)
+            }
+            else {
+                setGroupRequest();
+                setShowAddConfirmation(false)
+                setAddStudent(false)
+            }
+        } catch {
+            setShowAddConfirmation(false)
+            setAddStudent(false)
+            setErrorConfirm(true)
+        }
+    //const res = await addGroupMember(studentsFromSchoolWithNoGroup[selectedStudent].email, id)
+    //if (!res) {
+    //  setShowAddConfirmation(false)
+    //  setAddStudent(false)
+    //  setErrorConfirm(true)
+    //}
+    //else {
+    //  setGroupRequest();
+    //  setShowAddConfirmation(false)
+    //  setAddStudent(false)
+    //}
+    
+  }
   const confirmRemoveMember = (confirmed) => {
     if (confirmed) {
       const res = removeGroupMember(studentToRemove.email)
@@ -66,11 +115,14 @@ const GroupPage = () => {
     setGroupInfo(group);
     setStudentsList(group.students);
     
+    
   }
 
   useEffect(() => {
-    if (id !== '-1' && (user.role === "Student" && user.groupId !== id)) {
+    if (id !== '-1' && ((user.role === "Student" && user.groupId !== id) || user.role !== "Student")) {
       setGroupRequest();
+      
+
     }
   }, [id])
 
@@ -98,6 +150,34 @@ const GroupPage = () => {
               <div className='group-title'>
                 <h1>חברי הקבוצה</h1>
               </div>
+              {user.role !== "Student" && user.role !== "TeamOwner" && (
+                
+                <div className='join_student_to_group_div'>
+                {!addStudent && (
+                  <button className='add_to_group_button' onClick={() => prepareToAddStudent()}>צרף +</button>
+                
+                )}
+                {addStudent && (
+                  <>
+                  <div className="member_select_wrapper">
+                    <select value={selectedStudent} onChange={(e) => setSelectedStudent(e.target.value)}>
+                      <option value="">בחר/י חניך</option>
+                      {studentsFromSchoolWithNoGroup.map((student, index) => (
+                        <option key={index} value={index}>{student.firstName + " " + student.lastName}</option>
+                      ))} 
+                    </select>
+                  </div>
+                    <button className="add_core_member_button" onClick={() => popUpAddingScreen()}> שייך </button>
+                </>
+                
+                )}
+                </div>
+                
+              )}
+              
+              
+
+                
               <div className='Group-Info'>
                 {studentList.length > 0 ? (
                   studentList.map((student, index) => (
@@ -132,6 +212,19 @@ const GroupPage = () => {
           confirmationMessage={`להסיר את ${studentToRemove.fullname} מהקבוצה?`}
           handleConfirmation={confirmRemoveMember}
           setShowConfirmation={setShowRemoveConfirmation}
+        />
+      )}
+      {showAddConfirmation && (
+        <ConfirmationMessage
+          confirmationMessage={`להוסיף את ${studentsFromSchoolWithNoGroup[selectedStudent].firstName + " " + studentsFromSchoolWithNoGroup[selectedStudent].lastName } לקבוצה?`}
+          handleConfirmation={confirmAddMember}
+          setShowConfirmation={setShowAddConfirmation}
+        />
+      )}
+       {errorConfirm && (
+        <ConfirmMessage
+          confirmationMessage={`ההוספה לא הצליחה, ייתכן כי הקבוצה הגיע לסף המקסימלי של המקומות או שתיתכן שגיאה פנימית במערכת`}
+          handleConfirm={() => setErrorConfirm(false)}
         />
       )}
 
