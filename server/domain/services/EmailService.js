@@ -19,17 +19,17 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        usersLogger.info("Intiating sending verification email to: " + email);
-        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        const verificationLink = `https://garineiudi.org.il/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        console.log(verificationLink);
-        await transporter.sendMail({
-           to: email,
-           subject: 'Verify Your Email Address',
-           html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
-        });
+        // usersLogger.info("Intiating sending verification email to: " + email);
+        // argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+        // const verificationLink = `https://garineiudi.org.il/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        // console.log(verificationLink);
+        // await transporter.sendMail({
+        //    to: email,
+        //    subject: 'Verify Your Email Address',
+        //    html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
+        // });
         
-        usersLogger.info("Successfully sent email to: " + email);
+        // usersLogger.info("Successfully sent email to: " + email);
     }
 
     async verifyEmailAndToken(encryptedEmail, token) {
