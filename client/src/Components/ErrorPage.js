@@ -1,5 +1,10 @@
+
+import { useContext } from 'react';
 import './css/ErrorPage.css'
+import DataContext from '../Helpers/DataContext';
+
 const ErrorPage = () => {
+  const {navigate} = useContext(DataContext)
   return (
     <div className="error_body">
       <div className="center_error">

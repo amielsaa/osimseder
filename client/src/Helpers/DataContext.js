@@ -26,7 +26,7 @@ export const DataProvider = ({children}) => {
         }
     }, [loginRefresh])
    
-    const updateUserGroupId = (newGroupId) => {
+    const updateUserGroupId = async (newGroupId) => {
         setUser((prevUser) => ({
           ...prevUser,
           groupId: newGroupId

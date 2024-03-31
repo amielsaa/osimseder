@@ -20,6 +20,7 @@ import AddHousePage from './Components/AddHousePage.js';
 import AddTaskPage from './Components/AddTaskPage.js';
 import AddGroupToHousePage from './Components/AddGroupToHousePage.js';
 import EditHousePage from './Components/EditHousePage.js'
+import AuthenticateEmailPage from './Components/AuthenticateEmailPage.js'
 
 
 
@@ -33,12 +34,11 @@ function App() {
       <div className="App">
         <DataProvider>
           <Routes>
-            <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Groups" element={<Groups />} />
             <Route path="/GroupPage/:id" element={<GroupPage />} />
-
             <Route path="/Personal/:encryptedEmail" element={<PersonalPage />} />
             <Route path="/My-Groups" element={<MyGroupsTeamOwner />} />
             <Route path="/addGroup" element={<AddGroupPage/>}/>
@@ -48,9 +48,9 @@ function App() {
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
-           {/*<Route path="/Equipment" element={<Equipment />} />*/} 
+            <Route path="/authenticate-email/:token/:encryptedEmail" element={<AuthenticateEmailPage/>} />
             <Route path="/TaskPage/:id" element={<TaskPage />} />
-            <Route path="/404" element={<ErrorPage />} />
+            <Route path="/*" element={<ErrorPage />} /> 
           </Routes>
         </DataProvider>
       </div>

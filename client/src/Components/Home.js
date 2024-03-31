@@ -5,7 +5,13 @@ import DataContext from '../Helpers/DataContext';
 import { useContext, useEffect, useState } from 'react';
 import Footer from './Footer';
 const Home = () => {
-  const {user, loginRefresh, setLoginRefresh} = useContext(DataContext)
+  
+  const {user,navigate, loginRefresh, setLoginRefresh} = useContext(DataContext)
+  useEffect(() => {
+    if(!(localStorage.getItem("accessToken"))){
+      navigate('/404')
+    }
+  })
   useEffect(() => {
     if(loginRefresh) {
       setLoginRefresh(false);

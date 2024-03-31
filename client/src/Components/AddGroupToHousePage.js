@@ -65,7 +65,7 @@ function AddGroupToHousePage() {
             value={selectedSchool}
             onChange={(e) => setSelectedSchool(e.target.value)}
           >
-            <option value=''>הכל</option>
+            <option value=''>בחר/י בית ספר</option>
             {schoolOptions.map((school) => (
               <option key={school.id} value={school.id}>
                 {school.schoolName}
