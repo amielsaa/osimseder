@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
 const string2Int = require('./utils/String2Int');
-const { usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 

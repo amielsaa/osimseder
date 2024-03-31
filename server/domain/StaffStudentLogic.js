@@ -1,6 +1,6 @@
 const {Students, Groups} = require('../models');
 const argumentChecker = require('./utils/ArgumentChecker');
-const {usersLogger} = require('../utils/logger');
+const {usersLogger} = require('../utils/Logger');
 
 class StaffStudentLogic {
 

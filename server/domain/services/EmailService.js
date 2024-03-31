@@ -2,7 +2,7 @@
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 const argumentChecker = require('../utils/ArgumentChecker');
-const { usersLogger } = require('../../utils/logger');
+const { usersLogger } = require('../../utils/Logger');
 const EmailEncryptor = require('../utils/EmailEncryptor');
 
 const transporter = nodemailer.createTransport({
