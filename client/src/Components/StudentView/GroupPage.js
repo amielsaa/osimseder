@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FaHouseChimney } from "react-icons/fa6";
 import ConfirmationMessage from '../ConfirmationMessage';
-import { getGroupById, removeGroupMember } from '../../Helpers/StaffFrontLogic';
+import { getGroupById, removeGroupMember, getStudentsWithoutGroupBySchoolId } from '../../Helpers/StaffFrontLogic';
 
 const GroupPage = () => {
   const { id } = useParams();
@@ -56,9 +56,11 @@ const GroupPage = () => {
     setShowAddConfirmation(true)
 
   }
-  const prepareToAddStudent = () => {
+  const prepareToAddStudent = async () => {
+    const res = await getStudentsWithoutGroupBySchoolId(groupInfo.schoolId)
+    console.log(res)
+    setStudentsFromSchoolWithNoGroup()
     setAddStudent(true)
-    //TODO: get all the students without groups to  studentsFromSchoolWithNoGroup
   }
 
   const confirmAddMember = () => {
