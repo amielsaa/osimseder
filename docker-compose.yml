@@ -7,7 +7,7 @@ services:
       - "5433:5432"
     environment:
       POSTGRES_DB: osimseder
-      POSTGRES_USER: osimseder_db
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: n1sWTx7hf9TWI7j
     volumes:
       # - ./postgres:/app
@@ -21,7 +21,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: osimseder-test
-      POSTGRES_USER: osimseder_db
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: n1sWTx7hf9TWI7j
     volumes:
       # - ./postgres:/app
@@ -38,7 +38,7 @@ services:
       - ./server:/app
       - /app/node_modules
     environment:
-      - PGUSER=osimseder_db
+      - PGUSER=root
       - PGHOST=127.0.0.1
       - PGDATABASE=osimseder
       - PGPASSWORD=n1sWTx7hf9TWI7j
