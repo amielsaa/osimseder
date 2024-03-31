@@ -122,6 +122,8 @@ class StaffGroupLogic {
                     schoolName: schoolName
                 };
             }));
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got groups by Team Owner for email: " + teamOwnerEmailAddr);
             return responseData;
@@ -187,6 +189,10 @@ class StaffGroupLogic {
                     schoolName: schoolName
                 };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             groupsLogger.debug("Successfully got groups by City Manager for email: " + cityManagerEmail);
             return responseData;
 
@@ -231,6 +237,9 @@ class StaffGroupLogic {
                     schoolName: schoolName
                 };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got all groups");
             return responseData;
@@ -322,6 +331,9 @@ class StaffGroupLogic {
                 schoolName: school.schoolName
             }));
 
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             groupsLogger.debug("Successfully got schools by City for city: " + cityName);
             return responseData;
 
@@ -370,6 +382,9 @@ class StaffGroupLogic {
                     schoolName: schoolName
                 };
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got all groups without house for school: " + schoolId);
             return responseData;
@@ -527,6 +542,9 @@ module.exports = new StaffGroupLogic();
             memberCount: group.dataValues.students.length,
             capacity: group.capacity
         }));
+
+                // Sort responseData by id
+        responseData.sort((a, b) => a.id - b.id);
  
         return responseData;
 

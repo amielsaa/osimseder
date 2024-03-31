@@ -392,6 +392,9 @@ class StaffHouseLogic {
                 capacity: group.capacity
             }));
 
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             housesLogger.debug("Successfully got house groups by house id: " + houseId);
             return responseData;
 
