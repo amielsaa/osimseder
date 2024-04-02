@@ -82,7 +82,6 @@ describe('verifyLoginStudent', () => {
         where: { email: newStudent.email },
       });
 
-      console.log(result);
       // Assertions
       expect(result).toHaveProperty('token');
       expect(result).toHaveProperty('user');

@@ -23,7 +23,6 @@ const fetchAllGroupsBySchool = async (user) => {
     // })
     // Amiel - get all the groups from this student's school!   
   } else if (user.role === "TeamOwner") {
-    console.log('imhere');
     // Amiel - get all the groups that the team owner can manage - teams from his city.
   }
 }

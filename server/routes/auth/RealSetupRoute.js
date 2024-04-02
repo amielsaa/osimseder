@@ -434,7 +434,7 @@ const setupStaffs = async () => {
         phoneNumber: '0505050505',
         gender: 'נקבה',
         accesses: 'B',
-        city: 'ירושלים'
+        city: 'באר שבע'
     });
     await createdUser.update({ isVerified: true, verificationToken: null });
 }

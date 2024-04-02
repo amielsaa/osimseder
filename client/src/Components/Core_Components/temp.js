@@ -25,7 +25,6 @@ const Group = ({ groupId , groupJson}) => {
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
       handleJoinGroup(groupId, user.id)
-      console.log(user)
     }
     // Close the confirmation message
     setShowConfirmation(false);

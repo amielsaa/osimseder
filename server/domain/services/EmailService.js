@@ -39,9 +39,6 @@ class EmailService {
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
             usersLogger.debug("While verifiyng email, decrypted email: " + email);
-            // Decrypt the email here
-            console.log("HERE!!!!")
-            console.log(email)
 
             const student = await Students.findOne({
                 where: { email: email }
@@ -53,7 +50,7 @@ class EmailService {
                 if (!staff) {
                     throw new Error('No user with this email');
                 }
-                const isStudent = false;
+                let isStudent = false;
                 const staffToken = staff.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -66,7 +63,7 @@ class EmailService {
                 }
             }
             else {
-                const isStudent = true;
+                let isStudent = true;
                 const studentToken = student.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -123,8 +120,7 @@ class EmailService {
             argumentChecker.checkSingleArugments([encryptedEmail, token], ["encryptedEmail", "token"]);
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
-            console.log("HERE!!!!")
-            console.log(email)
+
             const student = await Students.findOne({
                 where: { email: email }
             });
@@ -152,7 +148,6 @@ class EmailService {
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
-                console.log("Entered Check");
                 if (studentToken == token) {
                     return isStudent;
                 } else {

@@ -122,7 +122,6 @@ const getAllGroupsWithoutHouse = async (schoolId) => {
 const assignGroupToHouse = async (groupId, houseId) => {
     const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
     if(res.data.error) { 
-        console.log(res.data.error);
         return false; 
     }
     else { return true; }

@@ -30,6 +30,7 @@ function Registration() {
         city: "",
         school: "",
         languages: "",
+        issuesText: ""
 
     };
     const schools = []
@@ -78,7 +79,6 @@ function Registration() {
     const handleCityChange = async (cityName) => {
         setSelectedCity(cityName);
         const res = await fetchAllSchoolsByCityForRegister(cityName);
-        console.log(res);
         setSchoolsList(res);
     }
 
@@ -184,7 +184,12 @@ function Registration() {
                             ))}
                         </Field>
                         <ErrorMessage name="languages" component="span" />
-                    </div>
+                        </div>
+                        <div>
+                            <label htmlFor="issuesText">טקסט חופשי:  </label>
+                            <Field id="issuesText" name="issuesText" />
+                            <ErrorMessage name="issuesText" component="span" />
+                        </div>
                     <div className='Button-Div'>
                     <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>

@@ -10,7 +10,7 @@ const generateToken =  (user, password) => {jwt.sign(user, password, { expiresIn
   if(!accessToken) return res.json({error:"User not logged in"});
   try{
       const validToken = verify(accessToken, "importantsecret");
-      console.log(validToken);
+      //console.log(validToken);
       req.user = validToken;
       if(validToken) {
           return next();
