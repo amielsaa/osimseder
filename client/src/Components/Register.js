@@ -30,6 +30,7 @@ function Registration() {
         city: "",
         school: "",
         languages: "",
+        issuesText:""
 
     };
     const schools = []
@@ -187,6 +188,11 @@ function Registration() {
                     </div>
                     <div className='Button-Div'>
                     <button type="submit" className='RegisterButton'>הירשם</button>
+                    </div>
+                    <div>
+                        <label htmlFor="parentName">טקסט חופשי:  </label>
+                        <Field id="issuesText" name="issuesText"  />
+                        <ErrorMessage name="issuesText" component="span" />
                     </div>
                 </Form>
             </Formik>
