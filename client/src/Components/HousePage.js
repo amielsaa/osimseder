@@ -50,7 +50,8 @@ const HousePage = () => {
     if(selectedMemberA.length !== 0) {
       const res = await assignTeamOwner(dropdownOptionsA[selectedMemberA].email, 'A', id);
       if(res) {
-        setFirstMember(dropdownOptionsA[selectedMemberA])
+        //setFirstMember(dropdownOptionsA[selectedMemberA])
+        setHouseRequest()
         setMemberAChoosingStatus(false)
       }
     }
@@ -75,7 +76,8 @@ const HousePage = () => {
     if(selectedMemberB.length !== 0) {
       const res = await assignTeamOwner(dropdownOptionsA[selectedMemberB].email, 'B', id);
       if(res) {
-        setSecondMember(dropdownOptionsA[selectedMemberB]);
+        //setSecondMember(dropdownOptionsA[selectedMemberB]);
+        setHouseRequest()
         setMemberBChoosingStatus(false);
       }
     }

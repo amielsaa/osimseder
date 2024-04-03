@@ -19,17 +19,21 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        //usersLogger.info("Intiating sending verification email to: " + email);
-        //argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        //const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        //console.log(verificationLink);
-        //await transporter.sendMail({
-        //    to: email,
-        //    subject: 'Verify Your Email Address',
-        //    html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
-        //});
-        //
-        //usersLogger.info("Successfully sent email to: " + email);
+        usersLogger.info("Intiating sending verification email to: " + email);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+        const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        console.log(verificationLink);
+        await transporter.sendMail({
+            to: email,
+            subject: 'Welcome to "Osim Seder"!',
+            html: `
+        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process.
+        </p>
+    `
+        });
+        
+        usersLogger.info("Successfully sent email to: " + email);
     }
 
     async verifyEmailAndToken(encryptedEmail, token) {
