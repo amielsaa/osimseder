@@ -1,6 +1,7 @@
 const {Cities, Staffs} = require('../models');
 const argumentChecker = require('./utils/ArgumentChecker');
-const { housesLogger } = require('../utils/Logger');
+const { housesLogger } = require('../utils/logger');
+const EmailEncryptor = require('./utils/EmailEncryptor');
 
 class StaffLogic {
 
@@ -53,7 +54,8 @@ class StaffLogic {
 
             const responseData = {
                 email: staffMember.dataValues.email,
-                fullName: `${staffMember.dataValues.firstName} ${staffMember.dataValues.lastName}`
+                fullName: `${staffMember.dataValues.firstName} ${staffMember.dataValues.lastName}`,
+                encryptedEmail: EmailEncryptor.encryptEmail(staffMember.dataValues.email)
             };
 
             // const responseData = {

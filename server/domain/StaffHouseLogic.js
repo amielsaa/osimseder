@@ -340,9 +340,6 @@ class StaffHouseLogic {
     async updateHouse(houseId, updatedFields, requesterEmail) {
         try {
             housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
-            console.log(houseId)
-            console.log(updatedFields)
-            console.log(requesterEmail)
             argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
             //argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "areaId"]);
             //TODO add check on the updated fields values
@@ -352,8 +349,6 @@ class StaffHouseLogic {
             if(!house){
                 throw new Error('Couldn\'t find a house with that id.');
             }
-            console.log(houseId)
-            console.log(updatedFields["areaId"])
             for (const key in updatedFields) {
                 if (Object.hasOwnProperty.call(updatedFields, key)) {
                     house[key] = updatedFields[key];

@@ -21,12 +21,14 @@ class EmailService {
     async sendVerificationEmail(email, token) {
         usersLogger.info("Intiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        const verificationLink = `https://garineiudi.org.il/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        console.log(verificationLink);
+        const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         await transporter.sendMail({
-           to: email,
-           subject: 'Verify Your Email Address',
-           html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
+            to: email,
+            subject: 'Welcome to "Osim Seder"!',
+            html: `
+        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process.
+        </p>
         });
         
         usersLogger.info("Successfully sent email to: " + email);
@@ -39,9 +41,6 @@ class EmailService {
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
             usersLogger.debug("While verifiyng email, decrypted email: " + email);
-            // Decrypt the email here
-            console.log("HERE!!!!")
-            console.log(email)
 
             const student = await Students.findOne({
                 where: { email: email }
@@ -124,8 +123,7 @@ class EmailService {
             argumentChecker.checkSingleArugments([encryptedEmail, token], ["encryptedEmail", "token"]);
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
-            console.log("HERE!!!!")
-            console.log(email)
+
             const student = await Students.findOne({
                 where: { email: email }
             });
@@ -153,7 +151,6 @@ class EmailService {
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
-                console.log("Entered Check");
                 if (studentToken == token) {
                     return isStudent;
                 } else {

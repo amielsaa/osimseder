@@ -25,8 +25,6 @@ class RegistrationLogic {
 
             const cityId = await string2Int.getCityId(studentData.city);
             const schoolId = await string2Int.getSchoolId(studentData.school);
-            console.log(cityId)
-            console.log(schoolId)
 
             const createdStudent = await Students.create({
                 "email": studentData.email,
