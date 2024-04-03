@@ -1,5 +1,5 @@
 const {Houses, Tasks} = require('../models');
-const { housesLogger } = require('../utils/logger');
+const { housesLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 class StaffTaskLogic {

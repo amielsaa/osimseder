@@ -5,7 +5,7 @@ const { sign, verify } = require('jsonwebtoken');
 const {Staffs} = require('../models/');
 const { roleGroup } = require('../utils/Accesses')
 const { formatStaffValues,  formatStudentValues} = require('./utils/JsonValueAdder')
-const { usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 

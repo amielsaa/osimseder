@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
 const RegistrationLogic = require('./RegistrationLogic');
-const { usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 class UserManagementLogic {

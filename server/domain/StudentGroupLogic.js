@@ -1,5 +1,5 @@
 const { Groups, Students } = require('../models/');
-const { groupsLogger } = require('../utils/logger');
+const { groupsLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const String2Int = require('./utils/String2Int');
 

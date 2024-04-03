@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: osimseder
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: n1sWTx7hf9TWI7j
     volumes:
       # - ./postgres:/app
       # - database:/app/postgres
@@ -22,7 +22,7 @@ services:
     environment:
       POSTGRES_DB: osimseder-test
       POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: n1sWTx7hf9TWI7j
     volumes:
       # - ./postgres:/app
       # - database:/app/postgres
@@ -31,7 +31,7 @@ services:
     build: ./server
     container_name: server_c
     ports:
-      - "3001:3001"
+      - "3000:3000"
     depends_on:
       - postgres
     volumes:
@@ -41,13 +41,13 @@ services:
       - PGUSER=root
       - PGHOST=127.0.0.1
       - PGDATABASE=osimseder
-      - PGPASSWORD=password
+      - PGPASSWORD=n1sWTx7hf9TWI7j
       - PGPORT=5432
   client:
     build: ./client
     container_name: client_c
     ports:
-      - "3000:3000"
+      - "3001:3001"
     stdin_open: true
     tty: true
     depends_on:

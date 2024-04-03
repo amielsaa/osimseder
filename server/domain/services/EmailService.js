@@ -2,7 +2,7 @@
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 const argumentChecker = require('../utils/ArgumentChecker');
-const { usersLogger } = require('../../utils/logger');
+const { usersLogger } = require('../../utils/Logger');
 const EmailEncryptor = require('../utils/EmailEncryptor');
 
 const transporter = nodemailer.createTransport({
@@ -29,7 +29,6 @@ class EmailService {
         <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
             Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process.
         </p>
-    `
         });
         
         usersLogger.info("Successfully sent email to: " + email);
@@ -89,11 +88,12 @@ class EmailService {
 
 
     async sendResetPasswordEmail(email, token) {
+        let isStudent = false;
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `http://localhost:3000/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        let isStudent = false;
+        const resetLink = `https://garineiudi.org.il/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
         });

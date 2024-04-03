@@ -20,7 +20,7 @@ const myCombinedFormat = combine(
 
 // create, edit, remove, add task, edit task, add photos
 const housesLogger = winston.createLogger({
-    level: 'debug',   // minimum level to transport
+    level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
         new transports.File({ filename: 'loggers/housesLogFile.log' }) 
@@ -29,7 +29,7 @@ const housesLogger = winston.createLogger({
 
 // create, edit, remove, add TO
 const groupsLogger = winston.createLogger({
-    level: 'debug',   // minimum level to transport
+    level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
         new transports.File({ filename: 'loggers/groupsLogFile.log' })
@@ -37,7 +37,7 @@ const groupsLogger = winston.createLogger({
 });
 
 const usersLogger = winston.createLogger({
-    level: 'debug',   // minimum level to transport
+    level: 'info',   // minimum level to transport
     format: myCombinedFormat,
     transports: [
         new transports.File({ filename: 'loggers/usersLogFile.log' })  

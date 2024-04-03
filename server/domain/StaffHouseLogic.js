@@ -1,7 +1,7 @@
 const { Groups, Cities, Staffs, Houses, Areas } = require('../models');
 const string2Int = require('./utils/String2Int');
 const argumentChecker = require('./utils/ArgumentChecker');
-const { housesLogger } = require('../utils/logger');
+const { housesLogger } = require('../utils/Logger');
 
 
 class StaffHouseLogic {
