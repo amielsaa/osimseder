@@ -1,6 +1,6 @@
 const {Cities, Staffs} = require('../models');
 const argumentChecker = require('./utils/ArgumentChecker');
-const { housesLogger } = require('../utils/logger');
+const { housesLogger } = require('../utils/Logger');
 const EmailEncryptor = require('./utils/EmailEncryptor');
 
 class StaffLogic {
