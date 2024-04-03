@@ -31,6 +31,7 @@ textarea {
     box-sizing: border-box;
     background-color: var(--GREY-COLOR);
     resize: vertical; /* Allow vertical resizing of the textarea */
+    direction: rtl;
 }
 .add-house-semi-title{
     margin-top: 5%;

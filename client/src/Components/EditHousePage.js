@@ -15,6 +15,7 @@ function EditHousePage() {
     const { id } = useParams()
     const { navigate, user } = useContext(DataContext);
     const [areas, setAreas] = useState([]);
+    const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
     useEffect(() => {
         if (!(localStorage.getItem("accessToken"))) {
             navigate('/404')
@@ -82,9 +83,9 @@ function EditHousePage() {
         alternativeNumber: Yup.string()
             .matches(/^05\d{8}$/, "מספר לא תקין"),
         residentGender: Yup.string(),
-        languageNeeded: Yup.string(),
+        languageNeeded: Yup.string().required('שפה נדרשת'),
         numberOfRooms: Yup.string().required('מספר חדרים נדרש'),
-        membersNeeded: Yup.string().required('גודל קבוצה נדרש'),
+        membersNeeded: Yup.string(),
         freeText: Yup.string()
     });
 
@@ -176,6 +177,16 @@ function EditHousePage() {
                                 </Field>
                                 <ErrorMessage name="residentGender" component="span" />
                             </div>
+                            <div>
+                        <label htmlFor="languageNeeded">שפה נחוצה:</label>
+                        <Field as="select" id="languageNeeded" name="languageNeeded">
+                            <option value="">שפות</option>
+                            {languages.map((lang) => (
+                                <option key={lang} value={lang}>{lang}</option>
+                            ))}
+                        </Field>
+                        <ErrorMessage name="languageNeeded" component="span" />
+                    </div>
 
                             <div>
                                 <label htmlFor="numberOfRooms"> מספר חדרים בבית: </label>

@@ -75,11 +75,19 @@ function Registration() {
                 setShowConfirmError(true);
             });
     };
+    const changeCity = async (cityName) => {
+        setSelectedCity(cityName)
+    }
 
     const handleCityChange = async (cityName) => {
-        setSelectedCity(cityName);
+        await changeCity(cityName);
+        if (cityName !== ""){
         const res = await fetchAllSchoolsByCityForRegister(cityName);
         setSchoolsList(res);
+        }
+        else {
+        setSchoolsList([])
+        }
     }
 
     return (
@@ -118,7 +126,7 @@ function Registration() {
                     </div>
 
                     <div>
-                        <label htmlFor="confirmPassword">אשר סיסמה: </label>
+                        <label htmlFor="confirmPassword">אשר/י סיסמה: </label>
                         <Field type="password" id="confirmPassword" name="confirmPassword"  />
                         <ErrorMessage name="confirmPassword" component="span" />
                     </div>
@@ -176,7 +184,7 @@ function Registration() {
                     </div>}
 
                     <div>
-                        <label htmlFor="languages"> האם אתה דובר את אחת מהשפות הבאות? </label>
+                        <label htmlFor="languages"> האם את/ה דובר/ת את אחת מהשפות הבאות? </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
                             {languages.map((lang) => (
@@ -186,8 +194,8 @@ function Registration() {
                         <ErrorMessage name="languages" component="span" />
                         </div>
                         <div>
-                            <label htmlFor="issuesText">טקסט חופשי:  </label>
-                            <Field id="issuesText" name="issuesText" />
+                            <label htmlFor="issuesText"> עוד משהו שעלינו לדעת?  </label>
+                            <Field as="textarea" id="issuesText"  name="issuesText" />
                             <ErrorMessage name="issuesText" component="span" />
                         </div>
                     <div className='Button-Div'>

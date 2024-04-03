@@ -55,4 +55,13 @@ select {
 .Title-Div{
     color:var(--ORANGE-COLOR)
 }
-
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--GREY-COLOR);
+    resize: vertical; /* Allow vertical resizing of the textarea */
+    direction: rtl;
+}

@@ -161,7 +161,7 @@ const GroupPage = () => {
                   <>
                   <div className="member_select_wrapper">
                     <select value={selectedStudent} onChange={(e) => setSelectedStudent(e.target.value)}>
-                      <option value="">בחר/י חניך</option>
+                      <option value="">בחר/י מתנדב/ת</option>
                       {studentsFromSchoolWithNoGroup.map((student, index) => (
                         <option key={index} value={index}>{student.firstName + " " + student.lastName}</option>
                       ))} 
