@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'https://garineiudi.org.il/api';
+const URL = 'http://localhost:3001/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
@@ -221,7 +221,34 @@ const fetchTeamOwnerInfo = async (email) => {
     }
 }
 
-export {fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
+const deleteHouse = async (houseId) => {
+    const res = await axios.delete(`${URL}/staff/houses/${houseId}`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+const deleteGroup = async (groupId) => {
+    const res = await axios.delete(`${URL}/staff/groups/deleteGroup/${groupId}`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
+const deleteTask = async (taskId) => {
+    const res = await axios.delete(`${URL}/staff/tasks/${taskId}`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+}
+export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,

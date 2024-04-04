@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3001;
 const path = require('path')
 //const encryption = require('./utils/Encryption')
 //const logger = require('./utils/Logger')
@@ -22,14 +22,14 @@ app.use("/api/auth", authRouter)
 // const setupRouter = require("./routes/auth/SetupRoute")
 // app.use("/setup", setupRouter)
 
-const buildPath = path.normalize(path.join(__dirname, './build'));
- app.use(express.static(buildPath));
- const rootRouter = express.Router();
+// const buildPath = path.normalize(path.join(__dirname, './build'));
+//  app.use(express.static(buildPath));
+//  const rootRouter = express.Router();
 
- rootRouter.get('(/*)?', async (req, res, next) => {
-     res.sendFile(path.join(buildPath, 'index.html'));
-   });
- app.use(rootRouter);
+//  rootRouter.get('(/*)?', async (req, res, next) => {
+//      res.sendFile(path.join(buildPath, 'index.html'));
+//    });
+//  app.use(rootRouter);
 
 //db.sequelize.sync().then(() => {
 //  app.listen(port, () => {

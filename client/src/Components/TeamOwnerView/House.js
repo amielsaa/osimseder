@@ -2,16 +2,32 @@ import React, { useContext, useEffect, useState } from 'react';
 import '../css/House.css';
 import DataContext from '../../Helpers/DataContext';
 import houseImg from '../../images/housepicture.jpg'
-
+import ConfirmationMessage from '../ConfirmationMessage';
+import {deleteHouse} from '../../Helpers/StaffFrontLogic'
 const House = ({ id, landlordName, address }) => {
   const [selectedHouse, setSelectedHouse] = useState('')
-  const { navigate } = useContext(DataContext);
+
+  const [showConfirmationDelete, setShowConfirmationDelete] = useState('')
+  const { navigate, user } = useContext(DataContext);
 
   useEffect(() => {
     if (selectedHouse) {
       navigate(`/HousePage/${id}`)
     }
   })
+
+
+  const toggleStatus = () => {
+    setShowConfirmationDelete(true);
+  }
+
+  const handleConfirmationDelete = (confirmed) => {
+    if(confirmed) {
+      deleteHouse(id);
+    }
+    setShowConfirmationDelete(false);
+
+  }
 
   return (
     <>
@@ -26,6 +42,12 @@ const House = ({ id, landlordName, address }) => {
         </div>
         
         <button className='watch-house-btn' onClick={() => {setSelectedHouse(id)}}>צפה</button>
+        <button className='watch-house-btn' onClick={() => {toggleStatus()}}>הסר</button>
+        {(user.role === 'CityManager' || user.role === 'AreaManager'  ) && showConfirmationDelete && (
+        <ConfirmationMessage confirmationMessage={"האם אתה בטוח שברצונך למחוק את המטלה?"}
+                              handleConfirmation={handleConfirmationDelete}
+                              setShowConfirmation={setShowConfirmationDelete}/>
+      )}
       </div>
     </>
   );

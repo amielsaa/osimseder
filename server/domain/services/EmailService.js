@@ -92,7 +92,7 @@ class EmailService {
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `https://garineiudi.org.il/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        const resetLink = `http://localhost:3001/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
         isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
