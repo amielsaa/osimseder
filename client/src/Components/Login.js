@@ -44,7 +44,7 @@ const Login = () => {
       code: code,
     };
 
-    axios.post("http://localhost:3001/auth/login", data).then((res) => {
+    axios.post("https://garineiudi.org.il/api/auth/login", data).then((res) => {
             if(res.data.error) alert(res.data.error);
             else {
                 //localStorage.clear();
@@ -101,7 +101,7 @@ const Login = () => {
 
           <div className="signup-link">
             <p>
-              {/* <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | */} <a href="/register">הרשמה לסטודנט</a>
+              {/* <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | */} <a href="/register">הרשמה למתנדב/ת</a>
             </p>
           </div>
         </Form>

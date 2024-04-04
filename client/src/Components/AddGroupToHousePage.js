@@ -26,8 +26,8 @@ function AddGroupToHousePage() {
     //Amiel - for the filter, I need you to bring me the list of all the schools and put it in schoolOptions useState.
     //TO DELETE!!!!
     const cities = {
-      '1': 'BSV',
-      '2': 'JRS'
+      '1': 'באר שבע',
+      '2': 'ירושלים'
     }
     const setSchoolsRequest = async () => {
       if(user.cityId) {

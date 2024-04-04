@@ -49,11 +49,22 @@ const AddGroupPage = () => {
     } 
    }
   };
+
+  const changeCity = async (cityName) => {
+    setSelectedCity(cityName)
+  }
   
   const handleCityChange = async (e) => {
-    setSelectedCity(e.target.value)
-    const schools = await fetchAllSchoolsByCity(e.target.value);
-    setSchoolsList(schools);
+    await changeCity(e.target.value)
+    if (e.target.value !== ""){
+      const schools = await fetchAllSchoolsByCity(e.target.value);
+      setSchoolsList(schools);
+    }
+    else {
+      setSchoolsList("")
+      setSelectedCapacity("")
+    }
+    
   }
 
 
@@ -81,8 +92,8 @@ const AddGroupPage = () => {
                 <label htmlFor="city"> עיר: </label>
                 <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>
-                  <option value="JRS">ירושלים</option>
-                  <option value="BSV">באר שבע</option>
+                  <option value="ירושלים">ירושלים</option>
+                  <option value="באר שבע">באר שבע</option>
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>
@@ -114,7 +125,7 @@ const AddGroupPage = () => {
                 </div>
               )}
 
-              {selectedSchool && (
+              {selectedSchool && selectedCity && (
                 <div>
                   <label htmlFor="capacity"> הגבלה: </label>
                   <Field as="select" id="capacity" name="capacity" onChange={(e) => setSelectedCapacity(e.target.value)} value={selectedCapacity}>
@@ -130,7 +141,7 @@ const AddGroupPage = () => {
                     
 
 
-              {selectedCapacity && (
+              {(selectedCapacity !== "" && selectedSchool !== "" && selectedCapacity !== "") && (
                 <div className='submit_Buttons'>
                 <button type="submit" onClick={onSubmit} className='submit-button' >צור קבוצה</button>
                 </div>

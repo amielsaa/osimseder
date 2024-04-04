@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
 const RegistrationLogic = require('./RegistrationLogic');
-const { usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 class UserManagementLogic {
@@ -58,16 +58,12 @@ class UserManagementLogic {
                     throw new Error('No user with this email');
                 }
                 else {
-                    console.log("YOAV2")
                     const staffJson = await formatStaffValues(staff);
-                    console.log("YOAV3")
                     return staffJson;
                 }
             }
             else {
-                console.log("HERE3")
                 const studentJson = await formatStudentValues(student);
-                console.log("HERE4")
                 return studentJson;
             }
 

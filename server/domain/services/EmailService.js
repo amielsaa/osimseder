@@ -2,7 +2,7 @@
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 const argumentChecker = require('../utils/ArgumentChecker');
-const { usersLogger } = require('../../utils/logger');
+const { usersLogger } = require('../../utils/Logger');
 const EmailEncryptor = require('../utils/EmailEncryptor');
 
 const transporter = nodemailer.createTransport({
@@ -22,13 +22,15 @@ class EmailService {
         usersLogger.info("Intiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
         const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        console.log(verificationLink);
         await transporter.sendMail({
             to: email,
-            subject: 'Verify Your Email Address',
-            html: `<p>Click <a href="${verificationLink}">here</a> to verify your email address.</p>`
+            subject: 'Welcome to "Osim Seder"!',
+            html: `
+        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process.
+        </p>`
         });
-
+        
         usersLogger.info("Successfully sent email to: " + email);
     }
 
@@ -39,9 +41,6 @@ class EmailService {
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
             usersLogger.debug("While verifiyng email, decrypted email: " + email);
-            // Decrypt the email here
-            console.log("HERE!!!!")
-            console.log(email)
 
             const student = await Students.findOne({
                 where: { email: email }
@@ -53,7 +52,7 @@ class EmailService {
                 if (!staff) {
                     throw new Error('No user with this email');
                 }
-                const isStudent = false;
+                let isStudent = false;
                 const staffToken = staff.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -66,7 +65,7 @@ class EmailService {
                 }
             }
             else {
-                const isStudent = true;
+                let isStudent = true;
                 const studentToken = student.verificationToken;
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
@@ -89,11 +88,12 @@ class EmailService {
 
 
     async sendResetPasswordEmail(email, token) {
+        let isStudent = false;
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `http://localhost:3000/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
-        let isStudent = false;
+        const resetLink = `https://garineiudi.org.il/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
         });
@@ -123,8 +123,7 @@ class EmailService {
             argumentChecker.checkSingleArugments([encryptedEmail, token], ["encryptedEmail", "token"]);
 
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
-            console.log("HERE!!!!")
-            console.log(email)
+
             const student = await Students.findOne({
                 where: { email: email }
             });
@@ -152,7 +151,6 @@ class EmailService {
                 if (studentToken == null) {
                     throw new Error("Error: student in mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
-                console.log("Entered Check");
                 if (studentToken == token) {
                     return isStudent;
                 } else {

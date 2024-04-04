@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3001';
+const URL = 'https://garineiudi.org.il/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
@@ -23,7 +23,6 @@ const getUserByEmail = async (email) => {
 const authenticateRegisterEmail = async (token, encryptedEmail) => {
     const res = await axios.post(`${URL}/auth/verify-email/${token}/${encryptedEmail}`, {}, headers);
     if (res.data.error) {
-        console.log(res.data.error);
         return false;
     }
     else { return true; }

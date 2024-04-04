@@ -138,7 +138,6 @@ describe('getAllGroupsBySchool', () => {
       const result = await GroupLogic.getAllGroupsBySchool(createdSchool.id);
       
       // // Assertions
-      console.log(result);
       expect(result[0]).toHaveProperty('memberCount', 0);
       expect(result[0]).toHaveProperty('id', 1);
       expect(result[0]).toHaveProperty('students', []);

@@ -50,7 +50,8 @@ const HousePage = () => {
     if(selectedMemberA.length !== 0) {
       const res = await assignTeamOwner(dropdownOptionsA[selectedMemberA].email, 'A', id);
       if(res) {
-        setFirstMember(dropdownOptionsA[selectedMemberA])
+        //setFirstMember(dropdownOptionsA[selectedMemberA])
+        setHouseRequest()
         setMemberAChoosingStatus(false)
       }
     }
@@ -75,7 +76,8 @@ const HousePage = () => {
     if(selectedMemberB.length !== 0) {
       const res = await assignTeamOwner(dropdownOptionsA[selectedMemberB].email, 'B', id);
       if(res) {
-        setSecondMember(dropdownOptionsA[selectedMemberB]);
+        //setSecondMember(dropdownOptionsA[selectedMemberB]);
+        setHouseRequest()
         setMemberBChoosingStatus(false);
       }
     }
@@ -116,16 +118,17 @@ const HousePage = () => {
   const setHouseRequest = async () => {
     const houseJson = await getHouseById(id);
     setHouse(houseJson);
-      if (user.role !== 'Student') {
+      
           if (houseJson.teamOwnerEmail) {
               const teamOwner_1 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail);
               setFirstMember(teamOwner_1);
+              
           }
           if (houseJson.teamOwnerEmail_2) {
               const teamOwner_2 = await fetchTeamOwnerInfo(houseJson.teamOwnerEmail_2);
               setSecondMember(teamOwner_2);
           }
-      }
+      
   }
 
   const setTasksRequest = async () => {
@@ -228,7 +231,7 @@ const HousePage = () => {
               </div>
             </div>
           }
-          {user.role !== 'Student' &&
+          {
             <div className="members_of_house_content">
               <div className="title_for_members_of_house">חברי גרעין אחראים</div>
               <div className="members_of_house">
@@ -240,12 +243,12 @@ const HousePage = () => {
 
                 {!memberAChoosingStatus && (
                   <>
-                    חבר גרעין א: {firstMember? firstMember.fullName : ""}
+                    <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין א: {firstMember? firstMember.fullName : ""}</h4>
                     
-                    {!firstMember && user.role !== "TeamOwner" && (
+                    {!firstMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                       <button className="add_core_member_button" onClick={() => prepareToAssignTeamOwnerA()}> הוסף </button>
                     )}
-                    {firstMember && user.role !== "TeamOwner" && (
+                    {firstMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                       <button className="add_core_member_button" onClick={() => removeFirstMember()} > הסר </button>
                     )}
                   </>
@@ -276,11 +279,11 @@ const HousePage = () => {
                 <div className="member_in_charge_info">
                 {!memberBChoosingStatus && (
                       <>
-                        חבר גרעין ב: {secondMember ? secondMember.fullName : ""}
-                        {!secondMember && user.role !== "TeamOwner" && (
+                         <h4 onClick={secondMember? () => {navigate(`/Personal/${secondMember.encryptedEmail}`)} : () => {}}>חבר גרעין ב: {secondMember? secondMember.fullName : ""}</h4>
+                        {!secondMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                           <button className="add_core_member_button" onClick={prepareToAssignTeamOwnerB}> הוסף </button>
                         )}
-                        {secondMember && user.role !== "TeamOwner" && (
+                        {secondMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                           <button className="add_core_member_button" onClick={removeSecondMember}> הסר </button>
                         )}
                       </>
@@ -315,10 +318,14 @@ const HousePage = () => {
               כתובת: {house?.address}
             </div>
             <div className="Info">
-              שם איש קשר: {house?.residentFirstName + " " + house?.residentLastName}
+              שם הדייר/ת: {house?.residentFirstName + " " + house?.residentLastName}
             </div>
-            <div className="Info">
-              מספר איש קשר: {house?.residentPhoneNum}
+
+
+            {user.role !== "Student" && (
+              <>
+              <div className="Info">
+              מספר הדייר/ת: {house?.residentPhoneNum}
             </div>
             <div className="Info">
               מספר חלופי: {house?.residentAlternatePhoneNum}
@@ -338,13 +345,18 @@ const HousePage = () => {
             <div className="Info">
               הערות : {house?.freeText}
             </div>
+            </>
+            )}
+            
           </div>
-          <div className="House-Tasks">
+
+          { user.role !== "Student" && (
+            <div className="House-Tasks">
             <div className="House-title-Tasks">
               <h1>מטלות הבית</h1>
             </div>
             <div className='House-Info-Tasks'>
-              {tasks.length > 0 ? (
+              {(tasks.length > 0) ? (
                 tasks.map((task, index) => (
                   <TaskCard key={index} room={task.room} tasks={task.tasks} />
                 ))
@@ -355,6 +367,10 @@ const HousePage = () => {
               )}
             </div>
           </div>
+          )}
+          
+
+
         </div>
       </div>
       <Footer />

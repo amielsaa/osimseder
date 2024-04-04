@@ -11,10 +11,11 @@ import { decryptEmail, getUserByEmail } from '../Helpers/utils';
 
 const PersonalPage = () => {
   const { encryptedEmail } = useParams();
-  const { navigate } = useContext(DataContext);
-  const [user, setUser] = useState({});
+  const { navigate,user } = useContext(DataContext);
+  const [centerUser, setCenterUser] = useState({});
   const [userRole, setUserRole] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isCenterUser,setIsCenterUser] = useState(false)
 
   const encryptedEmailToUser = async () => {
     const decryptedEmail = await decryptEmail(encryptedEmail);
@@ -22,21 +23,26 @@ const PersonalPage = () => {
     return userInfo;
   }
 
+  const checkIfUserIsCenterUser = async (tmpUser) => {
+    setIsCenterUser(((tmpUser.email === user.email) || user.role !== "Student"))
+  }
   useEffect(() => {
     const setUpPage = async () => {
       const tmpUser = await encryptedEmailToUser(encryptedEmail);
-      setUser(tmpUser);
+      setCenterUser(tmpUser);
       await SettingForRole(tmpUser);
+      await checkIfUserIsCenterUser(tmpUser)
       setIsLoading(false); // Set loading to false once user data is fetched
+      
     };
     setUpPage();
   }, [encryptedEmail]); 
 
   const SettingForRole = async (tmpUser) => {
-    tmpUser.role === "Student" ? setUserRole("חניך") :
-    tmpUser.role === "TeamOwner" ? setUserRole("חניך גרעין") : 
-    tmpUser.role === "AreaManager" ? setUserRole("רכז גרעין") :
-    tmpUser.role === "CityManager" ? setUserRole("רכז עירוני"):
+    tmpUser.role === "Student" ? setUserRole("מתנדב/ת") :
+    tmpUser.role === "TeamOwner" ? setUserRole("חניכ/ת גרעין") : 
+    tmpUser.role === "AreaManager" ? setUserRole("רכז/ת גרעין") :
+    tmpUser.role === "CityManager" ? setUserRole("רכז/ת עיר"):
     tmpUser.role === "Admin" ? setUserRole("אדמין"): setUserRole("")  ;
   }
 
@@ -44,7 +50,7 @@ const PersonalPage = () => {
     <>
       <Header />
       <Nav />
-
+  
       <div className='content-Box'>
         <span className='purple_circle'>
           <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
@@ -55,26 +61,31 @@ const PersonalPage = () => {
         <div className='personal_page_main_content'>
           {!isLoading && (
             <div className='Personal-Info'>
-              {user.role === "Student" ? (
+              {centerUser.role === "Student" ? (
                 <>
-                  <div className='Info'>שם: {user.firstName} {user.lastName}</div>
+                  <div className='Info'>שם: {centerUser.firstName} {centerUser.lastName}</div>
                   <div className='Info'>תפקיד: {userRole}</div>
-                  <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
-                  <div className='Info'>שם הורה: {user.parentName}</div>
-                  <div className='Info'>מספר פלאפון הורה: {user.parentPhoneNumber}</div>
-                  <div className='Info'>עיר: {user.cityName}</div>
-                  <div className='Info'>בית ספר: {user.schoolName}</div>
-                  <div className='Info'>מין: {user.gender}</div>
-                  <div className='Info'>שפה נוספת: {user.extraLanguage}</div>
-                  <div className='Info'>בקשות אישיות: {user.issuesText}</div>
+                  <div className='Info'>מספר פלאפון: {centerUser.phoneNumber}</div>
+  
+                  {isCenterUser && (
+                    <>
+                      <div className='Info'>שם הורה: {centerUser.parentName}</div>
+                      <div className='Info'>מספר פלאפון הורה: {centerUser.parentPhoneNumber}</div>
+                      <div className='Info'>עיר: {centerUser.cityName}</div>
+                      <div className='Info'>בית ספר: {centerUser.schoolName}</div>
+                      <div className='Info'>מין: {centerUser.gender}</div>
+                      <div className='Info'>שפה נוספת: {centerUser.extraLanguage}</div>
+                      <div className='Info'>בקשות אישיות: {centerUser.issuesText}</div>
+                    </>
+                  )}
                 </>
               ) : (
                 <>
-                  <div className='Info'>שם: {user.firstName} {user.lastName}</div>
+                  <div className='Info'>שם: {centerUser.firstName} {centerUser.lastName}</div>
                   <div className='Info'>תפקיד: {userRole}</div>
-                  <div className='Info'>עיר: {user.cityName}</div>
-                  <div className='Info'>מספר פלאפון: {user.phoneNumber}</div>
-                  <div className='Info'>מין: {user.gender}</div>
+                  <div className='Info'>עיר: {centerUser.cityName}</div>
+                  <div className='Info'>מספר פלאפון: {centerUser.phoneNumber}</div>
+                  <div className='Info'>מין: {centerUser.gender}</div>
                 </>
               )}
             </div>

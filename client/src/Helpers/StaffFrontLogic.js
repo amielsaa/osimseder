@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3001';
+const URL = 'https://garineiudi.org.il/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
@@ -122,7 +122,6 @@ const getAllGroupsWithoutHouse = async (schoolId) => {
 const assignGroupToHouse = async (groupId, houseId) => {
     const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
     if(res.data.error) { 
-        console.log(res.data.error);
         return false; 
     }
     else { return true; }
@@ -176,6 +175,26 @@ const removeGroupMember = async (email) => {
 
 }
 
+const getStudentsWithoutGroupBySchoolId = async (schoolId) => {
+    const res = await axios.get(`${URL}/staff/students/getStudentsWithoutGroupBySchool/${schoolId}`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    }
+}
+
+const addGroupMember = async (email, groupId) => {
+    const res = await axios.put(`${URL}/staff/students/addGroupMember/${email}`, { groupId: groupId }, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    }
+}
+
 const fetchTeamOwners = async (cityName) => {
     const res = await axios.post(`${URL}/staff/staff/teamowners`,{cityName:cityName}, headers);
     if(res.data.error) {
@@ -206,4 +225,6 @@ export {fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, remov
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
-        getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup}
+    getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
+    , addGroupMember
+}

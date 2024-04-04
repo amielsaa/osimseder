@@ -1,7 +1,7 @@
 const { Groups, Cities, Staffs, Houses, Areas } = require('../models');
 const string2Int = require('./utils/String2Int');
 const argumentChecker = require('./utils/ArgumentChecker');
-const { housesLogger } = require('../utils/logger');
+const { housesLogger } = require('../utils/Logger');
 
 
 class StaffHouseLogic {
@@ -57,6 +57,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of city by email: " + userEmail);
             return houses;
 
@@ -91,6 +96,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of area by email: " + areaManagerEmail);
             return houses;
 
@@ -114,6 +124,11 @@ class StaffHouseLogic {
             if(!houses){
                 throw new Error('Couldn\'t find houses.');
             }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
             housesLogger.debug("Successfully got all houses of team owner by email: " + userEmail);
             return houses;
 
@@ -325,9 +340,6 @@ class StaffHouseLogic {
     async updateHouse(houseId, updatedFields, requesterEmail) {
         try {
             housesLogger.info("Initiate update house by id: " + houseId + ". By email: " + requesterEmail);
-            console.log(houseId)
-            console.log(updatedFields)
-            console.log(requesterEmail)
             argumentChecker.checkSingleArugments([houseId, requesterEmail], ["houseId", "requesterEmail"]);
             //argumentChecker.checkByKeys(updatedFields, "updatedFields", ["address", "residentLastName", "residentFirstName", "residentPhoneNum", "residentGender", "languageNeeded", "numberOfRooms", "areaId"]);
             //TODO add check on the updated fields values
@@ -337,8 +349,6 @@ class StaffHouseLogic {
             if(!house){
                 throw new Error('Couldn\'t find a house with that id.');
             }
-            console.log(houseId)
-            console.log(updatedFields["areaId"])
             for (const key in updatedFields) {
                 if (Object.hasOwnProperty.call(updatedFields, key)) {
                     house[key] = updatedFields[key];
@@ -391,6 +401,9 @@ class StaffHouseLogic {
                 memberCount: group.dataValues.students.length,
                 capacity: group.capacity
             }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
 
             housesLogger.debug("Successfully got house groups by house id: " + houseId);
             return responseData;

@@ -1,5 +1,5 @@
 const { Groups, Students } = require('../models/');
-const { groupsLogger } = require('../utils/logger');
+const { groupsLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const String2Int = require('./utils/String2Int');
 
@@ -45,6 +45,9 @@ class StudentGroupLogic {
                 };
             }));
 
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
             groupsLogger.debug('Successfully found all groups by schoolId: ' + schoolId);
             return responseData;
             
@@ -89,6 +92,7 @@ class StudentGroupLogic {
                 schoolId: group.schoolId,
                 schoolName: schoolName
             };
+
 
             groupsLogger.debug('Successfully found all groups by groupId: ' + groupId);
             return responseData;

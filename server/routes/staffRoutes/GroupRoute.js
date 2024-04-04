@@ -29,12 +29,10 @@ router.post('/', validateToken, validateAccess(accessGroup.C), async (req, res) 
 
 // Return all schools related to the city
 router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req, res) => {
-    //req.data.city = BSV/JRS
     try {
         // const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const cityName = req.body.city;
-        // cityName = 'bsv';
         const schools = await staffGroupLogic.getSchoolsByCity(cityName);
 
         //no arguments needed
@@ -52,12 +50,10 @@ router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req
 // need to move to other route someday
 // Return all schools related to the city
 router.post('/schools_for_register', async (req, res) => {
-    //req.data.city = BSV/JRS
     try {
         // const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const cityName = req.body.city;
-        // cityName = 'bsv';
         const schools = await staffGroupLogic.getSchoolsByCity(cityName);
 
         //no arguments needed
@@ -75,12 +71,10 @@ router.post('/schools_for_register', async (req, res) => {
 
 // Return all groups in a school without a house
 router.post('/emptygroups', validateToken, validateAccess(accessGroup.C), async (req, res) => {
-    //req.data.city = BSV/JRS
     try {
         // const groupSize = req.body.capacity;
         // const cityName = req.body.cityName;
         const schoolId = req.body.schoolId;
-        // cityName = 'bsv';
         const groups = await staffGroupLogic.getAllGroupsWithoutHouse(schoolId);
 
         //no arguments needed

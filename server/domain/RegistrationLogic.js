@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const emailService = require('./services/EmailService');
 const string2Int = require('./utils/String2Int');
-const { usersLogger } = require('../utils/logger');
+const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 
 
@@ -25,8 +25,6 @@ class RegistrationLogic {
 
             const cityId = await string2Int.getCityId(studentData.city);
             const schoolId = await string2Int.getSchoolId(studentData.school);
-            console.log(cityId)
-            console.log(schoolId)
 
             const createdStudent = await Students.create({
                 "email": studentData.email,

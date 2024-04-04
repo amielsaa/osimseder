@@ -19,7 +19,6 @@ router.post('/register_student', async (req, res) => {
 
 // Endpoint to log in a user
 router.post('/login', async (req, res) => {
-    console.log("Enter login route");
     const { email, password } = req.body;
     try {
         const user = await loginLogic.verifyLogin(email, password)

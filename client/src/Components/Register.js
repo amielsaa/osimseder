@@ -30,6 +30,7 @@ function Registration() {
         city: "",
         school: "",
         languages: "",
+        issuesText: ""
 
     };
     const schools = []
@@ -64,7 +65,7 @@ function Registration() {
         data.city = selectedCity;
         setEmail(data.email)
         data.languages = [data.languages]
-        axios.post("http://localhost:3001/auth/register_student", data)
+        axios.post("https://garineiudi.org.il/api/auth/register_student", data)
             .then(response => {
                 // If the response is successful (status 200), show confirmation
                 setShowConfirm(true);
@@ -74,12 +75,19 @@ function Registration() {
                 setShowConfirmError(true);
             });
     };
+    const changeCity = async (cityName) => {
+        setSelectedCity(cityName)
+    }
 
     const handleCityChange = async (cityName) => {
-        setSelectedCity(cityName);
+        await changeCity(cityName);
+        if (cityName !== ""){
         const res = await fetchAllSchoolsByCityForRegister(cityName);
-        console.log(res);
         setSchoolsList(res);
+        }
+        else {
+        setSchoolsList([])
+        }
     }
 
     return (
@@ -118,7 +126,7 @@ function Registration() {
                     </div>
 
                     <div>
-                        <label htmlFor="confirmPassword">אשר סיסמה: </label>
+                        <label htmlFor="confirmPassword">אשר/י סיסמה: </label>
                         <Field type="password" id="confirmPassword" name="confirmPassword"  />
                         <ErrorMessage name="confirmPassword" component="span" />
                     </div>
@@ -127,9 +135,9 @@ function Registration() {
                         <label htmlFor="gender">מין: </label>
                         <Field as="select" id="gender" name="gender">
                             <option value="">בחר מין</option>
-                            <option value="Male">זכר</option>
-                            <option value="Female">נקבה</option>
-                            <option value="Other">אחר</option>
+                            <option value="זכר">זכר</option>
+                            <option value="נקבה">נקבה</option>
+                            <option value="אחר">אחר</option>
                         </Field>
                         <ErrorMessage name="gender" component="span" />
                     </div>
@@ -152,8 +160,8 @@ function Registration() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
                           <option value="">בחר עיר</option>
-                          <option value="JRS">ירושלים</option>
-                          <option value="BSV">באר שבע</option>
+                          <option value="ירושלים">ירושלים</option>
+                          <option value="באר שבע">באר שבע</option>
                       </Field>
                       <ErrorMessage name="school" component="span" />
                     </div>
@@ -176,7 +184,7 @@ function Registration() {
                     </div>}
 
                     <div>
-                        <label htmlFor="languages"> האם אתה דובר את אחת מהשפות הבאות? </label>
+                        <label htmlFor="languages"> האם את/ה דובר/ת את אחת מהשפות הבאות? </label>
                         <Field as="select" id="languages" name="languages">
                             <option value="">שפות</option>
                             {languages.map((lang) => (
@@ -184,10 +192,16 @@ function Registration() {
                             ))}
                         </Field>
                         <ErrorMessage name="languages" component="span" />
-                    </div>
+                        </div>
+                        <div>
+                            <label htmlFor="issuesText"> עוד משהו שעלינו לדעת?  </label>
+                            <Field as="textarea" id="issuesText"  name="issuesText" />
+                            <ErrorMessage name="issuesText" component="span" />
+                        </div>
                     <div className='Button-Div'>
                     <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>
+                    
                 </Form>
             </Formik>
             )}

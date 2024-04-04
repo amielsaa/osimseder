@@ -12,7 +12,6 @@ router.post('/realSetup', async (req, res) => {
         await setupSchools();
         await setupStaffs();
         await setupStudents();
-        await setupGroups();
         res.json('DONE')
 
     } catch (error) {
@@ -141,7 +140,7 @@ const setupStaffs = async () => {
         phoneNumber: '0526864229',
         gender: 'זכר',
         accesses: 'E',
-        city: ''
+        city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
 
@@ -413,6 +412,31 @@ const setupStaffs = async () => {
         city: 'ירושלים'
     });
     await createdUser.update({ isVerified: true, verificationToken: null });
+    //=======================================================================================================
+    // Ours
+    createdUser = await registrationLogic.registerStaff({
+        email: 'teamOwner1@gmail.com',
+        password: '123456', // Please provide the password
+        lastName: 'שש',
+        firstName: 'ראש קבוצה בש',
+        phoneNumber: '0505050505',
+        gender: 'זכר',
+        accesses: 'B',
+        city: 'ירושלים'
+    });
+    await createdUser.update({ isVerified: true, verificationToken: null });
+    // Ours
+    createdUser = await registrationLogic.registerStaff({
+        email: 'teamOwner2@gmail.com',
+        password: '123456', // Please provide the password
+        lastName: 'שש',
+        firstName: 'ראש קבוצה בש',
+        phoneNumber: '0505050505',
+        gender: 'נקבה',
+        accesses: 'B',
+        city: 'באר שבע'
+    });
+    await createdUser.update({ isVerified: true, verificationToken: null });
 }
 
 
@@ -479,7 +503,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
         city: "באר שבע",
-        school: "מקיף ז'",
+        school: "מקיף ז",
         extraLanguage: "אמהרית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -495,7 +519,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "",
         city: "באר שבע",
-        school: "מקיף ז'",
+        school: "מקיף ז",
         extraLanguage: ""
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -511,7 +535,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "",
         city: "באר שבע",
-        school: "מקיף ז'",
+        school: "מקיף ז",
         extraLanguage: "רוסית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -575,7 +599,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "בעייה בסחיבת חפצים כבדים",
         city: "ירושלים",
-        school: 'רמות',
+        school: 'תבל רמות',
         extraLanguage: "ערבית"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -591,7 +615,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "אלרגי לחתולים",
         city: "ירושלים",
-        school: 'רמות',
+        school: 'תבל רמות',
         extraLanguage: "אחר"
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -607,7 +631,7 @@ const setupStudents = async () => {
         parentPhoneNumber: "0549552120",
         issuesText: "",
         city: "ירושלים",
-        school: 'רמות',
+        school: 'תבל רמות',
         extraLanguage: ""
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
