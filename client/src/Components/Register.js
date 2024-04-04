@@ -65,7 +65,7 @@ function Registration() {
         data.city = selectedCity;
         setEmail(data.email)
         data.languages = [data.languages]
-        axios.post("https://garineiudi.org.il/api/auth/register_student", data)
+        axios.post("http://localhost:3001/api/auth/register_student", data)
             .then(response => {
                 // If the response is successful (status 200), show confirmation
                 setShowConfirm(true);
