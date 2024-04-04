@@ -1,18 +1,28 @@
 // TaskCard.js
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
-import { IoSearchOutline } from 'react-icons/io5';
+import { IoSearchOutline , IoCloseSharp} from 'react-icons/io5';
 import '../css/TaskCard.css';
 import DataContext from '../../Helpers/DataContext';
 import ConfirmationMessage from '../ConfirmationMessage';
-import {updateTaskStatus} from '../../Helpers/StaffFrontLogic';
+import {updateTaskStatus, deleteTask} from '../../Helpers/StaffFrontLogic';
 
 const TaskCard = ({ room, tasks }) => {
   const { user } = useContext(DataContext);
   const isStudent = user.role === 'Student';
   const [taskList, setTaskList] = useState(tasks);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showConfirmationDelete, setShowConfirmationDelete] = useState(false);
+
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
+
+  const toggleStatusDelete = (id) => {
+    if(!isStudent) {
+      setShowConfirmationDelete(true);
+      setSelectedTaskId(id);
+    }
+  }
 
   const toggleStatus = (index) => {
     if (!isStudent) {
@@ -21,6 +31,22 @@ const TaskCard = ({ room, tasks }) => {
       setSelectedTaskIndex(index);
     }
   };
+
+  const handleConfirmationDelete = async (confirmed) => {
+    if(confirmed) {
+      const res = await deleteTask(selectedTaskId);
+      if(res) {
+        let updatedTasks = [...taskList];
+        updatedTasks = updatedTasks.filter((task, index) => task.taskId !== selectedTaskId);
+        setTaskList(updatedTasks);
+      }
+      // const updatedTasks = [...taskList];
+      // setTaskList(updatedTasks);
+    }
+
+    setShowConfirmationDelete(false);
+    setSelectedTaskIndex(null);
+  }
 
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
@@ -51,6 +77,7 @@ const TaskCard = ({ room, tasks }) => {
             <Link to={`/TaskPage/${task.taskId}`}>
               <IoSearchOutline className='view-icon' />
             </Link>{' '}
+            <IoCloseSharp onClick={() => toggleStatusDelete(task.taskId)}/>
             <span
               className={task.status === 'GREEN' ? 'green-circle' : 'red-circle'}
               onClick={() => toggleStatus(index)}
@@ -64,6 +91,12 @@ const TaskCard = ({ room, tasks }) => {
         <ConfirmationMessage confirmationMessage={"האם אתה בטוח שברצונך לשנות את סטטוס המטלה?"}
                               handleConfirmation={handleConfirmation}
                               setShowConfirmation={setShowConfirmation}/>
+      )}
+
+      {!isStudent && showConfirmationDelete && (
+        <ConfirmationMessage confirmationMessage={"האם אתה בטוח שברצונך למחוק את המטלה?"}
+                              handleConfirmation={handleConfirmationDelete}
+                              setShowConfirmation={setShowConfirmationDelete}/>
       )}
     </div>
   );

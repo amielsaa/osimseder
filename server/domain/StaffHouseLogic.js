@@ -2,6 +2,7 @@ const { Groups, Cities, Staffs, Houses, Areas } = require('../models');
 const string2Int = require('./utils/String2Int');
 const argumentChecker = require('./utils/ArgumentChecker');
 const { housesLogger } = require('../utils/Logger');
+const { Op } = require('sequelize');
 
 
 class StaffHouseLogic {
@@ -119,7 +120,12 @@ class StaffHouseLogic {
             argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
             const houses = await Houses.findAll({
-                where: { teamOwnerEmail: userEmail }
+                where: { 
+                    [Op.or]:[
+                        {teamOwnerEmail: userEmail },
+                        {teamOwnerEmail_2: userEmail }
+                    ]
+                }
             });
             if(!houses){
                 throw new Error('Couldn\'t find houses.');

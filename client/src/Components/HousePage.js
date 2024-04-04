@@ -132,7 +132,7 @@ const HousePage = () => {
   }
 
   const setTasksRequest = async () => {
-    const tasksJson = await getTasksByHouseId(id);
+    const tasksJson = await getTasksByHouseId(id)
     setTasks(tasksJson);
   }
   const removeGroupFromHouse = (groupId) => {
