@@ -23,3 +23,7 @@
   box-sizing: border-box;
   font-family: var(--MAIN-FONT);
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
