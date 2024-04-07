@@ -7,7 +7,7 @@ import DataContext from '../../Helpers/DataContext';
 import ConfirmationMessage from '../ConfirmationMessage';
 import {updateTaskStatus, deleteTask} from '../../Helpers/StaffFrontLogic';
 
-const TaskCard = ({ room, tasks }) => {
+const TaskCard = ({ room, tasks, removeRoomFromTasklist }) => {
   const { user } = useContext(DataContext);
   const isStudent = user.role === 'Student';
   const [taskList, setTaskList] = useState(tasks);
@@ -33,20 +33,20 @@ const TaskCard = ({ room, tasks }) => {
   };
 
   const handleConfirmationDelete = async (confirmed) => {
-    if(confirmed) {
+    if (confirmed) {
       const res = await deleteTask(selectedTaskId);
-      if(res) {
+      if (res) {
         let updatedTasks = [...taskList];
         updatedTasks = updatedTasks.filter((task, index) => task.taskId !== selectedTaskId);
         setTaskList(updatedTasks);
+        if (updatedTasks.length === 0) {
+          removeRoomFromTasklist(room);
+        }
       }
-      // const updatedTasks = [...taskList];
-      // setTaskList(updatedTasks);
     }
-
     setShowConfirmationDelete(false);
     setSelectedTaskIndex(null);
-  }
+  };
 
   const handleConfirmation = (confirmed) => {
     if (confirmed) {
