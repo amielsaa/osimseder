@@ -26,11 +26,16 @@ const HousePage = () => {
   const [memberBChoosingStatus,setMemberBChoosingStatus] = useState(false)
   const [selectedMemberA,setSelectedMemberA] = useState("")
   const [selectedMemberB,setSelectedMemberB] = useState('')
+  const [refreshPage,setRefreshPage] = useState(false)
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
       navigate('/404')
     }
   })
+  const removeRoomFromTasklist = (room) => {
+    setTasks(prevTasks => prevTasks.filter(task => task.room !== room));
+    
+  }
 
   const prepareToAssignTeamOwnerA = async () => {
     const res = await fetchTeamOwners(user.cityName);
@@ -358,7 +363,7 @@ const HousePage = () => {
             <div className='House-Info-Tasks'>
               {(tasks.length > 0) ? (
                 tasks.map((task, index) => (
-                  <TaskCard key={index} room={task.room} tasks={task.tasks} />
+                  <TaskCard key={index} room={task.room} tasks={task.tasks} removeRoomFromTasklist={removeRoomFromTasklist} />
                 ))
               ) : (
                 <div className="empty-tasks">

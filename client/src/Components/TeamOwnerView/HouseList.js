@@ -55,6 +55,11 @@ const HouseList = () => {
     setHousesList();
   }, []);
 
+  const deleteHouseFromList = (id) => {
+    setHouses(prevHouses => prevHouses.filter(house => house.id !== id));
+  }
+  
+
   return (
     <>
       {houses && 
@@ -64,6 +69,7 @@ const HouseList = () => {
           id={house.id}
           landlordName={house.residentFirstName + " " + house.residentLastName }
           address={house.address}
+          deleteHouseFromList={deleteHouseFromList}
         />
       ))} </>
       }

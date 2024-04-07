@@ -22,12 +22,17 @@ const GroupListTO = () => {
     setGroups();
 
   }, [user]);  // Add user to the dependency array */
-
+  const deleteGroupFromList = (id) => {
+    setGroupIds(groupIds => groupIds.filter(group => group.id !== id));
+  }
   return (
     <> 
       { (groupIds.length > 0) && <>
       {groupIds.map((groupJson) => (
-        <GroupTO key={groupJson.id} groupId={groupJson.id} groupJson={groupJson} />
+        <GroupTO key={groupJson.id}
+                groupId={groupJson.id}
+                groupJson={groupJson}
+                deleteGroupFromList={deleteGroupFromList} />
       ))} </>
       }
     </>

@@ -1,6 +1,6 @@
 .House {
     min-height:12%;
-    width: 95%;
+    width: 100%;
     border-radius: 5px;
     background-color: var(--GREY-COLOR);
     color:var(--PURPLE-COLOR);
@@ -14,13 +14,13 @@
 }
 .House-img-container{
     height: 100%;
-    width: 20%;
+    width: 25%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
 }
 .House-bar-Info {
-    
+    padding-left: 3%;
     height: 100%;
     width: 50%;
     direction: rtl;
@@ -35,7 +35,7 @@
     color:var(--FONT-COLOR);
 }
 .watch-house-btn {
-    width: 20%;
+    width: 15%;
     height: 50%;
     margin: 0%;
     border-radius: 20px;
@@ -45,6 +45,18 @@
     background-color:var(--ORANGE-COLOR);
     color:whitesmoke
 }
+.remove-house-btn{
+    width: 15%;
+    height: 50%;
+    margin: 0%;
+    border-radius: 20px;
+    border:none;
+    transition: background-color 0.3s;
+    margin-left: 5%;
+    background-color:var(--RED-COLOR);
+    color:whitesmoke
+    
+  }
 .house_pic {
     width: 100%;
     height: auto;
