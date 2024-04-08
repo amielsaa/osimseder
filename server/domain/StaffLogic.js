@@ -20,9 +20,13 @@ class StaffLogic {
                 throw new Error('Couldn\'t find a city by that name.');
             }
             const teamowners = await Staffs.findAll({
-                where: {cityId: city.id, accesses:'B'}
+                where: { cityId: city.id, accesses: 'B' },
+                order: [
+                    ['firstName', 'ASC'], // Sort by first name in ascending order
+                    ['lastName', 'ASC']   // Then sort by last name in ascending order
+                ]
             });
-            if (!teamowners) {
+            if (teamowners.length === 0) {
                 throw new Error('Couldn\'t find team owners by that city.');
             }
             const teamOwnersList = teamowners.map(owner => ({
