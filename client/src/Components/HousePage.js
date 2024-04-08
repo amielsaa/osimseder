@@ -248,7 +248,7 @@ const HousePage = () => {
 
                 {!memberAChoosingStatus && (
                   <>
-                    <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין א: {firstMember? firstMember.fullName : ""}</h4>
+                    <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין: {firstMember? firstMember.fullName : ""}</h4>
                     
                     {!firstMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                       <button className="add_core_member_button" onClick={() => prepareToAssignTeamOwnerA()}> הוסף </button>
@@ -284,7 +284,7 @@ const HousePage = () => {
                 <div className="member_in_charge_info">
                 {!memberBChoosingStatus && (
                       <>
-                         <h4 onClick={secondMember? () => {navigate(`/Personal/${secondMember.encryptedEmail}`)} : () => {}}>חבר גרעין ב: {secondMember? secondMember.fullName : ""}</h4>
+                         <h4 onClick={secondMember? () => {navigate(`/Personal/${secondMember.encryptedEmail}`)} : () => {}}>חבר גרעין: {secondMember? secondMember.fullName : ""}</h4>
                         {!secondMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                           <button className="add_core_member_button" onClick={prepareToAssignTeamOwnerB}> הוסף </button>
                         )}
