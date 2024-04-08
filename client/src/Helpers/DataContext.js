@@ -14,6 +14,8 @@ export const DataProvider = ({children}) => {
     const [user,setUser] = useState({});
     const [loginRefresh, setLoginRefresh] = useState(false);
 
+
+
     useEffect(() => {
         if(localStorage.getItem("accessToken")) {
             axios.get(`http://localhost:3001/api/auth/update_user_session`, {headers: {accessToken:localStorage.getItem("accessToken")}}).then((res) => {
@@ -21,6 +23,8 @@ export const DataProvider = ({children}) => {
                 else {
                     setUser(res.data.user.dataValues);
                     //window.location.reload();
+                    
+                    
                 };
             });
         }
