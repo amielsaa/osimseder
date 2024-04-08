@@ -1,25 +1,26 @@
 .House {
-    min-height:12%;
+    min-height: 12%;
     width: 100%;
     border-radius: 5px;
     background-color: var(--GREY-COLOR);
-    color:var(--PURPLE-COLOR);
+    color: var(--PURPLE-COLOR);
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
-    margin:2%;
+    margin: 2%;
     font-weight: bold;
-    
-    
 }
-.House-img-container{
+
+.House-img-container {
+    position: relative; /* Ensure the container is positioned */
     height: 100%;
     width: 25%;
     border-radius: 5px;
     display: flex;
     justify-content: center;
 }
+
 .House-bar-Info {
     padding-left: 3%;
     height: 100%;
@@ -33,32 +34,31 @@
     font-size: 0.9rem;
     justify-content: center;
 }
-.house-id  {
-    color:var(--FONT-COLOR);
+
+.house-id {
+    color: var(--FONT-COLOR);
 }
+
+.watch-house-btn,
+.remove-house-btn {
+    width: 15%;
+    height: 30%;
+    margin: 0%;
+    border-radius: 20px;
+    border: none;
+    transition: background-color 0.3s;
+    margin-left: 5%;
+    color: whitesmoke;
+}
+
 .watch-house-btn {
-    width: 15%;
-    height: 30%;
-    margin: 0%;
-    border-radius: 20px;
-    border:none;
-    transition: background-color 0.3s;
-    margin-left: 5%;
-    background-color:var(--ORANGE-COLOR);
-    color:whitesmoke
+    background-color: var(--ORANGE-COLOR);
 }
-.remove-house-btn{
-    width: 15%;
-    height: 30%;
-    margin: 0%;
-    border-radius: 20px;
-    border:none;
-    transition: background-color 0.3s;
-    margin-left: 5%;
-    background-color:var(--RED-COLOR);
-    color:whitesmoke
-    
-  }
+
+.remove-house-btn {
+    background-color: var(--RED-COLOR);
+}
+
 .house_pic {
     width: 100%;
     height: auto;
@@ -67,9 +67,10 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     padding-left: 10px;
-  }
-  .house_id_in_picture{
+}
+
+.house_id_in_picture {
     position: absolute;
-    margin-top:7% ;
-    
-  }
+    margin-top: 40%;
+    margin-left: 15%;
+}
