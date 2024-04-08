@@ -36,7 +36,40 @@ class StaffHouseLogic {
         }
     }
 
+//TODO YOAV  - check if needed
+// Get all houses in the system
+// Input: userEmail - the email of the user requesting the houses
+// Output: an array of all houses
+    async getAllHousesOfSystem(userEmail) {
+        try {
+            housesLogger.debug("Initiate get all houses of system by email: " + userEmail);
+            argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
+            const user = await Staffs.findOne({
+                where: {email: userEmail}
+            });
+            if(!user){
+                throw new Error('Couldn\'t find a staff user.');
+            }
+            // console.log(user);
+            const houses = await Houses.findAll();
+            if(!houses){
+                throw new Error('Couldn\'t find houses.');
+            }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
+            housesLogger.debug("Successfully got all houses of system by email: " + userEmail);
+            return houses;
+
+        } catch (error) {
+            housesLogger.error("Failed to get all houses of system by email: " + userEmail + ". Reason: " + error);
+            throw new Error('Failed to get all houses of system: ' + error);
+        }
+    }
+    
 // Get all houses in the requester's city
 // Input: userEmail - the email of the user requesting the houses
 // Output: an array of all houses
