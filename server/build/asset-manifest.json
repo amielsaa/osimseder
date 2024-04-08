@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.a5776a46.css",
-    "main.js": "/static/js/main.1d789439.js",
+    "main.css": "/static/css/main.c3c2fe7c.css",
+    "main.js": "/static/js/main.73df73ef.js",
     "static/js/787.d5fa4d18.chunk.js": "/static/js/787.d5fa4d18.chunk.js",
-    "static/media/cleaningPicture.jpg": "/static/media/cleaningPicture.827c3da67acf50391e44.jpg",
-    "static/media/housepicture.jpg": "/static/media/housepicture.36f37fa3fb2fe20032ff.jpg",
-    "static/media/paintingPicture.jpg": "/static/media/paintingPicture.f1c11d35bbd62fe7a3d2.jpg",
+    "static/media/paintingPicture.png": "/static/media/paintingPicture.cfb55467ec8243335250.png",
+    "static/media/etcPicture.png": "/static/media/etcPicture.4fb76bb87c232011bd98.png",
+    "static/media/cleaningPicture.png": "/static/media/cleaningPicture.f822d848cc42dbfd7b06.png",
+    "static/media/housepicture.png": "/static/media/housepicture.4c29fc24e5e12b981c12.png",
     "static/media/g_udi_logo.png": "/static/media/g_udi_logo.31cc0c62fb2fb8d58cd4.png",
     "index.html": "/index.html",
-    "main.a5776a46.css.map": "/static/css/main.a5776a46.css.map",
-    "main.1d789439.js.map": "/static/js/main.1d789439.js.map",
+    "main.c3c2fe7c.css.map": "/static/css/main.c3c2fe7c.css.map",
+    "main.73df73ef.js.map": "/static/js/main.73df73ef.js.map",
     "787.d5fa4d18.chunk.js.map": "/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a5776a46.css",
-    "static/js/main.1d789439.js"
+    "static/css/main.c3c2fe7c.css",
+    "static/js/main.73df73ef.js"
   ]
 }
