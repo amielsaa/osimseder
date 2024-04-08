@@ -100,6 +100,7 @@ const AddHousePage = () => {
   const setAreas = async () => {
     const res = await fetchAllAreasByCity(selectedCity);
     setAreaList(res[selectedCity]);
+    
   }
 
   useEffect(() => {

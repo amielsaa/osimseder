@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import DataContext from "../../Helpers/DataContext";
 import House from "./House";
 import {fetchAllHouses} from '../../Helpers/StaffFrontLogic'
-const HouseList = () => {
+import Houses from "./Houses";
+const HouseList = (selectedNeiborhood) => {
   const { user } = useContext(DataContext);
 
   const initialHouses = [
@@ -44,17 +45,27 @@ const HouseList = () => {
   ];
 
   const [houses, setHouses] = useState([]);
-
+  const [filteredhouses,setFilteredHouses] = useState(houses)
+  useState(() => {
+    
+  },[selectedNeiborhood.selectedNeiborhood])
   const setHousesList = async () => {
     const housesList = await fetchAllHouses();
     setHouses(housesList);
   }
+  const filterHouses = async () => {
+    if (selectedNeiborhood.selectedNeiborhood) {
+      const filteredHousesList = houses.filter(house => house.areaId
+        == selectedNeiborhood.selectedNeiborhood);
+      setFilteredHouses(filteredHousesList);
+    }
+  };
 
   useEffect(() => {
-    
     setHousesList();
-  }, []);
-
+    filterHouses()
+  }, [user,selectedNeiborhood]);
+  
   const deleteHouseFromList = (id) => {
     setHouses(prevHouses => prevHouses.filter(house => house.id !== id));
   }
@@ -62,8 +73,19 @@ const HouseList = () => {
 
   return (
     <>
-      {houses && 
+      {(houses && !selectedNeiborhood.selectedNeiborhood) &&
       <> {houses.map((house) => (
+        <House
+          key={house.id}
+          id={house.id}
+          landlordName={house.residentFirstName + " " + house.residentLastName }
+          address={house.address}
+          deleteHouseFromList={deleteHouseFromList}
+        />
+      ))} </>
+      }
+      {(filteredhouses && selectedNeiborhood.selectedNeiborhood) &&
+      <> {filteredhouses.map((house) => (
         <House
           key={house.id}
           id={house.id}
