@@ -19,7 +19,7 @@
 .group-id , .users-in-group, .students-Count {
     color:var(--PURPLE-COLOR);
 }
-.join-group-btn, .users-in-group-btn ,.exit-group-btn {
+.join-group-btn, .users-in-group-btn ,.exit-group-btn , .remove-group-btn {
     width: 15%;
     height: 60%;
     margin: 0%;
@@ -30,6 +30,9 @@
     background-color:var(--ORANGE-COLOR);
     
     
+}
+.remove-group-btn{
+    background-color:var(--RED-COLOR);
 }
 
 .sub-title {

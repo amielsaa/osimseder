@@ -147,17 +147,17 @@ function EditHousePage() {
                                 <ErrorMessage name="address" component="span" />
                             </div>
                             <div>
-                                <label htmlFor="residentFirstName">   שם איש קשר :</label>
+                                <label htmlFor="residentFirstName">   שם פרטי דייר/ת :</label>
                                 <Field id="residentFirstName" name="residentFirstName" />
                                 <ErrorMessage name="residentFirstName" component="span" />
                             </div>
                             <div>
-                                <label htmlFor="residentLastName">   שם משפחה איש קשר :</label>
+                                <label htmlFor="residentLastName">   שם משפחה דייר/ת :</label>
                                 <Field id="residentLastName" name="residentLastName" />
                                 <ErrorMessage name="residentLastName" component="span" />
                             </div>
                             <div>
-                                <label htmlFor="phoneNumber">    מספר פלאפון  :</label>
+                                <label htmlFor="phoneNumber">   מספר פלאפון דייר/ת  :</label>
                                 <Field id="phoneNumber" name="phoneNumber" />
                                 <ErrorMessage name="phoneNumber" component="span" />
                             </div>
@@ -168,7 +168,7 @@ function EditHousePage() {
                             </div>
 
                             <div>
-                                <label htmlFor="residentGender">מין הדייר/ת : </label>
+                                <label htmlFor="residentGender"> מין הדייר/ת : </label>
                                 <Field as="select" id="residentGender" name="residentGender">
                                     <option value="">בחר את מין הדייר/ת</option>
                                     <option value="זכר">זכר</option>

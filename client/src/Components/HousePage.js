@@ -3,7 +3,7 @@ import Header from "./Header";
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
 import './css/HousePage.css';
-import HousePicture from '../images/housepicture.jpg';
+import HousePicture from '../images/housepicture.png';
 import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
@@ -26,11 +26,16 @@ const HousePage = () => {
   const [memberBChoosingStatus,setMemberBChoosingStatus] = useState(false)
   const [selectedMemberA,setSelectedMemberA] = useState("")
   const [selectedMemberB,setSelectedMemberB] = useState('')
+  const [refreshPage,setRefreshPage] = useState(false)
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
       navigate('/404')
     }
   })
+  const removeRoomFromTasklist = (room) => {
+    setTasks(prevTasks => prevTasks.filter(task => task.room !== room));
+    
+  }
 
   const prepareToAssignTeamOwnerA = async () => {
     const res = await fetchTeamOwners(user.cityName);
@@ -191,9 +196,7 @@ const HousePage = () => {
             <div className="House-title">
               <h1>בית מספר : {id}</h1>
             </div>
-            <div className="House_picture">
-              <img src={HousePicture} alt="אין תמונה" />
-            </div>
+            
           </div>
           {user.role !== "Student" &&
             <div className="buttons_for_house_logic">
@@ -243,7 +246,7 @@ const HousePage = () => {
 
                 {!memberAChoosingStatus && (
                   <>
-                    <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין א: {firstMember? firstMember.fullName : ""}</h4>
+                    <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין: {firstMember? firstMember.fullName : ""}</h4>
                     
                     {!firstMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                       <button className="add_core_member_button" onClick={() => prepareToAssignTeamOwnerA()}> הוסף </button>
@@ -279,7 +282,7 @@ const HousePage = () => {
                 <div className="member_in_charge_info">
                 {!memberBChoosingStatus && (
                       <>
-                         <h4 onClick={secondMember? () => {navigate(`/Personal/${secondMember.encryptedEmail}`)} : () => {}}>חבר גרעין ב: {secondMember? secondMember.fullName : ""}</h4>
+                         <h4 onClick={secondMember? () => {navigate(`/Personal/${secondMember.encryptedEmail}`)} : () => {}}>חבר גרעין: {secondMember? secondMember.fullName : ""}</h4>
                         {!secondMember && user.role !== "TeamOwner" && user.role !== "Student" && (
                           <button className="add_core_member_button" onClick={prepareToAssignTeamOwnerB}> הוסף </button>
                         )}
@@ -358,7 +361,7 @@ const HousePage = () => {
             <div className='House-Info-Tasks'>
               {(tasks.length > 0) ? (
                 tasks.map((task, index) => (
-                  <TaskCard key={index} room={task.room} tasks={task.tasks} />
+                  <TaskCard key={index} room={task.room} tasks={task.tasks} removeRoomFromTasklist={removeRoomFromTasklist} />
                 ))
               ) : (
                 <div className="empty-tasks">

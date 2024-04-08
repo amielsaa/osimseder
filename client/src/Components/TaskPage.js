@@ -5,14 +5,20 @@ import Nav from './Nav';
 import './css/TaskPage.css'
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
-import CleaningPicture from '../images/cleaningPicture.jpg'
-import PaintingPicture from '../images/paintingPicture.jpg'
+import CleaningPicture from '../images/cleaningPicture.png'
+import PaintingPicture from '../images/paintingPicture.png'
+import EtcPicture from '../images/etcPicture.png'
 import Footer from './Footer';
 import {getTaskById} from '../Helpers/StaffFrontLogic'
 const TaskPage = () => {
     const {id} = useParams ()
     const {navigate} = useContext(DataContext)
     const [task, SetTask] = useState({})
+    const [picture,setPicture] = useState('')
+    useEffect(() => {
+      task.type === 'ניקיון' ? setPicture(CleaningPicture) : task.type === 'צביעה' ? setPicture(PaintingPicture): setPicture(EtcPicture)  
+    })
+    
 
     const setTaskRequest = async () => {
       const taskById = await getTaskById(id);
@@ -37,7 +43,7 @@ const TaskPage = () => {
       <div className='Task_kind'>סוג מטלה : <span className='TaskInfo'> {task.type} </span>  </div>
       <div className='Task_description'>תיאור : <span className='Task_info_desc'> {task.freeText} </span></div>
       <div className='action_pic'>
-        <img src={task.type === 'ניקיון' ? CleaningPicture : PaintingPicture }/>
+        <img src={picture}/>
       </div>
     </div>
 

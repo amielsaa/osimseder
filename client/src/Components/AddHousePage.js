@@ -100,6 +100,7 @@ const AddHousePage = () => {
   const setAreas = async () => {
     const res = await fetchAllAreasByCity(selectedCity);
     setAreaList(res[selectedCity]);
+    
   }
 
   useEffect(() => {
@@ -182,18 +183,18 @@ const AddHousePage = () => {
                     </div>
                     
                     <div>
-                        <label htmlFor="firstName">שם איש קשר(*):</label>
+                        <label htmlFor="firstName">שם פרטי דייר/ת(*):</label>
                         <Field id="firstName" name="firstName"  onChange={(e) => {setFirstName(e.target.value)}} value={firstName} />
                         <ErrorMessage name="firstName" component="span" />
                     </div>
 
                     <div>
-                        <label htmlFor="lastName">שם משפחה איש קשר(*): </label>
+                        <label htmlFor="lastName">שם משפחה דייר/ת(*): </label>
                         <Field id="lastName" name="lastName"  onChange={(e) => {setLastName(e.target.value)}} value={lastName}/>
                         <ErrorMessage name="lastName" component="span" />
                     </div>
                     <div>
-                        <label htmlFor="phoneNumber"> מספר פלאפון(*): </label>
+                        <label htmlFor="phoneNumber">מספר פלאפון דייר/ת(*): </label>
                         <Field id="phoneNumber" name="phoneNumber"  onChange={(e) => {setPhoneNumber(e.target.value)}} value={phoneNumber}/>
                         <ErrorMessage name="phoneNumber" component="span" />
                     </div>
@@ -204,7 +205,7 @@ const AddHousePage = () => {
                     </div>
                     
                     <div>
-                        <label htmlFor="gender">מין איש קשר(*): </label>
+                        <label htmlFor="gender">מין הדייר/ת(*): </label>
                         <Field as="select" id="gender" name="gender" onChange={(e) => {setGender(e.target.value)}} value={gender}>
                             <option value="">בחר מין</option>
                             <option value="זכר">זכר</option>
