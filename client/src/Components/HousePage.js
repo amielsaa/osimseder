@@ -3,7 +3,7 @@ import Header from "./Header";
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
 import './css/HousePage.css';
-import HousePicture from '../images/housepicture.jpg';
+import HousePicture from '../images/housepicture.png';
 import TaskCard from "./StudentView/TaskCard";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
@@ -196,9 +196,7 @@ const HousePage = () => {
             <div className="House-title">
               <h1>בית מספר : {id}</h1>
             </div>
-            <div className="House_picture">
-              <img src={HousePicture} alt="אין תמונה" />
-            </div>
+            
           </div>
           {user.role !== "Student" &&
             <div className="buttons_for_house_logic">

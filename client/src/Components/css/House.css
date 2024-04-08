@@ -11,6 +11,7 @@
     margin:2%;
     font-weight: bold;
     
+    
 }
 .House-img-container{
     height: 100%;
@@ -30,6 +31,7 @@
     gap: 3%;
     overflow-y: scroll;
     font-size: 0.9rem;
+    justify-content: center;
 }
 .house-id  {
     color:var(--FONT-COLOR);
@@ -65,4 +67,9 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     padding-left: 10px;
+  }
+  .house_id_in_picture{
+    position: absolute;
+    margin-top:7% ;
+    
   }

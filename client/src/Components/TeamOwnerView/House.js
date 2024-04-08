@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../css/House.css';
 import DataContext from '../../Helpers/DataContext';
-import houseImg from '../../images/housepicture.jpg'
+import houseImg from '../../images/housepicture.png'
 import ConfirmationMessage from '../ConfirmationMessage';
 import {deleteHouse} from '../../Helpers/StaffFrontLogic'
 const House = ({ id, landlordName, address, deleteHouseFromList}) => {
@@ -37,11 +37,11 @@ const House = ({ id, landlordName, address, deleteHouseFromList}) => {
     <>
       <div className="House">
         <div className='House-img-container'>
+          <h2 className='house_id_in_picture'>{id}</h2>
           <img className='house_pic' src={houseImg} alt='אין תמונה'/>
         </div>
         <div className='House-bar-Info'>
-          <p>בית מספר: {id}</p>
-          <p>בעל/ת הבית: {landlordName}</p>
+          <p> דייר/ת: {landlordName}</p>
           <p>כתובת: {address}</p>
         </div>
         
