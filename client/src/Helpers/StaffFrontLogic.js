@@ -3,7 +3,7 @@ import axios from 'axios';
 const URL = 'http://localhost:3001/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
-
+//usecase: view groups
 const fetchAllGroupsStaff = async () => {
     const res = await axios.get(`${URL}/staff/groups/getgroups`, headers);
     if(res.data.error) {
@@ -12,7 +12,7 @@ const fetchAllGroupsStaff = async () => {
         return res.data;
     }
 }
-
+//usecase: addgroup, used by addGroup
 const fetchAllSchoolsByCity = async (cityName) => {
     const res = await axios.post(`${URL}/staff/groups/schools`, {city:cityName} ,headers);
     if(res.data.error) {
@@ -22,6 +22,7 @@ const fetchAllSchoolsByCity = async (cityName) => {
     }
 }
 
+//usecase: addgroup
 const addGroup = async (cityName, schoolId, capacity) => {
     const res = await axios.post(`${URL}/staff/groups/`, {city:cityName, schoolId:schoolId, capacity:capacity} ,headers);
     if(res.data.error) {
@@ -31,7 +32,7 @@ const addGroup = async (cityName, schoolId, capacity) => {
         return true;
     }
 }
-
+//usecase: view houses
 const fetchAllHouses = async () => {
     const res = await axios.get(`${URL}/staff/houses`, headers);
     if(res.data.error) {
@@ -40,6 +41,7 @@ const fetchAllHouses = async () => {
         return res.data;
     }
 }
+//usecase: get house
 const getHouseById = async (id) => {
     const res = await axios.get(`${URL}/staff/houses/${id}`, headers)
     if(res.data.error) {
@@ -49,6 +51,7 @@ const getHouseById = async (id) => {
     }
 }
 
+//usecase: add new house
 const addHouse = async (information) => {
     const res = await axios.post(`${URL}/staff/houses`,information, headers);
     if(res.data.error) {
@@ -60,6 +63,7 @@ const addHouse = async (information) => {
 
 }
 
+//usecase: update house
 const updateHouse = async (information, id) => {
     const res = await axios.put(`${URL}/staff/houses/${id}`, information, headers)
     if(res.data.error) {
@@ -82,7 +86,7 @@ const fetchAllAreasByCity = async (city) => {
         return res.data;
     }
 }
-
+//usecase: add new task
 const addTask = async (data) => {
     const res = await axios.post(`${URL}/staff/tasks/`,data, headers);
     if(res.data.error) {
@@ -91,7 +95,7 @@ const addTask = async (data) => {
         return true;
     }
 }
-
+//usecase: view tasks of house
 const getTasksByHouseId = async (id) => {
     const res = await axios.get(`${URL}/staff/tasks/${id}`,headers);
     if(res.data.error) {
@@ -100,7 +104,7 @@ const getTasksByHouseId = async (id) => {
         return res.data;
     }
 }
-
+//usecase: view task
 const getTaskById = async (id) => {
     const res = await axios.post(`${URL}/staff/tasks/${id}`,{}, headers);
     if(res.data.error) {
@@ -118,7 +122,7 @@ const getAllGroupsWithoutHouse = async (schoolId) => {
         return res.data;
     }
 }
-
+//usecase: assign group to house
 const assignGroupToHouse = async (groupId, houseId) => {
     const res = await axios.post(`${URL}/staff/houses/${houseId}/${groupId}`,{},headers);
     if(res.data.error) { 
@@ -135,7 +139,7 @@ const fetchGroupsForHouse = async (houseId) => {
         return res.data
     }
 }
-
+//usecase: remove assosiated group from house
 const removeGroupByHouse = async (groupId) => {
     const res = await axios.put(`${URL}/staff/groups/${groupId}`,{houseId:null},headers);
     if(res.data.error) {
@@ -145,7 +149,7 @@ const removeGroupByHouse = async (groupId) => {
         return true;
     }
 }
-
+//usecase: update task
 const updateTaskStatus = async (taskId, taskStatus) => {
     const res = await axios.put(`${URL}/staff/tasks/${taskId}`,{status:taskStatus}, headers);
     if(res.data.error) {
@@ -154,7 +158,7 @@ const updateTaskStatus = async (taskId, taskStatus) => {
         return res.data;
     }
 }
-
+//usecase: view group
 const getGroupById = async (groupId) => {
     const res = await axios.get(`${URL}/staff/groups/${groupId}`,headers);
     if(res.data.error) {
@@ -163,7 +167,7 @@ const getGroupById = async (groupId) => {
         return res.data;
     }
 }
-
+//usecase: remove group member from group
 const removeGroupMember = async (email) => {
     const res = await axios.put(`${URL}/staff/students/${email}`,{groupId:null}, headers);
     if(res.data.error) {
@@ -174,7 +178,7 @@ const removeGroupMember = async (email) => {
     }
 
 }
-
+//usecase: 
 const getStudentsWithoutGroupBySchoolId = async (schoolId) => {
     const res = await axios.get(`${URL}/staff/students/getStudentsWithoutGroupBySchool/${schoolId}`, headers);
     if(res.data.error) {
@@ -184,7 +188,7 @@ const getStudentsWithoutGroupBySchoolId = async (schoolId) => {
         return res.data;
     }
 }
-
+//usecase: add group member to a group
 const addGroupMember = async (email, groupId) => {
     const res = await axios.put(`${URL}/staff/students/addGroupMember/${email}`, { groupId: groupId }, headers);
     if(res.data.error) {
@@ -203,7 +207,7 @@ const fetchTeamOwners = async (cityName) => {
         return res.data;
     }
 }
-
+//usecase: assign team owner to a house
 const assignTeamOwner = async (email, index, id) => {
     if(index === 'A') {
         return updateHouse({teamOwnerEmail: email}, id);
@@ -220,7 +224,7 @@ const fetchTeamOwnerInfo = async (email) => {
         return res.data;
     }
 }
-
+//usecase: delete house
 const deleteHouse = async (houseId) => {
     const res = await axios.delete(`${URL}/staff/houses/${houseId}`, headers);
     if(res.data.error) {
@@ -229,7 +233,7 @@ const deleteHouse = async (houseId) => {
         return res.data;
     }
 }
-
+//usecase: delete group
 const deleteGroup = async (groupId) => {
     const res = await axios.delete(`${URL}/staff/groups/deleteGroup/${groupId}`, headers);
     if(res.data.error) {
@@ -238,7 +242,7 @@ const deleteGroup = async (groupId) => {
         return res.data;
     }
 }
-
+//usecase: delete task
 const deleteTask = async (taskId) => {
     const res = await axios.delete(`${URL}/staff/tasks/${taskId}`, headers);
     if(res.data.error) {
