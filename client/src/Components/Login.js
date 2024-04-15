@@ -66,6 +66,7 @@ const Login = () => {
     
     
     <div className='background_login_page'>
+    <div className="overlay"></div>
     <div className='logo_big'>
     <img src={Logo} alt='לוגו חברה'/>
       </div>
@@ -95,7 +96,7 @@ const Login = () => {
 
           <div className='login_Buttons'>
           <button type="submit" className='button-login' style={{ display: displayCode ? 'block' : 'none' }} onClick={handleRegisterStaff}>הרשם כסגל</button>
-          <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר</button>
+          <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר/י</button>
           </div>
           
 
@@ -107,6 +108,7 @@ const Login = () => {
         </Form>
       </Formik>
     </div>
+    
     </div>
     </>
   );
