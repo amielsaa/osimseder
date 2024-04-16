@@ -6,18 +6,30 @@
 
 .pop-up_screen {
     width: 95%;
-    min-height: 100%; /* Set a default min-height when there are no students */
+    min-height: 1%; /* Initial height */
+    max-height: 100%; /* Maximum height */
     background-color: var(--WHITEBG-COLOR);
-    border-radius: 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     direction: rtl;
     overflow-y: scroll;
     gap: 5%;
-    list-style-type: none; /* Remove default list styles */
+    border-radius: 5%;
+    list-style-type: none;
     border-top: 2px solid var(--ORANGE-COLOR);
     border-bottom: 2px solid var(--ORANGE-COLOR);
+    transition: min-height 0.5s ease; /* Transition for height change */
+    animation: expandPopup 0.5s forwards; /* Animation to expand */
+}
+
+@keyframes expandPopup {
+    0% {
+        min-height: 1%; /* Start from 1% */
+    }
+    100% {
+        min-height: 100%; /* End at 100% */
+    }
 }
 
 /* Adjust the min-height when there are students */
@@ -50,4 +62,58 @@
 .empty-students {
     margin: auto;
     color: var(--PURPLE-COLOR);
+}
+@media screen and (min-width: 768px) {
+    .pop-up_container {
+        width: 100%;
+        display: flex;
+    }
+    
+    .pop-up_screen {
+        width: 30%;
+        min-height: 100%; /* Set a default min-height when there are no students */
+        background-color: var(--WHITEBG-COLOR);
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        direction: rtl;
+        overflow-y: scroll;
+        gap: 5%;
+        list-style-type: none; /* Remove default list styles */
+        border-top: 2px solid var(--ORANGE-COLOR);
+        border-bottom: 2px solid var(--ORANGE-COLOR);
+    }
+    
+    /* Adjust the min-height when there are students */
+    .pop-up_container.has-students {
+        width: 100%;
+        min-height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom:5px
+    }
+    
+    .student-bar {
+        margin-top: 2%;
+        color: var(--PURPLE-COLOR);
+        padding: 15px;
+        min-height: 15%;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.3rem;
+        border-bottom:1px solid var(--GREY-COLOR);
+    }
+    
+    .student-bar:last-child {
+        border-bottom: none;
+    }
+    
+    .empty-students {
+        margin: auto;
+        color: var(--PURPLE-COLOR);
+    }
 }

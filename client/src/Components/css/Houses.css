@@ -14,6 +14,16 @@
     background-color: var(--WHITEBG-COLOR);
     
   }
+  .main_content_houses {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 79%;
+    gap: 3%;
+    overflow-y: scroll;
+}
   .Houses_title{
     color: var(--ORANGE-COLOR);
     font-size: 1.5rem;
@@ -27,7 +37,7 @@
     padding: 10px;
     border: none;
     cursor: pointer;
-    margin-top: 5%;
+    
   }
   .filtersContainer{
     width: 100%;
@@ -43,4 +53,61 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+  @media screen and (min-width: 768px) {
+    .content-Box {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      top: 7vh; /* Height of the header */
+      width: 100%; /* Adjust for the remaining width */
+      height: calc(100vh - 7vh); /* Take the remaining viewport height */
+      padding: 20px; /* Adjust padding as needed */
+      box-sizing: border-box;
+      transition: ease-in 0.3s; /* Add transition for smooth animation */
+      overflow-y: scroll;
+      background-color: var(--WHITEBG-COLOR);
+      
+    }
+    .main_content_houses {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 75%;
+      overflow-y: scroll;
+  }
+    .Houses_title{
+      color: var(--ORANGE-COLOR);
+      font-size: 1.5rem;
+    }
+    .add_house_btn{
+      background-color: var(--ORANGE-COLOR);
+      border-radius: var(--BORDER-RADIUS);
+      width: 30%;
+      font-size: 1.2em;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      
+    }
+    .filtersContainer{
+      width: 50%;
+      min-height: 7%;
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      align-items: center;
+    }
+    .neighborhood_Filter_and_label{
+      display: flex;
+      direction: rtl;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
   }

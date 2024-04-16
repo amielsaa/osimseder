@@ -3,7 +3,7 @@
   height:60%;
   
   border: 1px solid #ccc;
-  background-color: var(--WHITEBG-COLOR);
+  background-color: var(--WHITEOP-COLOR);
   border-radius: 5px;
   box-shadow: 0 0 10px 5px var(--ORANGEOP-COLOR);
   margin-top:30%;
@@ -18,7 +18,7 @@
     align-items: center;
     font-size: 1.5rem;
     color: var(--ORANGE-COLOR);
-    margin-top:5%;
+    
 }
 
 label {

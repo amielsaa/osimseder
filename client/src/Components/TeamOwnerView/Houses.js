@@ -33,8 +33,7 @@ const Houses = () => {
     <Header/>
     <Nav/>
     <div className='content-Box'>
-      <div className='main_content_houses'>
-        <div className='Houses_title'>
+    <div className='Houses_title'>
           {user.role === "TeamOwner" && (
              <h1>הבתים שלי</h1>
           )}
@@ -70,8 +69,7 @@ const Houses = () => {
             </div>
           ) : null
         ) : null}
-       
-
+      <div className='main_content_houses'>
         <HouseList selectedNeiborhood={selectedNeiborhood}/>
         </div>
         <button className='add_house_btn' onClick={() => navigate('/addHouse')}>הוסף בית</button>

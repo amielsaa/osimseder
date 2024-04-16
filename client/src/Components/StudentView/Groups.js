@@ -19,10 +19,11 @@ const Groups = () => {
     <Header/>
       <Nav/>
     <div className='content-Box'>
-      <div className='groups_main_content'>
-        <div className='groups_title'>
+    <div className='groups_title'>
       <h1>אנא בחר קבוצה</h1>
       </div>
+      <div className='groups_main_content'>
+        
       {user.groupId && (
          <div className='groups_semi_title'>
          <h2>הינך נמצא בקבוצה {user.groupId} כרגע</h2>
