@@ -49,6 +49,7 @@
     transition: background-color 0.3s;
     margin-left: 5%;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 .watch-house-btn {
@@ -129,6 +130,7 @@
         transition: background-color 0.3s;
         margin-left: 5%;
         color: whitesmoke;
+        cursor: pointer;
     }
     
     .watch-house-btn {

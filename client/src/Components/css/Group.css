@@ -31,7 +31,7 @@
     transition: background-color 0.3s;
     color:var(--FONT-COLOR);
     background-color:var(--ORANGE-COLOR);
-    
+    cursor: pointer;
     
 }
 .remove-group-btn{
@@ -81,6 +81,7 @@
         transition: background-color 0.3s;
         color:var(--FONT-COLOR);
         background-color:var(--ORANGE-COLOR);
+        cursor: pointer;
         
         
     }

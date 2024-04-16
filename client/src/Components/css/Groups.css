@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 72%;
+    height: 79%;
     gap: 3%;
     overflow-y: scroll;
   }
@@ -73,7 +73,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 77%;
+      height: 75%;
       gap: 3%;
       overflow-y: scroll;
     }

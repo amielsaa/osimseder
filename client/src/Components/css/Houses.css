@@ -20,7 +20,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 79%;
+    height: 72%;
     gap: 3%;
     overflow-y: scroll;
 }
@@ -77,7 +77,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 75%;
+      height: 72%;
       overflow-y: scroll;
   }
     .Houses_title{
