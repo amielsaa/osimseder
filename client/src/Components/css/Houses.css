@@ -20,7 +20,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 72%;
+    height: 70%;
     gap: 3%;
     overflow-y: scroll;
 }

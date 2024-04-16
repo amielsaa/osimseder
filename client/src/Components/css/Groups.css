@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 79%;
+    height: 76%;
     gap: 3%;
     overflow-y: scroll;
   }
