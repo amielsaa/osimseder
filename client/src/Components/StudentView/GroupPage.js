@@ -132,19 +132,26 @@ const GroupPage = () => {
       <Header />
       <Nav />
       <div className='content-Box-Group'>
-        <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+      <span className='purple_circle'>
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
-        <div className='main_page_content'>
+        
 
+
+      
+        <div className='main_page_content'>
+        {id>= 1 && (
+          <div className='group-title'>
+          <h1>קבוצה: {id}</h1>
+          </div>
+        )}
+        
          
           {(user.role !== 'Student' || (user.role === "Student" && user.groupId !== null)) && (
             <>
-              <div className='group-title'>
-                <h1>קבוצה: {id}</h1>
-              </div>
-              <div className='Info'>בית ספר : {groupInfo.schoolName} </div>
-              <div className='Info'>בית משוייך :
+             
+              <div className='Info-g'>בית ספר : {groupInfo.schoolName} </div>
+              <div className='Info-g'>בית משוייך :
                 {groupInfo && groupInfo.houseId && <FaHouseChimney className='house_for_group' onClick={() => { navigate(`/HousePage/${groupInfo.houseId}`) }} />}
               </div>
               <div className='group-title'>

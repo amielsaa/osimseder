@@ -98,13 +98,14 @@ header .icons .settings-icon {
     font-size: 1.5em;
     margin-left: 10%;
     margin-bottom: 0.5%;
-    min-width: 17%;
+    min-width: 10%;
   }
   .hello{
     margin-bottom: 1.5%;
   }
   .role-box {
     margin-bottom: 1.0%;
+    margin-right: 5%;
   }
   
 

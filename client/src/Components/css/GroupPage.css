@@ -63,10 +63,11 @@
   .kick_student:hover {
     background-color: darkred; /* Change color on hover */
   }
-  .Info {
+  .Info-g {
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
+    color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
     width: 100%;
@@ -102,7 +103,7 @@
   margin-right: 5%;
   background-color: var(--PURPLE-COLOR);
   border-radius: 25%;
-  width: 6%;
+  width: 10%;
   height: 3%;
   display: flex;
   justify-content: center;
@@ -161,6 +162,160 @@
   cursor: pointer;
   outline: none;
   
+}
+@media screen and (min-width: 768px){
+  .purple_circle{
+    width: 4%;
+  }
+  .content-Box-Group {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: var( --WHITEBG-COLOR); /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    direction: rtl;
+  }
+  
+  .Group-Info {
+    width: 70%;
+    height: 30%;
+    border-top:2px solid var(--ORANGE-COLOR);
+    border-bottom:2px solid var(--ORANGE-COLOR);
+    margin-top:5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--BORDER-RADIUS);
+    overflow-y: scroll;
+    min-height: 52%;
+    font-size: 2rem;
+
+  }
+  .Group-Info .Group_Member {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--PURPLE-COLOR);
+  }
+  .kick_student {
+    background-color: var(--ORANGE-COLOR);
+    color: white;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: var(--BORDER-RADIUS); /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+  }
+  .main_page_content{
+    width:50%;
+    margin-top: 0%;
+  }
+  
+  /* Hover effect */
+  .kick_student:hover {
+    background-color: darkred; /* Change color on hover */
+  }
+  .Info-g {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:var(--PURPLE-COLOR);
+    background-color: var(--GREY-COLOR);
+    margin-top: 5%;
+    width: 70%;
+    
+  }
+  .group-title {
+    font-size: 2rem;
+   margin-top:6%;
+   color : var(--ORANGE-COLOR);
+  }
+  
+
+.house_for_group{
+  margin-right: 3%;
+}
+.empty-group {
+  margin: auto;
+  color: var(--PURPLEOP-COLOR);
+}
+
+.user_not_in_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:auto
+}
+
+.user_not_in_group .group-title {
+  margin-top: 6%;
+  font-size: 2rem;
+  color: var(--ORANGE-COLOR);
+}
+
+.user_not_in_group .move_to_groups_button {
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  font-size: 1.2rem;
+  outline: none;
+  margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+.user_not_in_group .move_to_groups_button:hover {
+  background-color: darkred;
+}
+.join_student_to_group_div{
+  
+    width: 70%;
+    display: flex;
+    align-items: center;
+    min-height: 10%;
+    justify-content: space-between;
+}
+.add_to_group_button{
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  height: 40%;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+  
+}
 }
 
 
