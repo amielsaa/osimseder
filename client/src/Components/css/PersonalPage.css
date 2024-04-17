@@ -20,14 +20,13 @@
     color : var(--ORANGE-COLOR);
    }
    .Personal-Info{
-    width: 30%;
+    width: 100%;
     direction: rtl;
     margin-top: 10%;
    }
    .Info-bar {
     padding: 15px;
     font-weight: bold;
-    
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
     width: 100%;
