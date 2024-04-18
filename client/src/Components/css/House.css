@@ -95,7 +95,7 @@
     
     .House-img-container {
         position: relative; /* Ensure the container is positioned */
-        height: 100%;
+        height: 100px;
         width: 25%;
         border-radius: 5px;
         display: flex;

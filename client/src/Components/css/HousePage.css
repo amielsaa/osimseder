@@ -238,7 +238,8 @@
       align-items: center;
       flex-direction: column;
       min-height: 55%;
-      margin-bottom: 120%;
+      margin-bottom: 100%;
+      gap:150px
       
       
     }
@@ -246,8 +247,8 @@
       display: flex;
       flex-direction: column;
       width: 80%;
-      min-height: 100%;
-      justify-content: center;
+      min-height: 200px;
+      justify-content: space-between;
       align-items: center;
       border-radius: var(--BORDER-RADIUS);
       border-top: 2px solid var(--ORANGE-COLOR);
@@ -283,9 +284,32 @@
   color : var(--ORANGE-COLOR);
   font-size: 2rem;
 }
-.House-Tasks{
+
+.house_group_info, .member_in_charge_info {
+  width: 100%;
+  display: flex;
+  direction: rtl;
+  height: 70px;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between;
+  color: var(--PURPLE-COLOR);
+  font-weight: bold;
+  background-color: var(--GREY-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+  flex-wrap: wrap;
+  min-height: 40%;
+  padding-right: 5%;
+
+}
+.House-Tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  min-height: 40%;
   margin-top: 0%;
-  margin-bottom: 15%;
+  
 }
    
    }
