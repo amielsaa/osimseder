@@ -27,3 +27,11 @@
     margin-top:6%;
     color : var(--ORANGE-COLOR);
 }
+@media screen and (min-width: 768px){
+    .add-task-title{
+        font-size: 1.8rem;
+    }
+    form {
+        margin-top: 3%;
+    }
+}

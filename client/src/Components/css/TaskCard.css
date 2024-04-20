@@ -44,6 +44,7 @@
     padding-right: 5%;
     width: 90%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     font-weight: bold;
@@ -69,4 +70,20 @@
   .view-icon{
    color:black;
    margin-top:30%;
+  }
+  @media screen and (min-width: 768px){
+    .Task {
+      min-width: 150px;
+      height: 100%;
+      border: 1px solid var(--PURPLE-COLOR);
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: right;
+      align-items: center;
+      transition: all 0.3s ease; /* Add transition for a smoother effect */
+    }
+    .Description-Status::-webkit-scrollbar {
+    display: none;
+}
   }

@@ -79,7 +79,7 @@
     }
     .groups_title {
       color:var(--ORANGE-COLOR);
-      font-size: 2rem;
+      font-size: 1.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -96,7 +96,7 @@
       padding: 10px;
       border: none;
       cursor: pointer;
-      margin-top: 2%;
+      margin-top: 0%;
     }
     
   }

@@ -71,6 +71,9 @@
       background-color: var(--WHITEBG-COLOR);
       
     }
+    .content-Box::-webkit-scrollbar {
+      display: none;
+    }
     .main_content_houses {
       width: 100%;
       display: flex;
@@ -93,6 +96,7 @@
       padding: 10px;
       border: none;
       cursor: pointer;
+      margin-top: 0.5%;
       
     }
     .filtersContainer{

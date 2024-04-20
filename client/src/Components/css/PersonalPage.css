@@ -126,7 +126,7 @@
     flex-grow: 1;
   }
     .Personal-Title {
-      
+      margin-top: 3%;
       color : var(--ORANGE-COLOR);
       font-size: 2rem;
      }
@@ -142,12 +142,14 @@
       font-weight: bold;
       font-size: 2rem;
       background-color: var(--GREY-COLOR);
-      margin-top: 5%;
+      
       width: 100%;
-      height: 5%;
+      height: 10%;
       
       color:var(--PURPLE-COLOR);
       display: flex;
+      
+      justify-content: start;
       flex-direction: row;
       align-items: center;
       

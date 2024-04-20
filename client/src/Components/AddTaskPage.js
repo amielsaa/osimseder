@@ -55,8 +55,8 @@ function AddTaskPage() {
           <Header />
           <Nav />
           <div className='content-Box-Add-Task'>
-            <span className='purple_circle'>
-              <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+          <span className='purple_circle'>
+                <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
             </span>
             <div className="main-content-Add-Task">
     
