@@ -336,12 +336,12 @@
   margin-top: 5%;
 }
 .House-Info-Tasks::-webkit-scrollbar {
-  background: var(--PURPLEOP-COLOR) ;
+  background: var(--ORANGEOP-COLOR) ;
   border-radius: var(--BORDER-RADIUS);
   
  }
  .House-Info-Tasks::-webkit-scrollbar-thumb {
-  background-color: var(--PURPLE-COLOR);
+  background-color: var(--ORANGE-COLOR);
   border-radius: var(--BORDER-RADIUS);
 }
 
