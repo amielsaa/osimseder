@@ -116,13 +116,16 @@ const GroupPage = () => {
           {(user.role !== 'Student' || (user.role === "Student" && user.groupId !== null)) && (
             <>
               <div className='group_details'>
+              <div className='group-semi-title'>
+              <h1>פרטי הקבוצה</h1>
+              </div>
                 <div className='Info-g'>בית ספר : {groupInfo.schoolName} </div>
                 <div className='Info-g'>בית משוייך :
                   {groupInfo && groupInfo.houseId && <FaHouseChimney className='house_for_group' onClick={() => { navigate(`/HousePage/${groupInfo.houseId}`) }} />}
                 </div>
               </div>
               <div className='group_members_container'>
-                <div className='group-title'>
+                <div className='group-semi-title'>
                   <h1>חברי הקבוצה</h1>
                 </div>
 

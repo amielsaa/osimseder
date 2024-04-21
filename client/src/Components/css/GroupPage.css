@@ -14,6 +14,11 @@
     overflow-y: scroll;
     direction: ltr;
   }
+  .group-semi-title{
+    font-size: 1.2rem;
+      margin-top: 0%;
+     color : var(--ORANGE-COLOR);
+  }
   .group_details{
     display: flex;
     flex-direction: column;
@@ -25,7 +30,7 @@
   .group_members_container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 100%;
     min-height: 100%;
@@ -201,8 +206,8 @@
   }
   
   .Group-Info {
-    width: 50%;
-    height: 30%;
+    width: 80%;
+    height: 350px;
     border-top:2px solid var(--ORANGE-COLOR);
     border-bottom:2px solid var(--ORANGE-COLOR);
     margin-top:5%;
@@ -255,7 +260,7 @@
     flex-direction: column;
     width: 50%;
     height: 100%;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
   }
   .Info-g {
@@ -265,7 +270,7 @@
     color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
-    width: 50%;
+    width: 100%;
     direction: rtl;
     
   }
@@ -315,12 +320,13 @@
   margin-top: 20px; /* Adjust margin-top as needed */
 }
 
+
 .user_not_in_group .move_to_groups_button:hover {
   background-color: darkred;
 }
 .join_student_to_group_div{
-  
-    width: 50%;
+    margin-top: 2%;
+    width: 80%;
     display: flex;
     align-items: center;
     min-height: 10%;
@@ -331,7 +337,7 @@
   color: white;
   border: none;
   height: 70%;
-  width: 15%;
+  width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,18 +365,30 @@
 .content-Box-Group::-webkit-scrollbar {
   display: none;
 }
+.group_details{
+  margin-right: 50px;
+  width: 50%;
+  padding-bottom: 50px;
+  
+  
+}
+.group_members_container{
+  width: 70%;
+  
+}
+.group-semi-title{
+  font-size: 1.2rem;
+    margin-top: 0%;
+   color : var(--ORANGE-COLOR);
+}
 
 
 .main_page_content::-webkit-scrollbar {
-  background: var(--PURPLEOP-COLOR) ;
-  border-radius: var(--BORDER-RADIUS);
+  display: none;
   
   
  }
- .main_page_content::-webkit-scrollbar-thumb {
-   background-color: var(--PURPLE-COLOR);
-   border-radius: var(--BORDER-RADIUS);
- }
+
 }
 
 

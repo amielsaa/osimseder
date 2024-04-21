@@ -79,7 +79,7 @@
 @media screen and (min-width: 768px){
    
         .House {
-            min-height: 150px; /* Set a different fixed height for larger screens if needed */
+            min-height: 130px; /* Set a different fixed height for larger screens if needed */
             width: 50%;
             border-radius: 5px;
             background-color: var(--GREY-COLOR);
@@ -107,7 +107,7 @@
         padding-left: 3%;
         height: 100%;
         width: 30%;
-        direction: rtl;
+        direction: ltr;
         display: flex;
         flex-direction: column;
         align-items: right;
@@ -116,9 +116,24 @@
         font-size: 1.5rem;
         justify-content: start;
     }
-    .House-bar-Info::-webkit-scrollbar {
-        display: none;
-      }
+    .House-bar-Info p {
+        direction: rtl;
+        padding-right:10px
+    }
+    
+      .House-bar-Info::-webkit-scrollbar {
+        background: var(--PURPLEOP-COLOR) ;
+        border-radius: var(--BORDER-RADIUS);
+        width: 10px;
+        padding-right: 5px;
+        
+        
+    }
+    .House-bar-Info::-webkit-scrollbar-thumb {
+        background-color: var(--PURPLE-COLOR);
+        border-radius: var(--BORDER-RADIUS);
+    }
+      
     
     .house-id {
         color: var(--FONT-COLOR);
@@ -163,4 +178,5 @@
         margin-left: 6%;
         font-size: 2.5rem
     }
+    
 }

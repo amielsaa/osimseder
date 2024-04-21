@@ -161,4 +161,7 @@ input {
     margin-top: 20px;
     margin-right: 10px;
   }
+  .background_login_page::-webkit-scrollbar{
+    display: none;
+  }
 }
