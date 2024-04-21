@@ -96,7 +96,7 @@
     .House-img-container {
         position: relative; /* Ensure the container is positioned */
         height: 100px;
-        width: 25%;
+        width: 150px;
         border-radius: 5px;
         display: flex;
         justify-content: center;
@@ -148,7 +148,7 @@
     }
     
     .house_pic {
-        width: 60%;
+        width: 70%;
         height: auto;
         max-height: 150px; /* Set a maximum height for the image */
         object-fit: cover; /* Maintain aspect ratio and cover the container */

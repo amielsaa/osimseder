@@ -210,6 +210,16 @@
     align-items: center;
     overflow-y: scroll;
   }
+  .personal_page_main_content::-webkit-scrollbar {
+    background: var(--PURPLEOP-COLOR) ;
+    border-radius: var(--BORDER-RADIUS);
+    
+    
+   }
+   .personal_page_main_content::-webkit-scrollbar-thumb {
+     background-color: var(--PURPLE-COLOR);
+     border-radius: var(--BORDER-RADIUS);
+   }
 
 }
 

@@ -12,7 +12,7 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    direction: ltr;
   }
   
   .Group-Info {
@@ -32,7 +32,7 @@
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
-    
+    direction: rtl;
     margin-top: 5%;
     display: flex;
     flex-direction: row;
@@ -72,6 +72,7 @@
     margin-top: 5%;
     width: 100%;
     font-size: 1.2rem;
+    direction: rtl;
   }
   .group-title {
    margin-top:6%;
@@ -146,7 +147,7 @@
   background-color: darkred;
 }
 .join_student_to_group_div{
-  
+    direction: rtl;
     width: 100%;
     display: flex;
     align-items: center;
@@ -181,11 +182,11 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    direction: ltr;
   }
   
   .Group-Info {
-    width: 70%;
+    width: 50%;
     height: 30%;
     border-top:2px solid var(--ORANGE-COLOR);
     border-bottom:2px solid var(--ORANGE-COLOR);
@@ -202,7 +203,7 @@
     padding: 15px;
     font-weight: bold;
     font-size: 1.5rem;
-    
+    direction: rtl;
     margin-top: 5%;
     display: flex;
     flex-direction: row;
@@ -225,7 +226,7 @@
     outline: none; /* Remove default button outline */
   }
   .main_page_content{
-    width:50%;
+    width:100%;
     margin-top: 0%;
   }
   
@@ -240,7 +241,8 @@
     color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
-    width: 70%;
+    width: 50%;
+    direction: rtl;
     
   }
   .group-title {
@@ -267,7 +269,7 @@
 }
 
 .user_not_in_group .group-title {
-  margin-top: 6%;
+  margin-top: 0%;
   font-size: 2rem;
   color: var(--ORANGE-COLOR);
 }
@@ -294,7 +296,7 @@
 }
 .join_student_to_group_div{
   
-    width: 70%;
+    width: 50%;
     display: flex;
     align-items: center;
     min-height: 10%;
@@ -317,6 +319,23 @@
   outline: none;
   
 }
+.Group-Info::-webkit-scrollbar {
+  display: none;
+}
+.content-Box-Group::-webkit-scrollbar {
+  display: none;
+}
+
+.main_page_content::-webkit-scrollbar {
+  background: var(--PURPLEOP-COLOR) ;
+  border-radius: var(--BORDER-RADIUS);
+  
+  
+ }
+ .main_page_content::-webkit-scrollbar-thumb {
+   background-color: var(--PURPLE-COLOR);
+   border-radius: var(--BORDER-RADIUS);
+ }
 }
 
 

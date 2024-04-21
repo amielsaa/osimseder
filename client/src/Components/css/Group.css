@@ -59,7 +59,7 @@
         align-items: center;
         margin:2%;
         font-weight: bold;
-        min-height: 7%;
+        min-height: 10%;
         
     }
     .group_students_pop_up{
@@ -69,7 +69,7 @@
         color:var(--PURPLE-COLOR);
     }
     .join-group-btn, .users-in-group-btn ,.exit-group-btn , .remove-group-btn {
-        width: 10%;
+        width: 12%;
         height: 60%;
         margin: 0%;
         font-size: 1.2rem;

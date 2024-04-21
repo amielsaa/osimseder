@@ -70,7 +70,7 @@
     }
     
     .pop-up_screen {
-        width: 30%;
+        width: 25%;
         min-height: 100%; /* Set a default min-height when there are no students */
         background-color: var(--WHITEBG-COLOR);
         
@@ -116,4 +116,8 @@
         margin: auto;
         color: var(--PURPLE-COLOR);
     }
+    .pop-up_screen::-webkit-scrollbar {
+        display: none;
+      }
+    
 }

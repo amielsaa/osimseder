@@ -74,7 +74,7 @@ const AddGroupPage = () => {
       <Nav />
       <div className='content-Box-add-group'>
         <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
         <div className="main_content_add_group">
 

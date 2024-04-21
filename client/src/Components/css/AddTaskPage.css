@@ -34,4 +34,10 @@
     form {
         margin-top: 3%;
     }
+    .main-content-Add-Task::-webkit-scrollbar {
+        display: none;
+      }
+      .content-Box-Add-Task::-webkit-scrollbar {
+        display: none;
+      }
 }

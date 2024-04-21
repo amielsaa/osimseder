@@ -114,4 +114,14 @@
       justify-content: center;
       align-items: center;
     }
+    .main_content_houses::-webkit-scrollbar {
+      background: var(--PURPLEOP-COLOR) ;
+      border-radius: var(--BORDER-RADIUS);
+      
+      
+     }
+     .main_content_houses::-webkit-scrollbar-thumb {
+       background-color: var(--PURPLE-COLOR);
+       border-radius: var(--BORDER-RADIUS);
+     }
   }

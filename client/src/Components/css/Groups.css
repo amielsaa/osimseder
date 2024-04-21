@@ -74,7 +74,7 @@
       justify-content: flex-start;
       align-items: center;
       height: 75%;
-      gap: 3%;
+      gap: 0%;
       overflow-y: scroll;
     }
     .groups_title {
@@ -98,5 +98,15 @@
       cursor: pointer;
       margin-top: 0%;
     }
+    .To_main_content_groups::-webkit-scrollbar {
+      background: var(--PURPLEOP-COLOR) ;
+      border-radius: var(--BORDER-RADIUS);
+      
+      
+     }
+     .To_main_content_groups::-webkit-scrollbar-thumb {
+       background-color: var(--PURPLE-COLOR);
+       border-radius: var(--BORDER-RADIUS);
+     }
     
   }
