@@ -12,7 +12,7 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    
 }
 .main_content_add_House{
     display: flex;
@@ -22,6 +22,12 @@
     align-items: center;
     height: 90%;
     overflow-y: scroll;
+}
+input{
+    direction: rtl;
+}
+select {
+    direction: rtl;
 }
 textarea {
     width: 100%;
@@ -35,5 +41,22 @@ textarea {
 }
 .add-house-semi-title{
     margin-top: 5%;
+    direction: rtl;
     color:var(--PURPLE-COLOR)
+}
+@media screen and (min-width: 768px) {
+    .main_content_add_House::-webkit-scrollbar {
+        background: var(--PURPLEOP-COLOR) ;
+        border-radius: var(--BORDER-RADIUS);
+        
+        
+       }
+       .add-house-semi-title{
+        margin-top: 1%;
+       }
+
+       .main_content_add_House::-webkit-scrollbar-thumb {
+         background-color: var(--PURPLE-COLOR);
+         border-radius: var(--BORDER-RADIUS);
+       }
 }

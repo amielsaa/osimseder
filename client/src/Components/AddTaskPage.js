@@ -90,7 +90,7 @@ function AddTaskPage() {
                 </div>
                  
                 <div className='Button-Div'>
-                    <button type="submit" className='RegisterButton'>הוסף מטלה</button>
+                    <button type="submit" className='add_task_btn'>הוסף מטלה</button>
                 </div>
                 </Form>
               </Formik>

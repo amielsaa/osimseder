@@ -115,7 +115,7 @@ function EditHousePage() {
             <span className='purple_circle'>
                 <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
             </span>
-                <div className="main-content-Add-Task">
+                <div className="main-content-Edit-House">
 
                     <div className='add-task-title'>
                         <h1>עריכת בית</h1>
@@ -219,7 +219,7 @@ function EditHousePage() {
                             </div>
 
                             <div className='Button-Div'>
-                                <button type="submit" className='RegisterButton'>ערוך פרטי בית</button>
+                                <button type="submit" className='edit_house_btn'>ערוך פרטי בית</button>
                             </div>
                         </Form>
                     </Formik>

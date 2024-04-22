@@ -12,7 +12,7 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    
 }
 
 .main-content-Add-Group-To-House{
@@ -55,4 +55,56 @@
     gap: 5%;
     align-items: center;
     margin-top: 10%;
+    direction: rtl;
+}
+@media screen and (min-width: 768px) {
+    .content-Box-Add-Group-To-House::-webkit-scrollbar {
+        display: none;
+       }
+       .main-content-Add-Group-To-House::-webkit-scrollbar {
+        display: none;
+       }
+
+       .add-Add-Group-To-House-title{
+        font-size: 1.5rem;
+        margin-top:3%;
+        color : var(--ORANGE-COLOR);
+    }
+    .add-Add-Group-To-House-semi-title{
+        margin-top:1%;
+        color : var(--ORANGE-COLOR);
+        font-size: 1rem;
+    }
+    .groups_container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 85%;
+        gap: 3%;
+        margin-top:1%;
+        overflow-y: scroll;
+    }
+    .School_filter {
+        width: 20%;
+    }
+    .school_Filter_and_label{
+        gap: 1%; 
+        margin-top: 2%;
+        direction: rtl;
+    }
+
+    .groups_container::-webkit-scrollbar {
+        background: var(--PURPLEOP-COLOR) ;
+        border-radius: var(--BORDER-RADIUS);
+        
+        
+       }
+       .groups_container::-webkit-scrollbar-thumb {
+         background-color: var(--PURPLE-COLOR);
+         border-radius: var(--BORDER-RADIUS);
+       }
+
+       
 }

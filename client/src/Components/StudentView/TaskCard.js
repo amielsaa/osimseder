@@ -77,7 +77,7 @@ const TaskCard = ({ room, tasks, removeRoomFromTasklist }) => {
             <Link to={`/TaskPage/${task.taskId}`}>
               <IoSearchOutline className='view-icon' />
             </Link>{' '}
-            <IoCloseSharp onClick={() => toggleStatusDelete(task.taskId)}/>
+            <IoCloseSharp className='delete-icon' onClick={() => toggleStatusDelete(task.taskId)}/>
             <span
               className={task.status === 'GREEN' ? 'green-circle' : 'red-circle'}
               onClick={() => toggleStatus(index)}

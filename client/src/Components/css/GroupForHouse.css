@@ -12,3 +12,9 @@
     min-height: 7%;
     direction: rtl;
 }
+@media screen and (min-width: 768px){
+    .potential_group_for_house{
+        width: 50%;
+        min-height: 60px;
+    }
+}

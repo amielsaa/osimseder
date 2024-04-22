@@ -49,6 +49,7 @@
     align-items: center;
     font-weight: bold;
     justify-content: space-between;
+    
   }
   
   .green-circle,
@@ -62,14 +63,20 @@
   
   .green-circle {
     background-color: #8cff66; /* Lighter green color */
+    cursor: pointer;
+  }
+  .delete-icon{
+    cursor: pointer;
   }
   
   .red-circle {
     background-color: #ff6666; /* Red color */
+    cursor: pointer;
   }
   .view-icon{
    color:black;
    margin-top:30%;
+   cursor: pointer;
   }
   @media screen and (min-width: 768px){
     .Task {

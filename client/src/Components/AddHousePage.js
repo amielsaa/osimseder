@@ -114,8 +114,8 @@ const AddHousePage = () => {
       <Header />
       <Nav />
       <div className='content-Box-add-House'>
-        <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+      <span className='purple_circle'>
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
         <div className="main_content_add_House">
 
