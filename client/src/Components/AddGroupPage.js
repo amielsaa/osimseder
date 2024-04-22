@@ -74,7 +74,7 @@ const AddGroupPage = () => {
       <Nav />
       <div className='content-Box-add-group'>
         <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
         <div className="main_content_add_group">
 
@@ -131,7 +131,7 @@ const AddGroupPage = () => {
                   <Field as="select" id="capacity" name="capacity" onChange={(e) => setSelectedCapacity(e.target.value)} value={selectedCapacity}>
                     <option value="">בחר הגבלה לקבוצה</option>
                     
-                    {Array.from({ length: 9 }, (_, index) => index + 2).map((size) => (
+                    {Array.from({ length: 8 }, (_, index) => index + 2).map((size) => (
                       <option key={size} value={size}>{size}</option>
                     ))}
                   </Field>

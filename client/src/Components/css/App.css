@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Inter:wght@100..900&display=swap');
 :root {
-  --PURPLEOP-COLOR: rgba(121, 4, 62, 1);
+  --PURPLEOP-COLOR: rgba(121, 4, 62, 0.7);
   --PURPLE-COLOR: #79043e;
   --RED-COLOR: #E34234;
   --ORANGE-COLOR: #eb743e;
+  --ORANGEOP-COLOR: rgba(235, 116, 62, 0.5);
   --FONT-COLOR: whitesmoke;
+  --WHITEOP-COLOR:rgba(255, 255, 255, 0.9);
   --BLUE-COLOR:#003061;
   --LIGHTBLUE-COLOR:#008ad1;
   --CYAN-COLOR:#7ad3f7;
@@ -23,7 +25,8 @@
   box-sizing: border-box;
   font-family: var(--MAIN-FONT);
 }
-
+@media screen and (max-width: 768px){
 ::-webkit-scrollbar {
     display: none;
+}
 }

@@ -75,11 +75,46 @@ header .icons .settings-icon {
 
 /* Media query for smaller screens (e.g., phones) */
 @media only screen and (max-width: 768px) {
-  .logo,
+
   .hello,
   .role-box,
   .user-icon,
   .settings-icon {
     font-size: 0.7em; /* Adjust the font size for smaller screens */
+  }
+}
+@media only screen and (min-width: 769px) {
+  header {
+    height: 7vh; /* Restore original height for PC screens */
+    padding: 10px; /* Restore original padding for PC screens */
+  }
+
+  .logo {
+    width: 30%; /* Restore original logo width for PC screens */
+  }
+
+  .hello,
+  .role-box {
+    font-size: 1.5em;
+    margin-left: 10%;
+    margin-bottom: 0.5%;
+    min-width: 10%;
+  }
+  .hello{
+    margin-bottom: 1.5%;
+  }
+  .role-box {
+    margin-bottom: 1.0%;
+    margin-right: 5%;
+  }
+  
+
+  .icons {
+    gap: 1rem; /* Restore original gap between icons for PC screens */
+  }
+
+  .user-icon,
+  .settings-icon {
+    margin-right: 10px; /* Restore original margin for PC screens */
   }
 }

@@ -14,13 +14,12 @@
     overflow-y: scroll;
 }
 .Task-Content{
-    margin-top: 10%;
+    margin-top: 1%;
     width: 100%;
     height: 90%;
     display: flex;
     justify-content: right;
     flex-direction: column;
-    direction: rtl;
     overflow-y: scroll;
 }
 .Task_Id {
@@ -33,12 +32,16 @@
 .room, .Task_kind , .Task_description  {
     margin-top: 10%;
     font-size: 1.5rem;
+    direction: rtl;
     margin-right: 5%;
-    color: darkblue;
+    color: var(--PURPLE-COLOR);
     font-weight: bold;
     background-color: var(--GREY-COLOR);
 
 
+}
+.task_title{
+    margin-top: 7%;
 }
 
 .Task_description {
@@ -57,12 +60,97 @@
 }
 .action_pic{
     margin-top: 10%;
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
 }
+.task_desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    width: 100%;
+
+}
 .action_pic img {
     width: 100%;
-    height: 100%;
+    height: 90%;
     object-fit: cover; /* This ensures that the image covers the entire container while maintaining its aspect ratio */
+}
+@media screen and (min-width: 768px){
+    .task_title{
+        margin-top: 3%;
+    }
+    .Task-Content{
+        margin-top: 1%;
+        width: 100%;
+        height: 90%;
+        display: flex;
+        justify-content: right;
+        flex-direction: row-reverse;
+        
+        overflow-y: scroll;
+    }
+    .task_desc{
+       justify-content:center;
+       align-items: right;
+        width: 50%;
+        margin-left: 10%;
+        padding-left: 10%;
+        gap:50px;
+        padding-bottom: 50px;
+    
+    }
+    .Task_Id {
+        display: flex;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--ORANGE-COLOR);
+    }
+    .room, .Task_kind , .Task_description  {
+        margin-top:1%;
+        font-size: 1.5rem;
+        margin-right: 5%;
+        width: 70%;
+        color: var();
+        font-weight: bold;
+        background-color: var(--GREY-COLOR);
+    
+    
+    }
+    
+    .Task_description {
+        display: flex;
+        flex-direction: column;
+    
+    }
+     .Task_info_desc {
+        margin-right: 10%;
+        margin-top: 5%;
+        color:black
+    }
+    .TaskInfo{
+        color:black;
+        font-size: 1.5 rem;
+    }
+    .action_pic{
+        margin-top: 150px;
+        height: 300px;
+        
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+    }
+    .action_pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* This ensures that the image covers the entire container while maintaining its aspect ratio */
+    }
+    .content_Box_Task_Page::-webkit-scrollbar {
+        display: none;
+       }
+       .Task-Content::-webkit-scrollbar {
+        display: none;
+       }
 }

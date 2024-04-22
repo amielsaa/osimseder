@@ -46,9 +46,9 @@ function AddGroupToHousePage() {
           <Header />
           <Nav />
           <div className='content-Box-Add-Group-To-House'>
-            <span className='purple_circle'>
-              <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
-            </span>
+          <span className='purple_circle'>
+            <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
+          </span>
             <div className="main-content-Add-Group-To-House">
             <div className='add-Add-Group-To-House-title'>
                 <h1>הוספת קבוצה לבית</h1>

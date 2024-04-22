@@ -13,8 +13,7 @@ const MyGroupsTeamOwner = () => {
     <Header/>
       <Nav/>
     <div className='content-Box'>
-      <div className='To_main_content_groups'>
-        <div className='groups_title'>
+    <div className='groups_title'>
         {user.role === "TeamOwner" && (
              <h1>הקבוצות שלי</h1>
           )}
@@ -25,6 +24,8 @@ const MyGroupsTeamOwner = () => {
              <h1>כל הקבוצות</h1>
           )}
       </div>
+      <div className='To_main_content_groups'>
+        
       <GroupListTO/>
       
     </div>

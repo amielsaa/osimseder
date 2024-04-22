@@ -14,7 +14,35 @@
     overflow-y: scroll;
     
   }
+   .groups_and_teamOwners_and_houseInfo{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top:60%;
+    
+  } 
+  .title_and_buttons{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:50%;
+    min-height: 30%;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .groups_and_teamOwners{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 30%;
+    gap:15%;
 
+  }
   .House_Info {
     width: 90%;
     min-height: 80%;
@@ -23,9 +51,9 @@
     margin-bottom: 80%; /* Adjust this value */
   }
  .House-title{
-    margin-top:6%;
     color : var(--ORANGE-COLOR);
     font-size: 1rem;
+
  }
  .House_picture img {
     display: flex;
@@ -75,7 +103,7 @@
   }
   .buttons_for_house_logic{
     width: 100%;
-    min-height: 5%;
+    min-height: 15%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -139,7 +167,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 90%;
+    min-height: 100%;
     justify-content: center;
     align-items: center;
     border-radius: var(--BORDER-RADIUS);
@@ -160,7 +188,7 @@
   .Info {
     padding: 15px;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 2rem;
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
     width: 100%;
@@ -202,5 +230,122 @@
    .assign_button_wrapper{
     width: 15%;
    }
+   @media screen and (min-width: 768px){
+    .groups_and_teamOwners{
+      display: flex;
+      width: 40%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 55%;
+      margin-bottom: 100%;
+      gap:150px
+      
+      
+    }
+    .content-Box-House::-webkit-scrollbar {
+      display: none;
+    }
+    .groups_of_house, .members_of_house {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      min-height: 200px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: var(--BORDER-RADIUS);
+      border-top: 2px solid var(--ORANGE-COLOR);
+      border-bottom: 2px solid var(--ORANGE-COLOR);
+      gap: 20%;
+  }
+  .House_Info {
+    width: 40%;
+    min-height: 80%;
+    direction: rtl;
+    margin-top: 2%;
+    
+}
+ .groups_and_teamOwners_and_houseInfo{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: 8%;
+
+  
+} 
+.buttons_for_house_logic {
+  width: 30%;
+  min-height: 15%;
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: center;
+  align-items: center;
+  gap:20%
+}
+ .add_task_button , .edit_house_button  {
+  cursor: pointer;
+}
+.House-title{
+  color : var(--ORANGE-COLOR);
+  font-size: 2rem;
+}
+
+.house_group_info, .member_in_charge_info {
+  width: 100%;
+  display: flex;
+  direction: rtl;
+  height: 80px;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between;
+  color: var(--PURPLE-COLOR);
+  font-weight: bold;
+  background-color: var(--GREY-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+  flex-wrap: wrap;
+  min-height: 40%;
+  padding-right: 5%;
+
+}
+.House-Tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  min-height: 250px;
+  margin-top: -52%;
+  margin-right: 40%; 
+}
+.House_main_content::-webkit-scrollbar {
+ background: var(--PURPLEOP-COLOR) ;
+ border-radius: var(--BORDER-RADIUS);
+ 
+}
+.House_main_content::-webkit-scrollbar-thumb {
+  background-color: var(--PURPLE-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+}
+
+
+
+
+.House_main_content{
+  height: 85%;
+  margin-top: 5%;
+}
+.House-Info-Tasks::-webkit-scrollbar {
+  background: var(--ORANGEOP-COLOR) ;
+  border-radius: var(--BORDER-RADIUS);
+  
+ }
+ .House-Info-Tasks::-webkit-scrollbar-thumb {
+  background-color: var(--ORANGE-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+}
+
    
+   }
+
   

@@ -188,15 +188,15 @@ const HousePage = () => {
       <Header />
       <Nav />
       <div className='content-Box-House'>
-        <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+      <span className='purple_circle'>
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
         <div className="House_main_content">
+          <div className="title_and_buttons">
           <div className="title_picture">
             <div className="House-title">
               <h1>בית מספר : {id}</h1>
             </div>
-            
           </div>
           {user.role !== "Student" &&
             <div className="buttons_for_house_logic">
@@ -204,8 +204,9 @@ const HousePage = () => {
               <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
             </div>
           }
-
-
+          </div>
+          <div className="groups_and_teamOwners_and_houseInfo">
+          <div className="groups_and_teamOwners">
           {user.role !== 'Student' &&
             <div className="groups_of_house_content">
               <div className="title_for_groups_of_house">קבוצות משוייכות</div>
@@ -239,11 +240,6 @@ const HousePage = () => {
               <div className="title_for_members_of_house">חברי גרעין אחראים</div>
               <div className="members_of_house">
                 <div className="member_in_charge_info">
-
-
-
-
-
                 {!memberAChoosingStatus && (
                   <>
                     <h4 onClick={firstMember? () => {navigate(`/Personal/${firstMember.encryptedEmail}`)} : () => {}}>חבר גרעין: {firstMember? firstMember.fullName : ""}</h4>
@@ -270,13 +266,6 @@ const HousePage = () => {
                     <button className="add_core_member_button" onClick={handleAssignMemberA}> שייך </button>
                 </>
                 )}
-                 
-
-
-
-
-
-
 
                 </div>
                 <div className="member_in_charge_info">
@@ -308,6 +297,7 @@ const HousePage = () => {
               </div>
             </div>
           }
+          </div>
 
           <div className="House_Info">
             <div className="house_Info_Title"><h1>פרטי הבית</h1></div>
@@ -352,6 +342,8 @@ const HousePage = () => {
             )}
             
           </div>
+          </div>
+
 
           { user.role !== "Student" && (
             <div className="House-Tasks">

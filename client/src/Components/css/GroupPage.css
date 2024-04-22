@@ -12,9 +12,29 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    direction: ltr;
   }
-  
+  .group-semi-title{
+    font-size: 1.2rem;
+      margin-top: 0%;
+     color : var(--ORANGE-COLOR);
+  }
+  .group_details{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .group_members_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+  }
   .Group-Info {
     width: 100%;
     height: 50%;
@@ -32,7 +52,7 @@
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
-    
+    direction: rtl;
     margin-top: 5%;
     display: flex;
     flex-direction: row;
@@ -63,14 +83,16 @@
   .kick_student:hover {
     background-color: darkred; /* Change color on hover */
   }
-  .Info {
+  .Info-g {
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
+    color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
     width: 100%;
     font-size: 1.2rem;
+    direction: rtl;
   }
   .group-title {
    margin-top:6%;
@@ -102,7 +124,7 @@
   margin-right: 5%;
   background-color: var(--PURPLE-COLOR);
   border-radius: 25%;
-  width: 6%;
+  width: 10%;
   height: 3%;
   display: flex;
   justify-content: center;
@@ -145,7 +167,7 @@
   background-color: darkred;
 }
 .join_student_to_group_div{
-  
+    direction: rtl;
     width: 100%;
     display: flex;
     align-items: center;
@@ -161,6 +183,212 @@
   cursor: pointer;
   outline: none;
   
+}
+@media screen and (min-width: 768px){
+  .purple_circle{
+    width: 4%;
+  }
+  .content-Box-Group {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 7vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: var( --WHITEBG-COLOR); /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    overflow-y: scroll;
+    direction: ltr;
+  }
+  
+  .Group-Info {
+    width: 80%;
+    height: 350px;
+    border-top:2px solid var(--ORANGE-COLOR);
+    border-bottom:2px solid var(--ORANGE-COLOR);
+    margin-top:5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--BORDER-RADIUS);
+    overflow-y: scroll;
+    min-height: 52%;
+    font-size: 2rem;
+
+  }
+  .Group-Info .Group_Member {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    direction: rtl;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--PURPLE-COLOR);
+  }
+  .kick_student {
+    background-color: var(--ORANGE-COLOR);
+    color: white;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: var(--BORDER-RADIUS); /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+  }
+  .main_page_content{
+    width:100%;
+    margin-top: 0%;
+    flex-direction: row-reverse;
+  }
+  
+  /* Hover effect */
+  .kick_student:hover {
+    background-color: darkred; /* Change color on hover */
+  }
+  .group_details{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: start;
+    align-items: center;
+  }
+  .Info-g {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:var(--PURPLE-COLOR);
+    background-color: var(--GREY-COLOR);
+    margin-top: 5%;
+    width: 100%;
+    direction: rtl;
+    
+  }
+  .group-title {
+    font-size: 2rem;
+    margin-top: 0%;
+   color : var(--ORANGE-COLOR);
+  }
+  
+
+.house_for_group{
+  margin-right: 3%;
+}
+.empty-group {
+  margin: auto;
+  color: var(--PURPLEOP-COLOR);
+}
+
+.user_not_in_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:auto
+}
+
+.user_not_in_group .group-title {
+  margin-top: 0%;
+  font-size: 2rem;
+  color: var(--ORANGE-COLOR);
+}
+
+.user_not_in_group .move_to_groups_button {
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  font-size: 1.2rem;
+  outline: none;
+  margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+
+.user_not_in_group .move_to_groups_button:hover {
+  background-color: darkred;
+}
+.join_student_to_group_div{
+    margin-top: 2%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    min-height: 10%;
+    justify-content: space-between;
+}
+.add_to_group_button{
+  background-color: var(--ORANGE-COLOR);
+  color: white;
+  border: none;
+  height: 70%;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  border-radius: var(--BORDER-RADIUS);
+  padding: 8px 12px;
+  cursor: pointer;
+  outline: none;
+  
+}
+
+.Group-Info::-webkit-scrollbar {
+  background: var(--ORANGEOP-COLOR) ;
+  border-radius: var(--BORDER-RADIUS);
+  
+ }
+ .Group-Info::-webkit-scrollbar-thumb {
+  background-color: var(--ORANGE-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+}
+
+
+
+.content-Box-Group::-webkit-scrollbar {
+  display: none;
+}
+.group_details{
+  margin-right: 50px;
+  width: 50%;
+  padding-bottom: 50px;
+  
+  
+}
+.group_members_container{
+  width: 70%;
+  
+}
+.group-semi-title{
+  font-size: 1.2rem;
+    margin-top: 0%;
+   color : var(--ORANGE-COLOR);
+}
+
+
+.main_page_content::-webkit-scrollbar {
+  display: none;
+  
+  
+ }
+
 }
 
 

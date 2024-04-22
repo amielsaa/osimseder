@@ -24,11 +24,14 @@
     height: 60%;
     margin: 0%;
     border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border:none;
     transition: background-color 0.3s;
     color:var(--FONT-COLOR);
     background-color:var(--ORANGE-COLOR);
-    
+    cursor: pointer;
     
 }
 .remove-group-btn{
@@ -41,5 +44,57 @@
 }
 .group_studentPopUp{
     border:1px solid black
+}
+@media screen and (min-width: 768px){
+    .group {
+        min-height:60px;
+        width: 50%;
+        border-radius: 5px;
+        font-size: 1.5rem;
+        background-color: var(--GREY-COLOR);
+        /* border: 1px double var(--ORANGE-COLOR); */
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        align-items: center;
+        margin:2%;
+        font-weight: bold;
+        
+        
+    }
+    .group_students_pop_up{
+        gap:0%
+    }
+    .group-id , .users-in-group, .students-Count {
+        color:var(--PURPLE-COLOR);
+    }
+    .join-group-btn, .users-in-group-btn ,.exit-group-btn , .remove-group-btn {
+        width: 12%;
+        height: 60%;
+        margin: 0%;
+        font-size: 1.2rem;
+        border-radius: 20px;
+        border:none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+        color:var(--FONT-COLOR);
+        background-color:var(--ORANGE-COLOR);
+        cursor: pointer;
+        
+        
+    }
+    .remove-group-btn{
+        background-color:var(--RED-COLOR);
+    }
+    
+    .sub-title {
+        text-wrap: nowrap;
+        font-size: 1rem;
+    }
+    .group_studentPopUp{
+        border:1px solid black
+    }
 }
 

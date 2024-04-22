@@ -96,7 +96,7 @@ function Registration() {
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
                     <div className='Title-Div'>
-                    <h2>הרשמה</h2>
+                    <h2>הרשמה למתנדב/ת</h2>
                     </div>
                     <div>
                         <label htmlFor="firstName">שם פרטי:</label>

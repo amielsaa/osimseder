@@ -25,11 +25,10 @@ import AuthenticateEmailPage from './Components/AuthenticateEmailPage.js'
 
 
 function App() {
-  const { width } = useWindowEvents();
 
-  const isMobile = width <= 767; // Adjust the width value according to your mobile breakpoint
+  //const isMobile = width <= 767; // Adjust the width value according to your mobile breakpoint
 
-  if (isMobile) {
+  
     return (
       <div className="App">
         <DataProvider>
@@ -55,13 +54,7 @@ function App() {
         </DataProvider>
       </div>
     );
-  } else {
-    return (
-      <div className="App">
-        <ErrorPage />
-      </div>
-    );
-  }
-}
+  } 
+
 
 export default App;

@@ -11,7 +11,7 @@ import { decryptEmail, getUserByEmail } from '../Helpers/utils';
 
 const PersonalPage = () => {
   const { encryptedEmail } = useParams();
-  const { navigate,user } = useContext(DataContext);
+  const { navigate,user,width } = useContext(DataContext);
   const [centerUser, setCenterUser] = useState({});
   const [userRole, setUserRole] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -52,9 +52,12 @@ const PersonalPage = () => {
       <Nav />
   
       <div className='content-Box'>
+        
         <span className='purple_circle'>
-          <IoChevronForwardCircle className='back_button' onClick={() => navigate(-1)} />
+          <button className='back_button' onClick={() => navigate(-1)} >חזרה</button>
         </span>
+         
+        
         <div className='Personal-Title'> 
           <h1>פרטים אישיים</h1>
         </div>
@@ -63,29 +66,29 @@ const PersonalPage = () => {
             <div className='Personal-Info'>
               {centerUser.role === "Student" ? (
                 <>
-                  <div className='Info'>שם: {centerUser.firstName} {centerUser.lastName}</div>
-                  <div className='Info'>תפקיד: {userRole}</div>
-                  <div className='Info'>מספר פלאפון: {centerUser.phoneNumber}</div>
+                  <div className='Info-bar'>שם: {centerUser.firstName} {centerUser.lastName}</div>
+                  <div className='Info-bar'>תפקיד: {userRole}</div>
+                  <div className='Info-bar'>מספר פלאפון: {centerUser.phoneNumber}</div>
   
                   {isCenterUser && (
                     <>
-                      <div className='Info'>שם הורה: {centerUser.parentName}</div>
-                      <div className='Info'>מספר פלאפון הורה: {centerUser.parentPhoneNumber}</div>
-                      <div className='Info'>עיר: {centerUser.cityName}</div>
-                      <div className='Info'>בית ספר: {centerUser.schoolName}</div>
-                      <div className='Info'>מין: {centerUser.gender}</div>
-                      <div className='Info'>שפה נוספת: {centerUser.extraLanguage}</div>
-                      <div className='Info'>בקשות אישיות: {centerUser.issuesText}</div>
+                      <div className='Info-bar'>שם הורה: {centerUser.parentName}</div>
+                      <div className='Info-bar'>מספר פלאפון הורה: {centerUser.parentPhoneNumber}</div>
+                      <div className='Info-bar'>עיר: {centerUser.cityName}</div>
+                      <div className='Info-bar'>בית ספר: {centerUser.schoolName}</div>
+                      <div className='Info-bar'>מין: {centerUser.gender}</div>
+                      <div className='Info-bar'>שפה נוספת: {centerUser.extraLanguage}</div>
+                      <div className='Info-bar'>בקשות אישיות: {centerUser.issuesText}</div>
                     </>
                   )}
                 </>
               ) : (
                 <>
-                  <div className='Info'>שם: {centerUser.firstName} {centerUser.lastName}</div>
-                  <div className='Info'>תפקיד: {userRole}</div>
-                  <div className='Info'>עיר: {centerUser.cityName}</div>
-                  <div className='Info'>מספר פלאפון: {centerUser.phoneNumber}</div>
-                  <div className='Info'>מין: {centerUser.gender}</div>
+                  <div className='Info-bar'>שם: {centerUser.firstName} {centerUser.lastName}</div>
+                  <div className='Info-bar'>תפקיד: {userRole}</div>
+                  <div className='Info-bar'>עיר: {centerUser.cityName}</div>
+                  <div className='Info-bar'>מספר פלאפון: {centerUser.phoneNumber}</div>
+                  <div className='Info-bar'>מין: {centerUser.gender}</div>
                 </>
               )}
             </div>

@@ -68,7 +68,7 @@
   .sidebar-menu li a {
     display: inline-flex;
     align-items: center;
-    width: 95%;
+    width: 100%;
     padding: 5px 15px;
     color: white;
     text-decoration: none;
@@ -96,15 +96,16 @@
     border-top:2px solid var(--ORANGE-COLOR)
   }
   .sidebar-menu li:last-child {
-    padding-left: 20px;
-  }
+    padding-left: 30px;
+}
+
   
   #toggle-btn {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center; /* Adjusted position */
-    right: -45px;
+    right: -40px;
     width: 40px;
     height: 7vh;
     font-size: 18px;
@@ -228,3 +229,13 @@
     }
 
   }
+  @media only screen and (min-width: 769px) {
+    .sidebar-menu li:last-child {
+      padding-left: 0px;
+      cursor: pointer;
+  }
+  nav {
+    box-shadow: 5px 0 10px var(--PURPLEOP-COLOR);
+  }
+  }
+  

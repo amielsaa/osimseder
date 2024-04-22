@@ -86,3 +86,11 @@
     margin-top: 5%;
     color:var(--PURPLE-COLOR)
   }
+  @media screen and (min-width: 768px){
+    .add-group-title{
+        font-size: 1.8rem;
+    }
+    form {
+        margin-top: 3%;
+    }
+}

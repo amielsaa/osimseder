@@ -12,9 +12,18 @@
     box-sizing: border-box;
     transition: ease-in 0.3s; /* Add transition for smooth animation */
     overflow-y: scroll;
-    direction: rtl;
+    
 }
 .main-content-Add-Task{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    height: 90%;
+    overflow-y: scroll;
+}
+.main-content-Edit-House{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -26,4 +35,52 @@
 .add-task-title{
     margin-top:6%;
     color : var(--ORANGE-COLOR);
+}
+.add_task_btn {
+    background-color: var(--ORANGE-COLOR);
+    color: var(--FONT-COLOR);
+    padding: 10px;
+    border: none;
+    border-radius: var(--BORDER-RADIUS);
+    cursor: pointer;
+    width: 100%;
+}
+.edit_house_btn {
+    background-color: var(--ORANGE-COLOR);
+    color: var(--FONT-COLOR);
+    padding: 10px;
+    border: none;
+    border-radius: var(--BORDER-RADIUS);
+    cursor: pointer;
+    width: 100%;
+}
+@media screen and (min-width: 768px){
+    .add-task-title{
+        font-size: 1.8rem;
+    }
+    form {
+        margin-top: 3%;
+    }
+    .add_task_btn, .edit_house_btn  {
+        font-size: 1.2rem;
+        width: 50%;
+    }
+    .main-content-Add-Task::-webkit-scrollbar {
+        display: none;
+      }
+      .content-Box-Add-Task::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .main-content-Edit-House::-webkit-scrollbar {
+        background: var(--PURPLEOP-COLOR) ;
+        border-radius: var(--BORDER-RADIUS);
+        
+        
+       }
+       .main-content-Edit-House::-webkit-scrollbar-thumb {
+         background-color: var(--PURPLE-COLOR);
+         border-radius: var(--BORDER-RADIUS);
+       }
+      
 }
