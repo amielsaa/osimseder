@@ -85,6 +85,7 @@ video{
   video{
     width:130%;
     height: 100%;
+    padding-bottom: 1%;
   }
   .giant_title{
     position: fixed;
