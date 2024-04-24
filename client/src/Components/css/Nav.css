@@ -26,7 +26,7 @@
     background: var(--PURPLE-COLOR); /* Background color change */
     border-bottom-right-radius: 10px;
     transition: ease-in 0.3s;
-    z-index: 1000;
+    z-index: 9999;
   }
   
   nav.hide {

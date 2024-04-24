@@ -9,7 +9,7 @@
     border-radius: 15px;
     padding: 20px;
     text-align: center;
-    z-index: 1000; /* Ensure it's above other elements */
+    z-index: 10000; /* Ensure it's above other elements */
     border: 2px double var(--ORANGE-COLOR);
   }
   .confirm_title{
@@ -42,7 +42,7 @@
       border-radius: 15px;
       padding: 20px;
       text-align: center;
-      z-index: 1000; /* Ensure it's above other elements */
+      z-index: 10000; /* Ensure it's above other elements */
       border: 2px double var(--ORANGE-COLOR);
     }
     .confirm_title{
