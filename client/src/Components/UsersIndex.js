@@ -17,7 +17,8 @@ const users = [
       city: 'תל אביב',
       school: 'תיכון מרכזי',
       gender: 'זכר',
-      language: 'עברית'
+      language: 'עברית',
+      groupId: 1
     },
     {
       name: 'אמה',
@@ -28,7 +29,8 @@ const users = [
       city: 'ירושלים',
       school: 'תיכון מערבי',
       gender: 'נקבה',
-      language: 'אנגלית'
+      language: 'אנגלית',
+      groupId: 2
     },
     {
       name: 'נועם',
@@ -39,7 +41,8 @@ const users = [
       city: 'חיפה',
       school: 'תיכון צפון',
       gender: 'זכר',
-      language: 'צרפתית'
+      language: 'צרפתית',
+      groupId: undefined
     },
     {
       name: 'יעל',
@@ -50,7 +53,8 @@ const users = [
       city: 'באר שבע',
       school: 'תיכון דרום',
       gender: 'נקבה',
-      language: 'גרמנית'
+      language: 'גרמנית',
+      groupId: 3
     },
     {
       name: 'איתי',
@@ -61,7 +65,8 @@ const users = [
       city: 'אשדוד',
       school: 'תיכון מזרח',
       gender: 'זכר',
-      language: 'איטלקית'
+      language: 'איטלקית',
+      groupId: undefined
     },
     {
       name: 'ליה',
@@ -72,7 +77,8 @@ const users = [
       city: 'פתח תקווה',
       school: 'תיכון מערב',
       gender: 'נקבה',
-      language: 'פורטוגזית'
+      language: 'פורטוגזית',
+      groupId: 1
     },
     {
       name: 'אילן',
@@ -83,7 +89,8 @@ const users = [
       city: 'ראשון לציון',
       school: 'תיכון מרכזי',
       gender: 'זכר',
-      language: 'סינית'
+      language: 'סינית',
+      groupId: undefined
     },
     {
       name: 'אביגיל',
@@ -94,7 +101,8 @@ const users = [
       city: 'רמת גן',
       school: 'תיכון צפון',
       gender: 'נקבה',
-      language: 'יפנית'
+      language: 'יפנית',
+      groupId: 2
     },
     {
       name: 'ויליאם',
@@ -105,7 +113,8 @@ const users = [
       city: 'נתניה',
       school: 'תיכון דרום',
       gender: 'זכר',
-      language: 'קוריאנית'
+      language: 'קוריאנית',
+      groupId: 3
     },
     {
       name: 'סופיה',
@@ -116,9 +125,11 @@ const users = [
       city: 'הרצליה',
       school: 'תיכון מזרח',
       gender: 'נקבה',
-      language: 'רוסית'
+      language: 'רוסית',
+      groupId: undefined
     }
   ];
+  
 
 const UsersIndex = () => {
   const [filter, setFilter] = useState('');
@@ -127,6 +138,7 @@ const UsersIndex = () => {
   const [chosenStudent, setChosenStudent] = useState('');
   const { navigate, user } = useContext(DataContext);
 
+    
  
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -147,6 +159,12 @@ const UsersIndex = () => {
     setShowGroupsWindow(true);
     
   };
+  function onClose () {
+    setShowGroupsWindow(false)
+  }
+  function onDeleteStudent(userId) {
+    // deletes user from the system
+  }
 
   const filteredUsers = users.filter((user) => {
     if (filterType === 'name') {
@@ -182,9 +200,9 @@ const UsersIndex = () => {
             </select>
           </div>
         </div>
-        <UsersTable users={filteredUsers} prepareJoinGroupAction={prepareJoinGroupAction} />
+        <UsersTable users={filteredUsers} prepareJoinGroupAction={prepareJoinGroupAction} onDeleteStudent={onDeleteStudent} />
       </div>
-      {showGroupsWindow &&  <JoinGroupWindow student={chosenStudent} />}
+      {showGroupsWindow &&  <JoinGroupWindow student={chosenStudent} onClose={onClose}  />}
       <Footer />
     </>
   );

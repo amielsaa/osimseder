@@ -17,17 +17,15 @@ const JoinGroupWindow = ({ student, groups, onClose }) => {
         <div className='join-group-groups-container'>
         <div className='join-group-group'>
                 <div className='group-att'>
-                    <span>מספר קבוצה</span>
+                    <span>מספר קבוצה : 5</span>
                 </div>
                 <div className='group-att'>
-                    <span>מספר קבוצה</span>
+                    <span>גודל:</span>
                 </div>
-                <div className='group-att'>
-                    <span>מספר קבוצה</span>
-                </div>
-                <div className='group-att'>
-                    <span>מספר קבוצה</span>
-                </div>
+                
+                <button className='add-to-group-button'>
+                    <span>צרף לקבוצה</span>
+                </button>
         </div>
             
             
