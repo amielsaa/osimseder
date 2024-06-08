@@ -9,6 +9,7 @@ import { BsHouses } from "react-icons/bs";
 import { BsTools } from "react-icons/bs";
 import { FaInfo } from "react-icons/fa";
 import { FaDoorOpen } from "react-icons/fa";
+import { RiUserSearchLine } from "react-icons/ri";
 import { MdGroup } from "react-icons/md";
 import ConfirmationMessage from './ConfirmationMessage';
 
@@ -71,7 +72,7 @@ const Nav = () => {
             <>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Groups"><i className="fa fa-my_group"></i> <MdOutlineGroups3 className='nav_icon'/>כל הקבוצות</Link></li>
               <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/My-Houses"><i className="fa fa-my_group"></i> <BsHouses className='nav_icon'/> כל הבתים</Link></li>
-              {/*<li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/Equipment"><i className="fa fa-my_group"></i> <BsTools className='nav_icon'/>ציוד נדרש </Link></li>*/}
+              <li onClick={closeSidebar} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><Link to="/users"><i className="fa fa-my_group"></i> <RiUserSearchLine className='nav_icon'/>חניכים</Link></li>
               <li onClick={() => {setShowConfirmation(true)}} className={!isSidebarHidden ? 'appear-from-top' : 'disappear-from-top'}><i className="fa fa-my_group"></i> <FaDoorOpen className='nav_icon' />התנתק/י</li>
             </>
           )}

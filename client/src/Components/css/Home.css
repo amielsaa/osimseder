@@ -4,20 +4,30 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  top: 7vh; /* Height of the header */
+  top: 5.5vh; /* Height of the header */
   width: 100%; /* Adjust for the remaining width */
   height: calc(100vh - 7vh); /* Take the remaining viewport height */
-  padding: 20px; /* Adjust padding as needed */
+   /* Adjust padding as needed */
   background-color: #f2f2f2; /* Fallback background color */
   box-sizing: border-box;
   transition: ease-in 0.3s; /* Add transition for smooth animation */
   overflow-y: scroll;
 }
+@keyframes fadeInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 video{
   /* z-index: 1000; */
   
   width: 110%;
-  height: 115%;
+  height: 100%;
   
 }
 .giant_title{
@@ -70,6 +80,14 @@ video{
     transform: translate(-50%, -50%);
     z-index: 5000; /* To ensure it appears above everything else */
   }
+ 
+  .giant_title,
+  .giant_semi_title,
+  .giant_semi_semi_title
+  {
+
+  }
+  
 
 
 @media screen and (min-width: 768px) {
