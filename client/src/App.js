@@ -22,6 +22,7 @@ import AddGroupToHousePage from './Components/AddGroupToHousePage.js';
 import EditHousePage from './Components/EditHousePage.js'
 import AuthenticateEmailPage from './Components/AuthenticateEmailPage.js'
 import UsersIndex from './Components/UsersIndex.js';
+import StaffIndex from './Components/StaffIndex.js';
 
 
 
@@ -44,8 +45,8 @@ function App() {
             <Route path="/addGroup" element={<AddGroupPage/>}/>
             <Route path="/addHouse" element={<AddHousePage/>}/>
             <Route path="/addTask/:id" element={<AddTaskPage/>}/>
-            <Route path="/users" element={<UsersIndex/>}/>
-            
+            <Route path="/students-admin-management" element={<UsersIndex/>}/>
+            <Route path="/staff-admin-management" element={<StaffIndex/>}/>
             <Route path="/addGroupToHouse/:id" element={<AddGroupToHousePage/>}/>
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />

@@ -103,6 +103,7 @@
     background-color: var(--ORANGE-COLOR);
     color: white;
     display: flex;
+    flex-wrap: wrap;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
     align-items: center;
     justify-content: center;
@@ -174,7 +175,10 @@
 
   }
   .add-to-group-button{
-    width: 10%;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
     height: 30px;
   }
   .close-icon{

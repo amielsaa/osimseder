@@ -183,7 +183,7 @@ const exampleUsers = [
     }
 ];
 
-const UsersIndex = () => {
+const StaffIndex = () => {
   const [users, setusers] = useState(exampleUsers)
   const [groups, setGroups] = useState(exampleGroups)
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -285,4 +285,4 @@ const UsersIndex = () => {
   );
 };
 
-export default UsersIndex;
+export default StaffIndex;
