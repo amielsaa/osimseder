@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/UsersIndex.css';
 
-const JoinGroupWindow = ({ student, groups, onClose }) => {
+const JoinGroupWindow = ({ student, groups, onClose, onAddToGroup }) => {
   return (
     <div className="join-group-container">
       <div className="join-group-content">
@@ -15,18 +15,20 @@ const JoinGroupWindow = ({ student, groups, onClose }) => {
             <h2>{` הקבוצות שייכות לבית ספר  ${student.schoolName}`}</h2>
         </div>
         <div className='join-group-groups-container'>
-        <div className='join-group-group'>
-                <div className='group-att'>
-                    <span>מספר קבוצה : 5</span>
-                </div>
-                <div className='group-att'>
-                    <span>גודל:</span>
-                </div>
-                
-                <button className='add-to-group-button'>
-                    <span>צרף לקבוצה</span>
-                </button>
-        </div>
+          {groups.map(group =>
+            <div className='join-group-group' key={group.groupId}>
+            <div className='group-att'>
+                <span>מספר קבוצה : {group.groupId}</span>
+            </div>
+            <div className='group-att'>
+                <span>גודל קבוצה : {`${group.membersCount}/${group.capacity}`}</span>
+            </div>
+            <button className='add-to-group-button' onClick={() => onAddToGroup(group.groupId, student.userId, student.userName, student.userLastName)}>
+                <span>צרף לקבוצה</span>
+            </button>
+            </div>
+           ) }
+        
             
             
         </div>
