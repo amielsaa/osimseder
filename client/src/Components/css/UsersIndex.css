@@ -63,7 +63,7 @@
   }
   
   td {
-    border-bottom: 1px solid #ddd;
+    border-bottom:none;
   }
  
   
@@ -188,4 +188,32 @@
   .delete-student-button {
     background-color: var(--RED-COLOR);
     
+  }
+  .approve-box{
+    display: flex;
+    width: 150px;
+    height:50px;
+    padding-left: 50px;
+    flex-direction: row;
+    gap:6%;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .approve-button, .decline-button {
+    background-color: var(--LIGHT-GREEN-COLOR);
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    align-items: center;
+    justify-content: center;
+    border: none;
+    height: 70%;
+    width: 50px;
+    border-radius: var(--BORDER-RADIUS); /* Adjust the radius as needed for the desired roundness */
+    padding: 8px 12px; /* Adjust padding as needed */
+    cursor: pointer;
+    outline: none; /* Remove default button outline */
+    margin-left: 5%;
   }
