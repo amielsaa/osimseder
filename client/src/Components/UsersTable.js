@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/UsersIndex.css';
 
-const UsersTable = ({ users, prepareJoinGroupAction, onDeleteStudent }) => {
+const UsersTable = ({ users, prepareJoinGroupAction, prepareDeleteStudentAction }) => {
   return (
     <div className='content-box-users-table'>
       <table>
@@ -33,7 +33,7 @@ const UsersTable = ({ users, prepareJoinGroupAction, onDeleteStudent }) => {
               <td>{user.gender}</td>
               <td>{user.language}</td>
               {!user.groupId? <td className='group-id-td'><button className='join-group-button' onClick={() => prepareJoinGroupAction(user.id,user.name, user.lastName,  user.school)}>צרף</button></td> : <td>{user.groupId}</td>}
-              <td><button className='delete-student-button' onClick={() => onDeleteStudent(user.id)}>X</button></td>
+              <td><button className='delete-student-button' onClick={() => prepareDeleteStudentAction(user.id, user.name , user.lastName)}>X</button></td>
             </tr>
           ))}
         </tbody>

@@ -187,6 +187,7 @@ const UsersIndex = () => {
   const [users, setusers] = useState(exampleUsers)
   const [groups, setGroups] = useState(exampleGroups)
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showConfirmationUserDeletion, setShowConfirmationUserDeletion] = useState(false);
   const [selectedUserToGroup, setSelectedUserToGroup] = useState(null)
   const [selectedGroupId, setSelectedGroupId] = useState(null);
   const [filter, setFilter] = useState('');
@@ -205,12 +206,14 @@ const UsersIndex = () => {
     setFilterType(e.target.value);
   };
 
-  function handleConfirmation() {
+  function handleAddToTeamConfirmation() {
     //Yoav - this is the logic where you put a student into group
     setShowConfirmation(false)
     setShowGroupsWindow(false)
     console.log("Im here!")
   }
+  
+  
 
   const prepareJoinGroupAction = (userId, userName, userLastName, schoolName) => {
     const student = {
@@ -227,9 +230,29 @@ const UsersIndex = () => {
   function onClose () {
     setShowGroupsWindow(false)
   }
-  function onDeleteStudent(userId) {
-    // yoav - deletes user from the system
+  function prepareDeleteStudentAction(userId, userName, userLastName) {
+    
+     const student = {
+       userId: userId,
+       userName: userName,
+       userLastName: userLastName,
+   }
+     if(showGroupsWindow) {
+       setShowGroupsWindow(false)
+     }
+     setChosenStudent(student)
+     setShowConfirmationUserDeletion(true)
+   }
+ 
+
+
+  function handleDeleteUserConfirmation () {
+    // deletes chosenUser from the system
+    console.log("Im here!")
+    setShowConfirmationUserDeletion(false)
   }
+
+
   function onAddToGroup(groupId, userId, userName, userLastName) {
     setSelectedGroupId(groupId);
     setSelectedUserToGroup(userName + " " + userLastName)
@@ -270,14 +293,32 @@ const UsersIndex = () => {
             </select>
           </div>
         </div>
-        <UsersTable users={filteredUsers}  prepareJoinGroupAction={prepareJoinGroupAction} onDeleteStudent={onDeleteStudent} />
+
+
+
+
+        <UsersTable users={filteredUsers}  prepareJoinGroupAction={prepareJoinGroupAction} prepareDeleteStudentAction={prepareDeleteStudentAction} />
       </div>
+
+
+
       {showGroupsWindow &&  <JoinGroupWindow student={chosenStudent} groups={groups} onClose={onClose} onAddToGroup={onAddToGroup}  />}
+
+
+
+
       {showConfirmation && (
         <ConfirmationMessage
           confirmationMessage={`לשייך את ${selectedUserToGroup} לקבוצה מספר ${selectedGroupId}`}
-          handleConfirmation={handleConfirmation}
+          handleConfirmation={handleAddToTeamConfirmation}
           setShowConfirmation={setShowConfirmation}
+        />
+      )}
+      {showConfirmationUserDeletion && (
+        <ConfirmationMessage
+          confirmationMessage={`האם למחוק את ${chosenStudent.userName + " " + chosenStudent.userLastName } מהמערכת?`}
+          handleConfirmation={handleDeleteUserConfirmation}
+          setShowConfirmation={setShowConfirmationUserDeletion}
         />
       )}
       <Footer />
