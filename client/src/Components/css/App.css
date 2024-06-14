@@ -7,7 +7,9 @@
   --ORANGEOP-COLOR: rgba(235, 116, 62, 0.5);
   --FONT-COLOR: whitesmoke;
   --WHITEOP-COLOR:rgba(255, 255, 255, 0.9);
+  --WHITE-COLOR:rgba(255, 255, 255);
   --BLUE-COLOR:#003061;
+  --BLACK-COLOR:rgba(0, 0, 0);
   --LIGHTBLUE-COLOR:#008ad1;
   --CYAN-COLOR:#7ad3f7;
   --MAIN-FONT: 'Heebo', Arial, Helvetica, sans-serif;
@@ -16,7 +18,10 @@
   --PINKOP-COLOR:rgba(180, 86, 125, 0.5);
   --GREY-COLOR:#efefef;
   --SPACING1:20px;
-  --BORDER-RADIUS:20px
+  --BORDER-RADIUS:20px;
+  --LIGHT-GREEN-COLOR:#8cff66;
+  --BOX-SHADOW:0 0 10px rgba(0, 0, 0, 0.3); 
+
 }
 
 *{

@@ -38,7 +38,7 @@ const Home = () => {
       <Nav />
       
       <div className='content-Box-Home'>
-        <div className='overlay'></div>
+        
 
       
         <video autoPlay loop muted>
@@ -48,13 +48,13 @@ const Home = () => {
           Your browser does not support the video tag.
         </video>
         <div className='giant_title'>
-           !ברוכים הבאים
+           !ברוכים הבאים 
         </div>
         <div className='giant_semi_title'>
            לפרוייקט עושים סדר
         </div>
         <div className='giant_semi_semi_title'>
-           תודה על ההשתתפות
+           תודה על ההשתתפות {user.firstName}
         </div>
        
       </div>
