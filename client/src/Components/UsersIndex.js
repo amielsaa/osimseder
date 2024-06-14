@@ -207,7 +207,7 @@ const UsersIndex = () => {
   };
 
   function handleAddToTeamConfirmation() {
-    //Yoav - this is the logic where you put a student into group
+    //Yoav - you have const chosenStudent which has the studentId and you have the selectedGroupId. add the student to the seleceted group
     setShowConfirmation(false)
     setShowGroupsWindow(false)
     console.log("Im here!")
@@ -222,6 +222,7 @@ const UsersIndex = () => {
         userLastName: userLastName,
         schoolName: schoolName
     }
+    // Yoav - you need to get the school of this userId and bring all the groups of his school. you need to put it in groups
     setChosenStudent(student)
     console.log("Im here!")
     setShowGroupsWindow(true);
@@ -237,6 +238,7 @@ const UsersIndex = () => {
        userName: userName,
        userLastName: userLastName,
    }
+   
      if(showGroupsWindow) {
        setShowGroupsWindow(false)
      }
@@ -247,7 +249,7 @@ const UsersIndex = () => {
 
 
   function handleDeleteUserConfirmation () {
-    // deletes chosenUser from the system
+    // Yoav -  deletes chosenUser from the system - check if he is in groups delete him from there too
     console.log("Im here!")
     setShowConfirmationUserDeletion(false)
   }
