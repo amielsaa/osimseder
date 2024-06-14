@@ -104,7 +104,7 @@ video{
     width:130%;
     height: 100%;
   }
-  .giant_title{
+  .giant_title {
     position: fixed;
     display: flex;
     align-items: center;
@@ -113,9 +113,10 @@ video{
     left: 50%;
     font-size: 7rem;
     font-weight: bold;
-    color: var(--ORANGE-COLOR);
+    color: var(--LIGHTBLUE-COLOR);
     transform: translate(-50%, -50%);
     z-index: 5000; /* To ensure it appears above everything else */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Add this line for text shadow */
   }
   .giant_semi_title{
     position: fixed;

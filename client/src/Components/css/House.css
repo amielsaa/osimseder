@@ -1,11 +1,12 @@
 .House {
     min-height: 12%; /* Or adjust this value as needed */
     width: 100%;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: var(--GREY-COLOR);
     color: var(--PURPLE-COLOR);
     display: flex;
     flex-direction: row-reverse;
+    box-shadow: var(--BOX-SHADOW);
     justify-content: space-between;
     align-items: center;
     margin: 2%;
@@ -43,6 +44,7 @@
 .watch-house-btn,
 .remove-house-btn {
     width: 15%;
+    box-shadow: var(--BOX-SHADOW);
     height: 30px;
     margin: 0%;
     border-radius: 20px;
@@ -80,9 +82,9 @@
    
         .House {
             min-height: 130px; /* Set a different fixed height for larger screens if needed */
-            width: 50%;
-            border-radius: 5px;
-            background-color: var(--GREY-COLOR);
+            width: 75%;
+            border-radius: 20px;
+            background-color: var(--WHITE-COLOR);
             color: var(--PURPLE-COLOR);
             display: flex;
             flex-direction: row-reverse;
