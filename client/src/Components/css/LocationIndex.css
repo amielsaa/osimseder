@@ -25,11 +25,12 @@
 
   }
   .school-area-list-container{
-    border: 1px solid black;
+    
     width: 70%;
     height: 95%;
   }
   .cities-title{
+    gap:10px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -38,10 +39,19 @@
     color : var(--ORANGE-COLOR);
     font-size: 1.5rem;
   }
+  .cities-title h2 {
+    color:var(--BLACK-COLOR);
+    font-size: 1rem;
+    padding-bottom: 10px ;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
   .cities-list{
     
-    width: 100%;
-    height: 90%;
+    min-width: 100%;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -55,18 +65,32 @@
   .city-preview{
     display: flex;
     flex-direction: row-reverse;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap:5%;
+    padding: 30px;
+    min-width: 200px;
     cursor: pointer;
     width: 70%;
     min-height: 50px;
     border-radius: 25px;
     background-color: var(--WHITE-COLOR);
     box-shadow: var(--BOX-SHADOW);
+
     
   }
-  .city-name-change-button-container, .city-delete-button-container{
+  .city-name-container, .school-name-container, .area-name-container {
+    min-width: 100px;
+    max-width: 100px;
+    display: block; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    direction: rtl; 
+  }
+  .city-name-change-button-container, .city-delete-button-container,
+  .area-name-change-button-container, .area-delete-button-container,
+  .school-name-change-button-container, .school-delete-button-container{
     display: flex;
     
     justify-content: center;
@@ -75,4 +99,69 @@
     font-size: 1.5rem;
     height: 30px;
   }
-  
+  .schools-container, .areas-container {
+   width: 100%;
+   height: 100%;
+   
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+
+  }
+  .school-title, .area-title {
+    gap:10px;
+    color:var( --LIGHTBLUE-COLOR);
+    width: 100%;
+    padding-bottom: 20px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .school-area-container{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    height: 85%;
+    
+  }
+  .area-list, .school-list {
+    width: 100%;
+    flex-grow: 1;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 20px;
+    padding: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    
+    box-shadow: inset var(--BOX-SHADOW) ;
+  }
+  .add-city-button, .add-area-button, .add-school-button{
+    background-color: var(--ORANGE-COLOR);
+    color: var(--FONT-COLOR);
+    padding: 10px;
+    border: none;
+    border-radius: var(--BORDER-RADIUS);
+    cursor: pointer;
+    box-shadow: var(--BOX-SHADOW);
+    width: 50px ;
+  }
+  .add-area-button, .add-school-button{
+    background-color: var(--LIGHTBLUE-COLOR);
+  }
+  .buttons-container{
+    display: flex;
+    width: 80px;
+    height: 40px;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
+
+  }

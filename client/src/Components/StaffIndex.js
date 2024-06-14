@@ -156,12 +156,11 @@ const StaffIndex = () => {
 
 
   function handleDeleteUserConfirmation () {
-    // deletes chosenUser from the system
-    console.log("Im here!")
+    //Yoav -  deletes chosenUser from the system 
     setShowConfirmationUserDeletion(false)
   }
   function handleAcceptUserConfirmation () {
-    // Accepts chosenUser from the system
+    // Yoav - Accepts chosenUser to the system
     console.log("Im here!")
     setShowConfirmationUserAcceptance(false)
   }
