@@ -66,19 +66,19 @@ const PersonalPage = () => {
             <div className='Personal-Info'>
               {centerUser.role === "Student" ? (
                 <>
-                  <div className='Info-bar'>שם: {centerUser.firstName} {centerUser.lastName}</div>
-                  <div className='Info-bar'>תפקיד: {userRole}</div>
-                  <div className='Info-bar'>מספר פלאפון: {centerUser.phoneNumber}</div>
+                  <div className='Info-bar'>שם:<span className='black-color'>{centerUser.firstName} {centerUser.lastName}</span> </div>
+                  <div className='Info-bar'>תפקיד: <span className='black-color'> {userRole} </span></div>
+                  <div className='Info-bar'>מספר פלאפון: <span className='black-color'> {centerUser.phoneNumber} </span></div>
   
                   {isCenterUser && (
                     <>
-                      <div className='Info-bar'>שם הורה: {centerUser.parentName}</div>
-                      <div className='Info-bar'>מספר פלאפון הורה: {centerUser.parentPhoneNumber}</div>
-                      <div className='Info-bar'>עיר: {centerUser.cityName}</div>
-                      <div className='Info-bar'>בית ספר: {centerUser.schoolName}</div>
-                      <div className='Info-bar'>מין: {centerUser.gender}</div>
-                      <div className='Info-bar'>שפה נוספת: {centerUser.extraLanguage}</div>
-                      <div className='Info-bar'>בקשות אישיות: {centerUser.issuesText}</div>
+                      <div className='Info-bar'>שם הורה:<span className='black-color'>  {centerUser.parentName}</span></div>
+                      <div className='Info-bar'>מספר פלאפון הורה: <span className='black-color'> {centerUser.parentPhoneNumber} </span></div>
+                      <div className='Info-bar'>עיר: <span className='black-color'> {centerUser.cityName} </span></div>
+                      <div className='Info-bar'>בית ספר: <span className='black-color'> {centerUser.schoolName} </span></div>
+                      <div className='Info-bar'>מין: <span className='black-color'> {centerUser.gender} </span></div>
+                      <div className='Info-bar'>שפה נוספת: <span className='black-color'> {centerUser.extraLanguage} </span></div>
+                      <div className='Info-bar'>בקשות אישיות: <span className='black-color'> {centerUser.issuesText} </span></div>
                     </>
                   )}
                 </>

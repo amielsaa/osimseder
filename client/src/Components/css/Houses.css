@@ -63,7 +63,7 @@
       flex-direction: column;
       top: 7vh; /* Height of the header */
       width: 100%; /* Adjust for the remaining width */
-      height: calc(100vh - 7vh); /* Take the remaining viewport height */
+      height: calc(100vh - 8vh); /* Take the remaining viewport height */
       padding: 20px; /* Adjust padding as needed */
       box-sizing: border-box;
       transition: ease-in 0.3s; /* Add transition for smooth animation */
@@ -80,7 +80,8 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 70%;
+      flex:1;
+      
       overflow-y: scroll;
   }
     .Houses_title{
