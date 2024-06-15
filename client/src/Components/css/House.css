@@ -24,6 +24,7 @@
 }
 
 .House-bar-Info {
+    color: var(--LIGHTBLUE-COLOR);
     padding-left: 3%;
     height: 100%;
     width: 50%;
@@ -38,7 +39,7 @@
 }
 
 .house-id {
-    color: var(--FONT-COLOR);
+    color: var(--LIGHTBLUE-COLOR);
 }
 
 .watch-house-btn,
@@ -74,6 +75,7 @@
 }
 
 .house_id_in_picture {
+    
     position: absolute;
     margin-top: 20%;
     margin-left: 15%;
@@ -108,7 +110,9 @@
     .House-bar-Info {
         padding-left: 3%;
         height: 100%;
-        width: 30%;
+        box-shadow: inset var(--BOX-SHADOW);
+        width: 25%;
+        color: var(--LIGHTBLUE-COLOR);
         direction: ltr;
         display: flex;
         flex-direction: column;
@@ -124,7 +128,7 @@
     }
     
       .House-bar-Info::-webkit-scrollbar {
-        background: var(--PURPLEOP-COLOR) ;
+        background: var(--LIGHTBLUE-COLOR) ;
         border-radius: var(--BORDER-RADIUS);
         width: 10px;
         
