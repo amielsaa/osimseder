@@ -7,7 +7,7 @@ const {Groups, Staffs, Areas, Schools, Cities, Houses, Tasks} = require('../../m
 const ExportLogic = require('../../domain/ExportLogic');
 
 // Create a new task (POST)
-router.post('/',/* validateToken, validateAccess(accessGroup.B),*/ async (req, res) => {
+router.post('/', validateToken, validateAccess(accessGroup.E), async (req, res) => {
     try {
         const table = req.body.table;
 
