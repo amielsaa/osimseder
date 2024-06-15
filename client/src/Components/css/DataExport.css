@@ -1,0 +1,88 @@
+.content-box-export-data{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 7vh; /* Height of the header */
+    width: 100%; /* Adjust for the remaining width */
+    height: calc(100vh - 8vh); /* Take the remaining viewport height */
+    padding: 20px; /* Adjust padding as needed */
+    background-color: #f2f2f2; /* Set a background color or style as desired */
+    box-sizing: border-box;
+    transition: ease-in 0.3s; /* Add transition for smooth animation */
+    
+    background-color: var(--WHITEBG-COLOR);
+}
+.export-data-title{
+    font-size: 1.5rem;
+    color: var(--ORANGE-COLOR);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.export-data-title h2{
+    font-size: 1rem;
+    color: var(--BLACK-COLOR);
+    padding-bottom:20px ;
+}
+
+.button-container{
+    width: 100%;
+    height: 10%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+}
+.export-button{
+    background-color: var(--ORANGE-COLOR);
+    color: var(--FONT-COLOR);
+    height: 50%;
+    padding: 10px;
+    display: flex;
+    font-size: 1.2rem;
+    gap:10%;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: var(--BORDER-RADIUS);
+    cursor: pointer;
+    box-shadow: var(--BOX-SHADOW);
+    width: 100px ;
+}
+.export-list-container {
+    padding: 50px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 20px; 
+    direction: rtl;
+    flex-grow: 1;
+    box-shadow: inset var(--BOX-SHADOW);
+}
+
+.list-item-container {
+    background-color: var(--WHITE-COLOR);
+    box-shadow: var(--BOX-SHADOW);
+    border-radius: 25px;
+    height: 50px;
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Change this to space-between */
+    padding: 0 10px; /* Optional: adds some horizontal padding */
+}
+.marked{
+    background-color: var(--LIGHTBLUE-COLOR);
+    color: var(--WHITE-COLOR);
+}
+
+.list-item-name {
+    flex-grow: 1; 
+    text-align: center; 
+}
+
