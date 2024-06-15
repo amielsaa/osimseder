@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import DataContext from '../Helpers/DataContext';
 import { IoDownloadOutline } from "react-icons/io5";
 import Footer from './Footer';
+import { downloadCSVs } from "../Helpers/ExportFrontLogic";
 
 
 
@@ -23,16 +24,18 @@ const DataExport = () => {
   function exportData() {
     const selectedItems = [];
 
-    if (groups) selectedItems.push('groups');
-    if (students) selectedItems.push('students');
-    if (schools) selectedItems.push('schools');
-    if (cities) selectedItems.push('cities');
-    if (houses) selectedItems.push('houses');
-    if (staff) selectedItems.push('staff');
-    if (areas) selectedItems.push('areas');
-    if (tasks) selectedItems.push('tasks');
+    if (groups) selectedItems.push('Groups');
+    if (students) selectedItems.push('Students');
+    if (schools) selectedItems.push('Schools');
+    if (cities) selectedItems.push('Cities');
+    if (houses) selectedItems.push('Houses');
+    if (staff) selectedItems.push('Staffs');
+    if (areas) selectedItems.push('Areas');
+    if (tasks) selectedItems.push('Tasks');
 
-    console.log(selectedItems);
+    // console.log(selectedItems);
+    downloadCSVs(selectedItems);
+    
   }
  
   return (
