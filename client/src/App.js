@@ -24,7 +24,7 @@ import AuthenticateEmailPage from './Components/AuthenticateEmailPage.js'
 import UsersIndex from './Components/UsersIndex.js';
 import StaffIndex from './Components/StaffIndex.js';
 import LocationIndex from './Components/LocationIndex.js';
-
+import ExportData from './Components/ExportData.js';
 
 
 
@@ -50,7 +50,7 @@ function App() {
             <Route path="/students-admin-management" element={<UsersIndex/>}/>
             <Route path="/staff-admin-management" element={<StaffIndex/>}/>
             <Route path="/admin-location-management" element={<LocationIndex/>}/>
-            {/* <Route path="/admin-export-data" element={<ExportData/>}/> */}
+            <Route path="/admin-export-data" element={<ExportData/>}/>
             <Route path="/addGroupToHouse/:id" element={<AddGroupToHousePage/>}/>
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
