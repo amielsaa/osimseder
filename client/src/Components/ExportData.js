@@ -9,6 +9,7 @@ import { downloadCSVs } from "../Helpers/ExportFrontLogic";
 
 
 
+
 const DataExport = () => {
   const {user, navigate} = useContext(DataContext);
   const [groups, setgroups] = useState(false)
@@ -35,7 +36,7 @@ const DataExport = () => {
 
     // console.log(selectedItems);
     downloadCSVs(selectedItems);
-    
+   
   }
  
   return (
