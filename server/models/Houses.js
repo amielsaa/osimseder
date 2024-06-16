@@ -54,7 +54,8 @@ module.exports = (sequelize, DataTypes) => {
     Houses.associate = (models) => {
         Houses.belongsTo(models.Areas, {
             foreignKey: 'areaId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
         Houses.belongsTo(models.Cities, {
             foreignKey: 'cityId',

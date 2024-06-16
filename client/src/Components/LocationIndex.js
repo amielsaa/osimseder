@@ -8,7 +8,9 @@ import InputConfirmationMessage from './InputConfirmationMessage';
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import ConfirmationMessage from './ConfirmationMessage';
-
+import {fetchAllCities, addCity, editCity, deleteCity,
+        fetchAllSchools, addSchool, editSchool, deleteSchool,
+        fetchAllAreas, addArea, editArea, deleteArea} from '../Helpers/AdminFrontLogic';
 
 const cityList = [
     { cityId: 1, cityName: "ירושלים" },
@@ -72,40 +74,63 @@ const LocationIndex = () => {
   const [schoolConfirmationDeleteMessage, setSchoolConfirmationDeleteMessage] = useState(false)
 
   useEffect(() => {
+    setAllCities();
     // Amiel - use this useEffect to load all the cities to the const 'cities' by setCities.
   },[])
 
+  async function setAllCities() {
+    const cities = await fetchAllCities();
+    setCities(cities);
+  }
+
+  async function setSchoolsByCity(city) {
+    const schools = await fetchAllSchools(city.id);
+    setSchools(schools);
+  }
+
+  async function setAreasByCity(city) {
+    const areas = await fetchAllAreas(city.id);
+    setAreas(areas);
+  }
+
 
   function onCityClick(city){
-    setChosenCity(city)
+    setChosenCity(city);
+    setSchoolsByCity(city);
+    setAreasByCity(city);
     setShowAreasAndSchools(true)
   }
+
+
+
    // ------------------------------ Add ------------------------------------------
    function onAddCity() {
     setCityConfirmationAddMessage(true)
   }
-  function handleAddCity(cityName) {
+  async function handleAddCity(cityName) {
     //Amiel - you get the new cityName and you make a new city in the system - I hope you have ID counter in the back,
     //backend logic is here.
-    console.log("Im here")
+    await addCity(cityName);
+    setAllCities();
   }
   function onAddSchool() {
     setSchoolConfirmationAddMessage(true)
 
   }
-  function handleAddSchool(schooName) {
+  async function handleAddSchool(schooName) {
     //Amiel - you get the new schoolName and the city from chosenCity , you add the new school and give it an Id
     //backend logic is here.
-    console.log("Im here")
+    await addSchool(schooName, chosenCity.id)
+    setSchoolsByCity(chosenCity)
   }
   function onAddArea() {
     setAreaConfirmationAddMessage(true)
   }
-  function handleAddArea(areaName) {
+  async function handleAddArea(areaName) {
     //Amiel - you get the new areaName and the city from chosenCity , you add the new area and give it an Id
     //backend logic is here.
-    console.log("Im here")
-    
+    await addArea(areaName, chosenCity.id);
+    setAreasByCity(chosenCity);
   }
   // -----------------------------------------------------------------------------------
   // ------------------------------ Edit ------------------------------------------
@@ -113,30 +138,32 @@ const LocationIndex = () => {
     setCityToModify(city)
     setCityConfirmationEditMessage(true)
   }
-  function handleEditCity(cityName) {
+  async function handleEditCity(cityName) {
     //Amiel - you get the new cityName and the city to modify on the const  cityToModify,
     //backend logic is here.
-    console.log(cityName)
+    await editCity(cityToModify.id, cityName)
+    setAllCities();
   }
   function onEditSchool(school) {
     setSchoolToModify(school)
     setSchoolConfirmationEditMessage(true)
 
   }
-  function handleEditSchool(schooName) {
+  async function handleEditSchool(schooName) {
     //Amiel - you get the new schoolName and the city to modify on the const  schoolToModify,
     //backend logic is here.
-    console.log("Im here")
+    await editSchool(schoolToModify.id, schooName);
+    setSchoolsByCity(chosenCity);
   }
   function onEditArea(area) {
     setAreaToModify(area)
     setAreaConfirmationEditMessage(true)
   }
-  function handleEditArea(areaName) {
+  async function handleEditArea(areaName) {
     //Amiel - you get the new areaName and the city to modify on the const  areaToModify,
     //backend logic is here.
-    console.log("Im here")
-    
+    await editArea(areaToModify.id, areaName);    
+    setAreasByCity(chosenCity);
   }
   // -----------------------------------------------------------------------------------
 
@@ -145,10 +172,11 @@ const LocationIndex = () => {
     setCityToModify(city)
     setCityConfirmationDeleteMessage(true)
   }
-  function handleDeleteCity() {
+  async function handleDeleteCity() {
     //Amiel - you take the cityId cityToModify and you delete the city from the system, you delete everything that has to do with that city - students, groups,  schools, areas, houses... everything!
     //backend logic is here.
-    console.log("Im here")
+    await deleteCity(cityToModify.id)
+    setAllCities();
     setCityConfirmationDeleteMessage(false)
   }
   function onDeleteSchool(school) {
@@ -156,20 +184,18 @@ const LocationIndex = () => {
     setSchoolConfirmationDeleteMessage(true)
 
   }
-  function handleDeleteSchool() {
-    //Amiel - you take the schoolId from schoolToModify and you delete the school from the system, you delete everything that has to do with that school - students, groups ... everything!
-    //backend logic is here.
-    console.log("Im here")
+  async function handleDeleteSchool() {
+    await deleteSchool(schoolToModify.id);
+    setSchoolsByCity(chosenCity);
     setSchoolConfirmationDeleteMessage(false)
   }
   function onDeleteArea(area) {
     setAreaToModify(area)
     setAreaConfirmationDeleteMessage(true)
   }
-  function handleDeleteArea() {
-    //Amiel - you take the areaId from areaToModify and you delete the AREA from the system, you delete everything that has to do with that area - houses ... everything!
-    //backend logic is here.
-    console.log("Im here")
+  async function handleDeleteArea() {
+    await deleteArea(areaToModify.id);
+    setAreasByCity(chosenCity);
     setAreaConfirmationDeleteMessage(false)
     
   }
@@ -190,7 +216,7 @@ const LocationIndex = () => {
             </div>
             <div className='cities-list'>
                 {cities.map(city => 
-                    <div key={city.cityId} className='city-preview' onClick={() => onCityClick(city)}>
+                    <div key={city.id} className='city-preview' onClick={() => onCityClick(city)}>
                     <div className='city-name-container'  title={city.cityName}>{city.cityName}</div>
                     <div className='buttons-container' >
                     <div className='city-name-change-button-container' title='ערוך שם' onClick={(e) => {e.stopPropagation();

@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
 
         Groups.belongsTo(models.Schools, {
             foreignKey: 'schoolId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
 
         Groups.belongsTo(models.Houses, {
