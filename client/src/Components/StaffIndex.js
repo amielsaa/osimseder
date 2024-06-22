@@ -6,7 +6,7 @@ import Nav from './Nav';
 import DataContext from '../Helpers/DataContext';
 import ConfirmationMessage from './ConfirmationMessage';
 import StaffTable from './StaffTable';
-import { approveStaffRole, removeStaff } from '../Helpers/UserTabLogic'
+import { approveStaffRole, removeStaff, getAllStaffs } from '../Helpers/UserTabLogic'
 
 
 const exampleUsers = [
@@ -118,7 +118,11 @@ const StaffIndex = () => {
   const [chosenStaff, setChosenStaff] = useState('');
   const { navigate, user } = useContext(DataContext);
 
-  
+    useEffect(() => {
+        // Yoav - you need to get all the users from the server and put them in the users state
+        const myStaffs = getAllStaffs(null)
+        setusers(myStaffs)
+    }, [])
  
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
