@@ -29,12 +29,14 @@ module.exports = (sequelize, DataTypes) => {
     Areas.associate = (models) => {
         Areas.hasMany(models.Houses, {
             foreignKey: 'areaId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
 
         Areas.belongsTo(models.Cities, {
             foreignKey: 'cityId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
     };
 

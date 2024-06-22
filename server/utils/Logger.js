@@ -44,7 +44,16 @@ const usersLogger = winston.createLogger({
     ],
 });
 
+const adminLogger = winston.createLogger({
+    level: 'info',   // minimum level to transport
+    format: myCombinedFormat,
+    transports: [
+        new transports.File({ filename: 'loggers/adminLogFile.log' }) 
+    ],
+});
+
 module.exports = {
     housesLogger,
     groupsLogger,
-    usersLogger};
+    usersLogger,
+    adminLogger};

@@ -11,12 +11,14 @@ module.exports = (sequelize, DataTypes) => {
     Schools.associate = (models) => {
         Schools.hasMany(models.Students, {
             foreignKey: 'schoolId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
 
         Schools.hasMany(models.Groups, {
             foreignKey: 'schoolId',
-            allowNull: false
+            allowNull: false,
+            onDelete: 'CASCADE'
         });
 
         Schools.belongsTo(models.Cities, {
