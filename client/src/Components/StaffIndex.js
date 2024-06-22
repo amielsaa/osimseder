@@ -6,6 +6,8 @@ import Nav from './Nav';
 import DataContext from '../Helpers/DataContext';
 import ConfirmationMessage from './ConfirmationMessage';
 import StaffTable from './StaffTable';
+import { approveStaffRole, removeStaff } from '../Helpers/UserTabLogic'
+
 
 const exampleUsers = [
   {
@@ -155,14 +157,14 @@ const StaffIndex = () => {
  
 
 
-  function handleDeleteUserConfirmation () {
-    //Yoav -  deletes chosenUser from the system 
-    setShowConfirmationUserDeletion(false)
+    function handleDeleteUserConfirmation() {
+        const res = removeStaff(chosenStaff.userId) // ARI - need to use res? 
+        setShowConfirmationUserDeletion(false)
   }
-  function handleAcceptUserConfirmation () {
-    // Yoav - Accepts chosenUser to the system
-    console.log("Im here!")
-    setShowConfirmationUserAcceptance(false)
+    function handleAcceptUserConfirmation() {
+        const alternateRole = null // ARI - OPTIONAL : get the alternate role for the accepted user
+        const res = approveStaffRole(chosenStaff.userId, alternateRole)// ARI - need to use res?
+        setShowConfirmationUserAcceptance(false)
   }
 
 

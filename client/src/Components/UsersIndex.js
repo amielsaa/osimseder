@@ -7,6 +7,8 @@ import UsersTable from './UsersTable';
 import JoinGroupWindow from './JoinGroupWindow';
 import DataContext from '../Helpers/DataContext';
 import ConfirmationMessage from './ConfirmationMessage';
+import { removeVolunteer } from '../Helpers/UserTabLogic';
+import { getAllGroupsWithoutHouse, addGroupMember } from '../Helpers/StaffFrontLogic';
 
 const exampleUsers = [
     {
@@ -207,10 +209,11 @@ const UsersIndex = () => {
   };
 
   function handleAddToTeamConfirmation() {
-    //Yoav - you have const chosenStudent which has the studentId and you have the selectedGroupId. add the student to the seleceted group
-    setShowConfirmation(false)
-    setShowGroupsWindow(false)
-    console.log("Im here!")
+      //Yoav - you have const chosenStudent which has the studentId and you have the selectedGroupId. add the student to the seleceted group
+      const res = addGroupMember(chosenStudent.userId, selectedGroupId); //ARI - need to use res?
+      setShowConfirmation(false)
+      setShowGroupsWindow(false)
+      console.log("Im here!")
   }
   
   
@@ -222,7 +225,8 @@ const UsersIndex = () => {
         userLastName: userLastName,
         schoolName: schoolName
     }
-    // Yoav - you need to get the school of this userId and bring all the groups of his school. you need to put it in groups
+      // Yoav - you need to get the school of this userId and bring all the groups of his school. you need to put it in groups
+    groups = getAllGroupsWithoutHouse(student.schoolName)
     setChosenStudent(student)
     console.log("Im here!")
     setShowGroupsWindow(true);
@@ -248,11 +252,11 @@ const UsersIndex = () => {
  
 
 
-  function handleDeleteUserConfirmation () {
-    // Yoav -  deletes chosenUser from the system - check if he is in groups delete him from there too
-    console.log("Im here!")
-    setShowConfirmationUserDeletion(false)
-  }
+    function handleDeleteUserConfirmation() {
+        const res = removeVolunteer(chosenStudent.userId) // ARI - need to use res? 
+        console.log("Im here!")
+        setShowConfirmationUserDeletion(false)
+    }
 
 
   function onAddToGroup(groupId, userId, userName, userLastName) {
