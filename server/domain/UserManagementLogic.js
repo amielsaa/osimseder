@@ -6,6 +6,7 @@ const EmailService = require('./services/EmailService');
 const RegistrationLogic = require('./RegistrationLogic');
 const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
+const String2Int = require('./utils/String2Int');
 
 class UserManagementLogic {
 
@@ -26,8 +27,20 @@ class UserManagementLogic {
             // Find all students based on the constructed where clause
             const students = await Students.findAll({ where: whereClause });
 
+            // Fetch schoolName and cityName for each student
+            const enhancedStudents = await Promise.all(students.map(async student => {
+                const schoolName = await String2Int.getSchoolNameById(student.schoolId);
+                const cityName = await String2Int.getCityNameById(student.cityId);
+
+                return {
+                    ...student.dataValues,
+                    schoolName: schoolName,
+                    cityName: cityName
+                };
+            }));
+
             usersLogger.debug('Successfully found all volunteers');
-            return students;
+            return enhancedStudents;
         } catch (error) {
             usersLogger.error('Failed to fetch volunteers: ' + error);
             throw new Error('Failed to fetch volunteers');

@@ -10,6 +10,7 @@ router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), asyn
     try {
         const filterBy = req.body.filterBy;
         var students;
+        const userRole = req.user.role;
         if ((accessGroup.D.includes(userRole))) { //for city managers and admins
             students = await userManagementLogic.getAllStudents(filterBy);
         }

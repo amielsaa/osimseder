@@ -25,7 +25,7 @@ const Group = ({ groupId }) => {
     updateStudentList();
   }, []);
 
-  const joinGroup = async (groupId, userId) => {
+    const joinGroup = async (groupId, email) => {
     setSelectedGroupId(groupId);
     setShowConfirmation(true);
   }

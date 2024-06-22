@@ -130,9 +130,9 @@ const StaffIndex = () => {
 
   
   
-  function onApproveStaffMember(userId, userName, userLastName, role) {
+    function onApproveStaffMember(email, userName, userLastName, role) {
     const staff = {
-      userId: userId,
+        email: email,
       userName: userName,
       userLastName: userLastName,
       role: role
@@ -143,10 +143,10 @@ const StaffIndex = () => {
   }
   
   
-  function prepareDeleteStaffAction(userId, userName, userLastName) {
+    function prepareDeleteStaffAction(email, userName, userLastName) {
     
      const staff = {
-       userId: userId,
+         email: email,
        userName: userName,
        userLastName: userLastName,
    }
@@ -158,12 +158,12 @@ const StaffIndex = () => {
 
 
     function handleDeleteUserConfirmation() {
-        const res = removeStaff(chosenStaff.userId) // ARI - need to use res? 
+        const res = removeStaff(chosenStaff.email) // ARI - need to use res? 
         setShowConfirmationUserDeletion(false)
   }
     function handleAcceptUserConfirmation() {
         const alternateRole = null // ARI - OPTIONAL : get the alternate role for the accepted user
-        const res = approveStaffRole(chosenStaff.userId, alternateRole)// ARI - need to use res?
+        const res = approveStaffRole(chosenStaff.email, alternateRole)// ARI - need to use res?
         setShowConfirmationUserAcceptance(false)
   }
 
