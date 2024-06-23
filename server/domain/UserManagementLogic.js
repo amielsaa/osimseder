@@ -1,5 +1,5 @@
 // Student Management
-const { Students, Staffs } = require('../models');
+const { Students, Staffs, Areas } = require('../models');
 const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
@@ -7,8 +7,33 @@ const RegistrationLogic = require('./RegistrationLogic');
 const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const String2Int = require('./utils/String2Int');
+const StaffLogic = require('./StaffLogic');
 
 class UserManagementLogic {
+
+
+ // get area of manager email
+ // Input: managerEmail - the email of the manager
+// Output: the area object
+async getAreaByManager(managerEmail) {
+    try {
+        usersLogger.debug('Getting area by manager email: ' + managerEmail);
+        await argumentChecker.checkSingleArugments([managerEmail], ["managerEmail"]);
+
+        const area = await Areas.findOne({
+            where: { areaManagerEmail: managerEmail }
+        });
+        if (!area) {
+            throw new Error('No area with this manager email');
+        }
+
+        usersLogger.debug('Successfully found area by manager email: ' + managerEmail);
+        return area;
+    } catch (error) {
+        usersLogger.error('Failed to fetch area: ' + error);
+        throw new Error('Failed to fetch area: ' + error);
+    }
+}
 
 // get all students
 // Output: a list of all students
@@ -48,12 +73,68 @@ class UserManagementLogic {
     }
 
 // get all staffs
+// Input: requesterEmail - the email of the requester
+//        requesterRole - the role of the requester
+//        filterBy - the filter object
 // Output: a list of all staffs
-    async getAllStaffs(filterBy) {
+    async getAllStaffs(requesterEmail, requesterRole, filterBy) {
         try {
-            usersLogger.debug('Getting all staffs');
-
+            usersLogger.debug("Getting all staffs for email: " + requesterEmail + "with requesterRole: " + requesterRole);
             // Construct the where clause based on the filterBy object
+            const whereClause = {};
+            console.log("filterBy: ", filterBy);
+            if (filterBy) {
+                Object.keys(filterBy).forEach(key => {
+                    whereClause[key] = filterBy[key];
+                });
+            }
+            console.log("whereClause: ", whereClause);
+            const staffs = await Staffs.findAll({
+                where: whereClause,
+                order: [
+                    ['firstName', 'ASC'], // Sort by first name in ascending order
+                    ['lastName', 'ASC']   // Then sort by last name in ascending order
+                ]
+            });
+
+            var areaName = ''
+
+// Fetch cityName for each staff
+            const enhancedStaffs = await Promise.all(staffs.map(async staff => {
+                const cityName = await String2Int.getCityNameById(staff.cityId);
+                var areaName = ''
+                if (staff.accesses == "C") {
+                    console.log(staff.email)
+                    const area = await this.getAreaByManager(staff.email);
+                    areaName = area.areaName;
+                }
+
+                return {
+                    ...staff.dataValues,
+                    cityName: cityName,
+                    areaName: areaName
+                };
+            }));
+            console.log("staffs: ", enhancedStaffs);
+
+            usersLogger.debug('Successfully found all staffs');
+            return enhancedStaffs;
+        } catch (error) {
+            usersLogger.error('Failed to fetch staffs: ' + error);
+            throw new Error('Failed to fetch staffs');
+        }
+    }
+
+// get all team owners
+// Input: managerEmail - the email of the manager
+//        filterBy - the filter object
+// Output: a list of all team owners
+    async getAllTeamOwners(managerEmail, cityId, filterBy) {
+        try {
+            usersLogger.debug("Getting all team owners for email: " + managerEmail, "with cityId: " + cityId);
+            // Construct the where clause based on the filterBy object
+
+            filterBy.accesses = 'B'; //Team Owners Only
             const whereClause = {};
             if (filterBy) {
                 Object.keys(filterBy).forEach(key => {
@@ -61,14 +142,24 @@ class UserManagementLogic {
                 });
             }
 
-            // Find all students based on the constructed where clause
-            const staffs = await Staffs.findAll({ where: whereClause });
+            // Find all team owners based on the constructed where clause
+            const teamOwners = await Staffs.findAll({ where: whereClause });
 
-            usersLogger.debug('Successfully found all staffs');
-            return staffs;
+            const cityName = await String2Int.getCityNameById(cityId);
+            // Fetch cityName for each team owner
+            const enhancedTeamOwners = await Promise.all(teamOwners.map(async teamOwner => {
+
+                return {
+                    ...teamOwner.dataValues,
+                    cityName: cityName
+                };
+            }));
+
+            usersLogger.debug('Successfully found all team owners');
+            return enhancedTeamOwners;
         } catch (error) {
-            usersLogger.error('Failed to fetch staffs: ' + error);
-            throw new Error('Failed to fetch staffs');
+            usersLogger.error('Failed to fetch team owners: ' + error);
+            throw new Error('Failed to fetch team owners');
         }
     }
 

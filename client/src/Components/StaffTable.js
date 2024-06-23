@@ -21,24 +21,24 @@ const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, o
         <tbody>
           {users.map((user, index) => (
             <tr key={index}>
-              <td>{user.name}</td>
+              <td>{user.firstName}</td>
               <td>{user.lastName}</td>
-              <td>{user.role}</td>   
+              <td>{user.accesses}</td>   
               <td>{user.phoneNumber}</td>
-              <td>{user.city}</td>
-              <td>{user.area}</td>
+              <td>{user.cityName}</td>
+              <td>{user.areaName}</td>
               <td>{user.gender}</td>
                 {user.confirmationStatus ? (
                     <td>{"מאושר/ת"}</td>
                 ) : (
                     <td>
                     <div className='approve-box'>
-                    <button className='approve-button' onClick={() => onApproveStaffMember(user.id, user.name, user.lastName, user.role)} >✔</button>
+                    <button className='approve-button' onClick={() => onApproveStaffMember(user.id, user.firstName, user.lastName, user.accesses)} >✔</button>
                     </div>
                     </td>
                 )}
                 
-              <td><button className='delete-student-button' onClick={() => prepareDeleteStaffAction(user.id, user.name , user.lastName)}>X</button></td>
+              <td><button className='delete-student-button' onClick={() => prepareDeleteStaffAction(user.id, user.firstName , user.lastName)}>X</button></td>
             </tr>
           ))}
         </tbody>

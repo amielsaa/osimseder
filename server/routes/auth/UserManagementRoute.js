@@ -9,35 +9,32 @@ const { accessGroup, validateAccess } = require('../../utils/Accesses');
 router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const filterBy = req.body.filterBy;
-        var students;
         const userRole = req.user.role;
-        if ((accessGroup.D.includes(userRole))) { //for city managers and admins
-            students = await userManagementLogic.getAllStudents(filterBy);
+        if (!(accessGroup.E.includes(userRole))) { //for non-admins
+            filterBy.cityId = req.uesr.cityId;
         }
-        else { //for area managers
-            filterBy.cityId = req.user.cityId; //gets only the students in the city of the area manager
-            students = await userManagementLogic.getAllStudents(filterBy);
-        }
+        const students = await userManagementLogic.getAllStudents(filterBy);
+        
         res.json(students);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
+// Get all staffs by the requester's access level
 router.get('/getAllStaffs', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const filterBy = req.body.filterBy;
-        var staffs;
-        if ((accessGroup.D.includes(userRole))) { //for city managers and admins
-            staffs = await userManagementLogic.getAllStaffs(filterBy);
+        const userRole = req.user.role;
+        const userEmail = req.user.email;
+        if (!(accessGroup.E.includes(userRole))) { //for non-admins
+            filterBy.cityId = req.uesr.cityId;
+            if (accessGroup.C.includes(userRole)) { //for area managers
+                filterBy.accesses = 'B'; //Team Owners Only
+            }
         }
-        else { //for area managers
-            filterBy.cityId = req.user.cityId; //gets only the staffs in the city of the area manager
-            staffs = await userManagementLogic.getAllStaffs(filterBy);
-        }
-
-        const students = await userManagementLogic.getAllStaffs(filterBy);
-        res.json(students);
+        const staffs = await userManagementLogic.getAllStaffs(userEmail, userRole, filterBy);
+        res.json(staffs);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

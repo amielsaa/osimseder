@@ -276,8 +276,8 @@ const UsersIndex = () => {
       return user.firstName.includes(filter);
     } else if (filterType === 'schoolName') {
       return user.schoolName.includes(filter);
-    } else if (filterType === 'cityName') {
-        return user.cityName.includes(filter);
+    } else if (filterType === 'cityId') {
+        return user.cityId.includes(filter);
     }
     return false;
   });
