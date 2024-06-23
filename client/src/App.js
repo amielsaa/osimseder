@@ -25,6 +25,7 @@ import UsersIndex from './Components/UsersIndex.js';
 import StaffIndex from './Components/StaffIndex.js';
 import LocationIndex from './Components/LocationIndex.js';
 import ExportData from './Components/ExportData.js';
+import RegisterStaff from './Components/RegusterStaff.js';
 
 
 
@@ -38,7 +39,8 @@ function App() {
         <DataProvider>
           <Routes>
           <Route path="/" element={<Login />} />
-            <Route path="/Register" element={<Register />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/register-staff" element={<RegisterStaff />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Groups" element={<Groups />} />
             <Route path="/GroupPage/:id" element={<GroupPage />} />
