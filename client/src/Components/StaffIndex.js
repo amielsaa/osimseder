@@ -120,9 +120,14 @@ const StaffIndex = () => {
 
     useEffect(() => {
         // Yoav - you need to get all the users from the server and put them in the users state
-        const myStaffs = getAllStaffs(null)
-        setusers(myStaffs)
+        // console.log(Object.values(myStaffs))
+      updateUsers();
     }, [])
+  
+  async function updateUsers() {
+    const myStaffs = await getAllStaffs(null)
+    setusers(myStaffs)
+  }
  
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -134,12 +139,13 @@ const StaffIndex = () => {
 
   
   
-    function onApproveStaffMember(email, userName, userLastName, role) {
+    function onApproveStaffMember(userData) {
     const staff = {
-        email: email,
-      firstName: userName,
-      lastName: userLastName,
-      accesses: role
+        email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      accesses: userData.accesses,
+      cityName: userData.cityName
   }
     setChosenStaff(staff)
     setShowConfirmationUserAcceptance(true)
@@ -147,26 +153,25 @@ const StaffIndex = () => {
   }
   
   
-    function prepareDeleteStaffAction(email, userName, userLastName) {
-    
-     const staff = {
-         email: email,
-       userName: userName,
-       userLastName: userLastName,
-   }
-     
-     setChosenStaff(staff)
+    function prepareDeleteStaffAction(userData) {
+     setChosenStaff(userData)
      setShowConfirmationUserDeletion(true)
    }
+
+    function removeStaffFromUserList() {
+      setusers(prevUsers => prevUsers.filter(user => user.email !== chosenStaff.email));
+    }
  
-
-
     function handleDeleteUserConfirmation() {
-        const res = removeStaff(chosenStaff.email) // ARI - need to use res? 
+        const res = removeStaff(chosenStaff.email); // ARI - need to use res? 
+        if(res) {
+          removeStaffFromUserList()
+        }
         setShowConfirmationUserDeletion(false)
   }
     function handleAcceptUserConfirmation() {
         const alternateRole = null // ARI - OPTIONAL : get the alternate role for the accepted user
+        console.log(chosenStaff)
         const res = approveStaffRole(chosenStaff.email, alternateRole)// ARI - need to use res?
         setShowConfirmationUserAcceptance(false)
   }

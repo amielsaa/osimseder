@@ -82,13 +82,11 @@ async getAreaByManager(managerEmail) {
             usersLogger.debug("Getting all staffs for email: " + requesterEmail + "with requesterRole: " + requesterRole);
             // Construct the where clause based on the filterBy object
             const whereClause = {};
-            console.log("filterBy: ", filterBy);
             if (filterBy) {
                 Object.keys(filterBy).forEach(key => {
                     whereClause[key] = filterBy[key];
                 });
             }
-            console.log("whereClause: ", whereClause);
             const staffs = await Staffs.findAll({
                 where: whereClause,
                 order: [
@@ -115,7 +113,6 @@ async getAreaByManager(managerEmail) {
                     areaName: areaName
                 };
             }));
-            console.log("staffs: ", enhancedStaffs);
 
             usersLogger.debug('Successfully found all staffs');
             return enhancedStaffs;
@@ -234,11 +231,11 @@ async getAreaByManager(managerEmail) {
                 throw new Error('Staff not found');
             }
             await staff.destroy();
-            usersLogger.info('Successfully deleted staff with email: ' + studentEmail + ". Requester email: " + requesterEmail);
+            usersLogger.info('Successfully deleted staff with email: ' + staffEmail + ". Requester email: " + requesterEmail);
 
         } catch (error) {
             usersLogger.error('Failed to delete staff: ' + error);
-            throw new Error('Failed to delete staff');
+            throw new Error('Failed to delete staff: ' + error);
         }
     }
 
@@ -397,10 +394,13 @@ async getAreaByManager(managerEmail) {
             if (!staff) {
                 throw new Error('Couldn\'t find a staff with that email.');
             }
-            if (alternateRole) {
-                staff[accesses] = alternateRole;
+            if(staff.verificationToken) {
+                throw new Error('User didnt verify his account.')
             }
-            staff[isVerified] = true;
+            if (alternateRole) {
+                staff.accesses = alternateRole;
+            }
+            staff.isVerified = true;
             await staff.save();
 
             usersLogger.info('Successfully approved a staff role by manager for email: ' + staffEmail + '. Performed by email: ' + requesterEmail);

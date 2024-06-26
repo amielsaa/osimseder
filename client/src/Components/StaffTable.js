@@ -33,12 +33,12 @@ const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, o
                 ) : (
                     <td>
                     <div className='approve-box'>
-                    <button className='approve-button' onClick={() => onApproveStaffMember(user.id, user.firstName, user.lastName, user.accesses)} >✔</button>
+                    <button className='approve-button' onClick={() => onApproveStaffMember(user)} >✔</button>
                     </div>
                     </td>
                 )}
                 
-              <td><button className='delete-student-button' onClick={() => prepareDeleteStaffAction(user.id, user.firstName , user.lastName)}>X</button></td>
+              <td><button className='delete-student-button' onClick={() => prepareDeleteStaffAction(user)}>X</button></td>
             </tr>
           ))}
         </tbody>

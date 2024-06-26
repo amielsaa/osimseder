@@ -23,7 +23,7 @@ const getAllVolunteers = async (filterByDict) => {
 //          For example: {cityId: 1, FirstName: 'יעקב'}
 // Output: a list of all volunteers 
 const getAllStaffs = async (filterByDict) => {
-    const res = await axios.get(`${URL}/auth/getAllStaffs`, { filterBy: filterByDict }, headers);
+    const res = await axios.get(`${URL}/auth/getAllStaffs`, /*{ filterBy: filterByDict },*/ headers);
     if (res.data.error) {
         alert(res.data.error)
     } else {

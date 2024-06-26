@@ -69,9 +69,13 @@ class LoginLogic {
 //        givenPassword - the password of the staff
 // Output: the staff object
     async verifyLoginStaff(staff, email, givenPassword) {
-        if (!staff.isVerified) {
-            usersLogger.error("Failed to login for staff email: " + email + ". Reason: Student isn't verified");
+        if (staff.verificationToken !== null) {
+            usersLogger.error("Failed to login for staff email: " + email + ". Reason: Staff isn't verified");
             throw new Error("Your account hasn't been verified yet. Check your email");
+        }
+        if (!staff.isVerified) {
+            usersLogger.error("Failed to login for staff email: " + email + ". Reason: Access isn't granted yet.");
+            throw new Error("Your account access hasn't been verified yet.");
         }
         const match = await bcrypt.compare(givenPassword, staff.password);
         if (!match) {
