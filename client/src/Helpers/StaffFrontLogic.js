@@ -248,6 +248,7 @@ const deleteTask = async (taskId) => {
         return true;
     }
 }
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
