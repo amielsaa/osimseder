@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
-import {fetchAllSchoolsByCityForRegister} from '../Helpers/StudentFrontLogic'
+import {fetchAllCities, registerStaff} from '../Helpers/StaffFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 
 function RegisterStaff() {
@@ -13,6 +13,7 @@ function RegisterStaff() {
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedArea, setSelectedArea] = useState('');
     const [areaList, setAreaList] = useState([])
+    const [cityList, setCityList] = useState([])
     const [email, setEmail] = useState('')
     const [selectedRole, setSelectedRole] = useState('')
     const [showConfirm, setShowConfirm] = useState(false)
@@ -26,7 +27,6 @@ function RegisterStaff() {
         phoneNumber: "",
         confirmPassword: "",
         gender: "",
-
     };
 
     
@@ -37,7 +37,7 @@ function RegisterStaff() {
         password: Yup.string()
         .required("סיסמה נדרשת")
         .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+        /^(?=.*\d).{8,}$/,
         "סיסמה צריכה לכלול לפחות אות גדולה אחת, אות קטנה אחת, מספר אחד ולהיות באורך של 8 תווים לפחות"
         ),
         email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
@@ -48,11 +48,27 @@ function RegisterStaff() {
         gender: Yup.string().required("מגדר נדרש")
     });
 
-    const onSubmit = (data) => {
+    useEffect(() => {
+        updateCityList();
+    },[])
+
+    const updateCityList = async () => {
+        const res = await fetchAllCities();
+        setCityList(res);
+    }
+
+    const onSubmit = async (data) => {
         data.city = selectedCity;
         data.area = selectedArea;
         data.role = selectedRole;
 
+        const res = await registerStaff(data);
+        if(res) {
+            setShowConfirm(true);
+        } else {
+            setShowConfirmError(true);
+        }
+        
         // Yoav - this is the function where he submits the form. need back logic here.
         
        /*  setEmail(data.email)
@@ -143,8 +159,17 @@ function RegisterStaff() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {changeCity(e.target.value)}} >
                           <option value="">בחר עיר</option>
-                          <option value="ירושלים">ירושלים</option>
-                          <option value="באר שבע">באר שבע</option>
+                          {cityList && (
+                                <>
+                                {cityList.map((city) => (
+                                    <option key={city.cityName} value={city.cityName}>
+                                    {city.cityName}
+                                    </option>
+                                ))}
+                                </>
+                            )}
+                          {/* <option value="ירושלים">ירושלים</option>
+                          <option value="באר שבע">באר שבע</option> */}
                       </Field>
                       <ErrorMessage name="city" component="span" />
                     </div>
@@ -179,7 +204,7 @@ function RegisterStaff() {
         {showConfirm && (
         <ConfirmMessage
             title = {"...עוד צעד אחד קטן"}
-            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל ${email}\n`}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, נא לבדוק את הספאם ${email}\n`}
             handleConfirm={() => navigate('/')}
         />
       )}

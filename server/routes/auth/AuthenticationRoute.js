@@ -5,6 +5,7 @@ const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const {accessGroup, validateAccess} = require('../../utils/Accesses');
 const LoginLogic = require("../../domain/LoginLogic");
+const StaffCitiesLogic = require('../../domain/StaffCitiesLogic')
 const EmailEncryptor = require("../../domain/utils/EmailEncryptor");
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
@@ -39,14 +40,29 @@ router.get('/update_user_session', validateToken, async (req, res) => {
     }
 });
 
+
+router.get('/cities_for_register', async (req, res) => {
+    try {
+        const cities = await StaffCitiesLogic.fetchAllCities();
+
+        const cleanedCities = await cities.map(city => {
+            const {createdAt, updatedAt, cityManagerEmail, ...cleanedCity } = city.dataValues;
+            return cleanedCity;
+        });
+        res.json(cleanedCities);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
 // Endpoint to register a new staff
 router.post('/register_staff', async (req, res) => {
-    const { staffData } = req.body;
+    const staffData = req.body;
     try {
         const createdStaff = await RegistrationLogic.registerStaff(staffData);
         res.json(createdStaff);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 

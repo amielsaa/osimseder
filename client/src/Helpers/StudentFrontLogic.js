@@ -44,5 +44,14 @@ const fetchAllSchoolsByCityForRegister = async (cityName) => {
   }
 }
 
+const fetchAllCities = async () => {
+  const res = await axios.get(`${URL}/auth/cities_for_register`, headers)
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
 
-export {fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById}
+
+export {fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, fetchAllCities}

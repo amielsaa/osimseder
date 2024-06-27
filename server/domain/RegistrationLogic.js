@@ -6,7 +6,7 @@ const emailService = require('./services/EmailService');
 const string2Int = require('./utils/String2Int');
 const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
-
+const Accesses = require('../utils/Accesses')
 
 class RegistrationLogic {
 
@@ -25,7 +25,6 @@ class RegistrationLogic {
 
             const cityId = await string2Int.getCityId(studentData.city);
             const schoolId = await string2Int.getSchoolId(studentData.school);
-
             const createdStudent = await Students.create({
                 "email": studentData.email,
                 "password": hashedPassword,
@@ -66,6 +65,10 @@ class RegistrationLogic {
 
             const hashedPassword = await bcrypt.hash(staffData.password, 10);
             const cityId = await string2Int.getCityId(staffData.city);
+            if(!staffData.accesses) {
+                const roleKeys = Object.keys(Accesses.roleGroup)
+                staffData.accesses = roleKeys.find(key => roleKeys[key] === staffData.role )
+            }
 
             const createdStaff = await Staffs.create({
                 "email": staffData.email,
