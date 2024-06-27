@@ -8,6 +8,7 @@ class StaffLogic {
 // Get all team owners by city name
 // Input: the name of the city
 // Output: a list of team owners in that city
+// TODO - Move to another file?
     async getTeamOwnersByCityName(cityName) {
         try {
             housesLogger.debug('Getting all team owners by city name: ' + cityName);

@@ -6,99 +6,101 @@ import Nav from './Nav';
 import DataContext from '../Helpers/DataContext';
 import ConfirmationMessage from './ConfirmationMessage';
 import StaffTable from './StaffTable';
+import { approveStaffRole, removeStaff, getAllStaffs } from '../Helpers/UserTabLogic'
+
 
 const exampleUsers = [
   {
-    name: 'יוחנן',
+    firstName: 'יוחנן',
     lastName: 'כהן',
     role: 'TeamOwner',
     phoneNumber: '123-456-7890',
-    city: 'תל אביב',
+    cityName: 'תל אביב',
     gender: 'זכר',
     confirmationStatus: true
   },
   {
-    name: 'אמה',
+    firstName: 'אמה',
     lastName: 'לוי',
     role: 'AreaManager',
     phoneNumber: '234-567-8901',
-    city: 'ירושלים',
+    cityName: 'ירושלים',
     gender: 'נקבה',
     confirmationStatus: false,
     area: 'Jerusalem'
   },
   {
-    name: 'נועם',
+    firstName: 'נועם',
     lastName: 'ישראלי',
     role: 'AreaManager',
     phoneNumber: '345-678-9012',
-    city: 'חיפה',
+    cityName: 'חיפה',
     gender: 'זכר',
     confirmationStatus: true,
     area: 'Haifa'
   },
   {
-    name: 'יעל',
+    firstName: 'יעל',
     lastName: 'בראון',
     role: 'CityManager',
     phoneNumber: '456-789-0123',
-    city: 'באר שבע',
+    cityName: 'באר שבע',
     gender: 'נקבה',
     confirmationStatus: false
   },
   {
-    name: 'איתי',
+    firstName: 'איתי',
     lastName: 'שמעוני',
     role: 'TeamOwner',
     phoneNumber: '567-890-1234',
-    city: 'אשדוד',
+    cityName: 'אשדוד',
     gender: 'זכר',
     confirmationStatus: true
   },
   {
-    name: 'דניאל',
+    firstName: 'דניאל',
     lastName: 'גולן',
     role: 'AreaManager',
     phoneNumber: '678-901-2345',
-    city: 'תל אביב',
+    cityName: 'תל אביב',
     gender: 'זכר',
     confirmationStatus: true,
     area: 'Tel Aviv'
   },
   {
-    name: 'שירה',
+    firstName: 'שירה',
     lastName: 'לוין',
     role: 'CityManager',
     phoneNumber: '789-012-3456',
-    city: 'חיפה',
+    cityName: 'חיפה',
     gender: 'נקבה',
     confirmationStatus: true
   },
   {
-    name: 'אלעד',
+    firstName: 'אלעד',
     lastName: 'גרין',
     role: 'CityManager',
     phoneNumber: '890-123-4567',
-    city: 'ירושלים',
+    cityName: 'ירושלים',
     gender: 'זכר',
     confirmationStatus: false
   },
   {
-    name: 'איתן',
+    firstName: 'איתן',
     lastName: 'רז',
     role: 'AreaManager',
     phoneNumber: '901-234-5678',
-    city: 'באר שבע',
+    cityName: 'באר שבע',
     gender: 'זכר',
     confirmationStatus: true,
     area: 'Beersheba'
   },
   {
-    name: 'מאיה',
+    firstName: 'מאיה',
     lastName: 'כהן',
     role: 'TeamOwner',
     phoneNumber: '012-345-6789',
-    city: 'תל אביב',
+    cityName: 'תל אביב',
     gender: 'נקבה',
     confirmationStatus: false
   }
@@ -112,11 +114,20 @@ const StaffIndex = () => {
   const [showConfirmationUserDeletion, setShowConfirmationUserDeletion] = useState(false);
   const [showConfirmationUserAcceptance, setShowConfirmationUserAcceptance] = useState(false);
   const [filter, setFilter] = useState('');
-  const [filterType, setFilterType] = useState('name');
+  const [filterType, setFilterType] = useState('firstName');
   const [chosenStaff, setChosenStaff] = useState('');
   const { navigate, user } = useContext(DataContext);
 
+    useEffect(() => {
+        // Yoav - you need to get all the users from the server and put them in the users state
+        // console.log(Object.values(myStaffs))
+      updateUsers();
+    }, [])
   
+  async function updateUsers() {
+    const myStaffs = await getAllStaffs(null)
+    setusers(myStaffs)
+  }
  
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -128,12 +139,13 @@ const StaffIndex = () => {
 
   
   
-  function onApproveStaffMember(userId, userName, userLastName, role) {
+    function onApproveStaffMember(userData) {
     const staff = {
-      userId: userId,
-      userName: userName,
-      userLastName: userLastName,
-      role: role
+        email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      accesses: userData.accesses,
+      cityName: userData.cityName
   }
     setChosenStaff(staff)
     setShowConfirmationUserAcceptance(true)
@@ -141,40 +153,39 @@ const StaffIndex = () => {
   }
   
   
-  function prepareDeleteStaffAction(userId, userName, userLastName) {
-    
-     const staff = {
-       userId: userId,
-       userName: userName,
-       userLastName: userLastName,
-   }
-     
-     setChosenStaff(staff)
+    function prepareDeleteStaffAction(userData) {
+     setChosenStaff(userData)
      setShowConfirmationUserDeletion(true)
    }
+
+    function removeStaffFromUserList() {
+      setusers(prevUsers => prevUsers.filter(user => user.email !== chosenStaff.email));
+    }
  
-
-
-  function handleDeleteUserConfirmation () {
-    //Yoav -  deletes chosenUser from the system 
-    setShowConfirmationUserDeletion(false)
+    function handleDeleteUserConfirmation() {
+        const res = removeStaff(chosenStaff.email); // ARI - need to use res? 
+        if(res) {
+          removeStaffFromUserList()
+        }
+        setShowConfirmationUserDeletion(false)
   }
-  function handleAcceptUserConfirmation () {
-    // Yoav - Accepts chosenUser to the system
-    console.log("Im here!")
-    setShowConfirmationUserAcceptance(false)
+    function handleAcceptUserConfirmation() {
+        const alternateRole = null // ARI - OPTIONAL : get the alternate role for the accepted user
+        console.log(chosenStaff)
+        const res = approveStaffRole(chosenStaff.email, alternateRole)// ARI - need to use res?
+        setShowConfirmationUserAcceptance(false)
   }
 
 
   
 
   const filteredUsers = users.filter((user) => {
-    if (filterType === 'name') {
-      return user.name.includes(filter);
-    } else if (filterType === 'role') {
-      return user.role.toLowerCase().includes(filter.toLowerCase());
-    } else if (filterType === 'city') {
-      return user.city.includes(filter);
+    if (filterType === 'firstName') {
+      return user.firstName.includes(filter);
+    } else if (filterType === 'accesses') {
+      return user.accesses.includes(filter);
+    } else if (filterType === 'cityId') {
+      return user.cityId.includes(filter);
     }
     return false;
   });
@@ -196,9 +207,9 @@ const StaffIndex = () => {
                 placeholder='חפש'
             />
             <select value={filterType} onChange={handleFilterTypeChange}>
-                <option value='name'>שם</option>
-                <option value='role'>תפקיד</option>
-                <option value='city'>עיר</option>
+                <option value='firstName'>שם</option>
+                <option value='accesses'>תפקיד</option>
+                <option value='cityName'>עיר</option>
             </select>
           </div>
         </div>

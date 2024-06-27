@@ -58,7 +58,7 @@ class EmailService {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {
-                    await staff.update({ isVerified: true, verificationToken: null });
+                    await staff.update({ verificationToken: null });
                     return isStudent;
                 } else {
                     throw new Error('Error: Token saved for user is different from the one given here.');

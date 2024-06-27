@@ -9,18 +9,18 @@ const String2Int = require('./utils/String2Int');
 
 class StaffGroupLogic {
 
-// Create a group
-// Input: groupSize - the size of the group to create
-//        schoolId - the id of the school to create the group for
-//        userEmail - the email of the user creating the group
-// Output: the group object
+    // Create a group
+    // Input: groupSize - the size of the group to create
+    //        schoolId - the id of the school to create the group for
+    //        userEmail - the email of the user creating the group
+    // Output: the group object
     async createGroup(groupSize, schoolId, userEmail) {
         try {
             groupsLogger.info("Initiating Create Group for school ID: " + schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([groupSize, schoolId, userEmail], ["groupSize", "schoolId", "userEmail"]);
 
             const school = await Schools.findOne({
-                where: {id: schoolId}
+                where: { id: schoolId }
             });
             if (!school) {
                 throw new Error('School doesn\'t exist.');
@@ -33,15 +33,15 @@ class StaffGroupLogic {
             if (!group) {
                 throw new Error('Couldn\'t create a group.');
             }
-        
+
             const students = await group.getStudents();
-    
+
             const studentNames = students.map(student => {
                 const { firstName, lastName, ...rest } = student;
                 return `${firstName} ${lastName}`;
             });
-    
-            group.dataValues.students = studentNames;            
+
+            group.dataValues.students = studentNames;
 
             const schoolName = await String2Int.getSchoolNameById(schoolId)
             const responseData = {
@@ -52,18 +52,18 @@ class StaffGroupLogic {
                 schoolId: group.schoolId,
                 schoolName: schoolName
             };
-            groupsLogger.info("Successfully created group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
+            groupsLogger.info("Successfully created group for school ID: " + schoolId + ". of size:" + groupSize + ". By email: " + userEmail);
             return responseData;
 
         } catch (error) {
-            groupsLogger.error("Failed to create group for school ID: "+ schoolId + ". of size:" + groupSize + ". By email: " + userEmail + ". Reason: " + error);
+            groupsLogger.error("Failed to create group for school ID: " + schoolId + ". of size:" + groupSize + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to create group: ' + error);
         }
     }
 
-// get all groups related to team owner
-// Input: teamOwnerEmailAddr - the email of the team owner
-// Output: an array of groups
+    // get all groups related to team owner
+    // Input: teamOwnerEmailAddr - the email of the team owner
+    // Output: an array of groups
     async getGroupsByTeamOwner(teamOwnerEmailAddr) {
         try {
             groupsLogger.debug("Initiating Get Groups by Team Owner for email: " + teamOwnerEmailAddr);
@@ -100,15 +100,15 @@ class StaffGroupLogic {
 
             for (let i = 0; i < groups.length; i++) {
                 const group = groups[i];
-        
+
                 const students = await group.getStudents();
-        
+
                 const studentNames = students.map(student => {
                     const { firstName, lastName, ...rest } = student;
                     return `${firstName} ${lastName}`;
                 });
-        
-                group.dataValues.students = studentNames;            
+
+                group.dataValues.students = studentNames;
             }
 
             const responseData = await Promise.all(groups.map(async group => {
@@ -134,9 +134,9 @@ class StaffGroupLogic {
     }
 
 
-// get all groups related to city manager
-// Input: cityManagerEmail - the email of the city manager
-// Output: an array of groups
+    // get all groups related to city manager
+    // Input: cityManagerEmail - the email of the city manager
+    // Output: an array of groups
     async getGroupsByCityManager(cityManagerEmail) {
         try {
             groupsLogger.debug("Initiating Get Groups by City Manager for email: " + cityManagerEmail);
@@ -165,7 +165,7 @@ class StaffGroupLogic {
                         const { firstName, lastName, ...rest } = student;
                         return `${firstName} ${lastName}`;
                     });
-                    group.dataValues.students = studentNames;            
+                    group.dataValues.students = studentNames;
                     newGroups.push(group);
                 }
             }
@@ -202,8 +202,8 @@ class StaffGroupLogic {
         }
     }
 
-// get all groups in the requester city
-// Output: an array of groups
+    // get all groups in the requester city
+    // Output: an array of groups
     async getAllGroups() {
         try {
             groupsLogger.debug("Initiating Get All Groups");
@@ -215,15 +215,15 @@ class StaffGroupLogic {
 
             for (let i = 0; i < groups.length; i++) {
                 const group = groups[i];
-        
+
                 const students = await group.getStudents();
-        
+
                 const studentNames = students.map(student => {
                     const { firstName, lastName, ...rest } = student;
                     return `${firstName} ${lastName}`;
                 });
-        
-                group.dataValues.students = studentNames;            
+
+                group.dataValues.students = studentNames;
             }
 
             const responseData = await Promise.all(groups.map(async group => {
@@ -249,12 +249,12 @@ class StaffGroupLogic {
             throw new Error('Failed to get all groups: ' + error);
         }
     }
-    
 
-// get a group by id
-// Input: groupId - the id of the group to get
-//        user - the user requesting the group
-// Output: the group object
+
+    // get a group by id
+    // Input: groupId - the id of the group to get
+    //        user - the user requesting the group
+    // Output: the group object
     async getGroupById(groupId, user) {
         try {
             groupsLogger.debug("Initiating Get Group by ID for group ID: " + groupId + ". By user: " + user.email);
@@ -273,17 +273,17 @@ class StaffGroupLogic {
             if (!group) {
                 throw new Error('Group not found');
             }
-            
+
             const students = await group.getStudents();
-        
+
             const studentNames = students.map(student => {
-                const { firstName, lastName, email,...rest } = student;
+                const { firstName, lastName, email, ...rest } = student;
                 const encryptedEmail = EmailEncryptor.encryptEmail(email);
 
-                return {fullname:`${firstName} ${lastName}`, email:email, encryptedEmail:encryptedEmail};
+                return { fullname: `${firstName} ${lastName}`, email: email, encryptedEmail: encryptedEmail };
             });
-            group.dataValues.students = studentNames;       
-            
+            group.dataValues.students = studentNames;
+
             const schoolName = await String2Int.getSchoolNameById(group.schoolId)
             const responseData = {
                 id: group.id,
@@ -304,9 +304,9 @@ class StaffGroupLogic {
         }
     }
 
-// get all groups in the city
-// Input: cityName - the name of the city to get the groups for
-// Output: an array of groups
+    // get all groups in the city
+    // Input: cityName - the name of the city to get the groups for
+    // Output: an array of groups
     async getSchoolsByCity(cityName) {
         try {
             groupsLogger.debug("Initiating Get Schools by City for city: " + cityName);
@@ -343,9 +343,9 @@ class StaffGroupLogic {
         }
     }
 
-// get all groups without a house
-// Input: schoolId - the id of the school to get the groups for
-// Output: an array of groups
+    // get all groups without a house
+    // Input: schoolId - the id of the school to get the groups for
+    // Output: an array of groups
     async getAllGroupsWithoutHouse(schoolId) {
         try {
             groupsLogger.debug("Initiating Get all groups without house for school: " + schoolId);
@@ -360,15 +360,15 @@ class StaffGroupLogic {
 
             for (let i = 0; i < groups.length; i++) {
                 const group = groups[i];
-        
+
                 const students = await group.getStudents();
-        
+
                 const studentNames = students.map(student => {
                     const { firstName, lastName, ...rest } = student;
                     return `${firstName} ${lastName}`;
                 });
-        
-                group.dataValues.students = studentNames;            
+
+                group.dataValues.students = studentNames;
             }
 
             const responseData = await Promise.all(groups.map(async group => {
@@ -394,19 +394,19 @@ class StaffGroupLogic {
             throw new Error('Failed to get school\'s groups without a house ' + error);
         }
     }
-    
 
-// delete a group by id
-// Input: id - the id of the group to delete
-//        userEmail - the email of the user deleting the group
-// Output: none
+
+    // delete a group by id
+    // Input: id - the id of the group to delete
+    //        userEmail - the email of the user deleting the group
+    // Output: none
     async deleteGroup(id, userEmail) {
         try {
             groupsLogger.info("Initiating Delete Group by ID for group ID: " + id + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([id, userEmail], ["id", "userEmail"]);
 
             const group = await Groups.findOne({
-                where: {id: id}
+                where: { id: id }
             });
             if (!group) {
                 throw new Error('Couldn\'t find a group with that id.');
@@ -431,20 +431,20 @@ class StaffGroupLogic {
     }
 
 
-// update a group by id
-// Input: id - the id of the group to update
-//        updatedFields - the fields to update
-//        userEmail - the email of the user updating the group
-// Output: the updated group object
+    // update a group by id
+    // Input: id - the id of the group to update
+    //        updatedFields - the fields to update
+    //        userEmail - the email of the user updating the group
+    // Output: the updated group object
     async updateGroup(id, updatedFields, userEmail) {
         try {
             groupsLogger.info("Initiating Update Group by ID for group ID: " + id + ". By email: " + userEmail);
             argumentChecker.checkSingleArugments([id, updatedFields, userEmail], ["id", "updatedFields", "userEmail"]);
 
             const group = await Groups.findOne({
-                where: {id: id}
+                where: { id: id }
             });
-            if(!group){
+            if (!group) {
                 throw new Error('Couldn\'t find a group with that id.');
             }
 
@@ -456,12 +456,59 @@ class StaffGroupLogic {
 
             await group.save();
 
-            groupsLogger.info("Successfully updated group by ID for group ID: " + id + ". By email: " + userEmail); 
+            groupsLogger.info("Successfully updated group by ID for group ID: " + id + ". By email: " + userEmail);
             return group;
 
         } catch (error) {
             groupsLogger.error("Failed to update group by ID for group ID: " + id + ". By email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to update a group by id: ' + error);
+        }
+    }
+
+    // get all available groups in a school
+    //        schoolName - the name of the school to get the groups for
+    //        requesterEmail - the email of the user deleting the group
+    // Output: an array of groups
+    async getAvailableGroupsBySchool(schoolName, requesterEmail) {
+        try {
+            groupsLogger.debug("Initiating Get available Groups by School for school name: " + schoolName + ". By user: " + requesterEmail);
+            argumentChecker.checkSingleArugments([schoolName, requesterEmail], ["schoolName", "requesterEmail"]);
+
+            const schoolId = await String2Int.getSchoolId(schoolName)
+            const school = await Schools.findOne({
+                where: { "cityId": schoolId }
+            });
+            if (!school) {
+                throw new Error('Couldn\'t find school by Id:' + schoolId);
+            }
+            const groupsBySchool = await school.getGroups();
+
+            const availableGroups = await Promise.all(groupsBySchool.map(async group => {
+                const students = await group.getStudents();
+                const memberCount = students.length;
+
+                if (group.capacity > memberCount) {
+                    // Add the memberCount to the group object
+                    group.dataValues.memberCount = memberCount;
+                    return group;
+                } else {
+                    return null;
+                }
+            }));
+
+            // Filter out null values
+            const filteredGroups = availableGroups.filter(group => group !== null);
+
+
+            // Sort responseData by id
+            filteredGroups.sort((a, b) => a.id - b.id);
+
+            groupsLogger.debug("Successfully got available groups by School for school Id: " + schoolId + ". By user: " + requesterEmail);
+            return filteredGroups;
+
+        } catch (error) {
+            groupsLogger.error("Failed to get available groups by School for school Id: " + schoolId + ". By user: " + requesterEmail + ". Reason: " + error);
+            throw new Error('Failed to get available groups by school: ' + error);
         }
     }
 }
@@ -553,3 +600,7 @@ module.exports = new StaffGroupLogic();
     }
 }
 ***/
+
+
+        // get all groups in the requester city
+// Output: an array of groups

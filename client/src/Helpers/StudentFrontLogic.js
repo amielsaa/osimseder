@@ -4,8 +4,8 @@ const URL = 'http://localhost:3001/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
-const handleJoinGroup = (groupId, userId) => 
-    axios.post(`${URL}/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
+const handleJoinGroup = (groupId, email) => 
+    axios.post(`${URL}/student/groups/join/${groupId}`, { id: email },{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
     })   
 //Amiel handle leave group !!!
 
@@ -52,6 +52,14 @@ const fetchAllCities = async () => {
       return res.data;
   }
 }
+const getAllAvailableGroupsForSchool = async (schoolName) => {
+  const res = await axios.get(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName });
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
 
 
-export {fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, fetchAllCities}
+export { fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, fetchAllCities, getAllAvailableGroupsForSchool }
