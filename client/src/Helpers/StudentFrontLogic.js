@@ -44,8 +44,16 @@ const fetchAllSchoolsByCityForRegister = async (cityName) => {
   }
 }
 
+const fetchAllCities = async () => {
+  const res = await axios.get(`${URL}/auth/cities_for_register`, headers)
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
 const getAllAvailableGroupsForSchool = async (schoolName) => {
-    const res = await axios.get(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName });
+  const res = await axios.get(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName });
   if(res.data.error) {
       alert(res.data.error);
   } else {
@@ -54,4 +62,4 @@ const getAllAvailableGroupsForSchool = async (schoolName) => {
 }
 
 
-export { fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, getAllAvailableGroupsForSchool }
+export { fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, fetchAllCities, getAllAvailableGroupsForSchool }

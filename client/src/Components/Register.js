@@ -1,17 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
-import {fetchAllSchoolsByCityForRegister} from '../Helpers/StudentFrontLogic'
+import {fetchAllSchoolsByCityForRegister, fetchAllCities} from '../Helpers/StudentFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 
 function Register() {
     const {navigate} = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
     const [schoolsList, setSchoolsList] = useState([]);
+    const [cityList, setCityList] = useState([]);
     const [selectedSchool, setSelectedSchool] = useState('');
     const [email, setEmail] = useState('')
     const [showConfirm, setShowConfirm] = useState(false)
@@ -60,6 +61,17 @@ function Register() {
         school: Yup.string().required("בית ספר נדרש"),
         languages: Yup.string(),
     });
+
+    const updateCities = async () => {
+        const res = await fetchAllCities();
+        console.log(res);
+        setCityList(res);
+    }
+
+    useEffect(() => {
+        updateCities();
+    },[]);
+
 
     const onSubmit = (data) => {
         data.city = selectedCity;
@@ -160,8 +172,15 @@ function Register() {
                       <label htmlFor="city"> עיר: </label>
                       <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
                           <option value="">בחר עיר</option>
-                          <option value="ירושלים">ירושלים</option>
-                          <option value="באר שבע">באר שבע</option>
+                          {cityList && (
+                                <>
+                                {cityList.map((city) => (
+                                    <option key={city.cityName} value={city.cityName}>
+                                    {city.cityName}
+                                    </option>
+                                ))}
+                                </>
+                            )}
                       </Field>
                       <ErrorMessage name="city" component="span" />
                     </div>

@@ -71,7 +71,12 @@ const updateHouse = async (information, id) => {
 }
 
 const fetchAllCities = async () => {
-
+    const res = await axios.get(`${URL}/auth/cities_for_register`, headers)
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
 }
 
 const fetchAllAreasByCity = async (city) => {
@@ -249,10 +254,20 @@ const deleteTask = async (taskId) => {
     }
 }
 
+const registerStaff = async (staffData) => {
+    const res = await axios.post(`${URL}/auth/register_staff`, staffData, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember
+    , addGroupMember, fetchAllCities, registerStaff
 }
