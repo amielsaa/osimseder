@@ -137,6 +137,7 @@
      .Personal-Info{
       width: 90%;
       direction: rtl;
+      max-height: 400px;
       display: flex;
       gap:5%; 
       flex-direction: column;
@@ -149,7 +150,7 @@
      .Info-bar {
       padding: 15px;
       font-weight: bold;
-      font-size: 2rem;
+      font-size: 1.5rem;
       background-color: var(--GREY-COLOR);
       margin-top: 0;
       width: 50%;
@@ -181,6 +182,7 @@
   
   .ActionButtonsContainer {
     display: flex;
+    margin-bottom: 10px;
     width: 50%;
     justify-content: space-around;
     align-items: center; /* Add some spacing between the upload button and the action buttons */
@@ -190,14 +192,16 @@
   .ActionButton {
     background-color: var(--ORANGE-COLOR);
     color: #fff;
+    flex-wrap: wrap;
     padding: 10px 15px;
     border-radius: 20px;
-    margin-top: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
     cursor: pointer;
-    width: 20%;
+    width: 25%;
+    min-width: 190px;
     height: 40%;
     font-size: 1rem;
     border: none;
@@ -210,9 +214,11 @@
     margin-right: 5px; /* Add some spacing between the icon and text */
   }
   .personal_page_main_content { 
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
+    flex:1;
     height: 60%;
     gap:3%;
     justify-content: flex-start;

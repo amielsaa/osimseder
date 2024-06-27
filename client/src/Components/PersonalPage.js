@@ -2,30 +2,62 @@ import './css/PersonalPage.css'
 import Header from './Header';
 import Nav from './Nav';
 import { IoMdCreate, IoMdLock } from 'react-icons/io';
-import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from '../Helpers/DataContext';
 import { useContext, useState, useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
-import { decryptEmail, getUserByEmail } from '../Helpers/utils';
+import { decryptEmail, getUserByEmail, changeUserPassword } from '../Helpers/utils';
+import ConfirmMessage from './ConfirmMessage';
+import PasswordChanger from './PasswordChanger';
 
 const PersonalPage = () => {
   const { encryptedEmail } = useParams();
   const { navigate,user,width } = useContext(DataContext);
+  const [showPasswordChangePopUp, setShowPasswordChangePopUp] = useState(false)
   const [centerUser, setCenterUser] = useState({});
   const [userRole, setUserRole] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isCenterUser,setIsCenterUser] = useState(false)
+  const [errorConfirm, setErrorConfirm] = useState(false);
+  const [successConfirm, setSuccessConfirm] = useState(false);
 
   const encryptedEmailToUser = async () => {
     const decryptedEmail = await decryptEmail(encryptedEmail);
     const userInfo = await getUserByEmail(decryptedEmail);
     return userInfo;
   }
+  
+  
+
+  function openPasswordChangeWindow() {
+    setShowPasswordChangePopUp(true)
+  }
+  function closePasswordChangeWindow() {
+    setShowPasswordChangePopUp(false)
+  }
+  async function submitPasswordChange(data) {
+    try {
+      // Yoav - in the data here you have all the data, recent password - new password and confirmation of new password. (you have print here to see how it looks like)
+      // you need to check if the password of the user matches the old password, if so check if the new password and the confirmation of
+      // the new password match, if so, change the user password in the back.
+
+      await changeUserPassword(data) //  <--- create this function, ive made the template for you already.
+      console.log(data)
+      closePasswordChangeWindow()
+      setSuccessConfirm(true)
+    } catch (e) {
+      setErrorConfirm(true)
+    }
+    
+    
+  }
 
   const checkIfUserIsCenterUser = async (tmpUser) => {
     setIsCenterUser(((tmpUser.email === user.email) || user.role !== "Student"))
   }
+ 
+
+
   useEffect(() => {
     const setUpPage = async () => {
       const tmpUser = await encryptedEmailToUser(encryptedEmail);
@@ -84,25 +116,44 @@ const PersonalPage = () => {
                 </>
               ) : (
                 <>
-                  <div className='Info-bar'>שם: {centerUser.firstName} {centerUser.lastName}</div>
-                  <div className='Info-bar'>תפקיד: {userRole}</div>
-                  <div className='Info-bar'>עיר: {centerUser.cityName}</div>
-                  <div className='Info-bar'>מספר פלאפון: {centerUser.phoneNumber}</div>
-                  <div className='Info-bar'>מין: {centerUser.gender}</div>
+                  <div className='Info-bar' >שם:<span className='black-color'>  {centerUser.firstName} {centerUser.lastName} </span></div>
+                  <div className='Info-bar'>תפקיד:<span className='black-color'>  {userRole} </span></div>
+                  <div className='Info-bar'>עיר:<span className='black-color'>  {centerUser.cityName} </span></div>
+                  <div className='Info-bar'>מספר פלאפון:<span className='black-color'>  {centerUser.phoneNumber} </span></div>
+                  <div className='Info-bar'>מין:<span className='black-color'>  {centerUser.gender} </span></div>
                 </>
               )}
             </div>
           )}
         </div>
-        <div className='ActionButtonsContainer'>
+       { user && (centerUser.email === user.email) && <div className='ActionButtonsContainer'>
           <button className='ActionButton' >
             <IoMdCreate className='ActionIcon' /> ערוך
           </button>
-          <button className='ActionButton'>
-            <IoMdLock className='ActionIcon' /> שנה סיסמה
+          <button className='ActionButton'  onClick={() => openPasswordChangeWindow()}>
+            <IoMdLock className='ActionIcon'/> שנה סיסמה
           </button>
-        </div>
+        </div>}
       </div>
+
+
+      { showPasswordChangePopUp &&
+       <PasswordChanger onClose={() => setShowPasswordChangePopUp(false)} onSubmit={submitPasswordChange}/>
+      }
+      {errorConfirm && (
+        <ConfirmMessage
+          confirmationMessage={`שינוי הסיסמה לא הצליח`}
+          handleConfirm={() => setErrorConfirm(false)}
+        />
+      )}
+      {successConfirm && (
+        <ConfirmMessage
+          confirmationMessage={`הסיסמה שונתה בהצלחה!`}
+          handleConfirm={() => setSuccessConfirm(false)}
+        />
+      )}
+
+
       <Footer />
     </>
   );

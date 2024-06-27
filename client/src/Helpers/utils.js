@@ -3,7 +3,16 @@ import axios from 'axios';
 const URL = 'http://localhost:3001/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
-
+const changeUserPassword = async (data) => {
+    
+    /* const res = await axios.delete(`${URL}/staff/tasks/${taskId}`, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    } */
+}
 const decryptEmail = async (encryptedEmail) => {
     const res = await axios.get(`${URL}/auth/decryptEmail/${encryptedEmail}`, headers);
     if(res.data.error) {
@@ -29,4 +38,4 @@ const authenticateRegisterEmail = async (token, encryptedEmail) => {
 }
 
 
-export {decryptEmail, getUserByEmail, authenticateRegisterEmail}
+export {decryptEmail, getUserByEmail, authenticateRegisterEmail, changeUserPassword}
