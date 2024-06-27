@@ -9,36 +9,34 @@ const { accessGroup, validateAccess } = require('../../utils/Accesses');
 router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const filterBy = req.body.filterBy;
-        var students;
-        if ((accessGroup.D.includes(userRole))) { //for city managers and admins
-            students = await userManagementLogic.getAllStudents(filterBy);
+        const userRole = req.user.role;
+        if (!(accessGroup.E.includes(userRole))) { //for non-admins
+            filterBy.cityId = req.uesr.cityId;
         }
-        else { //for area managers
-            filterBy.cityId = req.user.cityId; //gets only the students in the city of the area manager
-            students = await userManagementLogic.getAllStudents(filterBy);
-        }
+        const students = await userManagementLogic.getAllStudents(filterBy);
+        
         res.json(students);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
+// Get all staffs by the requester's access level
 router.get('/getAllStaffs', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
         const filterBy = req.body.filterBy;
-        var staffs;
-        if ((accessGroup.D.includes(userRole))) { //for city managers and admins
-            staffs = await userManagementLogic.getAllStaffs(filterBy);
+        const userRole = req.user.role;
+        const userEmail = req.user.email;
+        if (!(accessGroup.E.includes(userRole))) { //for non-admins
+            filterBy.cityId = req.user.cityId;
+            if (accessGroup.C.includes(userRole)) { //for area managers
+                filterBy.accesses = 'B'; //Team Owners Only
+            }
         }
-        else { //for area managers
-            filterBy.cityId = req.user.cityId; //gets only the staffs in the city of the area manager
-            staffs = await userManagementLogic.getAllStaffs(filterBy);
-        }
-
-        const students = await userManagementLogic.getAllStaffs(filterBy);
-        res.json(students);
+        const staffs = await userManagementLogic.getAllStaffs(userEmail, userRole, filterBy);
+        res.json(staffs);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -49,7 +47,7 @@ router.get('/getUser/:email', validateToken, validateAccess(accessGroup.A), asyn
         const user = await userManagementLogic.getUserByEmail(email);
         res.json(user);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -61,7 +59,7 @@ router.delete('/deleteStudent/:studentEmail', validateToken, validateAccess(acce
         await userManagementLogic.deleteStudent(studentEmail, requesterEmail);
         res.json({ message: 'Student deleted successfully.' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -74,7 +72,7 @@ router.delete('/deleteStaff/:staffEmail', validateToken, validateAccess(accessGr
         await userManagementLogic.deleteStaff(staffEmail, requesterEmail);
         res.json({ message: 'Student deleted successfully.' });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -87,7 +85,7 @@ router.put('/addVolunteer', validateToken, validateAccess(accessGroup.D), async 
         const user = await userManagementLogic.addVolunteer(newVolunteerData, requesterEmail);
         res.json(user);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -99,7 +97,7 @@ router.put('/addStaff', validateToken, validateAccess(accessGroup.D), async (req
         const user = await userManagementLogic.addVolunteer(newStaffData, requesterEmail);
         res.json(user);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -112,7 +110,7 @@ router.put('/updateStudent/:email', validateToken, validateAccess(accessGroup.D)
         const updatedStudent = await userManagementLogic.updateVolunteerByManager(volunteerEmail, updatedData, requesterEmail);
         res.json(updatedStudent);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -125,12 +123,12 @@ router.put('/updateStaff/:email', validateToken, validateAccess(accessGroup.D), 
         const updatedStaff = await userManagementLogic.updateStaffByManager(staffEmail, updatedData, requesterEmail);
         res.json(updatedStaff);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
 // Endpoint to approve a staff by manager
-router.put('/approveStaff/:email', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/approveStaff/:email', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     const staffEmail = req.params.email;
     const alternateRole = req.params.alternateRole;
     const requesterEmail = req.user.email;
@@ -138,7 +136,7 @@ router.put('/approveStaff/:email', validateToken, validateAccess(accessGroup.C),
         const updatedStaff = await userManagementLogic.approveStaffRole(staffEmail, alternateRole, requesterEmail);
         res.json(updatedStaff);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 

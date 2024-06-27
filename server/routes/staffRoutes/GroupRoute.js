@@ -40,12 +40,12 @@ router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req
         res.json(schools);
         // res.json('ok')
 
-        
+
     } catch (err) {
         res.json({ error: err.message });
     }
-    
-})
+
+});
 
 // need to move to other route someday
 // Return all schools related to the city
@@ -61,10 +61,31 @@ router.post('/schools_for_register', async (req, res) => {
         res.json(schools);
         // res.json('ok')
 
+
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+})
+    
+// get all groups with available space by school
+router.get('/schools_for_register', async (req, res) => {
+    try {
+        // const groupSize = req.body.capacity;
+        // const cityName = req.body.cityName;
+        const cityName = req.body.city;
+        const schools = await staffGroupLogic.getSchoolsByCity(cityName);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
         
     } catch (err) {
         res.json({ error: err.message });
     }
+
+
     
 })
 
@@ -193,6 +214,21 @@ router.delete('/deleteGroup/:id', validateToken, validateAccess(accessGroup.C), 
         res.json(deletedGroup);
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+
+// Get all available groups in school (GET)
+router.get('/availableGroupsBySchool/:schoolId', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+    try {
+        const schoolId = req.body.schoolId;
+        const requesterEmaail = req.user.email;
+
+        const availableGroups = await staffGroupLogic.getAvailableGroupsBySchool(schoolId, requesterEmaail);
+
+        res.json(availableGroups);
+    } catch (err) {
+        res.json({ error: err.message });
     }
 });
 
