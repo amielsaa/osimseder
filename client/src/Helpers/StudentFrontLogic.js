@@ -53,7 +53,7 @@ const fetchAllCities = async () => {
   }
 }
 const getAllAvailableGroupsForSchool = async (schoolName) => {
-  const res = await axios.get(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName });
+  const res = await axios.post(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName },headers);
   if(res.data.error) {
       alert(res.data.error);
   } else {

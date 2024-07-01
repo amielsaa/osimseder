@@ -32,8 +32,8 @@ const UsersTable = ({ users, prepareJoinGroupAction, prepareDeleteStudentAction 
               <td>{user.schoolName}</td>
               <td>{user.gender}</td>
               <td>{user.extraLanguage}</td>
-              {!user.groupId? <td className='group-id-td'><button className='join-group-button' onClick={() => prepareJoinGroupAction(user.id,user.firstName, user.lastName,  user.school)}>צרף</button></td> : <td>{user.groupId}</td>}
-                  <td><button className='delete-student-button' onClick={() => prepareDeleteStudentAction(user.email, user.firstName , user.lastName)}>X</button></td>
+              {!user.groupId? <td className='group-id-td'><button className='join-group-button' onClick={() => prepareJoinGroupAction(user.email,user.firstName, user.lastName,  user.schoolName)}>צרף</button></td> : <td>{user.groupId}</td>}
+                  <td><button className='delete-student-button' onClick={() => prepareDeleteStudentAction(user.email, user.firstName , user.lastName, user.schoolName)}>X</button></td>
             </tr>
           ))}
         </tbody>

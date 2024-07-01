@@ -201,9 +201,13 @@ const UsersIndex = () => {
 
     useEffect(() => {
         // Yoav - you need to get all the users from the server and put them in the users state
-        const myUsers = getAllVolunteers(null)
-        setusers(myUsers)
+        updateUsers();
     }, [])
+
+  const updateUsers = async () => {
+    const myUsers = await getAllVolunteers(null)
+    setusers(myUsers)
+  }
  
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -213,9 +217,12 @@ const UsersIndex = () => {
     setFilterType(e.target.value);
   };
 
-  function handleAddToTeamConfirmation() {
+  async function handleAddToTeamConfirmation() {
       //Yoav - you have const chosenStudent which has the studentId and you have the selectedGroupId. add the student to the seleceted group
-      const res = addGroupMember(chosenStudent.email, selectedGroupId); //ARI - need to use res?
+      const res = await addGroupMember(chosenStudent.email, selectedGroupId); //ARI - need to use res?
+      if(res) {
+        updateUsers();
+      }
       setShowConfirmation(false)
       setShowGroupsWindow(false)
       console.log("Im here!")
@@ -223,7 +230,7 @@ const UsersIndex = () => {
   
   
 
-  const prepareJoinGroupAction = (email, userName, userLastName, schoolName) => {
+  const prepareJoinGroupAction = async (email, userName, userLastName, schoolName) => {
     const student = {
         email: email,
         userName: userName,
@@ -231,7 +238,7 @@ const UsersIndex = () => {
         schoolName: schoolName
     }
     // Yoav - you need to get the schoolName of this userId and bring all the groups of his school. you need to put it in groups
-    const myGroups = getAllAvailableGroupsForSchool(student.schoolName)
+    const myGroups = await getAllAvailableGroupsForSchool(student.schoolName)
     setGroups(myGroups);
     setChosenStudent(student)
     console.log("Im here!")
@@ -247,6 +254,7 @@ const UsersIndex = () => {
        email: email,
        userName: userName,
        userLastName: userLastName,
+       schoolName: chosenStudent.schoolName
    }
    
      if(showGroupsWindow) {
@@ -255,11 +263,16 @@ const UsersIndex = () => {
      setChosenStudent(student)
      setShowConfirmationUserDeletion(true)
    }
- 
+   
+   function removeChosenStudentFromList() {
+    setusers(users.filter((user) => user.email !== chosenStudent.email))
+   }
 
-
-    function handleDeleteUserConfirmation() {
-        const res = removeVolunteer(chosenStudent.email) // ARI - need to use res? 
+    async function handleDeleteUserConfirmation() {
+        const res = await removeVolunteer(chosenStudent.email) // ARI - need to use res? 
+        if(res) {
+          removeChosenStudentFromList();
+        }
         console.log("Im here!")
         setShowConfirmationUserDeletion(false)
     }

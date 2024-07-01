@@ -9,7 +9,7 @@ const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 //          For example: {cityId: 1, FirstName: 'יעקב'}
 // Output: a list of all volunteers 
 const getAllVolunteers = async (filterByDict) => {
-    const res = await axios.get(`${URL}/auth/getAllStudents`, { filterBy: filterByDict }, headers);
+    const res = await axios.get(`${URL}/auth/getAllStudents`, headers);
     if(res.data.error) {
         alert(res.data.error);
     } else {
@@ -132,6 +132,23 @@ const approveStaffRole = async (email, alternateRole) => {
     }
 }
 
+const accessToRoleName = (access) => {
+    switch(access) {
+        case 'A':
+            return 'סטודנט'
+        case 'B':
+            return 'חניך גרעין'
+        case 'C':
+            return 'מנהל שכונה'
+        case 'D':
+            return 'מנהל עיר'
+        case 'E':
+            return 'אדמין'
+        default:
+            return ''
+    }
+}
+
 export {
-    getAllStaffs, getAllVolunteers, removeVolunteer, adminAddVolunteer, editVolunteer, adminAddStaff, removeStaff , editStaff, approveStaffRole
+    getAllStaffs, getAllVolunteers, removeVolunteer, adminAddVolunteer, editVolunteer, adminAddStaff, removeStaff , editStaff, approveStaffRole, accessToRoleName
 }
