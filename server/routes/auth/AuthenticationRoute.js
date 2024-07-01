@@ -77,15 +77,26 @@ router.post('/reset_password', async (req, res) => {
 });
 
 // Endpoint to handle password change
-router.post('/change_password', async (req, res) => {
+router.post('/change_password', validateToken, async (req, res) => {
     try {
-        const { email, password, isStudent }  = req.body;
+        const { password, newPassword, isStudent }  = req.body;
         // Call the logic method to verify the email and token
-        await RegistrationLogic.changePassword(email, password, isStudent);
-        res.send(true);
+        await RegistrationLogic.changePassword(req.user.email, password, newPassword, isStudent);
+        res.json(true);
     } catch (error) {
-        console.error('Error verifying email:', error);
-        res.status(500).send('Internal server error.');
+        res.json({ error: error.message });
+    }
+});
+
+// Endpoint to handle edit personal details
+router.put('/edit_personal_details', validateToken, async (req, res) => {
+    try {
+        const userData  = req.body.userData;
+        // Call the logic method to verify the email and token
+        const user = await RegistrationLogic.editPersonalDetails(req.user.email, req.user.role, userData, userData.isStudent);
+        res.json(user);
+    } catch (error) {
+        res.json({ error: error.message });
     }
 });
 

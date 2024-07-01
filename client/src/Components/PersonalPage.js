@@ -6,7 +6,8 @@ import DataContext from '../Helpers/DataContext';
 import { useContext, useState, useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
-import { decryptEmail, getUserByEmail, changeUserPassword,changeUserDetails } from '../Helpers/utils';
+import { decryptEmail, getUserByEmail } from '../Helpers/utils';
+import {changeUserPassword,changeUserDetails} from '../Helpers/StaffFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 import PasswordChanger from './PasswordChanger';
 import EditDetailsPopUp from './EditDetailsPopUp'
@@ -47,21 +48,21 @@ const PersonalPage = () => {
   function openEditDetailsWindow() {
     if(user.role !== "Student"){
       setPropsForDetailsChange({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        gender: user.gender,
-        phoneNumber: user.phoneNumber
+        firstName: centerUser.firstName,
+        lastName: centerUser.lastName,
+        gender: centerUser.gender,
+        phoneNumber: centerUser.phoneNumber
       })
     } else {
       setPropsForDetailsChange({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        parentName: user.parentName,
-        parentPhoneNumber: user.parentPhoneNumber,
-        issuesText: user.issuesText,
-        extraLanguage: user.extraLanguage,
-        gender: user.gender,
-        phoneNumber: user.phoneNumber
+        firstName: centerUser.firstName,
+        lastName: centerUser.lastName,
+        parentName: centerUser.parentName,
+        parentPhoneNumber: centerUser.parentPhoneNumber,
+        issuesText: centerUser.issuesText,
+        extraLanguage: centerUser.extraLanguage,
+        gender: centerUser.gender,
+        phoneNumber: centerUser.phoneNumber
       })
     }
     
@@ -71,44 +72,27 @@ const PersonalPage = () => {
     setShowEditDetailsPopUp(false)
   }
   async function submitPasswordChange(data) {
-    try {
-      // Amiel - in the data here you have all the data, recent password - new password and confirmation of new password. (you have print here to see how it looks like)
-      // you need to check if the password of the user matches the old password, if so check if the new password and the confirmation of
-      // the new password match, if so, change the user password in the back.
-
-      await changeUserPassword(data) //  <--- create this function, ive made the template for you already.
-      console.log(data)
-      closePasswordChangeWindow()
+    data.isStudent = user.role === 'Student' ? true : false;
+    const res = await changeUserPassword(data) //  <--- create this function, ive made the template for you already.
+    closePasswordChangeWindow()
+    if(res) {
       setSuccessConfirmPasswordChange(true)
-    } catch (e) {
+    } else {
       setErrorConfirmPasswordChange(true)
     }
-    
     
   }
   async function submitEditDetails(data) {
-    try {
-      // Amiel - in the data here you have all the data, (you have print here to see how it looks like)
-      // do  your checks in the back, the date looks like this :
-      {/* {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        parentName: user.parentName,
-        parentPhoneNumber: user.parentPhoneNumber,
-        issuesText: user.issuesText,
-        extraLanguage: user.extraLanguage,
-        gender: user.gender,
-        phoneNumber: user.phoneNumber
-      } */}
-       // if the user isn't a student the parentPhoneNumber parentName issuesText and extra language will be '' do your checks in the back.
-
-      await changeUserDetails(data) //  <--- create this function, ive made the template for you already.
-      console.log(data)
-      setShowEditDetailsPopUp(false)
-    } catch (e) {
-      setErrorConfirmPasswordChange(true)
+    data.isStudent = user.role === 'Student' ? true : false;
+    const res = await changeUserDetails(data) //  <--- create this function, ive made the template for you already.
+    console.log(res);
+    setShowEditDetailsPopUp(false)
+    if(res) {
+      await SettingForRole(res);
+      setCenterUser(res)
+    } else {
+      setErrorEditDetails(true)
     }
-    
     
   }
 
