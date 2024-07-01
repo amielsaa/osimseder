@@ -7,6 +7,7 @@ const string2Int = require('./utils/String2Int');
 const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const Accesses = require('../utils/Accesses')
+const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 
 class RegistrationLogic {
 
@@ -138,33 +139,34 @@ class RegistrationLogic {
 //        password - the new password
 //        isStudent - if the user is a student
 // Output: the email of the user
-    async changePassword(email,password,isStudent) {
+    async changePassword(email,password,newPassword,isStudent) {
         try {
             usersLogger.info("Initiating actual Change Password process for email: " + email + ". Is he student?" + isStudent);
             argumentChecker.checkSingleArugments([email, password, isStudent], ["email", "password", "isStudent"]);
-
-            const hashedPassword = await bcrypt.hash(password, 10);
-
+            
+            var user = null
             if (isStudent) {
-                const student = await Students.findOne({
+                user = await Students.findOne({
                     where: { email: email }
                 });
-                await student.update({
-                    "verificationToken": null,
-                    "isVerified": true,
-                    "password": hashedPassword
-                })
             }
             else {
-                const staff = await Staffs.findOne({
+                user = await Staffs.findOne({
                     where: { email: email }
                 });
-                await staff.update({
-                    "verificationToken": null,
-                    "isVerified": true,
-                    "password": hashedPassword
-                })
             }
+
+            const match = await bcrypt.compare(password, user.password);
+            if (!match) {
+                throw new Error("Old password is incorrect.");
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            await user.update({
+                "verificationToken": null,
+                "isVerified": true,
+                "password": hashedPassword
+            })
             usersLogger.info("Successfully initiated actual change password proccess for email: " + email);
             return email;
 
@@ -178,6 +180,55 @@ class RegistrationLogic {
     generateVerificationToken() {
         return crypto.randomBytes(20).toString('hex');
     }
+
+    async fetchUserByEmail(email) {
+        var user = await Students.findOne({
+            where: { email: email }
+        });
+        if(!user) {
+            user = await Staffs.findOne({
+                where: { email: email }
+            });
+        }
+        if(!user) {
+            throw new Error('User with that email doesnt exists.')
+        }
+        return user
+    }
+
+    async editPersonalDetails(email, userRole, userData, isStudent) {
+        try {            
+            var user = await this.fetchUserByEmail(email);
+            const updatedFields = {
+                "firstName": userData.firstName,
+                "lastName": userData.lastName,
+                "parentName": userData.parentName,
+                "parentPhoneNumber": userData.parentPhoneNumber,
+                "issuesText": userData.issuesText,
+                "extraLanguage": userData.extraLanguage,
+                "gender": userData.gender,
+                "phoneNumber": userData.phoneNumber
+            }
+            if(!isStudent) {
+                let studentPropertiesToDelete = ["issuesText", "parentPhoneNumber", "parentName"]
+                studentPropertiesToDelete.forEach((property) => delete updatedFields[property])
+            }
+            user = await user.update(updatedFields);
+            if(isStudent) {
+                user = await formatStudentValues(user);
+            } else {
+                user = await formatStaffValues(user);
+            }
+            console.log(user)
+            usersLogger.info("Successfully edited personal details for email: " + email);
+            return user.dataValues;
+
+        } catch (error) {
+            usersLogger.error("Failed to edit personal details for email: " + email + ". Reason: " + error);
+            throw new Error('Failed to edit personal details: ' + error);
+        }
+    }
+
 }
 
 module.exports = new RegistrationLogic();

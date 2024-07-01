@@ -264,10 +264,30 @@ const registerStaff = async (staffData) => {
     }
 }
 
+const changeUserPassword = async (data) => {
+    const res = await axios.post(`${URL}/auth/change_password`, {password:data.currentPassword, newPassword:data.newPassword, isStudent:data.isStudent}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    } 
+}
+const changeUserDetails = async (data) => {
+    
+    const res = await axios.put(`${URL}/auth/edit_personal_details`, {userData:data} ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails
 }
