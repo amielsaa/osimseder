@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './css/PasswordChanger.css';
@@ -18,10 +18,12 @@ const validationSchema = Yup.object({
 
 
 const PasswordChanger = ({ onClose, onSubmit }) => {
+
+  
   
   return (
-    <div className="overlay" >
-      <div className="confirmation-modal">
+    <div className="overlay-password-changer">
+      <div className="confirmation-modal-password-changer">
         <button className="close-button" onClick={onClose}>X</button>
         <h2>שינוי סיסמה</h2>
         <Formik
@@ -46,7 +48,7 @@ const PasswordChanger = ({ onClose, onSubmit }) => {
               <ErrorMessage name="confirmNewPassword" component="div" />
             </div>
             <div className='change-password-button-container'>
-            <button type="submit" className="confirmation-button">
+            <button type="submit" className="confirmation-button-change-password">
               שנה סיסמה
             </button>
             </div>

@@ -1,4 +1,4 @@
-.overlay-password-changer {
+.overlay-student-info-changer {
     position: fixed;
     top: 0;
     left: 0;
@@ -6,13 +6,15 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999;
-  }
-  
-  .confirmation-modal-password-changer {
+}
+
+.confirmation-modal-student-info-changer {
     position: fixed;
     top: 50%;
     left: 50%;
     width: 75%;
+    max-height: 75%;
+    overflow-y: scroll;
     direction: rtl;
     transform: translate(-50%, -50%);
     font-size: 1.2rem;
@@ -22,14 +24,9 @@
     text-align: center;
     z-index: 10000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    text-align: right;
 }
-  
-  .close-button {
+
+.close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -37,9 +34,9 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-  }
-  
-  .confirmation-button-change-password {
+}
+
+.confirmation-button-change-info {
     background-color: var(--ORANGE-COLOR);
     width: 38%;
     color: white;
@@ -53,17 +50,21 @@
     margin: 10px;
     font-size: 1.2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  .change-password-button-container{
+}
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.change-info-button-container {
     width: 100%;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .confirmation-modal-password-changer {
-      width: 30%;
-      
-      min-height: 500px;
-      border: 1px solid black;
+}
+
+@media screen and (min-width: 768px) {
+    .confirmation-modal-student-info-changer {
+        width: 30%;
+        min-height: 500px;
+        border: 1px solid black;
     }
-  }
-  
+}
