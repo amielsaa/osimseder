@@ -6,20 +6,28 @@ import DataContext from '../Helpers/DataContext';
 import { useContext, useState, useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
-import { decryptEmail, getUserByEmail, changeUserPassword } from '../Helpers/utils';
+import { decryptEmail, getUserByEmail, changeUserPassword,changeUserDetails } from '../Helpers/utils';
 import ConfirmMessage from './ConfirmMessage';
 import PasswordChanger from './PasswordChanger';
+import EditDetailsPopUp from './EditDetailsPopUp'
 
 const PersonalPage = () => {
   const { encryptedEmail } = useParams();
   const { navigate,user,width } = useContext(DataContext);
-  const [showPasswordChangePopUp, setShowPasswordChangePopUp] = useState(false)
+  
   const [centerUser, setCenterUser] = useState({});
   const [userRole, setUserRole] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isCenterUser,setIsCenterUser] = useState(false)
-  const [errorConfirm, setErrorConfirm] = useState(false);
-  const [successConfirm, setSuccessConfirm] = useState(false);
+  //change password
+  const [showPasswordChangePopUp, setShowPasswordChangePopUp] = useState(false)
+  const [errorConfirmPasswordChange, setErrorConfirmPasswordChange] = useState(false);
+  const [successConfirmPasswordChange, setSuccessConfirmPasswordChange] = useState(false);
+  //edit details
+  const [showEditDetailsPopUp, setShowEditDetailsPopUp] = useState(false)
+  const [errorEditDetails, setErrorEditDetails] = useState(false);
+  const [successEditDetails, setSuccessEditDetails] = useState(false);
+  const [propsForDetailsChange, setPropsForDetailsChange] = useState({})
 
   const encryptedEmailToUser = async () => {
     const decryptedEmail = await decryptEmail(encryptedEmail);
@@ -28,25 +36,77 @@ const PersonalPage = () => {
   }
   
   
-
+  //change password
   function openPasswordChangeWindow() {
     setShowPasswordChangePopUp(true)
   }
   function closePasswordChangeWindow() {
     setShowPasswordChangePopUp(false)
   }
+  //change password
+  function openEditDetailsWindow() {
+    if(user.role !== "Student"){
+      setPropsForDetailsChange({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber
+      })
+    } else {
+      setPropsForDetailsChange({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        parentName: user.parentName,
+        parentPhoneNumber: user.parentPhoneNumber,
+        issuesText: user.issuesText,
+        extraLanguage: user.extraLanguage,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber
+      })
+    }
+    
+    setShowEditDetailsPopUp(true)
+  }
+  function closeEditDetailsWindow() {
+    setShowEditDetailsPopUp(false)
+  }
   async function submitPasswordChange(data) {
     try {
-      // Yoav - in the data here you have all the data, recent password - new password and confirmation of new password. (you have print here to see how it looks like)
+      // Amiel - in the data here you have all the data, recent password - new password and confirmation of new password. (you have print here to see how it looks like)
       // you need to check if the password of the user matches the old password, if so check if the new password and the confirmation of
       // the new password match, if so, change the user password in the back.
 
       await changeUserPassword(data) //  <--- create this function, ive made the template for you already.
       console.log(data)
       closePasswordChangeWindow()
-      setSuccessConfirm(true)
+      setSuccessConfirmPasswordChange(true)
     } catch (e) {
-      setErrorConfirm(true)
+      setErrorConfirmPasswordChange(true)
+    }
+    
+    
+  }
+  async function submitEditDetails(data) {
+    try {
+      // Amiel - in the data here you have all the data, (you have print here to see how it looks like)
+      // do  your checks in the back, the date looks like this :
+      {/* {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        parentName: user.parentName,
+        parentPhoneNumber: user.parentPhoneNumber,
+        issuesText: user.issuesText,
+        extraLanguage: user.extraLanguage,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber
+      } */}
+       // if the user isn't a student the parentPhoneNumber parentName issuesText and extra language will be '' do your checks in the back.
+
+      await changeUserDetails(data) //  <--- create this function, ive made the template for you already.
+      console.log(data)
+      setShowEditDetailsPopUp(false)
+    } catch (e) {
+      setErrorConfirmPasswordChange(true)
     }
     
     
@@ -65,6 +125,7 @@ const PersonalPage = () => {
       await SettingForRole(tmpUser);
       await checkIfUserIsCenterUser(tmpUser)
       setIsLoading(false); // Set loading to false once user data is fetched
+      
       
     };
     setUpPage();
@@ -127,7 +188,7 @@ const PersonalPage = () => {
           )}
         </div>
        { user && (centerUser.email === user.email) && <div className='ActionButtonsContainer'>
-          <button className='ActionButton' >
+          <button className='ActionButton' onClick={() => openEditDetailsWindow()} >
             <IoMdCreate className='ActionIcon' /> ערוך
           </button>
           <button className='ActionButton'  onClick={() => openPasswordChangeWindow()}>
@@ -140,16 +201,39 @@ const PersonalPage = () => {
       { showPasswordChangePopUp &&
        <PasswordChanger onClose={() => setShowPasswordChangePopUp(false)} onSubmit={submitPasswordChange}/>
       }
-      {errorConfirm && (
+      {errorConfirmPasswordChange && (
         <ConfirmMessage
           confirmationMessage={`שינוי הסיסמה לא הצליח`}
-          handleConfirm={() => setErrorConfirm(false)}
+          handleConfirm={() => setErrorConfirmPasswordChange(false)}
         />
       )}
-      {successConfirm && (
+      {successConfirmPasswordChange && (
         <ConfirmMessage
-          confirmationMessage={`הסיסמה שונתה בהצלחה!`}
-          handleConfirm={() => setSuccessConfirm(false)}
+          confirmationMessage={`!הסיסמה שונתה בהצלחה`}
+          handleConfirm={() => setSuccessConfirmPasswordChange(false)}
+        />
+      )}
+
+
+
+
+
+
+
+
+      { showEditDetailsPopUp &&
+       <EditDetailsPopUp onClose={() => closeEditDetailsWindow(false)} onSubmit={submitEditDetails} userRole={user.role} props={propsForDetailsChange}/>
+      }
+      {errorEditDetails && (
+        <ConfirmMessage
+          confirmationMessage={`עדכון  הפרטים לא הצליח`}
+          handleConfirm={() => setErrorEditDetails(false)}
+        />
+      )}
+      {successEditDetails && (
+        <ConfirmMessage
+          confirmationMessage={`!הפרטים עודכנו בהצלחה`}
+          handleConfirm={() => setSuccessEditDetails(false)}
         />
       )}
 
