@@ -8,12 +8,12 @@ const { accessGroup, validateAccess } = require('../../utils/Accesses');
 // Endpoint to fetch all students
 router.get('/getAllStudents', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const filterBy = req.body.filterBy;
+        // const filterBy = req.body.filterBy;
         const userRole = req.user.role;
-        if (!(accessGroup.E.includes(userRole))) { //for non-admins
-            filterBy.cityId = req.uesr.cityId;
-        }
-        const students = await userManagementLogic.getAllStudents(filterBy);
+        // if (!(accessGroup.E.includes(userRole))) { //for non-admins
+        //     filterBy.cityId = req.uesr.cityId;
+        // }
+        const students = await userManagementLogic.getAllStudents(null);
         
         res.json(students);
     } catch (error) {

@@ -6,7 +6,7 @@ import Nav from './Nav';
 import DataContext from '../Helpers/DataContext';
 import ConfirmationMessage from './ConfirmationMessage';
 import StaffTable from './StaffTable';
-import { approveStaffRole, removeStaff, getAllStaffs } from '../Helpers/UserTabLogic'
+import { approveStaffRole, removeStaff, getAllStaffs, accessToRoleName } from '../Helpers/UserTabLogic'
 
 
 const exampleUsers = [
@@ -145,7 +145,8 @@ const StaffIndex = () => {
       firstName: userData.firstName,
       lastName: userData.lastName,
       accesses: userData.accesses,
-      cityName: userData.cityName
+      cityName: userData.cityName,
+      role: accessToRoleName(userData.accesses)
   }
     setChosenStaff(staff)
     setShowConfirmationUserAcceptance(true)
@@ -159,7 +160,7 @@ const StaffIndex = () => {
    }
 
     function removeStaffFromUserList() {
-      setusers(prevUsers => prevUsers.filter(user => user.email !== chosenStaff.email));
+      setusers(users.filter(user => user.email !== chosenStaff.email));
     }
  
     function handleDeleteUserConfirmation() {
@@ -169,10 +170,10 @@ const StaffIndex = () => {
         }
         setShowConfirmationUserDeletion(false)
   }
-    function handleAcceptUserConfirmation() {
+    async function handleAcceptUserConfirmation() {
         const alternateRole = null // ARI - OPTIONAL : get the alternate role for the accepted user
-        console.log(chosenStaff)
-        const res = approveStaffRole(chosenStaff.email, alternateRole)// ARI - need to use res?
+        const res = await approveStaffRole(chosenStaff.email, alternateRole)// ARI - need to use res?
+        updateUsers()
         setShowConfirmationUserAcceptance(false)
   }
 
@@ -224,14 +225,14 @@ const StaffIndex = () => {
 
       {showConfirmationUserDeletion && (
         <ConfirmationMessage
-          confirmationMessage={`האם למחוק את ${chosenStaff.userName + " " + chosenStaff.userLastName } מהמערכת?`}
+          confirmationMessage={`האם למחוק את ${chosenStaff.firstName + " " + chosenStaff.lastName } מהמערכת?`}
           handleConfirmation={handleDeleteUserConfirmation}
           setShowConfirmation={setShowConfirmationUserDeletion}
         />
       )}
       {showConfirmationUserAcceptance && (
         <ConfirmationMessage
-          confirmationMessage={`האם לאשר את ${chosenStaff.userName + " " + chosenStaff.userLastName } לתפקיד ${chosenStaff.role} במערכת?`}
+          confirmationMessage={`האם לאשר את ${chosenStaff.firstName + " " + chosenStaff.lastName } לתפקיד ${chosenStaff.role} במערכת?`}
           handleConfirmation={handleAcceptUserConfirmation}
           setShowConfirmation={setShowConfirmationUserDeletion}
         />

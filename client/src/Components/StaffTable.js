@@ -2,6 +2,8 @@ import React from 'react';
 import './css/UsersIndex.css';
 
 const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, onApproveStaffMember }) => {
+
+
   return (
     <div className='content-box-users-table'>
       <table>
@@ -28,7 +30,7 @@ const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, o
               <td>{user.cityName}</td>
               <td>{user.areaName}</td>
               <td>{user.gender}</td>
-                {user.confirmationStatus ? (
+                {user.isVerified ? (
                     <td>{"מאושר/ת"}</td>
                 ) : (
                     <td>

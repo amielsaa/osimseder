@@ -196,7 +196,7 @@ const addGroupMember = async (email, groupId) => {
         alert(res.data.error);
         return false;
     } else {
-        return res.data;
+        return true;
     }
 }
 

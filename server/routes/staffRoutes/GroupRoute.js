@@ -219,12 +219,12 @@ router.delete('/deleteGroup/:id', validateToken, validateAccess(accessGroup.C), 
 
 
 // Get all available groups in school (GET)
-router.get('/availableGroupsBySchool/:schoolId', validateToken, validateAccess(accessGroup.C), async (req, res) => {
+router.post('/availableGroupsBySchool/', validateToken, validateAccess(accessGroup.C), async (req, res) => {
     try {
-        const schoolId = req.body.schoolId;
+        const schoolName = req.body.schoolName;
         const requesterEmaail = req.user.email;
 
-        const availableGroups = await staffGroupLogic.getAvailableGroupsBySchool(schoolId, requesterEmaail);
+        const availableGroups = await staffGroupLogic.getAvailableGroupsBySchool(schoolName, requesterEmaail);
 
         res.json(availableGroups);
     } catch (err) {

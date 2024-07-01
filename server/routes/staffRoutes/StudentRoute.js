@@ -31,7 +31,7 @@ router.put('/addGroupMember/:email', validateToken, validateAccess(accessGroup.C
         const newStudent = await StaffStudentLogic.addStudentToGroup(studentEmail, groupId);
         res.json(newStudent);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.json({ message: err.message });
     }
 });
 
