@@ -95,7 +95,7 @@ const Login = () => {
           </div>
 
           <div className='login_Buttons'>
-          <button type="submit" className='button-login' style={{ display: displayCode ? 'block' : 'none' }} onClick={handleRegisterStaff}>הרשם כסגל</button>
+         {/*<button type="submit" className='button-login' style={{ display: displayCode ? 'block' : 'none' }} onClick={handleRegisterStaff}>הרשם כסגל</button>*/}
           <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר/י</button>
           </div>
           

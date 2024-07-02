@@ -51,7 +51,7 @@ function Registration() {
         phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        gender: Yup.string().required("מגדר נדרש"),
+        gender: Yup.string().required("מין נדרש"),
         parentName: Yup.string().required("שם הורה נדרש"),
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
