@@ -2,7 +2,7 @@ import React from 'react';
 import './css/PicturePopUp.css'; 
 import img from '../images/try-img.jpeg'
 
-const PicturePopUp = ({ onClose, onDelete, index, image }) => {
+const PicturePopUp = ({ onClose, onDelete, index, image, reason, onConfirm }) => {
   
 
   return (
@@ -17,7 +17,8 @@ const PicturePopUp = ({ onClose, onDelete, index, image }) => {
           
         </div>
         <div className='remove-button-container'>
-        <button className="remove-button" onClick={() => onDelete(image , index)}>מחק תמונה</button>
+        {(reason === "select") &&<button className="remove-button" onClick={() => onDelete(image , index)}>מחק תמונה</button>}
+        {(reason === "upload") &&<button className="remove-button" onClick={() => onConfirm(image)}>העלה תמונה</button>}
         </div>
       </div>
     </div>
