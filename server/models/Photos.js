@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         photoPath: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     });
 

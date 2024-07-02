@@ -178,7 +178,7 @@ async function confirmAddPicture(imageUrl) {
             const formData = new FormData();
             formData.append('file', chosenFile);
             console.log(formData)
-            const res = await uploadImage(formData);
+            const res = await uploadImage(formData, id);
             setImageList([...imageList, imageUrl]);
             setPictureToDisplay('')
             setConfirmPicturePopUp(false)

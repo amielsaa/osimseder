@@ -284,9 +284,9 @@ const changeUserDetails = async (data) => {
     } 
 }
 
-const uploadImage = async (imageData) => {
+const uploadImage = async (imageData, houseId) => {
 
-    const res = await axios.post(`${URL}/staff/images`, imageData, {
+    const res = await axios.post(`${URL}/staff/images/upload/${houseId}`, imageData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         accessToken: localStorage.getItem('accessToken')

@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const {validateToken} = require('../../utils/JsonWebToken');
-const {validateAccess, accessGroup} = require('../../utils/Accesses');
-const StaffTaskLogic = require('../../domain/StaffTaskLogic');
-const {Groups, Staffs, Areas, Schools, Cities, Houses, Tasks} = require('../../models');
 const multer = require('multer');
 const path = require('path');
+const PhotoLogic = require('../../domain/PhotoLogic'); 
+const {housesLogger} = require('../../utils/Logger');
 
 // Set up storage engine
 const storage = multer.diskStorage({
   destination: './uploads/',
   filename: (req, file, cb) => {
-    const houseId = req.body.houseId;
+    const houseId = req.params.houseId;
     if (!houseId) {
       return cb(new Error('houseId is required'));
     }
@@ -26,7 +24,7 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   },
-}).single('image'); // 'image' is the key in FormData
+}).single('file'); // Assuming 'file' is the field name in your form data
 
 // Check file type
 function checkFileType(file, cb) {
@@ -41,19 +39,24 @@ function checkFileType(file, cb) {
   }
 }
 
-// TODO: validateToken
-router.post('/upload', /*validateToken, validateAccess(accessGroup.B),*/ (req, res) => {
-  upload(req, res, (err) => {
+// Route handler for uploading photo
+router.post('/upload/:houseId', (req, res) => {
+  upload(req, res, async (err) => {
     if (err) {
-      return res.status(400).json({ message: err.message });
+      return res.json({ error: err.message });
     }
     if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
+      return res.json({ error: 'No file uploaded' });
     }
-    res.status(200).json({
-      message: 'File uploaded successfully',
-      file: req.file.filename,
-    });
+
+    try {
+      const houseId = req.params.houseId;
+      const photo = await PhotoLogic.addPhoto(houseId, req.file.filename);
+      res.json({ message: 'Photo uploaded successfully', photo });
+    } catch (error) {
+    //   housesLogger.error(`Failed Adding photo to house: ${req.params.houseId}: ${error.message}`);
+      res.json({ error: error.message });
+    }
   });
 });
 
