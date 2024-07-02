@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Header from "./Header";
+
 import Nav from "./Nav";
 import { useParams } from "react-router-dom";
 import './css/HousePage.css';
@@ -10,6 +11,7 @@ import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
 import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
+import PicturePopUp from "./PicturePopUp";
 
 const HousePage = () => {
   const { id } = useParams();
@@ -20,6 +22,7 @@ const HousePage = () => {
   const [secondGroup, setSecondGroup] = useState('');
   const [firstMember, setFirstMember] = useState('');
   const [secondMember, setSecondMember] = useState('');
+  
   const [dropdownOptionsA, setDropdownOptionsA] = useState(["דר. דרה", "אייס קיוב","איזי","ילה","מק רן"]);
   // for selecting memebers to the group
   const [memberAChoosingStatus,setMemberAChoosingStatus] = useState(false)
@@ -27,11 +30,19 @@ const HousePage = () => {
   const [selectedMemberA,setSelectedMemberA] = useState("")
   const [selectedMemberB,setSelectedMemberB] = useState('')
   const [refreshPage,setRefreshPage] = useState(false)
+  //image logic
+  const [chosenImageIndex, setChosenImageIndex] = useState('')
+  const [imageList, setImageList] = useState([])
+  const [showBigPicture, setShowBigPicture] = useState(false)
+  const [pictureToDisplay, setPictureToDisplay] = useState('')
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
       navigate('/404')
     }
   })
+  useEffect(() => {
+
+  },[imageList])
   const removeRoomFromTasklist = (room) => {
     setTasks(prevTasks => prevTasks.filter(task => task.room !== room));
     
@@ -136,6 +147,66 @@ const HousePage = () => {
       
   }
 
+  // ------------------- picture handlers ---------------------
+
+
+  const handleAddPicture = (event) => {
+    
+    const file = event.target.files[0];
+    if (file) {
+        const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        if (validImageTypes.includes(file.type)) {
+            const imageUrl = URL.createObjectURL(file);
+            //Feliks - Before you start, notice that every function that is addressed to the back is coming from the Helpers directory, set your function there
+            // and use it here, that from here whatever data you need.
+            //Feliks - right now Im just adding the img to my const list here in the front, you need to Implement a function here to take the data to the back
+            // and save it. if you want the house Id to store it for you can get it from the const id.
+            setImageList([...imageList, imageUrl]);
+            
+            console.log('Selected file:', file);
+        } else {
+            console.log('Please select a valid image file (png, jpeg, jpg).');
+        }
+    }
+};
+
+const handleAddPictureClick = () => {
+    document.getElementById('fileInput').click();
+};
+
+function onPictureClick(image, index) {
+  console.log(image)
+  setChosenImageIndex(index)
+  setShowBigPicture(true)
+  setPictureToDisplay(image)
+
+}
+
+function onClosePicturePopUp(){
+  setShowBigPicture(false)
+}
+
+const deleteImage = (image, index) => {
+  const updatedList = [...imageList];
+  updatedList.splice(index, 1);
+  // Feliks - in this row you need to delete the picture from the database you get the image here in the arguments.
+  // if you want the house Id to store it for you can get it from the const id.
+  setImageList(updatedList);
+  setShowBigPicture(false)
+};
+
+async function setImageRequest() {
+  // Feliks, in this function you need to get all the pictures from the server, store them into a list and then put the inside the  imageList
+  // notice! imageList is a useState, the way you are doing this is storing the list in a const, lets say const list, and then you use the method setImageList(list)
+  // should be looking somthing like that
+  {/* const list = await (whatever you bring from the database)
+     setImageList(list)*/}
+}
+
+
+// ------------------- picture handlers ---------------------
+  
+
   const setTasksRequest = async () => {
     const tasksJson = await getTasksByHouseId(id)
     setTasks(tasksJson);
@@ -180,6 +251,7 @@ const HousePage = () => {
     setHouseRequest();
     // setTeamOwners();
     setTasksRequest();
+
   }, []);  // Dependency array ensures it runs when the id changes
 
 
@@ -198,6 +270,10 @@ const HousePage = () => {
               <h1>בית מספר : {id}</h1>
             </div>
           </div>
+
+         
+
+
           {user.role !== "Student" &&
             <div className="buttons_for_house_logic">
               <button className="edit_house_button" onClick={() => navigate(`/EditHouse/${id}`)}> ערוך בית</button>
@@ -205,6 +281,27 @@ const HousePage = () => {
             </div>
           }
           </div>
+          {/* picture components here*/ }
+          <div className="house-pictures-container">
+          {imageList.map((image, index) => (
+                <div key={index} className="picture-container" onClick={() => {onPictureClick(image,index)}}>
+                    <img src={image} alt={`image-${index}`} />
+                </div>
+            ))}
+          </div>
+
+          
+          <button className="add_picture_button" onClick={() => {handleAddPictureClick()}}>הוסף תמונה</button>
+          <input
+                type="file"
+                id="fileInput"
+                style={{ display: 'none' }}
+                accept="image/png, image/jpeg, image/jpg"
+                onChange={handleAddPicture}
+            />
+            {showBigPicture && <PicturePopUp onClose={onClosePicturePopUp} onDelete={deleteImage} index={chosenImageIndex} image={pictureToDisplay} />}
+          {/* picture components here*/ }
+         
           <div className="groups_and_teamOwners_and_houseInfo">
           <div className="groups_and_teamOwners">
           {user.role !== 'Student' &&
@@ -302,41 +399,41 @@ const HousePage = () => {
           <div className="House_Info">
             <div className="house_Info_Title"><h1>פרטי הבית</h1></div>
             <div className="Info">
-              עיר: {house?.cityName}
+              עיר:<span className="little-info">{house?.cityName} </span>
             </div>
             <div className="Info">
-              שכונה: {house?.areaName}
+              שכונה:<span className="little-info"> {house?.areaName}</span>
             </div>
             <div className="Info">
-              כתובת: {house?.address}
+              כתובת:<span className="little-info"> {house?.address} </span>
             </div>
             <div className="Info">
-              שם הדייר/ת: {house?.residentFirstName + " " + house?.residentLastName}
+              שם הדייר/ת: <span className="little-info"> {house?.residentFirstName + " " + house?.residentLastName} </span>
             </div>
 
 
             {user.role !== "Student" && (
               <>
               <div className="Info">
-              מספר הדייר/ת: {house?.residentPhoneNum}
+              מספר הדייר/ת: <span className="little-info">{house?.residentPhoneNum} </span> 
             </div>
             <div className="Info">
-              מספר חלופי: {house?.residentAlternatePhoneNum}
+              מספר חלופי: <span className="little-info">{house?.residentAlternatePhoneNum} </span> 
             </div>
             <div className="Info">
-              מין הדייר/ת: {house?.residentGender}
+              מין הדייר/ת: <span className="little-info"> {house?.residentGender} </span>
             </div>
             <div className="Info">
-              שפה נחוצה: {house?.languageNeeded}
+              שפה נחוצה: <span className="little-info"> {house?.languageNeeded} </span>
             </div>
             <div className="Info">
-              מספר חדרים: {house?.numberOfRooms}
+              מספר חדרים: <span className="little-info">{house?.numberOfRooms} </span> 
             </div>
             <div className="Info">
-              גודל קבוצה נחוץ: {house?.membersNeeded}
+              גודל קבוצה נחוץ: <span className="little-info">{house?.membersNeeded} </span> 
             </div>
             <div className="Info">
-              הערות : {house?.freeText}
+              הערות : <span className="little-info"> {house?.freeText} </span>
             </div>
             </>
             )}
