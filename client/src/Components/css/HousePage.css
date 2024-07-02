@@ -14,6 +14,44 @@
     overflow-y: scroll;
     
   }
+  .house-pictures-container {
+    width: 90%;
+    min-height: 20%; 
+    display: flex;
+    border-radius: 12px;
+    justify-content: flex-start;
+    overflow-x: auto; 
+    align-items: center;
+    padding: 10px;
+    padding:15px;
+    gap: 3%;
+    box-shadow: inset var(--BOX-SHADOW);
+}
+
+.picture-container {
+    height: 100px;
+    width: 100px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    flex: 0 0 auto; 
+}
+.little-info {
+  color: black;
+  margin-right:5px;
+}
+
+.picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 12px;
+}
+.empty-list-text{
+  margin:auto;
+  font-size: 1.5rem;
+}
    .groups_and_teamOwners_and_houseInfo{
     display: flex;
     width: 100%;
@@ -86,7 +124,7 @@
   }
   .House-Info-Tasks {
     width: 100%;
-    min-height: 60%; /* Adjust this value as needed */
+    min-height: 80%; /* Adjust this value as needed */
     border-right:2px solid var(--ORANGE-COLOR);
     border-left:2px solid var(--ORANGE-COLOR);
     display: flex;
@@ -110,9 +148,10 @@
     align-items: center;
     gap:20%
   }
-  .edit_house_button , .add_task_button {
+  .edit_house_button , .add_task_button, .add_picture_button {
     width: 30%;
     height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
     border-radius: var(--BORDER-RADIUS);
     border: none;
     transition: background-color 0.3s;
@@ -243,6 +282,17 @@
       
       
     }
+    .house-pictures-container {
+      min-height: 250px ;
+    }
+    .picture-container{
+      min-height: 200px ;
+      min-width: 200px ;
+    }
+    .add_picture_button {
+      width: 200px;
+      cursor: pointer;
+    }
     .content-Box-House::-webkit-scrollbar {
       display: none;
     }
@@ -308,6 +358,7 @@
   padding-right: 5%;
 
 }
+
 .House-Tasks {
   display: flex;
   flex-direction: column;
@@ -328,7 +379,21 @@
   border-radius: var(--BORDER-RADIUS);
 }
 
+.house-pictures-container::-webkit-scrollbar-track {
+  background: var(--PURPLEOP-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+}
 
+.house-pictures-container::-webkit-scrollbar-thumb {
+  background-color: var(--PURPLE-COLOR);
+  border-radius: var(--BORDER-RADIUS);
+}
+
+/* For Firefox */
+.house-pictures-container {
+  scrollbar-color: var(--PURPLE-COLOR) var(--PURPLEOP-COLOR);
+  scrollbar-width: thin;
+}
 
 
 .House_main_content{

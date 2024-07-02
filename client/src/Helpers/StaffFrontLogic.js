@@ -71,7 +71,12 @@ const updateHouse = async (information, id) => {
 }
 
 const fetchAllCities = async () => {
-
+    const res = await axios.get(`${URL}/auth/cities_for_register`, headers)
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
 }
 
 const fetchAllAreasByCity = async (city) => {
@@ -191,7 +196,7 @@ const addGroupMember = async (email, groupId) => {
         alert(res.data.error);
         return false;
     } else {
-        return res.data;
+        return true;
     }
 }
 
@@ -248,10 +253,41 @@ const deleteTask = async (taskId) => {
         return true;
     }
 }
+
+const registerStaff = async (staffData) => {
+    const res = await axios.post(`${URL}/auth/register_staff`, staffData, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    }
+}
+
+const changeUserPassword = async (data) => {
+    const res = await axios.post(`${URL}/auth/change_password`, {password:data.currentPassword, newPassword:data.newPassword, isStudent:data.isStudent}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    } 
+}
+const changeUserDetails = async (data) => {
+    
+    const res = await axios.put(`${URL}/auth/edit_personal_details`, {userData:data} ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails
 }

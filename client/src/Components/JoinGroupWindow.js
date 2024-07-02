@@ -21,9 +21,9 @@ const JoinGroupWindow = ({ student, groups, onClose, onAddToGroup }) => {
                 <span>מספר קבוצה : {group.groupId}</span>
             </div>
             <div className='group-att'>
-                <span>גודל קבוצה : {`${group.membersCount}/${group.capacity}`}</span>
+                <span>גודל קבוצה : {`${group.memberCount}/${group.capacity}`}</span>
             </div>
-            <button className='add-to-group-button' onClick={() => onAddToGroup(group.groupId, student.userId, student.userName, student.userLastName)}>
+            <button className='add-to-group-button' onClick={() => onAddToGroup(group.id, student.email, student.userName, student.userLastName)}>
                 <span>צרף לקבוצה</span>
             </button>
             </div>

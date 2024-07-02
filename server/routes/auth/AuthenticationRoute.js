@@ -5,6 +5,7 @@ const loginLogic = require('../../domain/LoginLogic');
 const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const {accessGroup, validateAccess} = require('../../utils/Accesses');
 const LoginLogic = require("../../domain/LoginLogic");
+const StaffCitiesLogic = require('../../domain/StaffCitiesLogic')
 const EmailEncryptor = require("../../domain/utils/EmailEncryptor");
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
@@ -16,6 +17,18 @@ router.post('/register_student', async (req, res) => {
         res.json({ error: error.message });
     }
 });
+
+//================== VERIFY FOR TESTING ==================
+router.post('/verify', async (req, res) => {
+    const studentData = req.body.email;
+    try {
+        const createdStudent = await RegistrationLogic.instantVerifyTesting(studentData);
+        res.json(createdStudent);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+//================== VERIFY FOR TESTING ==================
 
 // Endpoint to log in a user
 router.post('/login', async (req, res) => {
@@ -39,14 +52,29 @@ router.get('/update_user_session', validateToken, async (req, res) => {
     }
 });
 
+
+router.get('/cities_for_register', async (req, res) => {
+    try {
+        const cities = await StaffCitiesLogic.fetchAllCities();
+
+        const cleanedCities = await cities.map(city => {
+            const {createdAt, updatedAt, cityManagerEmail, ...cleanedCity } = city.dataValues;
+            return cleanedCity;
+        });
+        res.json(cleanedCities);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
 // Endpoint to register a new staff
 router.post('/register_staff', async (req, res) => {
-    const { staffData } = req.body;
+    const staffData = req.body;
     try {
         const createdStaff = await RegistrationLogic.registerStaff(staffData);
         res.json(createdStaff);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ error: error.message });
     }
 });
 
@@ -61,15 +89,26 @@ router.post('/reset_password', async (req, res) => {
 });
 
 // Endpoint to handle password change
-router.post('/change_password', async (req, res) => {
+router.post('/change_password', validateToken, async (req, res) => {
     try {
-        const { email, password, isStudent }  = req.body;
+        const { password, newPassword, isStudent }  = req.body;
         // Call the logic method to verify the email and token
-        await RegistrationLogic.changePassword(email, password, isStudent);
-        res.send(true);
+        await RegistrationLogic.changePassword(req.user.email, password, newPassword, isStudent);
+        res.json(true);
     } catch (error) {
-        console.error('Error verifying email:', error);
-        res.status(500).send('Internal server error.');
+        res.json({ error: error.message });
+    }
+});
+
+// Endpoint to handle edit personal details
+router.put('/edit_personal_details', validateToken, async (req, res) => {
+    try {
+        const userData  = req.body.userData;
+        // Call the logic method to verify the email and token
+        const user = await RegistrationLogic.editPersonalDetails(req.user.email, req.user.role, userData, userData.isStudent);
+        res.json(user);
+    } catch (error) {
+        res.json({ error: error.message });
     }
 });
 

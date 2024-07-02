@@ -5,16 +5,17 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
-import {fetchAllSchoolsByCityForRegister, fetchAllCities} from '../Helpers/StudentFrontLogic'
+import {fetchAllCities, registerStaff} from '../Helpers/StaffFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 
-function Register() {
+function RegisterStaff() {
     const {navigate} = useContext(DataContext);
     const [selectedCity, setSelectedCity] = useState('');
-    const [schoolsList, setSchoolsList] = useState([]);
-    const [cityList, setCityList] = useState([]);
-    const [selectedSchool, setSelectedSchool] = useState('');
+    const [selectedArea, setSelectedArea] = useState('');
+    const [areaList, setAreaList] = useState([])
+    const [cityList, setCityList] = useState([])
     const [email, setEmail] = useState('')
+    const [selectedRole, setSelectedRole] = useState('')
     const [showConfirm, setShowConfirm] = useState(false)
     const [showConfirmError, setShowConfirmError] = useState(false)
 
@@ -26,16 +27,8 @@ function Register() {
         phoneNumber: "",
         confirmPassword: "",
         gender: "",
-        parentName: "",
-        parentPhoneNumber: "",
-        city: "",
-        school: "",
-        languages: "",
-        issuesText: ""
-
     };
-    const schools = []
-    const languages = ["ערבית","ספרדית","אמהרית","רוסית"]
+
     
 
     const validationSchema = Yup.object().shape({
@@ -44,7 +37,7 @@ function Register() {
         password: Yup.string()
         .required("סיסמה נדרשת")
         .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+        /^(?=.*\d).{8,}$/,
         "סיסמה צריכה לכלול לפחות אות גדולה אחת, אות קטנה אחת, מספר אחד ולהיות באורך של 8 תווים לפחות"
         ),
         email: Yup.string().email("אימייל לא תקין").required("אימייל נדרש"),
@@ -52,30 +45,33 @@ function Register() {
         phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        gender: Yup.string().required("מין נדרש"),
-        parentName: Yup.string().required("שם הורה נדרש"),
-        parentPhoneNumber: Yup.string()
-        .required("מספר הורה נדרש")
-        .matches(/^05\d{8}$/, "מספר לא תקין"),
-        //city: Yup.string().required("עיר נדרשת"),
-        school: Yup.string().required("בית ספר נדרש"),
-        languages: Yup.string(),
+        gender: Yup.string().required("מגדר נדרש")
     });
 
-    const updateCities = async () => {
+    useEffect(() => {
+        updateCityList();
+    },[])
+
+    const updateCityList = async () => {
         const res = await fetchAllCities();
-        console.log(res);
         setCityList(res);
     }
 
-    useEffect(() => {
-        updateCities();
-    },[]);
-
-
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         data.city = selectedCity;
-        setEmail(data.email)
+        data.area = selectedArea;
+        data.role = selectedRole;
+
+        const res = await registerStaff(data);
+        if(res) {
+            setShowConfirm(true);
+        } else {
+            setShowConfirmError(true);
+        }
+        
+        // Yoav - this is the function where he submits the form. need back logic here.
+        
+       /*  setEmail(data.email)
         data.languages = [data.languages]
         axios.post("http://localhost:3001/api/auth/register_student", data)
             .then(response => {
@@ -85,21 +81,14 @@ function Register() {
             .catch(error => {
                 // If there's an error in the response, show error
                 setShowConfirmError(true);
-            });
+            }); */
     };
+
+
+
     const changeCity = async (cityName) => {
         setSelectedCity(cityName)
-    }
-
-    const handleCityChange = async (cityName) => {
-        await changeCity(cityName);
-        if (cityName !== ""){
-        const res = await fetchAllSchoolsByCityForRegister(cityName);
-        setSchoolsList(res);
-        }
-        else {
-        setSchoolsList([])
-        }
+        // Yoav - get all the areas from the city name.
     }
 
     return (
@@ -155,22 +144,20 @@ function Register() {
                     </div>
 
                     <div>
-                        <label htmlFor="parentName">שם הורה: </label>
-                        <Field id="parentName" name="parentName"  />
-                        <ErrorMessage name="parentName" component="span" />
+                      <label htmlFor="role"> תפקיד: </label>
+                      <Field as="select" id="role" name="role" value={selectedRole} onChange={(e) => {setSelectedRole(e.target.value)}} >
+                          <option value="">בחר תפקיד</option>
+                          <option value="CityManager">מנהל עיר</option>
+                          <option value="AreaManager">מנהל איזור</option>
+                          <option value="TeamOwner">חניך גרעין</option>
+                          
+                      </Field>
+                      <ErrorMessage name="role" component="span" />
                     </div>
-
-                    <div>
-                        <label htmlFor="parentPhoneNumber">מספר פלאפון הורה: </label>
-                        <Field id="parentPhoneNumber" name="parentPhoneNumber" />
-                        <ErrorMessage name="parentPhoneNumber" component="span" />
-                    </div>
-
-                
 
                     <div>
                       <label htmlFor="city"> עיר: </label>
-                      <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {handleCityChange(e.target.value)}}>
+                      <Field as="select" id="city" name="city" value={selectedCity} onChange={(e) => {changeCity(e.target.value)}} >
                           <option value="">בחר עיר</option>
                           {cityList && (
                                 <>
@@ -181,45 +168,34 @@ function Register() {
                                 ))}
                                 </>
                             )}
+                          {/* <option value="ירושלים">ירושלים</option>
+                          <option value="באר שבע">באר שבע</option> */}
                       </Field>
                       <ErrorMessage name="city" component="span" />
                     </div>
-
-                    {selectedCity && <div>
-                      <label htmlFor="school">בית ספר: </label>
-                      <Field as="select" id="school" name="school" >
-                          <option value="">בחר בית ספר</option>
-                          {schoolsList && (
+                    {(selectedCity && selectedRole === 'AreaManager')  && <div>
+                      <label htmlFor="area">  איזור: (למנהלי איזור בלבד) </label>
+                      <Field as="select" id="area" name="area" value={selectedArea} onChange={(e) => {setSelectedArea(e.target.value)}}>
+                          <option value="">בחר איזור : </option>
+                          {areaList && (
                                 <>
-                                {schoolsList.map((school) => (
-                                    <option key={school.schoolName} value={school.schoolName}>
-                                    {school.schoolName}
+                                {areaList.map((area) => (
+                                    <option key={area.areaName} value={area.areaName}>
+                                    {area.areaName}
                                     </option>
                                 ))}
                                 </>
                             )}
                       </Field>
-                      <ErrorMessage name="school" component="span" />
+                      <ErrorMessage name="area" component="span" />
                     </div>}
 
-                    <div>
-                        <label htmlFor="languages"> האם את/ה דובר/ת את אחת מהשפות הבאות? </label>
-                        <Field as="select" id="languages" name="languages">
-                            <option value="">שפות</option>
-                            {languages.map((lang) => (
-                                <option key={lang} value={lang}>{lang}</option>
-                            ))}
-                        </Field>
-                        <ErrorMessage name="languages" component="span" />
-                        </div>
-                        <div>
-                            <label htmlFor="issuesText"> עוד משהו שעלינו לדעת?  </label>
-                            <Field as="textarea" id="issuesText"  name="issuesText" />
-                            <ErrorMessage name="issuesText" component="span" />
-                        </div>
+     
                     <div className='Button-Div'>
                     <button type="submit" className='RegisterButton'>הירשם</button>
                     </div>
+
+                   
                     
                 </Form>
             </Formik>
@@ -228,7 +204,7 @@ function Register() {
         {showConfirm && (
         <ConfirmMessage
             title = {"...עוד צעד אחד קטן"}
-            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל ${email}\n`}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, נא לבדוק את הספאם ${email}\n`}
             handleConfirm={() => navigate('/')}
         />
       )}
@@ -243,4 +219,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default RegisterStaff;

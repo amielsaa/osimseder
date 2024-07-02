@@ -4,8 +4,8 @@ const URL = 'http://localhost:3001/api';
 const headers = {headers: {accessToken: localStorage.getItem('accessToken')}};
 
 
-const handleJoinGroup = (groupId, userId) => 
-    axios.post(`${URL}/student/groups/join/${groupId}`,{id:userId},{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
+const handleJoinGroup = (groupId, email) => 
+    axios.post(`${URL}/student/groups/join/${groupId}`, { id: email },{headers: {accessToken: localStorage.getItem('accessToken')}}).then((res) => {
     })   
 //Amiel handle leave group !!!
 
@@ -44,5 +44,22 @@ const fetchAllSchoolsByCityForRegister = async (cityName) => {
   }
 }
 
+const fetchAllCities = async () => {
+  const res = await axios.get(`${URL}/auth/cities_for_register`, headers)
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
+const getAllAvailableGroupsForSchool = async (schoolName) => {
+  const res = await axios.post(`${URL}/staff/groups/availableGroupsBySchool`, { schoolName: schoolName },headers);
+  if(res.data.error) {
+      alert(res.data.error);
+  } else {
+      return res.data;
+  }
+}
 
-export {fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById}
+
+export { fetchAllSchoolsByCityForRegister, handleJoinGroup, fetchAllGroupsBySchool, fetchGroupById, fetchAllCities, getAllAvailableGroupsForSchool }

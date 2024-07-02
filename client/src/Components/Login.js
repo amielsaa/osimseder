@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './css/Login.css';
@@ -95,14 +96,14 @@ const Login = () => {
           </div>
 
           <div className='login_Buttons'>
-         {/*<button type="submit" className='button-login' style={{ display: displayCode ? 'block' : 'none' }} onClick={handleRegisterStaff}>הרשם כסגל</button>*/}
+          
           <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר/י</button>
           </div>
           
 
           <div className="signup-link">
             <p>
-              {/* <a href="#" onClick={handleDisplayCode}>הרשמה לסגל</a> | */} <a href="/register">הרשמה למתנדב/ת</a>
+              <Link to={"/register"}>הרשמה למתנדב/ת</Link> |  <Link to={"/register-staff"}> הרשמה לסגל</Link>
             </p>
           </div>
         </Form>
