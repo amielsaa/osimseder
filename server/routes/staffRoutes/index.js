@@ -12,6 +12,7 @@ const schoolRouter = require('./SchoolRoute');
 const citiesRouter = require('./CitiesRoute');
 const areasRouter = require('./AreasRoute');
 const exportRouter = require('./ExportRoute');
+const imagesRouter = require('./ImagesRoute');
 
 
 router.use('/groups',groupRouter);
@@ -24,6 +25,7 @@ router.use('/cities',citiesRouter);
 router.use('/areas',areasRouter);
 
 router.use('/export',exportRouter);
+router.use('/images',imagesRouter);
 
 
 module.exports = router;
