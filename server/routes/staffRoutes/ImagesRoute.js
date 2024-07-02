@@ -54,10 +54,46 @@ router.post('/upload/:houseId', (req, res) => {
       const photo = await PhotoLogic.addPhoto(houseId, req.file.filename);
       res.json({ message: 'Photo uploaded successfully', photo });
     } catch (error) {
-    //   housesLogger.error(`Failed Adding photo to house: ${req.params.houseId}: ${error.message}`);
+      housesLogger.error(`Failed Adding photo to house: ${req.params.houseId}: ${error.message}`);
       res.json({ error: error.message });
     }
   });
 });
+
+//get all photos by houseId
+router.get('/photo/:houseId', async (req, res) => {
+    try {
+        const houseId = req.params.houseId;
+        const photos = await PhotoLogic.getPhotos(houseId);
+
+        if (!photos || photos.length === 0) {
+            return res.json({ error: 'No photos found for this house' });
+        }
+
+        const filenames = photos.map(photo => photo.photoName);
+        res.json(filenames);
+    } catch (error) {
+        housesLogger.error(`Failed to retrieve photos: ${req.params.houseId}: ${error.message}`);
+        res.json({ error: 'Failed to retrieve photos' });
+    }
+  });
+
+//get a single photo by photoName
+router.get('/photo/:filename', (req, res) => {
+    try {
+        const filename = req.params.filename;
+        const filePath = path.join(__dirname, '..', 'uploads', filename);
+        res.sendFile(filePath, err => {
+            if (err) {
+                housesLogger.error(`Failed to send file: ${filename}: ${err.message}`);
+                res.json({ error: 'Failed to send file' });
+            }
+        });
+    } catch (error) {
+        housesLogger.error(`Failed to retrieve photo: ${req.params.filename}: ${error.message}`);
+        res.json({ error: 'Failed to retrieve photo' });
+    }
+});
+  
 
 module.exports = router;
