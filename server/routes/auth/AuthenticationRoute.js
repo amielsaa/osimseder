@@ -18,6 +18,18 @@ router.post('/register_student', async (req, res) => {
     }
 });
 
+//================== VERIFY FOR TESTING ==================
+router.post('/verify', async (req, res) => {
+    const studentData = req.body.email;
+    try {
+        const createdStudent = await RegistrationLogic.instantVerifyTesting(studentData);
+        res.json(createdStudent);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+//================== VERIFY FOR TESTING ==================
+
 // Endpoint to log in a user
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
