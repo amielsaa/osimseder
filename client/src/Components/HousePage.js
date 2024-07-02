@@ -34,6 +34,7 @@ const HousePage = () => {
   const [chosenImageIndex, setChosenImageIndex] = useState('')
   const [imageList, setImageList] = useState([])
   const [showBigPicture, setShowBigPicture] = useState(false)
+  const [confirmPicturePopUp, setConfirmPicturePopUp] = useState(false)
   const [pictureToDisplay, setPictureToDisplay] = useState('')
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
@@ -157,18 +158,24 @@ const HousePage = () => {
         const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         if (validImageTypes.includes(file.type)) {
             const imageUrl = URL.createObjectURL(file);
-            //Feliks - Before you start, notice that every function that is addressed to the back is coming from the Helpers directory, set your function there
-            // and use it here, that from here whatever data you need.
-            //Feliks - right now Im just adding the img to my const list here in the front, you need to Implement a function here to take the data to the back
-            // and save it. if you want the house Id to store it for you can get it from the const id.
-            setImageList([...imageList, imageUrl]);
-            
+            setPictureToDisplay(imageUrl)
+            setConfirmPicturePopUp(true)
             console.log('Selected file:', file);
         } else {
             console.log('Please select a valid image file (png, jpeg, jpg).');
         }
     }
 };
+
+function confirmAddPicture(imageUrl) {
+   //Feliks - Before you start, notice that every function that is addressed to the back is coming from the Helpers directory, set your function there
+            // and use it here, that from here whatever data you need.
+            //Feliks - right now Im just adding the img to my const list here in the front, you need to Implement a function here to take the data to the back
+            // and save it. if you want the house Id to store it for you can get it from the const id.
+            setImageList([...imageList, imageUrl]);
+            setPictureToDisplay('')
+            setConfirmPicturePopUp(false)
+}
 
 const handleAddPictureClick = () => {
     document.getElementById('fileInput').click();
@@ -184,6 +191,9 @@ function onPictureClick(image, index) {
 
 function onClosePicturePopUp(){
   setShowBigPicture(false)
+}
+function onClosePictureConfirmation(){
+  setConfirmPicturePopUp(false)
 }
 
 const deleteImage = (image, index) => {
@@ -283,6 +293,7 @@ async function setImageRequest() {
           </div>
           {/* picture components here*/ }
           <div className="house-pictures-container">
+          {imageList.length === 0 && <div className="empty-list-text">לחץ על הוסף תמונה כדי להעלות תמונות</div>}
           {imageList.map((image, index) => (
                 <div key={index} className="picture-container" onClick={() => {onPictureClick(image,index)}}>
                     <img src={image} alt={`image-${index}`} />
@@ -299,7 +310,8 @@ async function setImageRequest() {
                 accept="image/png, image/jpeg, image/jpg"
                 onChange={handleAddPicture}
             />
-            {showBigPicture && <PicturePopUp onClose={onClosePicturePopUp} onDelete={deleteImage} index={chosenImageIndex} image={pictureToDisplay} />}
+            {showBigPicture && <PicturePopUp onClose={onClosePicturePopUp} onDelete={deleteImage} index={chosenImageIndex} image={pictureToDisplay} reason={"select"}/>}
+            {confirmPicturePopUp && <PicturePopUp onClose={onClosePictureConfirmation} onConfirm={confirmAddPicture}  image={pictureToDisplay} reason={"upload"}/>}
           {/* picture components here*/ }
          
           <div className="groups_and_teamOwners_and_houseInfo">
