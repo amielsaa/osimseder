@@ -284,10 +284,28 @@ const changeUserDetails = async (data) => {
     } 
 }
 
+const uploadImage = async (imageData) => {
+
+    const res = await axios.post(`${URL}/staff/images`, imageData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        accessToken: localStorage.getItem('accessToken')
+      }
+    });
+    if(res.data.error) {
+        alert(res.data.error);
+        return false; 
+    } else {
+        return res.data
+    }
+}
+
+    
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage
 }

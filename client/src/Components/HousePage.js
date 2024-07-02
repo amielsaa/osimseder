@@ -10,7 +10,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
+import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse, uploadImage } from '../Helpers/StaffFrontLogic';
 import PicturePopUp from "./PicturePopUp";
 
 const HousePage = () => {
@@ -32,6 +32,8 @@ const HousePage = () => {
   const [refreshPage,setRefreshPage] = useState(false)
   //image logic
   const [chosenImageIndex, setChosenImageIndex] = useState('')
+  const [chosenFile, setChosenFile] = useState(null)
+
   const [imageList, setImageList] = useState([])
   const [showBigPicture, setShowBigPicture] = useState(false)
   const [confirmPicturePopUp, setConfirmPicturePopUp] = useState(false)
@@ -157,6 +159,7 @@ const HousePage = () => {
     if (file) {
         const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         if (validImageTypes.includes(file.type)) {
+            setChosenFile(file);
             const imageUrl = URL.createObjectURL(file);
             setPictureToDisplay(imageUrl)
             setConfirmPicturePopUp(true)
@@ -167,11 +170,15 @@ const HousePage = () => {
     }
 };
 
-function confirmAddPicture(imageUrl) {
+async function confirmAddPicture(imageUrl) {
    //Feliks - Before you start, notice that every function that is addressed to the back is coming from the Helpers directory, set your function there
             // and use it here, that from here whatever data you need.
             //Feliks - right now Im just adding the img to my const list here in the front, you need to Implement a function here to take the data to the back
             // and save it. if you want the house Id to store it for you can get it from the const id.
+            const formData = new FormData();
+            formData.append('file', chosenFile);
+            console.log(formData)
+            const res = await uploadImage(formData);
             setImageList([...imageList, imageUrl]);
             setPictureToDisplay('')
             setConfirmPicturePopUp(false)
