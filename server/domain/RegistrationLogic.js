@@ -170,6 +170,25 @@ class RegistrationLogic {
             throw new Error('Failed to initiate change password proccess: ' + error);
         }
     }
+//====================================FOR TESTING ONLY====================================
+    async instantVerifyTesting(email) {
+        try {
+            const student = await Students.findOne({
+                where: { email: email }
+            });
+            
+            await student.update({
+                "verificationToken": null,
+                "isVerified": true
+            })
+            return email;
+
+        } catch (error) {
+            
+        }
+    }
+//====================================FOR TESTING ONLY====================================
+
 
 // generate a verification token for the user
     generateVerificationToken() {

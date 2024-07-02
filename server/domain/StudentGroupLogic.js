@@ -141,6 +141,11 @@ class StudentGroupLogic {
             });
 
             const students = await updatedGroup.getStudents();
+            
+            const school = await Groups.findOne({
+                where: { "schoolId": group.schoolId }
+            });
+
     
             const studentNames = students.map(student => {
                 const { firstName, lastName, ...rest } = student;
@@ -155,7 +160,7 @@ class StudentGroupLogic {
                 students: updatedGroup.dataValues.students,
                 memberCount: updatedGroup.dataValues.students.length,
                 schoolId: group.schoolId,
-                schoolName: schoolName
+                schoolName: school.schoolName
             };
 
             groupsLogger.info('Successfully joined group by groupId: ' + groupId + ' and userEmail: ' + userEmail);
