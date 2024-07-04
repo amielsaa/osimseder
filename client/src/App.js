@@ -59,7 +59,7 @@ function App() {
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
             <Route path="/authenticate-email/:token/:encryptedEmail" element={<AuthenticateEmailPage/>} />
-            <Route path="/password-change/:token/:encryptedEmail" element={<ChangePasswordPage/>} />
+            <Route path="/verify-reset-link/:token/:encryptedEmail" element={<ChangePasswordPage/>} />
             <Route path="/TaskPage/:id" element={<TaskPage />} />
             <Route path="/*" element={<ErrorPage />} /> 
           </Routes>

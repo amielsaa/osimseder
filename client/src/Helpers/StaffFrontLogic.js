@@ -273,8 +273,27 @@ const registerStaff = async (staffData) => {
     }
 }
 
-const changeUserPassword = async (data) => {
-    const res = await axios.post(`${URL}/auth/change_password`, {password:data.currentPassword, newPassword:data.newPassword, isStudent:data.isStudent}, headers);
+const changeUserPasswordInPersonal = async (data) => {
+    const res = await axios.post(`${URL}/auth/password_change_personal`, {password:data.currentPassword, newPassword:data.newPassword, isStudent:data.isStudent}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    } 
+}
+const sendResetPasswordMail = async (email) => {
+    console.log("WHAT", email)
+    const res = await axios.post(`${URL}/auth/reset_password_login`, { email: email}, headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return true;
+    } 
+}
+const changeUserPasswordExternal = async (data) => {
+    const res = await axios.post(`${URL}/auth/password_change_external`, { encryptedEmail: data.encryptedEmail, newPassword: data.newPassword }, headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;
@@ -298,5 +317,5 @@ export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwne
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, fetchAllAreasByCityRegisterStaff
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPasswordInPersonal, sendResetPasswordMail, changeUserPasswordExternal, changeUserDetails, fetchAllAreasByCityRegisterStaff
 }

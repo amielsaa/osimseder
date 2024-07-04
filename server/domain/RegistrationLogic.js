@@ -113,8 +113,7 @@ class RegistrationLogic {
                     where: { email: email }
                 });
                 await student.update({
-                    "verificationToken": verificationToken,
-                    "isVerified": false
+                    "verificationToken": verificationToken
                 })
             }
             else {
@@ -134,6 +133,7 @@ class RegistrationLogic {
         }
     }
 
+    // FROM PERSONAL PAGE
 // change the password of the user
 // Input: email - the email of the user
 //        password - the new password
@@ -141,7 +141,7 @@ class RegistrationLogic {
 // Output: the email of the user
     async changePassword(email,password,newPassword,isStudent) {
         try {
-            usersLogger.info("Initiating actual Change Password process for email: " + email + ". Is he student?" + isStudent);
+            usersLogger.info("Initiating internal Change Password process for email: " + email + ". Is he student?" + isStudent);
             argumentChecker.checkSingleArugments([email, password, isStudent], ["email", "password", "isStudent"]);
             
             var user = null
@@ -167,7 +167,48 @@ class RegistrationLogic {
                 "isVerified": true,
                 "password": hashedPassword
             })
-            usersLogger.info("Successfully initiated actual change password proccess for email: " + email);
+            usersLogger.info("Successfully initiated internal change password proccess for email: " + email);
+            return email;
+
+        } catch (error) {
+            usersLogger.error("Failed to initiate actual change password process for email: " + email + ". Reason: " + error);
+            throw new Error('Failed to initiate change password proccess: ' + error);
+        }
+    }
+
+//FROM LOGIN PAGE
+// change the password of the user after verify in mail
+// Input: email - the email of the user
+//        password - the new password
+//        isStudent - if the user is a student
+// Output: the email of the user
+    async changePasswordAfterVerify(encryptedEmail,newPassword) {
+        try {
+            usersLogger.info("Initiating external Change Password process for encrypted email: " + encryptedEmail);
+            argumentChecker.checkSingleArugments([encryptedEmail, password, isStudent], ["encryptedEmail", "password", "isStudent"]);
+
+            const email = await EmailEncryptor.decryptEmail(encryptedEmail);
+            usersLogger.info("While verifiyng email, decrypted email: " + email);
+            var user;
+            user = await Students.findOne({
+                where: { email: email }
+            });
+            if (!user) {
+                user = await Staffs.findOne({
+                    where: { email: email }
+                });
+                if (!staff) {
+                    throw new Error('No user with this email');
+                }
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            await user.update({
+                "verificationToken": null,
+                "isVerified": true,
+                "password": hashedPassword
+            })
+            usersLogger.info("Successfully initiated external change password proccess for email: " + email);
             return email;
 
         } catch (error) {

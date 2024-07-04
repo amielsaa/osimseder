@@ -80,8 +80,12 @@ router.post('/register_staff', async (req, res) => {
     }
 });
 
-router.post('/reset_password', async (req, res) => {
-    const {email} = req.body;
+router.post('/reset_password_login', async (req, res) => {
+    const { email } = req.body;
+
+    console.log("BLA")
+    console.log(email)
+
     try {
         const createdStudent = await RegistrationLogic.forgotPassword(email);
         res.json(createdStudent);
@@ -91,11 +95,24 @@ router.post('/reset_password', async (req, res) => {
 });
 
 // Endpoint to handle password change
-router.post('/change_password', validateToken, async (req, res) => {
+router.post('/password_change_personal', validateToken, async (req, res) => {
     try {
         const { password, newPassword, isStudent }  = req.body;
         // Call the logic method to verify the email and token
         await RegistrationLogic.changePassword(req.user.email, password, newPassword, isStudent);
+        res.json(true);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
+
+// Endpoint to handle password change
+router.post('/password_change_external', validateToken, async (req, res) => {
+    try {
+        const { encryptedEmail, newPassword } = req.body;
+        // Call the logic method to verify the email and token
+        await RegistrationLogic.changePasswordAfterVerify(encryptedEmail, newPassword)
         res.json(true);
     } catch (error) {
         res.json({ error: error.message });

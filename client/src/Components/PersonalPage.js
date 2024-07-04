@@ -7,7 +7,7 @@ import { useContext, useState, useEffect } from 'react';
 import Footer from './Footer';
 import { useParams } from 'react-router-dom';
 import { decryptEmail, getUserByEmail } from '../Helpers/utils';
-import {changeUserPassword,changeUserDetails} from '../Helpers/StaffFrontLogic'
+import {changeUserPasswordInPersonal,changeUserDetails} from '../Helpers/StaffFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 import PasswordChanger from './PasswordChanger';
 import EditDetailsPopUp from './EditDetailsPopUp'
@@ -73,7 +73,7 @@ const PersonalPage = () => {
   }
   async function submitPasswordChange(data) {
     data.isStudent = user.role === 'Student' ? true : false;
-    const res = await changeUserPassword(data) //  <--- create this function, ive made the template for you already.
+    const res = await changeUserPasswordInPersonal(data) //  <--- create this function, ive made the template for you already.
     closePasswordChangeWindow()
     if(res) {
       setSuccessConfirmPasswordChange(true)

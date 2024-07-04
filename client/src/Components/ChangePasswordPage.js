@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import ConfirmMessage from './ConfirmMessage';
 import PasswordChanger from './PasswordChanger';
 import DataContext from '../Helpers/DataContext';
-import {authenticateRegisterEmail} from '../Helpers/utils'
+import { authenticateChangePassword } from '../Helpers/utils'
+import { changeUserPasswordExternal } from '../Helpers/StaffFrontLogic'
+
 
 const ChangePasswordPage = () => {
     const {navigate} = useContext(DataContext)
@@ -13,17 +15,18 @@ const ChangePasswordPage = () => {
     const [showConfirmSuccess,setShowConfirmSuccess] = useState(false)
     const [showConfirmFailed,setShowConfirmFailed] = useState(false)
 
-    /* useEffect(() => {
+    useEffect(() => {
         const authenticate = async () => {
-            setResponse(await authenticateRegisterEmail(token, encryptedEmail))
+            setResponse(await authenticateChangePassword(token, encryptedEmail))
             setLoading(false)
         }
         authenticate()
-    }, [token]) */
+    }, [token]) 
 
     function submitPasswordChange(data) {
         try {
             console.log(data)
+            changeUserPasswordExternal(encryptedEmail, data.newPassword)
             setShowConfirmSuccess(true)
 
         }catch(e) {

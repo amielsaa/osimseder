@@ -9,6 +9,7 @@ import DataContext from '../Helpers/DataContext';
 import Logo from '../images/g_udi_logo.png';  // Fix the import here
 import InputConfirmationMessage from './InputConfirmationMessage';
 import ConfirmMessage from './ConfirmMessage'
+import { sendResetPasswordMail } from '../Helpers/StaffFrontLogic'
 
 
 const Login = () => {
@@ -31,19 +32,9 @@ const Login = () => {
     setShowEmailPopUp(true)
   }
   function handleChangePassword(email) {
-    try{
-     
-      console.log(email)
-       //  Yoav - you get the email here, do what you need to do in the back, and send the email to the user.
-
-
-
-
+      try {
+        sendResetPasswordMail(email)
        setShowEmailSent(true)
-
-      
-
-
     } catch (e) {
       setShowEmailFailed(true)
 

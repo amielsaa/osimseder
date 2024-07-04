@@ -212,7 +212,7 @@ function RegisterStaff() {
         {showConfirm && (
         <ConfirmMessage
             title = {"...עוד צעד אחד קטן"}
-            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, <strong>נא לבדוק את הספאם</strong> ${email}\n`}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, <strong>אם לא מוצאים את המייל, נא לבדוק את הספאם</strong> ${email}\n`}
             handleConfirm={() => navigate('/')}
         />
       )}
