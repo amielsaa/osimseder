@@ -67,13 +67,20 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
         //    houses = await StaffHouseLogic.getAllHousesOfSystem(userEmail);
         //}
         //else
-        if ((accessGroup.D.includes(userRole))) { //for city managers
+
+        if ((accessGroup.E.includes(userRole))) { //for admin
+            houses = await StaffHouseLogic.getAllHousesAdmin(userEmail);
+        }
+
+        else if ((accessGroup.D.includes(userRole))) { //for city managers
             houses = await StaffHouseLogic.getAllHousesOfCity(userEmail);
         }
 
         else if ((accessGroup.C.includes(userRole))) { //for area managers
             houses = await StaffHouseLogic.getAllHousesOfArea(userEmail);
         }
+
+        
 
         else {
             houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);

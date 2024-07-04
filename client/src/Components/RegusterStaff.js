@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import "./css/Register.css"
 import DataContext from '../Helpers/DataContext';
-import {fetchAllCities, registerStaff} from '../Helpers/StaffFrontLogic'
+import {fetchAllCities, registerStaff, fetchAllAreasByCityRegisterStaff} from '../Helpers/StaffFrontLogic'
 import ConfirmMessage from './ConfirmMessage';
 
 function RegisterStaff() {
@@ -13,6 +13,7 @@ function RegisterStaff() {
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedArea, setSelectedArea] = useState('');
     const [areaList, setAreaList] = useState([])
+    const [allAreasList, setAllAreaList] = useState({})
     const [cityList, setCityList] = useState([])
     const [email, setEmail] = useState('')
     const [selectedRole, setSelectedRole] = useState('')
@@ -50,7 +51,13 @@ function RegisterStaff() {
 
     useEffect(() => {
         updateCityList();
+        updateAllAreasList();
     },[])
+
+    const updateAllAreasList = async () => {
+        const res = await fetchAllAreasByCityRegisterStaff();
+        setAllAreaList(res);
+    }
 
     const updateCityList = async () => {
         const res = await fetchAllCities();
@@ -61,7 +68,7 @@ function RegisterStaff() {
         data.city = selectedCity;
         data.area = selectedArea;
         data.role = selectedRole;
-
+        console.log(data);
         const res = await registerStaff(data);
         if(res) {
             setShowConfirm(true);
@@ -88,6 +95,7 @@ function RegisterStaff() {
 
     const changeCity = async (cityName) => {
         setSelectedCity(cityName)
+        setAreaList(allAreasList[cityName])
         // Yoav - get all the areas from the city name.
     }
 
@@ -97,7 +105,7 @@ function RegisterStaff() {
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
                     <div className='Title-Div'>
-                    <h2>הרשמה למתנדב/ת</h2>
+                    <h2>הרשמה לסגל</h2>
                     </div>
                     <div>
                         <label htmlFor="firstName">שם פרטי:</label>
@@ -180,8 +188,8 @@ function RegisterStaff() {
                           {areaList && (
                                 <>
                                 {areaList.map((area) => (
-                                    <option key={area.areaName} value={area.areaName}>
-                                    {area.areaName}
+                                    <option key={area} value={area}>
+                                    {area}
                                     </option>
                                 ))}
                                 </>
