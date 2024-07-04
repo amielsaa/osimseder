@@ -71,6 +71,7 @@ class RegistrationLogic {
                 staffData.accesses = roleKeys.find(key => roleKeys[key] === staffData.role )
             }
 
+            // console.log(staffData);
             const createdStaff = await Staffs.create({
                 "email": staffData.email,
                 "password": hashedPassword,

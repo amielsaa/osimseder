@@ -1,5 +1,5 @@
 // Student Management
-const { Students, Staffs, Areas } = require('../models');
+const { Students, Staffs, Areas, Cities } = require('../models');
 const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
@@ -402,7 +402,7 @@ async getAreaByManager(managerEmail) {
             }
             staff.isVerified = true;
             await staff.save();
-
+            await initNewStaff(staffEmail);
             usersLogger.info('Successfully approved a staff role by manager for email: ' + staffEmail + '. Performed by email: ' + requesterEmail);
             return staff;
 
@@ -461,6 +461,44 @@ async getAreaByManager(managerEmail) {
         } catch (error) {
             usersLogger.error('Failed to handle password reset: ' + error); 
             throw new Error('Failed to handle password reset: ' + error);
+        }
+    }
+
+    async initNewStaff(staffEmail) {
+        try {
+            usersLogger.info('Assigning staff email to the city/area for email: ' + staffEmail);
+            argumentChecker.checkSingleArugments([staffEmail], ['staffEmail']);
+
+            const staff = await Staffs.findOne({
+                where: { email: staffEmail }
+            });
+            if (!staff) {
+                throw new Error('Couldn\'t find a staff with that email.');
+            }
+            
+            if(staff.accesses == 'D'){ // city manager
+                const city = await Cities.findOne({
+                    where: { id: staff.cityId }
+                });
+                if (!city) {
+                    throw new Error('Couldn\'t find a city with that id.');
+                }
+                await city.update({
+                    where: {cityManagerEmail: staff.email}
+                });
+            }
+            
+            else if(staff.accesses == 'C'){ // area manager
+
+            }
+
+
+            usersLogger.info('Successfully assigned staff email to the city/area for email: ' + staffEmail);
+            return staff;
+
+        } catch (error) {
+            usersLogger.error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
+            throw new Error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
         }
     }
 }

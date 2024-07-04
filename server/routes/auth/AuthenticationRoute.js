@@ -6,6 +6,8 @@ const { generateToken, validateToken } = require("../../utils/JsonWebToken");
 const {accessGroup, validateAccess} = require('../../utils/Accesses');
 const LoginLogic = require("../../domain/LoginLogic");
 const StaffCitiesLogic = require('../../domain/StaffCitiesLogic')
+const StaffHouseLogic = require('../../domain/StaffHouseLogic')
+
 const EmailEncryptor = require("../../domain/utils/EmailEncryptor");
 // Endpoint to register a new student
 router.post('/register_student', async (req, res) => {
@@ -133,6 +135,62 @@ router.get('/decryptEmail/:encryptedEmail', validateToken, validateAccess(access
         res.json(decryptedEmail);
     } catch (err) {
         res.status(400).json({ message: err.message });
+    }
+});
+
+router.post('/getareas', async (req, res) => {
+    try {
+        
+        const areas = await StaffHouseLogic.getAllAreasByCity();
+        const transformedAreas = Object.keys(areas).reduce((acc, key) => {
+            acc[key] = new Set(areas[key].map(item => item.areaName));
+            return acc;
+        }, {});
+        
+        // Convert Sets to Arrays for JSON serialization
+        const responseData = Object.keys(transformedAreas).reduce((acc, key) => {
+            acc[key] = Array.from(transformedAreas[key]);
+            return acc;
+        }, {});
+
+        res.json(responseData);
+
+        // returns like this:
+        /*
+        {
+            "BSV": [
+                {
+                    "id": 1,
+                    "areaName": "eastbsv",
+                    "areaManagerEmail": "amieleastbsv@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.446Z",
+                    "updatedAt": "2024-02-28T17:26:24.446Z",
+                    "cityId": 1
+                }
+            ],
+            "JRS": [
+                {
+                    "id": 2,
+                    "areaName": "eastjrs",
+                    "areaManagerEmail": "amieleastjrs@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.452Z",
+                    "updatedAt": "2024-02-28T17:26:24.452Z",
+                    "cityId": 2
+                },
+                {
+                    "id": 3,
+                    "areaName": "testbsv",
+                    "areaManagerEmail": "amieleastjrs@gmail.com",
+                    "createdAt": "2024-02-28T17:26:24.452Z",
+                    "updatedAt": "2024-02-28T17:26:24.452Z",
+                    "cityId": 2
+                }
+            ]
+        }
+        */
+        
+    } catch (err) {
+        res.json({ error: err.message });
     }
 });
 module.exports = router;
