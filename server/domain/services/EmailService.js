@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        usersLogger.info("Intiating sending verification email to: " + email);
+        usersLogger.info("Initiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
         const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         await transporter.sendMail({
@@ -27,11 +27,14 @@ class EmailService {
             subject: 'Welcome to "Osim Seder"!',
             html: `
         <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
-            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process.
+            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process. \n In case you registered as a staff memeber, you\'ll need to wait for an admin to approve you
         </p>`
-        });
-        
-        usersLogger.info("Successfully sent email to: " + email);
+            });
+
+            usersLogger.info("Successfully sent email to: " + email);
+        } catch (error) {
+            usersLogger.error("Error sending verification email to: " + email + ". Error: " + error.message);
+        }
     }
 
     async verifyEmailAndToken(encryptedEmail, token) {
