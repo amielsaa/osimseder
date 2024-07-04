@@ -139,7 +139,7 @@ class StaffGroupLogic {
             // argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
             const groups = await Groups.findAll();
-            if (!groups || groups.length === 0) {
+            if (!groups) {
                 throw new Error('Couldn\'t find groups.');
             }
 

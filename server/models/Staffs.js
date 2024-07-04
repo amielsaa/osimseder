@@ -36,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
         isVerified: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        futureAreaName: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     });
 
