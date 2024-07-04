@@ -21,7 +21,7 @@ class EmailService {
     async sendVerificationEmail(email, token) {
         usersLogger.info("Intiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        const verificationLink = `https://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         await transporter.sendMail({
             to: email,
             subject: 'Welcome to "Osim Seder"!',
@@ -52,9 +52,10 @@ class EmailService {
                 if (!staff) {
                     throw new Error('No user with this email');
                 }
+                console.log(staff);
                 let isStudent = false;
                 const staffToken = staff.verificationToken;
-                if (studentToken == null) {
+                if (staffToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {

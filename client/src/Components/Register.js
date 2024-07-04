@@ -64,7 +64,7 @@ function Register() {
 
     const updateCities = async () => {
         const res = await fetchAllCities();
-        console.log(res);
+        // console.log(res);
         setCityList(res);
     }
 
