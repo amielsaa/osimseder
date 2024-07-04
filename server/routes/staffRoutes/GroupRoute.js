@@ -117,6 +117,7 @@ router.post('/emptygroups', validateToken, validateAccess(accessGroup.C), async 
 // Get all groups related to current staff user (GET)
 router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (req, res) => {
     try {
+        console.log(req.user);
         const userEmail = req.user.email;
 
         // Implementation One:
@@ -131,7 +132,11 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
         const userRole = req.user.role;
         let groups = [];
 
-        if(accessGroup.D.includes(userRole) || (accessGroup.C.includes(userRole))){
+        if ((accessGroup.E.includes(userRole))) { //for admin
+            groups = await staffGroupLogic.getAllGroupsAdmin(userEmail);
+        }
+
+        else if(accessGroup.D.includes(userRole) || (accessGroup.C.includes(userRole))){
             groups = await staffGroupLogic.getGroupsByCityManager(userEmail);
         }
 
@@ -143,9 +148,7 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
             groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
         }
 
-        else if ((accessGroup.E.includes(userRole))) { //for admin
-            groups = await staffGroupLogic.getAllGroupsAdmin(userEmail);
-        }
+        
         else {
             res.json({error: "You don't have the permission to perform this action!"});
         }

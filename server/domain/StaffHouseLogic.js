@@ -154,7 +154,7 @@ class StaffHouseLogic {
             }
 
             // Sort houses by id
-            houses.sort((a, b) => a.id - b.id);
+            // houses.sort((a, b) => a.id - b.id);
 
 
             housesLogger.debug("Successfully got all houses of admin");

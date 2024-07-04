@@ -67,7 +67,12 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
         //    houses = await StaffHouseLogic.getAllHousesOfSystem(userEmail);
         //}
         //else
-        if ((accessGroup.D.includes(userRole))) { //for city managers
+
+        if ((accessGroup.E.includes(userRole))) { //for admin
+            houses = await StaffHouseLogic.getAllHousesAdmin(userEmail);
+        }
+
+        else if ((accessGroup.D.includes(userRole))) { //for city managers
             houses = await StaffHouseLogic.getAllHousesOfCity(userEmail);
         }
 
@@ -75,9 +80,7 @@ router.get('/', validateToken, validateAccess(accessGroup.B), async (req, res) =
             houses = await StaffHouseLogic.getAllHousesOfArea(userEmail);
         }
 
-        else if ((accessGroup.E.includes(userRole))) { //for admin
-            houses = await StaffHouseLogic.getAllHousesAdmin(userEmail);
-        }
+        
 
         else {
             houses = await StaffHouseLogic.getAllHousesOfTeamOwner(userEmail);
