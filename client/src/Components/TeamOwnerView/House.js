@@ -44,9 +44,10 @@ const House = ({ id, landlordName, address, deleteHouseFromList}) => {
           <p> דייר/ת: {landlordName}</p>
           <p>כתובת: {address}</p>
         </div>
-        
+        <div className='houses-house-buttons-container'>
         <button className='watch-house-btn' onClick={() => {setSelectedHouse(id)}}>צפה</button>
         <button className='remove-house-btn' onClick={() => {toggleStatus(id)}}>הסר</button>
+        </div>
         {(user.role === 'CityManager' || user.role === 'AreaManager'  ) && showConfirmationDelete && (
         <ConfirmationMessage confirmationMessage={`האם אתה בטוח שברצונך למחוק את בית מספר ${selectedHouseForDelete}?`}
                               handleConfirmation={handleConfirmationDelete}
