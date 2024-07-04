@@ -13,7 +13,7 @@ class StaffCitiesLogic {
             adminLogger.info("Initiating Create City: " + cityName);
             argumentChecker.checkSingleArugments([cityName], ["cityName"]);
 
-            const city = await Cities.create({cityName: cityName, cityManagerEmail: "none@gmail.com"});
+            const city = await Cities.create({cityName: cityName, cityManagerEmail: "none"});
             if (!city) {
                 throw new Error('Couldn\'t create a city.');
             }
