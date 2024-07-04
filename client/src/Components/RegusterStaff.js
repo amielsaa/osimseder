@@ -45,7 +45,7 @@ function RegisterStaff() {
         phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        gender: Yup.string().required("מגדר נדרש")
+        gender: Yup.string().required("מין נדרש")
     });
 
     useEffect(() => {
@@ -204,7 +204,7 @@ function RegisterStaff() {
         {showConfirm && (
         <ConfirmMessage
             title = {"...עוד צעד אחד קטן"}
-            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, נא לבדוק את הספאם ${email}\n`}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, <strong>נא לבדוק את הספאם</strong> ${email}\n`}
             handleConfirm={() => navigate('/')}
         />
       )}

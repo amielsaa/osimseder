@@ -1,25 +1,22 @@
-const { selectors, urls, loginDetails } = require('../support/constants');
+﻿const { selectors, urls, loginDetails } = require('../support/constants');
 const puppeteer = require('puppeteer');
 
-describe('Volunteer Join Group', () => {
+// BEFORE ALL - VERIFY STUDENT1 isnt in any group
+describe('Volunteer Group Management', () => {
     let browser;
     let page;
 
     beforeAll(async () => {
-        const screenWidth = 1620; // Your screen width
-        const screenHeight = 980; // Your screen height
-
         browser = await puppeteer.launch({
             headless: false,
-            slowMo: 80,
+            slowMo: 50,
             args: [
-                `--window-size=${screenWidth / 2},${screenHeight}`,
-                `--window-position=0,0`
-            ],
+                '--window-size=1620,980',
+                '--window-position=0,0'
+            ]
         });
-
         page = await browser.newPage();
-        await page.setViewport({ width: screenWidth / 2, height: screenHeight });
+        await page.setViewport({ width: 810, height: 980 });
     });
 
     afterAll(async () => {
@@ -28,20 +25,13 @@ describe('Volunteer Join Group', () => {
 
     beforeEach(async () => {
         await page.goto(urls.loginPage);
-        await page.waitForSelector(selectors.login.emailInput);
-        await page.type(selectors.login.emailInput, loginDetails.validVolunteer.email);
-        await page.type(selectors.login.passwordInput, loginDetails.validVolunteer.password);
-        await page.locator(selectors.login.loginButton).click();
-
+        await page.type(selectors.volunteer.login.emailInput, loginDetails.validVolunteer.email);
+        await page.type(selectors.volunteer.login.passwordInput, loginDetails.validVolunteer.password);
+        await page.locator(selectors.volunteer.login.loginButton).click();
         await page.waitForNavigation();
-        expect(page.url()).toBe(urls.home);
-
-        await page.locator(selectors.tabs.burgerMenu).click();
-
-        await page.locator(selectors.tabs.volunteer.groups).click();
-
+        await page.locator(selectors.volunteer.tabs.burgerMenu).click();
+        await page.locator(selectors.volunteer.tabs.volunteer.groups).click();
         await page.waitForNavigation();
-        expect(page.url()).toBe(urls.allGroups);
     });
 
     afterEach(async () => {
@@ -49,21 +39,38 @@ describe('Volunteer Join Group', () => {
         page = await browser.newPage();
     });
 
-    it('should insert the volunteer to a group if there is space', async () => {
-        // Click the first group from the list
-        await page.waitForSelector(selectors.group.joinGroupButton);
-        await page.click(selectors.group.joinGroupButton);
-        await page.waitForSelector('.confirmation-message'); // Adjust this selector based on actual confirmation message element
-        const confirmationMessage = await page.$eval('.confirmation-message', el => el.textContent);
-        expect(confirmationMessage).toContain('You have successfully joined the group');
-    }, 60000);
-    //
-    //it('should not insert the volunteer to a group if there is no space', async () => {
-    //    // Simulate no space scenario (this might require setting up test data for no space in a group)
-    //    await page.waitForSelector(selectors.group.joinGroupButton);
-    //    await page.click(selectors.group.joinGroupButton);
-    //    await page.waitForSelector('.error-message'); // Adjust this selector based on actual error message element
-    //    const errorMessage = await page.$eval('.error-message', el => el.textContent);
-    //    expect(errorMessage).toContain('No space available in the group');
-    //}, 60000);
+    
+    it('should not see group 3', async () => {
+        const group3Exists = await page.$(selectors.volunteer.groups.joinGroup3Button_invalid) !== null;
+        expect(group3Exists).toBe(false);
+    });
+
+    it('should join group 1 successfully', async () => {
+        await page.locator(selectors.volunteer.groups.joinGroup1Button).click();
+        await page.locator(selectors.volunteer.groups.verifyJoinGroupButton).click();
+        // Verify the user is now in group 1
+        await page.waitForNavigation();
+        expect(page.url()).toBe(urls.group1Page);
+    });
+    
+
+    it('should see group 1 house', async () => {
+        await page.locator(selectors.volunteer.tabs.burgerMenu).click();
+        await page.locator(selectors.volunteer.tabs.volunteer.myGroup).click();
+        // Verify the user is now in group 1
+        await page.waitForNavigation();
+        expect(page.url()).toBe(urls.group1Page);
+        await page.click(selectors.volunteer.myGroup.navigateToHouse1);
+
+        await page.waitForNavigation();
+        expect(page.url()).toBe(urls.house1Page);
+    });
+    
+    it('should not join group 2 as it is full', async () => {
+        await page.locator(selectors.volunteer.groups.joinGroup2Button).click();
+        await page.locator(selectors.volunteer.groups.verifyJoinGroupButton).click();
+        // Verify the user is now in group 1
+        expect(page.url()).toBe(urls.allGroups);
+    });
+
 });

@@ -38,9 +38,9 @@ describe('User Login', () => {
         });
 
         // Perform login action with invalid credentials
-        await page.type(selectors.login.emailInput, 'invalid@example.com');
-        await page.type(selectors.login.passwordInput, 'invalidpassword');
-        await page.click(selectors.login.loginButton);
+        await page.type(selectors.volunteer.login.emailInput, 'invalid@example.com');
+        await page.type(selectors.volunteer.login.passwordInput, 'invalidpassword');
+        await page.click(selectors.volunteer.login.loginButton);
 
         // Wait for a short period to ensure the dialog is triggered
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -53,18 +53,18 @@ describe('User Login', () => {
 
     it('should show error messages for invalid email, missing email, and missing password', async () => {
         // 1. Enter empty email and empty password
-        await page.click(selectors.login.emailInput);
-        await page.click(selectors.login.passwordInput);
-        await page.click(selectors.login.emailInput);
+        await page.click(selectors.volunteer.login.emailInput);
+        await page.click(selectors.volunteer.login.passwordInput);
+        await page.click(selectors.volunteer.login.emailInput);
 
         // Wait for and check the missing email error message
-        await page.waitForSelector('input[name="email"] ~ .error-message');
-        let emailErrorMessage = await page.$eval('input[name="email"] ~ .error-message', el => el.textContent);
+        await page.waitForSelector(`${selectors.volunteer.login.emailInput} ~ ${fieldErrorMessage}`);
+        let emailErrorMessage = await page.$eval(`${selectors.volunteer.login.emailInput} ~ ${fieldErrorMessage}`, el => el.textContent);
         expect(emailErrorMessage).toBe('אימייל נדרש');
 
         // Wait for and check the missing password error message
-        await page.waitForSelector('input[name="password"] ~ .error-message');
-        let passwordErrorMessage = await page.$eval('input[name="password"] ~ .error-message', el => el.textContent);
+        await page.waitForSelector(`${selectors.volunteer.login.passwordInput} ~ ${fieldErrorMessage}`);
+        let passwordErrorMessage = await page.$eval(`${selectors.volunteer.login.passwordInput} ~ ${fieldErrorMessage}`, el => el.textContent);
         expect(passwordErrorMessage).toBe('סיסמה נדרשת');
 
         // 2. Write invalid email to trigger the email error
@@ -72,14 +72,14 @@ describe('User Login', () => {
         await page.click('body'); // Click elsewhere on the screen to trigger validation
 
         // Wait for and check the invalid email error message
-        await page.waitForSelector('input[name="email"] ~ .error-message');
-        emailErrorMessage = await page.$eval('input[name="email"] ~ .error-message', el => el.textContent);
+        await page.waitForSelector(`${selectors.volunteer.login.emailInput} ~ ${fieldErrorMessage}`);
+        emailErrorMessage = await page.$eval(`${selectors.volunteer.login.emailInput} ~ ${fieldErrorMessage}`, el => el.textContent);
         expect(emailErrorMessage).toBe('אימייל לא תקין');
     }, 60000); // Increase timeout to 60 seconds for this test
 
 
     it('should redirect to the signup page when the signup link is clicked', async () => {
-        await page.click(selectors.login.signupLink);
+        await page.locator(selectors.volunteer.login.signupLink).click();
         await page.waitForNavigation();
         expect(page.url()).toBe(urls.signup);
     });
@@ -95,14 +95,14 @@ describe('User Login', () => {
             await page.goto(urls.loginPage);
 
             // Wait for the email input to be visible
-            await page.waitForSelector(selectors.login.emailInput);
+            await page.waitForSelector(selectors.volunteer.login.emailInput);
 
             // Type in the email and password
-            await page.type(selectors.login.emailInput, credentials.email);
-            await page.type(selectors.login.passwordInput, credentials.password);
+            await page.type(selectors.volunteer.login.emailInput, credentials.email);
+            await page.type(selectors.volunteer.login.passwordInput, credentials.password);
 
             // Click the login button
-            await page.click(selectors.login.loginButton);
+            await page.click(selectors.volunteer.login.loginButton);
 
             // Wait for navigation to the home page
             await page.waitForNavigation();

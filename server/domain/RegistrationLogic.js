@@ -121,8 +121,7 @@ class RegistrationLogic {
                     where: { email: email }
                 });
                 await staff.update({
-                    "verificationToken": verificationToken,
-                    "isVerified": false
+                    "verificationToken": verificationToken
                 })
             }
             usersLogger.info("Successfully initiated forgot password proccess for email: " + email);
