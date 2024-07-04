@@ -133,6 +133,69 @@ class StaffGroupLogic {
         }
     }
 
+    async getAllGroupsAdmin(userEmail) {
+        try {
+            groupsLogger.debug("Initiating Get Groups by admin: " + userEmail);
+            // argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
+
+            const groups = await Groups.findAll();
+            if (!groups || groups.length === 0) {
+                throw new Error('Couldn\'t find groups.');
+            }
+
+            // console.log(houses)
+
+            // let groups = [];
+            // for (let i = 0; i < houses.length; i++) {
+            //     const house = houses[i];
+            //     const houseGroups = await house.getGroups();
+
+            //     if (houseGroups && houseGroups.length > 0) {
+            //         groups.push(...houseGroups);
+            //     }
+            // }
+            // if (!groups || groups.length === 0) {
+            //     // throw new Error('Couldn\'t find groups by the houses.');
+            //     return {};
+            // }
+            // console.log(groups)
+
+            // for (let i = 0; i < groups.length; i++) {
+            //     const group = groups[i];
+
+            //     const students = await group.getStudents();
+
+            //     const studentNames = students.map(student => {
+            //         const { firstName, lastName, ...rest } = student;
+            //         return `${firstName} ${lastName}`;
+            //     });
+
+            //     group.dataValues.students = studentNames;
+            // }
+
+            // const responseData = await Promise.all(groups.map(async group => {
+            //     const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+            //     return {
+            //         id: group.id,
+            //         students: group.dataValues.students,
+            //         memberCount: group.dataValues.students.length,
+            //         capacity: group.capacity,
+            //         schoolId: group.schoolId,
+            //         schoolName: schoolName
+            //     };
+            // }));
+            // // Sort responseData by id
+            // responseData.sort((a, b) => a.id - b.id);
+
+            groupsLogger.debug("Successfully got groups by admin for email: " + userEmail);
+            // return responseData;
+            return groups;
+        } catch (error) {
+            groupsLogger.error("Failed to get groups by admin for email: " + userEmail + ". Reason: " + error);
+            throw new Error('Failed to find an area by admin: ' + error);
+        }
+    }
+
 
     // get all groups related to city manager
     // Input: cityManagerEmail - the email of the city manager
