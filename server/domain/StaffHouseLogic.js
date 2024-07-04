@@ -144,6 +144,28 @@ class StaffHouseLogic {
         }
     }
 
+    async getAllHousesAdmin(userEmail) {
+        try {
+            housesLogger.debug("Initiate get all houses for admin: " + userEmail);
+
+            const houses = await Houses.findAll();
+            if(!houses){
+                throw new Error('Couldn\'t find houses.');
+            }
+
+            // Sort houses by id
+            houses.sort((a, b) => a.id - b.id);
+
+
+            housesLogger.debug("Successfully got all houses of admin");
+            return houses;
+
+        } catch (error) {
+            housesLogger.error("Failed to get all houses of admin: " + userEmail+  ". Reason: " + error);
+            throw new Error('Failed to get all houses of admin: ' + error);
+        }
+    }
+
  // Get all houses of teamOwner
  // Input: userEmail - the email of the user requesting the houses
  // Output: an array of all houses

@@ -143,6 +143,9 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
             groups = await staffGroupLogic.getGroupsByTeamOwner(userEmail);
         }
 
+        else if ((accessGroup.E.includes(userRole))) { //for admin
+            groups = await staffGroupLogic.getAllGroupsAdmin(userEmail);
+        }
         else {
             res.json({error: "You don't have the permission to perform this action!"});
         }
