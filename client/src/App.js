@@ -26,6 +26,7 @@ import StaffIndex from './Components/StaffIndex.js';
 import LocationIndex from './Components/LocationIndex.js';
 import ExportData from './Components/ExportData.js';
 import RegisterStaff from './Components/RegusterStaff.js';
+import ChangePasswordPage from './Components/ChangePasswordPage.js';
 
 
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
             <Route path="/authenticate-email/:token/:encryptedEmail" element={<AuthenticateEmailPage/>} />
+            <Route path="/password-change/:token/:encryptedEmail" element={<ChangePasswordPage/>} />
             <Route path="/TaskPage/:id" element={<TaskPage />} />
             <Route path="/*" element={<ErrorPage />} /> 
           </Routes>

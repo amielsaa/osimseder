@@ -21,7 +21,7 @@ class EmailService {
     async sendVerificationEmail(email, token) {
         usersLogger.info("Intiating sending verification email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-        const verificationLink = `https://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
         await transporter.sendMail({
             to: email,
             subject: 'Welcome to "Osim Seder"!',

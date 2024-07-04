@@ -183,7 +183,7 @@ const PersonalPage = () => {
 
 
       { showPasswordChangePopUp &&
-       <PasswordChanger onClose={() => setShowPasswordChangePopUp(false)} onSubmit={submitPasswordChange}/>
+       <PasswordChanger onClose={() => setShowPasswordChangePopUp(false)} onSubmit={submitPasswordChange} fromLoginPage={false}/>
       }
       {errorConfirmPasswordChange && (
         <ConfirmMessage

@@ -4,27 +4,29 @@ import * as Yup from 'yup';
 import './css/PasswordChanger.css';
 
 // Validation schema
-const validationSchema = Yup.object({
-  currentPassword: Yup.string().required('שדה נדרש'),
-  newPassword: Yup.string()
-  .min(8, 'הסיסמה חייבת להכיל לפחות 8 תווים')
-  .matches(/[a-z]/, 'הסיסמה חייבת להכיל לפחות אות אחת קטנה')
-  .matches(/[A-Z]/, 'הסיסמה חייבת להכיל לפחות אות אחד גדולה')
-  .matches(/\d/, 'הסיסמה חייבת להכיל מספר')
-  .required('שדה נדרש'),
-  confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'הסיסמאות חייבות להיות תואמות').required('שדה נדרש'),
-});
 
 
 
-const PasswordChanger = ({ onClose, onSubmit }) => {
 
+const PasswordChanger = ({ onClose, onSubmit, fromLoginPage }) => {
+
+
+  const validationSchema = Yup.object({
+    currentPassword: fromLoginPage ? Yup.string()  : Yup.string().required('שדה נדרש'),
+    newPassword: Yup.string()
+    .min(8, 'הסיסמה חייבת להכיל לפחות 8 תווים')
+    .matches(/[a-z]/, 'הסיסמה חייבת להכיל לפחות אות אחת קטנה')
+    .matches(/[A-Z]/, 'הסיסמה חייבת להכיל לפחות אות אחד גדולה')
+    .matches(/\d/, 'הסיסמה חייבת להכיל מספר')
+    .required('שדה נדרש'),
+    confirmNewPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'הסיסמאות חייבות להיות תואמות').required('שדה נדרש'),
+  });
   
   
   return (
     <div className="overlay-password-changer">
       <div className="confirmation-modal-password-changer">
-        <button className="close-button" onClick={onClose}>X</button>
+        {!fromLoginPage && <button className="close-button" onClick={onClose}>X</button>}
         <h2>שינוי סיסמה</h2>
         <Formik
           initialValues={{ currentPassword: '', newPassword: '', confirmNewPassword: '' }}
@@ -32,11 +34,11 @@ const PasswordChanger = ({ onClose, onSubmit }) => {
           onSubmit={onSubmit}
         >
           <Form>
-            <div>
+            {!fromLoginPage && <div>
               <label htmlFor="currentPassword">סיסמה נוכחית</label>
               <Field name="currentPassword" type="password" />
               <ErrorMessage name="currentPassword" component="div" />
-            </div>
+            </div>}
             <div>
               <label htmlFor="newPassword">סיסמה חדשה</label>
               <Field name="newPassword" type="password" />
