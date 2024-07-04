@@ -35,6 +35,8 @@ class PhotoLogic {
             where: {photoName: photoName},
         });
 
+        //TODO: delete photo file from server
+
         housesLogger.debug('Successfully Removing photo to house: ' + photoName);
         return { success: true, message: 'Photo removed successfully' };
     } catch (error) {
