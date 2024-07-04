@@ -241,6 +241,53 @@ class UserManagementLogic {
             if (!staff) {
                 throw new Error('Staff not found');
             }
+
+            // Remove this mail from groups/areas/cities
+            if (staff.accesses === 'B'){
+                let groups = await Houses.findAll({
+                    where: { "teamOwnerEmail": staff.email }
+                });
+                for (let i = 0; i < groups.length; i++) {
+                    const group = groups[i];
+                    await group.update({
+                        "teamOwnerEmail": "none"
+                    });
+                }
+                // ----------------------------------------
+                groups = await Houses.findAll({
+                    where: { "teamOwnerEmail_2": staff.email }
+                });
+                for (let i = 0; i < groups.length; i++) {
+                    const group = groups[i];
+                    await group.update({
+                        "teamOwnerEmail_2": "none"
+                    });
+                }
+            }
+            else if (staff.accesses === 'C'){
+                let areas = await Areas.findAll({
+                    where: { "areaManagerEmail": staff.email }
+                });
+                for (let i = 0; i < areas.length; i++) {
+                    const area = areas[i];
+                    await area.update({
+                        "areaManagerEmail": "none"
+                    });
+                }
+            }
+            else if (staff.accesses === 'D'){
+                let cities = await Cities.findAll({
+                    where: { "cityManagerEmail": staff.email }
+                });
+                for (let i = 0; i < cities.length; i++) {
+                    const city = cities[i];
+                    await city.update({
+                        "cityManagerEmail": "none"
+                    });
+                }
+            }
+
+
             await staff.destroy();
             usersLogger.info('Successfully deleted staff with email: ' + staffEmail + ". Requester email: " + requesterEmail);
 
