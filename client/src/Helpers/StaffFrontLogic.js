@@ -88,6 +88,15 @@ const fetchAllAreasByCity = async (city) => {
     }
 }
 
+const fetchAllAreasByCityRegisterStaff = async (city) => {
+    const res = await axios.post(`${URL}/auth/getareas`,{},headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
 const addTask = async (data) => {
     const res = await axios.post(`${URL}/staff/tasks/`,data, headers);
     if(res.data.error) {
@@ -327,5 +336,5 @@ export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwne
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage, fetchAllImagesByHouse, URL, deletePhoto
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage, fetchAllImagesByHouse, URL, deletePhoto, fetchAllAreasByCityRegisterStaff
 }

@@ -17,7 +17,7 @@ class StaffAreasLogic {
 
             const area = await Areas.create({areaName: areaName,
                                              cityId: cityId,
-                                             areaManagerEmail: "none@gmail.com"});
+                                             areaManagerEmail: "none"});
             if (!area) {
                 throw new Error('Couldn\'t create a area.');
             }

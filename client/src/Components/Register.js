@@ -52,7 +52,7 @@ function Register() {
         phoneNumber: Yup.string()
         .required("מספר נייד נדרש")
         .matches(/^05\d{8}$/, "מספר לא תקין"),
-        gender: Yup.string().required("מגדר נדרש"),
+        gender: Yup.string().required("מין נדרש"),
         parentName: Yup.string().required("שם הורה נדרש"),
         parentPhoneNumber: Yup.string()
         .required("מספר הורה נדרש")
@@ -64,7 +64,7 @@ function Register() {
 
     const updateCities = async () => {
         const res = await fetchAllCities();
-        console.log(res);
+        // console.log(res);
         setCityList(res);
     }
 
