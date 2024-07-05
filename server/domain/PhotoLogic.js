@@ -1,6 +1,8 @@
 const { Photos } = require('../models');
 const { housesLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
+const path = require('path');
+const fs = require('fs');
 
 class PhotoLogic {
   async addPhoto(houseId, photoName) {
@@ -10,14 +12,13 @@ class PhotoLogic {
 
       const photo = await Photos.create({
         photoName: photoName,
-        // photoPath: '../uploads/' + photoName,
+        photoPath: '/uploads/' + photoName,
         houseId: houseId,
       });
 
       if (!photo) {
         throw new Error('Photo not created');
       }
-
       housesLogger.debug('Successfully added photo to house: ' + houseId);
       return photo;
     } catch (error) {
@@ -35,7 +36,15 @@ class PhotoLogic {
             where: {photoName: photoName},
         });
 
-        //TODO: delete photo file from server
+        const filePath = path.join(__dirname, '../uploads/', photoName);
+        
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            housesLogger.error(`Failed to delete file: ${photoName}: ${err.message}`);
+            throw new Error(error)
+          }
+        });
+
 
         housesLogger.debug('Successfully Removing photo to house: ' + photoName);
         return { success: true, message: 'Photo removed successfully' };
@@ -53,10 +62,6 @@ class PhotoLogic {
       const photos = await Photos.findAll({
         where: { houseId: houseId }
       });
-
-      if (!photos) {
-        throw new Error('Photos not found');
-      }
 
       housesLogger.debug('Successfully Getting photos of house: ' + houseId);
       return photos;

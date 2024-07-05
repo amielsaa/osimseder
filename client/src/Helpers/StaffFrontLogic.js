@@ -300,6 +300,26 @@ const uploadImage = async (imageData, houseId) => {
     }
 }
 
+const fetchAllImagesByHouse = async (houseId) => {
+    const res = await axios.get(`${URL}/staff/images/photo/${houseId}` ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
+const deletePhoto = async (photoName) => {
+    const res = await axios.delete(`${URL}/staff/images/photo/${photoName}` ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
     
 
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
@@ -307,5 +327,5 @@ export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwne
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage, fetchAllImagesByHouse, URL, deletePhoto
 }

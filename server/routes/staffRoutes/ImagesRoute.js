@@ -4,6 +4,8 @@ const multer = require('multer');
 const path = require('path');
 const PhotoLogic = require('../../domain/PhotoLogic'); 
 const {housesLogger} = require('../../utils/Logger');
+const { validateToken } = require('../../utils/JsonWebToken');
+const { validateAccess , accessGroup} = require('../../utils/Accesses');
 
 // Set up storage engine
 const storage = multer.diskStorage({
@@ -40,7 +42,7 @@ function checkFileType(file, cb) {
 }
 
 // Route handler for uploading photo
-router.post('/upload/:houseId', (req, res) => {
+router.post('/upload/:houseId',validateToken, validateAccess(accessGroup.B), (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
       return res.json({ error: err.message });
@@ -66,12 +68,7 @@ router.get('/photo/:houseId', async (req, res) => {
         const houseId = req.params.houseId;
         const photos = await PhotoLogic.getPhotos(houseId);
 
-        if (!photos || photos.length === 0) {
-            return res.json({ error: 'No photos found for this house' });
-        }
-
-        const filenames = photos.map(photo => photo.photoName);
-        res.json(filenames);
+        res.json(photos);
     } catch (error) {
         housesLogger.error(`Failed to retrieve photos: ${req.params.houseId}: ${error.message}`);
         res.json({ error: 'Failed to retrieve photos' });
@@ -93,6 +90,20 @@ router.get('/photo/:filename', (req, res) => {
         housesLogger.error(`Failed to retrieve photo: ${req.params.filename}: ${error.message}`);
         res.json({ error: 'Failed to retrieve photo' });
     }
+});
+
+router.delete('/photo/:filename', validateToken, validateAccess(accessGroup.B), async (req, res) => {
+  try {
+    const filename = req.params.filename;
+
+    // Delete the photo record from the database
+    await PhotoLogic.removePhoto(filename);
+
+    res.json(true)
+  } catch (error) {
+    housesLogger.error(`Failed to delete photo: ${req.params.filename}: ${error.message}`);
+    res.json({ error: 'Failed to delete photo' + error });
+  }
 });
   
 
