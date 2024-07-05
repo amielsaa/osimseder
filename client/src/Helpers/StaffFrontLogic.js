@@ -293,10 +293,48 @@ const changeUserDetails = async (data) => {
     } 
 }
 
+const uploadImage = async (imageData, houseId) => {
+
+    const res = await axios.post(`${URL}/staff/images/upload/${houseId}`, imageData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        accessToken: localStorage.getItem('accessToken')
+      }
+    });
+    if(res.data.error) {
+        alert(res.data.error);
+        return false; 
+    } else {
+        return res.data
+    }
+}
+
+const fetchAllImagesByHouse = async (houseId) => {
+    const res = await axios.get(`${URL}/staff/images/photo/${houseId}` ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
+const deletePhoto = async (photoName) => {
+    const res = await axios.delete(`${URL}/staff/images/photo/${photoName}` ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+        return false;
+    } else {
+        return res.data;
+    } 
+}
+
+    
+
 export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, updateHouse, removeGroupMember, getGroupById,
      updateTaskStatus, removeGroupByHouse, fetchGroupsForHouse,
       fetchAllAreasByCity, assignGroupToHouse, getAllGroupsWithoutHouse,
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
-    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, fetchAllAreasByCityRegisterStaff
+    , addGroupMember, fetchAllCities, registerStaff, changeUserPassword, changeUserDetails, uploadImage, fetchAllImagesByHouse, URL, deletePhoto, fetchAllAreasByCityRegisterStaff
 }
