@@ -184,7 +184,7 @@ const StaffIndex = () => {
     if (filterType === 'firstName') {
       return user.firstName.includes(filter);
     } else if (filterType === 'accesses') {
-      return user.accesses.includes(filter);
+      return accessToRoleName(user.accesses).includes(filter);
     } else if (filterType === 'cityId') {
       return user.cityId.includes(filter);
     }
