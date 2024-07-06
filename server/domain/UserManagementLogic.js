@@ -1,5 +1,6 @@
 // Student Management
-const { Students, Staffs, Areas, Cities } = require('../models');
+const { Op } = require('sequelize');
+const { Students, Staffs, Areas, Cities, Houses } = require('../models');
 const bcrypt = require('bcrypt');
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
 const EmailService = require('./services/EmailService');
@@ -91,7 +92,9 @@ class UserManagementLogic {
             }
             
             const staffs = await Staffs.findAll({
-                where: whereClause,
+                where: {accesses: {
+                    [Op.not]: 'E' // Exclude staff with access = 'E'
+                }},
                 order: [
                     ['firstName', 'ASC'], // Sort by first name in ascending order
                     ['lastName', 'ASC']   // Then sort by last name in ascending order
@@ -241,9 +244,11 @@ class UserManagementLogic {
             if (!staff) {
                 throw new Error('Staff not found');
             }
-
+            if(staff.accesses === 'E') {
+                throw new Error('Unable to delete a admin account')
+            }
             // Remove this mail from groups/areas/cities
-            if (staff.accesses === 'B'){
+            else if (staff.accesses === 'B'){
                 let groups = await Houses.findAll({
                     where: { "teamOwnerEmail": staff.email }
                 });

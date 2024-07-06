@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/UsersIndex.css';
-
+import {accessToRoleName} from '../Helpers/UserTabLogic'
 const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, onApproveStaffMember }) => {
 
 
@@ -25,7 +25,7 @@ const StaffTable = ({ users, prepareJoinGroupAction, prepareDeleteStaffAction, o
             <tr key={index}>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
-              <td>{user.accesses}</td>   
+              <td>{accessToRoleName(user.accesses)}</td>   
               <td>{user.phoneNumber}</td>
               <td>{user.cityName}</td>
               <td>{user.areaName}</td>
