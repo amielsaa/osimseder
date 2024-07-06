@@ -8,6 +8,7 @@ const { usersLogger } = require('../utils/Logger');
 const argumentChecker = require('./utils/ArgumentChecker');
 const Accesses = require('../utils/Accesses')
 const { formatStaffValues, formatStudentValues } = require('./utils/JsonValueAdder')
+const EmailEncryptor = require('./utils/EmailEncryptor');
 
 class RegistrationLogic {
 
@@ -185,8 +186,7 @@ class RegistrationLogic {
     async changePasswordAfterVerify(encryptedEmail,newPassword) {
         try {
             usersLogger.info("Initiating external Change Password process for encrypted email: " + encryptedEmail);
-            argumentChecker.checkSingleArugments([encryptedEmail, password, isStudent], ["encryptedEmail", "password", "isStudent"]);
-
+            //argumentChecker.checkSingleArugments([encryptedEmail, password, isStudent], ["encryptedEmail", "password", "isStudent"]);
             const email = await EmailEncryptor.decryptEmail(encryptedEmail);
             usersLogger.info("While verifiyng email, decrypted email: " + email);
             var user;

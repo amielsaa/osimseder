@@ -292,8 +292,8 @@ const sendResetPasswordMail = async (email) => {
         return true;
     } 
 }
-const changeUserPasswordExternal = async (data) => {
-    const res = await axios.post(`${URL}/auth/password_change_external`, { encryptedEmail: data.encryptedEmail, newPassword: data.newPassword }, headers);
+const changeUserPasswordExternal = async (encryptedEmail, newPassword) => {
+    const res = await axios.post(`${URL}/auth/password_change_external`, { encryptedEmail: encryptedEmail, newPassword: newPassword }, headers);
     if(res.data.error) {
         alert(res.data.error);
         return false;

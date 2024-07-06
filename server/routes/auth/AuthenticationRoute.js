@@ -108,7 +108,7 @@ router.post('/password_change_personal', validateToken, async (req, res) => {
 
 
 // Endpoint to handle password change
-router.post('/password_change_external', validateToken, async (req, res) => {
+router.post('/password_change_external', async (req, res) => {
     try {
         const { encryptedEmail, newPassword } = req.body;
         // Call the logic method to verify the email and token
