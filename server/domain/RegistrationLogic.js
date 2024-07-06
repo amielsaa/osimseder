@@ -67,12 +67,16 @@ class RegistrationLogic {
 
             const hashedPassword = await bcrypt.hash(staffData.password, 10);
             const cityId = await string2Int.getCityId(staffData.city);
-            if(!staffData.accesses) {
-                const roleKeys = Object.keys(Accesses.roleGroup)
-                staffData.accesses = roleKeys.find(key => roleKeys[key] === staffData.role )
+            let accesses;
+            
+            const roleKeys = Object.keys(Accesses.roleGroup)
+            accesses = roleKeys.find(key => Accesses.roleGroup[key] === staffData.role)
+
+            let futureAreaName = null;
+            if (accesses === 'C'){
+                futureAreaName = staffData.area;
             }
 
-            // console.log(staffData);
             const createdStaff = await Staffs.create({
                 "email": staffData.email,
                 "password": hashedPassword,
@@ -82,8 +86,9 @@ class RegistrationLogic {
                 "gender": staffData.gender,
                 "verificationToken": verificationToken,
                 "isVerified": false,
-                "accesses": staffData.accesses,
-                "cityId": cityId
+                "accesses": accesses,
+                "cityId": cityId,
+                "futureAreaName": futureAreaName
             });
 
             await emailService.sendVerificationEmail(staffData.email, verificationToken);

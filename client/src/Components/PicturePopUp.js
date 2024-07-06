@@ -2,7 +2,7 @@ import React from 'react';
 import './css/PicturePopUp.css'; 
 import img from '../images/try-img.jpeg'
 
-const PicturePopUp = ({ onClose, onDelete, index, image, reason, onConfirm }) => {
+const PicturePopUp = ({ onClose, onDelete, index, imagePath, image, reason, onConfirm, URLName }) => {
   
 
   return (
@@ -12,7 +12,7 @@ const PicturePopUp = ({ onClose, onDelete, index, image, reason, onConfirm }) =>
         <div className="picture-popup-container">
         
           <div className="placeholder-picture">
-          <img src={image} alt='no img to display'></img>
+          <img src={imagePath} alt='no img to display'></img>
           </div>
           
         </div>

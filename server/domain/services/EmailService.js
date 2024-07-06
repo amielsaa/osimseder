@@ -29,10 +29,10 @@ class EmailService {
                 to: email,
                 subject: 'ברוכים הבאים ל-"עושים סדר"!',
                 html: `
-        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
-            Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process. \n In case you registered as a staff memeber, you\'ll need to wait for an admin to approve you
-        </p>`
-            });
+            <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+                Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process. \n In case you registered as a staff memeber, you\'ll need to wait for an admin to approve you
+            </p>`
+                });
 
             usersLogger.info("Successfully sent email to: " + email);
         } catch (error) {
@@ -58,9 +58,10 @@ class EmailService {
                 if (!staff) {
                     throw new Error('No user with this email');
                 }
+                console.log(staff);
                 let isStudent = false;
                 const staffToken = staff.verificationToken;
-                if (studentToken == null) {
+                if (staffToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {

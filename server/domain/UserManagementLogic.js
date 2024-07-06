@@ -12,31 +12,31 @@ const StaffLogic = require('./StaffLogic');
 class UserManagementLogic {
 
 
- // get area of manager email
- // Input: managerEmail - the email of the manager
-// Output: the area object
-async getAreaByManager(managerEmail) {
-    try {
-        usersLogger.debug('Getting area by manager email: ' + managerEmail);
-        await argumentChecker.checkSingleArugments([managerEmail], ["managerEmail"]);
+    // get area of manager email
+    // Input: managerEmail - the email of the manager
+    // Output: the area object
+    async getAreaByManager(managerEmail) {
+        try {
+            usersLogger.debug('Getting area by manager email: ' + managerEmail);
+            await argumentChecker.checkSingleArugments([managerEmail], ["managerEmail"]);
 
-        const area = await Areas.findOne({
-            where: { areaManagerEmail: managerEmail }
-        });
-        if (!area) {
-            throw new Error('No area with this manager email');
+            const area = await Areas.findOne({
+                where: { areaManagerEmail: managerEmail }
+            });
+            if (!area) {
+                throw new Error('No area with this manager email');
+            }
+
+            usersLogger.debug('Successfully found area by manager email: ' + managerEmail);
+            return area;
+        } catch (error) {
+            usersLogger.error('Failed to fetch area: ' + error);
+            throw new Error('Failed to fetch area: ' + error);
         }
-
-        usersLogger.debug('Successfully found area by manager email: ' + managerEmail);
-        return area;
-    } catch (error) {
-        usersLogger.error('Failed to fetch area: ' + error);
-        throw new Error('Failed to fetch area: ' + error);
     }
-}
 
-// get all students
-// Output: a list of all students
+    // get all students
+    // Output: a list of all students
     async getAllStudents(filterBy) {
         try {
             usersLogger.debug('Getting all volunteers');
@@ -72,14 +72,16 @@ async getAreaByManager(managerEmail) {
         }
     }
 
-// get all staffs
-// Input: requesterEmail - the email of the requester
-//        requesterRole - the role of the requester
-//        filterBy - the filter object
-// Output: a list of all staffs
+    // get all staffs
+    // Input: requesterEmail - the email of the requester
+    //        requesterRole - the role of the requester
+    //        filterBy - the filter object
+    // Output: a list of all staffs
+
     async getAllStaffs(requesterEmail, requesterRole, filterBy) {
         try {
             usersLogger.debug("Getting all staffs for email: " + requesterEmail + "with requesterRole: " + requesterRole);
+            
             // Construct the where clause based on the filterBy object
             const whereClause = {};
             if (filterBy) {
@@ -87,6 +89,7 @@ async getAreaByManager(managerEmail) {
                     whereClause[key] = filterBy[key];
                 });
             }
+            
             const staffs = await Staffs.findAll({
                 where: whereClause,
                 order: [
@@ -94,26 +97,33 @@ async getAreaByManager(managerEmail) {
                     ['lastName', 'ASC']   // Then sort by last name in ascending order
                 ]
             });
-
-            var areaName = ''
-
-// Fetch cityName for each staff
+    
+            // Fetch cityName and areaName for each staff
             const enhancedStaffs = await Promise.all(staffs.map(async staff => {
-                const cityName = await String2Int.getCityNameById(staff.cityId);
-                var areaName = ''
-                if (staff.accesses == "C") {
-                    console.log(staff.email)
-                    const area = await this.getAreaByManager(staff.email);
-                    areaName = area.areaName;
+                let cityName = '';
+                let areaName = '';
+                try {
+                    cityName = await String2Int.getCityNameById(staff.cityId);
+                } catch (error) {
+                    usersLogger.error(`Failed to fetch city name for cityId ${staff.cityId}: ${error}`);
                 }
-
+    
+                if (staff.accesses === "C") {
+                    try {
+                        const area = await this.getAreaByManager(staff.email);
+                        areaName = area.areaName;
+                    } catch (error) {
+                        usersLogger.error(`Failed to fetch area for manager email ${staff.email}: ${error}`);
+                    }
+                }
+    
                 return {
                     ...staff.dataValues,
                     cityName: cityName,
                     areaName: areaName
                 };
             }));
-
+    
             usersLogger.debug('Successfully found all staffs');
             return enhancedStaffs;
         } catch (error) {
@@ -121,6 +131,7 @@ async getAreaByManager(managerEmail) {
             throw new Error('Failed to fetch staffs');
         }
     }
+    
 
 // get all team owners
 // Input: managerEmail - the email of the manager
@@ -230,6 +241,53 @@ async getAreaByManager(managerEmail) {
             if (!staff) {
                 throw new Error('Staff not found');
             }
+
+            // Remove this mail from groups/areas/cities
+            if (staff.accesses === 'B'){
+                let groups = await Houses.findAll({
+                    where: { "teamOwnerEmail": staff.email }
+                });
+                for (let i = 0; i < groups.length; i++) {
+                    const group = groups[i];
+                    await group.update({
+                        "teamOwnerEmail": "none"
+                    });
+                }
+                // ----------------------------------------
+                groups = await Houses.findAll({
+                    where: { "teamOwnerEmail_2": staff.email }
+                });
+                for (let i = 0; i < groups.length; i++) {
+                    const group = groups[i];
+                    await group.update({
+                        "teamOwnerEmail_2": "none"
+                    });
+                }
+            }
+            else if (staff.accesses === 'C'){
+                let areas = await Areas.findAll({
+                    where: { "areaManagerEmail": staff.email }
+                });
+                for (let i = 0; i < areas.length; i++) {
+                    const area = areas[i];
+                    await area.update({
+                        "areaManagerEmail": "none"
+                    });
+                }
+            }
+            else if (staff.accesses === 'D'){
+                let cities = await Cities.findAll({
+                    where: { "cityManagerEmail": staff.email }
+                });
+                for (let i = 0; i < cities.length; i++) {
+                    const city = cities[i];
+                    await city.update({
+                        "cityManagerEmail": "none"
+                    });
+                }
+            }
+
+
             await staff.destroy();
             usersLogger.info('Successfully deleted staff with email: ' + staffEmail + ". Requester email: " + requesterEmail);
 
@@ -378,6 +436,8 @@ async getAreaByManager(managerEmail) {
         }
     }
 
+    
+    
 // approve a staff role
 // Input: staffEmail - the email of the staff
 //        alternateRole - the alternate role to assign
@@ -402,7 +462,7 @@ async getAreaByManager(managerEmail) {
             }
             staff.isVerified = true;
             await staff.save();
-            await initNewStaff(staffEmail);
+            await this.initNewStaff(staffEmail);
             usersLogger.info('Successfully approved a staff role by manager for email: ' + staffEmail + '. Performed by email: ' + requesterEmail);
             return staff;
 
@@ -412,7 +472,61 @@ async getAreaByManager(managerEmail) {
         }
     }
 
+    async initNewStaff(staffEmail) {
+        try {
+            usersLogger.info('Assigning staff email to the city/area for email: ' + staffEmail);
+            // argumentChecker.checkSingleArugments([staffEmail], ['staffEmail']);
 
+            console.log(staffEmail);
+            const staff = await Staffs.findOne({
+                where: { email: staffEmail }
+            });
+            if (!staff) {
+                throw new Error('Couldn\'t find a staff with that email.');
+            }
+            
+            // console.log(staff);
+
+            if(staff.accesses === 'D'){ // city manager
+                const city = await Cities.findOne({
+                    where: { id: staff.cityId }
+                });
+                if (!city) {
+                    throw new Error('Couldn\'t find a city with that id.');
+                }
+                await Cities.update(
+                    { cityManagerEmail: staff.email },
+                    { where: { id: staff.cityId }}
+                );
+                
+            }
+            
+            else if(staff.accesses === 'C'){ // area manager
+                const area = await Areas.findOne({
+                    where: { areaName: staff.futureAreaName }
+                });
+                if (!area) {
+                    throw new Error('Couldn\'t find a area with that id.');
+                }
+                await Areas.update(
+                    { areaManagerEmail: staff.email },
+                    { where: { id: area.id }}
+                );
+                await Staffs.update(
+                    { futureAreaName: null },
+                    { where: { email: staff.email }}
+                );
+            }
+
+
+            usersLogger.info('Successfully assigned staff email to the city/area for email: ' + staffEmail);
+            return staff;
+
+        } catch (error) {
+            usersLogger.error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
+            throw new Error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
+        }
+    }
 
 
 // reset password
@@ -464,43 +578,6 @@ async getAreaByManager(managerEmail) {
         }
     }
 
-    async initNewStaff(staffEmail) {
-        try {
-            usersLogger.info('Assigning staff email to the city/area for email: ' + staffEmail);
-            argumentChecker.checkSingleArugments([staffEmail], ['staffEmail']);
-
-            const staff = await Staffs.findOne({
-                where: { email: staffEmail }
-            });
-            if (!staff) {
-                throw new Error('Couldn\'t find a staff with that email.');
-            }
-            
-            if(staff.accesses == 'D'){ // city manager
-                const city = await Cities.findOne({
-                    where: { id: staff.cityId }
-                });
-                if (!city) {
-                    throw new Error('Couldn\'t find a city with that id.');
-                }
-                await city.update({
-                    where: {cityManagerEmail: staff.email}
-                });
-            }
-            
-            else if(staff.accesses == 'C'){ // area manager
-
-            }
-
-
-            usersLogger.info('Successfully assigned staff email to the city/area for email: ' + staffEmail);
-            return staff;
-
-        } catch (error) {
-            usersLogger.error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
-            throw new Error('Failed to assigned staff email to the city/area for email: ' + staffEmail + ' .error:' + error);
-        }
-    }
 }
 
 module.exports = new UserManagementLogic();

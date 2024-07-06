@@ -10,7 +10,7 @@ import { IoChevronForwardCircle } from "react-icons/io5";
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { MdGroups } from "react-icons/md";
-import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse } from '../Helpers/StaffFrontLogic';
+import { fetchTeamOwnerInfo, assignTeamOwner, fetchTeamOwners, getHouseById, removeGroupByHouse, getTasksByHouseId, fetchGroupsForHouse, uploadImage, fetchAllImagesByHouse, URL as URLName, deletePhoto } from '../Helpers/StaffFrontLogic';
 import PicturePopUp from "./PicturePopUp";
 
 const HousePage = () => {
@@ -32,7 +32,9 @@ const HousePage = () => {
   const [refreshPage,setRefreshPage] = useState(false)
   //image logic
   const [chosenImageIndex, setChosenImageIndex] = useState('')
-  const [imageList, setImageList] = useState([])
+  const [chosenFile, setChosenFile] = useState(null)
+
+  const [imageList, setImageList] = useState([''])
   const [showBigPicture, setShowBigPicture] = useState(false)
   const [confirmPicturePopUp, setConfirmPicturePopUp] = useState(false)
   const [pictureToDisplay, setPictureToDisplay] = useState('')
@@ -42,8 +44,8 @@ const HousePage = () => {
     }
   })
   useEffect(() => {
-
-  },[imageList])
+    setImageRequest();
+  },[])
   const removeRoomFromTasklist = (room) => {
     setTasks(prevTasks => prevTasks.filter(task => task.room !== room));
     
@@ -157,6 +159,7 @@ const HousePage = () => {
     if (file) {
         const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         if (validImageTypes.includes(file.type)) {
+            setChosenFile(file);
             const imageUrl = URL.createObjectURL(file);
             setPictureToDisplay(imageUrl)
             setConfirmPicturePopUp(true)
@@ -167,12 +170,15 @@ const HousePage = () => {
     }
 };
 
-function confirmAddPicture(imageUrl) {
+async function confirmAddPicture(imageUrl) {
    //Feliks - Before you start, notice that every function that is addressed to the back is coming from the Helpers directory, set your function there
             // and use it here, that from here whatever data you need.
             //Feliks - right now Im just adding the img to my const list here in the front, you need to Implement a function here to take the data to the back
             // and save it. if you want the house Id to store it for you can get it from the const id.
-            setImageList([...imageList, imageUrl]);
+            const formData = new FormData();
+            formData.append('file', chosenFile);
+            const res = await uploadImage(formData, id);
+            setImageList((prevList) => [...prevList, res.photo]);
             setPictureToDisplay('')
             setConfirmPicturePopUp(false)
 }
@@ -182,7 +188,6 @@ const handleAddPictureClick = () => {
 };
 
 function onPictureClick(image, index) {
-  console.log(image)
   setChosenImageIndex(index)
   setShowBigPicture(true)
   setPictureToDisplay(image)
@@ -196,21 +201,22 @@ function onClosePictureConfirmation(){
   setConfirmPicturePopUp(false)
 }
 
-const deleteImage = (image, index) => {
-  const updatedList = [...imageList];
-  updatedList.splice(index, 1);
-  // Feliks - in this row you need to delete the picture from the database you get the image here in the arguments.
-  // if you want the house Id to store it for you can get it from the const id.
-  setImageList(updatedList);
+const deleteImage = async (image, index) => {
+  console.log(image)
+  const res = await deletePhoto(image.photoName)
+  if(res) {
+    const updatedList = [...imageList];
+    updatedList.splice(index, 1);
+    setImageList(updatedList);
+  }
+  
   setShowBigPicture(false)
 };
 
 async function setImageRequest() {
-  // Feliks, in this function you need to get all the pictures from the server, store them into a list and then put the inside the  imageList
-  // notice! imageList is a useState, the way you are doing this is storing the list in a const, lets say const list, and then you use the method setImageList(list)
-  // should be looking somthing like that
-  {/* const list = await (whatever you bring from the database)
-     setImageList(list)*/}
+  const res = await fetchAllImagesByHouse(id);
+  console.log(res)
+  setImageList(res);
 }
 
 
@@ -294,9 +300,9 @@ async function setImageRequest() {
           {/* picture components here*/ }
           <div className="house-pictures-container">
           {imageList.length === 0 && <div className="empty-list-text">לחץ על הוסף תמונה כדי להעלות תמונות</div>}
-          {imageList.map((image, index) => (
+          {imageList && imageList.map((image, index) => (
                 <div key={index} className="picture-container" onClick={() => {onPictureClick(image,index)}}>
-                    <img src={image} alt={`image-${index}`} />
+                    <img src={URLName+image.photoPath} alt={`image-${index}`} />
                 </div>
             ))}
           </div>
@@ -310,8 +316,8 @@ async function setImageRequest() {
                 accept="image/png, image/jpeg, image/jpg"
                 onChange={handleAddPicture}
             />
-            {showBigPicture && <PicturePopUp onClose={onClosePicturePopUp} onDelete={deleteImage} index={chosenImageIndex} image={pictureToDisplay} reason={"select"}/>}
-            {confirmPicturePopUp && <PicturePopUp onClose={onClosePictureConfirmation} onConfirm={confirmAddPicture}  image={pictureToDisplay} reason={"upload"}/>}
+            {showBigPicture && <PicturePopUp onClose={onClosePicturePopUp} onDelete={deleteImage} index={chosenImageIndex} image={pictureToDisplay} reason={"select"} imagePath={URLName+pictureToDisplay.photoPath} URLName={URLName}/>}
+            {confirmPicturePopUp && <PicturePopUp onClose={onClosePictureConfirmation} onConfirm={confirmAddPicture}  image={pictureToDisplay} reason={"upload"} imagePath={pictureToDisplay}/>}
           {/* picture components here*/ }
          
           <div className="groups_and_teamOwners_and_houseInfo">

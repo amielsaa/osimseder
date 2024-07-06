@@ -13,6 +13,8 @@ app.use(cors())
 
 // const helloRouter = require("./routes/Hello")
 // app.use("/", helloRouter)
+app.use('/api/uploads', express.static(path.join(__dirname, 'uploads')));
+
 const studentRouter = require("./routes/studentRoutes")
 app.use("/api/student", studentRouter)
 const staffRouter = require("./routes/staffRoutes")
