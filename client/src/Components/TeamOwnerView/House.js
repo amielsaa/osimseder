@@ -4,6 +4,7 @@ import DataContext from '../../Helpers/DataContext';
 import houseImg from '../../images/housepicture.png'
 import ConfirmationMessage from '../ConfirmationMessage';
 import {deleteHouse} from '../../Helpers/StaffFrontLogic'
+import ScoreBar from '../ScoreBar';
 const House = ({ id, landlordName, address, deleteHouseFromList}) => {
   const [selectedHouse, setSelectedHouse] = useState('')
   const [selectedHouseForDelete, setSelectedHouseForDelete] = useState('')
@@ -43,10 +44,12 @@ const House = ({ id, landlordName, address, deleteHouseFromList}) => {
         <div className='House-bar-Info'>
           <p> דייר/ת: {landlordName}</p>
           <p>כתובת: {address}</p>
+          <ScoreBar score={3}/>
         </div>
-        
+        <div className='houses-house-buttons-container'>
         <button className='watch-house-btn' onClick={() => {setSelectedHouse(id)}}>צפה</button>
         <button className='remove-house-btn' onClick={() => {toggleStatus(id)}}>הסר</button>
+        </div>
         {(user.role === 'CityManager' || user.role === 'AreaManager'  ) && showConfirmationDelete && (
         <ConfirmationMessage confirmationMessage={`האם אתה בטוח שברצונך למחוק את בית מספר ${selectedHouseForDelete}?`}
                               handleConfirmation={handleConfirmationDelete}

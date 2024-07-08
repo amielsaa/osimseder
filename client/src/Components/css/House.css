@@ -1,6 +1,8 @@
 .House {
-    min-height: 12%; /* Or adjust this value as needed */
+    min-height: 75px; /* Or adjust this value as needed */
     width: 100%;
+    
+    max-height: 300px;
     border-radius: 20px;
     background-color: var(--GREY-COLOR);
     color: var(--PURPLE-COLOR);
@@ -13,7 +15,45 @@
     font-weight: bold;
     overflow: hidden; /* Prevents overflow content from affecting layout */
 }
-
+.score{
+    font-size: 1rem;
+}
+.review-bar-and-score{
+    width: 100%;
+    gap:3%;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row;
+    padding-top: 5px;
+    justify-content:flex-start;
+    align-items: center;
+    height: 0.5rem;
+}
+.review-bar-out-of{
+    background-color: rgb(221, 221, 221);
+    width: 60%;
+    min-height: 5px;
+    height: 0.3rem;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+.review-bar-score{
+    background-color: #8cff66;
+    height: 100%;
+    border-radius: inherit;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.houses-house-buttons-container{
+    display: flex;
+    justify-content: center;
+    gap:3%;
+    padding-left: 10px;
+    align-items: center;
+    flex-direction: row-reverse;
+}
 .House-img-container {
     position: relative; /* Ensure the container is positioned */
     height: 80%;
@@ -27,7 +67,7 @@
     color: var(--LIGHTBLUE-COLOR);
     padding-left: 3%;
     height: 100%;
-    width: 50%;
+    width: 40%;
     direction: rtl;
     display: flex;
     flex-direction: column;
@@ -44,7 +84,7 @@
 
 .watch-house-btn,
 .remove-house-btn {
-    width: 15%;
+    min-width: 50px;
     box-shadow: var(--BOX-SHADOW);
     height: 30px;
     margin: 0%;
@@ -85,11 +125,12 @@
         .House {
             min-height: 130px; /* Set a different fixed height for larger screens if needed */
             width: 75%;
+            max-width: 300px;
             border-radius: 20px;
             background-color: var(--WHITE-COLOR);
             color: var(--PURPLE-COLOR);
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: column;
             justify-content: space-between;
             align-items: center;
             margin: 1%;
@@ -109,9 +150,8 @@
     
     .House-bar-Info {
         padding-left: 3%;
-        height: 100%;
-        box-shadow: inset var(--BOX-SHADOW);
-        width: 25%;
+        height: 200px;
+        width: 100%;
         color: var(--LIGHTBLUE-COLOR);
         direction: ltr;
         display: flex;
@@ -124,7 +164,8 @@
     }
     .House-bar-Info p {
         direction: rtl;
-        padding-right:10px
+        padding-right:10px;
+        font-size: 1rem;
     }
     
       .House-bar-Info::-webkit-scrollbar {
@@ -148,7 +189,7 @@
     
     .watch-house-btn,
     .remove-house-btn {
-        width: 10%;
+        width: 30%;
         height: 30%;
         margin: 0%;
         font-size: 1.2rem;
@@ -186,6 +227,26 @@
         margin-top: 20%;
         margin-left: 6%;
         font-size: 2.5rem
+    }
+    .houses-house-buttons-container {
+        width: 100%;
+        min-height: 70px;
+        display: flex;
+        justify-content: center;  
+        align-items: center;  
+        gap: 10%; 
+        padding-left: 0;  
+      }
+      .review-bar-and-score{
+        width: 100%;
+        gap:3%;
+        margin-top: 10px;
+        display: flex;
+        flex-flow: row-reverse;
+        padding-right: 10px;
+        justify-content:flex-start;
+        align-items: center;
+        height: 0.5rem;
     }
     
 }

@@ -14,13 +14,19 @@
     background-color: var(--WHITEBG-COLOR);
     
   }
+  .city_Filter_and_label  , .neighborhood_Filter_and_label {
+    min-width: 30%;
+  }
+
   .main_content_houses {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 70%;
+    padding-bottom: 10px;
+    flex:1;
+    max-height:65% ;
     gap: 3%;
     overflow-y: scroll;
 }
@@ -43,11 +49,11 @@
     width: 100%;
     min-height: 7%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: right;
-    align-items: center;
+    align-items: right;
   }
-  .neighborhood_Filter_and_label{
+  .neighborhood_Filter_and_label, .city_Filter_and_label{
     display: flex;
     direction: rtl;
     flex-direction: row;
@@ -74,15 +80,19 @@
     .content-Box::-webkit-scrollbar {
       display: none;
     }
+    .city_Filter_and_label select , .neighborhood_Filter_and_label select{
+      min-width: 200px;
+    }
     .main_content_houses {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      flex:1;
-      
-      overflow-y: scroll;
+      display: grid;
+      padding:20px;
+      flex: 1;
+      row-gap: 300px;
+      align-items: start;
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      justify-items: center;
   }
     .Houses_title{
       color: var(--ORANGE-COLOR);
@@ -101,15 +111,16 @@
       
     }
     .filtersContainer{
-      width: 73%;
+      width: 90%;
+      gap:3%;
       padding-bottom: 10px;
       min-height: 7%;
       display: flex;
-      flex-direction: row;
+      flex-direction: row-reverse;
       justify-content: right;
       align-items: center;
     }
-    .neighborhood_Filter_and_label{
+    .neighborhood_Filter_and_label, .city_Filter_and_label {
       display: flex;
       direction: rtl;
       flex-direction: row;
