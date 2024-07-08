@@ -32,6 +32,7 @@ const HouseList = (selectedCity ,selectedNeiborhood) => {
 
 
   useEffect(() => {
+    //Amiel - when you bring houses, I want you to give me the % of tasks they completed
     setHousesList();
     filterHouses()
     console.log(houses)

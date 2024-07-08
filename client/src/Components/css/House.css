@@ -15,6 +15,9 @@
     font-weight: bold;
     overflow: hidden; /* Prevents overflow content from affecting layout */
 }
+.score{
+    font-size: 1rem;
+}
 .review-bar-and-score{
     width: 100%;
     gap:3%;
