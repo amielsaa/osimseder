@@ -1,5 +1,5 @@
 .House {
-    min-height: 15%; /* Or adjust this value as needed */
+    min-height: 75px; /* Or adjust this value as needed */
     width: 100%;
     
     max-height: 300px;
@@ -14,6 +14,34 @@
     margin: 2%;
     font-weight: bold;
     overflow: hidden; /* Prevents overflow content from affecting layout */
+}
+.review-bar-and-score{
+    width: 100%;
+    gap:3%;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row;
+    padding-top: 5px;
+    justify-content:flex-start;
+    align-items: center;
+    height: 0.5rem;
+}
+.review-bar-out-of{
+    background-color: rgb(221, 221, 221);
+    width: 60%;
+    min-height: 5px;
+    height: 0.3rem;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+.review-bar-score{
+    background-color: #8cff66;
+    height: 100%;
+    border-radius: inherit;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 .houses-house-buttons-container{
     display: flex;
@@ -206,5 +234,16 @@
         gap: 10%; 
         padding-left: 0;  
       }
+      .review-bar-and-score{
+        width: 100%;
+        gap:3%;
+        margin-top: 10px;
+        display: flex;
+        flex-flow: row-reverse;
+        padding-right: 10px;
+        justify-content:flex-start;
+        align-items: center;
+        height: 0.5rem;
+    }
     
 }
