@@ -39,7 +39,7 @@ const ChangePasswordPage = () => {
 
   return (
     <>
-    {(/* !response && !loading && */
+    {((!response && !loading && !showConfirmSuccess && !showConfirmFailed) && 
         <PasswordChanger  onSubmit={submitPasswordChange} fromLoginPage={true}/>
       )}
 
@@ -53,8 +53,8 @@ const ChangePasswordPage = () => {
     {showConfirmFailed && (
       <ConfirmMessage
       title={`תקלה`}
-      confirmationMessage={`ייתכן שהסיסמה לא תואמת או שהייתה שגיאת מערכת, נסו שוב`}
-      handleConfirm={() => setShowConfirmFailed(false)}
+      confirmationMessage={`ייתכן שהסיסמה לא תואמת או שהייתה שגיאת מערכת`}
+      handleConfirm={() => navigate('/')}
       />
     )}
     </>
