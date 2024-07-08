@@ -17,8 +17,12 @@ const ChangePasswordPage = () => {
 
     useEffect(() => {
         const authenticate = async () => {
-            setResponse(await authenticateChangePassword(token, encryptedEmail))
-            setLoading(false)
+            try {
+                setResponse(await authenticateChangePassword(token, encryptedEmail))
+                setLoading(false)
+            } catch (e) {
+                setShowConfirmFailed(true)
+            }
         }
         authenticate()
     }, [token]) 
@@ -39,7 +43,7 @@ const ChangePasswordPage = () => {
 
   return (
     <>
-    {((!response && !loading && !showConfirmSuccess && !showConfirmFailed) && 
+    {((!loading && !showConfirmSuccess && !showConfirmFailed) && 
         <PasswordChanger  onSubmit={submitPasswordChange} fromLoginPage={true}/>
       )}
 
