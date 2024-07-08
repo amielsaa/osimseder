@@ -1,4 +1,4 @@
-// EmailService.js
+﻿// EmailService.js
 const nodemailer = require('nodemailer');
 const { Students, Staffs } = require('../../models');
 const argumentChecker = require('../utils/ArgumentChecker');
@@ -19,13 +19,15 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async sendVerificationEmail(email, token) {
-        try{
-            usersLogger.info("Initiating sending verification email to: " + email);
-            argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
-            const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        usersLogger.info("Initiating sending verification email to: " + email);
+        argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
+
+        const verificationLink = `http://localhost:3000/authenticate-email/${token}/${EmailEncryptor.encryptEmail(email)}`;
+
+        try {
             await transporter.sendMail({
                 to: email,
-                subject: 'Welcome to "Osim Seder"!',
+                subject: 'ברוכים הבאים ל-"עושים סדר"!',
                 html: `
             <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
                 Please click <a href="${verificationLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the registration process. \n In case you registered as a staff memeber, you\'ll need to wait for an admin to approve you
@@ -97,7 +99,9 @@ class EmailService {
         usersLogger.info("Initiating sending reset password email to: " + email);
         argumentChecker.checkSingleArugments([email, token], ["email", "token"]);
 
-        const resetLink = `http://localhost:3001/verify-reset-password/${token}/${EmailEncryptor.encryptEmail(email)}`;
+
+        const resetLink = `http://localhost:3000/verify-reset-link/${token}/${EmailEncryptor.encryptEmail(email)}`;
+        
         isStudent = false;
         const student = await Students.findOne({
             where: { email: email }
@@ -112,13 +116,23 @@ class EmailService {
         } else {
             isStudent = true;
         }
-        await transporter.sendMail({
-            to: email,
-            subject: 'Reset Your Password',
-            html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`
-        });
 
-        usersLogger.info("Successfully sent email to: " + email);
+        try {
+            await transporter.sendMail({
+                to: email,
+                subject: 'עושים סדר - שינוי סיסמה',
+                html: `
+        <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+            Please click <a href="${resetLink}" style="color: #007bff; text-decoration: none;">here</a> to verify your email address and complete the password reset process.
+        </p>`
+            });
+
+            usersLogger.info("Successfully sent email to: " + email);
+        } catch (error) {
+            usersLogger.error("Error sending verification email to: " + email + ". Error: " + error.message);
+        }
+
+        usersLogger.info("Successfully sent reset password email to: " + email);
         return isStudent;
 
     }
@@ -141,7 +155,7 @@ class EmailService {
                 }
                 const isStudent = false;
                 const staffToken = staff.verificationToken;
-                if (studentToken == null) {
+                if (staffToken == null) {
                     throw new Error("Error: staff with mail: " + email + " has no token, meaning there's not any process that needs verification ")
                 }
                 if (staffToken == token) {

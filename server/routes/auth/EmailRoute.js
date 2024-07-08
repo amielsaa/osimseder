@@ -20,13 +20,13 @@ router.post('/verify-email/:token/:encryptedEmail', async (req, res) => {
 });
 
 // Endpoint to handle password reset
-router.post('/verify-reset-password', async (req, res) => {
+router.post('/verify_reset_password/:token/:encryptedEmail', async (req, res) => {
     try {
-        const token = req.query.token;
-        const email = req.query.email;
+        const token = req.params.token;
+        const encryptedEmail = req.params.encryptedEmail;
 
         // Call the logic method to verify the email and token
-        const isStudent = await emailService.verifyEmailForPassword(email, token);
+        const isStudent = await emailService.verifyEmailAndTokenForPassword(encryptedEmail, token);
 
         res.send(isStudent);
     } catch (error) {

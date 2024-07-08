@@ -7,6 +7,9 @@ import './css/Login.css';
 import axios from "axios";
 import DataContext from '../Helpers/DataContext';
 import Logo from '../images/g_udi_logo.png';  // Fix the import here
+import InputConfirmationMessage from './InputConfirmationMessage';
+import ConfirmMessage from './ConfirmMessage'
+import { sendResetPasswordMail } from '../Helpers/StaffFrontLogic'
 
 
 const Login = () => {
@@ -15,13 +18,28 @@ const Login = () => {
   const { URL } = useContext(DataContext);
   const [error,setError] = useState('')
   const {setUser, setLoginRefresh} = useContext(DataContext);
+  const [showEmailPopUp, setShowEmailPopUp] = useState(false)
+  const [showEmailSent, setShowEmailSent] = useState(false)
+  const [showEmailFailed, setShowEmailFailed] = useState(false)
+  
 
   const initialValues = {
     email: '',
     password: '',
     code: '',
   };
+  function onPasswordChangeToggle() {
+    setShowEmailPopUp(true)
+  }
+  function handleChangePassword(email) {
+      try {
+        sendResetPasswordMail(email)
+       setShowEmailSent(true)
+    } catch (e) {
+      setShowEmailFailed(true)
 
+    }
+  }
   const handleRegisterStaff = () => {
 
   }
@@ -100,8 +118,12 @@ const Login = () => {
           <button type="submit" className='button-login' style={{ display: !displayCode ? 'block' : 'none' }}>התחבר/י</button>
           </div>
           
+           
+          
+          
 
           <div className="signup-link">
+          <p className='forgot-password'>שכחת סיסמה? <span className='change-password-button' onClick={onPasswordChangeToggle}>לחץ כאן</span></p>
             <p>
               <Link to={"/register"}>הרשמה למתנדב/ת</Link> |  <Link to={"/register-staff"}> הרשמה לסגל</Link>
             </p>
@@ -109,6 +131,27 @@ const Login = () => {
         </Form>
       </Formik>
     </div>
+    {showEmailPopUp && (
+      <InputConfirmationMessage
+      promptMessage={`הכנס את כתובת המייל, ותישלח אליך הודעה עם לינק לשינוי סיסמה`}
+      handleInput={handleChangePassword}
+      setShowInput={setShowEmailPopUp}
+      />
+    )}
+    {showEmailSent && (
+      <ConfirmMessage
+      title={`!האימייל נשלח בהצלחה`}
+      confirmationMessage={`נא לבדוק בתיבת הספאם`}
+      handleConfirm={() => setShowEmailSent(false)}
+      />
+    )}
+    {showEmailFailed && (
+      <ConfirmMessage
+      title={`תקלה`}
+      confirmationMessage={`ייתכן שהאימייל לא קיים או שהייתה שגיאת מערכת, נסו שוב`}
+      handleConfirm={() => setShowEmailFailed(false)}
+      />
+    )}
     
     </div>
     </>

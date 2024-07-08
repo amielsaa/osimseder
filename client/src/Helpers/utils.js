@@ -28,5 +28,13 @@ const authenticateRegisterEmail = async (token, encryptedEmail) => {
     else { return true; }
 }
 
+const authenticateChangePassword = async (token, encryptedEmail) => {
+    const res = await axios.post(`${URL}/auth/verify_reset_password/${token}/${encryptedEmail}`, {}, headers);
+    if (res.data.error) {
+        return false;
+    }
+    else { return res; }
+}
 
-export {decryptEmail, getUserByEmail, authenticateRegisterEmail}
+
+export { decryptEmail, getUserByEmail, authenticateRegisterEmail, authenticateChangePassword }

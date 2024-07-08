@@ -1,12 +1,12 @@
 .login-container {
   width: 95%;
-  height:60%;
-  
+  height:70%;
+  max-height: 500px;
   border: 1px solid #ccc;
   background-color: var(--WHITEOP-COLOR);
   border-radius: 5px;
   box-shadow: 0 0 10px 5px var(--ORANGEOP-COLOR);
-  margin-top:30%;
+  margin-top:10%;
   z-index: 10000;
 }
 .input-box {
@@ -26,6 +26,15 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+.change-password-button{
+  color:var(--LIGHTBLUE-COLOR);
+  font-weight: bold;
+  cursor: pointer;
+}
+.change-password-button:hover {
+  color: var(--PURPLE-COLOR);
+}
+
 
 input {
   width: 100%;
@@ -60,6 +69,8 @@ input {
 
 .signup-link {
     display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
     justify-content: center;
     align-items: center;
 }

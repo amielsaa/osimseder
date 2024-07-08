@@ -87,6 +87,7 @@
     padding: 15px;
     font-weight: bold;
     font-size: 1rem;
+    border-radius: 12px;
     color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);
     margin-top: 5%;
@@ -133,6 +134,10 @@
 }
 .house_for_group{
   margin-right: 3%;
+  cursor: pointer;
+  color: var(--LIGHTBLUE-COLOR);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); 
+  
 }
 .empty-group {
   margin: auto;
@@ -266,6 +271,10 @@
   .Info-g {
     padding: 15px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
     font-size: 1.5rem;
     color:var(--PURPLE-COLOR);
     background-color: var(--GREY-COLOR);

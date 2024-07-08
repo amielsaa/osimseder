@@ -228,7 +228,7 @@ function Register() {
         {showConfirm && (
         <ConfirmMessage
             title = {"...עוד צעד אחד קטן"}
-            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל ${email}\n`}
+            confirmationMessage={`נשלחה הודעת אישור לאימייל, אנא לחץ על הקישור דרך האימייל, <strong>אם לא מוצאים את המייל, נא לבדוק את הספאם</strong> \n${email}\n`}
             handleConfirm={() => navigate('/')}
         />
       )}
