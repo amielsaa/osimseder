@@ -3,15 +3,13 @@ import DataContext from "../../Helpers/DataContext";
 import House from "./House";
 import {fetchAllHouses} from '../../Helpers/StaffFrontLogic'
 import Houses from "./Houses";
-const HouseList = (selectedCity ,selectedNeiborhood) => {
+const HouseList = ({selectedCity ,selectedNeiborhood}) => {
   const { user } = useContext(DataContext);
 
 
   const [houses, setHouses] = useState([]);
   const [filteredhouses,setFilteredHouses] = useState(houses)
-  useState(() => {
-    
-  },[selectedNeiborhood.selectedNeiborhood])
+
   const setHousesList = async () => {
     const housesList = await fetchAllHouses();
     setHouses(housesList);
@@ -20,11 +18,11 @@ const HouseList = (selectedCity ,selectedNeiborhood) => {
     let filteredHousesList = houses;
 
     if (selectedCity) {
-      filteredHousesList = filteredHousesList.filter(house => house.cityId === selectedCity);
+      filteredHousesList = filteredHousesList.filter(house => parseInt(house.cityId) == parseInt(selectedCity));
     }
 
     if (selectedNeiborhood) {
-      filteredHousesList = filteredHousesList.filter(house => house.areaId === selectedNeiborhood);
+      filteredHousesList = filteredHousesList.filter(house => parseInt(house.areaId) == parseInt(selectedNeiborhood));
     }
 
     setFilteredHouses(filteredHousesList);
@@ -32,10 +30,8 @@ const HouseList = (selectedCity ,selectedNeiborhood) => {
 
 
   useEffect(() => {
-    //Amiel - when you bring houses, I want you to give me the % of tasks they completed
     setHousesList();
     filterHouses()
-    console.log(houses)
   }, [user,selectedNeiborhood]);
   
   const deleteHouseFromList = (id) => {
@@ -45,25 +41,28 @@ const HouseList = (selectedCity ,selectedNeiborhood) => {
 
   return (
     <>
-      {(houses && !selectedNeiborhood.selectedNeiborhood) &&
+      {(houses && !selectedNeiborhood) &&
       <> {houses.map((house) => (
         <House
           key={house.id}
           id={house.id}
           landlordName={house.residentFirstName + " " + house.residentLastName }
           address={house.address}
-
+          numberOfCompletedTasks={house.numberOfCompletedTasks}
+          numberOfTasks={house.numberOfTasks}
           deleteHouseFromList={deleteHouseFromList}
         />
       ))} </>
       }
-      {(filteredhouses && selectedNeiborhood.selectedNeiborhood) &&
+      {(filteredhouses && selectedNeiborhood) &&
       <> {filteredhouses.map((house) => (
         <House
           key={house.id}
           id={house.id}
           landlordName={house.residentFirstName + " " + house.residentLastName }
           address={house.address}
+          numberOfCompletedTasks={house.numberOfCompletedTasks}
+          numberOfTasks={house.numberOfTasks}
           deleteHouseFromList={deleteHouseFromList}
         />
       ))} </>

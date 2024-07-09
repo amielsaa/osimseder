@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../../Helpers/DataContext';
 import { fetchAllAreasByCity } from '../../Helpers/StaffFrontLogic';
+import {fetchAllCities} from '../../Helpers/AdminFrontLogic';
 
 const Houses = () => {
   const { user, navigate } = useContext(DataContext);
@@ -21,30 +22,34 @@ const Houses = () => {
     }
   }, [navigate]);
 
+  
+
   useEffect(() => {
     setLoading(true);
     if (user.role === "Admin") {
       setCities();
-    } else {
-      setAreas();
     }
+    setAreas();
     setLoading(false);
   }, [user]);
 
-  const setCities = () => {
+  const setCities = async () => {
     // Fetch cities from the database
-    setCityOptions([{ id: 1, name: 'ירושלים' }, { id: 2, name: 'באר שבע' }]);
+    const res = await fetchAllCities();
+    setCityOptions(res);
   };
 
-  const onChangeSelectedCity = (city) => {
+  const onChangeSelectedCity = async (city) => {
     setSelectedCity(city);
+    const cityById = await cityOptions.find(curCity => curCity.id == city)
+    await setAreas(cityById.cityName)
     // Fetch areas related to the selected city
   };
 
-  const setAreas = async () => {
+  const setAreas = async (cityName=user.cityName) => {
     if (user.role === 'CityManager' || user.role === 'Admin') {
       const res = await fetchAllAreasByCity(selectedCity);
-      setNeighborhoodOptions(res[user.cityName]);
+      setNeighborhoodOptions(res[cityName]);
     }
   };
 
@@ -74,7 +79,7 @@ const Houses = () => {
                     <option value=''>כל הערים</option>
                     {cityOptions.map((city) => (
                       <option key={city.id} value={city.id}>
-                        {city.name}
+                        {city.cityName}
                       </option>
                     ))}
                   </select>

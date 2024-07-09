@@ -59,7 +59,7 @@ class StaffHouseLogic {
 
             // Sort houses by id
             houses.sort((a, b) => a.id - b.id);
-
+            await this.addTasksCompletion(houses)
 
             housesLogger.debug("Successfully got all houses of system by email: " + userEmail);
             return houses;
@@ -92,9 +92,10 @@ class StaffHouseLogic {
                 throw new Error('Couldn\'t find houses.');
             }
 
+
             // Sort houses by id
             houses.sort((a, b) => a.id - b.id);
-
+            await this.addTasksCompletion(houses);
 
             housesLogger.debug("Successfully got all houses of city by email: " + userEmail);
             return houses;
@@ -133,7 +134,7 @@ class StaffHouseLogic {
 
             // Sort houses by id
             houses.sort((a, b) => a.id - b.id);
-
+            await this.addTasksCompletion(houses)
 
             housesLogger.debug("Successfully got all houses of area by email: " + areaManagerEmail);
             return houses;
@@ -144,6 +145,7 @@ class StaffHouseLogic {
         }
     }
 
+
     async getAllHousesAdmin(userEmail) {
         try {
             housesLogger.debug("Initiate get all houses for admin: " + userEmail);
@@ -153,12 +155,10 @@ class StaffHouseLogic {
                 throw new Error('Couldn\'t find houses.');
             }
 
-            // Sort houses by id
-            // houses.sort((a, b) => a.id - b.id);
-
+            await this.addTasksCompletion(houses);
 
             housesLogger.debug("Successfully got all houses of admin");
-            return houses;
+            return houses
 
         } catch (error) {
             housesLogger.error("Failed to get all houses of admin: " + userEmail+  ". Reason: " + error);
@@ -187,8 +187,10 @@ class StaffHouseLogic {
             }
 
             // Sort houses by id
-            houses.sort((a, b) => a.id - b.id);
+            // const newHouses = this.addTasksCompletion(houses);
 
+            houses.sort((a, b) => a.id - b.id);
+            await this.addTasksCompletion(houses)
 
             housesLogger.debug("Successfully got all houses of team owner by email: " + userEmail);
             return houses;
@@ -199,6 +201,16 @@ class StaffHouseLogic {
         }
     }
 
+    async addTasksCompletion(houses) {
+        for(const house of houses) {
+            const houseTasks = await house.getTasks();
+            const completedTaskNumber = houseTasks.filter(task => task.status === 'GREEN').length
+            house.dataValues.numberOfTasks = houseTasks.length;
+            house.dataValues.numberOfCompletedTasks = completedTaskNumber;
+        }
+    }
+
+    
     
 // Get house by ID
 // Input: houseId - the id of the house to get
