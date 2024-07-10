@@ -293,12 +293,14 @@ async function setImageRequest() {
           {user.role !== "Student" &&
             <div className="buttons_for_house_logic">
               <button className="edit_house_button" onClick={() => navigate(`/EditHouse/${id}`)}> ערוך בית</button>
-              <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
+             
             </div>
           }
           </div>
           {/* picture components here*/ }
+         
           <div className="house-pictures-container">
+            
           {imageList.length === 0 && <div className="empty-list-text">לחץ על הוסף תמונה כדי להעלות תמונות</div>}
           {imageList && imageList.map((image, index) => (
                 <div key={index} className="picture-container" onClick={() => {onPictureClick(image,index)}}>
@@ -469,6 +471,7 @@ async function setImageRequest() {
               {(tasks.length > 0) ? (
                 tasks.map((task, index) => (
                   <TaskCard key={index} room={task.room} tasks={task.tasks} removeRoomFromTasklist={removeRoomFromTasklist} />
+                  
                 ))
               ) : (
                 <div className="empty-tasks">
@@ -476,6 +479,7 @@ async function setImageRequest() {
                 </div>
               )}
             </div>
+            <button className="add_task_button" onClick={() => navigate(`/addTask/${id}`)}>הוסף מטלה</button>
           </div>
           )}
           

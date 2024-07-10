@@ -88,7 +88,7 @@ const AddGroupPage = () => {
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             <Form>
               {user.role === "Admin" && (
-                <div>
+                <div className="form_add_group">
                 <label htmlFor="city"> עיר: </label>
                 <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>

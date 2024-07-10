@@ -15,13 +15,43 @@
     background-color: var(--WHITEBG-COLOR);
     
   }
+  .filtersContainer_groups {
+    width: 100%;
+    gap :3%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: end;
+  }
+  .filtersContainer_groups .school_Filter_and_label {
+    gap:1%;
+    margin-top: 0%;
+    direction: rtl;
+  }
+  .filtersContainer_groups select {
+    width: 70%;
+  }
+  .filtersContainer_groups .school_Filter_and_label{
+    width: 100%;
+  }
+  
+  .city_Filter_and_label_groups{
+    display: flex;
+    width: 100%;
+    gap:32px;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+  }
+    
   .groups_main_content , .To_main_content_groups {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 76%;
+    height: 60%;
     gap: 3%;
     overflow-y: scroll;
   }
@@ -84,6 +114,39 @@
       justify-content: center;
       align-items: center;
     }
+    .filtersContainer_groups {
+      width: 90%;
+      gap :3%;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: center;
+    }
+    .filtersContainer_groups .school_Filter_and_label {
+      gap:1%;
+      margin-top: 0%;
+      
+      direction: rtl;
+    }
+   
+    .filtersContainer_groups select {
+      max-width: 300px;
+      min-width: 300px;
+    }
+    .city_Filter_and_label_groups{
+      display: flex;
+      gap:2px;
+      width: 400px;
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .city_Filter_and_label_groups label {
+      min-width: 80px;
+    }    
+   
+
     .groups_main_content , .To_main_content_groups{
       /* background: url('../../images/groups-background-img.png') center/cover no-repeat; */
     }
