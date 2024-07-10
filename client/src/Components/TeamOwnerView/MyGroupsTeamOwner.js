@@ -5,7 +5,8 @@ import GroupListTO from './GroupListTO'
 import { useContext, useEffect, useState } from 'react';
 import DataContext from '../../Helpers/DataContext';
 import Footer from '../Footer';
-
+import {fetchAllCities} from '../../Helpers/AdminFrontLogic';
+import { fetchAllSchoolsByCity } from '../../Helpers/StaffFrontLogic';
 
 const schoolsForDemo = [{schoolId:1, schoolName:"נתיבי עם"}, {schoolId:2, schoolName:"מקיף א"}]
 const CitiesForDemo = [{cityId:1, cityName:"באר שבע"}, {cityId:2, cityName:"תל אביב"}]
@@ -17,20 +18,57 @@ const MyGroupsTeamOwner = () => {
   const [schoolOptions, setSchoolOptions] = useState([])
   const [selectedSchool, setSelectedSchool] = useState('')
 
-  useEffect(() => {
-    if (user.role === "Admin"){
-      setCityOptions(CitiesForDemo)
-      //Amiel - set all the cities in the cityOptions
-    } else if(user.role === "CityManager" || user.role === "AreaManager") {
-      setSchoolOptions(schoolsForDemo)
-      //Amiel - ignore the cities and set all the schools from the user.CityId groups
-    }
-  })
 
-  function onChangeSelectedCity(city) {
-    //Amiel - This is relevent to Admin, sets the city in Selected City, and brings all the relevent schools of the city, sets the SelectedSchool back to ''
-    setSchoolOptions(schoolsForDemo)
-  }
+
+    async function setAllCities() {
+        const cities = await fetchAllCities();
+        setCityOptions(cities);
+    }
+    async function setSchoolOptionsByCity(cityName) {
+        const schools = await fetchAllSchoolsByCity(cityName);
+        setSchoolOptions(schools);
+    }
+
+  useEffect(() => {
+      if (user.role === "Admin") {
+          setAllCities();
+    } else if(user.role === "CityManager" || user.role === "AreaManager") {
+            setSchoolOptionsByCity(user.cityName)
+    }
+  },[])
+
+    function onChangeSelectedCity(cityName) {
+        setSchoolOptionsByCity(cityName)
+    }
+
+    // TODO ARI - GPT mentioned this
+    // NOTICE - we dont use setSelectedCity
+    /*
+    const [loading, setLoading] = useState(true); // Changed `isLoading` to `setLoading`
+...
+async function setAllCities() {
+    const cities = await fetchAllCities();
+    setCityOptions(cities);
+    setLoading(false); // Added this line
+}
+async function setSchoolOptionsByCity(cityName) {
+    const schools = await fetchAllSchoolsByCity(cityName);
+    setSchoolOptions(schools);
+    setLoading(false); // Added this line
+}
+useEffect(() => {
+    if (user.role === "Admin") {
+        setAllCities();
+    } else if(user.role === "CityManager" || user.role === "AreaManager") {
+        setSchoolOptionsByCity(user.cityName);
+    } else {
+        setLoading(false); // Added this line
+    }
+}, [user.role, user.cityName]); // Added dependencies to ensure useEffect runs correctly
+
+    */
+
+
 
   return (
     <>

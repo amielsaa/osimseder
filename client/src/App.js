@@ -54,7 +54,7 @@ function App() {
             <Route path="/staff-admin-management" element={<StaffIndex/>}/>
             <Route path="/admin-location-management" element={<LocationIndex/>}/>
             <Route path="/admin-export-data" element={<ExportData/>}/>
-            <Route path="/addGroupToHouse/:id" element={<AddGroupToHousePage/>}/>
+            <Route path="/addGroupToHouse/:id/:cityName" element={<AddGroupToHousePage/>}/>
             <Route path="/My-Houses" element={<Houses />} />
             <Route path="/HousePage/:id" element={<HousePage />} />
             <Route path="/EditHouse/:id" element={<EditHousePage />} />
