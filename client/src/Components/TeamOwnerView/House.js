@@ -5,7 +5,7 @@ import houseImg from '../../images/housepicture.png'
 import ConfirmationMessage from '../ConfirmationMessage';
 import {deleteHouse} from '../../Helpers/StaffFrontLogic'
 import ScoreBar from '../ScoreBar';
-const House = ({ id, landlordName, address, deleteHouseFromList}) => {
+const House = ({ id, landlordName, address, deleteHouseFromList, numberOfCompletedTasks, numberOfTasks}) => {
   const [selectedHouse, setSelectedHouse] = useState('')
   const [selectedHouseForDelete, setSelectedHouseForDelete] = useState('')
   const [showConfirmationDelete, setShowConfirmationDelete] = useState('')
@@ -44,7 +44,7 @@ const House = ({ id, landlordName, address, deleteHouseFromList}) => {
         <div className='House-bar-Info'>
           <p> דייר/ת: {landlordName}</p>
           <p>כתובת: {address}</p>
-          <ScoreBar score={3}/>
+          <ScoreBar numberOfTasks={numberOfTasks} numberOfCompletedTasks={numberOfCompletedTasks}/>
         </div>
         <div className='houses-house-buttons-container'>
         <button className='watch-house-btn' onClick={() => {setSelectedHouse(id)}}>צפה</button>
