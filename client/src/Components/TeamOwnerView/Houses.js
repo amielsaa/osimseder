@@ -41,6 +41,9 @@ const Houses = () => {
 
   const onChangeSelectedCity = async (city) => {
     setSelectedCity(city);
+    setSelectedNeiborhood('');
+    if(city === '') 
+      return;
     const cityById = await cityOptions.find(curCity => curCity.id == city)
     await setAreas(cityById.cityName)
     // Fetch areas related to the selected city

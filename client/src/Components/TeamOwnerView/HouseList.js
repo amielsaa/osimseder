@@ -18,10 +18,12 @@ const HouseList = ({selectedCity ,selectedNeiborhood}) => {
     let filteredHousesList = houses;
 
     if (selectedCity) {
+      console.log("city")
       filteredHousesList = filteredHousesList.filter(house => parseInt(house.cityId) == parseInt(selectedCity));
     }
 
     if (selectedNeiborhood) {
+      console.log("neighborhood")
       filteredHousesList = filteredHousesList.filter(house => parseInt(house.areaId) == parseInt(selectedNeiborhood));
     }
 
@@ -32,7 +34,7 @@ const HouseList = ({selectedCity ,selectedNeiborhood}) => {
   useEffect(() => {
     setHousesList();
     filterHouses()
-  }, [user,selectedNeiborhood]);
+  }, [user,selectedNeiborhood, selectedCity]);
   
   const deleteHouseFromList = (id) => {
     setHouses(prevHouses => prevHouses.filter(house => house.id !== id));
@@ -41,7 +43,7 @@ const HouseList = ({selectedCity ,selectedNeiborhood}) => {
 
   return (
     <>
-      {(houses && !selectedNeiborhood) &&
+      {(houses && !selectedNeiborhood && !selectedCity) &&
       <> {houses.map((house) => (
         <House
           key={house.id}
@@ -54,7 +56,7 @@ const HouseList = ({selectedCity ,selectedNeiborhood}) => {
         />
       ))} </>
       }
-      {(filteredhouses && selectedNeiborhood) &&
+      {(filteredhouses && (selectedNeiborhood || selectedCity)) &&
       <> {filteredhouses.map((house) => (
         <House
           key={house.id}
