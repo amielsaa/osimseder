@@ -1,10 +1,14 @@
 import React from 'react';
 import './css/PicturePopUp.css'; 
 import img from '../images/try-img.jpeg'
+import { useContext } from 'react';
+import DataContext from '../Helpers/DataContext';
+
+
 
 const PicturePopUp = ({ onClose, onDelete, index, imagePath, image, reason, onConfirm, URLName }) => {
+  const { user } = useContext(DataContext);
   
-
   return (
     <div className="overlay-picture-pop-up">
       <div className="picture-modal">
@@ -17,7 +21,8 @@ const PicturePopUp = ({ onClose, onDelete, index, imagePath, image, reason, onCo
           
         </div>
         <div className='remove-button-container'>
-        {(reason === "select") &&<button className="remove-button" onClick={() => onDelete(image , index)}>מחק תמונה</button>}
+
+        {((reason === "select") && user.role !== "Student") && <button className="remove-button" onClick={() => onDelete(image , index)}>מחק תמונה</button>}
         {(reason === "upload") &&<button className="remove-button" onClick={() => onConfirm(image)}>העלה תמונה</button>}
         </div>
       </div>

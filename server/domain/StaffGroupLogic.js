@@ -139,9 +139,9 @@ class StaffGroupLogic {
             // argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
             const groups = await Groups.findAll();
-            if (!groups) {
+          /*   if (!groups) {
                 throw new Error('Couldn\'t find groups.');
-            }
+            } */
 
             // console.log(houses)
 
@@ -192,7 +192,7 @@ class StaffGroupLogic {
             return groups;
         } catch (error) {
             groupsLogger.error("Failed to get groups by admin for email: " + userEmail + ". Reason: " + error);
-            throw new Error('Failed to find an area by admin: ' + error);
+            throw new Error('Failed to find all groups by admin: ' + error);
         }
     }
 

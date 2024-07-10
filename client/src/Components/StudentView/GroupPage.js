@@ -168,16 +168,19 @@ const GroupPage = () => {
               </div>
             </>
           )}
-        </div>
-
-        {user.role === 'Student' && user.groupId === null && (
+          {user.role === 'Student' && user.groupId === null && (
+          
           <div className='user_not_in_group'>
             <div className='group-title'>
               <h1>אינך חבר בקבוצה כרגע</h1>
             </div>
             <button className='move_to_groups_button' onClick={() => navigate('/groups')}>להצטרפות לקבוצה</button>
           </div>
+          
         )}
+        </div>
+
+        
       </div>
 
       {showRemoveConfirmation && (

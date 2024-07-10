@@ -14,10 +14,12 @@
     overflow-y: scroll;
     
   }
+  
   .house-pictures-container {
     width: 90%;
     min-height: 20%; 
     display: flex;
+    overflow-y: hidden;
     border-radius: 12px;
     justify-content: flex-start;
     overflow-x: auto; 
@@ -50,7 +52,7 @@
 }
 .empty-list-text{
   margin:auto;
-  font-size: 1.5rem;
+  font-size: 0.875rem;
 }
    .groups_and_teamOwners_and_houseInfo{
     display: flex;
@@ -289,6 +291,10 @@
       min-height: 200px ;
       min-width: 200px ;
     }
+    .empty-list-text{
+      margin:auto;
+      font-size: 1.5rem;
+    }
     .add_picture_button {
       width: 200px;
       cursor: pointer;
@@ -310,9 +316,9 @@
   }
   .House_Info {
     width: 40%;
-    min-height: 80%;
+    min-height: 90%;
     direction: rtl;
-    margin-top: 2%;
+    margin-top: 0%;
     
 }
  .groups_and_teamOwners_and_houseInfo{
