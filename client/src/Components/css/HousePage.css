@@ -165,6 +165,9 @@
     align-items: center;
   }
 
+  .add_task_button{
+    margin-top: 10px;
+  }
 
   .add_group_button , .add_core_member_button {
     background-color: var(--ORANGE-COLOR);
