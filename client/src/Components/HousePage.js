@@ -308,7 +308,7 @@ async function setImageRequest() {
           </div>
 
           
-          <button className="add_picture_button" onClick={() => {handleAddPictureClick()}}>הוסף תמונה</button>
+          {(user.role !== "Student") && <button className="add_picture_button" onClick={() => {handleAddPictureClick()}}>הוסף תמונה</button>}
           <input
                 type="file"
                 id="fileInput"
