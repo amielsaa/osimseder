@@ -22,6 +22,15 @@ const fetchAllSchoolsByCity = async (cityName) => {
     }
 }
 
+const fetchAllSchoolsByCityId = async (cityId) => {
+    const res = await axios.post(`${URL}/staff/groups/schoolsByCityId`, { cityId: cityId } ,headers);
+    if(res.data.error) {
+        alert(res.data.error);
+    } else {
+        return res.data;
+    }
+}
+
 const addGroup = async (cityName, schoolId, capacity) => {
     const res = await axios.post(`${URL}/staff/groups/`, {city:cityName, schoolId:schoolId, capacity:capacity} ,headers);
     if(res.data.error) {
@@ -356,6 +365,6 @@ export {deleteHouse, deleteGroup, deleteTask, fetchTeamOwnerInfo, assignTeamOwne
        getTaskById, getTasksByHouseId, addTask, fetchAllGroupsStaff,
     getHouseById, addHouse, fetchAllHouses, fetchAllSchoolsByCity, addGroup, getStudentsWithoutGroupBySchoolId
     , addGroupMember, fetchAllCities, registerStaff, changeUserPasswordInPersonal, sendResetPasswordMail,
-    changeUserPasswordExternal, changeUserDetails, fetchAllAreasByCityRegisterStaff, uploadImage, fetchAllImagesByHouse, URL, deletePhoto
+    changeUserPasswordExternal, fetchAllSchoolsByCityId, changeUserDetails, fetchAllAreasByCityRegisterStaff, uploadImage, fetchAllImagesByHouse, URL, deletePhoto
 
 }

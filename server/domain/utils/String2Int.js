@@ -86,6 +86,27 @@ class String2Int {
             throw new Error('Error: process of finding the school: "' + schoolName + '" failed. Description: ' + error);
         }
     }
+
+
+    async getCityIdBySchoolId(schoolId) {
+        try {
+            const school = await Schools.findOne({
+                where: { "id": schoolId }
+            });
+            if (!school) {
+                throw new Error('Problem - School with id: "' + schoolId + '" was not found in the system');
+            }
+            const city = await Cities.findOne({
+                where: { "id": school.cityId }
+            });
+            if (!city) {
+                throw new Error('Problem - City: "' + cityName + '" was not found in the system');
+            }
+            return city.id;
+        } catch (error) {
+            throw new Error('Error: process of finding the city: "' + cityName + '" failed. Description: ' + error);
+        }
+    }
 }
 
 module.exports = new String2Int();

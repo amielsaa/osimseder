@@ -331,7 +331,7 @@ async function setImageRequest() {
                 <div className="house_group_info">
                   <h4 onClick={firstGroup ? ()=> navigate(`/GroupPage/${firstGroup.id}`): doNothing()}>קבוצה משוייכת : {firstGroup? firstGroup.id : ""}</h4>
                   {!firstGroup && user.role !== "TeamOwner" && (
-                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
+                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}/${house.cityName}`)}> הוסף </button>
 
                   )}
                   {firstGroup && user.role !== "TeamOwner" && (
@@ -342,7 +342,7 @@ async function setImageRequest() {
                 <div className="house_group_info">
                 <h4 onClick={secondGroup ? ()=> navigate(`/GroupPage/${secondGroup.id}`) : doNothing()}>קבוצה משוייכת : {secondGroup? secondGroup.id : ""}</h4>
                   {!secondGroup && user.role !== "TeamOwner" && (
-                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}`)}> הוסף </button>
+                    <button className="add_group_button" onClick={() => navigate(`/addGroupToHouse/${id}/${house.cityName}`)}> הוסף </button>
 
                   )}
                   {secondGroup && user.role !== "TeamOwner" && (

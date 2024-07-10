@@ -285,7 +285,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -297,7 +297,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -309,7 +309,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'נקבה',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -321,7 +321,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -333,7 +333,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -345,7 +345,7 @@ const setupStaffs = async () => {
         firstName: 'ראש',
         phoneNumber: '0549552120',
         gender: 'נקבה',
-        accesses: 'B',
+        accesses: 'TeamOwner',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -358,7 +358,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'C',
+        accesses: 'AreaManager',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -370,7 +370,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'C',
+        accesses: 'AreaManager',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -382,7 +382,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'C',
+        accesses: 'AreaManager',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -394,7 +394,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'C',
+        accesses: 'AreaManager',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -407,7 +407,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'D',
+        accesses: 'CityManager',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -419,7 +419,7 @@ const setupStaffs = async () => {
         firstName: 'עמיאל',
         phoneNumber: '0549552120',
         gender: 'זכר',
-        accesses: 'D',
+        accesses: 'CityManager',
         city: 'באר שבע'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });
@@ -432,7 +432,7 @@ const setupStaffs = async () => {
         firstName: 'אדמין',
         phoneNumber: '0549552120',
         gender: 'נקבה',
-        accesses: 'E',
+        accesses: 'Admin',
         city: 'ירושלים'
     })
     await createdUser.update({ isVerified: true, verificationToken: null });

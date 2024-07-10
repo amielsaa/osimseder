@@ -113,13 +113,15 @@ class StaffGroupLogic {
 
             const responseData = await Promise.all(groups.map(async group => {
                 const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                const cityId = await String2Int.getCityIdBySchoolId(group.schoolId);
                 return {
                     id: group.id,
                     students: group.dataValues.students,
                     memberCount: group.dataValues.students.length,
                     capacity: group.capacity,
                     schoolId: group.schoolId,
-                    schoolName: schoolName
+                    schoolName: schoolName,
+                    cityId: cityId
                 };
             }));
             // Sort responseData by id
@@ -139,59 +141,38 @@ class StaffGroupLogic {
             // argumentChecker.checkSingleArugments([userEmail], ["userEmail"]);
 
             const groups = await Groups.findAll();
-
-            //if (!groups) {
-            //    throw new Error('Couldn\'t find groups.');
-            //}
+            const newGroups = [];
 
 
-            // console.log(houses)
+            for (let group of groups) {
+                const students = await group.getStudents();
+                const studentNames = students.map(student => {
+                    const { firstName, lastName, ...rest } = student;
+                    return `${firstName} ${lastName}`;
+                });
+                group.dataValues.students = studentNames;
+                newGroups.push(group);
+            }
 
-            // let groups = [];
-            // for (let i = 0; i < houses.length; i++) {
-            //     const house = houses[i];
-            //     const houseGroups = await house.getGroups();
-
-            //     if (houseGroups && houseGroups.length > 0) {
-            //         groups.push(...houseGroups);
-            //     }
-            // }
-            // if (!groups || groups.length === 0) {
-            //     // throw new Error('Couldn\'t find groups by the houses.');
-            //     return {};
-            // }
-            // console.log(groups)
-
-            // for (let i = 0; i < groups.length; i++) {
-            //     const group = groups[i];
-
-            //     const students = await group.getStudents();
-
-            //     const studentNames = students.map(student => {
-            //         const { firstName, lastName, ...rest } = student;
-            //         return `${firstName} ${lastName}`;
-            //     });
-
-            //     group.dataValues.students = studentNames;
-            // }
-
-            // const responseData = await Promise.all(groups.map(async group => {
-            //     const schoolName = await String2Int.getSchoolNameById(group.schoolId);
-            //     return {
-            //         id: group.id,
-            //         students: group.dataValues.students,
-            //         memberCount: group.dataValues.students.length,
-            //         capacity: group.capacity,
-            //         schoolId: group.schoolId,
-            //         schoolName: schoolName
-            //     };
-            // }));
-            // // Sort responseData by id
-            // responseData.sort((a, b) => a.id - b.id);
+            const responseData = await Promise.all(newGroups.map(async group => {
+                const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                const cityId = await String2Int.getCityIdBySchoolId(group.schoolId);
+                return {
+                    id: group.id,
+                    students: group.dataValues.students,
+                    memberCount: group.dataValues.students.length,
+                    capacity: group.capacity,
+                    schoolId: group.schoolId,
+                    schoolName: schoolName,
+                    cityId: cityId
+                };
+            }));
+             // Sort responseData by id
+             responseData.sort((a, b) => a.id - b.id);
 
             groupsLogger.debug("Successfully got groups by admin for email: " + userEmail);
             // return responseData;
-            return groups;
+            return responseData;
         } catch (error) {
             groupsLogger.error("Failed to get groups by admin for email: " + userEmail + ". Reason: " + error);
             throw new Error('Failed to find all groups by admin: ' + error);
@@ -245,13 +226,15 @@ class StaffGroupLogic {
             //}));
             const responseData = await Promise.all(newGroups.map(async group => {
                 const schoolName = await String2Int.getSchoolNameById(group.schoolId);
+                const cityId = await String2Int.getCityIdBySchoolId(group.schoolId);
                 return {
                     id: group.id,
                     students: group.dataValues.students,
                     memberCount: group.dataValues.students.length,
                     capacity: group.capacity,
                     schoolId: group.schoolId,
-                    schoolName: schoolName
+                    schoolName: schoolName,
+                    cityId: cityId
                 };
             }));
 
@@ -374,7 +357,7 @@ class StaffGroupLogic {
     // Output: an array of groups
     async getSchoolsByCity(cityName) {
         try {
-            groupsLogger.debug("Initiating Get Schools by City for city: " + cityName);
+            groupsLogger.debug("Initiating Get Schools by CityName for city: " + cityName);
             argumentChecker.checkSingleArugments([cityName], ["cityName"]);
 
 
@@ -404,6 +387,45 @@ class StaffGroupLogic {
 
         } catch (error) {
             groupsLogger.error("Failed to get schools by City for city: " + cityName + ". Reason: " + error);
+            throw new Error('Failed to get schools by city ' + error);
+        }
+    }
+
+    // Input: cityId - the name of the city to get the groups for
+    // Output: an array of groups
+    async getSchoolsByCityId(cityId) {
+        try {
+            groupsLogger.debug("Initiating Get Schools by CityId for city: " + cityId);
+            argumentChecker.checkSingleArugments([cityId], ["cityId"]);
+
+
+            const city = await Cities.findOne({
+                where: { id: cityId },
+            });
+            if (!city) {
+                throw new Error('City not found');
+            }
+
+            const schools = await Schools.findAll({
+                where: { "cityId": cityId }
+            });
+            if (!schools) {
+                throw new Error('Schools not found');
+            }
+            const responseData = schools.map(school => ({
+                id: school.id,
+                schoolName: school.schoolName,
+                cityId: cityId
+            }));
+
+            // Sort responseData by id
+            responseData.sort((a, b) => a.id - b.id);
+
+            groupsLogger.debug("Successfully got schools by CityId for city: " + cityId);
+            return responseData;
+
+        } catch (error) {
+            groupsLogger.error("Failed to get schools by CityId for city: " + cityId + ". Reason: " + error);
             throw new Error('Failed to get schools by city ' + error);
         }
     }
