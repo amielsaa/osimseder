@@ -47,6 +47,24 @@ router.post('/schools', validateToken, validateAccess(accessGroup.A), async (req
 
 });
 
+// Return all schools related to the city
+router.post('/schoolsByCityId', validateToken, validateAccess(accessGroup.A), async (req, res) => {
+    try {
+        const cityId = req.body.cityId;
+        const schools = await staffGroupLogic.getSchoolsByCityId(cityId);
+
+        //no arguments needed
+        //return group information (all the fields)
+        res.json(schools);
+        // res.json('ok')
+
+
+    } catch (err) {
+        res.json({ error: err.message });
+    }
+
+});
+
 // need to move to other route someday
 // Return all schools related to the city
 router.post('/schools_for_register', async (req, res) => {
@@ -153,7 +171,8 @@ router.get('/getgroups', validateToken, validateAccess(accessGroup.B), async (re
             res.json({error: "You don't have the permission to perform this action!"});
         }
         
-        
+        //console.log("HERE")
+        //console.log(groups)
         res.json(groups); 
         
     } catch (err) {
