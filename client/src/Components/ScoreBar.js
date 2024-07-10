@@ -1,7 +1,9 @@
-function ScoreBar({score}) {
+function ScoreBar({numberOfCompletedTasks, numberOfTasks}) {
 
     function width() {
-        let width = score * 20;
+        let width = 0;
+        if(numberOfTasks != 0) 
+            width = (numberOfCompletedTasks/numberOfTasks) * 100;
         return `${width}%`;
     }
     return (
