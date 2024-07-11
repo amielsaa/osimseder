@@ -38,6 +38,10 @@
     position: relative;
     overflow: hidden;
 }
+.no-tasks-indicator{
+    font-size: 1rem;
+    color: rgb(255,0,0,0.5);
+}
 .review-bar-score{
     background-color: #8cff66;
     height: 100%;

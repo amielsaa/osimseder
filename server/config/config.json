@@ -2,21 +2,21 @@
 {
   "development": {
     "username": "root",
-    "password": "n1sWTx7hf9TWI7j",
+    "password": "password",
     "database": "osimseder",
     "host": "postgres",
     "dialect": "postgres"
   },
   "test": {
     "username": "root",
-    "password": "n1sWTx7hf9TWI7j",
+    "password": "password",
     "database": "osimseder-test",
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "root",
-    "password": "n1sWTx7hf9TWI7j",
+    "password": "password",
     "database": "osimseder",
     "host": "postgres",
     "dialect": "postgres"

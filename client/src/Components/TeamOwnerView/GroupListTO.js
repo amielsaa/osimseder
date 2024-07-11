@@ -54,8 +54,8 @@ const GroupListTO = ({selectedCity, selectedSchool}) => {
   return (
     <> 
       {/*Amiel - should be filteredGroups here instead of groups. test it out when you finish with all the back stuff. */}
-      { (groups.length > 0) && <>
-      {groups.map((groupJson) => (
+      { (filteredGroups.length > 0) && <>
+      {filteredGroups.map((groupJson) => (
         <GroupTO key={groupJson.id}
                 groupId={groupJson.id}
                 groupJson={groupJson}

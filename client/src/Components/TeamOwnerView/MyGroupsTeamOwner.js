@@ -8,8 +8,7 @@ import Footer from '../Footer';
 import {fetchAllCities} from '../../Helpers/AdminFrontLogic';
 import { fetchAllSchoolsByCity, fetchAllSchoolsByCityId } from '../../Helpers/StaffFrontLogic';
 
-const schoolsForDemo = [{schoolId:1, schoolName:"נתיבי עם"}, {schoolId:2, schoolName:"מקיף א"}]
-const CitiesForDemo = [{cityId:1, cityName:"באר שבע"}, {cityId:2, cityName:"תל אביב"}]
+
 const MyGroupsTeamOwner = () => {
   const {user, navigate} = useContext(DataContext);
   const [loading, isLoading] = useState(true)
@@ -31,8 +30,15 @@ const MyGroupsTeamOwner = () => {
   }, [user.role, user.cityId])
 
     function onChangeSelectedCity(cityId) {
+        if(cityId === "") {
+          setSelectedCity("")
+          setSchoolOptions([])
+          setSelectedSchool("")
+        } else {
         setSelectedCity(cityId);
         setSchoolOptionsByCityId(cityId)
+        setSelectedSchool("")
+        }
     }
 
 
