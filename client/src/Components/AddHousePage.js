@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import { addHouse, fetchAllAreasByCity} from '../Helpers/StaffFrontLogic'
+import { addHouse, fetchAllAreasByCity, fetchAllCities} from '../Helpers/StaffFrontLogic'
 
 const AddHousePage = () => {
     const { user, navigate } = useContext(DataContext);
@@ -25,12 +25,15 @@ const AddHousePage = () => {
     const [secondPhoneNumber, setSecondPhoneNumber] = useState('');
     const [areaList, setAreaList] = useState([]);
     const [errorMessage, setErrorMessage] = useState(false)
+    const [citiesList, setCitiesList] = useState([]);
+
     const languages = ["עברית","ערבית","ספרדית","אמהרית","רוסית"]
     useEffect(() => {
       if(!(localStorage.getItem("accessToken"))){
         navigate('/404')
       }
-    })
+      setAllCities();
+    },[])
   const initialValues = {
     city: '',
     area: '',
@@ -63,6 +66,11 @@ const AddHousePage = () => {
     secondPhoneNumber: Yup.string()
         .matches(/^05\d{8}$/, "מספר לא תקין"),
   });
+
+  const setAllCities = async () => {
+    const res = await fetchAllCities();
+    setCitiesList(res);
+  }
 
   const onSubmit = () => {
     setErrorMessage(false)
@@ -137,8 +145,11 @@ const AddHousePage = () => {
                 <label htmlFor="city"> עיר(*): </label>
                 <Field as="select" id="city" name="city" onChange={(e) => {setSelectedCity(e.target.value)}} value={selectedCity}>
                   <option value="">בחר עיר</option>
-                  <option value="ירושלים">ירושלים</option>
-                  <option value="באר שבע">באר שבע</option>
+                  {citiesList &&
+                       <>{citiesList.map((city) => (
+                         <option key={city.id} value={city.cityName}>{city.cityName}</option>
+                       ))}
+                       </>}
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>

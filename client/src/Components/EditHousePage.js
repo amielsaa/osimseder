@@ -9,7 +9,7 @@ import Header from './Header';
 import Nav from './Nav';
 import Footer from './Footer';
 import { IoChevronForwardCircle } from "react-icons/io5";
-import { getHouseById, updateHouse, fetchAllAreasByCity } from '../Helpers/StaffFrontLogic'
+import { getHouseById, updateHouse, fetchAllAreasByCity, fetchAllCities } from '../Helpers/StaffFrontLogic'
 
 function EditHousePage() {
     const { id } = useParams()
@@ -37,6 +37,7 @@ function EditHousePage() {
 
     const getHouseInfo = async () => {
         const houseInfo = await getHouseById(id);
+        await getAreas(houseInfo.cityName)
         initialValues.areaName = houseInfo.areaId;
         initialValues.address = houseInfo.address;
         initialValues.residentLastName = houseInfo.residentLastName;
@@ -50,23 +51,15 @@ function EditHousePage() {
         initialValues.freeText = houseInfo.freeText;
     }
 
-    const getAreas = async () => {
+    const getAreas = async (cityName) => {
         const res = await fetchAllAreasByCity();
-        if (user.cityId === 1) {
-            const ars = res["באר שבע"];
-            setAreas(ars);
-        } else {
-            const ars = res["ירושלים"];
-            setAreas(ars);
-        }
+        setAreas(res[cityName])
     }
 
     useEffect(() => {
         //Amiel import the House data - city is unchangeable.
         //after you imported to house data put its data in the initialValues instead of ""
         //look inside the JSX (the HTML down in this page) code, there is more comments
-        getAreas();
-
         getHouseInfo();
     }, [])
 

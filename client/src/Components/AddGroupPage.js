@@ -7,19 +7,22 @@ import * as Yup from 'yup';
 import DataContext from "../Helpers/DataContext";
 import Footer from "./Footer";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import {fetchAllSchoolsByCity, addGroup} from '../Helpers/StaffFrontLogic'
+import {fetchAllSchoolsByCity, addGroup, fetchAllCities} from '../Helpers/StaffFrontLogic'
 
 const AddGroupPage = () => {
   const { user, navigate } = useContext(DataContext);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedCapacity, setSelectedCapacity] = useState('');
+  const [citiesList, setCitiesList] = useState([]);
   const [schoolsList, setSchoolsList] = useState([]);
   useEffect(() => {
     if(!(localStorage.getItem("accessToken"))){
       navigate('/404')
     }
-  })
+    setAllCities()
+
+  },[])
   const initialValues = {
     city: '',
     school: '',
@@ -38,6 +41,11 @@ const AddGroupPage = () => {
       then: Yup.number(),
     })
   });
+
+  const setAllCities = async () => {
+    const res = await fetchAllCities();
+    setCitiesList(res);
+  }
 
   const onSubmit = (data) => {
     // Handle form submission
@@ -92,8 +100,11 @@ const AddGroupPage = () => {
                 <label htmlFor="city"> עיר: </label>
                 <Field as="select" id="city" name="city" onChange={handleCityChange} value={selectedCity}>
                   <option value="">בחר עיר</option>
-                  <option value="ירושלים">ירושלים</option>
-                  <option value="באר שבע">באר שבע</option>
+                  {citiesList &&
+                       <>{citiesList.map((city) => (
+                         <option key={city.id} value={city.cityName}>{city.cityName}</option>
+                       ))}
+                       </>}
                 </Field>
                 <ErrorMessage name="city" component="span" />
               </div>
