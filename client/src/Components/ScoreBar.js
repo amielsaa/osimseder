@@ -1,7 +1,8 @@
 ﻿import React from 'react';
+import useWindowEvents from '../Helpers/useWindowEvents';
 
 function ScoreBar({ numberOfCompletedTasks, numberOfTasks }) {
-
+    const windowSize = useWindowEvents();
     const calculateWidth = () => {
         if (numberOfTasks === 0) {
             return '0%';
@@ -15,7 +16,9 @@ function ScoreBar({ numberOfCompletedTasks, numberOfTasks }) {
         if (numberOfTasks === 0) {
             return 'טרם נוצרו מטלות';
         } else {
-            return `${numberOfCompletedTasks}/${numberOfTasks}`;
+            if (windowSize.width > 768)
+            return `מטלות שהושלמו ${numberOfCompletedTasks}/${numberOfTasks}`;
+            else return `מטלות ${numberOfCompletedTasks}/${numberOfTasks}`
         }
     };
 

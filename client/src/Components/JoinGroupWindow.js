@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/UsersIndex.css';
 
 const JoinGroupWindow = ({ student, groups, onClose, onAddToGroup }) => {
+  useEffect(() => {
+    console.log(groups)
+  },[groups])
   return (
     <div className="join-group-container">
       <div className="join-group-content">
@@ -16,9 +19,9 @@ const JoinGroupWindow = ({ student, groups, onClose, onAddToGroup }) => {
         </div>
         <div className='join-group-groups-container'>
           {groups.map(group =>
-            <div className='join-group-group' key={group.groupId}>
+            <div className='join-group-group' key={group.id}>
             <div className='group-att'>
-                <span>מספר קבוצה : {group.groupId}</span>
+                <span>מספר קבוצה : {group.id}</span>
             </div>
             <div className='group-att'>
                 <span>גודל קבוצה : {`${group.memberCount}/${group.capacity}`}</span>
