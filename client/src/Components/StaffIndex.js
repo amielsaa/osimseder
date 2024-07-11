@@ -9,107 +9,11 @@ import StaffTable from './StaffTable';
 import { approveStaffRole, removeStaff, getAllStaffs, accessToRoleName } from '../Helpers/UserTabLogic'
 
 
-const exampleUsers = [
-  {
-    firstName: 'יוחנן',
-    lastName: 'כהן',
-    role: 'TeamOwner',
-    phoneNumber: '123-456-7890',
-    cityName: 'תל אביב',
-    gender: 'זכר',
-    confirmationStatus: true
-  },
-  {
-    firstName: 'אמה',
-    lastName: 'לוי',
-    role: 'AreaManager',
-    phoneNumber: '234-567-8901',
-    cityName: 'ירושלים',
-    gender: 'נקבה',
-    confirmationStatus: false,
-    area: 'Jerusalem'
-  },
-  {
-    firstName: 'נועם',
-    lastName: 'ישראלי',
-    role: 'AreaManager',
-    phoneNumber: '345-678-9012',
-    cityName: 'חיפה',
-    gender: 'זכר',
-    confirmationStatus: true,
-    area: 'Haifa'
-  },
-  {
-    firstName: 'יעל',
-    lastName: 'בראון',
-    role: 'CityManager',
-    phoneNumber: '456-789-0123',
-    cityName: 'באר שבע',
-    gender: 'נקבה',
-    confirmationStatus: false
-  },
-  {
-    firstName: 'איתי',
-    lastName: 'שמעוני',
-    role: 'TeamOwner',
-    phoneNumber: '567-890-1234',
-    cityName: 'אשדוד',
-    gender: 'זכר',
-    confirmationStatus: true
-  },
-  {
-    firstName: 'דניאל',
-    lastName: 'גולן',
-    role: 'AreaManager',
-    phoneNumber: '678-901-2345',
-    cityName: 'תל אביב',
-    gender: 'זכר',
-    confirmationStatus: true,
-    area: 'Tel Aviv'
-  },
-  {
-    firstName: 'שירה',
-    lastName: 'לוין',
-    role: 'CityManager',
-    phoneNumber: '789-012-3456',
-    cityName: 'חיפה',
-    gender: 'נקבה',
-    confirmationStatus: true
-  },
-  {
-    firstName: 'אלעד',
-    lastName: 'גרין',
-    role: 'CityManager',
-    phoneNumber: '890-123-4567',
-    cityName: 'ירושלים',
-    gender: 'זכר',
-    confirmationStatus: false
-  },
-  {
-    firstName: 'איתן',
-    lastName: 'רז',
-    role: 'AreaManager',
-    phoneNumber: '901-234-5678',
-    cityName: 'באר שבע',
-    gender: 'זכר',
-    confirmationStatus: true,
-    area: 'Beersheba'
-  },
-  {
-    firstName: 'מאיה',
-    lastName: 'כהן',
-    role: 'TeamOwner',
-    phoneNumber: '012-345-6789',
-    cityName: 'תל אביב',
-    gender: 'נקבה',
-    confirmationStatus: false
-  }
-];
 
   
 
 const StaffIndex = () => {
-  const [users, setusers] = useState(exampleUsers)
+  const [users, setusers] = useState([])
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showConfirmationUserDeletion, setShowConfirmationUserDeletion] = useState(false);
   const [showConfirmationUserAcceptance, setShowConfirmationUserAcceptance] = useState(false);
@@ -185,8 +89,8 @@ const StaffIndex = () => {
       return user.firstName.includes(filter);
     } else if (filterType === 'accesses') {
       return accessToRoleName(user.accesses).includes(filter);
-    } else if (filterType === 'cityId') {
-      return user.cityId.includes(filter);
+    } else if (filterType === 'cityName') {
+      return user.cityName.includes(filter);
     }
     return false;
   });
