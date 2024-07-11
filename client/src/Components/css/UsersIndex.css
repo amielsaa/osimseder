@@ -217,3 +217,10 @@
     outline: none; /* Remove default button outline */
     margin-left: 5%;
   }
+
+  @media screen and (max-width: 768px){
+    .filter-box{
+      width: 100%;
+    }
+  }
+ 
